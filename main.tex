@@ -1,0 +1,81 @@
+\documentclass[12pt]{book}
+
+% PACKAGES
+\input{./preamble/packages.sty}
+
+% SETTINGS 
+\graphicspath{ {images/} } %graphicx
+
+% Biblatex
+\addbibresource{./extras/bibliography.bib}	
+
+% My own definitions
+%\input{./extras/my-definitions}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACTUAL DOCUMENT
+\begin{document}
+
+% FRONTMATTER INFOS
+\title
+{
+	{Thesis Title}\\
+	{\large Institution Name}\\
+	{\includegraphics[keepaspectratio,width=3cm]{uni-logos/logo-TUE.jpg}}\\
+	{\includegraphics[keepaspectratio,width=3cm]{uni-logos/logo-TN.jpg}}
+}
+\author{Carlo Lanzi Luciani}
+\date{Day Month 2026}
+
+
+
+% FRONTMATTER PAGE
+%\maketitle
+
+%\chapter*{Abstract}
+%Abstract goes here
+%
+%\chapter*{Dedication}
+%To mum and dad
+%
+%\chapter*{Declaration}
+%I declare that..
+
+%\tableofcontents
+
+
+
+% MAIN BODY
+%\chapter{My work till now}
+\input{./chapters/chapter01}
+
+%\chapter{Introduction}
+%\input{./chapters/introduction}
+
+%\chapter{Chapter Two Title}
+%\input{./chapters/chapter02}
+%
+%\chapter{Chapter Three Title}
+%\input{./chapters/chapter03}
+%
+%\chapter{Chapter Four Title}
+%\input{./chapters/chapter04}
+%
+%\chapter{Conclusion}
+%\input{./chapters/conclusion}
+%
+%\chapter{Acknowledgements}
+%\input{./chapters/acknowledgements}
+
+\printbibliography
+
+% ENDMATTER
+%\appendix
+%\chapter{Appendix Title}
+%\input{./chapters/appendix}
+
+
+\end{document}
