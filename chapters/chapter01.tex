@@ -1,5 +1,35 @@
-\section{Test of the custom variables}
+\section{The context: \emph{chemotaxis} and \emph{Dictyostelium Discoideum}}
 
-math mode: $ \Zhi, \Iu, \Ch$ 
+\emph{Chemotaxis} is defined as the movement of an organism in response to a chemical stimulus, called \emph{chemotaxin}.
+Such phenomenon can be observed among many living beings, both unicellular (\eg bacteria) and multicellular (\eg lymphocytes migration in response to injuries and infection), and comes usually in two forms: either an attraction towards the substance (\eg a bacterium directed towards a source of nutrients), which is then called \emph{chemoattractant}, or away from it (\eg a microorganism fleeing from some poisonous chemical).
+Many organisms exploits this response also to induce a coordinated group-behaviour, secreting substances which attract their fellows.
+As it evinces from this, there are many good reasons to study chemotaxis, dictated not only by our sheer scientific curiosity, but also by the applications in medicine and pharmacology (\eg contrasting metastasization and growth of tumors by disrupting their chemotactical movements and signals).
+The main mathematical framework to model chemotaxis is the Keller-Segel PDE's system, developed heuristically in 1970, which states how the concentration of a microorganism population and of its chemoattractant it produces are evolving over time.
 
-text mode: $\invquest$ \invquest \Zhi
+One organism which has been extensively studied in this context (and not only) is the amoeba \emph{Dictyostelium Discoideum} (abbreviated as \emph{dd}), because of the simplicity of its self-organising behaviour.
+An exhausting, quick (and rather easthetically pleasing and entertaining) explanation of its lifecycle is provided by the scientific youtube channel "Ze Frank" in his video \citep{ze-frank}.
+Such animal, when exhaust the food in its sorrounding, starts to "sweat" cAMP (cyclic Adenosine 3',5'-monophosphate).
+All the amoebas (even the ones of other species) follow the gradient of such chemoattractant, and if they are also \emph{dd}, they start to secrete cAMP as well.
+The animals form therefore many aggregated groups, which then compact into slime-molds, in a lifeform which has been described as between unicellular and multicellular.
+In this phase the slimes move to find the right spot to then produce a fruit body full of spores, who will afterwards fly somewhere else to start the lifecycle again.
+
+[[MORE REFERENCES WOULD BE NICE]]
+[[MORE PICTURES OF THE AMOEBAS AND THE cAMP WAVES WOULD BE NICE]]
+
+\section{Problem statement and Objectives}
+
+In this master thesis the objective is to create a stochastic individual based model for the aggregation phase in the physical space (not in the phase space) and find the effective equations for it, \ie the continuouty equations which regulate the evolution of the population density over time.
+This model is thought to be an expansion of the one defined by \citep{ana}, but with the difference that now the amoebas are not modelled as attracting each others with a Coulomb potential, but rather as attracted with a Gaussian potential to the cAMP molecules, which are created by the \emph{dd}s only in specific instants in time.
+
+% Research objectives / questions – Clear bullet points (e.g., derive a PDE system, prove existence of traveling waves, compare with experimental data).
+
+% Maybe add some parts regarding teh ways this could be exapnded
+
+\section{Outline of the thesis}
+
+\section{Old literature and originality of the thesis: creation and annihilation of particles in such context}
+%Stochastic individual based model of Ana, without creation and annihilation of particles
+
+
+
+
