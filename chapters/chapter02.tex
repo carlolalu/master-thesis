@@ -70,19 +70,19 @@ With these indipendent processes we can now finally write down the model as a se
 \begin{equation}
 \left\{
 \begin{aligned}
-A_t^p 
-&= A_0^p 
-+ \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(A_s^p - C_s^{p,g}) d s
+\amba_t^p 
+&= \amba_0^p 
++ \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(\amba_s^p - \camp_s^{p,g}) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
 &
 \\
-C_t^{p,g} 
+\camp_t^{p,g} 
 &\qquad\text{does not exist} 
 &if \quad t < \btime^{p,g}
 \\
-C_t^{p,g}
-&= A_{\btime^{p,g}}^p + \underbrace{\sigma_C \quasibm_t^{p,g}}_{\int_0^t \sigma_C Q_s^{p,g}} 
+\camp_t^{p,g}
+&= \amba_{\btime^{p,g}}^p + \underbrace{\sigma_C \quasibm_t^{p,g}}_{\int_0^t \sigma_C Q_s^{p,g}} 
 &if \quad t \geq \btime^{p,g}
 \end{aligned}
 \right.
@@ -90,12 +90,12 @@ C_t^{p,g}
 
 \subsection{Observations}
 
-One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
+One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
 \paragraph{Pitfall definitions}\label{ch2:pitfall} One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
 This is indeed a good method, but, as we will see, would then create great difficulties later. 
-In fact at the spawning moment the particle $C^{p,g}$ must be at the position $A_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time (see \ref{ch3:avoid-pitfall-of-jumping-particles}) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
+In fact at the spawning moment the particle $\camp^{p,g}$ must be at the position $\amba_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time (see \ref{ch3:avoid-pitfall-of-jumping-particles}) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
 
 
 \section{Random (casual) parenting toy model}
@@ -112,27 +112,27 @@ is $\Pois(N \lambda)$-distributed, and thus the correspondent birth times are
 \btime_m := \inf \{ t : \hmactive_t \geq m\} \sim \Gma(m, N\lambda)
 \end{equation}
 
-Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $C^m$ is spawned at its birth time with uniform probability on the position of one of the amoebas.
-Mathematically this means considering a "parenting function" $P(m)$ which will represent the spawning amoeba of the $C^m$ particle.
+Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $\camp^m$ is spawned at its birth time with uniform probability on the position of one of the amoebas.
+Mathematically this means considering a "parenting function" $P(m)$ which will represent the spawning amoeba of the $\camp^m$ particle.
 Assume that $P(m) \sim \Unf_{\{1,\ldots,N\}}$ and that $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$.
 Then we can redefine the model as:
 
 \begin{equation}
 \left\{
 \begin{aligned}
-A_t^p 
-&= A_0^p 
-+ \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \drift(A_s^p - C_s^m) d s
+\amba_t^p 
+&= \amba_0^p 
++ \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \drift(\amba_s^p - \camp_s^m) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
 &
 \\
-C_t^m 
+\camp_t^m 
 &\qquad\text{does not exist} 
 &if \quad t < \btime^m
 \\
-C_t^m
-&= A_{\btime^m}^{P(m)} + \underbrace{\sigma_C \quasibm_t^m}_{\int_0^t \sigma_C Q_s^m}
+\camp_t^m
+&= \amba_{\btime^m}^{P(m)} + \underbrace{\sigma_C \quasibm_t^m}_{\int_0^t \sigma_C Q_s^m}
 &if \quad t \geq \btime^m
 \end{aligned}
 \right.
@@ -150,7 +150,7 @@ Then what is the amoeba spawning such particle?
 Define, for the deterministic parenting model, the function
 
 \begin{equation}
-P'(m) := p \quad \text{s.t. }A^p \text{ is the parent of } C^m
+P'(m) := p \quad \text{s.t. }\amba^p \text{ is the parent of } \camp^m
 \end{equation}
 
 Let us compare the function $P$ and $P'$.
