@@ -26,6 +26,8 @@ Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, th
 
 \ie the \emph{spawning} or \emph{birth time} of the $\camp^{p,g}$ cAMP molecule.
 
+[[HERE ILLUSTRATION OF WHAT IS HAPPENING TIMEWISE]]
+
 Consider a countable collection of indipendent Brownian motions 
 
 \begin{equation}
@@ -86,12 +88,85 @@ C_t^{p,g}
 \right.
 \end{align*}\label{model:deterministic-parenting}
 
-One can immediately notice that instead, not even the dimension of the system \ref{model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved.
+One can immediately notice that instead, not even the dimension of the system \ref{model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
 One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
 This is indeed a good method, but, as we will see, would then create great difficulties later. 
 In fact at the spawning moment the particle $C^{p,g}$ must be at the position $A_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF EXISTENCE AND UNIQUENESS, THIS HAPPENS WHEN THE PARTICLES JUMP FROM THEIR FIXED POSITION TO THE SPAWNING POSITION]]) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
+
+
+\subsection{Existence and uniqueness of solutions}
+
+The best chance we have to prove existence and uniqueness of solutions for the defined system is to find a way to see it (or some of its parts) as proper SDEs and use the theorems of such framework to reach the goal.
+
+Recall that an SDE, according to the mathematical definition, is an equation of the kind
+
+\begin{equation}\label{eq:general-sde}
+Y_t = Y_0 + \int_0^t b(t, Y_t) \,dt + \int_0^t\sigma(t, Y_t) \,d B_t
+\end{equation}
+
+of finite deterministic dimension.
+A solution to it is a couple of a continuous stochastic process $Y$ and a brownian motion $B$ fullfilling the equation \ref{eq:general-sde}.
+
+Our system presents a considerable amount of difficulties:
+\begin{itemize}
+\item An hypothetical vector $\modsol_t := (A_t^1,\ldots, A_t^N, \text{camp molecules } C_t^{p,g} \text{ already spawned at time }t)$ would have a dimension growing to infinite as the time flows.
+\item Since the system is piecewise defined in time, at every instant $t$ the same hypothetical vector $\modsol_t$ would have a finite \emph{stochastic} dimension.
+\item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{eq:general-sde}$ we would have a term $b = b(t, X_t, (M_t^p)_p)$ depending also on the Poisson-distributed processes $(M_t^p)_p$ (thus not representable as solution of an SDE), making it "too much stochastical" to be treated as in \ref{eq:general-sde}.
+\end{itemize}
+
+To make the dimension finite we can operate in this way:
+
+\begin{equation*}
+\exists ! X_t \text{solution to \ref{eq:general-sde} in }\R_+ \Longleftrightarrow \forall \overline{t} \in \R_+ \exists ! . X_t \text{solution to \ref{eq:general-sde} in } [0,\overline{t}] 
+\end{equation*}
+
+Let us then fix $\overline{t}\in\R$ and consider the system only on $[0,\overline{t}]$.
+In such time each amoeba $A^p$ will have spawned exactly $\hmactive^p_{\overline{t}}$ particles, and thus the maximum dimension the system reaches is in the instant $\overline{t}$ and is given by the total number of particles present.
+If we define the process $\hmactive_t := \sum_{p=1}^N \hmactive_t^p$ the number of $d$-dimensional equations is given by:
+
+\begin{equation}
+D := \overbrace{N}^{\#\text{amoebas}} 
++ \overbrace{\hmactive_{\overline{t}}}^{\#\text{(cAMP spawned till time }\overline{t})}
+\end{equation}
+
+and thus the maximum dimension of the system is $D\cdot d = N + M_{\overline{t}}$, which is finite, but still stochastic.
+
+It is clear that 
+
+\begin{equation}
+\forall p. \{\btime^{p,g} \leq s\} = \{ \hmactive_s^p \geq g \}
+\end{equation}
+
+and thus choosing a realization of the $\Pois(\lambda)$-process $(\hmactive_s^p)_{0\leq s \leq \overline{t}}$ is equivalent to choose a realization of the $\Gma(g,\lambda)$ birth times $(\btime^{p,g})_{g}$.
+We also do notice that the birth times are not dependent on the amoebas and cAMPs molecules movements.
+The idea is then to pass from a stochastic to a finite dimension by considering the equation under the regular probability measure $\Prb(\cdot | \bvector)$, where $\bvector$ is defined as
+
+\begin{equation}
+\bvector := (\btime^{p,g})_{p,g}
+\end{equation}
+
+In this way the dimension of the system can be treated as constant, as if we acted realization-wise for each realization of the birth-times.
+
+More details on the verification of this step, and on why the random measure $\Prb(\cdot | \bvector)$ is regular can be found in the appendix at \ref{app:regular-random-measure}.
+
+This solves also the problem of the drift term:
+
+
+
+
+
+
+
+
+
+
+
+
+To reach a deterministic dimension we can fix the times and treat them as deterministic ([[PUT ON APPENDIX A BETTER EXPLANATION FOLLOWING THE DISINTEGRATION OF MEASURES AND PROBABILITY MEASURES FROM OLAV KALLNBERG, theorem 8.5]])
+
+
 
 
 
