@@ -52,7 +52,7 @@ Wat we need is a "quasi-Brownian motion", which is $0$ till the time $T^{p,g}$ a
 \caption{[[ Add HERE TIKZ PICTURE SHOWING IN DIFFERENT COLORS THE VARIOUS PROCESSES INVOLVED]]}
 \end{figure}
 
-\begin{equation}\label{quasi-bm-camp}
+\begin{equation}\label{ch2:quasi-bm-camp}
 \quasibm_t^{p,g} := "B_{t-\btime^{p,g}}^{p,g,(\btime^{p,g})}\1_{t-\btime^{p,g}\geq 0}"
 \left\{
 \begin{aligned}
@@ -86,16 +86,16 @@ C_t^{p,g}
 &if \quad t \geq \btime^{p,g}
 \end{aligned}
 \right.
-\end{equation}\label{model:deterministic-parenting}
+\end{equation}\label{ch2:model:deterministic-parenting}
 
 \subsection{Observations}
 
-One can immediately notice that not even the dimension of the system \ref{model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
+One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
-One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
+\paragraph{Pitfall definitions}\label{ch2:pitfall} One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
 This is indeed a good method, but, as we will see, would then create great difficulties later. 
-In fact at the spawning moment the particle $C^{p,g}$ must be at the position $A_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF EXISTENCE AND UNIQUENESS, THIS HAPPENS WHEN THE PARTICLES JUMP FROM THEIR FIXED POSITION TO THE SPAWNING POSITION]]) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
+In fact at the spawning moment the particle $C^{p,g}$ must be at the position $A_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time (see \ref{ch3:avoid-pitfall-of-jumping-particles}) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
 
 
 \section{Random (casual) parenting toy model}
@@ -136,7 +136,7 @@ C_t^m
 &if \quad t \geq \btime^m
 \end{aligned}
 \right.
-\end{equation}\label{model:casual-parenting}
+\end{equation}\label{ch2:model:casual-parenting}
 
 This makes the equations much more simple than before and let us arrange the spawning time chronologically.
 
@@ -200,7 +200,7 @@ This implies that $\Prb (P'(m) = p) = const$, and thus that $P'(m)$ is uniformly
 
 What about the requirement $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$?
 
-We can easily see that 
+[[[[ COMPLETE THIS WITH SOME EASY COUNTEREXAMPLE AS THE POSSIBILITY THAT THE SAME AMOEBA PRODUCES A LOT OF CAMP ]]]]
 
 
 
