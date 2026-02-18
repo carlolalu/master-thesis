@@ -21,7 +21,7 @@ Let $N\in\N$ be the number of amoebas, and fix $N$ indipendent Poisson processes
 Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, the stopping time
 
 \begin{equation}
-\btime^{p,g} := \inf \{ t : \hmactive^p_t \geq g \}
+\btime^{p,g} := \inf \{ t : \hmactive^p_t \geq g \} \sim \Gma(g, \lambda)
 \end{equation}
 
 \ie the \emph{spawning} or \emph{birth time} of the $\camp^{p,g}$ cAMP molecule.
@@ -67,14 +67,14 @@ Wat we need is a "quasi-Brownian motion", which is $0$ till the time $T^{p,g}$ a
 
 With these indipendent processes we can now finally write down the model as a set of stochastic differential equations:
 
-\begin{align*}
+\begin{equation}
 \left\{
 \begin{aligned}
 A_t^p 
 &= A_0^p 
 + \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(A_s^p - C_s^{p,g}) d s
 + 
-\overbrace{\int_0^t \sigma_A d B_s^p}^{\sigma^A B_t^p}
+\overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
 &
 \\
 C_t^{p,g} 
@@ -82,13 +82,15 @@ C_t^{p,g}
 &if \quad t < \btime^{p,g}
 \\
 C_t^{p,g}
-&= A_{\btime^{p,g}}^p + \underbrace{\int_0^t \sigma_C Q_s^{p,g}}_{\sigma_C \quasibm_t^{p,g}} 
+&= A_{\btime^{p,g}}^p + \underbrace{\sigma_C \quasibm_t^{p,g}}_{\int_0^t \sigma_C Q_s^{p,g}} 
 &if \quad t \geq \btime^{p,g}
 \end{aligned}
 \right.
-\end{align*}\label{model:deterministic-parenting}
+\end{equation}\label{model:deterministic-parenting}
 
-One can immediately notice that instead, not even the dimension of the system \ref{model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
+\subsection{Observations}
+
+One can immediately notice that not even the dimension of the system \ref{model:deterministic-parenting} is deterministic: the particles $C_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
 One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
@@ -96,85 +98,113 @@ This is indeed a good method, but, as we will see, would then create great diffi
 In fact at the spawning moment the particle $C^{p,g}$ must be at the position $A_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, making hard to prove the existence and uniqueness of solutions for the system because of the non-easy-to-deal-with kind of discontinuouty in time ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF EXISTENCE AND UNIQUENESS, THIS HAPPENS WHEN THE PARTICLES JUMP FROM THEIR FIXED POSITION TO THE SPAWNING POSITION]]) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the relative the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
 
 
-\subsection{Existence and uniqueness of solutions}
-
-The best chance we have to prove existence and uniqueness of solutions for the defined system is to find a way to see it (or some of its parts) as proper SDEs and use the theorems of such framework to reach the goal.
-
-Recall that an SDE, according to the mathematical definition, is an equation of the kind
-
-\begin{equation}\label{eq:general-sde}
-Y_t = Y_0 + \int_0^t b(t, Y_t) \,dt + \int_0^t\sigma(t, Y_t) \,d B_t
-\end{equation}
-
-of finite deterministic dimension.
-A solution to it is a couple of a continuous stochastic process $Y$ and a brownian motion $B$ fullfilling the equation \ref{eq:general-sde}.
-
-Our system presents a considerable amount of difficulties:
-\begin{itemize}
-\item An hypothetical vector $\modsol_t := (A_t^1,\ldots, A_t^N, \text{camp molecules } C_t^{p,g} \text{ already spawned at time }t)$ would have a dimension growing to infinite as the time flows.
-\item Since the system is piecewise defined in time, at every instant $t$ the same hypothetical vector $\modsol_t$ would have a finite \emph{stochastic} dimension.
-\item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{eq:general-sde}$ we would have a term $b = b(t, X_t, (M_t^p)_p)$ depending also on the Poisson-distributed processes $(M_t^p)_p$ (thus not representable as solution of an SDE), making it "too much stochastical" to be treated as in \ref{eq:general-sde}.
-\end{itemize}
-
-To make the dimension finite we can operate in this way:
-
-\begin{equation*}
-\exists ! X_t \text{solution to \ref{eq:general-sde} in }\R_+ \Longleftrightarrow \forall \overline{t} \in \R_+ \exists ! . X_t \text{solution to \ref{eq:general-sde} in } [0,\overline{t}] 
-\end{equation*}
-
-Let us then fix $\overline{t}\in\R$ and consider the system only on $[0,\overline{t}]$.
-In such time each amoeba $A^p$ will have spawned exactly $\hmactive^p_{\overline{t}}$ particles, and thus the maximum dimension the system reaches is in the instant $\overline{t}$ and is given by the total number of particles present.
-If we define the process $\hmactive_t := \sum_{p=1}^N \hmactive_t^p$ the number of $d$-dimensional equations is given by:
-
-\begin{equation}
-D := \overbrace{N}^{\#\text{amoebas}} 
-+ \overbrace{\hmactive_{\overline{t}}}^{\#\text{(cAMP spawned till time }\overline{t})}
-\end{equation}
-
-and thus the maximum dimension of the system is $D\cdot d = N + M_{\overline{t}}$, which is finite, but still stochastic.
-
-It is clear that 
-
-\begin{equation}
-\forall p. \{\btime^{p,g} \leq s\} = \{ \hmactive_s^p \geq g \}
-\end{equation}
-
-and thus choosing a realization of the $\Pois(\lambda)$-process $(\hmactive_s^p)_{0\leq s \leq \overline{t}}$ is equivalent to choose a realization of the $\Gma(g,\lambda)$ birth times $(\btime^{p,g})_{g}$.
-We also do notice that the birth times are not dependent on the amoebas and cAMPs molecules movements.
-The idea is then to pass from a stochastic to a finite dimension by considering the equation under the regular probability measure $\Prb(\cdot | \bvector)$, where $\bvector$ is defined as
-
-\begin{equation}
-\bvector := (\btime^{p,g})_{p,g}
-\end{equation}
-
-In this way the dimension of the system can be treated as constant, as if we acted realization-wise for each realization of the birth-times.
-
-More details on the verification of this step, and on why the random measure $\Prb(\cdot | \bvector)$ is regular can be found in the appendix at \ref{app:regular-random-measure}.
-
-This solves also the problem of the drift term:
-
-
-
-
-
-
-
-
-
-
-
-
-To reach a deterministic dimension we can fix the times and treat them as deterministic ([[PUT ON APPENDIX A BETTER EXPLANATION FOLLOWING THE DISINTEGRATION OF MEASURES AND PROBABILITY MEASURES FROM OLAV KALLNBERG, theorem 8.5]])
-
-
-
-
-
 \section{Random (casual) parenting toy model}
 
-Another solution of 
+We could imagine to make a mathematically handier version of the previous model, by noticing that, since the Poisson processes $M^p$s spawning determining the spawning times of particles are independent for each amoeba, we have that
+
+\begin{equation}
+\hmactive_t := \sum_{p=1}^N \hmactive_t^p
+\end{equation}
+
+is $\Pois(N \lambda)$-distributed, and thus the correspondent birth times are
+
+\begin{equation}
+\btime_m := \inf \{ t : \hmactive_t \geq m\} \sim \Gma(m, N\lambda)
+\end{equation}
+
+Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $C^m$ is spawned at its birth time with uniform probability on the position of one of the amoebas.
+Mathematically this means considering a "parenting function" $P(m)$ which will represent the spawning amoeba of the $C^m$ particle.
+Assume that $P(m) \sim \Unf_{\{1,\ldots,N\}}$ and that $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$.
+Then we can redefine the model as:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+A_t^p 
+&= A_0^p 
++ \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \drift(A_s^p - C_s^m) d s
++ 
+\overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
+&
+\\
+C_t^m 
+&\qquad\text{does not exist} 
+&if \quad t < \btime^m
+\\
+C_t^m
+&= A_{\btime^m}^{P(m)} + \underbrace{\sigma_C \quasibm_t^m}_{\int_0^t \sigma_C Q_s^m}
+&if \quad t \geq \btime^m
+\end{aligned}
+\right.
+\end{equation}\label{model:casual-parenting}
+
+This makes the equations much more simple than before and let us arrange the spawning time chronologically.
+
+\section{Is the casual model just a relabeling?}
+
+No, not exactly, is the short answer.
+The key is in the definition of the chosen "parenting function" $P$, precisely in the requirement that $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$.
+To show that let us start from the deterministic parenting model, and let us consider the birth time $\btime_m$.
+It is the spawning time of the $m$-th molecule.
+Then what is the amoeba spawning such particle?
+Define, for the deterministic parenting model, the function
+
+\begin{equation}
+P'(m) := p \quad \text{s.t. }A^p \text{ is the parent of } C^m
+\end{equation}
+
+Let us compare the function $P$ and $P'$.
+The first question is if $P'$ is uniformly distributed.
+
+\begin{equation}
+\begin{aligned}
+\Prb (P'(m) = p) 
+&= \Prb (\exists g \in \N. \btime_m = \btime^{p,g} )
+\\
+&= \sum_{g=1}^{\infty} \Prb (\btime_m = \btime^{p,g})
+\end{aligned}
+\end{equation}
+
+Let us calculate the distribution of $(\btime_m,\btime^{p,g})$ for generic $m,g,p$.
+
+\begin{equation}
+\begin{aligned}
+\Prb (\btime_m \leq s,\btime^{p,g} \leq t) 
+&= \Prb ( \sum_{k=1}^N \hmactive_s^k \geq m, \hmactive_t^p \geq g)
+\\
+&= \1_{s\neq t}(\cdots)
++ \1_{s=t}\Prb ( \sqcup_{j=g}^{\infty} (\sum_{k=1}^N \hmactive_s^k \geq m, \hmactive_t^p = j) )
+\\
+&= \1_{s\neq t}(\cdots)
++ \1_{s=t} \sum_{j=g}^{\infty} \Prb ( (\sum_{k=1}^N \hmactive_s^k - \hmactive_t^p \geq m - j, \hmactive_t^p = j) )
+\\
+&= \1_{s\neq t}(\cdots)
++ \1_{s=t} \sum_{j=g}^{\infty} \Prb ( \underbrace{(\sum_{k\neq p} \hmactive_s^k \geq m - j, \hmactive_t^p = j)}_{\indep} )
+\\
+&= \1_{s\neq t}(\cdots)
++ \1_{s=t} \sum_{j=g}^{\infty} \big[ \Prb ( \sum_{k\neq p} \hmactive_s^k \geq m - j) \Prb(\hmactive_t^p = j) \big]
+\\
+&= \1_{s\neq t}(\cdots)
++ \1_{s=t} \underbrace{\sum_{j=g}^{\infty} \big[ \Pois_{(N-1)s\lambda}([0 \vee (m - j), \infty]) \Pois_{t\lambda}(\{j\})}_{=:\Zhi(m,s,p,g,t)}
+\end{aligned}
+\end{equation}
+
+Then we notice immediately that $\Zhi$ is independent from $p$, thus also
+
+\begin{equation}
+\Prb(\btime_m = dt,\btime^{p,g} = dt)
+\end{equation}
+
+is independent on $p$.
+This implies that $\Prb (P'(m) = p) = const$, and thus that $P'(m)$ is uniformly distirbuted, as it is the case for $P(m)$.
+
+What about the requirement $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$?
+
+We can easily see that 
 
 
-Here define the 2 models involved (the casual and random parenting). 
 
-At the others you work easily afterwards
+
+
+
+

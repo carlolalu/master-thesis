@@ -1,0 +1,109 @@
+The best chance we have to prove existence and uniqueness of solutions for the defined system is to find a way to see it (or some of its parts) as proper SDEs and use the theorems of such framework to reach the goal.
+
+\subsection{The system as a piecewise deconditioned SDE}
+
+Recall that an SDE, according to the mathematical definition, is an equation of the kind
+
+\begin{equation}\label{eq:general-sde}
+Y_t = Y_0 + \int_0^t b(s, Y_s) \,ds + \int_0^t\sigma(s, Y_s) \,d B_s
+\end{equation}
+
+of finite deterministic dimension.
+A solution to it is a couple of a continuous stochastic process $Y$ and a brownian motion $B$ fullfilling the equation \ref{eq:general-sde}.
+
+Our system presents a considerable amount of difficulties:
+\begin{itemize}
+\item An hypothetical vector $\modsol_t := (A_t^1,\ldots, A_t^N, \text{camp molecules } C_t^{p,g} \text{ already spawned at time }t)$ would have a dimension growing to infinite as the time flows.
+\item Since the system is piecewise defined in time, at every instant $t$ the same hypothetical vector $\modsol_t$ would have a finite \emph{stochastic} dimension.
+\item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{eq:general-sde}$ we would have a term $b = b(t, X_t, (M_t^p)_p)$ depending also on the Poisson-distributed processes $(M_t^p)_p$ (thus not representable as solution of an SDE), making it "too much stochastical" to be treated as in \ref{eq:general-sde}.
+\end{itemize}
+
+To make the dimension finite we can operate in this way:
+
+\begin{equation*}
+\exists ! X_t \text{solution to \ref{eq:general-sde} in }\R_+ \Longleftrightarrow \forall \overline{t} \in \R_+ \exists ! . X_t \text{solution to \ref{eq:general-sde} in } [0,\overline{t}] 
+\end{equation*}
+
+Let us then fix $\overline{t}\in\R$ and consider the system only on $[0,\overline{t}]$.
+In such time each amoeba $A^p$ will have spawned exactly $\hmactive^p_{\overline{t}}$ particles, and thus the maximum dimension the system reaches is in the instant $\overline{t}$ and is given by the total number of particles present.
+If we define the process $\hmactive_t := \sum_{p=1}^N \hmactive_t^p$ the number of $d$-dimensional equations is given by:
+
+\begin{equation}
+D := \overbrace{N}^{\#\text{amoebas}} 
++ \overbrace{\hmactive_{\overline{t}}}^{\#\text{(cAMP spawned till time }\overline{t})}
+\end{equation}
+
+and thus the maximum dimension of the system is $D\cdot d = N + M_{\overline{t}}$, which is finite, but still stochastic.
+
+It is clear that 
+
+\begin{equation}
+\forall p. \{\btime^{p,g} \leq s\} = \{ \hmactive_s^p \geq g \}
+\end{equation}
+
+and thus choosing a realization of the $\Pois(\lambda)$-process $(\hmactive_s^p)_{0\leq s \leq \overline{t}}$ is equivalent to choose a realization of the $\Gma(g,\lambda)$ birth times $(\btime^{p,g})_{g}$.
+We also do notice that the birth times are not dependent on the amoebas and cAMPs molecules movements.
+
+
+
+
+
+
+The idea is then to pass from a stochastic to a finite dimension by considering the equation under the regular probability measure $\Prb(\cdot | \bvector)$, where $\bvector$ is defined as
+
+\begin{equation}
+\bvector := (\btime^{p,g})_{p,g}
+\end{equation}
+
+In this way $(M_t^p)_p$ can be treated as a deterministic function in time, and the dimension of the system can be treated as constant.
+
+More details on the verification of this reasoning, and on why the random measure $\Prb(\cdot | \bvector)$ is regular, can be found in the appendix at \ref{app:regular-random-measure}.
+
+Then now \ref{model:deterministic-parenting} can be rewritten in a way compatible with the SDE framework.
+
+\begin{equation}
+\modsol_t = \modsol_0 + \int_0^t b(s, \modsol_s, (\hmactive_s^p)_p) \,ds + \int_0^t\sigma \,d B_s
+\end{equation}
+
+where $b(s,x) = b(\cdot, \cdot, (\hmactive_t^p)_p)): \R_+ \times \R^{Dd} \longrightarrow \R^{Dd}$ is defined as
+
+\begin{equation}
+b(s, x, (\hmactive_t^p)_p) :=
+\left\{
+\begin{aligned}
+& \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(x^p - ^{p,g})
+& if 
+\\
+C_t^{p,g} 
+&\qquad\text{does not exist} 
+&if \quad t < \btime^{p,g}
+\\
+C_t^{p,g}
+&= A_{\btime^{p,g}}^p + \underbrace{\int_0^t \sigma_C Q_s^{p,g}}_{\sigma_C \quasibm_t^{p,g}} 
+&if \quad t \geq \btime^{p,g}
+\end{aligned}
+\right.
+\end{equation}\label{def:b-term-deterministic-parenting}
+
+and $\sigma \in \R^{Dd}\times\R^{Dd}$ is the constant matrix:
+
+\begin{equation}
+\begin{aligned}
+matrix
+\end{aligned}
+\end{equation}
+
+
+
+
+
+
+
+
+
+
+To reach a deterministic dimension we can fix the times and treat them as deterministic ([[PUT ON APPENDIX A BETTER EXPLANATION FOLLOWING THE DISINTEGRATION OF MEASURES AND PROBABILITY MEASURES FROM OLAV KALLNBERG, theorem 8.5]])
+
+
+
+
