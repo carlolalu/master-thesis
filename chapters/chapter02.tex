@@ -100,18 +100,19 @@ In fact at the spawning moment the particle $\camp^{p,g}$ must be at the positio
 
 \section{Random (casual) parenting toy model}
 
-We could imagine to make a mathematically handier version of the previous model, by noticing that, since the Poisson processes $M^p$s spawning determining the spawning times of particles are independent for each amoeba, we have that
+Here we try to build a mathematically handier version of the previous model. Since the Poisson processes $M^p$s determining the spawning times of particles are independent for each amoeba, we have that
 
 \begin{equation}
 \hmactive_t := \sum_{p=1}^N \hmactive_t^p
 \end{equation}
 
-is $\Pois(N \lambda)$-distributed, and thus the correspondent birth times are
+is $\Pois(N \lambda)$-distributed. Therefore the correspondent birth times
 
 \begin{equation}
-\btime_m := \inf \{ t : \hmactive_t \geq m\} \sim \Gma(m, N\lambda)
+\btime_m := \inf \{ t : \hmactive_t \geq m\}
 \end{equation}
 
+are $\Gma(m, N\lambda)$-distributed.
 Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $\camp^m$ is spawned at its birth time with uniform probability on the position of one of the amoebas.
 Mathematically this means considering a "parenting function" $P(m)$ which will represent the spawning amoeba of the $\camp^m$ particle.
 Assume that $P(m) \sim \Unf_{\{1,\ldots,N\}}$ and that $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$.
@@ -142,11 +143,11 @@ This makes the equations much more simple than before and let us arrange the spa
 
 \section{Is the casual model just a relabeling?}
 
-No, not exactly, is the short answer.
+Let us explore the answer.
 The key is in the definition of the chosen "parenting function" $P$, precisely in the requirement that $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$.
-To show that let us start from the deterministic parenting model, and let us consider the birth time $\btime_m$.
+Let us start from the deterministic parenting model, and let us consider the birth time $\btime_m$.
 It is the spawning time of the $m$-th molecule.
-Then what is the amoeba spawning such particle?
+Which amoeba is spawning such particle?
 Define, for the deterministic parenting model, the function
 
 \begin{equation}
@@ -192,15 +193,105 @@ Let us calculate the distribution of $(\btime_m,\btime^{p,g})$ for generic $m,g,
 Then we notice immediately that $\Zhi$ is independent from $p$, thus also
 
 \begin{equation}
-\Prb(\btime_m = dt,\btime^{p,g} = dt)
+\Prb(\btime_m = dt,\btime^{p,g} = dt) = \partial_t \partial_s \Zhi(m,s,g,t)
 \end{equation}
 
 is independent on $p$.
-This implies that $\Prb (P'(m) = p) = const$, and thus that $P'(m)$ is uniformly distirbuted, as it is the case for $P(m)$.
+This implies that $\Prb (P'(m) = p) = const(m)$, and thus that $P'(m)$ is uniformly distirbuted, as it is the case for $P(m)$.
+This was quite expected, because by reindexing the spawning Poisson processes $\hmactive_t^p$ we should have the same distribution. 
 
 What about the requirement $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$?
+We do expect this to be not the case for the function $P'$: we expect to be more likely that the cAMP molecules are spawned by all amoebas, and not that it is also likely that a process $\hmactive_t^p$ fires many times in a row while the other processes are muted.
+If $P'(m)$ would be indipendent from $P'(m+1)$, for two parents $p \neq q$ (we suppose that $N \geq 3$) we should have that:
 
-[[[[ COMPLETE THIS WITH SOME EASY COUNTEREXAMPLE AS THE POSSIBILITY THAT THE SAME AMOEBA PRODUCES A LOT OF CAMP ]]]]
+\begin{equation}
+\begin{aligned}
+\Prb(P'(m) = p, P'(m+1) = q) 
+&= \Prb(P'(m) = p) \Prb(P'(m+1) = q) 
+\\
+&= \Prb(P'(m) = p) \Prb(P'(m+1) = p) 
+\\
+&= \Prb(P'(m) = p, P'(m+1) = p)
+\end{aligned}
+\end{equation}
+
+We found then a possible counterexample:
+
+\begin{equation}
+\invquest p\neq q \Longrightarrow \Prb(P'(1) = p, P'(2) = q) = \Prb(P'(1) = p, P'(2) = p) ?
+\end{equation}\label{ch2:indep-parenting-function?}
+
+Let us check the LHS of \ref{ch2:indep-parenting-function?}. Assume first that $p\neq q$:
+
+\begin{equation}
+\begin{aligned}
+\Prb(&P'(1) = p, P'(2) = q) 
+= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{q,1})
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^q = 1)
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
+	\hmactive_{\btime_2}^q = 1, \hmactive_{\btime_2}^p = 1, \sum_{k\neq p, k \neq q} \hmactive_{\btime_2}^k = 0, )
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
+	\hmactive_{\btime_1,\btime_2}^p = 0, \sum_{k\neq p, k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
+	\hmactive_{\btime_1,\btime_2}^q = 1)
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
+	\sum_{k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
+	\hmactive_{\btime_1,\btime_2}^q = 1)
+\\
+&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} 
+	\hmactive_{s}^k = 0,\sum_{k \neq q} \hmactive_{s,t}^k = 0,\hmactive_{s,t}^q = 1)}_{=:\Ch_{LHS}}
+\end{aligned}
+\end{equation}
+
+Thus we have that:
+
+\begin{equation}
+\begin{aligned}
+\Ch_{LHS}
+&= \Prb(\hmactive_{s}^p = 1) \Prb(\sum_{k\neq p} \hmactive_{s}^k = 0) 
+	\Prb(\sum_{k \neq q} \hmactive_{s,t}^k = 0)\Prb(\hmactive_{s,t}^q = 1)
+\\
+&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
+	\Pois_{(t-s)\lambda}(\{1\}) 
+\end{aligned}
+\end{equation}
+
+What about the RHS of \ref{ch2:indep-parenting-function?}?
+
+\begin{equation}
+\begin{aligned}
+\Prb(&P'(1) = p, P'(2) = p) 
+= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{p,2})
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^p = 2)
+\\
+&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
+	\hmactive_{\btime_2}^p = 2, \sum_{k\neq p} \hmactive_{\btime_2}^k = 0 )
+\\
+&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{t}^p = 2, \sum_{k\neq p} \hmactive_{t}^k = 0 )}_{\Ch_{RHS}}
+\end{aligned}
+\end{equation}
+
+Then
+
+\begin{equation}
+\begin{aligned}
+\Ch_{LHS}
+&= \Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{s,t}^p = 1,
+	\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
+\\
+&= \Prb(\hmactive_{s}^p = 1)\Prb( \sum_{k\neq p} \hmactive_{s}^k = 0)\Prb(\hmactive_{s,t}^p = 1)
+	\Prb(\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
+\\
+&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
+	\Pois_{(t-s)\lambda}(\{1\})
+\end{aligned}
+\end{equation}
+
+
 
 
 
