@@ -179,175 +179,299 @@ Let us answer to the first one:
 \\
 &= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}} = m)
 \\
-&= \sum_{g=1}^{\infty} 
-	\int d\Prb(\btime^{p,g} = s) \Prb (\hmactive_{\btime^{p,g}} = m \big| \btime^{p,g} = s)
+&= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}}^p = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
 \\
-&= \sum_{g=1}^{\infty} 
-	\underbrace{\int d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds} \Prb (\hmactive_s = m \big)
+&= \sum_{g=1}^{\infty} \Prb (g = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
 \\
-&= \sum_{g=1}^{\infty} 
-	\Zhi(p,g,s) ds \Pois_{Ns\lambda}(\{m\})
+&= \sum_{g=1}^{\infty} \int \Prb( \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g) 
+	\big| \btime^{p,g} = s) d\Prb(\btime^{p,g} = s)
+\\
+&= \sum_{g=1}^{\infty} \int \Pois_{(N-1)s\lambda}(\{ m-g\})\1_{m-g \geq 0} 
+	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
 \end{aligned}
 \end{equation}
 
-And since $\Zhi(p,g,s)=d\Gma_{g,\lambda}$, it is independent from $p$, we have that $\Prb (\Parentof'(m) = p) = const(m)$, \ie it is independent from $p$ as well, and thus uniformly distirbuted on $\{1,\ldots,N\}$.
+And since $\Zhi(p,g,s)=d\Gma_{g,\lambda}$, it is independent from $p$, we have that $\Prb (\Parentof'(m) = p) = const(m)$ and thus uniformly distirbuted on $\{1,\ldots,N\}$.
 
-The second question is translatable to
+The second condition is
 
 \begin{equation*}
-\invquest 
-	\quad \forall p,g . 
-		\quad \Prb (\Parentof'(m) = p,\Parentof'(m+1) = q) =^{?} \Prb (\Parentof'(m) = p)\Prb (\Parentof'(m+1) = q) = \frac{1}{N^2}
+\invquest
+	\quad \forall p,q . \forall m,n\in\N .
+		\quad \Prb (\Parentof'(m) = p,\Parentof'(n) = q) =^{?} \Prb (\Parentof'(m) = p) \Prb(\Parentof'(n) = q) = \frac{1}{N^2}
 ?
-\end{equation*}
-
-Let us see:
-
-\begin{equation}
-\begin{aligned}
-\Prb (\Parentof'(m) = p, & \Parentof'(m+1) = q) 
-= \Prb(\exists g,h \in \N.\quad \hmactive^p_{\btime_m} = g, \hmactive^q_{\btime_{m+1}} = h)
-\\
-& = \Prb(\exists g \in \N.\quad \hmactive^p_{\btime_m} = g, \hmactive^q_{\btime_m,\btime_{m+1}} = h)
-\\
-&= \sum_{g=1}^{\infty} \Prb(\hmactive^p_{\btime_m} = g, \hmactive^q_{\btime_m,\btime_{m+1}} = h)
-\\
-&= \sum_{g,h=1}^{\infty} \int d\Prb(\btime_m = s, \btime_{m+1} = t)  \Prb(\hmactive^p_{\btime_m} = g,
-	\hmactive^q_{\btime_{m+1}} = h \big| \btime_m = s, \btime_{m+1} = t)
-\\
-& \text{(The integrand is positive, thus $\sum$ can enter the integral)}
-\\
-&= \int d\Prb(\btime_m = s, \btime_{m+1} = t)  \underbrace{\sum_{g,h=1}^{\infty} \Prb(\hmactive^p_{\btime_{m}} = g,\hmactive^q_{\btime_{m+1}} = h \big| \btime_m = s, \btime_{m+1} = t)}_{\Ch(p,q,s,t)}
-\end{aligned}
-\end{equation}
-
-Let us take a closer look at $\Ch$.
-There are two possibilities: either $p=q$ (same parent) or $p\neq q$ (different parent).
-Suppose that $p=q$, then:
-
-\begin{equation}
-\begin{aligned}
-\Ch(p,p,s,t) 
-&= \sum_{g,h=1}^{\infty} \Prb(\hmactive^p_{\btime_{m}} = g,\hmactive^p_{\btime_{m+1}} = h \big| \btime_m = s, \btime_{m+1} = t)\1_{h=g+1}
-\\
-&= \sum_{g=1}^{\infty} \Prb(\hmactive^p_{\btime_{m}} = g,\hmactive^p_{\btime_m,\btime_{m+1}} = 1, 
-	\sum_{k\neq p} \hmactive_{\btime_m,\btime_{m+1}}^k = 0 \big| \btime_m = s, \btime_{m+1} = t)
-\\
-&= \sum_{g=1}^{\infty} \Prb(\hmactive^p_s = g) \Prb(\hmactive^p_{s,t} = g+1 ) \Prb(\sum_{k\neq p} \hmactive_{s,t}^k = 0)
-\\
-&= \sum_{g=1}^{\infty} \Pois_{s\lambda}(\{g\}) \Pois_{(t-s)\lambda}(\{g+1\}) \Pois_{(N-1)(t-s)\lambda}(\{0\})
-\end{aligned}
-\end{equation}
-
-If instead we treat the case $p\neq q$ we obtain:
-
-\begin{equation}
-\begin{aligned}
-\Ch(p,p,s,t) 
-&= \sum_{g,h=1}^{\infty} \Prb(\hmactive^p_{\btime_{m}} = g,\hmactive^q_{\btime_{m+1}} = h \big| \btime_m = s, \btime_{m+1} = t)\1_{h=g+1}
-\\
-&= \sum_{g}^{\infty} \Prb(\hmactive^p_{\btime_{m}} = g, \hmactive^q_{\btime_{m},\btime_{m+1}} = 1 \big| \btime_m = s, \btime_{m+1} = t)\1_{h=g+1}
-\end{aligned}
-\end{equation}
+\end{equation*}\label{ch2:condition-indep-parentof}
 
 
-
-
-
-
-[[ this section is completely to rewrite ]]
-
-
-What about the requirement $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$?
-We do expect this to be not the case for the function $P'$: we expect to be more likely that the cAMP molecules are spawned by all amoebas, and not that it is also likely that a process $\hmactive_t^p$ fires many times in a row while the other processes are muted.
-If $P'(m)$ would be indipendent from $P'(m+1)$, for two parents $p \neq q$ (we suppose that $N \geq 3$) we should have that:
-
-\begin{equation}
-\begin{aligned}
-\Prb(P'(m) = p, P'(m+1) = q) 
-&= \Prb(P'(m) = p) \Prb(P'(m+1) = q) 
-\\
-&= \Prb(P'(m) = p) \Prb(P'(m+1) = p) 
-\\
-&= \Prb(P'(m) = p, P'(m+1) = p)
-\end{aligned}
-\end{equation}
-
-We found then a possible counterexample:
-
-\begin{equation}
-\invquest p\neq q \Longrightarrow \Prb(P'(1) = p, P'(2) = q) = \Prb(P'(1) = p, P'(2) = p) ?
-\end{equation}\label{ch2:indep-parenting-function?}
-
-Let us check the LHS of \ref{ch2:indep-parenting-function?}. Assume first that $p\neq q$:
-
-\begin{equation}
-\begin{aligned}
-\Prb(&P'(1) = p, P'(2) = q) 
-= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{q,1})
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^q = 1)
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
-	\hmactive_{\btime_2}^q = 1, \hmactive_{\btime_2}^p = 1, \sum_{k\neq p, k \neq q} \hmactive_{\btime_2}^k = 0, )
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
-	\hmactive_{\btime_1,\btime_2}^p = 0, \sum_{k\neq p, k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
-	\hmactive_{\btime_1,\btime_2}^q = 1)
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
-	\sum_{k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
-	\hmactive_{\btime_1,\btime_2}^q = 1)
-\\
-&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} 
-	\hmactive_{s}^k = 0,\sum_{k \neq q} \hmactive_{s,t}^k = 0,\hmactive_{s,t}^q = 1)}_{=:\Ch_{LHS}}
-\end{aligned}
-\end{equation}
-
-Thus we have that:
-
-\begin{equation}
-\begin{aligned}
-\Ch_{LHS}
-&= \Prb(\hmactive_{s}^p = 1) \Prb(\sum_{k\neq p} \hmactive_{s}^k = 0) 
-	\Prb(\sum_{k \neq q} \hmactive_{s,t}^k = 0)\Prb(\hmactive_{s,t}^q = 1)
-\\
-&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
-	\Pois_{(t-s)\lambda}(\{1\}) 
-\end{aligned}
-\end{equation}
-
-What about the RHS of \ref{ch2:indep-parenting-function?}?
-
-\begin{equation}
-\begin{aligned}
-\Prb(&P'(1) = p, P'(2) = p) 
-= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{p,2})
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^p = 2)
-\\
-&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
-	\hmactive_{\btime_2}^p = 2, \sum_{k\neq p} \hmactive_{\btime_2}^k = 0 )
-\\
-&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{t}^p = 2, \sum_{k\neq p} \hmactive_{t}^k = 0 )}_{\Ch_{RHS}}
-\end{aligned}
-\end{equation}
-
-Then
-
-\begin{equation}
-\begin{aligned}
-\Ch_{LHS}
-&= \Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{s,t}^p = 1,
-	\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
-\\
-&= \Prb(\hmactive_{s}^p = 1)\Prb( \sum_{k\neq p} \hmactive_{s}^k = 0)\Prb(\hmactive_{s,t}^p = 1)
-	\Prb(\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
-\\
-&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
-	\Pois_{(t-s)\lambda}(\{1\})
-\end{aligned}
-\end{equation}
+[[ THIS SECTION IS TO REWRITE COMPLETELY]]
+%%%%%
+%%%%%
+%%%%%Take generic $p,q$. Then:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Prb (\Parentof'(m) = p, & \Parentof'(m+1) = q) 
+%%%%%= \sum_{g,h=1}^{\infty} \Prb(\hmactive_{\btime^{p,g}}=m, \hmactive_{\btime^{q,h}}=m+1)
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} \Prb(\hmactive_{\btime^{p,g}}=m, \hmactive_{\btime^{p,g},\btime^{q,h}}=1, \btime^{p,g}<\btime^{q,h})
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k= m-g,
+%%%%%		\hmactive_{\btime^{p,g},\btime^{q,h}}^q = 1, \sum_{k\neq q}\hmactive_{\btime^{p,g},\btime^{q,h}}^k = 0
+%%%%%	, \btime^{p,g}<\btime^{q,h}) =: \Iu(p,q)
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%Now we have that 
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%RHS[\ref{ch2:condition-indep-parentof}] 
+%%%%%&= \Iu(p,p) 
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k= m - g,
+%%%%%		\hmactive_{\btime^{p,g},\btime^{p,h}}^p = 1, \sum_{k\neq p}\hmactive_{\btime^{p,g},\btime^{p,h}}^k = 0
+%%%%%	, \btime^{p,g}<\btime^{p,h})
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k= m - g,
+%%%%%		\hmactive_{\btime^{p,g},\btime^{p,h}}^p = 1, \sum_{k\neq p}\hmactive_{\btime^{p,g},\btime^{p,h}}^k = 0
+%%%%%	) \1_{h = g+1}
+%%%%%\\
+%%%%%&= \sum_{g=1}^{\infty} 
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k= m - g,
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g},\btime^{p,g+1}}^k = 0
+%%%%%	)
+%%%%%\\
+%%%%%&= \sum_{g=1}^{\infty} 
+%%%%%	\int \Prb(
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k= m - g,
+%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g},\btime^{p,g+1}}^k = 0
+%%%%%		\\
+%%%%%		&\big| \btime^{p,g} = s,\btime^{p,g+1} = t
+%%%%%		)
+%%%%%		d\Prb(\btime^{p,g} = s,\btime^{p,g+1} = t)
+%%%%%\\
+%%%%%&= \sum_{g=1}^{\infty} 
+%%%%%	\int \Prb(
+%%%%%		\Pois_{s\lambda(N-1)}(\{m-g\})\1_{m-g\geq 0}
+%%%%%		\Pois_{(t-s)\lambda (N-1)}(\{0\})
+%%%%%		d\Prb(\btime^{p,g} = s,\btime^{p,g+1} = t)
+%%%%%\\
+%%%%%&\text{The integrand is positive: $\sum$ can go under the integral}
+%%%%%\\
+%%%%%&= \int \sum_{g=1}^{m}
+%%%%%		\Pois_{s\lambda(N-1)}(\{m-g\})
+%%%%%		\Pois_{(t-s)\lambda (N-1)}(\{0\})
+%%%%%		d\Prb(\btime^{p,g} = s,\btime^{p,g+1} = t)
+%%%%%\\
+%%%%%&= \int \sum_{g=1}^{m}
+%%%%%		e^{-s\lambda(N-1)}\frac{(s\lambda(N-1))^{m-g}}{(m-g)!}
+%%%%%		e^{-(t-s)\lambda(N-1)}\frac{((t-s)\lambda(N-1))^0}{0!}
+%%%%%		d\Prb(\btime^{p,g} = s,\btime^{p,g+1} = t)
+%%%%%\\
+%%%%%&= \int \underbrace{\sum_{g=1}^{m}
+%%%%%		e^{-t\lambda(N-1)}\frac{(s\lambda(N-1))^{m-g}}{(m-g)!}}_{\Ch_{RHS}}
+%%%%%		d\Prb(\btime^{p,g} = s,\btime^{p,g+1} = t)
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%While we have that, for $p\neq q$:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%LHS[\ref{ch2:condition-indep-parentof}] 
+%%%%%&= \Iu(p,q) 
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p,q}\hmactive_{\btime^{p,g}}^k= m-g-h+1,
+%%%%%		\hmactive_{\btime^{p,g}}^q = h-1, 
+%%%%%		\hmactive_{\btime^{p,g},\btime^{q,h}}^q = 1, 
+%%%%%		\\
+%%%%%		&
+%%%%%		\sum_{k\neq q}\hmactive_{\btime^{p,g},\btime^{q,h}}^k = 0
+%%%%%		, \btime^{p,g}<\btime^{q,h}
+%%%%%	)
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\int
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p,q}\hmactive_{\btime^{p,g}}^k= m-g-h+1,
+%%%%%		\hmactive_{\btime^{p,g}}^q = h-1,
+%%%%%		\hmactive_{\btime^{p,g},\btime^{q,h}}^q = 1,
+%%%%%		\\
+%%%%%		&
+%%%%%		\sum_{k\neq q}\hmactive_{\btime^{p,g},\btime^{q,h}}^k = 0
+%%%%%	\\
+%%%%%	& \big| \btime^{p,g}=s,\btime^{q,h}=t) \1_{s<t} d \Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\int
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p,q}\hmactive_{s}^k= m-g-h+1,
+%%%%%		\hmactive_{s}^q = h-1,
+%%%%%		\hmactive_{s,t}^q = 1,
+%%%%%		\\
+%%%%%		&
+%%%%%		\sum_{k\neq q}\hmactive_{s,t}^k = 0)
+%%%%%	\1_{s<t} d \Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%\\
+%%%%%&= \sum_{g,h=1}^{\infty} 
+%%%%%	\int
+%%%%%	\Pois_{(N-2)}	
+%%%%%	\Prb(
+%%%%%		\sum_{k\neq p,q}\hmactive_{s}^k= m-g-h+1,
+%%%%%		\hmactive_{s}^q = h-1,
+%%%%%		\hmactive_{s,t}^q = 1,
+%%%%%		\\
+%%%%%		&
+%%%%%		\sum_{k\neq q}\hmactive_{s,t}^k = 0)
+%%%%%	\1_{s<t} d \Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%%\\
+%%%%%%&= \sum_{g,h=1}^{\infty} \int \Prb(
+%%%%%%		\sum_{k\neq p}\hmactive_{\btime^{p,g}}^k = m - g, \hmactive_{\btime^{p,g}}^p = g,\sum_{k\neq q}\hmactive_{\btime^{p,g},\btime^{q,h}}^k = m + 1 - h,
+%%%%%%\\ 
+%%%%%%&  \hmactive_{\btime^{p,g},\btime^{q,h}}^q = h
+%%%%%%	\big| \btime^{p,g}=s,\btime^{q,h}=t) d\Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%%	)
+%%%%%%\\
+%%%%%
+%%%%%
+%%%%%%&= \sum_{g,h=1}^{\infty} \int \Prb(
+%%%%%%		\sum_{k\neq p}\hmactive_{s}^k = m - g, \hmactive_{s}^p = g,\sum_{k\neq q}\hmactive_{s,t}^k = m + 1 - h,
+%%%%%%		\hmactive_{s,t}^q = h) 
+%%%%%%		\\
+%%%%%%		& d\Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%%		\\
+%%%%%%&= \sum_{g,h=1}^{\infty} \int \Pois_{(N-1)s\lambda}(\{m-g\}) \Pois_{s\lambda}(\{g\})
+%%%%%%	\\
+%%%%%%	&\Pois_{(N-1)(t-s)\lambda}(\{m+1-h\}) \Pois_{(t-s)\lambda}(\{h\}) d\Prb(\btime^{p,g}=s,\btime^{q,h}=t)
+%%%%%
+%%%%%
+%%%%%
+%%%%%[[ this section is completely to rewrite ]]
+%%%%%
+%%%%%Let us take a closer look at $\Ch$.
+%%%%%There are two possibilities: either $p=q$ (same parent) or $p\neq q$ (different parent).
+%%%%%Suppose that $p=q$, then:
+%%%%%
+%%%%%
+%%%%%
+%%%%%If instead we treat the case $p\neq q$ we obtain:
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%
+%%%%%[[ this section is completely to rewrite ]]
+%%%%%
+%%%%%
+%%%%%What about the requirement $\forall m_1 \neq m_2.P(m_1) \indep P(m_2)$?
+%%%%%We do expect this to be not the case for the function $P'$: we expect to be more likely that the cAMP molecules are spawned by all amoebas, and not that it is also likely that a process $\hmactive_t^p$ fires many times in a row while the other processes are muted.
+%%%%%If $P'(m)$ would be indipendent from $P'(m+1)$, for two parents $p \neq q$ (we suppose that $N \geq 3$) we should have that:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Prb(P'(m) = p, P'(m+1) = q) 
+%%%%%&= \Prb(P'(m) = p) \Prb(P'(m+1) = q) 
+%%%%%\\
+%%%%%&= \Prb(P'(m) = p) \Prb(P'(m+1) = p) 
+%%%%%\\
+%%%%%&= \Prb(P'(m) = p, P'(m+1) = p)
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%We found then a possible counterexample:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\invquest p\neq q \Longrightarrow \Prb(P'(1) = p, P'(2) = q) = \Prb(P'(1) = p, P'(2) = p) ?
+%%%%%\end{equation}\label{ch2:indep-parenting-function?}
+%%%%%
+%%%%%Let us check the LHS of \ref{ch2:indep-parenting-function?}. Assume first that $p\neq q$:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Prb(&P'(1) = p, P'(2) = q) 
+%%%%%= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{q,1})
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^q = 1)
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
+%%%%%	\hmactive_{\btime_2}^q = 1, \hmactive_{\btime_2}^p = 1, \sum_{k\neq p, k \neq q} \hmactive_{\btime_2}^k = 0, )
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
+%%%%%	\hmactive_{\btime_1,\btime_2}^p = 0, \sum_{k\neq p, k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
+%%%%%	\hmactive_{\btime_1,\btime_2}^q = 1)
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0,
+%%%%%	\sum_{k \neq q} \hmactive_{\btime_1,\btime_2}^k = 0,
+%%%%%	\hmactive_{\btime_1,\btime_2}^q = 1)
+%%%%%\\
+%%%%%&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} 
+%%%%%	\hmactive_{s}^k = 0,\sum_{k \neq q} \hmactive_{s,t}^k = 0,\hmactive_{s,t}^q = 1)}_{=:\Ch_{LHS}}
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%Thus we have that:
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Ch_{LHS}
+%%%%%&= \Prb(\hmactive_{s}^p = 1) \Prb(\sum_{k\neq p} \hmactive_{s}^k = 0) 
+%%%%%	\Prb(\sum_{k \neq q} \hmactive_{s,t}^k = 0)\Prb(\hmactive_{s,t}^q = 1)
+%%%%%\\
+%%%%%&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
+%%%%%	\Pois_{(t-s)\lambda}(\{1\}) 
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%What about the RHS of \ref{ch2:indep-parenting-function?}?
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Prb(&P'(1) = p, P'(2) = p) 
+%%%%%= \Prb(\btime_1 = \btime^{p,1}, \btime_2 = \btime^{p,2})
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \hmactive_{\btime_2}^p = 2)
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{\btime_1}^p = 1, \sum_{k\neq p} \hmactive_{\btime_1}^k = 0, 
+%%%%%	\hmactive_{\btime_2}^p = 2, \sum_{k\neq p} \hmactive_{\btime_2}^k = 0 )
+%%%%%\\
+%%%%%&= \int d\Prb(\btime_1 = s, \btime_2 = t) \underbrace{\Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{t}^p = 2, \sum_{k\neq p} \hmactive_{t}^k = 0 )}_{\Ch_{RHS}}
+%%%%%\end{aligned}
+%%%%%\end{equation}
+%%%%%
+%%%%%Then
+%%%%%
+%%%%%\begin{equation}
+%%%%%\begin{aligned}
+%%%%%\Ch_{LHS}
+%%%%%&= \Prb(\hmactive_{s}^p = 1, \sum_{k\neq p} \hmactive_{s}^k = 0,\hmactive_{s,t}^p = 1,
+%%%%%	\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
+%%%%%\\
+%%%%%&= \Prb(\hmactive_{s}^p = 1)\Prb( \sum_{k\neq p} \hmactive_{s}^k = 0)\Prb(\hmactive_{s,t}^p = 1)
+%%%%%	\Prb(\sum_{k\neq p} \hmactive_{s,t}^k = 0 )
+%%%%%\\
+%%%%%&= \Pois_{s\lambda}(\{1\}) \Pois_{(N-1)s\lambda}(\{0\}) \Pois_{(N-1)(t-s)\lambda}(\{0\}) 
+%%%%%	\Pois_{(t-s)\lambda}(\{1\})
+%%%%%\end{aligned}
+%%%%%\end{equation}
 
 
 
