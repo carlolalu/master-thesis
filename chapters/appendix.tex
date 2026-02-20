@@ -1,2 +1,115 @@
-\section{Random measures} \label{app:regular-random-measure}
+\section{What is a solution to the deterministic parenting model, formally}\label{app:formal-def-solution}
 
+First we define the space of configurations of cAMP molecules spawned by a single amoeba.
+Here the $\star$ means that a particle has not been spawned yet.
+We must take only sequences where only the first coordinates (finitely) are different from $\star$.
+
+\begin{definition}
+Define the space of the cAMP particles spawned by an amoeba as:
+\begin{equation}
+\R^d_{camp}:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d) := \{x = (x_g)_{g\in\N} : \exists G\in\N_0.\forall g\geq G. x_g =\star\}
+\end{equation}
+Define the space of configurations for all particles as
+\begin{equation}
+Conf:=(\R^d)^N \times\big(\R^d_{camp}\big)^N
+\end{equation}
+For each configuration of particles $x\in Conf$ sign its coordinates as 
+\begin{equation*}
+\begin{aligned}
+x &= (x^1, \ldots, x^N, 
+	&(x^{1,g})_{g\in\N}, \ldots, 
+	&(x^{p,g})_{g\in\N}, \ldots, 
+	&(x^{N,g})_{g\in\N})
+\\
+&= (a^1, \ldots, a^N, 
+	&c^{1,1}, c^{1,2}, \ldots, 
+	&c^{p,1},\ldots, 
+	&c^{N,1}, \ldots)
+\end{aligned}
+\end{equation*}
+where the absence of a coordinate in the list means that such coordinate is set to $\star$.
+\end{definition}
+
+This definition is important to have processes and function with domains and codomains which are constant throughout time.
+For example:
+
+\begin{definition} Let $S$ be the space of strictly increasing sequences on $\R+$. Then define $\drift: \R_+ \times Conf \times S^N \longrightarrow Conf$ as
+\begin{equation}
+\left\{
+\begin{aligned}
+&\drift_p(t,x,(\hmactive_t^p)_p) = \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(x^p - x^{p,g})
+	&& 1\leq p \leq N
+\\
+&\drift_{p,g}(t,x) = 0
+	&& \text{if } \btime^{p,g} \leq t
+\\
+&\drift_{p,g}(t,x) = \star
+	&& \text{otherwise}
+\end{aligned}
+\right.
+\end{equation}
+Let $\diffusion:Conf\longrightarrow Conf$ be defined as
+\begin{equation}
+\left\{
+\begin{aligned}
+&\diffusion_p:= \sigma_A
+&
+\\
+&\diffusion_{p,g} = \sigma_C
+	&& \text{if } \btime^{p,g} \leq t
+\\
+&\diffusion_{p,g} = \star
+	&& \text{otherwise}
+\end{aligned}
+\right.
+\end{equation}
+\end{definition}\label{ch3:formal-def-drift-diffus}
+
+Now we need to see what does it mean to formally solve a piecewise define SDE with a quasi-brownian motion as ours:
+
+\begin{definition}
+Given a Brownian motion $B$ and a stopping time $T$ we define the quasi Brownian motion
+\begin{equation}
+\quasibm_t^{B,T} :=
+\left\{
+\begin{aligned}
+& 0 
+& t<T
+\\
+&B_{t} - B_{T}
+& t \geq T
+\end{aligned}
+\right.
+\end{equation}
+\end{definition}
+
+Notice then that in the system \ref{ch2:model:deterministic-parenting} we have that
+\begin{equation}
+\quasibm^{B^{p,g}, T^{p,g}} = \quasibm^{p,g}
+\end{equation}
+
+
+
+
+%todo
+[[[WRITE FROM HERE ON]]]
+
+
+\begin{definition}
+A \emph{piecewise SDE with quasi BM} is an expression of the type $E($
+\end{definition}
+
+
+
+\begin{definition}
+A solution to \ref{ch2:model:deterministic-parenting} is given by
+\begin{itemize}
+\item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb)$
+\item $N$ indipendent Poisson processes $(\hmactive^p)_{1\leq p\leq N}$ on $\Omega$
+\item $(\Flt_t)_t$-adapted processes $\modsol,B:\R_+ \longrightarrow Conf$ such that 
+	\begin{itemize}
+	\item $(\hmactive^p)_{1\leq p\leq N}$ do not depend on $(\modsol,B)$
+	\item Under the random measure $\Prb(\quad\cdot\quad \big| (\hmactive^p)_{1\leq p\leq N, t\in\R_+})$ we have that $(\modsol,B)$ solves $E(\drift((\hmactive_t^p)_p), \diffusion)$ in the coordinates different from $\star$ piecewise on $I_m=[\btime_m,\btime_{m+1}]$ with the opportune modifications from $B^{p,g}$ to $\quasibm^{p,g}$
+	\end{itemize}
+\end{itemize}
+\end{definition}

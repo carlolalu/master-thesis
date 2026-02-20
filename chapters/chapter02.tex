@@ -72,7 +72,7 @@ With these indipendent processes we can now finally write down the model as a se
 \begin{aligned}
 \amba_t^p 
 &= \amba_0^p 
-+ \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(\amba_s^p - \camp_s^{p,g}) d s
++ \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(\amba_s^p - \camp_s^{p,g}) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
 &
@@ -123,7 +123,7 @@ Then we can redefine the model as:
 \begin{aligned}
 \amba_t^p 
 &= \amba_0^p 
-+ \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \drift(\amba_s^p - \camp_s^m) d s
++ \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^m) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
 &

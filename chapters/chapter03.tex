@@ -1,13 +1,13 @@
 The best chance we have to prove existence and uniqueness of solutions for the defined system is to find a way to see it (or some of its parts) as proper SDEs and use the theorems of such framework to reach the goal.
 
-\section{SDE framework}
+\section{The SDEs framework and the conditions for existence and uniqueness}
 
 An SDE is an expression of the form:
 
 \begin{equation}\label{ch3:eq:general-sde}
 \left\{
 \begin{aligned}
-d X_t &= b(t, X_t) dt + \sigma(t, X_t) d B_t	\\
+d X_t &= \drift(t, X_t) dt + \diffusion(t, X_t) d B_t	\\
 X_0 &\sim \rho_0
 \end{aligned}
 \right.
@@ -16,164 +16,210 @@ X_0 &\sim \rho_0
 which is a more conceptual notation to formally mean
 
 \begin{equation}\label{ch3:eq:general-sde-integral-form}
-X_t = \rho_0 + \int_0^t b(t, X_t) \,dt + \int_0^t\sigma(t, X_t) \,d B_t
+X_t = \rho_0 + \int_0^t \drift(t, X_t) \,dt + \int_0^t \diffusion(t, X_t) \,d B_t
 \end{equation}
 
-where $b\in \R^\Iu$, $\sigma \in \R^{\Iu, \Ch}$. A solution is a couple $(X, B)$ such that $B_t\in \R^\Ch$ is Wiener process and $X$ is a \emph{continous} semi-martingale.
+where $\drift \in \R^\Iu$, $\diffusion \in \R^{\Iu \times \Ch}$ are given vectorial and matricial functions respectively (the given initial distribution $\rho$ is optional).
+They are called \emph{drift} and \emph{volatiliyt} respectively.
+We sign such SDE as a $E(\drift,\diffusion)$.
+\begin{definition}
+A solution for $E(\drift,\diffusion)$ consists of
+\begin{itemize}
+\item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb) $
+\item an $\Ch$-dimensional $(\Flt_t)_t$-Brownian motion $B = (B^1, \ldots, B^\Ch)$
+\item an $(\Flt_t)_t$-adapted $\Iu$-dimensional process $X_t$ with $\Cspc^0$ sample paths
+\end{itemize}
+such that they satisfy the equation $E(\drift,\diffusion)$.
+If furthermore $X_0 = x$ we say that $X$ solves $E_x(\drift,\diffusion)$.
+\end{definition}
 
-\paragraph{cAMP particles cannot jump}\label{ch3:avoid-pitfall-of-jumping-particles} Recall that in \ref{ch2:pitfall} we hinted that a possible solution to avoid a dimension changing with the time (a piecewise defined system) was to let cAMP particles $\camp^{p,g}$ exist since the beginning in a fixed position and then at spawning time jump at position $\amba_{T^{p,g}}^p$ and start moving of Brownian motion.
-This is not a feasible way to define the system because then we wouldn't be able to reach an expression which has a continous solution as an SDE: the particles cannot jump!
-
-To ensure existence (strong uniqueness) and uniqueness (path uniqueness) of solutions we need to require conditions on $b, \sigma$. There are two main results:
+To ensure existence (strong existence, meaning that we can find a solution on each probability space) and uniqueness (path uniqueness, meaning that having two solutions with the same initial conditions, they are indistinguishable)of solutions we need to require conditions on $\drift, \diffusion$. There are two main results:
 \begin{itemize}
 \item \autocite[Thm 8.3]{le-gall}: The two coefficients are Lipschitz (eventually only locally) in space and continuous:
 \begin{equation*}
 \left\{
 \begin{aligned}
-\forall t .( |b(t, x)-b(t,y)| &< L_b |x-y| &\text{ and } |\sigma(t, x)-\sigma(t,y)| &< L_\sigma |x-y|) \\
-b &\in \mathcal{C}^0 &\text{ and }\sigma &\in \mathcal{C}^0
+\forall t .( |\drift(t, x)-\drift(t,y)| &< L_\drift |x-y| &\text{ and } |\diffusion(t, x)-\diffusion(t,y)| &< L_\diffusion |x-y|) \\
+\drift &\in \Cspc^0 &\text{ and }\diffusion &\in \Cspc^0
 \end{aligned}
 \right.
 \end{equation*}
 \item \autocite[Thm 9.4]{baldi}: The two coefficients are Lipschitz in space (as before) and have sublinear growth in space:
-\begin{equation*}\label{eq:lipsch-subgrowth}
+\begin{equation*}
 \left\{
 \begin{aligned}
-\forall t .(|b(t, x)-b(t,y)| &< L_b |x-y| &\text{ and } |\sigma(t, x)-\sigma(t,y)| &< L_\sigma |x-y|) \\
-\forall t |b(t, x)| &< M_b(1 + |x|) &\text{ and } |\sigma(t, x)| &< M_\sigma (1 + |x|)
+\forall t .(|\drift(t, x)-\drift(t,y)| &< L_\drift |x-y| &\text{ and } |\diffusion(t, x)-\diffusion(t,y)| &< L_\diffusion |x-y|) \\
+\forall t |\drift(t, x)| &< M_b(1 + |x|) &\text{ and } |\diffusion(t, x)| &< M_\diffusion (1 + |x|)
 \end{aligned}
 \right.
-\end{equation*}
+\end{equation*}\label{ch3:cond:E-and-U-lipsch+subgrowth}
 \end{itemize}
 
-Our system presents a considerable amount of difficulties:
+\section{Reducing our system to the SDE framework, heuristically}
+
+The formalization of the procedure illustrated here is treated in the appendix at \ref{app:formal-def-solution}.
+
+Our system \ref{ch2:model:deterministic-parenting} is not a proper SDE because of technical oddities:
 \begin{itemize}
-\item An hypothetical vector $\modsol_t := (\amba_t^1,\ldots, \amba_t^N, \text{camp molecules } \camp_t^{p,g} \text{ already spawned at time }t)$ would have a dimension growing to infinite as the time flows.
-\item Since the system is piecewise defined in time, at every instant $t$ the same hypothetical vector $\modsol_t$ would have a finite \emph{stochastic} dimension.
-\item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{eq:general-sde}$ we would have a term $b = b(t, X_t, (M_t^p)_p)$ depending also on the Poisson-distributed processes $(M_t^p)_p$ (thus not representable as solution of an SDE), making it "too much stochastical" to be treated as in \ref{eq:general-sde}.
+\item An hypothetical vector $\modsol_t := (\amba_t^1,\ldots, \amba_t^N, \camp_t^{p,g} \text{ already spawned at time }t)$ would have a dimension changing (growing, in particular) as the time flows.
+And it grows up to infinity.
+\item Not only it would be changing with the time, but it would be a \emph{stochastic} dimension.
+\item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{ch3:eq:general-sde}$ we would have a drift term $\drift = \drift(t, \modsol_t, (\hmactive_t^p)_p)$ depending also on the Poisson-distributed processes $(\hmactive_t^p)_p$, making it "too much stochastical" to be treated as in \ref{ch3:eq:general-sde}.
 \end{itemize}
 
-To make the dimension finite we can operate in this way:
-
-\begin{equation*}
-\exists ! X_t \text{solution to \ref{eq:general-sde} in }\R_+ \Longleftrightarrow \forall \overline{t} \in \R_+ \exists ! . X_t \text{solution to \ref{eq:general-sde} in } [0,\overline{t}] 
-\end{equation*}
-
-Let us then fix $\overline{t}\in\R$ and consider the system only on $[0,\overline{t}]$.
-In such time each amoeba $\amba^p$ will have spawned exactly $\hmactive^p_{\overline{t}}$ particles, and thus the maximum dimension the system reaches is in the instant $\overline{t}$ and is given by the total number of particles present.
-Then the number of $d$-dimensional equations is given by:
+All these oddities originate from the fact that our system depends on $N$ sequences $(\btime^{p,g})_{g}$ of birth times.
+We can notice that such sequences do not depend on any other process involved in the model (a part from $(\hmactive_t^p)_t$, to which they are completely equivalent)
+Then heuristically we can imagine to fix these sequences, \ie choose a realization $(\tau^{p,g})_{g}$ of $(\btime^{p,g})_{g}$, and operate then as if they are deterministic.
+Notice that choosing $(\tau^{p,g})_{g}$ is equivalent to take a sample path $(\mu_t^p)_{p,t}$ of $(\hmactive_t^p)_{t,p}$, with relations between $\tau^{p,g}$ and $\mu_t^p$ as the one intercurring between the respective processes. 
+Then we have the system:
 
 \begin{equation}
-D := \overbrace{N}^{\#\text{amoebas}} 
-+ \overbrace{\hmactive_{\overline{t}}}^{\#\text{(cAMP spawned till time }\overline{t})}
+\left\{
+\begin{aligned}
+\amba_t^p 
+&= \amba_0^p 
++ \int_0^t 
+	\overbrace{
+		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
+	}^{=:\drift_p(s, \modsol_s, \mu_s^p)=:\drift_p(s, \modsol_s)} 
+d s
++ 
+\overbrace{\sigma^A}^{=:\diffusion_p(s,\modsol_s)} B_t^p
+&
+\\
+\camp_t^{p,g} 
+&\qquad\text{does not exist} 
+&if \quad t < \tau^{p,g}
+\\
+\camp_t^{p,g}
+&= \amba_{\tau^{p,g}}^p + \underbrace{\sigma_C}_{=:\diffusion_{p,g}(s,\modsol_s)} \quasibm_t^{p,g}
+&if \quad t \geq \tau^{p,g}
+\end{aligned}
+\right.
 \end{equation}
 
-and thus the maximum dimension of the system is $D\cdot d = N + M_{\overline{t}}$, which is finite, but still stochastic.
+where the functions and variable involved are:
 
-This and the last problem can be solved by using a specific random measure.
-To see how to define it let us first observe that
+\begin{equation}
+\left\{
+\begin{aligned}
+&\drift_p(t,x) = \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(x^p - x^{p,g})
+	&& 1\leq p \leq N
+\\
+&\drift_{p,g}(t,x) = 0
+	&& \exists (p,g)
+\\
+&\diffusion_p(t,x) = \sigma_A
+	&& 1\leq p \leq N
+\\
+&\diffusion_{p,g}(t,x) = \sigma_C
+	&& \text{if } \exists (p,g)
+\\
+&x = (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,g+1},\ldots, x^{N,1}, \ldots)
+	&& \text{if } \exists (p,g)
+\end{aligned}
+\right.
+\end{equation}\label{ch3:def-determ-parent-drift-&-diffusion}
 
-\begin{equation*}
-definition of the COLLECTION btimes and the quivalent vector of poisson processes
-\end{equation*}
+From here we can treat the system piecewise in time and obtain proper SDEs, with finite deterministic dimensions, as the one in \ref{ch3:eq:general-sde-integral-form} (the quasi-Brownian motions $Q^{p,g}$ will transform appropriately).
+In fact we can order the birth times chronologically as
+
+\begin{equation}
+\tau_0:=0 < \tau_1 < \tau_2 < \ldots < \tau_m < \ldots
+\end{equation}
+
+(the correspondent sample path of $(\btime_m)_m$) and define the intervals
+
+\begin{equation}
+I_0 := [0,\tau_1], I_1:=[\tau_1,\tau_2], \ldots , I_m:= [\tau_m,\tau_{m+1}],\ldots
+\end{equation}
+
+On each interval $I_m = [\tau_m,\tau_{m+1}]$ the system can be described as this:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+t &\in I_m = [\tau_m,\tau_{m+1}]
+&
+\\
+\amba_t^p 
+&= \amba_{\tau_m}^p 
++ \int_{\tau_m}^t 
+	\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
+d s + \sigma^A B_t^p
+&
+\\
+\camp_t^{p,g} 
+&= \camp_{\tau^{p,g}}^{p,g} + \sigma_C \quasibm_t^{p,g}
+&\text{if} \quad \tau^{p,g} < \tau_m
+\\
+\camp_t^{p,g}
+&= \amba_{\tau^{p,g}}^p + \sigma_C \quasibm_t^{p,g}
+&\text{when} \quad \tau^{p,g} = \tau_m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:det-parent-piece}
+
+We observe that the point $\tau_{m+1}$ has measure $0$ in the Lebesgue measure $\lebsge$, and thus has measure $0$ for each probability measure which is absolutely continous under $\lebsge$.
+This implies that we can ignore the fact that the particle $\camp_{m+1}$ is spawning at such time and still describe the system reliably in $I_m$, where the number of particles is temporarily constant, stabilising the dimension.
+
+The only passage that we need in order to describe \ref{ch3:det-parent-piece} as a proper SDE is that of transforming the quasi-Brownian motions $\quasibm^{p,g}$ into proper Brownian motions.
+This is easily done by shifting the system in time from $I_m$ to $I_m-\tau_m=[0, \tau_{m+1}-\tau_m]$, obtaining:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+t &\in I_m - \tau_m = [0, \tau_{m+1}-\tau_m]
+&
+\\
+\amba_t^p 
+&= \amba_{\tau_m}^p
+	+ \int_0^t 
+		\overbrace{
+			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
+		}^{\drift_p}
+	d s
+	+ 
+	\overbrace{\sigma^A}^{\diffusion_p} 
+	\overbrace{(B_{t + \tau_m}^p - B_{\tau_m}^p)}
+		^{\text{Brownian motion in }t}
+&
+\\
+\camp_t^{p,g} 
+&= \camp_{\tau^{p,g}}^{p,g} + \sigma_C \quasibm_{\tau_m + t}^{p,g} = \camp_{\tau^{p,g}}^{p,g} + \sigma_C B_t^{p,g}
+&\text{if} \quad \tau^{p,g} < \tau_m
+\\
+\camp_t^{p,g}
+&= \amba_{\tau^{p,g}}^p + \sigma_C \quasibm_{\tau_m + t}^{p,g}
+	= \amba_{\tau^{p,g}}^p + \underbrace{\sigma_C}_{\diffusion_{p,g}} B_t^{p,g}
+&\text{when} \quad \tau^{p,g} = \tau_m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:basic-SDE-piece}
+
+and if this system has a solution ${}^m Y_t$ on $I_m - \tau_m$, then of course ${}^m X_t := {}^m Y_{t-\tau_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
+
+\section{Ensure the existence of solutions?}
+
+Now that we have reduced our model to a piecewise defined SDE, we can find individual solutions to each of them (each is defined on its interval $I_m$) and glue all of them together.
+The glued solution will have, by definition, continuous sample paths for each particle from the moment of its existence on.
+Even more, since each spawned particle $C^{p,g}$ is born on the position of its parent amoeba $A^p$, we will have a bifurcation there (\ie there are no jumps in the distance between particles at the moment of spawning).
+
+Let us prove that the system \ref{ch3:basic-SDE-piece} has a solution.
+On such system we have that the diffusion is a constant (and thus will not cause big problems, with the conditions we need) but that the drift is discontinous, precisely has potentially jumps at each time $\tau_m$:
+
+\begin{equation}
+\drift_p(t, x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(x^p - x^{p,g})
+\end{equation}
+
+then we must use the result \ref{ch3:cond:E-and-U-lipsch+subgrowth}, \ie prove that it is, at least locally, Lipschitz continuous, and that has sublinear growth.
 
 
+[[DEFINE EXPLICITLY THE DIMENSION OF THE SYSTEM ON EACH TIME INTERVAL, SO THAT YOU CNA USE THIS IN THE FUTURE]]
+
+\begin{lemma}
+
+\end{lemma}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-%
-%
-%\subsection{The system as a piecewise deconditioned SDE}
-%If we define the process $\hmactive_t := \sum_{p=1}^N \hmactive_t^p$ 
-%
-%It is clear that 
-%
-%\begin{equation}
-%\forall p. \{\btime^{p,g} \leq s\} = \{ \hmactive_s^p \geq g \}
-%\end{equation}
-%
-%and thus choosing a realization of the $\Pois(\lambda)$-process $(\hmactive_s^p)_{0\leq s \leq \overline{t}}$ is equivalent to choose a realization of the $\Gma(g,\lambda)$ birth times $(\btime^{p,g})_{g}$.
-%We also do notice that the birth times are not dependent on the amoebas and cAMPs molecules movements.
-%
-%
-%
-%
-%
-%
-%%The idea is then to pass from a stochastic to a finite dimension by considering the equation under the regular probability measure $\Prb(\cdot | \bvector)$, where $\bvector$ is defined as
-%%
-%%\begin{equation}
-%%\bvector := (\btime^{p,g})_{p,g}
-%%\end{equation}
-%
-%In this way $(M_t^p)_p$ can be treated as a deterministic function in time, and the dimension of the system can be treated as constant.
-%
-%More details on the verification of this reasoning, and on why the random measure $\Prb(\cdot | \bvector)$ is regular, can be found in the appendix at \ref{app:regular-random-measure}.
-%
-%Then now \ref{model:deterministic-parenting} can be rewritten in a way compatible with the SDE framework.
-%
-%\begin{equation}
-%\modsol_t = \modsol_0 + \int_0^t b(s, \modsol_s, (\hmactive_s^p)_p) \,ds + \int_0^t\sigma \,d B_s
-%\end{equation}
-%
-%where $b(s,x) = b(\cdot, \cdot, (\hmactive_t^p)_p)): \R_+ \times \R^{Dd} \longrightarrow \R^{Dd}$ is defined as
-%
-%\begin{equation}
-%b(s, x, (\hmactive_t^p)_p) :=
-%\left\{
-%\begin{aligned}
-%& \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \drift(x^p - ^{p,g})
-%& if 
-%\\
-%\camp_t^{p,g} 
-%&\qquad\text{does not exist} 
-%&if \quad t < \btime^{p,g}
-%\\
-%\camp_t^{p,g}
-%&= \amba_{\btime^{p,g}}^p + \underbrace{\int_0^t \sigma_C Q_s^{p,g}}_{\sigma_C \quasibm_t^{p,g}} 
-%&if \quad t \geq \btime^{p,g}
-%\end{aligned}
-%\right.
-%\end{equation}\label{def:b-term-deterministic-parenting}
-%
-%and $\sigma \in \R^{Dd}\times\R^{Dd}$ is the constant matrix:
-%
-%\begin{equation}
-%\begin{aligned}
-%matrix
-%\end{aligned}
-%\end{equation}
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%
-%To reach a deterministic dimension we can fix the times and treat them as deterministic ([[PUT ON APPENDIX A BETTER EXPLANATION FOLLOWING THE DISINTEGRATION OF MEASURES AND PROBABILITY MEASURES FROM OLAV KALLNBERG, theorem 8.5]])
-%
-%
-%
 
