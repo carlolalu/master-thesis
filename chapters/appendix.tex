@@ -1,3 +1,68 @@
+\section{Is the casual model just a relabeling?}
+
+These are the questions:
+
+\begin{itemize}
+\item Given the deterministic parenting model (\ie the processes $(\hmactive_t^p)_p$ indexing the cAMP particles), can I derive the casual parenting model, \ie write the system \ref{ch2:model:casual-parenting} with a process $\hmactive_t$ and a parenting function $\Parentof$ with the required distributions and characteristics? 
+\item Given the the casual parenting model, \ie the process $\hmactive_t$ and the parenting function $\Parentof$, can I derive the deterministic parenting model, \ie write the system \ref{ch2:model:deterministic-parenting} with processes $(\hmactive_t^p)_p$?
+\end{itemize}
+
+If the answer to both is yes, then the models are equivalent.
+
+\subsection{From deterministic to casual parenting}
+
+The process $\hmactive_t \sim \Gma_{m, N\lambda}$ (and therefore its birthtimes $\btime_m$) was already derived in the definition of \ref{ch2:model:casual-parenting}.
+In such case the birth time $\btime_m$ is the spawning time of the $m$-th molecule spawned in the deterministic system.
+Which amoeba is spawning such particle?
+
+\begin{equation}
+\Parentof'(m) := p \quad \text{s.t. }\amba^p \text{ is the parent of } \camp^m
+\end{equation}
+
+The question is, if such function respects the two assumptions we made on $\Parentof$ for \ref{ch2:model:casual-parenting}:
+\begin{itemize}
+\item $\invquest \quad \Parentof'(m) \sim \Unf_{\{1,\ldots,N\}} \quad ?$ 
+\item $\invquest \quad \forall m_1 \neq m_2.\Parentof'(m_1) \indep \Parentof'(m_2) \quad ?$
+\end{itemize}
+
+Let us answer to the first one:
+
+\begin{equation}
+\begin{aligned}
+\Prb (\Parentof'(m) = p) 
+&= \Prb (\exists g \in \N. \btime_m = \btime^{p,g} )
+\\
+&= \sum_{g=1}^{\infty} \Prb (\btime_m = \btime^{p,g})
+\\
+&= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}} = m)
+\\
+&= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}}^p = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
+\\
+&= \sum_{g=1}^{\infty} \Prb (g = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
+\\
+&= \sum_{g=1}^{\infty} \int \Prb( \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g) 
+	\big| \btime^{p,g} = s) d\Prb(\btime^{p,g} = s)
+\\
+&= \sum_{g=1}^{\infty} \int \Pois_{(N-1)s\lambda}(\{ m-g\})\1_{m-g \geq 0} 
+	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
+\end{aligned}
+\end{equation}
+
+And since $\Zhi(p,g,s)=d\Gma_{g,\lambda}$, it is independent from $p$, we have that $\Prb (\Parentof'(m) = p) = const(m)$ and thus uniformly distirbuted on $\{1,\ldots,N\}$.
+
+The second condition is
+
+\begin{equation*}
+\invquest
+	\quad \forall p,q . \forall m,n\in\N .
+		\quad \Prb (\Parentof'(m) = p,\Parentof'(n) = q) =^{?} \Prb (\Parentof'(m) = p) \Prb(\Parentof'(n) = q) = \frac{1}{N^2}
+?
+\end{equation*}\label{app:casual-determ:condition-indep-parentof}
+
+
+[[ FROM HERE ON THE SECTION OF CASUAL TO DETERMINISTIC IS TO COMPLETE]]
+
+
 \section{What is a solution to the deterministic parenting model, formally}\label{app:formal-def-solution}
 
 First we define the space of configurations of cAMP molecules spawned by a single amoeba.
@@ -92,7 +157,7 @@ Notice then that in the system \ref{ch2:model:deterministic-parenting} we have t
 
 
 %todo
-[[[WRITE FROM HERE ON]]]
+[[[REWRITE FROM HERE ON]]]
 
 
 \begin{definition}
