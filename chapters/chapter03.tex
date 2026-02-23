@@ -55,9 +55,9 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \end{equation*}\label{ch3:cond:E-and-U-lipsch+subgrowth}
 \end{itemize}
 
-\section{Reducing our system to the SDE framework, heuristically}
+\section{Reducing our system to the SDE framework}
 
-The formalization of the procedure illustrated here is treated in the appendix at \ref{app:formal-def-solution}.
+\subsection{Defining what is a solution in terms of SDEs}
 
 Our system \ref{ch2:model:deterministic-parenting} is not a proper SDE because of technical oddities:
 \begin{itemize}
@@ -67,11 +67,9 @@ And it grows up to infinity.
 \item If we were to write the equations for $\modsol$ in a similar way to the one in $\ref{ch3:eq:general-sde}$ we would have a drift term $\drift = \drift(t, \modsol_t, (\hmactive_t^p)_p)$ depending also on the Poisson-distributed processes $(\hmactive_t^p)_p$, making it "too much stochastical" to be treated as in \ref{ch3:eq:general-sde}.
 \end{itemize}
 
-All these oddities originate from the fact that our system depends on $N$ sequences $(\btime^{p,g})_{g}$ of birth times.
-We can notice that such sequences do not depend on any other process involved in the model (a part from $(\hmactive_t^p)_t$, to which they are completely equivalent)
-Then heuristically we can imagine to fix these sequences, \ie choose a realization $(\tau^{p,g})_{g}$ of $(\btime^{p,g})_{g}$, and operate then as if they are deterministic.
-Notice that choosing $(\tau^{p,g})_{g}$ is equivalent to take a sample path $(\mu_t^p)_{p,t}$ of $(\hmactive_t^p)_{t,p}$, with relations between $\tau^{p,g}$ and $\mu_t^p$ as the one intercurring between the respective processes. 
-Then we have the system:
+All these oddities originate from the fact that our system depends on $N$ sequences $(\btime^{p,g})_{g}$ of \emph{random} birth times (or equivalently from the Poisson processes generating them, \ie $(\hmactive_t^p)_t$).
+We can notice that, while the movement of amoebas $\amba^p$ and cAMP molecules $\camp^{p,g}$ depends on them, such sequences do not depend on $\amba^p, \camp^{p,g}$.
+Then heuristically we can imagine to fix these sequences to an arbitrary value $(\tau^{p,g})_{p,g} = (\btime^{p,g})_{p,g}$ (obtaining an equivalent $(\mu_t^p)_{p,t}=(\hmactive_t^p)_{t,p}$), and inquire if the yielded system \ref{ch3:heuristic-fix-the-times} has a solution for it:
 
 \begin{equation}
 \left\{
@@ -81,7 +79,7 @@ Then we have the system:
 + \int_0^t 
 	\overbrace{
 		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
-	}^{=:\drift_p(s, \modsol_s, \mu_s^p)=:\drift_p(s, \modsol_s)} 
+	}^{=:\drift_p(s, \modsol_s, (\mu_s^p)_p)=:\drift_p(s, \modsol_s)} 
 d s
 + 
 \overbrace{\sigma^A}^{=:\diffusion_p(s,\modsol_s)} B_t^p
@@ -96,13 +94,158 @@ d s
 &if \quad t \geq \tau^{p,g}
 \end{aligned}
 \right.
+\end{equation}\label{ch3:heuristic-fix-the-times}
+
+This solves the problem because $(\tau^{p,g})_{p,g}$ is deterministic.
+Since the value is arbitrary, if we find a solution $(\modsol, B) ((\tau^{p,g})_{p,g})$ for \ref{ch3:heuristic-fix-the-times}, then we can assemble all these components into a global solution $(\modsol, B)$.
+This is formally explained by defining defining a solution for the system \ref{ch2:model:deterministic-parenting} as a triple $((\hmactive^p)_p, \modsol = (\amba, \camp), B)$ such that under the conditional probability measure
+
+\begin{equation}
+\overline{\Prb} : = \PrbCondTimes{\cdot} = \quad\Prb(\ \cdot \ | (\hmactive^p)_{1\leq p\leq N, t\in\R_+} )
 \end{equation}
+
+the couple $(\modsol,B)$ solves \ref{ch2:model:deterministic-parenting}.
+But we can notice that even in this way the system has a dimension that changes in time, meaning that we need to operate piecewise in time (\ie define what is a solution that solves \ref{ch2:model:deterministic-parenting} as a solution that solves it piecewise in time).
+We can consider the birth times chronologically as in the \ref{ch2:model:casual-parenting}, \ie
+
+\begin{equation}
+\btime_0:=0 < \btime_1 < \btime_2 < \ldots < \btime_m < \ldots
+\end{equation}
+
+and define the correspondent intervals
+
+\begin{equation}
+I_0 := [0,\btime_1], I_1:=[\btime_1,\btime_2], \ldots , I_m:= [\btime_1,\btime_{m+1}],\ldots
+\end{equation}
+
+On each interval $I_m$ the system can be described as this:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+t &\in I_m = [\btime_m,\btime_{m+1}]
+&
+\\
+\amba_t^p 
+&= \amba_{\btime_m}^p 
++ \int_{\btime_m}^t 
+	\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
+d s + \sigma^A B_t^p
+&
+\\
+\camp_t^{p,g} 
+&= \camp_{\btime^{p,g}}^{p,g} + \sigma_C \quasibm_t^{p,g}
+&\text{if} \quad \btime^{p,g} < \btime_m
+\\
+\camp_t^{p,g}
+&= \amba_{\btime^{p,g}}^p + \sigma_C \quasibm_t^{p,g}
+&\text{when} \quad \btime^{p,g} = \btime_m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:det-parent-piece}
+
+\begin{remark}
+We need to observe that only in $I_m \smallsetminus \{\btime_{m+1}\}$ the number of particles (and thus the dimension) is constant, so why can we claim that \ref{ch2:model:deterministic-parenting} is described efficiently by \ref{ch3:det-parent-piece} efficiently on $I_m$?
+\begin{itemize}
+\item Since the $\{\btime_{m+1}\}$ has Lebesgue-measure $0$ the trajectory of the particles already spawned in $I_m \smallsetminus \{\btime_{m+1}\}$ is not influenced in $I_m$ by $\camp^{m+1}$.
+Then we can ignore its existence also in $I_m$ and have thus a constant dimension on such interval.
+\item The particle $\camp^{m+1}$ spawns on the point $\amba_{\btime_{m+1}}^p$ for some $p$, thus the solution on the interval $I_{m+1}$ can be glued with "continuouty" with the solution on $I_{m}$ even regarding the spawning position of $\camp^{m+1}$, meaning that if we would define the functions
+\begin{equation}
+\begin{aligned}
+\Zhi_m: I_m &\longrightarrow \R_+
+\\
+		t &\longmapsto	max \{|\modsol^i - \modsol^j| \}
+\end{aligned}
+\end{equation}
+then we could define a globally continous function $\Zhi:\R \longrightarrow \R_+$ piecewise defined as $\Zhi_m$.
+\end{itemize}
+\end{remark}
+
+\begin{remark}
+In the interval $I_m$ the number of particles is
+\begin{equation}
+\NumParticles_t := N + \sum_{p=1}^N \hmactive_t^p = \overbrace{N}^{\# \text{amoebas}} + \overbrace{\hmactive_t}^{\# \text{cAMP present at time } t }
+\end{equation}
+thus the dimension of the system is
+\begin{equation}
+\NumParticles_t \cdot d
+\end{equation}
+where $d$ is the dimension in which we are considering the particles ($2$ or $3$).
+\end{remark}
+
+The only passage that we need in order to describe \ref{ch3:det-parent-piece} as a proper SDE is that of transforming the quasi-Brownian motions $\quasibm^{p,g}$ into proper Brownian motions.
+This is easily done by shifting the system in time from $I_m$ to $I_m-\btime_m=[0, \btime_{m+1}-\btime_m]$, obtaining:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+t &\in I_m - \btime_m = [0, \btime_{m+1}-\btime_m]
+&
+\\
+\amba_t^p 
+&= \amba_{\btime_m}^p
+	+ \int_0^t 
+		\overbrace{
+			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
+		}^{\drift_p}
+	d s
+	+ 
+	\overbrace{\sigma^A}^{\diffusion_p} 
+	\overbrace{(B_{t + \btime_m}^p - B_{\btime_m}^p)}
+		^{\text{Brownian motion in }t}
+&
+\\
+\camp_t^{p,g} 
+&= \camp_{\btime^{p,g}}^{p,g} + \sigma_C \quasibm_{\btime_m + t}^{p,g} = \camp_{\btime^{p,g}}^{p,g} + \sigma_C
+	\overbrace{(B_{t + \btime_m}^{p,g} - B_{\btime_m}^{p,g})}
+	^{\text{Brownian motion in }t}
+&\text{if} \quad \btime^{p,g} < \btime_m
+\\
+\camp_t^{p,g}
+&= \amba_{\btime^{p,g}}^p + \sigma_C \quasibm_{\btime_m + t}^{p,g}
+	= \amba_{\btime^{p,g}}^p + \underbrace{\sigma_C}_{\diffusion_{p,g}} B_t^{p,g}
+&\text{when} \quad \btime^{p,g} = \btime_m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:final-SDE-reduction-determ-parenting}
+
+and if this system has a solution ${}^m Y_t$ on $I_m - \btime_m$, then it is straightforward to verify that ${}^m \modsol_t := {}^m Y_{t-\btime_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
+To be accurate we should operate also on the Brownian motion: if $B^{*}_t$ fullfills \ref{ch3:final-SDE-reduction-determ-parenting} for all particles but the one which just spawned, then $B^{*}_{t+\btime_m}$ fullfills \ref{ch3:det-parent-piece} for the equivalent equations; while if $B^{p,g}_t$ is the B.m. of the cAMP spawning in \ref{ch3:final-SDE-reduction-determ-parenting}, then the correpsondent quasi-B.m. $\quasibm_t^{p,g}$ (defined as in \ref{ch2:quasi-bm-camp}) fullfills the equation in \ref{ch3:det-parent-piece} for the correspondent particle.
+
+Then we can say that $(\modsol, B)$ is a solution for the piecewise defined system \ref{ch2:model:deterministic-parenting} under $\PrbCondTimes{\cdot}$ if it solves (under the same random measure) the system \ref{ch3:final-SDE-reduction-determ-parenting}.
+
+\subsection{Resume and observations}
+
+\begin{definition}
+A solution to \ref{ch2:model:deterministic-parenting} is a triple $((\hmactive^p)_{1\leq p \leq N}, \modsol = (\amba, \camp), B)$ such that:
+\begin{itemize}
+\item $(\hmactive^p)_{1\leq p N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\modsol, B)$
+\item Under the random measure $\PrbCondTimes{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
+\end{itemize}
+\end{definition}
+
+In order for this to be a valid definition we should specify a global codomain for the processes $\modsol, B$ and we should verify that $\PrbCondTimes{\cdot}$ is a \emph{regular} random probability measure.
+This is hinted in the appendix at \ref{app:formal-def-solution}.
+
+In general we can also observe that
+
+- DEFINITION OF DRIFT AND DIFFUSION
+
+- RECALL FORMALLY THE DIMENSION OF THE SYSTEM AND LABEL IT (SHOULD i TRANSFER THE PREVIOUS REMARK?)
+
+
+
+
+
 
 where the functions and variable involved are:
 
 \begin{equation}
 \left\{
 \begin{aligned}
+&x := (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,g+1},\ldots, x^{N,1}, \ldots)
+	&&
+\\
 &\drift_p(t,x) = \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(x^p - x^{p,g})
 	&& 1\leq p \leq N
 \\
@@ -114,90 +257,11 @@ where the functions and variable involved are:
 \\
 &\diffusion_{p,g}(t,x) = \sigma_C
 	&& \text{if } \exists (p,g)
-\\
-&x = (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,g+1},\ldots, x^{N,1}, \ldots)
-	&& \text{if } \exists (p,g)
 \end{aligned}
 \right.
 \end{equation}\label{ch3:def-determ-parent-drift-&-diffusion}
 
-From here we can treat the system piecewise in time and obtain proper SDEs, with finite deterministic dimensions, as the one in \ref{ch3:eq:general-sde-integral-form} (the quasi-Brownian motions $Q^{p,g}$ will transform appropriately).
-In fact we can order the birth times chronologically as
 
-\begin{equation}
-\tau_0:=0 < \tau_1 < \tau_2 < \ldots < \tau_m < \ldots
-\end{equation}
-
-(the correspondent sample path of $(\btime_m)_m$) and define the intervals
-
-\begin{equation}
-I_0 := [0,\tau_1], I_1:=[\tau_1,\tau_2], \ldots , I_m:= [\tau_m,\tau_{m+1}],\ldots
-\end{equation}
-
-On each interval $I_m = [\tau_m,\tau_{m+1}]$ the system can be described as this:
-
-\begin{equation}
-\left\{
-\begin{aligned}
-t &\in I_m = [\tau_m,\tau_{m+1}]
-&
-\\
-\amba_t^p 
-&= \amba_{\tau_m}^p 
-+ \int_{\tau_m}^t 
-	\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
-d s + \sigma^A B_t^p
-&
-\\
-\camp_t^{p,g} 
-&= \camp_{\tau^{p,g}}^{p,g} + \sigma_C \quasibm_t^{p,g}
-&\text{if} \quad \tau^{p,g} < \tau_m
-\\
-\camp_t^{p,g}
-&= \amba_{\tau^{p,g}}^p + \sigma_C \quasibm_t^{p,g}
-&\text{when} \quad \tau^{p,g} = \tau_m
-\end{aligned}
-\right.
-\end{equation}\label{ch3:det-parent-piece}
-
-We observe that the point $\tau_{m+1}$ has measure $0$ in the Lebesgue measure $\lebsge$, and thus has measure $0$ for each probability measure which is absolutely continous under $\lebsge$.
-This implies that we can ignore the fact that the particle $\camp_{m+1}$ is spawning at such time and still describe the system reliably in $I_m$, where the number of particles is temporarily constant, stabilising the dimension.
-
-The only passage that we need in order to describe \ref{ch3:det-parent-piece} as a proper SDE is that of transforming the quasi-Brownian motions $\quasibm^{p,g}$ into proper Brownian motions.
-This is easily done by shifting the system in time from $I_m$ to $I_m-\tau_m=[0, \tau_{m+1}-\tau_m]$, obtaining:
-
-\begin{equation}
-\left\{
-\begin{aligned}
-t &\in I_m - \tau_m = [0, \tau_{m+1}-\tau_m]
-&
-\\
-\amba_t^p 
-&= \amba_{\tau_m}^p
-	+ \int_0^t 
-		\overbrace{
-			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
-		}^{\drift_p}
-	d s
-	+ 
-	\overbrace{\sigma^A}^{\diffusion_p} 
-	\overbrace{(B_{t + \tau_m}^p - B_{\tau_m}^p)}
-		^{\text{Brownian motion in }t}
-&
-\\
-\camp_t^{p,g} 
-&= \camp_{\tau^{p,g}}^{p,g} + \sigma_C \quasibm_{\tau_m + t}^{p,g} = \camp_{\tau^{p,g}}^{p,g} + \sigma_C B_t^{p,g}
-&\text{if} \quad \tau^{p,g} < \tau_m
-\\
-\camp_t^{p,g}
-&= \amba_{\tau^{p,g}}^p + \sigma_C \quasibm_{\tau_m + t}^{p,g}
-	= \amba_{\tau^{p,g}}^p + \underbrace{\sigma_C}_{\diffusion_{p,g}} B_t^{p,g}
-&\text{when} \quad \tau^{p,g} = \tau_m
-\end{aligned}
-\right.
-\end{equation}\label{ch3:basic-SDE-piece}
-
-and if this system has a solution ${}^m Y_t$ on $I_m - \tau_m$, then of course ${}^m X_t := {}^m Y_{t-\tau_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
 
 \section{Ensure the existence of solutions?}
 
