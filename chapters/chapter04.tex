@@ -1,0 +1,152 @@
+\section{What are effective equations?}
+
+Effective equations are macroscopic description of system of many particles interacting with each others.
+The idea is that part of the very complex behaviour of many bodies interacting with each others can be averaged out on a bigger scale, leaving thus only the essential part of the interactions.
+In practice, we start from a cinematic $\modsol{}_t = (\amba_t, \camp_t) \in (\R^d)^{\NumParticles_t}$, the solution to one of the models, and we search for a system of PDEs
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\partial_t \adens(t, x) &= \ldots
+\\
+\partial_t \cdens(t, x) &= \ldots
+\end{aligned}
+\right.
+\end{equation}
+
+such that the solutions $\adens, \cdens: \text{time} \times \text{space} \longrightarrow \R_+ $ represent (in some sense yet to be explained) respectively the density of the amoebas and of the cAMP molecules when the number of amoebas involved is very very big, \ie when $N\longrightarrow + \infty$.
+Let us formalise this notions, assuming that we have such system of PDEs and a solution to it.
+
+\subsection{Reducing SDE's solutions and densities to their equivalent measures}
+
+First, the number of initial amoebas $N$ is here relevant, then we sign
+
+\begin{equation}
+\modsol{}_t = \modsol{}_t^N = ( \modsol{}_t^{N,k})_k \in (\R^d )^{\NumParticles_t} = (\R^d)^{\NumParticles_{N,t}}
+\end{equation}
+
+as the solution to the model with $N$ amoebas.
+
+Now we have two different type of objects: stochastic processes (cinematics) $(\amba_t^p)_p, (\camp_t^{p,g})_{p,g}$ and densities $\adens(t,\cdot), \cdens(t,\cdot)$.
+We will transform both of them in their respective measures, and compare those.
+
+Starting from $\modsol{}_t^N$ we consider the \emph{empirical density} of the amoebas and the cAMPs respectively, which in the deterministic parenting model are
+
+\begin{equation}
+\begin{aligned}
+\delta^N_{\amba_t} &:= \sum_{p=1}^N \delta_{\amba_t^p}
+\\
+\delta^N_{\camp_t} &:= \sum_{p=1}^N \sum_{g=1}^{\hmactive_t^p} \delta_{\camp_t^{p,g}}
+\end{aligned}
+\end{equation}
+
+where $\delta_x(E) := \1_E (x)$ represents the Dirac measure for a point $x$ (these are actually \emph{random} measures, but let's forget this temporarily).
+Analogously, we consider the measures deriving from the densities:
+
+\begin{equation}
+\begin{aligned}
+\mu_t^\adens (E) &:= \int_E \adens(t,\cdot) \, d\lebsge
+\\
+\mu_t^\cdens (E) &:= \int_E \cdens(t,\cdot) \, d\lebsge
+\end{aligned}
+\end{equation}
+
+where $\lebsge$ is the lebesgue measure (since they should be densities, let us assume that $\adens,\cdens \in \Lpspace^1$).
+Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein}.
+
+\subsection{Distances among Borel probability measures}
+
+The Wasserstein distance is built on the concept of \emph{coupling} of measures.
+
+\begin{definition}
+Let
+\begin{equation}
+\PrbMeas := \PrbMeas (\R^\Ch) := 
+	\{\mu :
+		\mu \text{ is a \emph{Borel} prob. meas. on } \R^\Ch
+	\}
+\end{equation}
+the space of probability measures on $\R^\Ch$ and let $\mu, \nu \in \PrbMeas$. A \emph{coupling of $\mu$ and $\nu$} is a measure $\gamma \in \PrbMeas (\R^\Ch \times \R^\Ch)$ such that for all Borel-measurable and bounded functions $\phi$ we have
+\begin{equation}
+\int_{\R^\Ch \times \R^\Ch} \phi(x) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(x) \,d\mu(x) 
+\quad \text{ and } \quad
+\int_{\R^\Ch \times \R^\Ch} \phi(y) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(y) \,d\nu(x) 
+\end{equation}\label{ch4:def-coupling}
+We sign as $\Gamma(\mu,\nu)$ the set of couplings of $\mu$ and $\nu$.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item The set $\Gamma(\mu,\nu)$ is never empty because the product measure $\mu \otimes \nu$ is always in it.
+\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^\Ch \times \R^\Ch \longrightarrow \R^\Ch$, we can observe that the condition \ref{ch4:def-coupling} is equivalent to require that
+\begin{equation}
+(\pi_1 )_\star \gamma = \mu
+\quad \text{ and } \quad
+(\pi_2)_\star \gamma = \nu
+\end{equation}
+where $\big((\pi_i)_\star \gamma \big)(E) := \gamma (\pi_i^{-1} (E))$ is the pushforward of $\gamma$ by $\pi_i$.
+\end{enumerate}
+\end{remark}
+
+
+A way to visualise a coupling is as a transformation of $\mu$ into $\nu$.
+Assume, for the sake of simplicity, that $\mu,\nu$ are measures on $\R$ and are absolute continuous with respect to the Lebesgue measure $\lebsge$.
+Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth (see \ref{ch4:fig:example-coupling}).
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\end{tikzpicture}
+\caption{[[HERE DRAW A TIKZ THE EARTH MOVING STUFF INTO 2 DIMENSION]]}
+\end{figure}\label{ch4:fig:example-coupling}
+
+A plan to move earth in $\R$ can be thought as a function $\overline{\gamma}: \R \times \R \longrightarrow \R $ which with the value $\overline{\gamma}(x,y)=: \overline{\gamma}(x\rightarrow y)$ tells how much earth we should move from the point $x$ to the point $y$.
+In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}$ into $\frac{d\nu}{d\lebsge}$, it must respect two symmetrical conditions:
+\begin{enumerate}
+\item For each $x\in\R$ the total earth (mass of) moved from it by the plan must be exactly equal to the earth present in $x$ at the beginning, namely:
+\begin{equation}
+\int \overline{\gamma}(x,y) \,dy = \frac{d\mu}{d\lebsge}(x)
+\end{equation}
+\item For each $y\in\R$ the earth (the mass) moved to it must be exactly equal to the earth present in $y$ at the end, namely:
+\begin{equation}
+\int \overline{\gamma}(x,y) \,dx = \frac{d\nu}{d\lebsge}(y)
+\end{equation}
+\end{enumerate}
+
+This is equivalent to \ref{ch4:def-coupling}, with $\overline{\gamma}$ playing the role of the density of the coupling $\gamma$.
+With this example in mind we could ask ourselves which is the best among such transformations of $\mu$ into $\nu$.
+To do that we need to associate to each coupling $\gamma \in \Gamma(\mu,nu)$ a value, which indicates how "good" a plan $\gamma$ might be.
+If we have a notion of distance $dist$ on our space $\R^\Ch$, then a plan can be evaluated with how much net distance we cover to transport all the earth around, \ie with the expression
+
+\begin{equation}
+\int dist(x,y) \,d\gamma(x,y)
+\end{equation}
+
+In this way we can say that two measures $\mu,\nu$ are near to each others if we can find a coupling $\gamma \in \Gamma(\mu,\nu)$ such that its evaluation is very low.
+With this idea in mind, choosing the distance induced by the $p$-norm on $\R$, one reaches the definition of the $p$-Wassertein distance.
+
+\begin{definition}
+Let
+\begin{equation}
+\PrbMeas_p := \PrbMeas_p(\R^\Ch) := 
+	\{\mu \in \PrbMeas :
+		\int |x|^p d \mu (x) < \infty
+	\} \subseteq \PrbMeas
+\end{equation}
+the space of Borel probability measures with finite $p$-moments on $\R^\Ch$.
+Then the $1$-Wasserstein distance between two measures $\mu,\nu \in \PrbMeas_p$ is defined as
+\begin{equation}
+W_p(\mu,\nu):= \inf_{\gamma \in \Gamma(\mu,\nu)} \big(
+	\int |x-y|^p d\gamma(x,y)
+\big)^{\frac{1}{p}}
+\end{equation}
+\end{definition}
+
+To see the proof that $W_p$ is a distance take a look at the proof after \autocite[Example 6.3]{cedric-villani-opt-trans}.
+Because of the heuristic of \ref{ch4:fig:example-coupling}, it is sometimes called \emph{Earth-mover distance} or \emph{EMD distance}.
+It presents important connections with the notion of \emph{optimal transport}.
+
+\subsection{Formulation of the quantity searched}
+
+
+
+\section{How make a smart guess for the effective equations and prove that it is the correct choice}
