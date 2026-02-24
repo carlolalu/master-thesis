@@ -19,8 +19,8 @@ which is a more conceptual notation to formally mean
 X_t = \rho_0 + \int_0^t \drift(t, X_t) \,dt + \int_0^t \diffusion(t, X_t) \,d B_t
 \end{equation}
 
-where $\drift \in \R^\Iu$, $\diffusion \in \R^{\Iu \times \Ch}$ are given vectorial and matricial functions respectively (the given initial distribution $\rho$ is optional).
-They are called \emph{drift} and \emph{volatiliyt} respectively.
+where $\drift \in \R^\Iu$, $\diffusion \in \R^{\Iu \times \Ch}$ are given vectorial and matricial functions respectively (the given initial distribution $\rho_0$ is optional).
+They are called \emph{drift} and \emph{diffusion} (or \emph{volatility}) respectively.
 We sign such SDE as a $E(\drift,\diffusion)$.
 \begin{definition}
 A solution for $E(\drift,\diffusion)$ consists of
@@ -33,9 +33,9 @@ such that they satisfy the equation $E(\drift,\diffusion)$.
 If furthermore $X_0 = x$ we say that $X$ solves $E_x(\drift,\diffusion)$.
 \end{definition}
 
-To ensure existence (strong existence, meaning that we can find a solution on each filtered probability space endowed with a Brownian motion) and uniqueness (path uniqueness, meaning that having two solutions with the same initial conditions, they are indistinguishable)of solutions we need to require conditions on $\drift, \diffusion$. There are two main results:
+To ensure existence (strong existence, meaning that we can find a solution on each filtered probability space endowed with a Brownian motion) and uniqueness (path uniqueness, meaning that having two solutions with the same initial conditions, they are indistinguishable) of solutions for $E(\drift, \diffusion)$ we need to require conditions on $\drift, \diffusion$. There are two main results:
 \begin{itemize}
-\item \autocite[Thm 8.3]{le-gall}: The two coefficients are Lipschitz (eventually only locally) in space and continuous:
+\item \autocite[Thm 8.3]{le-gall}: If the two coefficients are Lipschitz (eventually only locally) in space and continuous in time, then there is existence and uniqueness of solutions for $E(\drift, \diffusion)$:
 \begin{equation*}
 \left\{
 \begin{aligned}
@@ -44,7 +44,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \end{aligned}
 \right.
 \end{equation*}
-\item \autocite[Thm 9.4]{baldi}: The two coefficients are Lipschitz in space (as before) and have sublinear growth in space:
+\item \autocite[Thm 9.4]{baldi}: If the two coefficients are Lipschitz in space (as before) and have sublinear growth in space, then there is existence and uniqueness of solutions for $E(\drift, \diffusion)$:
 \begin{equation*}
 \left\{
 \begin{aligned}
@@ -196,7 +196,7 @@ Then we can say that $(\modsol{}, B)$ is a solution for the piecewise defined sy
 \begin{definition}
 A solution to \ref{ch2:model:deterministic-parenting} is a triple $((\hmactive^p)_{1\leq p \leq N}, \modsol{} = (\amba, \camp), B)$ such that:
 \begin{itemize}
-\item $(\hmactive^p)_{1\leq p N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\modsol{}, B)$
+\item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\modsol{}, B)$
 \item Under the random measure $\PrbCondTimes{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol{} = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
 \end{itemize}
 \end{definition}
@@ -241,19 +241,21 @@ We can also notice that the systems \ref{ch2:model:deterministic-parenting} (her
 \begin{equation}
 \left\{
 \begin{aligned}
-&x := (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,g+1},\ldots, x^{N,1}, \ldots)
+x &:= (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,g+1},\ldots, x^{N,1}, \ldots)
 	&&
 \\
-&\drift_p(t,x, (\hmactive^p_t)_t) := \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(x^p - x^{p,g})
+	&\ = (a^1, \ldots, a^N, c^{1,1}, \ldots, c^{p,g}, \ldots) &&
+\\
+\drift_p(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^p - x^{p,g})
 	&& 1\leq p \leq N
 \\
-&\drift_{p,g}(t,x) := 0
+\drift_{p,g}(t,x) &:= 0
 	&& \text{if } \exists (p,g)
 \\
-&\diffusion_p(t,x) := \sigma_A
+\diffusion_p(t,x) &:= \sigma_A
 	&& 1\leq p \leq N
 \\
-&\diffusion_{p,g}(t,x) := \sigma_C
+\diffusion_{p,g}(t,x) &:= \sigma_C
 	&& \text{if } \exists (p,g)
 \end{aligned}
 \right.
@@ -268,7 +270,7 @@ Now that we have reduced our model to a collection of conditional, piecewise-in-
 
 In order to do that the theorems \ref{ch3:sde-framework} indicate to watch at the drift and diffusion of the system, \ie the ones in \ref{ch3:def-determ-parent-drift-&-diffusion}.
 The diffusion coefficients are constant, and thus will not cause any problems: they are lipschitz-continuous in space with fixed time, they are $\Cspc^0$ in time and they grow sublinearly.
-This is not the case for the drift in the case of amoebas though: the coordinate functions $\drift_p(t, x)$ are only right-$\Cspc^0$ in time.
+This is not the case for the drift in the case of amoebas though: since $\hmactive^p_t$ are \cadlag, then it is easy to see that also the coordinate functions $\drift_p(t, x)$ are \cadlag, and consequently only right-$\Cspc^0$ in time.
 We need thus to use the result \ref{ch3:cond:E-and-U-lipsch+subgrowth}.
 
 \begin{lemma}
@@ -277,7 +279,7 @@ The drift function $\drift(t, x, (\hmactive^p)_p)$ defined coordinate-wise in \r
 \drift(t,x) := \drift(t,x, (\hmactive^p_t)_t) := 
 \left\{
 \begin{aligned}
-&\drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(x^p - x^{p,g})
+&\drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^p - x^{p,g})
 \\
 &\drift_{p,g}(t,x) := 0
 \end{aligned}
@@ -329,20 +331,18 @@ Fix $t,x,y$. Then
 	& \leq \frac{l}{N} \max_{k\in\{1,\ldots,N\}}
 		\sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 			\big(
-			||x^k - y^k ||_\infty + || (x^{p,g} - y^{p,g})||_\infty
+			||x^k - y^k ||_\infty + || x^{p,g} - y^{p,g}||_\infty
 			\big)
 	\\
 	& = \frac{l}{N} \sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 	\big(
-		\max_{k\in\{1,\ldots,N\}} ||x^k - y^k||_\infty + || (x^{p,g} - y^{p,g})||_\infty
+		\max_{k\in\{1,\ldots,N\}} ||x^k - y^k||_\infty + || x^{p,g} - y^{p,g}||_\infty
 	\big)
 	\\
 	& \leq \frac{l}{N} \sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 	\big(
 		||x - y ||_\infty + || x - y||_\infty
-	\big)
-	\\
-	& = \frac{2l}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty
+	\big) \ = \frac{2l}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty
 \end{aligned}
 \end{equation*}
 
@@ -364,10 +364,119 @@ For example, using the $\infty$-norm we have:
 \end{equation*}
 \end{proof}
 
-Therefore the conditions for the pathwise uniqueness and the strong existence of solutions of \ref{ch3:cond:E-and-U-lipsch+subgrowth} are fullfilled, and thus the deterministic parenting model has also the properties of pathwise uniqueness and strong existence of solution as wll, \ie under $\PrbCondTimes{}$ on each interval $I_m = [\btime_m, \btime{m+1}]$ there is a unique solution on each filtered probability space with a \Bm .
+Therefore the conditions for the pathwise uniqueness and the strong existence of solutions of \ref{ch3:cond:E-and-U-lipsch+subgrowth} are fullfilled, and thus the deterministic parenting model has also the properties of pathwise uniqueness and strong existence of solution as well, \ie under $\PrbCondTimes{}$ on each interval $I_m = [\btime_m, \btime_{m+1}]$ there is a unique solution on each filtered probability space endowed with a \Bm.
 
 
 \section{Corresponding results on the casual parenting model}
 
-[[[HERE GO QUICK ON NON IMPORTANT RESULTS, BUT BE CAREFUL IN UNDERLINING THE FIXING OF THE PARENTING FUNCTION FOR THE DEFINITION OF THE SOLUTION, AND FIND AGAIN THE LIPSCHITZ CONSTANT, WHICH MIGHT BECOME USEFUL LATER]]]
+The casual parenting model can be treated in the same way.
+From the system \ref{ch2:model:casual-parenting} we can see an analogous definition of the drift and diffusion terms:
+
+\begin{equation}
+\left\{
+\begin{aligned}
+&x := (x^1, \ldots, x^N, x^{N+1}, \ldots, x^{N+m},\ldots ) = (a^1, \ldots, a^N, c^1, \ldots, c^{m},\ldots, c^{\hmactive_t} )
+	&&
+\\
+&\drift_p(t,x, \hmactive_t) := \drift_p(t,x) := \frac{1}{N} \sum_{m = 1}^{\hmactive_t} \attraction(x^p - x^{N+m})
+	&& 1\leq p \leq N
+\\
+&\drift_{N+m}(t,x) := 0
+	&& \text{if } \exists c^m
+\\
+&\diffusion_p(t,x) := \sigma_A
+	&& 1\leq p \leq N
+\\
+&\diffusion_{N+m}(t,x) := \sigma_C
+	&& \text{if } \exists c^m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:def-casual-parent-drift-&-diffusion}
+
+Analogously a single piece of the system is 
+
+\begin{equation}
+\left\{
+\begin{aligned}
+t &\in I_m = [\btime_m,\btime_{m+1}]
+&
+\\
+\amba_t^p 
+&= \amba_{\btime_m}^p 
++ \int_{\btime_m}^t 
+	\frac{1}{N} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^m)
+d s + \sigma^A B_t^p
+&
+\\
+\camp_t^n 
+&= \camp_{\btime^n}^n + \sigma_C \quasibm_t^n
+&\text{if} \quad \btime^n < \btime_m
+\\
+\camp_t^n
+&= \amba_{\btime^n}^{\Parentof(p)} + \sigma_C \quasibm_t^n
+&\text{when} \quad \btime^{n} = \btime_m
+\end{aligned}
+\right.
+\end{equation}\label{ch3:casual-parent-piece}
+
+The solution is defined analogously to the deterministic parenting model:
+
+\begin{definition}
+A solution to \ref{ch2:model:casual-parenting} is a quadruple $(\hmactive, \Parentof, \modsol{} = (\amba, \camp), B)$ such that:
+\begin{itemize}
+\item $\hmactive$ is a Poisson process of parameter $\lambda$ not dependent on $(\modsol{}, B)$
+\item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\modsol{}, B)$ and such that $\Parentof(m)$ is uniformly distributed and $\forall n \neq m. \Parentof(m) \indep \Parentof(n)$ 
+\item Under the random measure $\PrbCondTimesCasual{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol{} = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
+\end{itemize}
+\end{definition}
+
+The system has a unique solution because, again, the drift and the diffusion of the system do piecewise respect the conditions of \ref{ch3:cond:E-and-U-lipsch+subgrowth}.
+We show only that the Lipschitz constant for the drift term with infinity norm remains the same:
+
+\begin{lemma}
+The drift function $\drift(t, x) = \drift(t, x, (\hmactive^p)_p)$ defined coordinate-wise in \ref{ch3:def-casual-parent-drift-&-diffusion} is Lipschitz continuous in space with fixed time with Lipschitz constant
+\begin{equation*}
+L_N := \frac{2l\hmactive_t}{N}
+\end{equation*}
+where $l$ is the Lipschitz constant of the attraction $\attraction$.
+\end{lemma}
+
+\begin{proof}
+Fix $t,x,y$. Then
+
+\begin{equation*}
+\begin{aligned}
+	|| \drift(t, x) - \drift(t, y) ||_\infty
+	&= \max_{k\in\{1,\ldots,N\}} || \drift_k(t, x) - \drift_k(t, y) ||_\infty
+	\\
+	&= \max_{k\in\{1,\ldots,N\}} ||
+			\frac{1}{N} \sum_{m = 1}^{\hmactive_t} \attraction(x^k - x^{N+m}) 
+			- \frac{1}{N} \sum_{m = 1}^{\hmactive_t} \attraction(y^k - y^{N+m}) 
+		||_\infty
+	\\
+	& \leq \frac{1}{N} \max_{k\in\{1,\ldots,N\}}
+			\sum_{m = 1}^{\hmactive_t}
+			\underbrace{|| \attraction(x^k - x^{N+m}) - \attraction(y^k - y^{N+m}) ||_\infty}
+			_{\leq l ||(x^k - x^{N+m}) - (y^k - y^{N+m}||_\infty }
+	\\
+	&\qquad \text{(Since $\attraction$ has Lipschitz constant $l$)}
+	\\
+	& \leq \frac{l}{N} \max_{k\in\{1,\ldots,N\}}
+		\sum_{m = 1}^{\hmactive_t}
+			\big(
+			||x^k - y^k ||_\infty + || x^{N+m} - y^{N+m}||_\infty
+			\big)
+	\\
+	& = \frac{l}{N} \sum_{m = 1}^{\hmactive_t}
+	\big(
+		\max_{k\in\{1,\ldots,N\}} ||x^k - y^k||_\infty + || x^{N+m} - y^{N+m}||_\infty
+	\big)
+	\\
+	& \leq \frac{l}{N} \sum_{m = 1}^{\hmactive_t}
+	\big(
+		||x - y ||_\infty + || x - y||_\infty
+	\big) \ = \frac{2l \hmactive_t}{N}||x - y ||_\infty
+\end{aligned}
+\end{equation*}
+\end{proof}
 
