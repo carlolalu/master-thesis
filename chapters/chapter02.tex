@@ -26,7 +26,11 @@ Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, th
 
 \ie the $\Gma_{g, \lambda}$ distributed \emph{spawning} or \emph{birth time} of the $\camp^{p,g}$ cAMP molecule.
 
-[[HERE ILLUSTRATION OF WHAT IS HAPPENING TIMEWISE]]
+\begin{figure}[h]
+\begin{tikzpicture}
+\end{tikzpicture}
+\caption{[[HERE ILLUSTRATION OF WHAT IS HAPPENING TIMEWISE]]}
+\end{figure}
 
 Consider a countable collection of indipendent Brownian motions 
 
@@ -65,11 +69,15 @@ Wat we need is a "quasi-Brownian motion", which is $0$ till the time $\btime^{p,
 \right.
 \end{equation}
 
-With these indipendent processes we can now finally write down the model as a set of stochastic differential equations:
+With these indipendent processes we can now finally write down the model as a set of Poisson processes and stochastic differential equations:
 
 \begin{equation}
 \left\{
 \begin{aligned}
+(\hmactive^p_t)_{p=1}^N 
+&\text{ iid and } \sim \Pois_{\lambda t}
+&
+\\
 \amba_t^p 
 &= \amba_0^p 
 + \int_0^t \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(\amba_s^p - \camp_s^{p,g}) d s
@@ -88,15 +96,12 @@ With these indipendent processes we can now finally write down the model as a se
 \right.
 \end{equation}\label{ch2:model:deterministic-parenting}
 
-\subsection{Observations}
-
-One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
+\paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
 %\paragraph{Solution via the definition?}\label{ch2:pitfall} One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
 %This is indeed a good method, but, as we will see, would then create great difficulties later. 
 %In fact at the spawning moment the particle $\camp^{p,g}$ must be at the position $\amba_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, therefore rendering the realizations discontinous (see \ref{ch3:avoid-pitfall-of-jumping-particles}) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the correspondent the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
-
 
 \section{Random (casual) parenting toy model}
 
@@ -106,21 +111,29 @@ Here we try to build a mathematically handier version of the previous model. Sin
 \hmactive_t := \sum_{p=1}^N \hmactive_t^p
 \end{equation}
 
-is $\Pois(N \lambda)$-distributed. Therefore the correspondent birth times
+is $\Pois(N t \lambda)$-distributed. Therefore the correspondent birth times
 
 \begin{equation}
 \btime_m := \inf \{ t : \hmactive_t \geq m\}
 \end{equation}
 
 are $\Gma(m, N\lambda)$-distributed.
-Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $\camp^m$ is spawned at its birth time with uniform probability on the position of one of the amoebas.
+Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $\camp^m$ (the cAMP spawning at $\btime_m$) is spawned at its birth time with uniform probability on the position of one of the amoebas.
 Mathematically this means considering a "parenting function" $\Parentof(m)$ which will represent the spawning amoeba of the $\camp^m$ particle.
-Assume that $\Parentof(m) \sim \Unf_{\{1,\ldots,N\}}$ and that $\forall m_1 \neq m_2.\Parentof(m_1) \indep \Parentof(m_2)$.
+Assume that $\Parentof(m) \sim \Unf_{\{1,\ldots,N\}}$.
 Then we can redefine the model as:
 
 \begin{equation}
 \left\{
 \begin{aligned}
+\hmactive_t
+&\sim \Pois_{N\lambda t}
+&
+\\
+P(m) 
+&\sim \Unf_{\{1,\ldots,N\}}
+&
+\\
 \amba_t^p 
 &= \amba_0^p 
 + \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^m) d s

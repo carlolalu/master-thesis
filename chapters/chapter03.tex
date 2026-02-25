@@ -425,7 +425,7 @@ The solution is defined analogously to the deterministic parenting model:
 A solution to \ref{ch2:model:casual-parenting} is a quadruple $(\hmactive, \Parentof, \modsol{} = (\amba, \camp), B)$ such that:
 \begin{itemize}
 \item $\hmactive$ is a Poisson process of parameter $\lambda$ not dependent on $(\modsol{}, B)$
-\item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\modsol{}, B)$ and such that $\Parentof(m)$ is uniformly distributed and $\forall n \neq m. \Parentof(m) \indep \Parentof(n)$ 
+\item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\modsol{}, B)$ and such that $\Parentof(m)$ is uniformly distributed.
 \item Under the random measure $\PrbCondTimesCasual{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol{} = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
 \end{itemize}
 \end{definition}
