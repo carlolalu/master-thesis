@@ -17,7 +17,7 @@ In practice, we start from a cinematic $\modsol{}_t = (\amba_t, \camp_t) \in (\R
 such that the solutions $\adens, \cdens: \text{time} \times \text{space} \longrightarrow \R_+ $ represent (in some sense yet to be explained) respectively the density of the amoebas and of the cAMP molecules when the number of amoebas involved is very very big, \ie when $N\longrightarrow + \infty$.
 Let us formalise this notions, assuming that we have such system of PDEs and a solution to it.
 
-\subsection{Reducing SDE's solutions and densities to their equivalent measures}
+\subsection{Comparing $N$-dimensional stochastic processes and densities}
 
 First, the number of initial amoebas $N$ is here relevant, then we sign
 
@@ -26,6 +26,8 @@ First, the number of initial amoebas $N$ is here relevant, then we sign
 \end{equation}
 
 as the solution to the model with $N$ amoebas.
+
+\subsubsection{Reducing the objects to their equivalent measures}
 
 Now we have two different type of objects: stochastic processes (cinematics) $(\amba_t^p)_p, (\camp_t^{p,g})_{p,g}$ and densities $\adens(t,\cdot), \cdens(t,\cdot)$.
 We will transform both of them in their respective measures, and compare those.
@@ -54,7 +56,7 @@ Analogously, we consider the measures deriving from the densities:
 where $\lebsge$ is the lebesgue measure (since they should be densities, let us assume that $\adens,\cdens \in \Lpspace^1$).
 Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein}.
 
-\subsection{Distances among Borel probability measures}
+\subsubsection{Distances among Borel probability measures}
 
 The Wasserstein distance is built on the concept of \emph{coupling} of measures.
 
@@ -145,7 +147,39 @@ To see the proof that $W_p$ is a distance take a look at the proof after \autoci
 Because of the heuristic of \ref{ch4:fig:example-coupling}, it is sometimes called \emph{Earth-mover distance} or \emph{EMD distance}.
 It presents important connections with the notion of \emph{optimal transport}.
 
-\subsection{Formulation of the quantity searched}
+\subsubsection{The distances among our probabilities are small}
+
+Applying such concept to our case we write down
+
+\begin{equation}
+\left\{
+\begin{aligned}
+dist \big( \delta^N_{\amba_t}, \adens(t,\cdot) \big) 
+&:= W_1 \big( \delta^N_{\amba_t}, \mu_t^\adens \big)
+= \inf_{\gamma \in \Gamma(\delta^N_{\amba_t},\mu_t^\adens)}
+	\int |x-y| d\gamma(x,y)
+\\
+dist \big( \delta^N_{\camp_t}, \cdens(t,\cdot) \big) 
+&:= W_1 \big( \delta^N_{\camp_t}, \mu_t^\cdens \big)
+= \inf_{\gamma \in \Gamma(\delta^N_{\camp_t},\mu_t^\cdens)}
+	\int |x-y| d\gamma(x,y)
+\\
+\end{aligned}
+\right.
+\end{equation}
+
+\begin{figure}[h]
+\caption{[[DRAW HERE WITH TIKZ]]$\delta^N_{\camp_t}$ and $\delta^N_{\amba_t}$, as pile of sands, give rise to $N$ poles each of mass $\frac{1}{N}$}
+\end{figure}
+
+These are still stochastic numbers, because $\delta^N_{\camp_t}$ and $\delta^N_{\amba_t}$ are still \emph{random} measures.
+
+
+%% from now on, to write what you need, read remark 6.5 from villani to calculate such distance, but explain that this is a cumbersome way to calculate stuff anyway.
+%% explain otherwise that the best way is the one of calculate the distance between the sdes derived from the densities nad our sdes. To seek explanation from this watch at what Ana says in her paper directly after the theorem 2.1, at the section '2.2. main result' and search in the book of villani. I SUSPECT THAT, ALTHOUGH SHE WROTE 'THEOREM 7.12' SHE WANTED TO HINT AT THE COROLLARY 6.11 AND THE REMARK 6.12, because they seem more pertninent, but I might be wrong)\\
+%% or maybe a good result would be theorem 6.15 choosing x_0 = 0, so that the the integral becomes the distance among the random varibales. Maybe.
+
+
 
 
 
