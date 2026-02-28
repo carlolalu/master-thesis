@@ -61,10 +61,10 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 
 Our system \ref{ch2:model:deterministic-parenting} is not a proper SDE because of technical oddities:
 \begin{itemize}
-\item An hypothetical vector $\modsol{}_t := (\amba_t^1,\ldots, \amba_t^N, \camp_t^{p,g} \text{ already spawned at time }t)$ would have a dimension changing (growing, in particular) as the time flows.
+\item An hypothetical vector $\sol_t := (\amba_t^1,\ldots, \amba_t^N, \camp_t^{p,g} \text{ already spawned at time }t)$ would have a dimension changing (growing, in particular) as the time flows.
 And it grows up to infinity.
 \item Not only it would be changing with the time, but it would be a \emph{stochastic} dimension.
-\item If we were to write the equations for $\modsol{}$ in a similar way to the one in $\ref{ch3:eq:general-sde}$ we would have a drift term $\drift = \drift(t, \modsol{}_t, (\hmactive_t^p)_p)$ depending also on the Poisson-distributed processes $(\hmactive_t^p)_p$, making it "too much stochastical" to be treated as in \ref{ch3:eq:general-sde}.
+\item If we were to write the equations for $\sol$ in a similar way to the one in $\ref{ch3:eq:general-sde}$ we would have a drift term $\drift = \drift(t, \sol_t, (\hmactive_t^p)_p)$ depending also on the Poisson-distributed processes $(\hmactive_t^p)_p$, making it "too much stochastical" to be treated as in \ref{ch3:eq:general-sde}.
 \end{itemize}
 
 All these oddities originate from the fact that our system depends on $N$ sequences $(\btime^{p,g})_{g}$ of \emph{random} birth times (or equivalently from the Poisson processes generating them, \ie $(\hmactive_t^p)_t$).
@@ -79,10 +79,10 @@ Then heuristically we can imagine to fix these sequences to an arbitrary value $
 + \int_0^t 
 	\overbrace{
 		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\mu_s^p} \attraction(\amba_s^p - \camp_s^{p,g})
-	}^{=:\drift_p(s, \modsol{}_s, (\mu_s^p)_p)=:\drift_p(s, \modsol{}_s)} 
+	}^{=:\drift_p(s, \sol_s, (\mu_s^p)_p)=:\drift_p(s, \sol_s)} 
 d s
 + 
-\overbrace{\sigma^A}^{=:\diffusion_p(s,\modsol{}_s)} B_t^p
+\overbrace{\sigma^A}^{=:\diffusion_p(s,\sol_s)} B_t^p
 &
 \\
 \camp_t^{p,g} 
@@ -90,21 +90,21 @@ d s
 &if \quad t < \tau^{p,g}
 \\
 \camp_t^{p,g}
-&= \amba_{\tau^{p,g}}^p + \underbrace{\sigma_C}_{=:\diffusion_{p,g}(s,\modsol{}_s)} \quasibm_t^{p,g}
+&= \amba_{\tau^{p,g}}^p + \underbrace{\sigma_C}_{=:\diffusion_{p,g}(s,\sol_s)} \quasibm_t^{p,g}
 &if \quad t \geq \tau^{p,g}
 \end{aligned}
 \right.
 \end{equation}\label{ch3:heuristic-fix-the-times}
 
 This solves the problem because $(\tau^{p,g})_{p,g}$ is deterministic.
-Since the value is arbitrary, if we find a solution $(\modsol{}, B)_{(\tau^{p,g})_{p,g}}$ for \ref{ch3:heuristic-fix-the-times}, then we can assemble all these components into a global solution $(\modsol{}, B)$.
-This is formally explained by defining defining a solution for the system \ref{ch2:model:deterministic-parenting} as a triple $((\hmactive^p)_p, \modsol{} = (\amba, \camp), B)$ such that under the conditional probability measure
+Since the value is arbitrary, if we find a solution $(\sol, B)_{(\tau^{p,g})_{p,g}}$ for \ref{ch3:heuristic-fix-the-times}, then we can assemble all these components into a global solution $(\sol, B)$.
+This is formally explained by defining defining a solution for the system \ref{ch2:model:deterministic-parenting} as a triple $((\hmactive^p)_p, \sol = (\amba, \camp), B)$ such that under the conditional probability measure
 
 \begin{equation}
 \overline{\Prb} : = \PrbCondTimes{\cdot} = \quad\Prb(\ \cdot \ | (\hmactive^p)_{1\leq p\leq N, t\in\R_+} )
 \end{equation}
 
-the couple $(\modsol{},B)$ solves \ref{ch2:model:deterministic-parenting}.
+the couple $(\sol,B)$ solves \ref{ch2:model:deterministic-parenting}.
 But we can notice that even in this way the system has a dimension that changes in time, meaning that we need to operate piecewise in time (\ie define what is a solution that solves \ref{ch2:model:deterministic-parenting} as a solution that solves it piecewise in time).
 We can consider the birth times chronologically as in the \ref{ch2:model:casual-parenting}, \ie
 
@@ -186,22 +186,22 @@ t &\in I_m - \btime_m = [0, \btime_{m+1}-\btime_m]
 \right.
 \end{equation}\label{ch3:final-SDE-reduction-determ-parenting}
 
-and if this system has a solution ${}^m Y_t$ on $I_m - \btime_m$, then it is straightforward to verify that $ \modsol{m}_t := {}^m Y_{t-\btime_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
+and if this system has a solution ${}^m Y_t$ on $I_m - \btime_m$, then it is straightforward to verify that $ {}^{m}\sol_t := {}^m Y_{t-\btime_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
 To be accurate we should operate also on the Brownian motion: if $B^{*}_t$ fullfills \ref{ch3:final-SDE-reduction-determ-parenting} for all particles but the one which just spawned, then $B^{*}_{t+\btime_m}$ fullfills \ref{ch3:det-parent-piece} for the equivalent equations; while if $B^{p,g}_t$ is the \Bm of the cAMP spawning in \ref{ch3:final-SDE-reduction-determ-parenting}, then the correpsondent quasi-\Bm $\quasibm_t^{p,g}$ (defined as in \ref{ch2:quasi-bm-camp}) fullfills the equation in \ref{ch3:det-parent-piece} for the correspondent particle.
 
-Then we can say that $(\modsol{}, B)$ is a solution for the piecewise defined system \ref{ch2:model:deterministic-parenting} under $\PrbCondTimes{\cdot}$ if it solves (under the same random measure) the system \ref{ch3:final-SDE-reduction-determ-parenting}.
+Then we can say that $(\sol, B)$ is a solution for the piecewise defined system \ref{ch2:model:deterministic-parenting} under $\PrbCondTimes{\cdot}$ if it solves (under the same random measure) the system \ref{ch3:final-SDE-reduction-determ-parenting}.
 
 \subsection{Resume and observations}
 
 \begin{definition}
-A solution to \ref{ch2:model:deterministic-parenting} is a triple $((\hmactive^p)_{1\leq p \leq N}, \modsol{} = (\amba, \camp), B)$ such that:
+A solution to \ref{ch2:model:deterministic-parenting} is a triple $((\hmactive^p)_{1\leq p \leq N}, \sol = (\amba, \camp), B)$ such that:
 \begin{itemize}
-\item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\modsol{}, B)$
-\item Under the random measure $\PrbCondTimes{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol{} = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
+\item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\sol, B)$
+\item Under the random measure $\PrbCondTimes{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
 \end{itemize}
 \end{definition}
 
-In order for this to be a valid definition we should specify a global codomain for the processes $\modsol{}, B$ and we should verify that $\PrbCondTimes{\cdot}$ is a \emph{regular} random probability measure.
+In order for this to be a valid definition we should specify a global codomain for the processes $\sol, B$ and we should verify that $\PrbCondTimes{\cdot}$ is a \emph{regular} random probability measure.
 This is hinted in the appendix at \ref{app:formal-def-solution}.
 
 \begin{remark}
@@ -213,12 +213,12 @@ What is the piecewise dimension of the system? How does this influence the gluei
 \end{equation}
 thus the dimension of the system is $\NumParticles_t \cdot d$, where $d$ is the dimension in which we are considering the particles ($2$ or $3$).
 \label{ch3:dimension-system}
-\item Since the particle $\camp^{m+1}$ spawns on the point $\amba_{\btime_{m+1}}^p$ for some $p$, the solution $\modsol{m+1}$ on the interval $I_{m+1}$ can be glued with "continuouty" with the solution $\modsol{m}$ on $I_{m}$ even regarding the spawning position of $\camp^{m+1}$, meaning that if we would define the functions
+\item Since the particle $\camp^{m+1}$ spawns on the point $\amba_{\btime_{m+1}}^p$ for some $p$, the solution ${}^{m+1}\sol$ on the interval $I_{m+1}$ can be glued with "continuouty" with the solution ${}^{m}\sol$ on $I_{m}$ even regarding the spawning position of $\camp^{m+1}$, meaning that if we would define the functions
 \begin{equation}
 \begin{aligned}
 \Zhi_m: I_m &\longrightarrow \R_+
 \\
-		t &\longmapsto	max \{|\modsol{}^i - \modsol{}^j| \}
+		t &\longmapsto	max \{|\sol^i - \sol^j| \}
 \end{aligned}
 \end{equation}
 then we could define a globally continous function $\Zhi:\R \longrightarrow \R_+$ piecewise defined as $\Zhi_m$.
@@ -422,11 +422,11 @@ d s + \sigma^A B_t^p
 The solution is defined analogously to the deterministic parenting model:
 
 \begin{definition}
-A solution to \ref{ch2:model:casual-parenting} is a quadruple $(\hmactive, \Parentof, \modsol{} = (\amba, \camp), B)$ such that:
+A solution to \ref{ch2:model:casual-parenting} is a quadruple $(\hmactive, \Parentof, \sol = (\amba, \camp), B)$ such that:
 \begin{itemize}
-\item $\hmactive$ is a Poisson process of parameter $\lambda$ not dependent on $(\modsol{}, B)$
-\item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\modsol{}, B)$ and such that $\Parentof(m)$ is uniformly distributed.
-\item Under the random measure $\PrbCondTimesCasual{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\modsol{} = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
+\item $\hmactive$ is a Poisson process of parameter $\lambda$ not dependent on $(\sol, B)$
+\item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\sol, B)$ and such that $\Parentof(m)$ is uniformly distributed.
+\item Under the random measure $\PrbCondTimesCasual{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
 \end{itemize}
 \end{definition}
 
