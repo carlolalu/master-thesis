@@ -183,60 +183,60 @@ But we are still operating with the law of some processes, rather than with them
 
 \subsection{Mean-field particles and how to use them}
 
-Starting from the effective equations solution $\adens_t$ we can associate to it, under some conditions, a stochastic process $\mfamba_t$ such that $\law(\mfamba_t) = \adens(t,\cdot)$.
-In particular let us assume that the effective equation for $\adens_t$ takes the form
-
-\begin{equation}
-\begin{aligned}
-\partial_t \adens(t,x) 
-&=  - \sum_{i=1}^{d} \partial_{x_i}[ \mfdrift^i(t,x) \adens(t,x)] 
-+ D_A \bigtriangleup \adens(t,x)
-\\
-D_A
-&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_A^2 = \frac{d\sigma_A^2}{2}
-\end{aligned}
-\end{equation}\label{ch4:eq:shape-effective-eqs-for-mf-particles}
-
-for some function $\mfdrift$ which respects the conditions that a drift $\drift$ of an SDE must respect in \ref{ch3:sde-framework} to ensure existence and uniqueness of solution.
-Then we know that there is a unique solution in $[0,T]$ for the SDE
-
-\begin{equation}
-\mfamba_t
-= \mfamba_0 + \int_0^t \mfdrift(s,\mfamba_s) ds + \sigma_A dB_t
-\end{equation}
-
-Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch4:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
-
-Now we can finally formulate a way to operate with the processes rather than with their laws.
-
-
-[[demonstration of how short distance between mean-field particles and a model do imply the convergence in W1 which is then ocnvergence in weak sense]]
-
-
-\subsection{Resume}
-
-[[Here define the conditions properly also for the cAMP and rewrite all labels and refs properly]]
-
-[['convergence in probability of the distance between mean-field and non-mean-field implies weak convergence of the marginals']]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+%Starting from the effective equations solution $\adens_t$ we can associate to it, under some conditions, a stochastic process $\mfamba_t$ such that $\law(\mfamba_t) = \adens(t,\cdot)$.
+%In particular let us assume that the effective equation for $\adens_t$ takes the form
+%
+%\begin{equation}
+%\begin{aligned}
+%\partial_t \adens(t,x) 
+%&=  - \sum_{i=1}^{d} \partial_{x_i}[ \mfdrift^i(t,x) \adens(t,x)] 
+%+ D_A \bigtriangleup \adens(t,x)
+%\\
+%D_A
+%&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_A^2 = \frac{d\sigma_A^2}{2}
+%\end{aligned}
+%\end{equation}\label{ch4:eq:shape-effective-eqs-for-mf-particles}
+%
+%for some function $\mfdrift$ which respects the conditions that a drift $\drift$ of an SDE must respect in \ref{ch3:sde-framework} to ensure existence and uniqueness of solution.
+%Then we know that there is a unique solution in $[0,T]$ for the SDE
+%
+%\begin{equation}
+%\mfamba_t
+%= \mfamba_0 + \int_0^t \mfdrift(s,\mfamba_s) ds + \sigma_A dB_t
+%\end{equation}
+%
+%Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch4:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
+%
+%Now we can finally formulate a way to operate with the processes rather than with their laws.
+%
+%
+%[[demonstration of how short distance between mean-field particles and a model do imply the convergence in W1 which is then ocnvergence in weak sense]]
+%
+%
+%\subsection{Resume}
+%
+%[[Here define the conditions properly also for the cAMP and rewrite all labels and refs properly]]
+%
+%[['convergence in probability of the distance between mean-field and non-mean-field implies weak convergence of the marginals']]
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
 
 
 [[FINISH THIS SECTION]]
