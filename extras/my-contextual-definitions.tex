@@ -5,11 +5,13 @@
 
 \newcommand{\adens}{a}									% effective density of the amoebas
 \newcommand{\cdens}{c}									% effective density of the cAMP molecules
+\newcommand{\heatkernel}{\Phi}
+
 \newcommand{\mfamba}{\overline{\amba}}					% mean-field amoeba
 \newcommand{\mfcamp}{\overline{\camp}}					% mean-field camp					
-\newcommand{\mfsol}{\overline{\sol}}					% mean-field solution
+\newcommand{\mfsol}{\overline{\sol}}						% mean-field solution
 \newcommand{\mfdrift}{\overline{\drift}}					% mean-field drift
-\newcommand{\spawnpos}{P}							% spawning position of the mean-field camp
+\newcommand{\spawnpos}{P}								% spawning position of the mean-field camp
 
 
 \newcommand{\potential}{v}								% the potential of attraction of amoebas towards the cAMP
@@ -21,7 +23,7 @@
 
 \newcommand{\quasibm}{Q}									% the quasi-BM of the cAMP
 
-\newcommand{\PrbCondTimes}[1]{\Prb\big( \ #1 \ \big|(\btime^{p,g})_{p,g}\big)}		% the random measure with fixed spawning times for the deterministic parenting model
-\newcommand{\ECondTimes}[2]{\ECond{#1}{#2 (\btime^{p,g})_{p,g}}}				% conditional expectation with fixed spawning times for the deterministic parenting model
+\newcommand{\PrbCondTimes}[1]{\Prb \big( \; #1 \; \Big|\;(\btime^{p,g})_{p,g}\big)}		% the random measure with fixed spawning times for the deterministic parenting model
+\newcommand{\ECondTimes}[2]{\ECond{#1}{#2 \; (\btime^{p,g})_{p,g}}}				% conditional expectation with fixed spawning times for the deterministic parenting model
 
-\newcommand{\PrbCondTimesCasual}[1]{\Prb\big( \ #1 \ \big|(\btime^m)_m, \Parentof \big)}		% the random measure with fixed spawning times and parenting function for the casual parenting model
+\newcommand{\PrbCondTimesCasual}[1]{\Prb\big( \ #1 \ \Big|(\btime^m)_m, \Parentof \big)}		% the random measure with fixed spawning times and parenting function for the casual parenting model

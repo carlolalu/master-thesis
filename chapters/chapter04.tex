@@ -259,7 +259,7 @@ where the drift terms $\mfdrift^{N,k}$ are calculated by taking the average of t
 
 \begin{equation}
 \begin{aligned}
-\mfdrift^{N,k}(t, x) &:= \ECond{\drift^{N,k}(t, \mfsol_t)}{ \mfsol_t^k} (x)
+\mfdrift^{N,p}(t, x) &:= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
 \\
 \mfdrift^{N,p,g}(t, x) &:= \ECond{\drift^{N,k}(t, \mfsol_t)}{ \mfsol_t^{p,g} } (x)
 \end{aligned}
@@ -278,9 +278,13 @@ This is made in order to express the distance between the mean-field particles a
 \begin{equation}
 \begin{aligned}
 | \sol_t^k - \mfsol_t^k | 
-&= | \int_0^t \drift^{N,k}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift^{N,k}(t,\mfsol_s^k) d s + \sigma B_t^k |
+&= \left| 
+		\int_0^t \drift^{N,k}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift^{N,k}(t,\mfsol_s^k) d s + \sigma B_t^k 
+	\right|
 \\
-&= | \int_0^t \drift^{N,k}(s,\sol_s)  - \mfdrift^{N,k}(t,\mfsol_s^k) d s|
+&= 
+	\left| \int_0^t \drift^{N,k}(s,\sol_s)  - \mfdrift^{N,k}(t,\mfsol_s^k) d s
+	\right|
 \end{aligned}
 \end{equation}
 
@@ -304,34 +308,106 @@ First we notice that since the drift of the cAMP molecules is $\equiv 0$, their 
 \end{aligned}
 \end{equation}
 
-Then, in the case of the cAMP particles, the 
+Then, with respect to the measure $\PrbCondTimes{\cdot}$, the effective equation for such particle will be
 
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^{\btime^{p,g}}(0, x) 
+&= 0 
+&&
+\\
+\partial_t \cdens^{\btime^{p,g}}(t, x) 
+&= 0 
+&&\text{if } t < \btime^{p,g}
+\\
+\cdens^{\btime^{p,g}}(\btime^{p,g}, x) 
+&= \text{ some spawning position related to } \adens(\btime^{p,g}, \cdot)
+&&
+\\
+\partial_t \cdens^{\btime^{p,g}}(t, x) 
+&= D_\camp \bigtriangleup \cdens^{\btime^{p,g}}(t, x) 
+&&\text{if } t \geq \btime^{p,g}
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+&&
+\end{aligned}
+\right.
+\end{equation}
 
+If we make the conjecture that the casual parenting model \ref{ch2:model:casual-parenting} has the same effective equations as the deterministic, we could expect to describe the initial dentisity $\cdens^{\btime^{p,g}}(\btime^{p,g}, \cdot)$ as simply $\adens(\btime^{p,g}, \cdot)$.
+Then taking an arbitrary birth time $\tau = \btime^{p,g}$, we can write
 
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^\tau(t, x) 
+& \equiv 0
+&&\text{if } t < \tau
+\\
+\cdens^\tau(\tau, \cdot) 
+&= \adens(\tau, \cdot)
+&&
+\\
+\partial_t \cdens^\tau
+&= D_\camp \bigtriangleup \cdens^\tau
+&&\text{if } t \geq \tau
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+&&
+\end{aligned}
+\right.
+\end{equation}\label{ch4:eq:eff-eq-candidate-camp}
 
+This is simply a heat-equation starting with initial condition $\adens(\tau)$ at time $\tau$. 
+Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$ we can express it with the analytical solution
 
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^\tau(t, x) 
+& \equiv 0
+&&\text{if } t < \tau
+\\
+\cdens^\tau(\tau, x) 
+&= 
+	\left(
+		\heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 
+	\right) (x)
+&&\text{if } t \geq \tau
+\\
+\heatkernel_s^{D_\camp}(x) &:= \frac{1}{
+		\big( 4 D_\camp \pi s \big)^{\frac{d}{2}}
+	}
+	exp \left(
+		-\frac{x\cdot x}{4 D_\camp s}
+	\right)
+&&
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+&&
+\end{aligned}
+\right.
+\end{equation}\label{ch4:eq:eff-eq-camp-analytical-sol}
 
-
-
-
-
-
-Let us then consider an index $p\in \{1, \ldots, N\}$.
-To calculate the 
+where $\star$ is the convolution in space.
+Let us calculate now the case for the amoebas:
 
 \begin{equation}
 \begin{aligned}
-\mfdrift^{N,p}(t, \mfsol_t^{p}) 
-:&= \ECond {\drift^{N,p}(t, \mfsol_t) }{\mfsol_t^{p}}
+\mfdrift^{N,p}(t, x) 
+:&= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
 \\
-&=\ECond {\ \ECondTimes{ \drift^{N,p}(t, \mfsol_t) }{\mfsol_t^{p}, }\ }{\mfsol_t^{p}}
+&= \ECond{\; 
+		\ECondTimes{
+			\drift^{N,p}(t, \mfsol_t)		
+		}{\mfsol_t^p=x, }
+	\;}{\mfsol_t^p=x}	
 \end{aligned}
 \end{equation}
-
-
-[[ rewrite this section underlining that the average is taken leaving the times out]]
-[[FINISH THIS SECTION]]
-
 
 
 
