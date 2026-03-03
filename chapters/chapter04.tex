@@ -294,7 +294,8 @@ The disadvantage of not having identical distributions, is that crafting a Law o
 \end{enumerate}
 \end{remark}
 
-Let us dive into the calculation.
+\subsection{Calculations}
+
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
 \begin{equation}
@@ -362,21 +363,19 @@ D_\camp
 \end{equation}\label{ch4:eq:eff-eq-candidate-camp}
 
 This is simply a heat-equation starting with initial condition $\adens(\tau)$ at time $\tau$. 
-Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$ we can express it with the analytical solution
+Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$ (modified so that it is $\equiv 0$ for negative values of $t$) we can express it with the analytical solution
 
 \begin{equation}
 \left\{
 \begin{aligned}
-\cdens^\tau(t, x) 
-& \equiv 0
-&&\text{if } t < \tau
-\\
 \cdens^\tau(\tau, x) 
+&= \adens(\tau)
+\\
+\cdens^\tau(t, x) 
 &= 
 	\left(
 		\heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 
 	\right) (x)
-&&\text{if } t \geq \tau
 \\
 \heatkernel_s^{D_\camp}(x) &:= \frac{1}{
 		\big( 4 D_\camp \pi s \big)^{\frac{d}{2}}
@@ -384,17 +383,16 @@ Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$
 	exp \left(
 		-\frac{x\cdot x}{4 D_\camp s}
 	\right)
-&&
+	\1_{s\geq 0}
 \\
 D_\camp
 &:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
-&&
 \end{aligned}
 \right.
 \end{equation}\label{ch4:eq:eff-eq-camp-analytical-sol}
 
 where $\star$ is the convolution in space.
-Let us calculate now the case for the amoebas:
+Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
 
 \begin{equation}
 \begin{aligned}
@@ -404,17 +402,278 @@ Let us calculate now the case for the amoebas:
 &= \ECond{\; 
 		\ECondTimes{
 			\drift^{N,p}(t, \mfsol_t)		
-		}{\mfsol_t^p=x, }
-	\;}{\mfsol_t^p=x}	
+		}{\mfamba_t^p=x, }
+	\;}{\mfamba_t^p=x}
+\\
+&= \ECond{\; 
+		\ECondTimes{
+			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(\mfamba_t^p - \mfcamp_t^{p,g}) 
+		}{\mfamba_t^p=x, }
+	\;}{\mfamba_t^p=x}
+\\
+&= \E{\; 
+		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} 
+		\ECondTimes{
+			\attraction(x - \mfcamp_t^{p,g}) 
+		}{}
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+		\int 
+			\attraction(x - y) 
+			d\PrbCondTimes{\mfcamp_t^{p,g} = y}
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+		\int 
+			\attraction(x - y) 
+			\cdens_t^{\btime^{p,g}}(y)
+		dy
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+			\left( \attraction \star \cdens_t^{\btime^{p,g}} \right) (x)
+	\;}
 \end{aligned}
 \end{equation}
 
+Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim \btime^{1,g}$, therefore
+
+\begin{equation}
+\begin{aligned}
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^1} 
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \E{\; 
+		\sum_{g = 1}^{\hmactive_t^1} 
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \E{\; 
+		\sum_{g = 1}^{\infty} 
+		\underbrace{
+			\overbrace{
+				\1_{g \leq \hmactive_t^1}
+			}^{
+				\1_{\btime^{1,g} \leq t}
+			}
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+		}_{\geq 0}
+	\;}
+\\
+&= \sum_{g = 1}^{\infty}
+	\E{\; \1_{\btime^{1,g} \leq t}
+		\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \sum_{g = 1}^{\infty}
+	\int
+		\1_{\tau \leq t}
+		\left( \attraction \star \cdens_t^{\tau} \right) (x)
+	d \underbrace{\Prb ( \btime^{1,g} = \tau )}_{\Gma_{\lambda, g}}
+\\
+&= \sum_{g = 1}^{\infty}
+	\int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+	\frac{\lambda^g}{(g-1)!} x^{g-1} \; e^{ - \lambda x}
+	d \tau
+\\
+&= \int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+		\lambda
+		\underbrace{
+			\sum_{g = 1}^{\infty} \frac{(\lambda x)^{g-1}}{(g-1)!}
+		}_{e^{\lambda x}}
+		e^{ - \lambda x}
+	d \tau
+\\
+&= \lambda \int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+	d \tau
+	=
+	\left( 
+		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+	\right) (x) =: \mfdrift^{N,p} (t, x) = \mfdrift^{p} (t, x)
+\end{aligned}
+\end{equation}
+
+With these calculations we have that the mean-field amoebas are the solution of the system
+
+\begin{equation}
+\begin{aligned}
+\amba_t^0 &\sim \adens_0
+\\
+\amba_t^p &= \int_0^t \left( 
+		\attraction \star \int_0^s \lambda \cdens_t^\tau 	d \tau
+	\right) (\mfamba_t^p) dt + \sigma_A B_t^p
+\end{aligned}
+\end{equation}
+
+and $\adens$ is therefore given by the Kolmogorov equation
+
+\begin{equation}
+\begin{aligned}
+\partial_t \adens(t, x) &= 
+	- \sum_{i=1}^d \partial_{x_i} 
+		\left[
+			\mfdrift_i^{p}(t,x) \adens(t,x)
+		\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+& = 	- \sum_{i=1}^d \partial_{x_i} 
+		\left[
+			\big( 
+				\underbrace{\attraction_i}_{\partial_{x_i} \potential}
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\big)
+			\adens
+		\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= - \sum_{i=1}^d
+		\left[
+			 \partial_{x_i} \left( 
+				\partial_{x_i} \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			+
+			 \left( 
+				\partial_{x_i} \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\partial_{x_i} \adens
+		\right] + \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= \left( \bigtriangleup \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			+
+			 \left( 
+				\nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\nabla \adens
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens			
+\end{aligned}
+\end{equation}
+
+If we would decide to express such equations with the analytical solution of $\cdens$ this would become
+
+\begin{equation}
+= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\\
+=  \lambda \nabla \left[ \left(
+			\int_0^t  \nabla \potential \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\end{equation}
 
 
+Then our system of mean-field particles is given by
 
+\begin{equation}
+\left\{
+\begin{aligned}
+\amba_t^0 &\sim \adens_0
+\\
+\amba_t^p &= \int_0^t \left( 
+		\attraction \star \int_0^s \lambda \cdens_t^\tau 	d \tau
+	\right) (\mfamba_t^p) dt + \sigma_A B_t^p
+\\
+\camp_t^{p,g} &= \amba_{\btime^{p,g}}^p + \sigma_C \quasibm_t^{p,g} &&\text{ from time }\btime^{p,g}
+\end{aligned}
+\right.
+\end{equation}\label{ch4:MF-particles}
 
+and the respective effective equations are given by
 
+\begin{equation}
+\left\{
+\begin{aligned}
+\adens(0, \cdot) &= \adens_0
+\\
+\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\\
+\cdens^\tau(t, \cdot) 
+& \equiv 0
+&&\text{if } t < \tau
+\\
+\cdens^\tau(\tau, \cdot) 
+&= \adens(\tau, \cdot)
+&&
+\\
+\partial_t \cdens^\tau
+&= \frac{d\sigma_\camp^2}{2} \bigtriangleup \cdens^\tau
+&&\text{if } t \geq \tau
+\end{aligned}
+\right.
+\end{equation}\label{ch4:EFFECTIVE-EQS}
 
+or, expressing the density of cAMP molecules analytically we have
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\adens(0, \cdot) &= \adens_0
+\\
+\partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
+		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(t, \cdot) 
+	 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\end{aligned}
+\right.
+\end{equation}\label{ch4:integro-differential-system}
+
+\subsection{Does the system have a solution?}
+
+The system \ref{ch4:integro-differential-system} is a non-linear integro-differential equation.
+The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
+
+\begin{theorem}
+Let $ E $ be a Banach theorem and let $C \subseteq E $ be a non-empty closed convex subset of $ E$.
+Let $F: C \longrightarrow C$ be a $\Cspc^0$ map such that $F(C) \subseteq K$, where $K\subseteq C$ is a compact subset of $C$.
+Then $F$ has a fixed point in $K$.
+\end{theorem}
+
+The usual procedure to apply the theorem is to divide the linear part from the non-linear one, to invert the linear operator with the green function of the linear operator, and then to verify that, with a domain in the space of functions with the characteristics that we do desire, the operator respects the conditions of the fixed point schauder theorem.
+
+[[explain this section up better]]
+
+[[explain better the section here down, and underline the base space of the lp-space: do we fix teh time or not? are they bochner space?]]
+
+Assuming that this is the case, and that $\adens \in \Lpspace^1 \cap \Lpspace^\infty$, then also $\cdens^\tau$ is in such space.
+With these considerations, we can easily deduce that also the system of mean-field particles \ref{ch4:MF-particles} has a solution, because $\mfdrift$ is bounded and locally Lipschitz:
+
+[[FIND PROOF IN YOUR NOTES]]
 
 
 
