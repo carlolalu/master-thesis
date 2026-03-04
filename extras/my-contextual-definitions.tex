@@ -1,5 +1,13 @@
+\newcommand{\potential}{v}								% the potential of \attraction
+\newcommand{\attraction}{V}								% the nabla of the potential, thus the attraction
+
+\newcommand{\hmactive}{M}								% how many molecules have been generated
+\newcommand{\btime}{T}									% birth time of the cAMP
+\newcommand{\Parentof}{P}								% parenting function in the casual parenting model
+
 \newcommand{\amba}{A}
 \newcommand{\camp}{C}
+\newcommand{\quasibm}{Q}									% the quasi-BM of the cAMP
 \newcommand{\sol}{X}										% the solution vector representing all amoebas and camps
 \newcommand{\NumParticles}{D}							% number of particles (cAMP + amoebas) present at time t
 
@@ -13,16 +21,9 @@
 \newcommand{\mfdrift}{\overline{\drift}}					% mean-field drift
 \newcommand{\mfspawnpos}{P}								% spawning position of the mean-field camp
 
-\newcommand{\potential}{v}								% the potential of \attraction
-\newcommand{\attraction}{V}								% the nabla of the potential, thus the attraction
-
-\newcommand{\hmactive}{M}								% how many molecules have been generated
-\newcommand{\btime}{T}
-\newcommand{\Parentof}{P}								% parenting function in the casual parenting model
-
-\newcommand{\quasibm}{Q}									% the quasi-BM of the cAMP
-
-\newcommand{\PrbCondTimes}[2]{\PrbCond{#1}{#2 \; (\btime^{p,g})_{p,g}}}		% the random measure with fixed spawning times for the deterministic parenting model
-\newcommand{\ECondTimes}[2]{\ECond{#1}{#2 \; (\btime^{p,g})_{p,g}}}				% conditional expectation with fixed spawning times for the deterministic parenting model
+\newcommand{\PrbCondTimes}[2]
+	{\PrbCond{#1}{#2\;(\btime^{p,g})_{p,g}}}				% cond. prob. with fixed birthtimes
+\newcommand{\ECondTimes}[2]
+	{\ECond{#1}{#2\;(\btime^{p,g})_{p,g}}}				% cond. expec. with fixed birthtimes
 
 \newcommand{\deldiniu}{\overline{D}}						% del dini up derivative (right or left?)
