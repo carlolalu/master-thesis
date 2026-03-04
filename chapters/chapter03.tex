@@ -101,7 +101,7 @@ Since the value is arbitrary, if we find a solution $(\sol, B)_{(\tau^{p,g})_{p,
 This is formally explained by defining defining a solution for the system \ref{ch2:model:deterministic-parenting} as a triple $((\hmactive^p)_p, \sol = (\amba, \camp), B)$ such that under the conditional probability measure
 
 \begin{equation}
-\overline{\Prb} : = \PrbCondTimes{\cdot} = \quad\Prb(\ \cdot \ | (\hmactive^p)_{1\leq p\leq N, t\in\R_+} )
+\overline{\Prb} : = \PrbCondTimes{\cdot} = \quad\PrbCond{\cdot}{(\hmactive^p)_{1\leq p\leq N, t\in\R_+}}
 \end{equation}
 
 the couple $(\sol,B)$ solves \ref{ch2:model:deterministic-parenting}.
@@ -189,7 +189,7 @@ t &\in I_m - \btime_m = [0, \btime_{m+1}-\btime_m]
 and if this system has a solution ${}^m Y_t$ on $I_m - \btime_m$, then it is straightforward to verify that $ {}^{m}\sol_t := {}^m Y_{t-\btime_m}$ solves \ref{ch3:det-parent-piece} on $I_m$.
 To be accurate we should operate also on the Brownian motion: if $B^{*}_t$ fullfills \ref{ch3:final-SDE-reduction-determ-parenting} for all particles but the one which just spawned, then $B^{*}_{t+\btime_m}$ fullfills \ref{ch3:det-parent-piece} for the equivalent equations; while if $B^{p,g}_t$ is the \Bm of the cAMP spawning in \ref{ch3:final-SDE-reduction-determ-parenting}, then the correpsondent quasi-\Bm $\quasibm_t^{p,g}$ (defined as in \ref{ch2:quasi-bm-camp}) fullfills the equation in \ref{ch3:det-parent-piece} for the correspondent particle.
 
-Then we can say that $(\sol, B)$ is a solution for the piecewise defined system \ref{ch2:model:deterministic-parenting} under $\PrbCondTimes{\cdot}$ if it solves (under the same random measure) the system \ref{ch3:final-SDE-reduction-determ-parenting}.
+Then we can say that $(\sol, B)$ is a solution for the piecewise defined system \ref{ch2:model:deterministic-parenting} under $\PrbCondTimes{\cdot}{}$ if it solves (under the same random measure) the system \ref{ch3:final-SDE-reduction-determ-parenting}.
 
 \subsection{Resume and observations}
 
@@ -197,11 +197,11 @@ Then we can say that $(\sol, B)$ is a solution for the piecewise defined system 
 A solution to \ref{ch2:model:deterministic-parenting} is a triple $((\hmactive^p)_{1\leq p \leq N}, \sol = (\amba, \camp), B)$ such that:
 \begin{itemize}
 \item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\sol, B)$
-\item Under the random measure $\PrbCondTimes{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
+\item Under the random measure $\PrbCondTimes{\cdot}{}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:det-parent-piece} (as described previously).
 \end{itemize}
 \end{definition}
 
-In order for this to be a valid definition we should specify a global codomain for the processes $\sol, B$ and we should verify that $\PrbCondTimes{\cdot}$ is a \emph{regular} random probability measure.
+In order for this to be a valid definition we should specify a global codomain for the processes $\sol, B$ and we should verify that $\PrbCondTimes{\cdot}{}$ is a \emph{regular} random probability measure.
 This is hinted in the appendix at \ref{app:formal-def-solution}.
 
 \begin{remark}
@@ -262,11 +262,11 @@ x &:= (x^1, \ldots, x^N, x^{1,1}, x^{1,2}, \ldots, x^{p,1},\ldots, x^{p,g},x^{p,
 \end{equation}\label{ch3:def-determ-parent-drift-&-diffusion}
 
 At first sight it would seem that these expressions would require to be manipulated in order to become the drift and the diffusion of \ref{ch3:final-SDE-reduction-determ-parenting}, because of the time translation of $\btime_m$.
-But the time dependence is given only by the random value $\hmactive_s^p$, which is fixed under $\PrbCondTimes{}$, giving us thus the exact same definition for the drift and diffusion of \ref{ch3:final-SDE-reduction-determ-parenting}.
+But the time dependence is given only by the random value $\hmactive_s^p$, which is fixed under $\PrbCondTimes{\cdot}{}$, giving us thus the exact same definition for the drift and diffusion of \ref{ch3:final-SDE-reduction-determ-parenting}.
 
 \section{Ensure the strong existence and pathwise uniqueness of solutions for the deterministic parenting system}
 
-Now that we have reduced our model to a collection of conditional, piecewise-in-time defined SDE, it is enough to find individual unique solutions on each interval $I_m$ under $\PrbCondTimes{}$, \ie a unique solution for \ref{ch3:final-SDE-reduction-determ-parenting} under such random probability measure.
+Now that we have reduced our model to a collection of conditional, piecewise-in-time defined SDE, it is enough to find individual unique solutions on each interval $I_m$ under $\PrbCondTimes{\cdot}{}$, \ie a unique solution for \ref{ch3:final-SDE-reduction-determ-parenting} under such random probability measure.
 
 In order to do that the theorems \ref{ch3:sde-framework} indicate to watch at the drift and diffusion of the system, \ie the ones in \ref{ch3:def-determ-parent-drift-&-diffusion}.
 The diffusion coefficients are constant, and thus will not cause any problems: they are lipschitz-continuous in space with fixed time, they are $\Cspc^0$ in time and they grow sublinearly.
@@ -364,7 +364,7 @@ For example, using the $\infty$-norm we have:
 \end{equation*}
 \end{proof}
 
-Therefore the conditions for the pathwise uniqueness and the strong existence of solutions of \ref{ch3:cond:E-and-U-lipsch+subgrowth} are fullfilled, and thus the deterministic parenting model has also the properties of pathwise uniqueness and strong existence of solution as well, \ie under $\PrbCondTimes{}$ on each interval $I_m = [\btime_m, \btime_{m+1}]$ there is a unique solution on each filtered probability space endowed with a \Bm.
+Therefore the conditions for the pathwise uniqueness and the strong existence of solutions of \ref{ch3:cond:E-and-U-lipsch+subgrowth} are fullfilled, and thus the deterministic parenting model has also the properties of pathwise uniqueness and strong existence of solution as well, \ie under $\PrbCondTimes{\cdot}{}$ on each interval $I_m = [\btime_m, \btime_{m+1}]$ there is a unique solution on each filtered probability space endowed with a \Bm.
 
 
 \section{Corresponding results on the casual parenting model}
@@ -426,7 +426,7 @@ A solution to \ref{ch2:model:casual-parenting} is a quadruple $(\hmactive, \Pare
 \begin{itemize}
 \item $\hmactive$ is a Poisson process of parameter $\lambda$ not dependent on $(\sol, B)$
 \item $\Parentof:\N \longrightarrow \{1, \ldots, N\}$ is a random function independent from $M$, not dependent on $(\sol, B)$ and such that $\Parentof(m)$ is uniformly distributed.
-\item Under the random measure $\PrbCondTimesCasual{\cdot}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
+\item Under the random measure $\PrbCond{\cdot}{(\btime_m)_m}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the system \ref{ch3:casual-parent-piece}.
 \end{itemize}
 \end{definition}
 

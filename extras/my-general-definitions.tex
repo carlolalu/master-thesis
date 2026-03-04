@@ -16,14 +16,17 @@
 \newcommand{\cadlag}{càdlàg}					% cadlag written properly
 
 %% Measure & probability general concepts
+\newcommand{\Prb}{\mathbb{P}}										% probability measure
+\newcommand{\PrbOf}[1]{\mathbb{P} \left( \; #1 \; \right)}			% probability measure of smt
+\newcommand{\PrbCond}[2]{\PrbOf{\; #1 \; \Big| \; #2 }}				% Conditional probability
+\newcommand{\E}[1]{\mathbb{E} \left[ \; #1 \; \right]}				% expectation value
+\newcommand{\ECond}[2]{\E{\; #1 \; \Big| \; #2}}						% conditional expectation
+
+\newcommand{\indep}{\perp \!\!\! \perp}		% symbol of indipendence
+\newcommand{\1}{\mathds{1}}					% indicator function
 \newcommand{\PrbMeas}{\mathcal{BPM}}			% The set of Borel probability measures
 \newcommand{\lebsge}{\lambda}				% lebesgue measure
 \newcommand{\Flt}{\mathcal{F}}				% filtrations
-\newcommand{\Prb}{\mathbb{P}}				% probability measure
-\newcommand{\E}[1]{\mathbb{E} \left[ \; #1 \; \right]}	% expectation value
-\newcommand{\ECond}[2]{\mathbb{E} \left[\; #1 \; \Big| \; #2 \right]}				% conditional expectation
-\newcommand{\indep}{\perp \!\!\! \perp}		% symbol of indipendence
-\newcommand{\1}{\mathds{1}}					% indicator function
 \newcommand{\drift}{b}						% drift term of an SDE
 \newcommand{\diffusion}{\sigma}				% diffusion term of an SDE
 \newcommand{\law}{\mathcal{L}}				% law of a RV

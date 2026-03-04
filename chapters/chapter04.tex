@@ -250,7 +250,7 @@ Instead of guessing the PDE, the idea is to guess the equivalent-mean field part
 \begin{aligned}
 d \mfamba^p_t &= \mfdrift^{N,p}(t,\mfamba_t^p) d t + \sigma_A d B_t^p &
 \\
-\mfcamp^{p,g}_t &= \text{ (some spawning position } \spawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift^{N,p}(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
+\mfcamp^{p,g}_t &= \text{ (some spawning position } \mfspawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift^{N,p}(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
 \end{aligned}
 \right.
 \end{equation}\label{ch4:eq:approximate-mean-field-equations}
@@ -265,7 +265,7 @@ where the drift terms $\mfdrift^{N,k}$ are calculated by taking the average of t
 \end{aligned}
 \end{equation}
 
-and all the spawning positions $\spawnpos_{\btime^{p,g}}^{p,g}$ are independent from each others and from the $A^p$s.
+and all the spawning positions $\mfspawnpos_{\btime^{p,g}}^{p,g}$ are independent from each others and from the $A^p$s.
 Then one considers the correspondent Kolmogorov forward equation, and that is the effective equation searched for.
 The idea behind this guess is that with a big number of amoebas and of cAMP molecules, their \emph{drift field} should resemble more and more the \emph{average drift field}, due to the fact that there are many long range interactions.
 For this reason the choice of the name \emph{mean-field particles}.
@@ -288,7 +288,7 @@ This is made in order to express the distance between the mean-field particles a
 \end{aligned}
 \end{equation}
 
-\item Notice that, while all the $\mfamba_t^p$ are \emph{iid}, the cAMP mean-fiel particles $\mfcamp_t^p$ are only \emph{independent} (\emph{not identically distributed}) and only \emph{under the conditioned probability} $ \PrbCondTimes{\cdot} $.
+\item Notice that, while all the $\mfamba_t^p$ are \emph{iid}, the cAMP mean-fiel particles $\mfcamp_t^p$ are only \emph{independent} (\emph{not identically distributed}) and only \emph{under the conditioned probability} $ \PrbCondTimes{\cdot}{} $.
 And it cannot be otherwise because of the coupling: indeed for each $\camp^{p,g}$ such quasi-\Bm $\quasibm^{p,g}_t$ starts to differ from $0$ only at $\btime^{p,g}$, and the molecule must necessary spawn at such time.
 The disadvantage of not having identical distributions, is that crafting a Law of large numbers becomes more difficult.
 \end{enumerate}
@@ -309,7 +309,7 @@ First we notice that since the drift of the cAMP molecules is $\equiv 0$, their 
 \end{aligned}
 \end{equation}
 
-Then, with respect to the measure $\PrbCondTimes{\cdot}$, the effective equation for such particle will be
+Then, with respect to the measure $\PrbCondTimes{\cdot}{}$, the effective equation for such particle will be
 
 \begin{equation}
 \left\{
