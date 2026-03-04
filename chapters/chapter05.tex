@@ -1,5 +1,45 @@
 \section{Preliminary on the del Dini derivatives}
 
+[[define and present the del dini derivative]]
+
+\subsection{Del Dini and cadlag increasing functions}
+
+In the main theorem there will be a moment in which it will be necessary to consider the quantity $\deldiniu_+ \sup_{0\leq t \leq T} | \sol_t^N - \mfsol_t^N|_\infty$.
+One can notice that
+We would like to prove that
+
+\begin{equation}
+\deldiniu_+ \sup_{0\leq t \leq T} | \sol_t^N - \mfsol_t^N|_\infty
+\;
+\leq
+\;
+\sup_{0\leq t \leq T} \deldiniu_+ | \sol_t^N - \mfsol_t^N|_\infty
+\end{equation}
+
+The process $\sol_t^N$ has continuous sample path under $\PrbCondTimes{}$, in the sense of \ref{ch3:system-continuous-glueing}, but this is not the case for $\mfsol_t^N$, because at the birth times the mean-field cAMP molecules $\mfcamp$ are spawning according to the density $\adens$ and not on some amoeba.
+
+
+[[[ formulate this sentence better]]]
+In such moment the infinity norm might suddenly jump to a value higher than all the previous one, creating a \cadlag -type discontinuouty.
+Notice that since only one particle spawns at time, the value cannot jump down.
+
+
+
+
+Therefore the function (consider it pathwise)
+
+\begin{equation}
+g(t) := | \sol_t^N - \mfsol_t^N|_\infty
+\end{equation}
+
+has these properties:
+
+\begin{enumerate}
+\item $g$ is \cadlag
+\item $g$ has a finite number of discontinuouities on $[0,T]$
+\item $\forall t. \; g(t-) \leq g(t)$ (notice that $g$ is not necessarily increasing!)
+\end{enumerate}
+
 \section{The two laws of large numbers}
 
 \section{The main result}
