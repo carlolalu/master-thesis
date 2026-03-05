@@ -225,7 +225,7 @@ A solution for $E(\drift,\diffusion)$ consists of
 \begin{itemize}
 \item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb) $
 \item an $\Ch$-dimensional $(\Flt_t)_t$-Brownian motion $B = (B^1, \ldots, B^\Ch)$
-\item an $(\Flt_t)_t$-adapted $\Iu$-dimensional process $X_t$ with $\Cspc^0$ sample paths
+\item an $(\Flt_t)_t$-adapted $\Iu$-dimensional process $X_t$ with $\Cspace^0$ sample paths
 \end{itemize}
 such that they satisfy the equation $E(\drift,\diffusion)$.
 If furthermore $X_0 = x$ we say that $X$ solves $E_x(\drift,\diffusion)$.
@@ -238,7 +238,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \left\{
 \begin{aligned}
 \forall t .( |\drift(t, x)-\drift(t,y)| &< L_\drift |x-y| &\text{ and } |\diffusion(t, x)-\diffusion(t,y)| &< L_\diffusion |x-y|) \\
-\drift &\in \Cspc^0 &\text{ and }\diffusion &\in \Cspc^0
+\drift &\in \Cspace^0 &\text{ and }\diffusion &\in \Cspace^0
 \end{aligned}
 \right.
 \end{equation*}
@@ -498,7 +498,7 @@ Since the case $m=1$ has essentialy the same expression for the drift and diffus
 In order to prove local existence and uniqueness we must watch at the drift and diffusion of the system (\ref{ch2:def:drift-&-diffusion}).
 The diffusion coefficients are constant, and thus respect all the conditions required in \ref{ch2:cond:E-and-U-lipsch+subgrowth}.
 The same is true for the drift of the cAMP.
-This is not the case for the drift in the case of amoebas though: since $\hmactive^p_t$ are \cadlag, then also the coordinate functions $\drift_p(t, x)$ are \cadlag, \ie not $\Cspc^0$ in time.
+This is not the case for the drift in the case of amoebas though: since $\hmactive^p_t$ are \cadlag, then also the coordinate functions $\drift_p(t, x)$ are \cadlag, \ie not $\Cspace^0$ in time.
 We need thus to use the result \ref{ch2:cond:E-and-U-lipsch+subgrowth}.
 
 \begin{lemma}
