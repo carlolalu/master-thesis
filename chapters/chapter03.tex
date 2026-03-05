@@ -265,7 +265,7 @@ For this reason the choice of the name \emph{mean-field particles}.
 
 \begin{remark}
 \begin{enumerate}
-\item We will also couple this system with the solution of \ref{ch2:model:deterministic-parenting}, meaning that we will take the same Poisson processes $(\hmactive^p)_p$ (thus birth times) and the same \Bm of such solution.
+\item We will also couple this system with the solution of \ref{ch2:model}, meaning that we will take the same Poisson processes $(\hmactive^p)_p$ (thus birth times) and the same \Bm of such solution.
 This is made in order to express the distance between the mean-field particles and the original ones in an easier way, namely for each coordinate
 
 \begin{equation}
@@ -291,16 +291,14 @@ The disadvantage of not having identical distributions, is that crafting a law o
 
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
-\begin{equation}
-\begin{aligned}
+\begin{align*}
 \forall p,g. \quad \mfdrift^{N,p,g}(t, \mfsol_t^{p,g}) 
 :&= \ECond {\drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}}
 \\
 &=\ECond {\ \ECondTimes{ \drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
 \\
 &= \E {\ECondTimes{ 0 }{} }  = 0
-\end{aligned}
-\end{equation}
+\end{align*}
 
 Then, with respect to the measure $\PrbCondTimes{\cdot}{}$, the effective equation for such particle will be
 
@@ -387,8 +385,7 @@ D_\camp
 where $\star$ is the convolution in space.
 Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
 
-\begin{equation}
-\begin{aligned}
+\begin{align*}
 \mfdrift^{N,p}(t, x) 
 :&= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
 \\
@@ -430,19 +427,17 @@ Let us calculate now the case for the amoebas, using our candidate for the effec
 		\sum_{g = 1}^{\hmactive_t^p} 
 			\left( \attraction \star \cdens_t^{\btime^{p,g}} \right) (x)
 	\;}
-\end{aligned}
-\end{equation}
+\end{align*}
 
 Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim \btime^{1,g}$, therefore
 
-\begin{equation}
-\begin{aligned}
+\begin{align*}
 &= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
 		\sum_{g = 1}^{\hmactive_t^1} 
 			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 	\;}
-\\
-&= \E{\; 
+\:=\: 
+\E{\; 
 		\sum_{g = 1}^{\hmactive_t^1} 
 			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 	\;}
@@ -458,7 +453,11 @@ Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim 
 			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 		}_{\geq 0}
 	\;}
-\\
+\end{align*}
+
+Since the argument in the expectation value is positive, we can extract the infinite sum:
+
+\begin{align*}
 &= \sum_{g = 1}^{\infty}
 	\E{\; \1_{\btime^{1,g} \leq t}
 		\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
@@ -491,13 +490,17 @@ Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim 
 	=
 	\left( 
 		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
-	\right) (x) =: \mfdrift^{N,p} (t, x) = \mfdrift^{p} (t, x)
-\end{aligned}
-\end{equation}
+	\right) (x) 
+	\quad
+	=: \mfdrift^{N,p} (t, x) 
+	\equiv
+	\mfdrift^{p} (t, x)
+\end{align*}
 
 With these calculations we have that the mean-field amoebas are the solution of the system
 
 \begin{equation}
+\left\{
 \begin{aligned}
 \amba_t^0 &\sim \adens_0
 \\
@@ -505,6 +508,7 @@ With these calculations we have that the mean-field amoebas are the solution of 
 		\attraction \star \int_0^s \lambda \cdens_t^\tau 	d \tau
 	\right) (\mfamba_t^p) dt + \sigma_A B_t^p
 \end{aligned}
+\right.
 \end{equation}
 
 and $\adens$ is therefore given by the Kolmogorov equation
@@ -517,8 +521,7 @@ and $\adens$ is therefore given by the Kolmogorov equation
 			\mfdrift_i^{p}(t,x) \adens(t,x)
 		\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
-\\
-& = 	- \sum_{i=1}^d \partial_{x_i} 
+= 	- \sum_{i=1}^d \partial_{x_i} 
 		\left[
 			\big( 
 				\underbrace{\attraction_i}_{\partial_{x_i} \potential}
@@ -566,7 +569,7 @@ and $\adens$ is therefore given by the Kolmogorov equation
 
 If we would decide to express such equations with the analytical solution of $\cdens$ this would become
 
-\begin{equation}
+\begin{align*}
 = \nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
@@ -580,7 +583,7 @@ If we would decide to express such equations with the analytical solution of $\c
 			\adens
 			\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
-\end{equation}
+\end{align*}
 
 
 Then our system of mean-field particles is given by
