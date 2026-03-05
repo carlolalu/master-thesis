@@ -4,20 +4,18 @@ The second important difference is that the release of cAMP will be regulated by
 The second part of the chapter is concerned with the definition of an alternative version of this first design, which can be handy for certain mathematical operations.
 Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2,3\}$, thus not the phase space.
 
-\section{Deterministic parenting toy model}
+\section{The first model}
 
 In words we can describe this design in this way:
 \begin{enumerate}
-\item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coeffiecient $\sigma^\amba$
+\item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coefficient $\sigma_\amba$
 \item Each amoeba $\amba^p$ attracted to the cAMP molecules with a potential $\potential$ which has properties [[PROPERTIES MODELLED ON THE GAUSSIAN]]
 \item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ indipendent of $p$
-\item Each cAMP molecule is born at the position of its parent and is subjected from that time on to its own Brownian motion with constant diffusion coefficient $\sigma^\camp$
+\item Each cAMP molecule is born at the position of its parent and is subjected from that time on to its own Brownian motion with constant diffusion coefficient $\sigma_\camp$
 \item All the Brownian motions for each particle are indipendent from each others
 \end{enumerate}
 
-Let us work more precisely.
-
-Let $N\in\N$ be the number of amoebas, and fix $N$ indipendent Poisson processes $(\hmactive^p)_{i=1}^N$ of parameter $\lambda$.
+Let us see all of this in equations. Let $N\in\N$ be the number of amoebas, and fix $N$ indipendent Poisson processes $(\hmactive^p)_{i=1}^N$ of parameter $\lambda$.
 Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, the stopping time
 
 \begin{equation}
@@ -40,15 +38,30 @@ Consider a countable collection of indipendent Brownian motions
 
 \ie $N$ of them for the amoebas and a countable amount for the cAMP molecules.
 Now we need an important passage to accurately define the Brownian movement of the cAMP particles.
-In fact each of these moves only after spawning, and thus such movement must be calibrated for starting after this moment, and not before.
-For each $1\leq p \leq N,g \in \N$ consider the process
+In fact each of these molucules moves only after spawning, and thus such movement must be calibrated for starting after this moment, and not before.
 
+\begin{definition}
+Let $T$ be a stopping time and $B$ a Brownian motion.
+Consider the process
 \begin{equation}
-B_t^{p,g,(\btime^{p,g})} := B_{\btime^{p,g}+t}^{p,g} - B_{\btime^{p,g}}^{p,g}
+B_t^{(T)} := B_{T+t} - B_T
 \end{equation}
-
-Such process is a Brownian motion because of the strong Markov property (\citep[Theorem 2.20]{le-gall}), but this is shifted of a time $\btime^{p,g}$.
-Wat we need is a "quasi-Brownian motion", which is $0$ till the time $\btime^{p,g}$ and afterward starts without shifts forward, thus this object:
+which is a \Bm (see for example \citep[Theorem 2.20]{le-gall}).
+Then the \emph{Quasi Brownian Motion} $\quasibm_t^{B,T}$ is defined as:
+\begin{equation}
+\quasibm_t^{B,T} := "B_{t-T}^{(T)}\1_{t-T\geq 0}"
+=
+\left\{
+\begin{aligned}
+& 0 
+& t<T
+\\
+& B_{t-T}^{(T)} = B_{t} - B_{T}
+& t \geq T
+\end{aligned}
+\right.
+\end{equation}
+\end{definition}\label{ch2:def:quasi-bm}
 
 \begin{figure}[h]
 \begin{tikzpicture}
@@ -56,19 +69,14 @@ Wat we need is a "quasi-Brownian motion", which is $0$ till the time $\btime^{p,
 \caption{[[ Add HERE TIKZ PICTURE SHOWING IN DIFFERENT COLORS THE VARIOUS PROCESSES INVOLVED]]}
 \end{figure}
 
-\begin{equation}\label{ch2:quasi-bm-camp}
-\quasibm_t^{p,g} := "B_{t-\btime^{p,g}}^{p,g,(\btime^{p,g})}\1_{t-\btime^{p,g}\geq 0}"
-\left\{
-\begin{aligned}
-& 0 
-& t<\btime^{p,g}
-\\
-& B_{t-\btime^{p,g}}^{p,g,(\btime^{p,g})} = B_{t}^{p,g} - B_{\btime^{p,g}}^{p,g}
-& t \geq \btime^{p,g}
-\end{aligned}
-\right.
+Then in our case, since $\forall p,g$ a unique \Bm and birht time is identified, we can write
+
+\begin{equation}
+\quasibm_t^{p,g} := \quasibm_t^{B^{p,g}, T^{p,g}}
+= "B_{t-\btime^{p,g}}^{p,g,(\btime^{p,g})}\1_{t-\btime^{p,g}\geq 0}"
 \end{equation}
 
+which is lighter on notation.
 With these indipendent processes we can now finally write down the model as a set of Poisson processes and stochastic differential equations:
 
 \begin{equation}
@@ -76,6 +84,10 @@ With these indipendent processes we can now finally write down the model as a se
 \begin{aligned}
 (\hmactive^p_t)_{p=1}^N 
 &\text{ iid and } \sim \Pois_{\lambda t}
+&
+\\
+\btime^{p,g} 
+&:= \inf \{ t : \hmactive^p_t \geq g \}
 &
 \\
 \amba_t^p 
@@ -87,25 +99,22 @@ With these indipendent processes we can now finally write down the model as a se
 \\
 \camp_t^{p,g} 
 &\qquad\text{does not exist} 
-&if \quad t < \btime^{p,g}
+&\text{if} \quad t < \btime^{p,g}
 \\
 \camp_t^{p,g}
 &= \amba_{\btime^{p,g}}^p + \underbrace{\sigma_C \quasibm_t^{p,g}}_{\int_0^t \sigma_C Q_s^{p,g}} 
-&if \quad t \geq \btime^{p,g}
+&\text{if} \quad t \geq \btime^{p,g}
 \end{aligned}
 \right.
-\end{equation}\label{ch2:model:deterministic-parenting}
+\end{equation}\label{ch2:model:1}
 
-\paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model:deterministic-parenting} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (the system is piecewise defined in time).
+\paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model:1} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (\ie the system is piecewise defined in time, according to stochastic times).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
-%\paragraph{Solution via the definition?}\label{ch2:pitfall} One could argue that a possible solution to render at least the dimension not stochastic could be done like this: let all the particles exist since the instant $0$, and simply consider a subset of them, the "active" ones, for the attraction of the amoebas.
-%This is indeed a good method, but, as we will see, would then create great difficulties later. 
-%In fact at the spawning moment the particle $\camp^{p,g}$ must be at the position $\amba_{\btime^{p,g}}^p$, which means that either it suddenly jumps at such position, therefore rendering the realizations discontinous (see \ref{ch3:avoid-pitfall-of-jumping-particles}) or would have to follow the amoeba till the moment of spawning, rendering hard the proper definition and comparison of the correspondent the mean-field particles ([[HERE INSERT THE PROPER REFERENCE TO THE CHAPTER OF mean-field particles, THIS HAPPENS WHEN THE PARTICLES FOLLOW THEIR PARENTS TILL THE SPAWNING MOMENTS]]).
+\subsection{Alternative formulation}
 
-\section{Random (casual) parenting toy model}
-
-Here we try to build a mathematically handier version of the previous model. Since the Poisson processes $M^p$s determining the spawning times of particles are independent for each amoeba, we have that
+We can build a mathematically handier version of the previous model.
+Since the Poisson processes $M^p$s determining the spawning times of particles are independent for each amoeba, we have that
 
 \begin{equation}
 \hmactive_t := \sum_{p=1}^N \hmactive_t^p
@@ -118,20 +127,52 @@ is $\Pois(N t \lambda)$-distributed. Therefore the correspondent birth times
 \end{equation}
 
 are $\Gma(m, N\lambda)$-distributed.
-Taking these as spawning times and indicising the cAMP particles consequently, we can imagine that each $\camp^m$ (the cAMP spawning at $\btime_m$) is spawned at its birth time with uniform probability on the position of one of the amoebas.
-Mathematically this means considering a "parenting function" $\Parentof(m)$ which will represent the spawning amoeba of the $\camp^m$ particle.
-Assume that $\Parentof(m) \sim \Unf_{\{1,\ldots,N\}}$.
-Then we can redefine the model as:
+Consider these as spawning times and re-indicise the cAMP particles consequently (\ie $\camp^m$ is the $m$-th spawned molecule, born at time $\btime_m$).
+Then which amoeba $\amba^p$ is spawning $\camp^m$?
+
+\begin{definition}
+Define the random function $\Parentof : \N \longrightarrow \{1, \ldots, N\}$ as
+\begin{equation}
+\Parentof(m) := \{ p\; : \; A^p \text{ is the parent of } \camp^m \}
+\end{equation}
+This function is called \emph{parenting function}, and for each $m\in\N$ the random variable $\Parentof(m)$ is uniformly distirbuted on the amoebas $\{1, \ldots, N\}$.
+\end{definition}
+
+\begin{proof}
+\begin{align*}
+\Prb (\Parentof(m) = p) 
+&= \Prb (\exists g \in \N. \btime_m = \btime^{p,g} )
+\\
+&= \sum_{g=1}^{\infty} \Prb (\btime_m = \btime^{p,g})
+\\
+&= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}} = m)
+\\
+&= \sum_{g=1}^{\infty} \Prb (\hmactive_{\btime^{p,g}}^p = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
+\\
+&= \sum_{g=1}^{\infty} \Prb (g = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
+\\
+&= \sum_{g=1}^{\infty} \int \Prb( \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g) 
+	\big| \btime^{p,g} = s) d\Prb(\btime^{p,g} = s)
+\\
+&= \sum_{g=1}^{\infty} \int \Pois_{(N-1)s\lambda}(\{ m-g\})\1_{m-g \geq 0} 
+	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
+\end{align*}
+
+And since $\Zhi(p,g,s)ds=d\Gma_{g,\lambda} (s)$, it is independent from $p$, we have that $\Prb (\Parentof(m) = p) = const(m)$ and thus uniformly distirbuted on $\{1,\ldots,N\}$.
+\end{proof}
+
+Then we can reformulate the model as:
 
 \begin{equation}
 \left\{
 \begin{aligned}
-\hmactive_t
-&\sim \Pois_{N\lambda t}
+(\hmactive^p_t)_{p=1}^N 
+&\text{ iid and } \sim \Pois_{\lambda t}
+,\: \hmactive_t := \sum_{p=1}^N \hmactive_t^p
 &
 \\
-P(m) 
-&\sim \Unf_{\{1,\ldots,N\}}
+\btime_m
+&:= \inf \{ t : \hmactive_t \geq m \}
 &
 \\
 \amba_t^p 
@@ -150,7 +191,9 @@ P(m)
 &if \quad t \geq \btime^m
 \end{aligned}
 \right.
-\end{equation}\label{ch2:model:casual-parenting}
+\end{equation}\label{ch2:model:1-alternative}
 
-This makes the equations much more simple than before and let us arrange the spawning time chronologically.
+This makes the equations simpler and let us arrange the spawning time chronologically, a feature which is important to show that the system has a solution.
+
+
 
