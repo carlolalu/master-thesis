@@ -1,0 +1,673 @@
+\section{What are effective equations?}
+
+Effective equations are macroscopic description of system of many particles interacting with each others.
+The idea is that part of the very complex behaviour of many bodies interacting with each others can be averaged out on a bigger scale, leaving thus only the essential part of the interactions.
+We start from a cinematic $\sol_t = (\amba_t, \camp_t) \in (\R^d)^{\NumParticles_t}$, the solution to one of the models, with initial condition
+
+\begin{equation}
+\amba_0 \sim \adens_0 \otimes \ldots \otimes \adens_0
+\end{equation}
+
+for some distribution $\adens_0 \in \Lpspace^1 \cap \Lpspace^\infty$.
+We search for a system of PDEs
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\partial_t \adens(t, x) &= \ldots
+\\
+\partial_t \cdens(t, x) &= \ldots
+\end{aligned}
+\right.
+\end{equation}
+
+such that the its solutions $\adens, \cdens: \text{time} \times \text{space} \longrightarrow \R_+ $ (under the same initial condition,\ie $\adens(0,\cdot)=\adens_0$) represent faithfully (in some sense yet to be explained) respectively the density of the amoebas and of the cAMP molecules when the number of amoebas $N$ tends to infinity.
+
+In order to formalise the definition, we must understand that the number of initial amoebas $N$ is here relevant, therefore we sign
+
+\begin{equation}
+\sol_t = \sol_t^N = ( \sol_t^{N,k})_k \in (\R^d )^{\NumParticles_t} = (\R^d)^{\NumParticles_{N,t}}
+\end{equation}
+
+as the solution to the model with $N$ amoebas.
+Consider now $\Psi_t^{\amba,N}:=\law(\amba_t), \Psi_t^{\camp,N}:=\law(\camp_t)$, \ie the law of the amoeba's and the cAMP's parts of the solution $\sol_t^N$.
+Consider its $(k)$-th marginals
+
+\begin{equation}
+\begin{aligned}
+{}^{(k)}\Psi_t^{\amba,N}
+&:= \int_{\R^{d(N-k)}} \Psi_t^{\amba,N} \, dx_{k+1} \ldots dx_N
+\\
+{}^{(k)}\Psi_t^{\camp,N}
+&:= \int_{\R^{d(\NumParticles-k)}} \Psi_t^{\camp,N} \, dx_{k+1} \ldots dx_{\NumParticles}
+\end{aligned}
+\end{equation}
+
+Then we can formalise the notion of faithful representation, at least for the amoebas' part, as the condition that for each $t\geq 0, k \geq 1$ we have that ${}^{(k)}\Psi_t^{\amba,N}$ converge weakly to $\otimes_{p=1}^{N}\adens_t$ (for $N$ going to $\infty$), \ie in symbols
+
+\begin{equation}
+\forall t\geq 0, k \geq 1 \quad
+{}^{(k)}\Psi_t^{\amba,N} \rightharpoonup \bigotimes_{p=1}^{k}\adens_t
+\end{equation}
+
+It will be more comfortable to operate in a bounded time-interval $[0, T]$ for an arbitrary $T > 0$, and thus the equivalent condition will become
+
+\begin{equation}
+\forall 0\leq t\leq T, k \geq 1 \quad
+{}^{(k)}\Psi_t^{\amba,N} \rightharpoonup \bigotimes_{p=1}^{k}\adens_t
+\end{equation}\label{ch4:marginals-convergence}
+
+For the cAMP's part this notion is more complicated, because it spawns at \emph{stochastic} times which, as $N$ grows, do grow in number as well, till they are dense in $[0,T]$.
+We will better approach it later, where it will be also clearer what we are proving.
+For now we observe, that even for the amoebas' part, working directly with the law of $\amba_t$ is cumbersome, and thus we need an alternative way to reach the condition \ref{ch4:marginals-convergence}.
+
+\subsection{A metric for the weak-convergence of probability measures}
+
+Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein} or \emph{Earth-mover distance} (EMD) because of the heuristic that we will see in \ref{ch4:fig:example-coupling}.
+First we need the concept of \emph{coupling} of measures.
+
+\begin{definition}
+Consider the space of Borel probability measures on $\R^\Ch$
+\begin{equation}
+\PrbMeas := \PrbMeas (\R^\Ch) := 
+	\{\mu :
+		\mu \text{ is a \emph{Borel} prob. meas. on } \R^\Ch
+	\}
+\end{equation}
+and let $\mu, \nu \in \PrbMeas$. A \emph{coupling of $\mu$ and $\nu$} is a measure $\gamma \in \PrbMeas (\R^\Ch \times \R^\Ch)$ such that for all Borel-measurable and bounded functions $\phi$ we have
+\begin{equation}
+\int_{\R^\Ch \times \R^\Ch} \phi(x) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(x) \,d\mu(x) 
+\quad \text{ and } \quad
+\int_{\R^\Ch \times \R^\Ch} \phi(y) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(y) \,d\nu(x) 
+\end{equation}\label{ch4:def-coupling}
+We sign as $\Gamma(\mu,\nu)$ the set of couplings of $\mu$ and $\nu$.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item The set $\Gamma(\mu,\nu)$ is never empty because the product measure $\mu \otimes \nu$ is always in it.
+\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^\Ch \times \R^\Ch \longrightarrow \R^\Ch$, we can observe that the condition \ref{ch4:def-coupling} is equivalent to require that
+\begin{equation}
+(\pi_1 )_\star \gamma = \mu
+\quad \text{ and } \quad
+(\pi_2)_\star \gamma = \nu
+\end{equation}
+where $\big((\pi_i)_\star \gamma \big)(E) := \gamma (\pi_i^{-1} (E))$ is the pushforward of $\gamma$ by $\pi_i$.
+\end{enumerate}
+\end{remark}
+
+A way to visualise a coupling is as a transformation of $\mu$ into $\nu$.
+Assume, for the sake of simplicity, that $\mu,\nu$ are measures on $\R$ and are absolute continuous with respect to the Lebesgue measure $\lebsge$.
+Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth (see \ref{ch4:fig:example-coupling}).
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\end{tikzpicture}
+\caption{[[HERE DRAW A TIKZ THE EARTH MOVING STUFF INTO 2 DIMENSION]]}
+\end{figure}\label{ch4:fig:example-coupling}
+
+A plan to move earth in $\R$ can be thought as a function $\overline{\gamma}: \R \times \R \longrightarrow \R $ which with the value $\overline{\gamma}(x,y)=: \overline{\gamma}(x\rightarrow y)$ tells how much earth we should move from the point $x$ to the point $y$.
+In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}$ into $\frac{d\nu}{d\lebsge}$, it must respect two symmetrical conditions:
+\begin{enumerate}
+\item For each $x\in\R$ the total earth (mass of) moved from it by the plan must be exactly equal to the earth present in $x$ at the beginning, namely:
+\begin{equation}
+\int \overline{\gamma}(x,y) \,dy = \frac{d\mu}{d\lebsge}(x)
+\end{equation}
+\item For each $y\in\R$ the earth (the mass) moved to it must be exactly equal to the earth present in $y$ at the end, namely:
+\begin{equation}
+\int \overline{\gamma}(x,y) \,dx = \frac{d\nu}{d\lebsge}(y)
+\end{equation}
+\end{enumerate}
+
+This is equivalent to \ref{ch4:def-coupling}, with $\overline{\gamma}$ playing the role of the density of the coupling $\gamma$.
+With this example in mind we could ask ourselves which is the best among such transformations of $\mu$ into $\nu$.
+To do that we need to associate to each coupling $\gamma \in \Gamma(\mu,nu)$ a value, which indicates how "good" a plan $\gamma$ might be.
+If we have a notion of distance $dist$ on our space $\R^\Ch$, then a plan can be evaluated with how much net distance we cover to transport all the earth around, \ie with the expression
+
+\begin{equation}
+\int dist(x,y) \,d\gamma(x,y)
+\end{equation}
+
+In this way we can say that two measures $\mu,\nu$ are near to each others if we can find a coupling $\gamma \in \Gamma(\mu,\nu)$ such that its evaluation is very low.
+With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^\Ch$ (meaning $\frac{|\cdot|_1}{\Ch}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
+
+\begin{definition}
+Consider the space of Borel probability measures with finite $1$-moments on $\R^\Ch$
+\begin{equation}
+\PrbMeas_1 := \PrbMeas_1(\R^\Ch) := 
+	\{\mu \in \PrbMeas :
+		\int |x| d \mu (x) < \infty
+	\} \subseteq \PrbMeas
+\end{equation}
+Then the $1$-Wasserstein distance between two measures $\mu,\nu \in \PrbMeas_p$ is defined as
+\begin{equation}
+W_1(\mu,\nu):= \inf_{\gamma \in \Gamma(\mu,\nu)}
+	\int_{\R^\Ch \times \R^\Ch} \frac{1}{\Ch}\sum_{i=1}^{\Ch} |x_i-y_i| d\gamma(x,y)
+\end{equation}
+\end{definition}
+
+To see the proof that $W_1$ is a distance take a look at the proof after \autocite[Example 6.3]{cedric-villani-opt-trans}.
+The reason why we cover this concept is this result (from \autocite[Corollary 6.13]{cedric-villani-opt-trans}):
+
+\begin{theorem}
+If $(X,d)$ is a Polish space, and $\overline{d}$ is a bounded distance inducing the same topology on $X$ as $d$, then the convergence of measures in the $1$-Wasserstein sense for $\overline{d}$ is equivalent to the usual weak convergence of probability measures in $\PrbMeas_1(X)$.
+\end{theorem}
+
+Therefore we can obtain the convergence of the marginals (condition \ref{ch4:marginals-convergence}) of the amoebas' part if the subsequent condition is fullfilled:
+
+\begin{equation}
+\sup_{0\leq t\leq T} \quad
+W_1 \big(
+	{}^{(k)}\Psi_t^{\amba,N}, \bigotimes_{p=1}^{k}\adens_t
+ \big) 
+ \xrightarrow {N \rightarrow \infty} 0
+\end{equation}
+
+or even stronger:
+
+\begin{equation}
+\sup_{0\leq t\leq T} \quad
+W_1 \big(
+	\Psi_t^{\amba,N}, \bigotimes_{p=1}^{N}\adens_t
+ \big) 
+ \xrightarrow {N \rightarrow \infty} 0
+\end{equation}\label{ch4:w-1-convergence-condition-amoebas}
+
+%&\sup_{t\geq 0} \
+%W_1 \big(
+%	{}^{(k)}\Psi_t^{\camp,N}, \bigotimes_{p=1,g=1}^{N, \hmactive_t^p}\cdens_t
+% \big) 
+% &\xrightarrow {N \rightarrow \infty} 0
+
+But we are still operating with the law of some processes, rather than with them directly.
+
+\subsection{Mean-field particles and how to use them}
+
+%Starting from the effective equations solution $\adens_t$ we can associate to it, under some conditions, a stochastic process $\mfamba_t$ such that $\law(\mfamba_t) = \adens(t,\cdot)$.
+%In particular let us assume that the effective equation for $\adens_t$ takes the form
+%
+%\begin{equation}
+%\begin{aligned}
+%\partial_t \adens(t,x) 
+%&=  - \sum_{i=1}^{d} \partial_{x_i}[ \mfdrift^i(t,x) \adens(t,x)] 
+%+ D_A \bigtriangleup \adens(t,x)
+%\\
+%D_A
+%&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_A^2 = \frac{d\sigma_A^2}{2}
+%\end{aligned}
+%\end{equation}\label{ch4:eq:shape-effective-eqs-for-mf-particles}
+%
+%for some function $\mfdrift$ which respects the conditions that a drift $\drift$ of an SDE must respect in \ref{ch3:sde-framework} to ensure existence and uniqueness of solution.
+%Then we know that there is a unique solution in $[0,T]$ for the SDE
+%
+%\begin{equation}
+%\mfamba_t
+%= \mfamba_0 + \int_0^t \mfdrift(s,\mfamba_s) ds + \sigma_A dB_t
+%\end{equation}
+%
+%Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch4:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
+%
+%Now we can finally formulate a way to operate with the processes rather than with their laws.
+%
+%
+%[[demonstration of how short distance between mean-field particles and a model do imply the convergence in W1 which is then ocnvergence in weak sense]]
+%
+%
+%\subsection{Resume}
+%
+%[[Here define the conditions properly also for the cAMP and rewrite all labels and refs properly]]
+%
+%[['convergence in probability of the distance between mean-field and non-mean-field implies weak convergence of the marginals']]
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+%
+
+
+[[FINISH THIS SECTION]]
+
+\section{How make a smart guess for the effective equations and prove that it is the correct choice}
+
+Instead of guessing the PDE, the idea is to guess the equivalent-mean field particles $\mfsol = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t})$ solutions to a system of equations 
+
+\begin{equation}
+\left\{
+\begin{aligned}
+d \mfamba^p_t &= \mfdrift^{N,p}(t,\mfamba_t^p) d t + \sigma_A d B_t^p &
+\\
+\mfcamp^{p,g}_t &= \text{ (some spawning position } \mfspawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift^{N,p}(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
+\end{aligned}
+\right.
+\end{equation}\label{ch4:eq:approximate-mean-field-equations}
+
+where the drift terms $\mfdrift^{N,k}$ are calculated by taking the average of the original $\drift^p$s, \ie
+
+\begin{equation}
+\begin{aligned}
+\mfdrift^{N,p}(t, x) &:= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
+\\
+\mfdrift^{N,p,g}(t, x) &:= \ECond{\drift^{N,k}(t, \mfsol_t)}{ \mfsol_t^{p,g} } (x)
+\end{aligned}
+\end{equation}
+
+and all the spawning positions $\mfspawnpos_{\btime^{p,g}}^{p,g}$ are independent from each others and from the $A^p$s.
+Then one considers the correspondent Kolmogorov forward equation, and that is the effective equation searched for.
+The idea behind this guess is that with a big number of amoebas and of cAMP molecules, their \emph{drift field} should resemble more and more the \emph{average drift field}, due to the fact that there are many long range interactions.
+For this reason the choice of the name \emph{mean-field particles}.
+
+\begin{remark}
+\begin{enumerate}
+\item We will also couple this system with the solution of \ref{ch2:model:deterministic-parenting}, meaning that we will take the same Poisson processes $(\hmactive^p)_p$ (thus birth times) and the same \Bm of such solution.
+This is made in order to express the distance between the mean-field particles and the original ones in an easier way, namely for each coordinate
+
+\begin{equation}
+\begin{aligned}
+| \sol_t^k - \mfsol_t^k | 
+&= \left| 
+		\int_0^t \drift^{N,k}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift^{N,k}(t,\mfsol_s^k) d s + \sigma B_t^k 
+	\right|
+\\
+&= 
+	\left| \int_0^t \drift^{N,k}(s,\sol_s)  - \mfdrift^{N,k}(t,\mfsol_s^k) d s
+	\right|
+\end{aligned}
+\end{equation}
+
+\item Notice that, while all the $\mfamba_t^p$ are \emph{iid}, the cAMP mean-fiel particles $\mfcamp_t^p$ are only \emph{independent} (\emph{not identically distributed}) and only \emph{under the conditioned probability} $ \PrbCondTimes{\cdot}{} $.
+And it cannot be otherwise because of the coupling: indeed for each $\camp^{p,g}$ such quasi-\Bm $\quasibm^{p,g}_t$ starts to differ from $0$ only at $\btime^{p,g}$, and the molecule must necessary spawn at such time.
+The disadvantage of not having identical distributions, is that crafting a law of large numbers becomes more difficult.
+\end{enumerate}
+\end{remark}
+
+\subsection{Calculations}
+
+First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
+
+\begin{equation}
+\begin{aligned}
+\forall p,g. \quad \mfdrift^{N,p,g}(t, \mfsol_t^{p,g}) 
+:&= \ECond {\drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}}
+\\
+&=\ECond {\ \ECondTimes{ \drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
+\\
+&= \E {\ECondTimes{ 0 }{} }  = 0
+\end{aligned}
+\end{equation}
+
+Then, with respect to the measure $\PrbCondTimes{\cdot}{}$, the effective equation for such particle will be
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^{\btime^{p,g}}(0, x) 
+&= 0 
+&&
+\\
+\partial_t \cdens^{\btime^{p,g}}(t, x) 
+&= 0 
+&&\text{if } t < \btime^{p,g}
+\\
+\cdens^{\btime^{p,g}}(\btime^{p,g}, x) 
+&= \text{ some spawning position related to } \adens(\btime^{p,g}, \cdot)
+&&
+\\
+\partial_t \cdens^{\btime^{p,g}}(t, x) 
+&= D_\camp \bigtriangleup \cdens^{\btime^{p,g}}(t, x) 
+&&\text{if } t \geq \btime^{p,g}
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+&&
+\end{aligned}
+\right.
+\end{equation}
+
+If we make the conjecture that the casual parenting model \ref{ch2:model:casual-parenting} has the same effective equations as the deterministic, we could expect to describe the initial dentisity $\cdens^{\btime^{p,g}}(\btime^{p,g}, \cdot)$ as simply $\adens(\btime^{p,g}, \cdot)$.
+Then taking an arbitrary birth time $\tau = \btime^{p,g}$, we can write
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^\tau(t, x) 
+& \equiv 0
+&&\text{if } t < \tau
+\\
+\cdens^\tau(\tau, \cdot) 
+&= \adens(\tau, \cdot)
+&&
+\\
+\partial_t \cdens^\tau
+&= D_\camp \bigtriangleup \cdens^\tau
+&&\text{if } t \geq \tau
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+&&
+\end{aligned}
+\right.
+\end{equation}\label{ch4:eq:eff-eq-candidate-camp}
+
+This is simply a heat-equation starting with initial condition $\adens(\tau)$ at time $\tau$. 
+Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$ (modified so that it is $\equiv 0$ for negative values of $t$) we can express it with the analytical solution
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\cdens^\tau(\tau, x) 
+&= \adens(\tau)
+\\
+\cdens^\tau(t, x) 
+&= 
+	\left(
+		\heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 
+	\right) (x)
+\\
+\heatkernel_s^{D_\camp}(x) &:= \frac{1}{
+		\big( 4 D_\camp \pi s \big)^{\frac{d}{2}}
+	}
+	exp \left(
+		-\frac{x\cdot x}{4 D_\camp s}
+	\right)
+	\1_{s\geq 0}
+\\
+D_\camp
+&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
+\end{aligned}
+\right.
+\end{equation}\label{ch4:eq:eff-eq-camp-analytical-sol}
+
+where $\star$ is the convolution in space.
+Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
+
+\begin{equation}
+\begin{aligned}
+\mfdrift^{N,p}(t, x) 
+:&= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
+\\
+&= \ECond{\; 
+		\ECondTimes{
+			\drift^{N,p}(t, \mfsol_t)		
+		}{\mfamba_t^p=x, }
+	\;}{\mfamba_t^p=x}
+\\
+&= \ECond{\; 
+		\ECondTimes{
+			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(\mfamba_t^p - \mfcamp_t^{p,g}) 
+		}{\mfamba_t^p=x, }
+	\;}{\mfamba_t^p=x}
+\\
+&= \E{\; 
+		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} 
+		\ECondTimes{
+			\attraction(x - \mfcamp_t^{p,g}) 
+		}{}
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+		\int 
+			\attraction(x - y) 
+			d\PrbCondTimes{\mfcamp_t^{p,g} = y}
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+		\int 
+			\attraction(x - y) 
+			\cdens_t^{\btime^{p,g}}(y)
+		dy
+	\;}
+\\
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^p} 
+			\left( \attraction \star \cdens_t^{\btime^{p,g}} \right) (x)
+	\;}
+\end{aligned}
+\end{equation}
+
+Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim \btime^{1,g}$, therefore
+
+\begin{equation}
+\begin{aligned}
+&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+		\sum_{g = 1}^{\hmactive_t^1} 
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \E{\; 
+		\sum_{g = 1}^{\hmactive_t^1} 
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \E{\; 
+		\sum_{g = 1}^{\infty} 
+		\underbrace{
+			\overbrace{
+				\1_{g \leq \hmactive_t^1}
+			}^{
+				\1_{\btime^{1,g} \leq t}
+			}
+			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+		}_{\geq 0}
+	\;}
+\\
+&= \sum_{g = 1}^{\infty}
+	\E{\; \1_{\btime^{1,g} \leq t}
+		\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
+	\;}
+\\
+&= \sum_{g = 1}^{\infty}
+	\int
+		\1_{\tau \leq t}
+		\left( \attraction \star \cdens_t^{\tau} \right) (x)
+	d \underbrace{\Prb ( \btime^{1,g} = \tau )}_{\Gma_{\lambda, g}}
+\\
+&= \sum_{g = 1}^{\infty}
+	\int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+	\frac{\lambda^g}{(g-1)!} x^{g-1} \; e^{ - \lambda x}
+	d \tau
+\\
+&= \int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+		\lambda
+		\underbrace{
+			\sum_{g = 1}^{\infty} \frac{(\lambda x)^{g-1}}{(g-1)!}
+		}_{e^{\lambda x}}
+		e^{ - \lambda x}
+	d \tau
+\\
+&= \lambda \int_0^t
+		\left( \attraction \star \cdens_t^\tau \right) (x)
+	d \tau
+	=
+	\left( 
+		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+	\right) (x) =: \mfdrift^{N,p} (t, x) = \mfdrift^{p} (t, x)
+\end{aligned}
+\end{equation}
+
+With these calculations we have that the mean-field amoebas are the solution of the system
+
+\begin{equation}
+\begin{aligned}
+\amba_t^0 &\sim \adens_0
+\\
+\amba_t^p &= \int_0^t \left( 
+		\attraction \star \int_0^s \lambda \cdens_t^\tau 	d \tau
+	\right) (\mfamba_t^p) dt + \sigma_A B_t^p
+\end{aligned}
+\end{equation}
+
+and $\adens$ is therefore given by the Kolmogorov equation
+
+\begin{equation}
+\begin{aligned}
+\partial_t \adens(t, x) &= 
+	- \sum_{i=1}^d \partial_{x_i} 
+		\left[
+			\mfdrift_i^{p}(t,x) \adens(t,x)
+		\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+& = 	- \sum_{i=1}^d \partial_{x_i} 
+		\left[
+			\big( 
+				\underbrace{\attraction_i}_{\partial_{x_i} \potential}
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\big)
+			\adens
+		\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= - \sum_{i=1}^d
+		\left[
+			 \partial_{x_i} \left( 
+				\partial_{x_i} \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			+
+			 \left( 
+				\partial_{x_i} \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\partial_{x_i} \adens
+		\right] + \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= \left( \bigtriangleup \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			+
+			 \left( 
+				\nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\nabla \adens
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\\
+&= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens			
+\end{aligned}
+\end{equation}
+
+If we would decide to express such equations with the analytical solution of $\cdens$ this would become
+
+\begin{equation}
+= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\\
+=  \lambda \nabla \left[ \left(
+			\int_0^t  \nabla \potential \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\end{equation}
+
+
+Then our system of mean-field particles is given by
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\amba_t^0 &\sim \adens_0
+\\
+\amba_t^p &= \int_0^t \left( 
+		\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
+	\right) (\mfamba_s^p) ds + \sigma_A B_t^p
+\\
+\camp_t^{p,g} &= \amba_{\btime^{p,g}}^p + \sigma_C \quasibm_t^{p,g} &&\text{ from time }\btime^{p,g}
+\end{aligned}
+\right.
+\end{equation}\label{ch4:MF-particles}
+
+and the respective effective equations are given by
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\adens(0, \cdot) &= \adens_0
+\\
+\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+\\
+\cdens^\tau(t, \cdot) 
+& \equiv 0
+&&\text{if } t < \tau
+\\
+\cdens^\tau(\tau, \cdot) 
+&= \adens(\tau, \cdot)
+&&
+\\
+\partial_t \cdens^\tau
+&= \frac{d\sigma_\camp^2}{2} \bigtriangleup \cdens^\tau
+&&\text{if } t \geq \tau
+\end{aligned}
+\right.
+\end{equation}\label{ch4:EFFECTIVE-EQS}
+
+or, expressing the density of cAMP molecules analytically we have
+
+\begin{equation}
+\left\{
+\begin{aligned}
+\adens(0, \cdot) &= \adens_0
+\\
+\partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
+		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(t, \cdot) 
+	 	d \tau
+			\right)
+			\adens
+			\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\end{aligned}
+\right.
+\end{equation}\label{ch4:integro-differential-system}
+
+\subsection{Does the system have a solution?}
+
+The system \ref{ch4:integro-differential-system} is a non-linear integro-differential equation.
+The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
+
+\begin{theorem}
+Let $E$ be a Banach space and let $C \subseteq E$ be a non-empty closed convex subset of $E$.
+Let $F: C \longrightarrow C$ be a $\Cspc^0$ map such that $F(C) \subseteq K$, where $K\subseteq C$ is a compact subset of $C$.
+Then $F$ has a fixed point in $K$.
+\end{theorem}
+
+The usual procedure to apply the theorem is to divide the linear part from the non-linear one, to invert the linear operator with the green function of the linear operator, and then to verify that, with a domain in the space of functions with the characteristics that we do desire, the operator respects the conditions of the fixed point schauder theorem.
+
+[[explain this section up better]]
+
+[[explain better the section here down, and underline the base space of the lp-space: do we fix teh time or not? are they bochner space?]]
+
+Assuming that this is the case, and that $\adens \in \Lpspace^1 \cap \Lpspace^\infty$, then also $\cdens^\tau$ is in such space.
+With these considerations, we can easily deduce that also the system of mean-field particles \ref{ch4:MF-particles} has a solution, because $\mfdrift$ is bounded and locally Lipschitz:
+
+[[FIND PROOF IN YOUR NOTES]]
+
+
+
+
