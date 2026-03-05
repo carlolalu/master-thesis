@@ -1,29 +1,118 @@
-\section{Del Dini derivativation of $J_t^N$}
+\section{Del Dini derivativation}
 
 In the main result we will need to consider the del Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
+In this section we show how to work with such quantity.
 
 \subsection{Del Dini derivatives and FTC}
 [[define and present the del dini derivative]]
 
-\subsection{Derivate the specific function}
+\subsection{Advance beyond the $\sup$}
+
+In this part we want to show that
+
+\begin{equation}
+\deldiniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+\leq
+\sup_{0 \leq t \leq T} \deldiniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+\end{equation}\label{ch4:result:deldini-of-sup}
 
 Consider the random function
 
 \begin{equation}
-\Zhi(t) := | \sol_t^N - \mfsol_t^N|_\infty
+\Ch(t) := | \sol_t^N - \mfsol_t^N|_\infty
 \end{equation}
 
-Since the sample paths of $\sol_t^N$ are $\Cspace^0$ ach path of $\Zhi$ i
+and look at its paths.
+Such function is surely continuous between birth times $\btime_m$, but what happens at such instants?
 
-can be considered pathwise
-has these properties:
+\begin{lemma}
+The paths of $\Ch(t)$ are \cadlag and have only a finite number of discontinuouties on $[0,T]$ (under $ \PrbCondTimes{}{}$).
+Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0_-} \Ch(t+h)$, we have that
+\begin{equation}
+\forall t_i. \quad \text{$\Ch$ is not $\Cspace^0$ in $t_i$} \Rightarrow \Ch(t_i-) \leq \Ch(t_i)
+\end{equation}
+\end{lemma}
 
-\begin{enumerate}
+\begin{remark}
+Notice that this does \emph{not} necessarily mean that $\Ch$ has increasing paths, it only means that such paths, if they do have a jump, it's necessarily a jump up.
+\end{remark}
+
+\begin{figure}[h]
+\begin{tikzpicture}
+\end{tikzpicture}
+\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouty AT THE RANDOM TIMES with the jump up]]]}
+\end{figure}
+\label{ch4:fig:discontinuous distance}
+
+\begin{proof}
+[[write down the proof]] and quote also \ref{ch3:rmk:mf-not-c0}
+\end{proof}
+
+\begin{definition}
+Let $\Skoro$ be the space of functions $g: \R_+ \longrightarrow \R_+$ such that:
+\begin{itemize}
+\item $g(0)=0$
 \item $g$ is \cadlag
-\item $g$ has a finite number of discontinuouities on $[0,T]$
-\item $\forall t. \; g(t-) \leq g(t)$ (notice that $g$ is not necessarily increasing!)
-\end{enumerate}
+\item $g$ has finite amount of discontinuouty in $[0,T]$ for each $T$
+\item If $g$ is discontinuous in $t_i$ then $g(t-) \leq g(t)$
+\end{itemize}
+\end{definition}
+
+By the previous lemma the paths of $\Ch$ are in $\Skoro$.
+
+\begin{lemma}
+Let $g \in \Skoro$.
+Then we have 
+\begin{equation}
+\sup_{0\leq s \leq t} g(s) = \max_{0\leq s \leq t} g(s)
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+[[write down the proof]]
+\end{proof}
+
+\begin{lemma}
+Let $g$ be a function in $\Skoro$.
+[[require maybe finite del dini derivatives on the left side]]
+Then
+\begin{equation}
+\deldiniu^+_t \sup_{0\leq s \leq t} g(s) 
+\leq
+\sup_{0\leq s \leq t} \deldiniu^+_s g(s)
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+[[write down the proof]]
+\end{proof}
+
+Thus we proved \ref{ch4:result:deldini-of-sup}.
+
+\subsection{Get rid of the integral sign in the derivation}
+
+Notice that since the mean-field particles are coupled with the system \ref{ch2:model}, and since the initial conditions $\adens_0$ are the same for all the amoebas, we have that
+
+\begin{align*}
+\norm{\sol_t^N-\mfsol_t^N}_\infty 
+&= \norm{
+	\sol_0^N 
+	+ \int_0^t \drift(s, \sol_s^N) d s
+	+ 
+	\sigma B_t^N
+-
+\left(
+	\mfsol_0^N 
+	+ \int_0^t \drift(s, \mfsol_s^N) d s
+	+ 
+	\sigma B_t^N
+\right)
+}
+\\
+&=
+\norm{
+	\int_0^t \drift(s, \sol_s^N) - \drift(s, \mfsol_s^N) d s
+}
+\end{align*}
 
 \section{The two laws of large numbers}
-
-\section{The main result}
