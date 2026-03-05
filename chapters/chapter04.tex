@@ -1,37 +1,21 @@
-\section{Preliminary on the del Dini derivatives}
+\section{Del Dini derivativation of $J_t^N$}
 
+In the main result we will need to consider the del Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
+
+\subsection{Del Dini derivatives and FTC}
 [[define and present the del dini derivative]]
 
-\subsection{Del Dini and cadlag increasing functions}
+\subsection{Derivate the specific function}
 
-In the main theorem there will be a moment in which it will be necessary to consider the quantity $\deldiniu_+ \sup_{0\leq t \leq T} | \sol_t^N - \mfsol_t^N|_\infty$.
-One can notice that
-We would like to prove that
+Consider the random function
 
 \begin{equation}
-\deldiniu_+ \sup_{0\leq t \leq T} | \sol_t^N - \mfsol_t^N|_\infty
-\;
-\leq
-\;
-\sup_{0\leq t \leq T} \deldiniu_+ | \sol_t^N - \mfsol_t^N|_\infty
+\Zhi(t) := | \sol_t^N - \mfsol_t^N|_\infty
 \end{equation}
 
-The process $\sol_t^N$ has continuous sample path under $\PrbCondTimes{\cdot}{}$, in the sense of \ref{ch3:system-continuous-glueing}, but this is not the case for $\mfsol_t^N$, because at the birth times the mean-field cAMP molecules $\mfcamp$ are spawning according to the density $\adens$ and not on some amoeba.
+SInce the sample paths of $\sol_t^N$ are $\Cspace^0$ ach path of $\Zhi$ i
 
-
-[[[ formulate this sentence better]]]
-In such moment the infinity norm might suddenly jump to a value higher than all the previous one, creating a \cadlag -type discontinuouty.
-Notice that since only one particle spawns at time, the value cannot jump down.
-
-
-
-
-Therefore the function (consider it pathwise)
-
-\begin{equation}
-g(t) := | \sol_t^N - \mfsol_t^N|_\infty
-\end{equation}
-
+can be considered pathwise
 has these properties:
 
 \begin{enumerate}

@@ -1,0 +1,23 @@
+Notice that since the mean-field particles are coupled with the system \ref{ch2:model}, and since the initial conditions $\adens_0$ are the same for all the amoebas, we have that
+
+\begin{align*}
+\norm{\sol_t^N-\mfsol_t^N}_\infty 
+&= \norm{
+	\sol_0^N 
+	+ \int_0^t \drift(s, \sol_s^N) d s
+	+ 
+	\sigma^A B_t^N
+-
+\left(
+	\mfsol_0^N 
+	+ \int_0^t \drift(s, \mfsol_s^N) d s
+	+ 
+	\sigma^A B_t^N
+\right)
+}
+\\
+&=
+\norm{
+	\int_0^t \drift(s, \sol_s^N) - \drift(s, \mfsol_s^N) d s
+}
+\end{align*}
