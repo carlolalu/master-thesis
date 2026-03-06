@@ -55,15 +55,15 @@ It will be more comfortable to operate in a bounded time-interval $[0, T]$ for a
 \begin{equation}
 \forall 0\leq t\leq T, k \geq 1 \quad
 {}^{(k)}\Psi_t^{\amba,N} \rightharpoonup \bigotimes_{p=1}^{k}\adens_t
-\end{equation}\label{ch4:marginals-convergence}
+\end{equation}\label{ch3:marginals-convergence}
 
 For the cAMP's part this notion is more complicated, because it spawns at \emph{stochastic} times which, as $N$ grows, do grow in number as well, till they are dense in $[0,T]$.
 We will better approach it later, where it will be also clearer what we are proving.
-For now we observe, that even for the amoebas' part, working directly with the law of $\amba_t$ is cumbersome, and thus we need an alternative way to reach the condition \ref{ch4:marginals-convergence}.
+For now we observe, that even for the amoebas' part, working directly with the law of $\amba_t$ is cumbersome, and thus we need an alternative way to reach the condition \ref{ch3:marginals-convergence}.
 
 \subsection{A metric for the weak-convergence of probability measures}
 
-Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein} or \emph{Earth-mover distance} (EMD) because of the heuristic that we will see in \ref{ch4:fig:example-coupling}.
+Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein} or \emph{Earth-mover distance} (EMD) because of the heuristic that we will see in \ref{ch3:fig:example-coupling}.
 First we need the concept of \emph{coupling} of measures.
 
 \begin{definition}
@@ -79,14 +79,14 @@ and let $\mu, \nu \in \PrbMeas$. A \emph{coupling of $\mu$ and $\nu$} is a measu
 \int_{\R^\Ch \times \R^\Ch} \phi(x) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(x) \,d\mu(x) 
 \quad \text{ and } \quad
 \int_{\R^\Ch \times \R^\Ch} \phi(y) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(y) \,d\nu(x) 
-\end{equation}\label{ch4:def-coupling}
+\end{equation}\label{ch3:def-coupling}
 We sign as $\Gamma(\mu,\nu)$ the set of couplings of $\mu$ and $\nu$.
 \end{definition}
 
 \begin{remark}
 \begin{enumerate}
 \item The set $\Gamma(\mu,\nu)$ is never empty because the product measure $\mu \otimes \nu$ is always in it.
-\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^\Ch \times \R^\Ch \longrightarrow \R^\Ch$, we can observe that the condition \ref{ch4:def-coupling} is equivalent to require that
+\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^\Ch \times \R^\Ch \longrightarrow \R^\Ch$, we can observe that the condition \ref{ch3:def-coupling} is equivalent to require that
 \begin{equation}
 (\pi_1 )_\star \gamma = \mu
 \quad \text{ and } \quad
@@ -98,13 +98,13 @@ where $\big((\pi_i)_\star \gamma \big)(E) := \gamma (\pi_i^{-1} (E))$ is the pus
 
 A way to visualise a coupling is as a transformation of $\mu$ into $\nu$.
 Assume, for the sake of simplicity, that $\mu,\nu$ are measures on $\R$ and are absolute continuous with respect to the Lebesgue measure $\lebsge$.
-Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth (see \ref{ch4:fig:example-coupling}).
+Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth (see \ref{ch3:fig:example-coupling}).
 
 \begin{figure}[h]
 \begin{tikzpicture}
 \end{tikzpicture}
 \caption{[[HERE DRAW A TIKZ THE EARTH MOVING STUFF INTO 2 DIMENSION]]}
-\end{figure}\label{ch4:fig:example-coupling}
+\end{figure}\label{ch3:fig:example-coupling}
 
 A plan to move earth in $\R$ can be thought as a function $\overline{\gamma}: \R \times \R \longrightarrow \R $ which with the value $\overline{\gamma}(x,y)=: \overline{\gamma}(x\rightarrow y)$ tells how much earth we should move from the point $x$ to the point $y$.
 In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}$ into $\frac{d\nu}{d\lebsge}$, it must respect two symmetrical conditions:
@@ -119,7 +119,7 @@ In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}
 \end{equation}
 \end{enumerate}
 
-This is equivalent to \ref{ch4:def-coupling}, with $\overline{\gamma}$ playing the role of the density of the coupling $\gamma$.
+This is equivalent to \ref{ch3:def-coupling}, with $\overline{\gamma}$ playing the role of the density of the coupling $\gamma$.
 With this example in mind we could ask ourselves which is the best among such transformations of $\mu$ into $\nu$.
 To do that we need to associate to each coupling $\gamma \in \Gamma(\mu,nu)$ a value, which indicates how "good" a plan $\gamma$ might be.
 If we have a notion of distance $dist$ on our space $\R^\Ch$, then a plan can be evaluated with how much net distance we cover to transport all the earth around, \ie with the expression
@@ -153,7 +153,7 @@ The reason why we cover this concept is this result (from \autocite[Corollary 6.
 If $(X,d)$ is a Polish space, and $\overline{d}$ is a bounded distance inducing the same topology on $X$ as $d$, then the convergence of measures in the $1$-Wasserstein sense for $\overline{d}$ is equivalent to the usual weak convergence of probability measures in $\PrbMeas_1(X)$.
 \end{theorem}
 
-Therefore we can obtain the convergence of the marginals (condition \ref{ch4:marginals-convergence}) of the amoebas' part if the subsequent condition is fullfilled:
+Therefore we can obtain the convergence of the marginals (condition \ref{ch3:marginals-convergence}) of the amoebas' part if the subsequent condition is fullfilled:
 
 \begin{equation}
 \sup_{0\leq t\leq T} \quad
@@ -171,7 +171,7 @@ W_1 \big(
 	\Psi_t^{\amba,N}, \bigotimes_{p=1}^{N}\adens_t
  \big) 
  \xrightarrow {N \rightarrow \infty} 0
-\end{equation}\label{ch4:w-1-convergence-condition-amoebas}
+\end{equation}\label{ch3:w-1-convergence-condition-amoebas}
 
 %&\sup_{t\geq 0} \
 %W_1 \big(
@@ -195,7 +195,7 @@ But we are still operating with the law of some processes, rather than with them
 %D_A
 %&:= \frac{1}{2} \sum_{k=1}^{d} \sigma_A^2 = \frac{d\sigma_A^2}{2}
 %\end{aligned}
-%\end{equation}\label{ch4:eq:shape-effective-eqs-for-mf-particles}
+%\end{equation}\label{ch3:eq:shape-effective-eqs-for-mf-particles}
 %
 %for some function $\mfdrift$ which respects the conditions that a drift $\drift$ of an SDE must respect in \ref{ch3:sde-framework} to ensure existence and uniqueness of solution.
 %Then we know that there is a unique solution in $[0,T]$ for the SDE
@@ -205,7 +205,7 @@ But we are still operating with the law of some processes, rather than with them
 %= \mfamba_0 + \int_0^t \mfdrift(s,\mfamba_s) ds + \sigma_A dB_t
 %\end{equation}
 %
-%Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch4:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
+%Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch3:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
 %
 %Now we can finally formulate a way to operate with the processes rather than with their laws.
 %
@@ -246,7 +246,7 @@ d \mfamba^p_t &= \mfdrift^{N,p}(t,\mfamba_t^p) d t + \sigma_A d B_t^p &
 \mfcamp^{p,g}_t &= \text{ (some spawning position } \mfspawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift^{N,p}(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
 \end{aligned}
 \right.
-\end{equation}\label{ch4:eq:approximate-mean-field-equations}
+\end{equation}\label{ch3:eq:approximate-mean-field-equations}
 
 where the drift terms $\mfdrift^{N,k}$ are calculated by taking the average of the original $\drift^p$s, \ie
 
@@ -351,7 +351,7 @@ D_\camp
 &&
 \end{aligned}
 \right.
-\end{equation}\label{ch4:eq:eff-eq-candidate-camp}
+\end{equation}\label{ch3:eq:eff-eq-candidate-camp}
 
 This is simply a heat-equation starting with initial condition $\adens(\tau)$ at time $\tau$. 
 Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$ (modified so that it is $\equiv 0$ for negative values of $t$) we can express it with the analytical solution
@@ -380,7 +380,7 @@ D_\camp
 &:= \frac{1}{2} \sum_{k=1}^{d} \sigma_\camp^2 = \frac{d\sigma_\camp^2}{2}
 \end{aligned}
 \right.
-\end{equation}\label{ch4:eq:eff-eq-camp-analytical-sol}
+\end{equation}\label{ch3:eq:eff-eq-camp-analytical-sol}
 
 where $\star$ is the convolution in space.
 Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
@@ -600,7 +600,7 @@ Then our system of mean-field particles is given by
 \camp_t^{p,g} &= \amba_{\btime^{p,g}}^p + \sigma_C \quasibm_t^{p,g} &&\text{ from time }\btime^{p,g}
 \end{aligned}
 \right.
-\end{equation}\label{ch4:MF-particles}
+\end{equation}\label{ch3:MF-particles}
 
 and the respective effective equations are given by
 
@@ -629,7 +629,7 @@ and the respective effective equations are given by
 &&\text{if } t \geq \tau
 \end{aligned}
 \right.
-\end{equation}\label{ch4:EFFECTIVE-EQS}
+\end{equation}\label{ch3:EFFECTIVE-EQS}
 
 or, expressing the density of cAMP molecules analytically we have
 
@@ -647,11 +647,11 @@ or, expressing the density of cAMP molecules analytically we have
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \end{aligned}
 \right.
-\end{equation}\label{ch4:integro-differential-system}
+\end{equation}\label{ch3:integro-differential-system}
 
 \subsection{Does the system have a solution?}
 
-The system \ref{ch4:integro-differential-system} is a non-linear integro-differential equation.
+The system \ref{ch3:integro-differential-system} is a non-linear integro-differential equation.
 The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
 
 \begin{theorem}
@@ -667,7 +667,7 @@ The usual procedure to apply the theorem is to divide the linear part from the n
 [[explain better the section here down, and underline the base space of the lp-space: do we fix teh time or not? are they bochner space?]]
 
 Assuming that this is the case, and that $\adens \in \Lpspace^1 \cap \Lpspace^\infty$, then also $\cdens^\tau$ is in such space.
-With these considerations, we can easily deduce that also the system of mean-field particles \ref{ch4:MF-particles} has a solution, because $\mfdrift$ is bounded and locally Lipschitz:
+With these considerations, we can easily deduce that also the system of mean-field particles \ref{ch3:MF-particles} has a solution, because $\mfdrift$ is bounded and locally Lipschitz:
 
 [[FIND PROOF IN YOUR NOTES]]
 
