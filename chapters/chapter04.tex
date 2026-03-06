@@ -1,10 +1,24 @@
 \section{Del Dini derivativation}
 
 In the main result we will need to consider the del Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
-In this section we show how to work with such quantity.
+This section provide the result ot work with it properly.
 
 \subsection{Del Dini derivatives and FTC}
 [[define and present the del dini derivative]]
+
+
+\begin{lemma}
+	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
+	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
+	Then we have that
+	\begin{equation}
+		\deldiniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\leq
+		\sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
+	\end{equation}
+\end{lemma}\label{ch4:del-dini-of-all}
+
+The proof of this result will be achieved at the end of the section.
 
 \subsection{Advance beyond the $\sup$}
 
@@ -19,14 +33,14 @@ In this part we want to show that
 Consider the random function
 
 \begin{equation}
-\Ch(t) := | \sol_t^N - \mfsol_t^N|_\infty
+\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
 \end{equation}
 
 and look at its paths.
 Such function is surely continuous between birth times $\btime_m$, but what happens at such instants?
 
 \begin{lemma}
-The paths of $\Ch(t)$ are \cadlag and have only a finite number of discontinuouties on $[0,T]$ (under $ \PrbCondTimes{}{}$).
+The paths of $\Ch(t)$ are \cadlag and have only a finite number of discontinuouties on $[0,T]$.
 Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0_-} \Ch(t+h)$, we have that
 \begin{equation}
 \forall t_i. \quad \text{$\Ch$ is not $\Cspace^0$ in $t_i$} \Rightarrow \Ch(t_i-) \leq \Ch(t_i)
@@ -45,7 +59,11 @@ Notice that this does \emph{not} necessarily mean that $\Ch$ has increasing path
 \label{ch4:fig:discontinuous distance}
 
 \begin{proof}
-[[write down the proof]] and quote also \ref{ch3:rmk:mf-not-c0}
+[[complete the proof and quote also \ref{ch3:rmk:mf-not-c0}.]]
+
+Since both $\sol_t^N$  and $\mfsol_t^N$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
+This, together with the fact that $\Norm{\cdot}_\infty$ is $\Cspace^0$ and that $\forall \omega$ the number of birthtimes $\btime_m$ in $[0,T]$ is finite, means that the discontinuouties n $[0,T]$ is finite.
+Furthermore we have that $[\btime_m, \btime_{m+1})$ is closed on the left, thus the paths are right-continuous.
 \end{proof}
 
 \begin{definition}
@@ -111,8 +129,9 @@ Notice that since the mean-field particles are coupled with the system \ref{ch2:
 \\
 &=
 \norm{
-	\int_0^t \drift(s, \sol_s^N) - \drift(s, \mfsol_s^N) d s
+	\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
 }
 \end{align*}
+
 
 \section{The two laws of large numbers}
