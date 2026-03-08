@@ -41,9 +41,9 @@ Such function is surely continuous between birth times $\btime_m$, but what happ
 
 \begin{lemma}
 The paths of $\Ch(t)$ are \cadlag and have only a finite number of discontinuouties on $[0,T]$.
-Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0_-} \Ch(t+h)$, we have that
+Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0^-} \Ch(t+h)$, we have that
 \begin{equation}
-\forall t_i. \quad \text{$\Ch$ is not $\Cspace^0$ in $t_i$} \Rightarrow \Ch(t_i-) \leq \Ch(t_i)
+\forall \btime_m. \Ch(\btime_m-) \leq \Ch(\btime_m)
 \end{equation}
 \end{lemma}
 
@@ -59,12 +59,58 @@ Notice that this does \emph{not} necessarily mean that $\Ch$ has increasing path
 \label{ch4:fig:discontinuous distance}
 
 \begin{proof}
-[[complete the proof and quote also \ref{ch3:rmk:mf-not-c0}.]]
-
 Since both $\sol_t^N$  and $\mfsol_t^N$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
 This, together with the fact that $\Norm{\cdot}_\infty$ is $\Cspace^0$ and that $\forall \omega$ the number of birthtimes $\btime_m$ in $[0,T]$ is finite, means that the discontinuouties n $[0,T]$ is finite.
 Furthermore we have that $[\btime_m, \btime_{m+1})$ is closed on the left, thus the paths are right-continuous.
+By definition we have also that 
+\begin{align}
+	& \lim_{t\rightarrow \btime_{m+1}} \sol_t^N = (\amba_{\btime_{m+1}}^1,\ldots,\amba_{\btime_{m+1}}^N, \camp_{\btime_{m+1}}^1, \ldots, \camp_{\btime_{m+1}}^m )
+\end{align}
+and thus that there is a left-limit.
+Analogous is valid for $\mfsol_t^N$and therefore the paths are \cadlag.
+
+Let us now prove that  $\Ch(\btime_m-) \leq \Ch(\btime_m)$ for every discontinuouty $t_i$ in $[0,T]$.
+We have that
+\begin{align*}
+	\Ch(\btime_m-) &= \lim_{t\rightarrow\btime_{m+1}^-} \Ch(t) = \lim_{t\rightarrow\btime_{m+1}^-} \norm{ \sol_t^N - \mfsol_t^N}_\infty
+	\\
+	& = \lim_{t\rightarrow\btime_{m+1}^-} \max \left\{ 
+		\max_{p \in \{ 1, \ldots, N\}} \norm{
+			\amba_t^p - \mfamba_t^p
+			},
+		\max_{1\leq i \leq m } \norm{
+			\camp_t^i - \mfcamp_t^i
+			}
+		\right\}
+	\\
+	& = \max \left\{ 
+	\max_{p \in \{ 1, \ldots, N\}} \norm{
+		\amba_{\btime_{m+1}}^p - \mfamba_{\btime_{m+1}}^p
+	},
+	\max_{1\leq i \leq m } \norm{
+		\camp_{\btime_{m+1}}^i - \mfcamp_{\btime_{m+1}}^i
+	}
+	\right\}
+	\\
+	& \leq \max \left\{ 
+	\max_{p \in \{ 1, \ldots, N\}} \norm{
+		\amba_{\btime_{m+1}}^p - \mfamba_{\btime_{m+1}}^p
+	},
+	\max_{1\leq i \leq m } \norm{
+		\camp_{\btime_{m+1}}^i - \mfcamp_{\btime_{m+1}}^i
+	},
+	\norm{
+		\camp_{\btime_{m+1}}^{m+1} - \mfcamp_{\btime_{m+1}}^{m+1}
+	}
+	\right\}
+	\\
+	& = \norm{ \sol_{\btime_{m+1}}^N -\mfsol_{\btime_{m+1}}^N}_\infty = \Ch(\btime_{m+1})
+\end{align*}
 \end{proof}
+
+\begin{remark}
+	Notice that, as noted in \ref{ch3:rmk:mf-not-c0}, we have that the trajectory of the mean-field cAMP does not start on any amoeba, \ie there is not biforcation of paths at birthtimes, hence the possibility of a jump at each birth time $\btime_m$.
+\end{remark}
 
 \begin{definition}
 Let $\Skoro$ be the space of functions $g: \R_+ \longrightarrow \R_+$ such that:
