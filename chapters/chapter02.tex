@@ -422,7 +422,11 @@ Then it is straightforward to verify that $({}^{m}\sol_t,B_t^{\star})$ fullfille
 A solution to \ref{ch2:model} is a triple $((\hmactive^p)_{1\leq p \leq N}, \sol = (\amba, \camp), B)$ such that:
 \begin{itemize}
 \item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\sol, B)$
-\item Under the random measure $\PrbCondTimes{\cdot}{}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp), B)$ solves the local system \ref{ch2:system:local-model}.
+\item Under the random measure $\PrbCondTimes{\cdot}{}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp^1, \ldots, \camp^m, \camp^{m+1}), B = (B^A, \quasibm^1, \quasibm^m, \quasibm^{m+1} ))$ 
+is such that $\left( 
+{}^m\sol := (\amba, \camp^1, \ldots, \camp^m),  {}^m B := (B^A, \quasibm^1, \ldots, \quasibm^m) 
+\right)
+$ solves the local system \ref{ch2:system:local-model}.
 \end{itemize}
 \end{definition}
 
