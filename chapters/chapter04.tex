@@ -72,10 +72,9 @@ By definition we have also that
 \begin{align}
 	& \lim_{t\rightarrow \btime_{m+1}} \sol_t^N = (\amba_{\btime_{m+1}}^1,\ldots,\amba_{\btime_{m+1}}^N, \camp_{\btime_{m+1}}^1, \ldots, \camp_{\btime_{m+1}}^m )
 \end{align}
-and thus that there is a left-limit.
-Analogous is valid for $\mfsol_t^N$and therefore the paths are \cadlag.
+and analogously for $\mfsol_t^N$. Therefore the paths of $\norm{\sol_t^N - \mfsol_t^N}_\infty$ are \cadlag.
 
-Let us now prove that  $\Ch(\btime_m-) \leq \Ch(\btime_m)$ for every discontinuouty $t_i$ in $[0,T]$.
+Let us now prove that  $\Ch(\btime_m-) \leq \Ch(\btime_m)$ for every discontinuouty $\btime_m$ in $[0,T]$.
 We have that
 \begin{align*}
 	\Ch(\btime_m-) &= \lim_{t\rightarrow\btime_{m+1}^-} \Ch(t) = \lim_{t\rightarrow\btime_{m+1}^-} \norm{ \sol_t^N - \mfsol_t^N}_\infty
@@ -125,21 +124,64 @@ Let $\SkoroF$ be the set of functions $g: \R_+ \longrightarrow \R_+$ such that:
 \item $g$ is \cadlag
 \item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
 \end{itemize}
-Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) \leq g(t_i)$, or equivalently, $\forall t. g(t-) \leq g(t+)$.
+Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$, or equivalently, such that $\forall t. g(t-) \leq g(t+)$.
 \end{definition}
 
 By the previous lemma the paths of $\Ch$ are elements in $\SkoroFUp$.
 
 \begin{lemma}
-Let $g \in \SkoroFUp$.
-Then we have 
+Let $g \in \SkoroFUp$ and consider $g_\star (t) := \sup_{0\leq s \leq t} g(s)$.
+Then
 \begin{equation}
-\sup_{0\leq s \leq t} g(s) = \max_{0\leq s \leq t} g(s)
+g_\star (t) = \max_{0\leq s \leq t} g(s)
 \end{equation}
+and $g_\star \in \SkoroFUp$.
 \end{lemma}
 
 \begin{proof}
-[[write down the proof]]
+Let $\{\tau_1, \ldots, \tau_m\}$ be the set of discontinuouities of $g$ in $[0,t]$, and define $\tau_0:=0, \tau_{m+1} := t$.
+Define then, for each $i\in\{1,\ldots, m\}$, the function
+\begin{equation*}
+	g_i (s) := \1_{[\tau_{i-1}, \tau_i)}(s) g(s) + \1_{\{ \tau_i\}}(s) g(\tau_i-)
+	=
+	\left\{ 
+	\begin{aligned}
+		&g(s) 	& s \in [\tau_{i-1}, \tau_i)
+		\\
+		&g(\tau_i - ) 	& s = \tau_i
+	\end{aligned}
+	\right.
+\end{equation*}
+The functions $g_i$ are obviously continuous, and since $[\tau_{i-1}, \tau_i]$ is a closed interval, we have that $\sup_s g_i(s) = \max_s g_i(s)$.
+We have two possible cases: either $\tau_i$ is a maximal point for $g_i$, or it is not.
+If $\tau_i$ is a maximal point for it we have that 
+
+\begin{equation}
+	g_i (s) \leq g_i (\tau_i) = g(\tau_i -) \leq g(\tau_i)
+	\quad \Rightarrow 	\max g_i \leq g (\tau_i)
+\end{equation}
+
+Otherwise if $\tau_i$ is not a maximal point for $g_i$, we have that $\exists s_i \in [\tau_{i-1}, \tau_i)$ such that $\forall s.\; g_i (s) \leq g(s_i) = g_i (s_i) $.
+Since $g_i =g$ on all points but on $\tau_i$, we  can affirm that in all cases
+\begin{equation}
+	\sup_{s \in [\tau_{i-1}, \tau_i]} g(s) = \max \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g_i(s), g(\tau_i) \right\} = \max_{s \in [\tau_{i-1}, \tau_i]} g(s)
+\end{equation}
+
+Hence it is obvious that
+
+\begin{align}
+	\sup_{s \in [0,t]} g(s) 
+	& = \max_i \left\{ \sup_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\} = \max_i \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\}
+	\\
+	& = \max_{s \in [0,t]} g(s) 
+\end{align}
+
+Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \sup_{[0,t]} g$.
+
+Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
+It is obvious that the set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
+
+[[complete the proof]]
 \end{proof}
 
 \begin{lemma}
