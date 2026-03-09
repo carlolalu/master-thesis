@@ -68,7 +68,7 @@ Then the \emph{Quasi Brownian Motion} $\quasibm_t^{B,T}$ is defined as:
 \caption{[[ Add HERE TIKZ PICTURE SHOWING IN DIFFERENT COLORS THE VARIOUS PROCESSES INVOLVED]]}
 \end{figure}
 
-Then in our case, since $\forall p,g$ a unique \Bm and birht time is identified, we can write
+Then in our case, since $\forall p,g$ a unique \Bm and birth time is identified, we can write
 
 \begin{equation}
 \quasibm_t^{p,g} := \quasibm_t^{B^{p,g}, T^{p,g}}
@@ -422,11 +422,7 @@ Then it is straightforward to verify that $({}^{m}\sol_t,B_t^{\star})$ fullfille
 A solution to \ref{ch2:model} is a triple $((\hmactive^p)_{1\leq p \leq N}, \sol = (\amba, \camp), B)$ such that:
 \begin{itemize}
 \item $(\hmactive^p)_{1\leq p\leq N}$ are Poisson processes of parameter $\lambda$ and do not depend on $(\sol, B)$
-\item Under the random measure $\PrbCondTimes{\cdot}{}$ and on the interval $I_m := [\btime_m, \btime_{m+1}]$ the couple $(\sol = (\amba, \camp^1, \ldots, \camp^m, \camp^{m+1}), B = (B^A, \quasibm^1, \quasibm^m, \quasibm^{m+1} ))$ 
-is such that $\left( 
-{}^m\sol := (\amba, \camp^1, \ldots, \camp^m),  {}^m B := (B^A, \quasibm^1, \ldots, \quasibm^m) 
-\right)
-$ solves the local system \ref{ch2:system:local-model}.
+\item Considering the random measure $\PrbCondTimes{\cdot}{}$ and the interval $I_m := [\btime_m, \btime_{m+1}]$ we have that the couple $(\sol = (\amba, \camp), B)$ on $I_m \setminus \{ \btime_{m+1}\} = [\btime_m, \btime_{m+1})$ takes the form $({}^m\sol := (\amba, \camp^1, \ldots, \camp^m), {}^mB := (B^A, \quasibm^1, \ldots, \quasibm^m))$ and such couple $({}^m\sol, {}^mB)$ solves the local system \ref{ch2:system:local-model} on the whole interval $I_m$.
 \end{itemize}
 \end{definition}
 
