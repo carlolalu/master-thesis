@@ -49,6 +49,12 @@ Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0^-} \Ch(t+h)$, we have 
 
 \begin{remark}
 Notice that this does \emph{not} necessarily mean that $\Ch$ has increasing paths, it only means that such paths, if they do have a jump, it's necessarily a jump up.
+Such condition, on \cadlag functions $g$, can be simply stated as:
+\begin{equation}
+	\forall t. \quad g(t-) \leq g(t+)
+	\quad 
+	\left( =g(t) \right)
+\end{equation}
 \end{remark}
 
 \begin{figure}[h]
@@ -109,23 +115,23 @@ We have that
 \end{proof}
 
 \begin{remark}
-	Notice that, as noted in \ref{ch3:rmk:mf-not-c0}, we have that the trajectory of the mean-field cAMP does not start on any amoeba, \ie there is not biforcation of paths at birthtimes, hence the possibility of a jump at each birth time $\btime_m$.
+	Notice that, as noted in \ref{ch3:rmk:mf-not-c0}, we have that the trajectory of the mean-field cAMP does not start on any amoeba, \ie there is no bifurcation of paths at birth times, hence the possibility of a jump at each birth time $\btime_m$.
 \end{remark}
 
 \begin{definition}
-Let $\Skoro$ be the space of functions $g: \R_+ \longrightarrow \R_+$ such that:
+Let $\SkoroF$ be the set of functions $g: \R_+ \longrightarrow \R_+$ such that:
 \begin{itemize}
 \item $g(0)=0$
 \item $g$ is \cadlag
-\item $g$ has finite amount of discontinuouty in $[0,T]$ for each $T$
-\item If $g$ is discontinuous in $t_i$ then $g(t-) \leq g(t)$
+\item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
 \end{itemize}
+Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) \leq g(t_i)$, or equivalently, $\forall t. g(t-) \leq g(t+)$.
 \end{definition}
 
-By the previous lemma the paths of $\Ch$ are in $\Skoro$.
+By the previous lemma the paths of $\Ch$ are elements in $\SkoroFUp$.
 
 \begin{lemma}
-Let $g \in \Skoro$.
+Let $g \in \SkoroFUp$.
 Then we have 
 \begin{equation}
 \sup_{0\leq s \leq t} g(s) = \max_{0\leq s \leq t} g(s)
@@ -137,7 +143,7 @@ Then we have
 \end{proof}
 
 \begin{lemma}
-Let $g$ be a function in $\Skoro$.
+Let $g$ be a function in $\SkoroFUp$.
 [[require maybe finite del dini derivatives on the left side]]
 Then
 \begin{equation}
