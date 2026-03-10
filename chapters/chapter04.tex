@@ -179,7 +179,40 @@ and $g_\star \in \SkoroFUp$.
 	Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \max_{[0,t]} g$.
 	
 	Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
-	It is easy to verify that the set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
+	\begin{claim}
+		The set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
+	\end{claim}
+	
+	\begin{figure}[h]
+		\begin{tikzpicture}
+		\end{tikzpicture}
+		\caption{[[[HERE DRAW TIKZ FIGURE of g and g star]]]}
+	\end{figure}
+	\label{ch4:fig:sup-of-cadlag-functions}
+	
+	\begin{proof}
+		Let $t$ be a point where $g$ is continuous.
+		We show that also $g_\star$ is continuous in $t$.
+		
+		We have two possibilities: either $g(t) = g_\star(t)$, or $g(t) < g_\star (t)$.
+		\begin{itemize}
+			\item If $g(t) < g_\star (t)$, since $g$ is $\Cspace^0$ in $t$, there is a neighbourhood $U_t$ of $t$ such that $g|_{U_t} < g_\star(t)$, and since $g_\star(t) = \max_{[0,t]} g$, we have that $(g_\star)|_{U_t} \equiv g_\star(t)$, and thus that $g_\star$ is continuous in $t$.
+			\item If $g(t) = g_\star(t)$, consider an $\epsilon>0$ small enough so that $g$ is monotonous on the left and right intervals $U_\epsilon^-:= (t-\epsilon, t)$ and $U_\epsilon^+:=(t,t+\epsilon)$. 
+			This can be done otherwise the function $g$ would oscillate infinite times in a neighbourhood, and we could construct a sequence $(t_n)_n$ such that $(g(t_n))_n$ does not converge to $g(t)$, contraddicting the continuouity in $t$.
+			Let us show that $g_\star$ is continuous on both left and right neighbourhoods, being thus continuous.
+			\begin{itemize}
+				\item[$\big( U_\epsilon^- \big)$] $g$ can be either constant or strictly increasing on $U_\epsilon^-$ (otherwise if $g$ would be strictly decreasing, we would have a point $s<t$ such that $g(s) > g(t) = g_\star(t) = \max_{[0,t]} g$, contraddiction).
+				If $g$ is constant on this left neighbourhood, then so is $g_\star$ and thus it is left continuous.
+				If $g$ is stricly increasing on $U_\epsilon^-$ we have either that the two functions coincide on such domain, or that $g_\star$ is constant on it, and in both case we have that $g_\star$ is left continuous.
+				\item[$\big( U_\epsilon^+ \big)$] Consider now the case on $U_\epsilon^+=(t,t+\epsilon)$: if $g$ is non-increasing on it, then $(g_\star)|_{U_\epsilon^+} \equiv g_\star (t)$.
+				If instead $g$ is increasing on it, the two functions coincide on it.
+				In either case, $g_\star$ is right-$\Cspace^0$.
+			\end{itemize}
+		\end{itemize}
+		
+		Therefore $g_\star$ is continuous on $t$.
+	\end{proof}
+	
 	\begin{claim}
 		$g_\star$ is right-$\Cspace^0$, \ie $g_\star(t) = g_\star(t+)$.
 	\end{claim}
@@ -235,15 +268,205 @@ Let $g$ be a function in $\SkoroFUp$.
 [[require maybe finite del dini derivatives on the left side]]
 Then
 \begin{equation}
+\deldiniu^+_t g_\star(t) 
+=
 \deldiniu^+_t \sup_{0\leq s \leq t} g(s) 
 \leq
 \sup_{0\leq s \leq t} \deldiniu^+_s g(s)
-\end{equation}
+=
+\left( \deldiniu^+ g \right)_\star (t)
+\end{equation}\label{ch4:eq:sup-deldini-exchange}
 \end{lemma}
 
 \begin{proof}
-[[write down the proof]]
+Observe that since $g \geq 0$ and since $g_\star$ is non-decreasing, we have that
+
+\begin{equation}
+	\lhs (\ref{ch4:del-dini-of-all}) = \lim_{h\rightarrow 0^+} \sup_{\delta \in (0,h]} \frac{g_\star(t+\delta) - g_\star(t)}{\delta} \geq 0
+\end{equation}
+Thus we have only two possibilities:
+\begin{equation}
+	\lhs (\ref{ch4:del-dini-of-all}) = 0 
+	\qquad \text{or} \qquad
+	\lhs (\ref{ch4:del-dini-of-all}) > 0 
+\end{equation}
+
+Consider the case $\lhs (\ref{ch4:del-dini-of-all}) = 0$.
+Then it is sufficient to show that $\rhs (\ref{ch4:del-dini-of-all}) \geq 0$ to obtain the result.
+Since $g \geq 0$, we trivially have that $g(t) \geq g(0)$, and thus
+
+\begin{equation}
+	\forall \delta >0 \quad \frac{g(\delta) - g(0)}{\delta} \geq 0
+	\qquad
+	\deldiniu_0^+g(0) \geq 0	
+\end{equation}
+
+And thus in such case we have that
+
+\begin{equation}
+	\lhs (\ref{ch4:del-dini-of-all}) = 0 
+	\leq
+	\deldiniu_0^+g(0)
+	\leq
+	\sup_{s \in [0,t]} \deldiniu_s^+g(s)
+	=
+	\rhs (\ref{ch4:del-dini-of-all})
+\end{equation}
+
+And so this case is covered.
+
+Let us then assume that $\lhs (\ref{ch4:del-dini-of-all}) > 0 $.
+We have that
+
+\begin{equation}
+\begin{aligned}
+	\lhs (\ref{ch4:del-dini-of-all}) > 0 
+	& \Longleftrightarrow 
+		\forall h \geq 0. \exists 0< \delta \leq h. 
+		\quad
+		\frac{g(t + \delta) - g(t)}{\delta} > 0
+	\\
+	& \Longleftrightarrow 
+		\forall h \geq 0. \exists 0< \delta \leq h. 
+		\quad
+		g(t + \delta) - g(t)> 0
+	\\
+	& \Longleftrightarrow 
+		\forall n \in \N. \exists 0< \delta_n \leq \frac{1}{n}. 
+		\quad
+		g(t + \delta_n) - g(t)> 0
+		\label{ch4:cond:proof-deldini-T1}
+\end{aligned}
+\end{equation}
+
+The strategy is to show that under the condition \ref{ch4:cond:proof-deldini-T1} in $t$, we can approximate the Del Dini derivative of $g_\star$ with the one of $g$, obtaining thus:
+
+\begin{equation*}
+\lhs = \deldiniu_t^+g_\star(t)
+\simeq \deldiniu_t^+g(t)
+\leq \sup_{s\in [0,t]} \deldiniu_s^+g(s)
+= \rhs
+\end{equation*}
+
+This will require some preliminary claims to be proved.
+
+\begin{claim}\label{ch4:claim:g=gstar}
+	Under the condition \ref{ch4:cond:proof-deldini-T1} we have that $g(t) = g_\star(t)$.
+\end{claim}
+\begin{proof}
+	By \ref{ch4:cond:proof-deldini-T1} we have that $\forall n. \exists 0 < \delta_n \leq \frac{1}{n}$ such that
+	\begin{equation}
+		\max_{[0, t + \delta_n]} g = g_\star (t + \delta_n) 
+		>^{\ref{ch4:cond:proof-deldini-T1}}
+		g_\star (t) = \max_{[0, t]} g
+	\end{equation}
+	Then $\forall n . \exists r_n \in (0, \delta_n] \subseteq (0, \frac{1}{n})$ such that $g(t + r_n ) = g_\star (t + \delta_n) > g_\star (t)$.
+	This, together with the fact that $r_n \xrightarrow{n} 0$ and that the functions involved are right-continuous, let us infer that
+	\begin{equation}
+		g(t) \leq g_\star (t) \leq \lim_n g(t + r_n) = g(t+) = g(t)
+	\end{equation}
+	And then $g(t) = g_\star (t)$.
 \end{proof}
+
+\begin{claim}\label{ch4:claim:exploit-xi-of-delta}
+	Under the condition \ref{ch4:cond:proof-deldini-T1} in $t$ consider $\delta >0$ such that $g,g_\star$ are $\Cspace^0$ on $U_\delta^+:= [t,t+\delta)$.
+	Define
+	\begin{equation}
+		\xi_{t,\delta} := \xi_\delta := \xi := \inf \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\}
+	\end{equation}
+	Then $\xi$ is strictly positive, is $\leq \delta$ and is such that $g(t+\xi) = g_\star (t+ \xi) = g_\star(t + \delta)$.
+\end{claim}
+	\begin{figure}[h]
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption{[[[HERE DRAW TIKZ FIGURE]]]}
+\end{figure}
+\label{ch4:fig:label-to-define}
+\begin{proof} We have that $\xi \leq \delta$ is trivially true by definition.
+	
+	\paragraph{$(\invquest \xi > 0?)$} Since $g_\star$ is $\Cspace^0$ on $[t,t+\delta)$, we have that
+	\begin{align*}
+		A :&= \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\} 
+		= (g_\star)|_{[t,t+\delta)}^{-1} \left( g_\star (t + \delta) \right) - t
+		\\
+		&= \Big( 
+		\underbrace{(g_\star)|_{[t,t+\delta)}^{-1} -t}_{\Cspace^0 \text{function}}
+		\Big) 
+		\Big( 
+		\underbrace{\{g_\star (t + \delta) \} }_{\text{closed set}}
+		\Big)
+	\end{align*}
+	and thus $A$ is closed.
+	Therefore we have $\xi:= \inf A = \min A$.
+	Furthermore, because of \ref{ch4:cond:proof-deldini-T1}, we have that $g_\star(t) < g_\star (t + \delta)$, and thus $0 \notin A$.
+	Hence $\xi > 0$.
+	
+	\paragraph{$(\invquest g(t+\xi) = g_\star (t+ \xi) ?)$} Suppose ad absurdum that $g(t+\xi) < g_\star (t + \xi)$.
+	Because of \ref{ch4:cond:proof-deldini-T1}, and since $\xi > 0$, we have that $g_\star(t) < g_\star (t + \xi)$.
+	Then $\exists 0 < \nu < \xi$ such that
+	\begin{equation}
+		g(t + \nu) = g_\star (t+ \xi) = \max_{[0, t+ \nu]} g = g_\star (t + \nu)
+	\end{equation}
+	And this is a contraddiction, because $\nu < \xi = \min A$, but $\nu \in A$.
+	
+	Finally, it is true by definition that $g_\star (t+ \xi)  = g_\star (t+ \delta)$.
+\end{proof}
+Now we have finally all the instrument to prove the final result.
+
+	\begin{align*}
+	\lhs(\ref{ch4:eq:sup-deldini-exchange}) 
+	&= \deldiniu^+_t g_\star(t) 
+	\\
+	&= \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \frac{
+		g_\star(t + \delta) - g_\star (t)
+		}{\delta}
+	\\
+	&= \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \frac{
+		g_\star(t + \delta) - g (t)
+	}{\delta}
+	&& \text{by }\ref{ch4:claim:g=gstar}
+	\\
+	&= \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \frac{
+		g(t + \xi_\delta) - g (t)
+	}{\delta}
+	&& \text{by }\ref{ch4:claim:exploit-xi-of-delta}
+	\end{align*}
+	
+Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}), we have that $\frac{1}{\delta} \leq \frac{1}{\xi_\delta}$ and thus 
+	\begin{align*}
+	&\leq \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \frac{
+			g(t + \xi_\delta) - g (t)
+		}{\xi_\delta}
+		&& \text{by }\ref{ch4:claim:exploit-xi-of-delta}
+	\\
+		&\leq \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \sup_{\nu \in (0, \delta]}
+			\frac{
+			g(t + \nu) - g (t)
+			}{\nu}
+	\\
+	& = \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]}
+		\frac{
+			g(t + \delta) - g (t)
+		}{\delta}
+	\\
+	&= \deldiniu^+_t g(t) 
+	\leq
+	\sup_{s\in [0,t]} \deldiniu^+_s g(s) = \rhs(\ref{ch4:eq:sup-deldini-exchange})
+	\end{align*}
+	And thus the result stated above is valid.
+\end{proof}
+
+\begin{remark}
+	One might be tempted to ask why we did not exploit the stronger result 
+	\begin{equation}
+		\deldiniu^+_t g_\star(t) 
+		\leq
+		\deldiniu^+_t g(t)
+	\end{equation}
+	for the statement.
+	But after observing more carefully one finds out that such result is valid only under the condition \ref{ch4:cond:proof-deldini-T1}, and not in general.
+	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\deldiniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\deldiniu^+_t g_\star(t)$ is always non-negative, which would break the statement above.
+\end{remark}
 
 Thus we proved \ref{ch4:result:deldini-of-sup}.
 
@@ -252,25 +475,25 @@ Thus we proved \ref{ch4:result:deldini-of-sup}.
 Notice that since the mean-field particles are coupled with the system \ref{ch2:model}, and since the initial conditions $\adens_0$ are the same for all the amoebas, we have that
 
 \begin{align*}
-\norm{\sol_t^N-\mfsol_t^N}_\infty 
-&= \norm{
-	\sol_0^N 
-	+ \int_0^t \drift(s, \sol_s^N) d s
-	+ 
-	\sigma B_t^N
--
-\left(
-	\mfsol_0^N 
-	+ \int_0^t \drift(s, \mfsol_s^N) d s
-	+ 
-	\sigma B_t^N
-\right)
-}
-\\
-&=
-\norm{
-	\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-}
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&= \norm{
+		\sol_0^N 
+		+ \int_0^t \drift(s, \sol_s^N) d s
+		+ 
+		\sigma B_t^N
+	-
+	\left(
+		\mfsol_0^N 
+		+ \int_0^t \drift(s, \mfsol_s^N) d s
+		+ 
+		\sigma B_t^N
+	\right)
+	}
+	\\
+	&=
+	\norm{
+		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+	}
 \end{align*}
 
 
