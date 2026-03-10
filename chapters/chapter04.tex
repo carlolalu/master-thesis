@@ -139,49 +139,95 @@ and $g_\star \in \SkoroFUp$.
 \end{lemma}
 
 \begin{proof}
-Let $\{\tau_1, \ldots, \tau_m\}$ be the set of discontinuouities of $g$ in $[0,t]$, and define $\tau_0:=0, \tau_{m+1} := t$.
-Define then, for each $i\in\{1,\ldots, m\}$, the function
-\begin{equation*}
-	g_i (s) := \1_{[\tau_{i-1}, \tau_i)}(s) g(s) + \1_{\{ \tau_i\}}(s) g(\tau_i-)
-	=
-	\left\{ 
-	\begin{aligned}
-		&g(s) 	& s \in [\tau_{i-1}, \tau_i)
+	Let $\{\tau_1, \ldots, \tau_m\}$ be the set of discontinuouities of $g$ in $[0,t]$, and define $\tau_0:=0, \tau_{m+1} := t$.
+	Define then, for each $i\in\{1,\ldots, m\}$, the function
+	\begin{equation*}
+		g_i (s) := \1_{[\tau_{i-1}, \tau_i)}(s) g(s) + \1_{\{ \tau_i\}}(s) g(\tau_i-)
+		=
+		\left\{ 
+		\begin{aligned}
+			&g(s) 	& s \in [\tau_{i-1}, \tau_i)
+			\\
+			&g(\tau_i - ) 	& s = \tau_i
+		\end{aligned}
+		\right.
+	\end{equation*}
+	The functions $g_i$ are obviously continuous, and since $[\tau_{i-1}, \tau_i]$ is a closed interval, we have that $\sup_s g_i(s) = \max_s g_i(s)$.
+	We have two possible cases: either $\tau_i$ is a maximal point for $g_i$, or it is not.
+	If $\tau_i$ is a maximal point for it we have that 
+	
+	\begin{equation}
+		g_i (s) \leq g_i (\tau_i) = g(\tau_i -) \leq g(\tau_i)
+		\quad \Rightarrow 	\max g_i \leq g (\tau_i)
+	\end{equation}
+	
+	Otherwise if $\tau_i$ is not a maximal point for $g_i$, we have that $\exists s_i \in [\tau_{i-1}, \tau_i)$ such that $\forall s.\; g_i (s) \leq g(s_i) = g_i (s_i) $.
+	Since $g_i =g$ on all points but on $\tau_i$, and since $(g_i)_i$ is a sequence with a finite number of elements, we  can affirm that in all cases
+	\begin{equation}
+		\sup_{s \in [\tau_{i-1}, \tau_i]} g(s) = \max \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g_i(s), g(\tau_i) \right\} = \max_{s \in [\tau_{i-1}, \tau_i]} g(s)
+	\end{equation}
+	
+	Hence it is obvious that
+	
+	\begin{align}
+		\sup_{s \in [0,t]} g(s) 
+		& = \max_i \left\{ \sup_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\} = \max_i \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\}
 		\\
-		&g(\tau_i - ) 	& s = \tau_i
-	\end{aligned}
-	\right.
-\end{equation*}
-The functions $g_i$ are obviously continuous, and since $[\tau_{i-1}, \tau_i]$ is a closed interval, we have that $\sup_s g_i(s) = \max_s g_i(s)$.
-We have two possible cases: either $\tau_i$ is a maximal point for $g_i$, or it is not.
-If $\tau_i$ is a maximal point for it we have that 
-
-\begin{equation}
-	g_i (s) \leq g_i (\tau_i) = g(\tau_i -) \leq g(\tau_i)
-	\quad \Rightarrow 	\max g_i \leq g (\tau_i)
-\end{equation}
-
-Otherwise if $\tau_i$ is not a maximal point for $g_i$, we have that $\exists s_i \in [\tau_{i-1}, \tau_i)$ such that $\forall s.\; g_i (s) \leq g(s_i) = g_i (s_i) $.
-Since $g_i =g$ on all points but on $\tau_i$, we  can affirm that in all cases
-\begin{equation}
-	\sup_{s \in [\tau_{i-1}, \tau_i]} g(s) = \max \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g_i(s), g(\tau_i) \right\} = \max_{s \in [\tau_{i-1}, \tau_i]} g(s)
-\end{equation}
-
-Hence it is obvious that
-
-\begin{align}
-	\sup_{s \in [0,t]} g(s) 
-	& = \max_i \left\{ \sup_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\} = \max_i \left\{ \max_{s \in [\tau_{i-1}, \tau_i]} g(s) \right\}
-	\\
-	& = \max_{s \in [0,t]} g(s) 
-\end{align}
-
-Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \sup_{[0,t]} g$.
-
-Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
-It is obvious that the set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
-
-[[complete the proof]]
+		& = \max_{s \in [0,t]} g(s) 
+	\end{align}
+	
+	Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \max_{[0,t]} g$.
+	
+	Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
+	It is easy to verify that the set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
+	\begin{claim}
+		$g_\star$ is right-$\Cspace^0$, \ie $g_\star(t) = g_\star(t+)$.
+	\end{claim}
+	\begin{proof}[Proof of claim]
+		\begin{equation*}
+		\begin{aligned}
+			g_\star(t+) 
+			&= \lim_{h \rightarrow 0^+} g_\star(t+h) = \lim_{h \rightarrow 0^+} \sup_{s \leq t+h} g_\star(s)
+			\\
+			&= \lim_{h \rightarrow 0^+} \max \Big\{ 
+				\underbrace{\sup_{s\in [0,t)} g(s)}_{\leq \sup_{s\in [0,t]} g(s) = g_\star(t)}
+				,\quad
+				\underbrace{\sup_{s \in [t, t+h]} g(s) }_{
+					\sup_{\delta \in [0, h]} g(t+\delta) 
+					}
+			\Big\}			
+			\\
+			& \leq \max \{ g_\star (t), \lim_{h\rightarrow 0^+} \sup_{\delta \in [0, h]} g(t+\delta) \}
+			\\
+			& = \max \{ g_\star (t), \limsup_{s\rightarrow t^+} g(s) \}
+			& = \max \{ g_\star (t), g(t) \} = g_\star(t)
+		\end{aligned}
+		\end{equation*}
+		Thus $g_\star(t+) \leq g_\star(t)$, but since $g_\star$ is increasing by definition we also have that $g_\star(t+) \geq g_\star(t)$, therefore $g_\star(t+) = g_\star(t)$.
+	\end{proof}
+	\begin{claim}
+		For each $t$ we have that $\exists g_\star(t-)$ and $g_\star(t-) \leq g_\star(t)$.
+	\end{claim}
+	\begin{proof}[Proof of claim]
+		If $g_\star$ is $\Cspace^0$ in $t$ the claim is obvious, let us thus assume that $g_\star$ is discontinuous in $t$.
+		Notice that since $g_\star$ is right-continuous and increasing, if the left limit $g_\star (t-)$ exists, then it must necessarily be that $g_\star(t-) < g_\star(t)$.
+		Therefore we need only to show that such left limit exists.
+		
+		Let $(t_n)_n$ be a sequence of points such that $\forall n. \: t_n \leq t_{n+1} <t$ and $t_n \longrightarrow t$.
+		Since the set of discontinuouities of $g$ on $[0,T]$ is finite, then it is discrete, thus there is an $\epsilon>0$ such that $g$ (and hence $g_\star$) are $\Cspace^0$ on $U_\epsilon^- := (t-\epsilon, t)$ and on $U_\epsilon^+:= (t,t+\epsilon)$.
+		We then observe, that since $(t_n)$ is a non-decreasing sequence and $g_\star$ is a non-decreasing function, we have that 
+		\begin{equation}
+			g_\star (t_n) \leq g_\star ( t_{n+1} )
+		\end{equation}
+		\ie that the sequence $( g_\star (t_n) )_n$ is non-decreasing.
+		Furthermore we have that $( g_\star (t_n) )_n$ is bounded by $g_\star(t)$ (because of the definition of $g_\star$).
+		Then, being the sequence $( g_\star (t_n) )_n$ bounded and non-decreasing, it has a limit $l$.
+		But being such sequence arbitrary, we have that
+		\begin{equation}
+			l = \lim_n g_\star (t_n) = \lim_{s\rightarrow t^-} g(s) = g(t-)
+		\end{equation}
+	\end{proof}
+	And thus $g_\star \in \SkoroFUp$ and the proof is concluded.
 \end{proof}
 
 \begin{lemma}
