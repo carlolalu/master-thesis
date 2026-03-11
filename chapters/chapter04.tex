@@ -534,13 +534,59 @@ Notice that since the mean-field particles are coupled with the system \ref{ch2:
 		+ 
 		\sigma B_t^N
 	\right)
-	}
+	}_\infty
 	\\
 	&=
 	\norm{
 		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-	}
+	}_\infty
 \end{align*}
 
+Therefore, if we try to Dini-derive such quantity we might sketch this:
+
+\begin{align*}
+	\diniu^+_t 
+	\;
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&=
+		\diniu^+_t 
+		\;
+		\norm{
+			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		}_\infty
+	\\
+	& \quad 
+		\left(
+		\text{if }\;
+		I(t):=
+			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		\; \text{ is right-differentiable}
+		\right)
+	\\
+	& =
+		\partial^+_t
+		\;
+		\norm{
+			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		}_\infty
+	\\
+	& =
+		\underbrace{
+			\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
+		}_{\invquest \leq (1, \ldots, 1) ?}
+		\underbrace{
+			\partial^+_t\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		}_{\invquest = \drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N) ?}
+	\\
+	& \leq^?
+		\norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
+\end{align*}
+
+Let us prove that this sketch is true.
+
+[[Compute the derivative of hte infinity norm and underline that there is a point of disocntinuouity but that you can consider the distributional derivative in L^2 and then everything is still valid]]
+
+
+[[do th etrick on the lebesgue integral underlining all the factors that lead you there]]
 
 \section{The two laws of large numbers}
