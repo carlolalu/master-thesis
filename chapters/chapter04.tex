@@ -1,34 +1,80 @@
-\section{Del Dini derivativation}
+\section{Dini derivativation and derivation of $J_t^N$}
 
-In the main result we will need to consider the del Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
-This section provide the result ot work with it properly.
+In the main result we will need to consider the Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
 
-\subsection{Del Dini derivatives and FTC}
-[[define and present the del dini derivative]]
+\subsection{Dini derivatives}
 
+We follow \autocite{dini-derivatives} and represent the work of \autocite{ana}.
+
+\begin{definition}[Dini derivatives]
+	For any function $f: \R \longrightarrow \R$ we define the \emph{right upper, right lower, left upper \emph{and} left lower Dini derivatives} in $t$ as:
+	\begin{align*}
+		& \diniu^+ f (t) = \limsup_{h\rightarrow 0^+} \frac{f(t+h) - f(t)}{h}
+		& \dinil^+ f (t) = \liminf_{h\rightarrow 0^+} \frac{f(t+h) - f(t)}{h}
+		\\
+		& \diniu^- f (t) = \limsup_{h\rightarrow 0^-} \frac{f(t+h) - f(t)}{h}
+		& \dinil^- f (t) = \liminf_{h\rightarrow 0^-} \frac{f(t+h) - f(t)}{h}		
+	\end{align*}
+	For any function $g: \R^\Ch \longrightarrow \R$ and any direction (\ie unit vector) $v\in \R^\Ch$ we define the \emph{upper \emph{and} lower dini derivative in the direction $v$} as:
+	\begin{align*}
+		& \diniu_v g (x) = \limsup_{h\rightarrow 0^+} \frac{g(x+hv) - g(x)}{h}
+		& \dinil_v g (x) = \liminf_{h\rightarrow 0^+} \frac{g(x+hv) - g(x)}{h}
+	\end{align*}
+\end{definition}
+
+\begin{remark}
+	The right upper Dini derivative $\diniu^+ f (t)$ might be signed also as $\diniu^+_t f (t)$, and analogous for the others.
+	The Dini derivative of the multivariate case has been added for the sake of completeness, but it will never be used in this work.
+\end{remark}
+
+\begin{remark}
+	Notice that the Dini derivatives are always defined if we allow them to take also values in $[-\infty, \infty]$.
+	Furthermore it is easy to see that
+	\begin{itemize}
+		\item If $f$ is locally Lipschitz, then its dini derivatives are all finite.
+		\item If $f$ is right-differentiable $\partial^+ f (t) = \diniu^+ f (t) = \dinil^+ f (t)$.
+			Analogously happens if $f$ is left-differentiable.
+		\item If $f$ is differentiable then $\partial f (t) = \partial^+ f (t) = \partial^- f (t)$ and all the dini derivatives coincide.
+	\end{itemize}
+\end{remark}
+
+\begin{lemma}[Properties of Dini derivatives]
+	Let $f,h: \R \longrightarrow \R$ be $\Cspace^0$.
+	Then
+	\begin{itemize}
+		\item $\diniu^+ (f + h) \leq \diniu^+ f + \diniu^+h$
+		\item If $f > 0$. then $\diniu^+ (fh) \leq (\diniu^+f) h + f(\diniu^+h)$
+		\item (\autocite[Theorem 11]{dini-derivatives}) If $f$ has \emph{finite} Dini derivative $\diniu^+$ at every point in $t\in\R$, and if $\diniu^+f$ is Lebesgue integrable on $[a,b]$, then
+			\begin{equation}
+				f(b) - f(a) = \int_a^b \diniu^+ f (t) dt.
+			\end{equation}
+	\end{itemize}
+\end{lemma}
+
+The proof of the first two properties is easily achieved exploiting the properties of $\limsup$, while the third one is found in the quoted article.
+
+With this background in mind, we state the next result, of which the proof will be achieved by the end of the section.
 
 \begin{lemma}
 	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
 	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
 	Then we have that
 	\begin{equation}
-		\deldiniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
 		\sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
 	\end{equation}
 \end{lemma}\label{ch4:del-dini-of-all}
-
-The proof of this result will be achieved at the end of the section.
 
 \subsection{Advance beyond the $\sup$}
 
 In this part we want to show that
 
 \begin{equation}
-\deldiniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 \leq
-\sup_{0 \leq t \leq T} \deldiniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
-\end{equation}\label{ch4:result:deldini-of-sup}
+\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+\end{equation}\label{ch4:result:dini-of-sup}
 
 Consider the random function
 
@@ -265,17 +311,17 @@ and $g_\star \in \SkoroFUp$.
 
 \begin{lemma}
 Let $g$ be a function in $\SkoroFUp$.
-[[require maybe finite del dini derivatives on the left side]]
+[[require maybe finite Dini derivatives on the left side]]
 Then
 \begin{equation}
-\deldiniu^+_t g_\star(t) 
+\diniu^+_t g_\star(t) 
 =
-\deldiniu^+_t \sup_{0\leq s \leq t} g(s) 
+\diniu^+_t \sup_{0\leq s \leq t} g(s) 
 \leq
-\sup_{0\leq s \leq t} \deldiniu^+_s g(s)
+\sup_{0\leq s \leq t} \diniu^+_s g(s)
 =
-\left( \deldiniu^+ g \right)_\star (t)
-\end{equation}\label{ch4:eq:sup-deldini-exchange}
+\left( \diniu^+ g \right)_\star (t)
+\end{equation}\label{ch4:eq:sup-dini-exchange}
 \end{lemma}
 
 \begin{proof}
@@ -298,7 +344,7 @@ Since $g \geq 0$, we trivially have that $g(t) \geq g(0)$, and thus
 \begin{equation}
 	\forall \delta >0 \quad \frac{g(\delta) - g(0)}{\delta} \geq 0
 	\qquad
-	\deldiniu_0^+g(0) \geq 0	
+	\diniu_0^+g(0) \geq 0	
 \end{equation}
 
 And thus in such case we have that
@@ -306,9 +352,9 @@ And thus in such case we have that
 \begin{equation}
 	\lhs (\ref{ch4:del-dini-of-all}) = 0 
 	\leq
-	\deldiniu_0^+g(0)
+	\diniu_0^+g(0)
 	\leq
-	\sup_{s \in [0,t]} \deldiniu_s^+g(s)
+	\sup_{s \in [0,t]} \diniu_s^+g(s)
 	=
 	\rhs (\ref{ch4:del-dini-of-all})
 \end{equation}
@@ -335,29 +381,29 @@ We have that
 		\forall n \in \N. \exists 0< \delta_n \leq \frac{1}{n}. 
 		\quad
 		g(t + \delta_n) - g(t)> 0
-		\label{ch4:cond:proof-deldini-T1}
+		\label{ch4:cond:proof-dini-T1}
 \end{aligned}
 \end{equation}
 
-The strategy is to show that under the condition \ref{ch4:cond:proof-deldini-T1} in $t$, we can approximate the Del Dini derivative of $g_\star$ with the one of $g$, obtaining thus:
+The strategy is to show that under the condition \ref{ch4:cond:proof-dini-T1} in $t$, we can approximate the Dini derivative of $g_\star$ with the one of $g$, obtaining thus:
 
 \begin{equation*}
-\lhs = \deldiniu_t^+g_\star(t)
-\simeq \deldiniu_t^+g(t)
-\leq \sup_{s\in [0,t]} \deldiniu_s^+g(s)
+\lhs = \diniu_t^+g_\star(t)
+\simeq \diniu_t^+g(t)
+\leq \sup_{s\in [0,t]} \diniu_s^+g(s)
 = \rhs
 \end{equation*}
 
 This will require some preliminary claims to be proved.
 
 \begin{claim}\label{ch4:claim:g=gstar}
-	Under the condition \ref{ch4:cond:proof-deldini-T1} we have that $g(t) = g_\star(t)$.
+	Under the condition \ref{ch4:cond:proof-dini-T1} we have that $g(t) = g_\star(t)$.
 \end{claim}
 \begin{proof}
-	By \ref{ch4:cond:proof-deldini-T1} we have that $\forall n. \exists 0 < \delta_n \leq \frac{1}{n}$ such that
+	By \ref{ch4:cond:proof-dini-T1} we have that $\forall n. \exists 0 < \delta_n \leq \frac{1}{n}$ such that
 	\begin{equation}
 		\max_{[0, t + \delta_n]} g = g_\star (t + \delta_n) 
-		>^{\ref{ch4:cond:proof-deldini-T1}}
+		>^{\ref{ch4:cond:proof-dini-T1}}
 		g_\star (t) = \max_{[0, t]} g
 	\end{equation}
 	Then $\forall n . \exists r_n \in (0, \delta_n] \subseteq (0, \frac{1}{n})$ such that $g(t + r_n ) = g_\star (t + \delta_n) > g_\star (t)$.
@@ -369,7 +415,7 @@ This will require some preliminary claims to be proved.
 \end{proof}
 
 \begin{claim}\label{ch4:claim:exploit-xi-of-delta}
-	Under the condition \ref{ch4:cond:proof-deldini-T1} in $t$ consider $\delta >0$ such that $g,g_\star$ are $\Cspace^0$ on $U_\delta^+:= [t,t+\delta)$.
+	Under the condition \ref{ch4:cond:proof-dini-T1} in $t$ consider $\delta >0$ such that $g,g_\star$ are $\Cspace^0$ on $U_\delta^+:= [t,t+\delta)$.
 	Define
 	\begin{equation}
 		\xi_{t,\delta} := \xi_\delta := \xi := \inf \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\}
@@ -398,11 +444,11 @@ This will require some preliminary claims to be proved.
 	\end{align*}
 	and thus $A$ is closed.
 	Therefore we have $\xi:= \inf A = \min A$.
-	Furthermore, because of \ref{ch4:cond:proof-deldini-T1}, we have that $g_\star(t) < g_\star (t + \delta)$, and thus $0 \notin A$.
+	Furthermore, because of \ref{ch4:cond:proof-dini-T1}, we have that $g_\star(t) < g_\star (t + \delta)$, and thus $0 \notin A$.
 	Hence $\xi > 0$.
 	
 	\paragraph{$(\invquest g(t+\xi) = g_\star (t+ \xi) ?)$} Suppose ad absurdum that $g(t+\xi) < g_\star (t + \xi)$.
-	Because of \ref{ch4:cond:proof-deldini-T1}, and since $\xi > 0$, we have that $g_\star(t) < g_\star (t + \xi)$.
+	Because of \ref{ch4:cond:proof-dini-T1}, and since $\xi > 0$, we have that $g_\star(t) < g_\star (t + \xi)$.
 	Then $\exists 0 < \nu < \xi$ such that
 	\begin{equation}
 		g(t + \nu) = g_\star (t+ \xi) = \max_{[0, t+ \nu]} g = g_\star (t + \nu)
@@ -414,8 +460,8 @@ This will require some preliminary claims to be proved.
 Now we have finally all the instrument to prove the final result.
 
 	\begin{align*}
-	\lhs(\ref{ch4:eq:sup-deldini-exchange}) 
-	&= \deldiniu^+_t g_\star(t) 
+	\lhs(\ref{ch4:eq:sup-dini-exchange}) 
+	&= \diniu^+_t g_\star(t) 
 	\\
 	&= \lim_{h \rightarrow 0^+} \sup_{\delta \in (0, h]} \frac{
 		g_\star(t + \delta) - g_\star (t)
@@ -449,9 +495,9 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 			g(t + \delta) - g (t)
 		}{\delta}
 	\\
-	&= \deldiniu^+_t g(t) 
+	&= \diniu^+_t g(t) 
 	\leq
-	\sup_{s\in [0,t]} \deldiniu^+_s g(s) = \rhs(\ref{ch4:eq:sup-deldini-exchange})
+	\sup_{s\in [0,t]} \diniu^+_s g(s) = \rhs(\ref{ch4:eq:sup-dini-exchange})
 	\end{align*}
 	And thus the result stated above is valid.
 \end{proof}
@@ -459,16 +505,16 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 \begin{remark}
 	One might be tempted to ask why we did not exploit the stronger result 
 	\begin{equation}
-		\deldiniu^+_t g_\star(t) 
+		\diniu^+_t g_\star(t) 
 		\leq
-		\deldiniu^+_t g(t)
+		\diniu^+_t g(t)
 	\end{equation}
 	for the statement.
-	But after observing more carefully one finds out that such result is valid only under the condition \ref{ch4:cond:proof-deldini-T1}, and not in general.
-	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\deldiniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\deldiniu^+_t g_\star(t)$ is always non-negative, which would break the statement above.
+	But after observing more carefully one finds out that such result is valid only under the condition \ref{ch4:cond:proof-dini-T1}, and not in general.
+	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\diniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\diniu^+_t g_\star(t)$ is always non-negative, which would break the statement above.
 \end{remark}
 
-Thus we proved \ref{ch4:result:deldini-of-sup}.
+Thus we proved \ref{ch4:result:dini-of-sup}.
 
 \subsection{Get rid of the integral sign in the derivation}
 
