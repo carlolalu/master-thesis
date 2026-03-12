@@ -53,18 +53,19 @@ We follow \autocite{dini-derivatives} and represent the work of \autocite{ana}.
 
 The proof of the first two properties is easily achieved exploiting the properties of $\limsup$, while the third one is found in the quoted article.
 
-With this background in mind, we state the next result, of which the proof will be achieved by the end of the section.
+With this background in mind, we state the next result, of which the proof will be achieved by the end of the section (\ref{ch4:proof:del-dini-of-all}).
 
-\begin{lemma}
+\begin{lemma}\label{ch4:lemma:del-dini-of-all}
 	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
 	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
 	Then we have that
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
-		\sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
+		 d \NumParticles_T \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
 	\end{equation}
-\end{lemma}\label{ch4:del-dini-of-all}
+	where $\NumParticles_T = N + \hmactive_T$ is the number of particles present at time $T$ in the whole system.
+\end{lemma}
 
 \subsection{Advance beyond the $\sup$}
 
@@ -551,17 +552,11 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 	&=
 		\diniu^+_t 
 		\;
-		\norm{
-			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-		}_\infty
+		\Big|
+\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I(t)}
+\Big|_\infty
 	\\
-	& \quad 
-		\left(
-		\text{if }\;
-		I(t):=
-			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-		\; \text{ is right-differentiable}
-		\right)
+	& \quad \left( \text{if $\forall j.\; I_j(t)$ is right-differentiable} \right)
 	\\
 	& =
 		\partial^+_t
@@ -574,19 +569,155 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\underbrace{
 			\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
 		}_{\invquest \leq (1, \ldots, 1) ?}
-		\underbrace{
-			\partial^+_t\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-		}_{\invquest = \drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N) ?}
+		\Big(
+			\underbrace{
+				\partial^+_t
+				\int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+			}_{\invquest = \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N) ?}
+		\Big)_{i=1}^{d\NumParticles_t}
 	\\
-	& \leq^?
-		\norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
+	& \leq \sum_i \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+	\\
+	& \leq \sum_i \norm{\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)} = \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_1
+	\\
+	& \leq d\NumParticles_t \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
 \end{align*}
 
-Let us prove that this sketch is true.
+To prove that this sketch is yielding the correct result we need to analyse and confirm a couple of results on the way.
+The first is an easy computation.
 
-[[Compute the derivative of hte infinity norm and underline that there is a point of disocntinuouity but that you can consider the distributional derivative in L^2 and then everything is still valid]]
+\begin{lemma}\label{ch4:lemma:derive-infinity-norm}
+	Considering eventually the derivative $\partial_i \norm{x}_\infty$ in the distributional sense we have that
+	\begin{equation}
+		\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}} \leq 1
+	\end{equation}
+	and therefore that $\nabla \norm{x}_\infty \leq (1, \ldots, 1)$.
+\end{lemma}
+\begin{proof}
+	Let us suppose that $\norm{x}_\infty = x_i$.
+	Then
+	\begin{align*}
+		\partial_i \norm{x}_\infty = \partial_i |x_i| = sgn(x_i)
+	\end{align*}
+	If instead there is $j \neq i$ such that $\norm{x}_\infty = x_j$, then
+	\begin{align*}
+		\partial_i \norm{x}_\infty = \partial_i |x_j| = 0
+	\end{align*}
+	Hence $\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}} \leq 1$.
+\end{proof}
 
+The second one is a confirmation of an intuitive fact:
 
-[[do th etrick on the lebesgue integral underlining all the factors that lead you there]]
+\begin{lemma}\label{ch4:lemma:right-diff-of-integral}
+	The quantity 
+	\begin{equation}
+		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+	\end{equation}
+	is right-differentiable in each of its coordinates and is such that
+	\begin{equation}
+		\partial^+ \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s = \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+	\end{equation}
+	almost everywhere.
+\end{lemma}
+
+\begin{proof}
+	Consider
+	\begin{equation}
+		\Zhi_i(t) := \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s,
+	\end{equation}
+	the $i$-th coordinate of the object of interest.
+	Then our thesis is that for all $t$
+	\begin{align*}
+		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi_i(t+h) - \Zhi_i(t)}{h} 
+		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+		\\
+		&= \lim_{h\rightarrow 0^+} \frac{1}{
+				\lebsge((t, t+ h))
+			} \int_{(t,t+h)} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d\lebsge(s)
+		\\
+		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+	\end{align*}
+	To prove this we just need to exploit the Lebesgue differentiation theorem (see \autocite[Theorem 3.21]{folland}), \ie check that the integrand is in $\Lpspace^1_{loc}$ (true by the definition of the solutions $\sol$ and $\mfsol$) and that $\{E_h\}_{h>0} := \big\{ (t,t+h) \big\}_{h>0}$ is a collection of Borel sets shrinking nicely to $t$.
+	The latter condition means to verify that:
+	\begin{itemize}
+		\item $\forall h. \; E_h \subseteq B_t(h)$, the ball of radius $h$ centered in $t$.
+		\item $\exists \alpha >0$ such that $\forall h. \; \lebsge (E_h) > \alpha \lebsge (B_t(h))$.
+	\end{itemize}
+	
+		\begin{figure}[h]
+		\begin{tikzpicture}
+		\end{tikzpicture}
+		\caption{[[[HERE DRAW TIKZ FIGURE]]]}
+		\end{figure}
+	
+	The verification is trivial: for each $h>0$ we have that $E_h = (t,t+h) \subseteq (t-h, t+h) = B_t(h)$ and that 
+	\begin{equation}
+		\lebsge(E_h) = h = \frac{1}{2} \cdot 2h = \frac{1}{2} \lebsge(B_t(h)) > \frac{1}{3} \lebsge(B_t(h)).
+	\end{equation}
+	
+	Then the Lebesgue differentiation theorem guarantees us that
+	
+	\begin{align*}
+		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+		\\
+		&= \lim_{h\rightarrow 0^+} \frac{1}{
+			\lebsge(E_h)
+		} \int_{E_h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d\lebsge(s)
+		\\
+		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+	\end{align*}
+	almost everywhere, and this concludes the proof.
+\end{proof}
+
+Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
+
+\begin{proof}[Proof of \ref{ch4:lemma:del-dini-of-all}]\label{ch4:proof:del-dini-of-all}
+	In \ref{ch4:result:dini-of-sup} we have already shown that the inequality
+		\begin{equation}
+		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\leq
+		\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\end{equation}
+	is valid.
+	Then, because of \ref{ch4:lemma:right-diff-of-integral} and \ref{ch4:lemma:derive-infinity-norm}, we have that the obtained function is right-differentiable, therefore
+	\begin{align*}
+		& \sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\\
+		& = \sup_{0 \leq t \leq T} \diniu^+_t \norm{\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_\infty
+		\\
+		&= \sup_{0 \leq t \leq T} \partial^+_t \norm{\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_\infty
+		\\
+			&\leq \sup_{0 \leq t \leq T} \sum_{i=1}^{d \NumParticles_t} \partial^+_t \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+			&& {\ref{ch4:lemma:derive-infinity-norm}} 
+		\\
+			&\leq \sup_{0 \leq t \leq T} \sum_{i=1}^{d \NumParticles_t} 
+				\norm{
+					\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+				}
+			&& \ref{ch4:lemma:right-diff-of-integral} 
+		\\
+		& \leq \sup_{0 \leq t \leq T} d \NumParticles_t
+		\norm{
+			\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)
+		}_\infty
+		& \leq d \NumParticles_T \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+	\end{align*}
+	And the proof is concluded.
+\end{proof}
 
 \section{The two laws of large numbers}
+
+[[introduce this properly]]
+
+\subsection{The conditional law of large numbers}
+
+\begin{proposition}
+	
+\end{proposition}
+
+\subsection{The less law of large numbers}
+
+\begin{proposition}
+	
+\end{proposition}
