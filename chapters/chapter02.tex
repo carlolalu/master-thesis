@@ -472,8 +472,8 @@ Then we can notice that all the systems considered (the model \ref{ch2:model}, i
 \begin{equation}
 \left\{
 \begin{aligned}
-\drift_p(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^p - x^{p,g})
-	&& 1\leq p \leq N
+\drift_k(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^k - x^{p,g})
+	&& 1\leq k \leq N
 \\
 \drift_{p,g}(t,x) &:= 0
 	&& \text{if } \exists (p,g)
@@ -507,7 +507,7 @@ The drift function $\drift(t, x, (\hmactive^p)_p)$ defined coordinate-wise in \r
 \drift(t,x) := \drift(t,x, (\hmactive^p_t)_t) := 
 \left\{
 \begin{aligned}
-&\drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^p - x^{p,g})
+&\drift_k(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^k - x^{p,g})
 \\
 &\drift_{p,g}(t,x) := 0
 \end{aligned}

@@ -62,7 +62,7 @@ With this background in mind, we state the next result, of which the proof will 
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
-		 d \NumParticles_T \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}
+		 d N \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
 	\end{equation}
 	where $\NumParticles_T = N + \hmactive_T$ is the number of particles present at time $T$ in the whole system.
 \end{lemma}
@@ -312,10 +312,9 @@ and $g_\star \in \SkoroFUp$.
 
 \begin{lemma}
 Let $g$ be a function in $\SkoroFUp$.
-[[require maybe finite Dini derivatives on the left side]]
 Then
 \begin{equation}
-\diniu^+_t g_\star(t) 
+\diniu^+_t g_\star(t)
 =
 \diniu^+_t \sup_{0\leq s \leq t} g(s) 
 \leq
@@ -329,17 +328,17 @@ Then
 Observe that since $g \geq 0$ and since $g_\star$ is non-decreasing, we have that
 
 \begin{equation}
-	\lhs (\ref{ch4:del-dini-of-all}) = \lim_{h\rightarrow 0^+} \sup_{\delta \in (0,h]} \frac{g_\star(t+\delta) - g_\star(t)}{\delta} \geq 0
+	\lhs (\ref{ch4:eq:sup-dini-exchange}) = \lim_{h\rightarrow 0^+} \sup_{\delta \in (0,h]} \frac{g_\star(t+\delta) - g_\star(t)}{\delta} \geq 0
 \end{equation}
 Thus we have only two possibilities:
 \begin{equation}
-	\lhs (\ref{ch4:del-dini-of-all}) = 0 
+	\lhs (\ref{ch4:eq:sup-dini-exchange}) = 0 
 	\qquad \text{or} \qquad
-	\lhs (\ref{ch4:del-dini-of-all}) > 0 
+	\lhs (\ref{ch4:eq:sup-dini-exchange}) > 0 
 \end{equation}
 
-Consider the case $\lhs (\ref{ch4:del-dini-of-all}) = 0$.
-Then it is sufficient to show that $\rhs (\ref{ch4:del-dini-of-all}) \geq 0$ to obtain the result.
+Consider the case $\lhs (\ref{ch4:eq:sup-dini-exchange}) = 0$.
+Then it is sufficient to show that $\rhs (\ref{ch4:eq:sup-dini-exchange}) \geq 0$ to obtain the result.
 Since $g \geq 0$, we trivially have that $g(t) \geq g(0)$, and thus
 
 \begin{equation}
@@ -351,23 +350,23 @@ Since $g \geq 0$, we trivially have that $g(t) \geq g(0)$, and thus
 And thus in such case we have that
 
 \begin{equation}
-	\lhs (\ref{ch4:del-dini-of-all}) = 0 
+	\lhs (\ref{ch4:eq:sup-dini-exchange}) = 0 
 	\leq
 	\diniu_0^+g(0)
 	\leq
 	\sup_{s \in [0,t]} \diniu_s^+g(s)
 	=
-	\rhs (\ref{ch4:del-dini-of-all})
+	\rhs (\ref{ch4:eq:sup-dini-exchange})
 \end{equation}
 
 And so this case is covered.
 
-Let us then assume that $\lhs (\ref{ch4:del-dini-of-all}) > 0 $.
+Let us then assume that $\lhs (\ref{ch4:eq:sup-dini-exchange}) > 0 $.
 We have that
 
 \begin{equation}
 \begin{aligned}
-	\lhs (\ref{ch4:del-dini-of-all}) > 0 
+	\lhs (\ref{ch4:eq:sup-dini-exchange}) > 0 
 	& \Longleftrightarrow 
 		\forall h \geq 0. \exists 0< \delta \leq h. 
 		\quad
@@ -697,11 +696,18 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 				}
 			&& \ref{ch4:lemma:right-diff-of-integral} 
 		\\
-		& \leq \sup_{0 \leq t \leq T} d \NumParticles_t
+		& \text{(the drift is $0$ for the cAMP)}
+		\\
+		&= \sup_{0 \leq t \leq T} \sum_{i=1}^{d N} 
+		\norm{
+			\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+		}
+		\\
+		& \leq \sup_{0 \leq t \leq T} d N
 		\norm{
 			\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)
 		}_\infty
-		& \leq d \NumParticles_T \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+		& = d N \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
 	\end{align*}
 	And the proof is concluded.
 \end{proof}
@@ -712,11 +718,179 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 
 \subsection{The conditional law of large numbers}
 
+The proof is classical law of large numbers, following for example \autocite{ana}.
+
 \begin{proposition}
-	
+	Let $\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^{1,1}, \ldots, \mfcamp^{N,\hmactive_t^N}) \in (\R^d)^\NumParticles_t$ be a random variable and let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
+	Assume that:
+	\begin{enumerate}
+		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
+		\item The laws $\cdens^{p,g}$ of $\mfcamp^{p,g}$ are uniformly bounded in $\Lpspace^{\infty}$, meaning that
+		\begin{equation*}
+			\exists K_0.\forall p,g,t.
+			\qquad
+			\Norm{\cdens^{p,g}}_\infty< K_0
+		\end{equation*}
+	\end{enumerate}
+	Fix now $\xi>0$ such that [[conditions on $\alpha + \xi < 1$?]] and define the sets
+	\begin{equation*}
+		\begin{aligned}
+			\widehat{S}^N_\xi 
+			&:= \left\{ \sup_{1\leq k \leq N} 
+				\norm{
+					\drift_k^N(t, \mfsol^N) 
+					- \ECondTimes{
+						\drift^N_k(t,\mfsol)
+					}{\mfamba^k,}
+				}_\infty \geq N^{-\xi} 
+			\right\}
+			\\
+			S^N_\xi 
+			&:= \left\{ \sup_{1\leq k \leq N} 
+				\norm{
+					\drift_k^N(t, \mfsol^N) 
+					- \ECondTimes{
+						\drift^N_k(t,\mfsol)
+					}{}
+				}_\infty \geq N^{-\xi} 
+			\right\}
+		\end{aligned}
+	\end{equation*}
+	Then it is valid the law of large numbers under $\PrbCondTimes{}{}$, meaning that
+	\begin{equation*}
+		\forall \gamma>0.\exists C_\gamma >0.
+		\quad
+		\PrbCondTimes{\widehat{S}^N_\xi}{},
+		\PrbCondTimes{S^N_\xi}{}
+		\leq C_\gamma N^{-\gamma}
+	\end{equation*}
 \end{proposition}
 
-\subsection{The less law of large numbers}
+\begin{proof}
+	The proof is done for the set $S^N_\xi $, since it remains analogous for the set $\widehat{S}^N_\xi $.
+	For the sake of shortness we will sign $\PrbCondTimes{}{}$ and $\ECondTimes{}{}$ by $\PrbTilde{}$ and $\ETilde{}$ respectively.
+	First notice that 
+	\begin{align*}
+		\PrbTilde{S^N_\xi}
+		& \leq \PrbTilde{
+			 \sup_{1\leq k \leq N} 
+			\norm{
+				\drift_k^N(t, \mfsol^N) 
+				- \ETilde{
+					\drift^N_k(t,\mfsol)
+				}
+			}_\infty \geq N^{-\xi} 
+		}
+		\\
+		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
+			\PrbTilde{\norm{
+					\drift^N_{k,i}(t, \mfsol^N) 
+					- \ETilde{
+						\drift^N_{k,i}(t,\mfsol)
+					}
+				} \geq N^{-\xi} 
+			}
+	\end{align*}
+	where $\drift_{k,i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th molecule.
+	The previous equation implies that it is enough to show that the bound $C_\gamma N^{-\gamma}$ is valid for the coordinate $(1,1)$, \ie on
+	\begin{align*}
+		\PrbTilde{\norm{
+				\drift^N_{1,1}(t, \mfsol^N) 
+				- \ETilde{
+					\drift^N_{1,1}(t,\mfsol)
+				}
+			} \geq N^{-\xi} 
+		}{}
+	\end{align*}
+	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2v}$ for a generic $v \in \N$.
+	\begin{align*}
+		&\PrbTilde{\norm{
+				\drift^N_{1,1}(t, \mfsol^N) 
+				- \ETilde{
+					\drift^N_{1,1}(t,\mfsol)
+				}
+			} \geq N^{-\xi} 
+		} \leq
+		\\
+		&\leq \frac{1}{ (N^{-\xi})^{2v} } \ETilde{
+				\norm{
+				\drift^N_{1,1}(t, \mfsol^N) 
+				- \ETilde{
+					\drift^N_{1,1}(t,\mfsol)
+					}
+				}^{2v}
+			}
+		\\
+		& = N^{\xi 2 v} \ETilde{
+			\norm{
+			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction_1(\mfamba^1 - \mfcamp^{p,g})
+			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETilde{
+				\attraction_1(\mfamba^1 - \mfcamp^{p,g})
+			}
+		}^{2v}
+		}
+		\\
+		& = N^{\xi 2 v} \frac{1}{N^{2v}} 
+		\ETilde{
+			\norm{
+			\sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} 
+			\left[
+			\attraction_1(\mfamba^1 - \mfcamp^{p,g})
+			- \ETilde{ \left( \attraction_1 \star \cdens^{p,g} \right) (\mfamba^1)}
+			\right]
+		}^{2v}
+	}=
+	\end{align*}
+	Here the relabelling of the model, \ref{ch2:model-reformulation}, proves its value:
+	\begin{align*}
+		&= N^{(\xi -1) 2 v}
+		\ETilde{
+			\norm{
+				\sum _{m = 1}^{\hmactive_t} 
+				\underbrace{
+				\left[
+				\attraction_1(\mfamba^1 - \mfcamp^m)
+				- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				\right]
+			}_{x_m}
+			}^{2v}
+		}
+		=
+	\end{align*}
+	
+	Now we can apply the multinomial formula:
+	\begin{equation}
+		\left( \sum_{m=1}^M x_m \right)^{2v}
+		= \sum_{\alpha_1 + \ldots + \alpha_M} \frac{(2v)!}{a_1! \ldots a_M!} \prod_{m=1}^M (x_m)^{a_m}
+	\end{equation}
+	
+	Obtaining than
+		\begin{align*}
+		&= N^{(\xi -1) 2 v}
+		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t}}
+			\frac{(2v)!}{a_1! \ldots a_{\hmactive_t}!}
+			\ETilde{
+				\prod_{m=1}^{\hmactive_t}
+				\norm{
+					\attraction_1(\mfamba^1 - \mfcamp^m)
+					- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				}^{a_m}
+			}
+		\\
+		&\leq N^{(\xi -1) 2 v} (2v)!
+		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t}}
+		\ETilde{
+			\prod_{m=1}^{\hmactive_t}
+			\norm{
+				\attraction_1(\mfamba^1 - \mfcamp^m)
+				- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+			}^{a_m}
+		}
+	\end{align*}
+	
+\end{proof}
+
+\subsection{The less conditional law of large numbers}
 
 \begin{proposition}
 	
