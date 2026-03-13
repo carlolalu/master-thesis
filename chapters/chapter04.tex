@@ -719,138 +719,193 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 \subsection{The conditional law of large numbers}
 
 The proof is classical law of large numbers, following for example \autocite{ana}.
+It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
 \begin{proposition}
-	Let $\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^{1,1}, \ldots, \mfcamp^{N,\hmactive_t^N}) \in (\R^d)^\NumParticles_t$ be a random variable and let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
+	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t$ be a \rv and let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
-		\item The laws $\cdens^{p,g}$ of $\mfcamp^{p,g}$ are uniformly bounded in $\Lpspace^{\infty}$, meaning that
+		\item All the coordinates of $\amba^p$ are \iid.
+		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists K_0.\forall p,g,t.
+			\exists K_0.\forall p,m,t.
 			\qquad
-			\Norm{\cdens^{p,g}}_\infty< K_0
+			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_0
 		\end{equation*}
+		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
 	Fix now $\xi>0$ such that [[conditions on $\alpha + \xi < 1$?]] and define the sets
 	\begin{equation*}
 		\begin{aligned}
-			\widehat{S}^N_\xi 
+			S^{N,\xi}_\amba
 			&:= \left\{ \sup_{1\leq k \leq N} 
 				\norm{
 					\drift_k^N(t, \mfsol^N) 
 					- \ECondTimes{
-						\drift^N_k(t,\mfsol)
+						\drift^N_k(t,\mfsol^N)
 					}{\mfamba^k,}
 				}_\infty \geq N^{-\xi} 
 			\right\}
 			\\
-			S^N_\xi 
+			S^{N, \xi}
 			&:= \left\{ \sup_{1\leq k \leq N} 
 				\norm{
 					\drift_k^N(t, \mfsol^N) 
 					- \ECondTimes{
-						\drift^N_k(t,\mfsol)
+						\drift^N_k(t,\mfsol^N)
 					}{}
 				}_\infty \geq N^{-\xi} 
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then it is valid the law of large numbers under $\PrbCondTimes{}{}$, meaning that
-	\begin{equation*}
-		\forall \gamma>0.\exists C_\gamma >0.
-		\quad
-		\PrbCondTimes{\widehat{S}^N_\xi}{},
-		\PrbCondTimes{S^N_\xi}{}
-		\leq C_\gamma N^{-\gamma}
-	\end{equation*}
+	Then are valid the laws of large numbers under $\PrbCondTimes{\cdot}{}$, \ie for all $\gamma>0$ exists $C_\gamma >0$ such that:
+	\begin{align}
+		& \PrbCondTimes{S^{N,\xi}_\amba}{}
+			\leq C_\gamma N^{-\gamma}
+		&& \label{ch4:lemma:cond-lln-1}
+		\\
+		& \PrbCondTimes{S^{N,\xi}}{}
+			\leq C_\gamma N^{-\gamma}
+		&& \label{ch4:lemma:cond-lln-2}
+	\end{align}
 \end{proposition}
 
 \begin{proof}
-	The proof is done for the set $S^N_\xi $, since it remains analogous for the set $\widehat{S}^N_\xi $.
-	For the sake of shortness we will sign $\PrbCondTimes{}{}$ and $\ECondTimes{}{}$ by $\PrbTilde{}$ and $\ETilde{}$ respectively.
+		For the sake of shortness we will use the subsequent notation:
+	\begin{align*}
+		\PrbTFoot{}{\cdot} &:= \PrbCondTimes{\cdot}{}			&		\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}
+		\\
+		\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\mfamba^k, }				&			\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\mfamba^k, }
+		\\
+		\PrbTFoot{\star}{\cdot}&:= \: \text{either of the two above}		&			\ETFoot{\star}{} &:=  \: \text{either of the two above}		
+	\end{align*}
+	and $S^{N, \xi}_\star$ analogously for $S^{N, \xi}_\amba$ and $S^{N, \xi}$.	
 	First notice that 
 	\begin{align*}
-		\PrbTilde{S^N_\xi}
-		& \leq \PrbTilde{
-			 \sup_{1\leq k \leq N} 
-			\norm{
-				\drift_k^N(t, \mfsol^N) 
-				- \ETilde{
-					\drift^N_k(t,\mfsol)
-				}
-			}_\infty \geq N^{-\xi} 
-		}
+		\PrbTFoot{}{S^{N,\xi}_\star}
+		& =\PrbTFoot{}{
+				\sup_{1\leq k \leq N} 
+				\norm{
+					\drift_k^N(t, \mfsol^N) 
+					- \ETFoot{\star}{
+						\drift^N_k(t,\mfsol^N)
+					}
+				}_\infty \geq N^{-\xi} 
+			}
 		\\
 		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
-			\PrbTilde{\norm{
+			\PrbTFoot{}{\norm{
 					\drift^N_{k,i}(t, \mfsol^N) 
-					- \ETilde{
-						\drift^N_{k,i}(t,\mfsol)
+					- \ETFoot{\star}{
+						\drift^N_{k,i}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
 			}
 	\end{align*}
 	where $\drift_{k,i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th molecule.
-	The previous equation implies that it is enough to show that the bound $C_\gamma N^{-\gamma}$ is valid for the coordinate $(1,1)$, \ie on
+	Then the previous equation implies that it is enough to show that the bound $C_\gamma N^{-\gamma}$ is valid for every coordinate $(k,i)$, and since the expression for each coordinate is the same one, it is enough to tame the case $(1,1)$, \ie
 	\begin{align*}
-		\PrbTilde{\norm{
+		\PrbTFoot{}{\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETilde{
-					\drift^N_{1,1}(t,\mfsol)
+				- \ETFoot{\star}{
+					\drift^N_{1,1}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		}{}
 	\end{align*}
+	
+	Now notice that, if we are treating the case $S^{N,\xi}_\amba$, then we can treat the expression above in this way:
+	\begin{align*}
+		&\PrbTFoot{}{\norm{
+				\drift^N_{1,1}(t, \mfsol^N) 
+				- \ETFoot{1}{
+					\drift^N_{1,1}(t,\mfsol^N)
+				}
+			} \geq N^{-\xi} 
+		}{} =
+		\\
+		&=
+		\int 
+		\underbrace{
+			\PrbCondTimes{\norm{
+					\drift^N_{1,1}(t, \mfsol^N) 
+					- \ETFoot{\star}{
+						\drift^N_{1,1}(t,\mfsol)
+					}
+				} \geq N^{-\xi} 
+			}{\mfamba^1 = x, }
+		}_{\invquest \leq C_\gamma N^{-\gamma} ?}
+		\:
+		\adens^1(x)
+		\:
+		dx
+	\end{align*}
+	
+	Therefore, for both the cases $S^{N,i}_\star$ we need to prove that
+	
+	\begin{align*}
+		\PrbTFoot{\star}{\norm{
+				\drift^N_{1,1}(t, \mfsol^N) 
+				- \ETFoot{\star}{
+					\drift^N_{1,1}(t,\mfsol)
+				}
+			} \geq N^{-\xi} 
+		}{}
+		\leq
+		C_\gamma N^{-\gamma}
+	\end{align*}
+	
+	where $\star$ is either $1$ or is absent.		
 	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2v}$ for a generic $v \in \N$.
 	\begin{align*}
-		&\PrbTilde{\norm{
+		&\PrbTFoot{\star}{\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETilde{
-					\drift^N_{1,1}(t,\mfsol)
+				- \ETFoot{\star}{
+					\drift^N_{1,1}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		} \leq
 		\\
-		&\leq \frac{1}{ (N^{-\xi})^{2v} } \ETilde{
+		&\leq \frac{1}{ (N^{-\xi})^{2v} } \ETFoot{\star}{
 				\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETilde{
-					\drift^N_{1,1}(t,\mfsol)
+				- \ETFoot{\star}{
+					\drift^N_{1,1}(t,\mfsol^N)
 					}
 				}^{2v}
 			}
 		\\
-		& = N^{\xi 2 v} \ETilde{
+		& = N^{\xi 2 v} \ETFoot{\star}{
 			\norm{
-			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction_1(\mfamba^1 - \mfcamp^{p,g})
-			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETilde{
-				\attraction_1(\mfamba^1 - \mfcamp^{p,g})
+			\frac{1}{N} 
+			\sum _{m = 1}^{\hmactive_t} 
+				\attraction_1(\mfamba^1 - \mfcamp^m)
+			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETFoot{\star}{
+				\attraction_1(\mfamba^1 - \mfcamp^m)
 			}
 		}^{2v}
 		}
 		\\
 		& = N^{\xi 2 v} \frac{1}{N^{2v}} 
-		\ETilde{
+		\ETFoot{\star}{
 			\norm{
-			\sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} 
+			\sum _{m = 1}^{\hmactive_t} 
 			\left[
-			\attraction_1(\mfamba^1 - \mfcamp^{p,g})
-			- \ETilde{ \left( \attraction_1 \star \cdens^{p,g} \right) (\mfamba^1)}
+			\attraction_1(\mfamba^1 - \mfcamp^m)
+			- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 			\right]
 		}^{2v}
-	}=
-	\end{align*}
-	Here the relabelling of the model, \ref{ch2:model-reformulation}, proves its value:
-	\begin{align*}
+	}
+	\\
 		&= N^{(\xi -1) 2 v}
-		\ETilde{
+		\ETFoot{\star}{
 			\norm{
 				\sum _{m = 1}^{\hmactive_t} 
 				\underbrace{
 				\left[
 				\attraction_1(\mfamba^1 - \mfcamp^m)
-				- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 				\right]
 			}_{x_m}
 			}^{2v}
@@ -861,32 +916,125 @@ The proof is classical law of large numbers, following for example \autocite{ana
 	Now we can apply the multinomial formula:
 	\begin{equation}
 		\left( \sum_{m=1}^M x_m \right)^{2v}
-		= \sum_{\alpha_1 + \ldots + \alpha_M} \frac{(2v)!}{a_1! \ldots a_M!} \prod_{m=1}^M (x_m)^{a_m}
+		= \sum_{\alpha_1 + \ldots + \alpha_M =2v} \frac{(2v)!}{a_1! \ldots a_M!} \prod_{m=1}^M (x_m)^{a_m}
 	\end{equation}
 	
 	Obtaining than
 		\begin{align*}
 		&= N^{(\xi -1) 2 v}
-		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t}}
-			\frac{(2v)!}{a_1! \ldots a_{\hmactive_t}!}
-			\ETilde{
+			\ETFoot{\star}{
+				\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+				\frac{(2v)!}{\alpha_1! \ldots \alpha_{\hmactive_t}!}
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
 					\attraction_1(\mfamba^1 - \mfcamp^m)
-					- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
-				}^{a_m}
+					- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				}^{\alpha_m}
 			}
 		\\
 		&\leq N^{(\xi -1) 2 v} (2v)!
-		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t}}
-		\ETilde{
+		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+		\ETFoot{\star}{
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
 				\attraction_1(\mfamba^1 - \mfcamp^m)
-				- \ETilde{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
-			}^{a_m}
-		}
+				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+			}^{\alpha_m}
+		} = 
 	\end{align*}
+	
+	Now notice that the \rv s $\attraction_1(\mfamba^1 - \mfcamp^m)$ are independent if $\mfamba^1$ is conditioned, thus we need to underline a passage which is superfluous if $\ETFoot{\star}{\cdot} = \ETFoot{1}{\cdot}$ but not if $\ETFoot{\star}{\cdot} = \ETFoot{}{\cdot}$:
+	
+	\begin{align*}
+	&= N^{(\xi -1) 2 v} (2v)!
+	\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+	\ETFoot{\star}{
+			\ETFoot{1}{
+			\prod_{m=1}^{\hmactive_t}
+			\norm{
+				\attraction_1(\mfamba^1 - \mfcamp^m)
+				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+			}^{\alpha_m}
+		}
+	}
+	\\
+		&= N^{(\xi -1) 2 v} (2v)!
+	\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+	\prod_{m=1}^{\hmactive_t}
+	\underbrace{
+		\ETFoot{\star}{
+			\ETFoot{1}{
+				\norm{
+					\underbrace{
+						\attraction_1(\mfamba^1 - \mfcamp^m)
+					}_{:=\Ch_m}
+					- 
+					\underbrace{
+						\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					}_{	\ETFoot{\star}{\Ch_m}}
+				}^{\alpha_m}
+			}
+		}
+	}_{:= \Zhi_m}
+	\end{align*}
+	
+	Let us examine closer the term $\Zhi_m$. 
+	If $\alpha_m =0$ we have
+
+	\begin{equation*}
+		\Zhi_m 
+		= 
+		\ETFoot{\star}{
+			\ETFoot{1}{
+				\norm{
+					\Ch_m
+					- \ETFoot{\star}{\Ch_m}
+				}^0
+		}} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1
+	\end{equation*}
+	
+	If instead $\alpha_m =1$ we have:
+	\begin{equation*}
+		\Zhi_m
+		= 	\ETFoot{\star}{
+			\ETFoot{1}{
+				\norm{
+					\Ch_m
+					- \ETFoot{\star}{\Ch_m}
+				}^1
+		}}
+		= 	\ETFoot{\star}{
+			\norm{
+					\Ch_m
+					- \ETFoot{\star}{\Ch_m}
+			}
+		}	= 0
+	\end{equation*}
+
+	\begin{claim}
+		If $\alpha_m \geq 2$, then 
+		\begin{equation}
+			\Zhi_m = \ETFoot{\star}{ \ETFoot{1}{ \norm{\Ch_m - \ETFoot{\star}{\Ch_m} }^{\alpha_m} }} 
+			\leq \: 
+			bound
+		\end{equation}
+		[[put here exact bound]] 
+	\end{claim}
+	
+	\begin{proof}[Proof of the claim]
+	\begin{align*}
+		\Zhi_m &= \ETFoot{\star}{ \ETFoot{1}{ \norm{\Ch_m - \ETFoot{\star}{\Ch_m} }^{\alpha_m} }} 
+		=
+		\\
+		&= 
+		\int_{\R^d} \attraction
+	\end{align*}
+	\end{proof}
+	
+
+	
+	
+	
 	
 \end{proof}
 
