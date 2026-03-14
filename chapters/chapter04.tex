@@ -739,7 +739,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
-	Fix now $\xi>0$ such that [[conditions on $\alpha + \xi < 1$?]] and define the sets
+	Fix now $0<\xi<\frac{1}{2}$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -763,14 +763,14 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then are valid the laws of large numbers under $\PrbCondTimes{\cdot}{}$, \ie for all $\gamma>0$ exists $C_\gamma >0$ such that:
+	Then are valid the laws of large numbers under $\PrbCondTimes{\cdot}{}$, \ie for all $n\in\N$ exists $C_n >0$ such that:
 	\begin{align}
 		& \PrbCondTimes{S^{N,\xi}_\amba}{}
-			\leq C_\gamma N^{-\gamma}
+			\leq C_n N^{-n}
 		&& \label{ch4:lemma:cond-lln-1}
 		\\
 		& \PrbCondTimes{S^{N,\xi}}{}
-			\leq C_\gamma N^{-\gamma}
+			\leq C_n N^{-n}
 		&& \label{ch4:lemma:cond-lln-2}
 	\end{align}
 \end{proposition}
@@ -861,7 +861,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{align*}
 	
 	where $\star$ is either $1$ or is absent.		
-	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2v}$ for a generic $v \in \N$.
+	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2n}$ for a generic $n \in \N$.
 	\begin{align*}
 		&\PrbTFoot{\star}{\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
@@ -871,13 +871,13 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			} \geq N^{-\xi} 
 		} \leq
 		\\
-		&\leq \frac{1}{ (N^{-\xi})^{2v} } \ETFoot{\star}{
+		&\leq \frac{1}{ (N^{-\xi})^{2n} } \ETFoot{\star}{
 				\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
 				- \ETFoot{\star}{
 					\drift^N_{1,1}(t,\mfsol^N)
 					}
-				}^{2v}
+				}^{2n}
 			}
 		\\
 		& = N^{\xi 2 v} \ETFoot{\star}{
@@ -888,10 +888,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETFoot{\star}{
 				\attraction_1(\mfamba^1 - \mfcamp^m)
 			}
-		}^{2v}
+		}^{2n}
 		}
 		\\
-		& = N^{\xi 2 v} \frac{1}{N^{2v}} 
+		& = N^{\xi 2 v} \frac{1}{N^{2n}} 
 		\ETFoot{\star}{
 			\norm{
 			\sum _{m = 1}^{\hmactive_t} 
@@ -899,7 +899,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\attraction_1(\mfamba^1 - \mfcamp^m)
 			- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 			\right]
-		}^{2v}
+		}^{2n}
 	}
 		\\
 		&= N^{(\xi -1) 2 v}
@@ -915,7 +915,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 						\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 					}_{=\ETFoot{\star}{\Psi_m}=: \psi_m^\star}
 				\right]
-			}^{2v}
+			}^{2n}
 		}
 		=
 	\end{align*}
@@ -923,10 +923,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Setting $\Zhi_m := |\Psi_m - \psi_m^\star|$, we can apply the multinomial formula:
 	
 	\begin{align}
-		\left( \sum_{m=1}^M \Zhi_m \right)^{2v}
-		&= \sum_{\alpha_1 + \ldots + \alpha_M =2v} \frac{(2v)!}{\alpha_1! \ldots \alpha_M!} \prod_{m=1}^M (\Psi_m - \psi_m^\star)^{\alpha_m}
+		\left( \sum_{m=1}^M \Zhi_m \right)^{2n}
+		&= \sum_{\alpha_1 + \ldots + \alpha_M =2n} \frac{(2n)!}{\alpha_1! \ldots \alpha_M!} \prod_{m=1}^M (\Psi_m - \psi_m^\star)^{\alpha_m}
 		\\
-		&= \sum_{|\alpha(M) |=2v} \frac{(2v)!}{(\alpha(M))!} \prod_{m=1}^M (\Zhi_m)^{\alpha_m}
+		&= \sum_{|\alpha(M) |=2n} \frac{(2n)!}{(\alpha(M))!} \prod_{m=1}^M (\Zhi_m)^{\alpha_m}
 	\end{align}
 	
 	where $\alpha(M)$ is the multi-index $(\alpha_1, \ldots, \alpha_M)$ and $(\alpha(M))! := \alpha_1!\ldots \alpha_M!$ and $|\alpha(M)|:=\alpha_1 + \cdots + \alpha_M$.
@@ -935,8 +935,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\begin{align*}
 		&= N^{(\xi -1) 2 v}
 			\ETFoot{\star}{
-				\sum_{|\alpha(\hmactive_t) |=2v}
-				\frac{(2v)!}{(\alpha(\hmactive_t))!}
+				\sum_{|\alpha(\hmactive_t) |=2n}
+				\frac{(2n)!}{(\alpha(\hmactive_t))!}
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
 					\Psi_m - \psi_m^\star
@@ -944,8 +944,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}
 		\\
 		& = N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2v}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\sum_{|\alpha(\hmactive_t) | =2n}
+		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		\ETFoot{\star}{
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
@@ -969,8 +969,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	\begin{align*}
 		&= N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2v}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\sum_{|\alpha(\hmactive_t) | =2n}
+		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		\ETFoot{\star}{
 			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
@@ -982,8 +982,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}} = 
 	\\
 		&= N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2v}
-	\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\sum_{|\alpha(\hmactive_t) | =2n}
+	\frac{(2n)!}{(\alpha(\hmactive_t))!}
 	\prod_{m=1}^{\hmactive_t}
 		\ETFoot{\star}{
 			\ETFoot{1}{
@@ -996,8 +996,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}
 	\\
 	& = N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2v}
-	\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\sum_{|\alpha(\hmactive_t) | =2n}
+	\frac{(2n)!}{(\alpha(\hmactive_t))!}
 	\prod_{m=1}^{\hmactive_t}
 	\ETFoot{\star}{
 			\norm{
@@ -1008,8 +1008,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}
 	\\
 	& = N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2v}
-	\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\sum_{|\alpha(\hmactive_t) | =2n}
+	\frac{(2n)!}{(\alpha(\hmactive_t))!}
 	\prod_{m=1}^{\hmactive_t}
 	\underbrace{
 	\ETFoot{\star}{
@@ -1084,20 +1084,20 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\\
 			&\leq
 			\left(
-			\Norm{V}_\infty + \Norm{\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}}_\infty
+			\Norm{\attraction}_\infty + \Norm{\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}}_\infty
 			\right)^{\alpha_m}
 			\\
 			& \leq
 			\left(
-			\Norm{V}_\infty + \Norm{V \star \cdens^m}_\infty
+			\Norm{V}_\infty + \Norm{\attraction \star \cdens^m}_\infty
 			\right)
 			^{\alpha_m}
 			\\
 			& \leq
 			\left(
-			\Norm{V}_\infty + \Norm{V}_\infty \Norm{\cdens^m}_1
+			\Norm{V}_\infty + \Norm{\attraction}_\infty \Norm{\cdens^m}_1
 			\right)^{\alpha_m}
-			\\ &= 2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}
+			\\ &= 2^{\alpha_m} \Norm{\attraction}_\infty^{\alpha_m}
 		\end{align*}
 	\end{proof}
 	
@@ -1118,8 +1118,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	\begin{align*}
 		& N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2v}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\sum_{|\alpha(\hmactive_t) | =2n}
+		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		\prod_{m=1}^{\hmactive_t}
 			\ETFoot{\star}{
 				\norm{
@@ -1131,41 +1131,64 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		 N^{(\xi -1) 2 v}
 		\sum_{
 			\substack{
-			|\alpha(\hmactive_t) | =2v
+			|\alpha(\hmactive_t) | =2n
 			\\
 			\#^1 \left(\alpha(\hmactive_t) \right) = 0
 			}}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		\prod_{m=1}^{\hmactive_t}
-		2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}
+		2^{\alpha_m} \Norm{\attraction}_\infty^{\alpha_m}
 		\\
 		& = N^{(\xi -1) 2 v}
 		\sum_{
 			\substack{
-				|\alpha(\hmactive_t) | =2v
+				|\alpha(\hmactive_t) | =2n
 				\\
 				\#^1 \left(\alpha(\hmactive_t) \right) = 0
 		}}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		2^{\alpha_1 + \cdots + \alpha_{\hmactive_t}} \Norm{V}_\infty^{\alpha_1 + \cdots + \alpha_{\hmactive_t}}
 		\\
 		& = N^{(\xi -1) 2 v}
-		(2 \Norm{V}_\infty)^{2v}
-		\sum_{
-			\substack{
-				|\alpha(\hmactive_t) | =2v
-				\\
-				\#^1 \left(\alpha(\hmactive_t) \right) = 0
-		}}
-		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+			(2 \Norm{\attraction}_\infty)^{2n}
+			\sum_{
+				\substack{
+					|\alpha(\hmactive_t) | =2n
+					\\
+					\#^1 \left(\alpha(\hmactive_t) \right) = 0
+			}}
+			\frac{(2n)!}{(\alpha(\hmactive_t))!}
+		\\
+		&\leq N^{(\xi -1) 2 v}
+		\underbrace{
+			(2 \Norm{\attraction}_\infty)^{2n}
+			(2n)!
+			\sum_{
+				\substack{
+					|\alpha(\hmactive_t) | =2n
+					\\
+					\#^1 \left(\alpha(\hmactive_t) \right) = 0
+			}}
+			1
+		}_{
+			=: C_n
+		}
+		\leq 
+		N^{- n} C_n
 	\end{align*}
-	
-	
-	
-	
+	In the last passage we used the assumption that $\xi < \frac{1}{2}$ and that $\Norm{\attraction}_\infty$ is bounded.
 \end{proof}
 
+
+
+\begin{remark}
+	There is a version of this proposition where the assumption on the attraction $\attraction$ is relaxed, allowing it to have a cut-off singularity in $0$.
+	If you are interested more on this can be found in the appendix at \ref{app:conditioned-LLN-with-singularity}.
+\end{remark}
+
 \subsection{The less conditional law of large numbers}
+
+[[[problem: in the previous lemma the constant depends on the process $\hmactive_t$, which is allright but should be explicitly stated there]]]
 
 \begin{proposition}
 	
