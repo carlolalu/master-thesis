@@ -722,7 +722,11 @@ The proof is classical law of large numbers, following for example \autocite{ana
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
 \begin{proposition}
-	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t$ be a \rv and let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
+	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
+	\begin{equation}
+		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
+	\end{equation}
+	Let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -897,141 +901,264 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right]
 		}^{2v}
 	}
-	\\
+		\\
 		&= N^{(\xi -1) 2 v}
 		\ETFoot{\star}{
 			\norm{
 				\sum _{m = 1}^{\hmactive_t} 
-				\underbrace{
 				\left[
-				\attraction_1(\mfamba^1 - \mfcamp^m)
-				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					\underbrace{
+						\attraction_1(\mfamba^1 - \mfcamp^m)
+					}_{:=\Psi_m}
+					-
+					\underbrace{
+						\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					}_{=\ETFoot{\star}{\Psi_m}=: \psi_m^\star}
 				\right]
-			}_{x_m}
 			}^{2v}
 		}
 		=
 	\end{align*}
 	
-	Now we can apply the multinomial formula:
-	\begin{equation}
-		\left( \sum_{m=1}^M x_m \right)^{2v}
-		= \sum_{\alpha_1 + \ldots + \alpha_M =2v} \frac{(2v)!}{a_1! \ldots a_M!} \prod_{m=1}^M (x_m)^{a_m}
-	\end{equation}
+	Setting $\Zhi_m := |\Psi_m - \psi_m^\star|$, we can apply the multinomial formula:
 	
-	Obtaining than
+	\begin{align}
+		\left( \sum_{m=1}^M \Zhi_m \right)^{2v}
+		&= \sum_{\alpha_1 + \ldots + \alpha_M =2v} \frac{(2v)!}{\alpha_1! \ldots \alpha_M!} \prod_{m=1}^M (\Psi_m - \psi_m^\star)^{\alpha_m}
+		\\
+		&= \sum_{|\alpha(M) |=2v} \frac{(2v)!}{(\alpha(M))!} \prod_{m=1}^M (\Zhi_m)^{\alpha_m}
+	\end{align}
+	
+	where $\alpha(M)$ is the multi-index $(\alpha_1, \ldots, \alpha_M)$ and $(\alpha(M))! := \alpha_1!\ldots \alpha_M!$ and $|\alpha(M)|:=\alpha_1 + \cdots + \alpha_M$.
+	Then we obtain
+	
 		\begin{align*}
 		&= N^{(\xi -1) 2 v}
 			\ETFoot{\star}{
-				\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
-				\frac{(2v)!}{\alpha_1! \ldots \alpha_{\hmactive_t}!}
+				\sum_{|\alpha(\hmactive_t) |=2v}
+				\frac{(2v)!}{(\alpha(\hmactive_t))!}
+				\prod_{m=1}^{\hmactive_t}
+				\norm{
+					\Psi_m - \psi_m^\star
+				}^{\alpha_m}
+			}
+		\\
+		& = N^{(\xi -1) 2 v}
+		\sum_{|\alpha(\hmactive_t) | =2v}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\ETFoot{\star}{
+			\prod_{m=1}^{\hmactive_t}
+			\norm{
+				\Psi_m - \psi_m^\star
+			}^{\alpha_m}
+		} =
+	\end{align*}
+	
+	Notice now that for each $m$ the \rvs
+	
+	\begin{equation}
+		 \Psi_m - \psi_m^\star 
+		 \quad
+		 = 
+		 \quad
+		 \attraction_1(\mfamba^1 - \mfcamp^m)
+		- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+	\end{equation}
+	
+	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
+	
+	\begin{align*}
+		&= N^{(\xi -1) 2 v}
+		\sum_{|\alpha(\hmactive_t) | =2v}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\ETFoot{\star}{
+			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
 					\attraction_1(\mfamba^1 - \mfcamp^m)
-					- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					-
+					\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				}^{\alpha_m}
+		}} = 
+	\\
+		&= N^{(\xi -1) 2 v}
+	\sum_{|\alpha(\hmactive_t) | =2v}
+	\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\prod_{m=1}^{\hmactive_t}
+		\ETFoot{\star}{
+			\ETFoot{1}{
+				\norm{
+					\attraction_1(\mfamba^1 - \mfcamp^m)
+					-
+					\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 				}^{\alpha_m}
 			}
-		\\
-		&\leq N^{(\xi -1) 2 v} (2v)!
-		\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
-		\ETFoot{\star}{
-			\prod_{m=1}^{\hmactive_t}
-			\norm{
-				\attraction_1(\mfamba^1 - \mfcamp^m)
-				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
-			}^{\alpha_m}
-		} = 
-	\end{align*}
-	
-	Now notice that the \rv s $\attraction_1(\mfamba^1 - \mfcamp^m)$ are independent if $\mfamba^1$ is conditioned, thus we need to underline a passage which is superfluous if $\ETFoot{\star}{\cdot} = \ETFoot{1}{\cdot}$ but not if $\ETFoot{\star}{\cdot} = \ETFoot{}{\cdot}$:
-	
-	\begin{align*}
-	&= N^{(\xi -1) 2 v} (2v)!
-	\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+		}
+	\\
+	& = N^{(\xi -1) 2 v}
+	\sum_{|\alpha(\hmactive_t) | =2v}
+	\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\prod_{m=1}^{\hmactive_t}
 	\ETFoot{\star}{
-			\ETFoot{1}{
-			\prod_{m=1}^{\hmactive_t}
 			\norm{
 				\attraction_1(\mfamba^1 - \mfcamp^m)
-				- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				-
+				\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
 			}^{\alpha_m}
 		}
-	}
 	\\
-		&= N^{(\xi -1) 2 v} (2v)!
-	\sum_{\alpha_1 + \ldots + \alpha_{\hmactive_t} =2v}
+	& = N^{(\xi -1) 2 v}
+	\sum_{|\alpha(\hmactive_t) | =2v}
+	\frac{(2v)!}{(\alpha(\hmactive_t))!}
 	\prod_{m=1}^{\hmactive_t}
 	\underbrace{
-		\ETFoot{\star}{
-			\ETFoot{1}{
-				\norm{
-					\underbrace{
-						\attraction_1(\mfamba^1 - \mfcamp^m)
-					}_{:=\Ch_m}
-					- 
-					\underbrace{
-						\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
-					}_{	\ETFoot{\star}{\Ch_m}}
-				}^{\alpha_m}
-			}
-		}
-	}_{:= \Zhi_m}
+	\ETFoot{\star}{
+		\norm{
+			\Psi_m - \psi_m^\star 
+		}^{\alpha_m}
+	}
+	}_{\leq ?}
 	\end{align*}
 	
-	Let us examine closer the term $\Zhi_m$. 
-	If $\alpha_m =0$ we have
-
-	\begin{equation*}
-		\Zhi_m 
-		= 
-		\ETFoot{\star}{
-			\ETFoot{1}{
-				\norm{
-					\Ch_m
-					- \ETFoot{\star}{\Ch_m}
-				}^0
-		}} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1
-	\end{equation*}
-	
-	If instead $\alpha_m =1$ we have:
-	\begin{equation*}
-		\Zhi_m
-		= 	\ETFoot{\star}{
-			\ETFoot{1}{
-				\norm{
-					\Ch_m
-					- \ETFoot{\star}{\Ch_m}
-				}^1
-		}}
-		= 	\ETFoot{\star}{
-			\norm{
-					\Ch_m
-					- \ETFoot{\star}{\Ch_m}
-			}
-		}	= 0
-	\end{equation*}
-
-	\begin{claim}
-		If $\alpha_m \geq 2$, then 
+	\begin{claim}\label{ch4:claim:bound-on-Psi-psi}
 		\begin{equation}
-			\Zhi_m = \ETFoot{\star}{ \ETFoot{1}{ \norm{\Ch_m - \ETFoot{\star}{\Ch_m} }^{\alpha_m} }} 
-			\leq \: 
-			bound
+			\ETFoot{\star}{
+				\norm{
+					\Psi_m - \psi_m^\star 
+				}^{\alpha_m}
+			}
+			\leq 
+			\left\{
+			\begin{aligned}
+				& 0 		&&\text{if} \quad \alpha_m = 1
+				\\
+				&2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}	\quad		&&\text{otherwise}
+			\end{aligned}
+			\right.
 		\end{equation}
-		[[put here exact bound]] 
 	\end{claim}
 	
 	\begin{proof}[Proof of the claim]
-	\begin{align*}
-		\Zhi_m &= \ETFoot{\star}{ \ETFoot{1}{ \norm{\Ch_m - \ETFoot{\star}{\Ch_m} }^{\alpha_m} }} 
-		=
-		\\
-		&= 
-		\int_{\R^d} \attraction
-	\end{align*}
+			If $\alpha_m =0$ we have
+		
+		\begin{equation*}
+			\ETFoot{\star}{
+				\norm{
+					\Psi_m
+					- \psi_m^\star
+				}^0
+			} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1 = 2^0 \Norm{\attraction}^0
+		\end{equation*}
+		
+		If instead $\alpha_m =1$ we have:
+		\begin{equation*}
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^1 }
+			=
+			\ETFoot{\star}{
+				\ETFoot{1}{
+					\norm{
+						\Psi_m
+						- \psi_m^\star
+					}
+			}}
+			= 	\ETFoot{\star}{
+				\norm{
+					\Psi_m
+					- \psi_m^\star
+				}
+			}	= 0
+		\end{equation*}
+		
+		Then finally, if $\alpha_m \geq 2$ we have
+		
+		\begin{align*}
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m} }
+			& \leq
+			\Norm{\Psi_m - \psi_m^\star }_\infty^{\alpha_m}
+			\\
+			&= \Norm{
+				\attraction_1(\mfamba^1 - \mfcamp^m)
+				-
+				\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+			}_\infty^{\alpha_m}
+			\\
+			&\leq
+			\left(
+			\Norm{V}_\infty + \Norm{\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}}_\infty
+			\right)^{\alpha_m}
+			\\
+			& \leq
+			\left(
+			\Norm{V}_\infty + \Norm{V \star \cdens^m}_\infty
+			\right)
+			^{\alpha_m}
+			\\
+			& \leq
+			\left(
+			\Norm{V}_\infty + \Norm{V}_\infty \Norm{\cdens^m}_1
+			\right)^{\alpha_m}
+			\\ &= 2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}
+		\end{align*}
 	\end{proof}
 	
-
+	Let us define, for every multi-index $\alpha(\hmactive_t)$ the quantity
+	\begin{equation}
+		\#^k \left( \alpha(\hmactive_t)  \right):= \# \{ 
+			i 
+			\:
+			\big|
+			\:
+			\alpha_i = k \: \text{ is a coordinate of } \: \alpha(\hmactive_t)
+		\}
+	\end{equation}
+	
+	\ie the amount of indices in $\alpha(\hmactive_t)$ which are equal to $k$.
+	In our calculations, because of claim \ref{ch4:claim:bound-on-Psi-psi}, we have that whenever $\#^1 (\alpha(\hmactive_t) )\neq 0$, the whole term with it is $0$.
+	Then, going on with our calculations, exploiting claim \ref{ch4:claim:bound-on-Psi-psi}, we have that
+	
+	\begin{align*}
+		& N^{(\xi -1) 2 v}
+		\sum_{|\alpha(\hmactive_t) | =2v}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\prod_{m=1}^{\hmactive_t}
+			\ETFoot{\star}{
+				\norm{
+					\Psi_m - \psi_m^\star 
+				}^{\alpha_m}
+			} \leq
+			\\
+		& \leq
+		 N^{(\xi -1) 2 v}
+		\sum_{
+			\substack{
+			|\alpha(\hmactive_t) | =2v
+			\\
+			\#^1 \left(\alpha(\hmactive_t) \right) = 0
+			}}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		\prod_{m=1}^{\hmactive_t}
+		2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}
+		\\
+		& = N^{(\xi -1) 2 v}
+		\sum_{
+			\substack{
+				|\alpha(\hmactive_t) | =2v
+				\\
+				\#^1 \left(\alpha(\hmactive_t) \right) = 0
+		}}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+		2^{\alpha_1 + \cdots + \alpha_{\hmactive_t}} \Norm{V}_\infty^{\alpha_1 + \cdots + \alpha_{\hmactive_t}}
+		\\
+		& = N^{(\xi -1) 2 v}
+		(2 \Norm{V}_\infty)^{2v}
+		\sum_{
+			\substack{
+				|\alpha(\hmactive_t) | =2v
+				\\
+				\#^1 \left(\alpha(\hmactive_t) \right) = 0
+		}}
+		\frac{(2v)!}{(\alpha(\hmactive_t))!}
+	\end{align*}
 	
 	
 	
