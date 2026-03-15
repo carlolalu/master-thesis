@@ -718,6 +718,209 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 
 \subsection{The conditional law of large numbers}
 
+In this subsection we prove a more general result than the one that we will use in main result: we will use an attraction which also admits a cut-off Coulomb-type of singularity.
+
+\begin{definition}[Generalised attraction and drift]\label{ch4:def:generalised-attr&drift}
+	Let $N \in \NumParticles, \alpha > 0$.
+	Let $\cutoffSinAttraction = \cutoffSinAttraction (N, \alpha) : \R^d \longrightarrow \R^d$ be a function such that
+	\begin{equation}
+		\norm{\cutoffSinAttraction}
+		\leq 
+		\left( 
+			\frac{1}{\norm{x}} \wedge N^\alpha
+		\right)
+		=
+		\left\{
+		\begin{aligned}
+			&\frac{1}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
+			\\
+			&N^{\alpha}						&& \text{otherwise}
+		\end{aligned}
+		\right.
+	\end{equation}
+	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $n^{\alpha}$.
+	Then we defined the generalised attraction as $\genAttraction := \genAttraction(N, \alpha) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
+	\begin{equation}
+		\left\{
+		\begin{aligned}
+			{}^{\genAttraction}\drift_k(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \genAttraction(x^k - x^{p,g})
+			&& 1\leq k \leq N
+			\\
+			{}^{\genAttraction}\drift_{p,g}(t,x) &:= 0
+			&& \text{if } \exists (p,g)
+		\end{aligned}
+		\right.
+	\end{equation}
+\end{definition}
+
+[[here tikz figure]]
+
+\begin{remark}
+	For the sake of shortness we will simply write $\drift$ for ${}^{\genAttraction}\drift$ all along this subsection, where such generalised attraction is used.
+\end{remark}
+
+Before proceeding to the law of large numbers we need to gather some preliminary lemmas.
+The first is a simple result of \autocite{peter-boers}, that we simply report here.
+
+\begin{lemma}\label{ch4:lemma:<-1+infty-norm}
+	For a function $f$ define the eventually infinite quantities
+	\begin{gather*}
+		\Norm{f}_{1 \wedge \infty} := 
+			\inf_{f_1 + f_\infty = f} 
+			\left( 
+				\Norm{f_1}_1 + \Norm{f_\infty}_\infty
+			\right)
+		\\
+		\Norm{f}_{1 \vee \infty} := 
+			\Norm{f}_1 + \Norm{f}_\infty
+	\end{gather*}
+	Then for arbitrary functions $,g$ it is true that
+	\begin{equation}
+		\Norm{f \star g}_\infty
+		\leq
+		\Norm{f}_{1 \wedge \infty} \cdot \Norm{g}_{1 \vee \infty}
+	\end{equation}
+\end{lemma}
+
+\begin{proof}
+	Let $g_1 + g_\infty = g$ be a decomposition of $g$.
+	Then
+	\begin{align*}
+		&\Norm{f \star g}_\infty 
+		\leq 
+		\Norm{f \star g_1}_\infty + \Norm{f \star g_1}_1
+		\leq
+		\\
+		&\leq
+		\Norm{f}_\infty \Norm{g_1}_1 + \Norm{f}_1 \Norm{g_\infty}_\infty
+		\\
+		&\leq
+		(\Norm{f}_\infty + \Norm{f}_1) ( \Norm{g_1}_1 + \Norm{g_\infty}_\infty)
+		= \Norm{f}_{1 \vee \infty}	( \Norm{g_1}_1 + \Norm{g_\infty}_\infty)
+	\end{align*}
+	Since this is valid for every decomposition $g_1 + g_\infty = g$, we have our result.
+\end{proof}
+
+The second lemma that we need is a simple evaluation of these quantities for the generalised attraction.
+
+\begin{lemma}\label{ch4:lemma:eval-norm-gen-attr}
+	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_\attraction$ depending only on $\attraction$ such that
+	\begin{align}
+		\Norm{\genAttraction}_{1 \wedge \infty}, \:
+		\Norm{\genAttraction^2}_{1 \wedge \infty} 
+		\leq K_\attraction
+	\end{align}
+\end{lemma}
+
+\begin{proof}
+	Let us first operate for the power $1$.
+	Choose the decomposition 
+	\begin{equation}
+		\genAttraction = \attraction + \cutoffSinAttraction = 
+		\underbrace{ 
+			\attraction + \cutoffSinAttraction \1_{\norm{x} \leq 1}
+		}_{=:(\genAttraction)_1}
+		+
+		\underbrace{
+			\cutoffSinAttraction \1_{\norm{x} > 1}
+		}_{=:(\genAttraction)_\infty}
+	\end{equation}
+	
+	[[put here a tikzfigure with everythign]]
+	
+	Then we have that
+	
+	\begin{align*}
+		&\Norm{(\genAttraction)_1}_1
+		\leq
+		\Norm{\attraction}_1 + \Norm{\cutoffSinAttraction \1_{\norm{x} \leq 1}}_1
+		\leq
+		\\
+		&\leq
+		\Norm{\attraction}_1 + \Norm{N^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{1}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
+		\\
+		&\leq
+		\Norm{\attraction}_1 + N^{\alpha} \cdot \lebsge (\Ball^{d-1}(N^{-\alpha})) + \int_{N^{-\alpha}}^1 \: \frac{1}{\norm{x}} \: dx
+		\\
+		& \leq
+		\Norm{\attraction}_1 
+		+ N^{\alpha} \max \left\{
+				\pi (N^{-\alpha})^2
+				,\frac{4}{3} \pi (N^{-\alpha})^3
+			\right\}
+			+
+			\max \left\{
+				\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
+				,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
+			\right\}
+		\\
+		& \leq 
+		\Norm{\attraction}_1 
+		+ N^{\alpha-2\alpha} 2 \pi
+		+ 2 \pi \cdot 2 \max \left\{
+		\int_0^1 dr
+		,\int_0^1  r\: dr
+		\right\}
+		\\
+		& \leq
+		\Norm{\attraction}_1
+		+ 6\pi 
+	\end{align*}
+	
+	And obviously we have that
+	
+	\begin{equation*}
+		\Norm{\cutoffSinAttraction \1_{\norm{x} > 1}}_\infty 
+		\leq 
+		\Norm{\frac{1}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = 1
+	\end{equation*}
+	
+	Then the first inequality is proven.
+	
+	[[treat the case with the power of 2]]
+	Let us proceed with the power $2$.
+	Let us choose this decomposition:
+	
+	\begin{align*}
+		\genAttraction^2 
+		&= 
+		\left(
+			\attraction + \cutoffSinAttraction
+		\right)^2
+		= \attraction^2 + 2 \attraction \cutoffSinAttraction + \cutoffSinAttraction^2 
+		\\
+		& = 
+		\underbrace{ 
+			\attraction^2 + 2 \attraction \cutoffSinAttraction \1_{\norm{x} \leq 1}
+		}_{=:(\genAttraction^2)_1}
+		+
+		\underbrace{
+			\attraction \cutoffSinAttraction \1_{\norm{x} > 1}
+			+ \cutoffSinAttraction^2 \1_{\norm{x} > 1}
+		}_{=:(\genAttraction^2)_\infty}
+	\end{align*}
+	
+	Then we have that
+	
+	\begin{equation*}
+		\Norm{(\genAttraction^2)_1}_1 
+		\leq
+		\Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \int \norm{\cutoffSinAttraction}  \1_{\norm{x} \leq 1}
+		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty 6\pi
+	\end{equation*}
+	
+	And regarding the other term:
+	
+	\begin{equation*}
+		\Norm{\attraction \cutoffSinAttraction \1_{\norm{x} > 1}
+			+ \cutoffSinAttraction^2 \1_{\norm{x} > 1}}_\infty 
+		\leq 
+		\Norm{\frac{\attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{1}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = \Norm{\attraction}_\infty + 1
+	\end{equation*}
+	
+\end{proof}
+
+Now we can finally approach the conditional law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
@@ -726,7 +929,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the usual drift (\ref{ch2:def:drift-&-diffusion}).
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift defined in \ref{ch2:def:drift-&-diffusion}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -735,11 +938,16 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\begin{equation*}
 			\exists K_0.\forall p,m,t.
 			\qquad
-			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_0
+			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_{dens}
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
-	Fix now $0<\xi<\frac{1}{2}$ and define the sets
+	Fix now $0<\xi<\frac{1}{2}$
+	
+	[[here the correct conditions on $\xi$ and $\alpha$]]
+	
+	
+	 and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -773,6 +981,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\leq C_n N^{-n}
 		&& \label{ch4:lemma:cond-lln-2}
 	\end{align}
+	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then 
+	
+	[[put here correct consequences if $\alpha =0$]]
 \end{proposition}
 
 \begin{proof}
@@ -884,9 +1095,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\norm{
 			\frac{1}{N} 
 			\sum _{m = 1}^{\hmactive_t} 
-				\attraction_1(\mfamba^1 - \mfcamp^m)
+				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETFoot{\star}{
-				\attraction_1(\mfamba^1 - \mfcamp^m)
+				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 			}
 		}^{2n}
 		}
@@ -896,8 +1107,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\norm{
 			\sum _{m = 1}^{\hmactive_t} 
 			\left[
-			\attraction_1(\mfamba^1 - \mfcamp^m)
-			- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
+			- \ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 			\right]
 		}^{2n}
 	}
@@ -908,11 +1119,11 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				\sum _{m = 1}^{\hmactive_t} 
 				\left[
 					\underbrace{
-						\attraction_1(\mfamba^1 - \mfcamp^m)
+						(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 					}_{:=\Psi_m}
 					-
 					\underbrace{
-						\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+						\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 					}_{=\ETFoot{\star}{\Psi_m}=: \psi_m^\star}
 				\right]
 			}^{2n}
@@ -961,8 +1172,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		 \quad
 		 = 
 		 \quad
-		 \attraction_1(\mfamba^1 - \mfcamp^m)
-		- \ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+		 (\genAttraction)_1(\mfamba^1 - \mfcamp^m)
+		- \ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 	\end{equation}
 	
 	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
@@ -975,9 +1186,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
-					\attraction_1(\mfamba^1 - \mfcamp^m)
+					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 					-
-					\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 				}^{\alpha_m}
 		}} = 
 	\\
@@ -988,9 +1199,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\ETFoot{\star}{
 			\ETFoot{1}{
 				\norm{
-					\attraction_1(\mfamba^1 - \mfcamp^m)
+					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 					-
-					\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 				}^{\alpha_m}
 			}
 		}
@@ -1001,9 +1212,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\prod_{m=1}^{\hmactive_t}
 	\ETFoot{\star}{
 			\norm{
-				\attraction_1(\mfamba^1 - \mfcamp^m)
+				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 				-
-				\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
+				\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 			}^{\alpha_m}
 		}
 	\\
@@ -1021,6 +1232,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{align*}
 	
 	\begin{claim}\label{ch4:claim:bound-on-Psi-psi}
+		There exists a constant $K_{\attraction,\text{dens}}$ depending only on $\attraction$ and on $K_{\text{dens}}$ such that
 		\begin{equation}
 			\ETFoot{\star}{
 				\norm{
@@ -1030,9 +1242,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\leq 
 			\left\{
 			\begin{aligned}
+				& 1 		&&\text{if} \quad \alpha_m = 0
+				\\
 				& 0 		&&\text{if} \quad \alpha_m = 1
 				\\
-				&2^{\alpha_m} \Norm{V}_\infty^{\alpha_m}	\quad		&&\text{otherwise}
+				&K_{\attraction,\text{dens}} 
+				2^{\alpha_m -2} N^{\alpha (\alpha_m -2)}	\quad		&&\text{otherwise}
 			\end{aligned}
 			\right.
 		\end{equation}
@@ -1047,7 +1262,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\Psi_m
 					- \psi_m^\star
 				}^0
-			} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1 = 2^0 \Norm{\attraction}^0
+			} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1 = 2^0 \Norm{(\genAttraction)}^0
 		\end{equation*}
 		
 		If instead $\alpha_m =1$ we have:
@@ -1069,37 +1284,139 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}	= 0
 		\end{equation*}
 		
-		Then finally, if $\alpha_m \geq 2$ we have
+		We need then to take care only of the case $\alpha_m \geq 2$.
+		Here we have
+		
+				\begin{align*}
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m} }
+			& =
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m - 2} \cdot \norm{\Psi_m - \psi_m^\star }^{2}}
+			\\
+			&\leq \Norm{\Psi_m - \psi_m^\star }^{\alpha_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
+		\end{align*}
+		
+		Then we can dominate the two terms separately.
 		
 		\begin{align*}
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m} }
-			& \leq
-			\Norm{\Psi_m - \psi_m^\star }_\infty^{\alpha_m}
-			\\
-			&= \Norm{
-				\attraction_1(\mfamba^1 - \mfcamp^m)
+			\Norm{\Psi_m - \psi_m^\star }_\infty 
+			&= \Norm{(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 				-
-				\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}
-			}_\infty^{\alpha_m}
+				\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+			}_\infty
 			\\
+			&=\Norm{\genAttraction}_\infty + \Norm{\genAttraction \star \cdens^m}_\infty
+			\\
+			& \leq \Norm{\genAttraction}_\infty + \Norm{\attraction}_\infty \Norm{\cdens^m}_1
+			\\
+			& = 2 \Norm{\genAttraction}_\infty = 2 (\Norm{\attraction}_\infty +  \Norm{\cutoffSinAttraction}_\infty )
+			\\
+			& \leq 2 N^{\alpha}
+		\end{align*}
+		
+		where the last inequality is valid if $N$ is big enough.
+		Then
+		
+		\begin{align*}
+			\Norm{\Psi_m - \psi_m^\star }_\infty^{\alpha_m - 2} 
+			\leq 
+			2^{\alpha_m -2} N^{\alpha (\alpha_m -2)}
+		\end{align*}
+		
+		Let us now check the other term:
+		
+		%- \ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+		
+		\begin{align*}
+			&\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} } =
+			\\
+			&= \ETFoot{\star}{
+				\ETFoot{1}{
+				\norm{
+			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
+			- \psi_m^\star }^{2}
+		}
+	}
+		\\
+		&=
+		\ETFoot{\star}{
+		\int
+		\left(
+			(\genAttraction)_1(\mfamba^1 - x)
+			- \psi_m^\star \right)^{2}
+			\:
+			\cdens^m(x)
+			\:
+			dx
+		}
+		\\
+		& = \ETFoot{\star}{
+			\int
+			(\genAttraction)_1^2(\mfamba^1 - x)
+			\cdens^m(x)
+			dx
+			- \int 2
+			(\genAttraction)_1(\mfamba^1 - x)
+			\psi_m^\star
+			\cdens^m(x)
+			dx
+			+
+			(\psi_m^\star)^2
+			 \int
+			\cdens^m(x)
+			dx
+		}
+		\\
+		&= \ETFoot{\star}{
+			\left( (\genAttraction)_1^2 \star \cdens^m \right) (\mfamba^1)
+			- 2 \psi_m^\star \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)
+			+(\psi_m^\star)^2
+		}
+		\\
+		& \leq \ETFoot{\star}{
+			\Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
+			+ 2 \psi_m^\star \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
+			+(\psi_m^\star)^2
+		}
+		\\
+		&= \Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
+		+ 2 \psi_m^\star \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
+		+(\psi_m^\star)^2 
+		\\
+		&\leq 
+		\Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
+		+ 2\Norm{(\genAttraction)_1 \star \cdens^m}_\infty^2
+		+ \Norm{(\genAttraction)_1 \star \cdens^m}_\infty^2
+		\\
+		& = 
+		\Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
+		+ 3\Norm{(\genAttraction)_1 \star \cdens^m}_\infty^2
+		\leq
+		\end{align*}
+		
+		And now we use the lemmas \ref{ch4:lemma:<-1+infty-norm} and \ref{ch4:lemma:eval-norm-gen-attr}:
+		
+		\begin{align*}
 			&\leq
+			\Norm{\genAttraction^2}_{1 \wedge \infty}
+			\Norm{\cdens^m}_{1 \vee \infty}
+			+ 3 
 			\left(
-			\Norm{\attraction}_\infty + \Norm{\ETFoot{\star}{ \left( \attraction_1 \star \cdens^m \right) (\mfamba^1)}}_\infty
-			\right)^{\alpha_m}
+			\Norm{\genAttraction}_{1 \wedge \infty}
+			\Norm{\cdens^m}_{1 \vee \infty}
+			\right)^2
 			\\
-			& \leq
-			\left(
-			\Norm{V}_\infty + \Norm{\attraction \star \cdens^m}_\infty
-			\right)
-			^{\alpha_m}
-			\\
-			& \leq
-			\left(
-			\Norm{V}_\infty + \Norm{\attraction}_\infty \Norm{\cdens^m}_1
-			\right)^{\alpha_m}
-			\\ &= 2^{\alpha_m} \Norm{\attraction}_\infty^{\alpha_m}
+			& =
+			K_\attraction (1 + K_{\text{dens}})
+			+ 3 K_\attraction^2 (1 + K_{\text{dens}})^2
 		\end{align*}
 	\end{proof}
+	
+	
+	
+	
+	[[correct from here on]]
+	[[check again the whole proof to subtitute $v$ with $n$ ]]
+	
 	
 	Let us define, for every multi-index $\alpha(\hmactive_t)$ the quantity
 	\begin{equation}
@@ -1137,7 +1454,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}}
 		\frac{(2n)!}{(\alpha(\hmactive_t))!}
 		\prod_{m=1}^{\hmactive_t}
-		2^{\alpha_m} \Norm{\attraction}_\infty^{\alpha_m}
+		2^{\alpha_m} \Norm{(\genAttraction)}_\infty^{\alpha_m}
 		\\
 		& = N^{(\xi -1) 2 v}
 		\sum_{
@@ -1150,7 +1467,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		2^{\alpha_1 + \cdots + \alpha_{\hmactive_t}} \Norm{V}_\infty^{\alpha_1 + \cdots + \alpha_{\hmactive_t}}
 		\\
 		& = N^{(\xi -1) 2 v}
-			(2 \Norm{\attraction}_\infty)^{2n}
+			(2 \Norm{(\genAttraction)}_\infty)^{2n}
 			\sum_{
 				\substack{
 					|\alpha(\hmactive_t) | =2n
@@ -1161,7 +1478,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\\
 		&\leq N^{(\xi -1) 2 v}
 		\underbrace{
-			(2 \Norm{\attraction}_\infty)^{2n}
+			(2 \Norm{(\genAttraction)}_\infty)^{2n}
 			(2n)!
 			\sum_{
 				\substack{
@@ -1176,13 +1493,13 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\leq 
 		N^{- n} C_n
 	\end{align*}
-	In the last passage we used the assumption that $\xi < \frac{1}{2}$ and that $\Norm{\attraction}_\infty$ is bounded.
+	In the last passage we used the assumption that $\xi < \frac{1}{2}$ and that $\Norm{(\genAttraction)}_\infty$ is bounded.
 \end{proof}
 
 
 
 \begin{remark}
-	There is a version of this proposition where the assumption on the attraction $\attraction$ is relaxed, allowing it to have a cut-off singularity in $0$.
+	There is a version of this proposition where the assumption on the attraction $(\genAttraction)$ is relaxed, allowing it to have a cut-off singularity in $0$.
 	If you are interested more on this can be found in the appendix at \ref{app:conditioned-LLN-with-singularity}.
 \end{remark}
 
