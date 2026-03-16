@@ -971,14 +971,14 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then are valid the laws of large numbers under $\PrbCondTimes{\cdot}{}$, \ie for all $n\in\N$ exists $C_n >0$ such that:
+	Then are valid the laws of large numbers under $\PrbCondTimes{\cdot}{}$, \ie for all $\gamma\in\N$ exists $C_\gamma >0$ such that:
 	\begin{align}
 		& \PrbCondTimes{S^{N,\xi}_\amba}{}
-			\leq C_n N^{-n}
+			\leq C_\gamma N^{-\gamma}
 		&& \label{ch4:lemma:cond-lln-1}
 		\\
 		& \PrbCondTimes{S^{N,\xi}}{}
-			\leq C_n N^{-n}
+			\leq C_\gamma N^{-\gamma}
 		&& \label{ch4:lemma:cond-lln-2}
 	\end{align}
 	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then 
@@ -1091,7 +1091,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				}^{2n}
 			}
 		\\
-		& = N^{\xi 2 v} \ETFoot{\star}{
+		& = N^{\xi 2n} \ETFoot{\star}{
 			\norm{
 			\frac{1}{N} 
 			\sum _{m = 1}^{\hmactive_t} 
@@ -1102,7 +1102,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}^{2n}
 		}
 		\\
-		& = N^{\xi 2 v} \frac{1}{N^{2n}} 
+		& = N^{\xi 2 n} \frac{1}{N^{2n}} 
 		\ETFoot{\star}{
 			\norm{
 			\sum _{m = 1}^{\hmactive_t} 
@@ -1113,7 +1113,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}^{2n}
 	}
 		\\
-		&= N^{(\xi -1) 2 v}
+		&= N^{(\xi -1) 2 n}
 		\ETFoot{\star}{
 			\norm{
 				\sum _{m = 1}^{\hmactive_t} 
@@ -1135,33 +1135,37 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	\begin{align}
 		\left( \sum_{m=1}^M \Zhi_m \right)^{2n}
-		&= \sum_{\alpha_1 + \ldots + \alpha_M =2n} \frac{(2n)!}{\alpha_1! \ldots \alpha_M!} \prod_{m=1}^M (\Psi_m - \psi_m^\star)^{\alpha_m}
+		&= \sum_{\beta_1 + \ldots + \beta_M =2n} 
+		\:
+		\frac{(2n)!}{\beta_1! \ldots \beta_M!} \prod_{m=1}^M (\Psi_m - \psi_m^\star)^{\beta_m}
 		\\
-		&= \sum_{|\alpha(M) |=2n} \frac{(2n)!}{(\alpha(M))!} \prod_{m=1}^M (\Zhi_m)^{\alpha_m}
+		&= \sum_{\beta_1 + \cdots + \beta_M =2n} 
+		\:
+		\frac{(2n)!}{(\beta)!} \prod_{m=1}^M (\Zhi_m)^{\beta_m}
 	\end{align}
 	
-	where $\alpha(M)$ is the multi-index $(\alpha_1, \ldots, \alpha_M)$ and $(\alpha(M))! := \alpha_1!\ldots \alpha_M!$ and $|\alpha(M)|:=\alpha_1 + \cdots + \alpha_M$.
+	where $\beta$ is the multi-index $(\beta_1, \ldots, \beta_M)$ and $(\beta)! := \beta_1!\ldots \beta_M!$.
 	Then we obtain
 	
 		\begin{align*}
-		&= N^{(\xi -1) 2 v}
+		&= N^{(\xi -1) 2 n}
 			\ETFoot{\star}{
-				\sum_{|\alpha(\hmactive_t) |=2n}
-				\frac{(2n)!}{(\alpha(\hmactive_t))!}
+				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
+				\frac{(2n)!}{(\beta)!}
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
 					\Psi_m - \psi_m^\star
-				}^{\alpha_m}
+				}^{\beta_m}
 			}
 		\\
-		& = N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2n}
-		\frac{(2n)!}{(\alpha(\hmactive_t))!}
+		& = N^{(\xi -1) 2 n}
+		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}
+		\frac{(2n)!}{(\beta)!}
 		\ETFoot{\star}{
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
 				\Psi_m - \psi_m^\star
-			}^{\alpha_m}
+			}^{\beta_m}
 		} =
 	\end{align*}
 	
@@ -1178,10 +1182,11 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
 	
-	\begin{align*}
-		&= N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2n}
-		\frac{(2n)!}{(\alpha(\hmactive_t))!}
+	\begin{equation}
+	\begin{aligned}\label{ch4:cond-lln:before-claim}
+		&= N^{(\xi -1) 2 n}
+		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
+		\frac{(2n)!}{(\beta)!}
 		\ETFoot{\star}{
 			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
@@ -1189,12 +1194,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 					-
 					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-				}^{\alpha_m}
+				}^{\beta_m}
 		}} = 
 	\\
-		&= N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2n}
-	\frac{(2n)!}{(\alpha(\hmactive_t))!}
+		&= N^{(\xi -1) 2 n}
+	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+	\frac{(2n)!}{(\beta)!}
 	\prod_{m=1}^{\hmactive_t}
 		\ETFoot{\star}{
 			\ETFoot{1}{
@@ -1202,34 +1207,47 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 					-
 					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-				}^{\alpha_m}
+				}^{\beta_m}
 			}
 		}
 	\\
-	& = N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2n}
-	\frac{(2n)!}{(\alpha(\hmactive_t))!}
+	& = N^{(\xi -1) 2 n}
+	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+	\frac{(2n)!}{(\beta)!}
 	\prod_{m=1}^{\hmactive_t}
 	\ETFoot{\star}{
 			\norm{
 				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 				-
 				\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-			}^{\alpha_m}
+			}^{\beta_m}
 		}
 	\\
-	& = N^{(\xi -1) 2 v}
-	\sum_{|\alpha(\hmactive_t) | =2n}
-	\frac{(2n)!}{(\alpha(\hmactive_t))!}
+	& \leq N^{(\xi -1) 2 n}
+	(2n)^{2n}
+	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+	\prod_{m=1}^{\hmactive_t}
+	\ETFoot{\star}{
+		\norm{
+			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
+			-
+			\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+		}^{\beta_m}
+	}
+	\\
+	& = N^{(\xi -1) 2 n}
+	(2n)^{2n}
+	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 	\prod_{m=1}^{\hmactive_t}
 	\underbrace{
 	\ETFoot{\star}{
 		\norm{
 			\Psi_m - \psi_m^\star 
-		}^{\alpha_m}
+		}^{\beta_m}
 	}
-	}_{\leq ?}
-	\end{align*}
+	}_{\leq ?} 
+	\end{aligned}
+	\end{equation}
 	
 	\begin{claim}\label{ch4:claim:bound-on-Psi-psi}
 		There exists a constant $K_{\attraction,\text{dens}}$ depending only on $\attraction$ and on $K_{\text{dens}}$ such that
@@ -1237,24 +1255,24 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\ETFoot{\star}{
 				\norm{
 					\Psi_m - \psi_m^\star 
-				}^{\alpha_m}
+				}^{\beta_m}
 			}
 			\leq 
 			\left\{
 			\begin{aligned}
-				& 1 		&&\text{if} \quad \alpha_m = 0
+				& 1		&&\text{if} \quad \beta_m = 0
 				\\
-				& 0 		&&\text{if} \quad \alpha_m = 1
+				& 0 		&&\text{if} \quad \beta_m = 1
 				\\
 				&K_{\attraction,\text{dens}} 
-				2^{\alpha_m -2} N^{\alpha (\alpha_m -2)}	\quad		&&\text{otherwise}
+				4^{\beta_m -2} N^{\alpha (\beta_m -2)}	\quad		&&\text{otherwise}
 			\end{aligned}
 			\right.
 		\end{equation}
 	\end{claim}
 	
 	\begin{proof}[Proof of the claim]
-			If $\alpha_m =0$ we have
+			If $\beta_m =0$ we have
 		
 		\begin{equation*}
 			\ETFoot{\star}{
@@ -1265,7 +1283,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1 = 2^0 \Norm{(\genAttraction)}^0
 		\end{equation*}
 		
-		If instead $\alpha_m =1$ we have:
+		If instead $\beta_m =1$ we have:
 		\begin{equation*}
 			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^1 }
 			=
@@ -1284,15 +1302,15 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}	= 0
 		\end{equation*}
 		
-		We need then to take care only of the case $\alpha_m \geq 2$.
+		We need then to take care only of the case $\beta_m \geq 2$.
 		Here we have
 		
 				\begin{align*}
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m} }
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m} }
 			& =
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\alpha_m - 2} \cdot \norm{\Psi_m - \psi_m^\star }^{2}}
+			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m - 2} \cdot \norm{\Psi_m - \psi_m^\star }^{2}}
 			\\
-			&\leq \Norm{\Psi_m - \psi_m^\star }^{\alpha_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
+			&\leq \Norm{\Psi_m - \psi_m^\star }^{\beta_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
 		\end{align*}
 		
 		Then we can dominate the two terms separately.
@@ -1310,16 +1328,16 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\\
 			& = 2 \Norm{\genAttraction}_\infty = 2 (\Norm{\attraction}_\infty +  \Norm{\cutoffSinAttraction}_\infty )
 			\\
-			& \leq 2 N^{\alpha}
+			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  4 N^{\alpha}
 		\end{align*}
 		
 		where the last inequality is valid if $N$ is big enough.
 		Then
 		
 		\begin{align*}
-			\Norm{\Psi_m - \psi_m^\star }_\infty^{\alpha_m - 2} 
+			\Norm{\Psi_m - \psi_m^\star }_\infty^{\beta_m - 2} 
 			\leq 
-			2^{\alpha_m -2} N^{\alpha (\alpha_m -2)}
+			4^{\beta_m -2} N^{\alpha (\beta_m -2)}
 		\end{align*}
 		
 		Let us now check the other term:
@@ -1408,100 +1426,319 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			& =
 			K_\attraction (1 + K_{\text{dens}})
 			+ 3 K_\attraction^2 (1 + K_{\text{dens}})^2
+			=: K_{\attraction, \text{dens}}
 		\end{align*}
 	\end{proof}
 	
-	
-	
-	
-	[[correct from here on]]
-	[[check again the whole proof to subtitute $v$ with $n$ ]]
-	
-	
-	Let us define, for every multi-index $\alpha(\hmactive_t)$ the quantity
-	\begin{equation}
-		\#^k \left( \alpha(\hmactive_t)  \right):= \# \{ 
-			i 
-			\:
-			\big|
-			\:
-			\alpha_i = k \: \text{ is a coordinate of } \: \alpha(\hmactive_t)
-		\}
-	\end{equation}
-	
-	\ie the amount of indices in $\alpha(\hmactive_t)$ which are equal to $k$.
-	In our calculations, because of claim \ref{ch4:claim:bound-on-Psi-psi}, we have that whenever $\#^1 (\alpha(\hmactive_t) )\neq 0$, the whole term with it is $0$.
-	Then, going on with our calculations, exploiting claim \ref{ch4:claim:bound-on-Psi-psi}, we have that
+	Then, going on with our calculations from \ref{ch4:cond-lln:before-claim}, exploiting claim \ref{ch4:claim:bound-on-Psi-psi}, we have that
 	
 	\begin{align*}
-		& N^{(\xi -1) 2 v}
-		\sum_{|\alpha(\hmactive_t) | =2n}
-		\frac{(2n)!}{(\alpha(\hmactive_t))!}
+		&= N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 		\prod_{m=1}^{\hmactive_t}
 			\ETFoot{\star}{
 				\norm{
 					\Psi_m - \psi_m^\star 
-				}^{\alpha_m}
-			} \leq
+				}^{\beta_m}
+			}
 			\\
-		& \leq
-		 N^{(\xi -1) 2 v}
-		\sum_{
-			\substack{
-			|\alpha(\hmactive_t) | =2n
-			\\
-			\#^1 \left(\alpha(\hmactive_t) \right) = 0
-			}}
-		\frac{(2n)!}{(\alpha(\hmactive_t))!}
-		\prod_{m=1}^{\hmactive_t}
-		2^{\alpha_m} \Norm{(\genAttraction)}_\infty^{\alpha_m}
-		\\
-		& = N^{(\xi -1) 2 v}
-		\sum_{
-			\substack{
-				|\alpha(\hmactive_t) | =2n
-				\\
-				\#^1 \left(\alpha(\hmactive_t) \right) = 0
-		}}
-		\frac{(2n)!}{(\alpha(\hmactive_t))!}
-		2^{\alpha_1 + \cdots + \alpha_{\hmactive_t}} \Norm{V}_\infty^{\alpha_1 + \cdots + \alpha_{\hmactive_t}}
-		\\
-		& = N^{(\xi -1) 2 v}
-			(2 \Norm{(\genAttraction)}_\infty)^{2n}
-			\sum_{
-				\substack{
-					|\alpha(\hmactive_t) | =2n
-					\\
-					\#^1 \left(\alpha(\hmactive_t) \right) = 0
-			}}
-			\frac{(2n)!}{(\alpha(\hmactive_t))!}
-		\\
-		&\leq N^{(\xi -1) 2 v}
+		&\leq
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 		\underbrace{
-			(2 \Norm{(\genAttraction)}_\infty)^{2n}
-			(2n)!
-			\sum_{
-				\substack{
-					|\alpha(\hmactive_t) | =2n
-					\\
-					\#^1 \left(\alpha(\hmactive_t) \right) = 0
-			}}
-			1
-		}_{
-			=: C_n
-		}
-		\leq 
-		N^{- n} C_n
+		\prod_{m=1}^{\hmactive_t}
+			\left(
+				\1_{\beta_m = 0} + \1_{\beta_m \geq 2} K_{\attraction,\text{dens}} 4^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			\right)
+		}_{=:\Iu = \Iu (\beta)}
 	\end{align*}
-	In the last passage we used the assumption that $\xi < \frac{1}{2}$ and that $\Norm{(\genAttraction)}_\infty$ is bounded.
+	
+	First of all we can notice that whenever the multi-index $\beta$ has an entry $\beta_m =0$, the whole product term $\Iu$ goes to $0$.
+	Second, we notice that if the multi-index $\beta$ has an entry $\beta_m =1$, this does not influence the product term $\Iu$, and therefore
+	
+	\begin{align*}
+		&= 
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{\substack{
+			\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+			\\
+			\forall m. \beta_m \neq 1
+			}}\
+			\prod_{m=1}^{\hmactive_t}
+			\left(
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} K_{\attraction,\text{dens}} 4^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			\right)
+			\\
+			& \leq 
+			N^{(\xi -1) 2 n}
+			(2n)^{2n}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+			}}\
+			\prod_{\beta_m \neq 0}
+			\left(
+			K_{\attraction,\text{dens}} 4^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			\right)
+			\\
+			& \leq 
+			N^{(\xi -1) 2 n}
+			(2n)^{2n}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+			}}\
+			\prod_{\beta_m \neq 0}
+			\left(
+			K_{\attraction,\text{dens}}^{\beta_m -2} 4^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			\right)
+			\\
+			&=
+			N^{(\xi -1) 2 n}
+			(2n)^{2n}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+			}}\
+			\prod_{\beta_m \neq 0}
+			\left(
+			K_{\attraction,\text{dens}}4 N^{\alpha}
+			\right)^{\beta_m -2}
+			=
+	\end{align*}
+	
+	We now need to take a closer look at the multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ and its entries.	
+	Let us define the quantity
+	
+	\begin{equation}
+		\#^{\widehat{0}} \left( \beta \right):= \# \{ 
+		i 
+		\:
+		\big|
+		\:
+		\beta_i  \: \text{ is non-zero entry of } \: \beta
+		\}
+	\end{equation}
+	
+	Observe that since the minimum value that we allow in an entry $\beta_m$  is $2$, then the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ such that $\beta_1 + \cdots + \beta_{\hmactive_t} =2n$, will be $n$ ($n$ entries of value $2$).
+	Then we can write:
+	
+	\begin{align*}
+		&=
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{k=1}^{n}\quad
+		\sum_{\substack{
+				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\\
+				\forall m. \beta_m \neq 1
+				\\
+				\#^{\widehat{0}} \left( \beta \right) = k
+		}}\quad
+		\prod_{\beta_m \neq 0}
+		\left(
+		K_{\attraction,\text{dens}}4 N^{\alpha}
+		\right)^{\beta_m -2}
+		\\
+		&=
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{k=1}^{n}\quad
+		\sum_{\substack{
+				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\\
+				\forall m. \beta_m \neq 1
+				\\
+				\#^{\widehat{0}} \left( \beta \right) = k
+		}}\quad
+		\left(
+		K_{\attraction,\text{dens}}4 N^{\alpha}
+		\right)^{
+			\sum_{\beta_m \neq 0}
+			(\beta_m -2)
+			}
+	\\
+		&=
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{k=1}^{n}\quad
+		\sum_{\substack{
+				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\\
+				\forall m. \beta_m \neq 1
+				\\
+				\#^{\widehat{0}} \left( \beta \right) = k
+		}}\quad
+	\underbrace{
+		\left(
+		K_{\attraction,\text{dens}}4 N^{\alpha}
+		\right)
+		^{2n - 2k}
+	}_{\Iu} =
+	\end{align*}
+	
+	Then $\Iu$ is dependent only on $\#^{\widehat{0}} \left( \beta \right) $ and not on $\beta$ itself:
+	
+	\begin{align*}
+		&=
+		N^{(\xi -1) 2 n}
+		(2n)^{2n}
+		\sum_{k=1}^{n}\quad
+		(K_{\attraction,\text{dens}}4)^{2n - 2k}
+		N^{\alpha(2n - 2k)}
+		\sum_{\substack{
+				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\\
+				\forall m. \beta_m \neq 1
+				\\
+				\#^{\widehat{0}} \left( \beta \right) = k
+		}} 1
+		\\
+		& \leq 
+			\underbrace{(8nK_{\attraction,\text{dens}})^{2n}}_{
+			=: K_{\attraction,\text{dens}, n}
+			}
+			N^{(\xi + \alpha -1) 2 n}
+			\sum_{k=1}^{n}
+				N^{-2k\alpha}
+				\sum_{\substack{
+						\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+						\\
+						\forall m. \beta_m \neq 1
+						\\
+						\#^{\widehat{0}} \left( \beta \right) = k
+				}} 1
+		\end{align*}
+		
+		We can notice that the term
+		
+		\begin{equation*}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\#^{\widehat{0}} \left( \beta \right) = k
+			}} 1
+			=
+			\# \left\{
+			\beta = (\beta_m)_{m=1}^{\hmactive_t} \ | \
+			\sum \beta_m = 2n, \
+			\forall m. \beta_m \neq 1, \
+			\#^{\widehat{0}} (\beta ) = k
+			\right\}
+			=
+		\end{equation*}
+	
+		can be tamed with the classical stars and bars problem, with $k -1$ bars and $n$ stars (technically there are $2n$ stars, but the condition $\beta_m \neq 1$ is equivalent to require that between each bars we have only even quantities):
+		
+		\begin{align*}
+			&= \# \left(
+			\text{ways to choose $k$ entries in $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$}
+			\right) \cdot
+			\\
+			&\qquad
+			\cdot
+			\left(
+			\text{ways to arrange $k-1$ bars between $n$ stars}
+			\right)
+			\\
+			& =
+			\left(
+			\begin{gathered}
+				\hmactive_t
+				\\
+				k
+			\end{gathered}
+			\right)
+			\left(
+			\begin{gathered}
+				 n + k -1
+				\\
+				 k - 1
+			\end{gathered}
+			\right)
+			\\
+			&=
+			\frac{\hmactive_t \cdot (\hmactive_t -1)\cdots  \cdot (\hmactive_t -k +1)}{k!} \cdot \frac{(n +k -1) \cdot (n +k -2)\cdots \cdot (n + 1)}{(k-1)!}
+			\\
+			& \leq
+			\left[ \hmactive_t \cdot (\hmactive_t -1)\cdots  \cdot (\hmactive_t -k +1)\right]
+			\left[ (n +k -1) \cdot (n +k -2)\cdots \cdot (n + 1)\right]
+			\\
+			&= (\hmactive_t)_{(k)} (n +k -1)_{(k-1)}
+			\\
+			&\leq
+			\hmactive_t^k  (n +k)^{k-1}
+		\end{align*}
+		
+		Then, returning back to the main inequality we have
+		
+		\begin{align*}
+			&K_{\attraction,\text{dens}, n}
+			N^{(\xi + \alpha -1) 2 n}
+			\sum_{k=1}^{n}
+			N^{-2k\alpha}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\#^{\widehat{0}} \left( \beta \right) = k
+			}} 1
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, n}
+		N^{(\xi + \alpha -1) 2 n}
+		\sum_{k=1}^{n}
+		N^{-2k\alpha}
+		\hmactive_t^k  (n +k)^{k-1}
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, n}
+		N^{(\xi + \alpha -1) 2 n}
+		N^{-2n\alpha}
+		\hmactive_t^n
+		(2n)^n
+		\sum_{k=1}^{n}1
+		\\
+		& =
+		K_{\attraction,\text{dens}, n}
+		N^{(\xi -1) 2 n}
+		\hmactive_t^n \leq
+		\end{align*}
+		
+		where in the last inequality we redefined $K_{\attraction,\text{dens}, n}$ as the product of all factors dependent only on $\attraction,\text{dens}, n$.
+		Thus, using the condition that $ \xi < \frac{1}{2}$, we obtain that
+		
+		\begin{equation}
+			\PrbTFoot{\star}{\norm{
+					\drift^N_{1,1}(t, \mfsol^N) 
+					- \ETFoot{\star}{
+						\drift^N_{1,1}(t,\mfsol^N)
+					}
+				} \geq N^{-\xi} 
+			} 
+			\leq
+			K_{\attraction,\text{dens}, n}
+			N^{(\xi -1) 2 n}
+			\hmactive_t^n 
+			\leq
+			K_{\attraction,\text{dens}, n}
+			N^{- n}
+			\hmactive_t^n
+		\end{equation}
+	[[solve this problem]]
+	
 \end{proof}
 
 
-
-\begin{remark}
-	There is a version of this proposition where the assumption on the attraction $(\genAttraction)$ is relaxed, allowing it to have a cut-off singularity in $0$.
-	If you are interested more on this can be found in the appendix at \ref{app:conditioned-LLN-with-singularity}.
-\end{remark}
 
 \subsection{The less conditional law of large numbers}
 
