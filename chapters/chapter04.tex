@@ -721,25 +721,25 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 In this subsection we prove a more general result than the one that we will use in main result: we will use an attraction which also admits a cut-off Coulomb-type of singularity.
 
 \begin{definition}[Generalised attraction and drift]\label{ch4:def:generalised-attr&drift}
-	Let $N \in \NumParticles, \alpha > 0$.
+	Let $\alpha \geq 0$.
 	Let $\cutoffSinAttraction = \cutoffSinAttraction (N, \alpha) : \R^d \longrightarrow \R^d$ be a function such that
 	\begin{equation}
 		\norm{\cutoffSinAttraction}
 		\leq 
-		\left( 
+		K \left( 
 			\frac{1}{\norm{x}} \wedge N^\alpha
 		\right)
 		=
 		\left\{
 		\begin{aligned}
-			&\frac{1}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
+			&\frac{K}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
 			\\
-			&N^{\alpha}						&& \text{otherwise}
+			&K\:N^{\alpha}						&& \text{otherwise}
 		\end{aligned}
 		\right.
 	\end{equation}
-	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $n^{\alpha}$.
-	Then we defined the generalised attraction as $\genAttraction := \genAttraction(N, \alpha) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
+	for some positive constant $K$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
+	Then we define the generalised attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
 	\begin{equation}
 		\left\{
 		\begin{aligned}
@@ -753,10 +753,12 @@ In this subsection we prove a more general result than the one that we will use 
 	\end{equation}
 \end{definition}
 
+For the sake of shortness we will simply write $\drift$ for ${}^{\genAttraction}\drift$ all along this subsection, where such generalised attraction is used.
+
 [[here tikz figure]]
 
 \begin{remark}
-	For the sake of shortness we will simply write $\drift$ for ${}^{\genAttraction}\drift$ all along this subsection, where such generalised attraction is used.
+	The usual attraction can be considered as a generalized attraction of parameter $\alpha = 0$.
 \end{remark}
 
 Before proceeding to the law of large numbers we need to gather some preliminary lemmas.
@@ -804,7 +806,7 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 The second lemma that we need is a simple evaluation of these quantities for the generalised attraction.
 
 \begin{lemma}\label{ch4:lemma:eval-norm-gen-attr}
-	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_\attraction$ depending only on $\attraction$ such that
+	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_\attraction$ depending on $\attraction$ such that
 	\begin{align}
 		\Norm{\genAttraction}_{1 \wedge \infty}, \:
 		\Norm{\genAttraction^2}_{1 \wedge \infty} 
@@ -834,21 +836,26 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		&\Norm{(\genAttraction)_1}_1
 		\leq
 		\Norm{\attraction}_1 + \Norm{\cutoffSinAttraction \1_{\norm{x} \leq 1}}_1
-		\leq
+		=
 		\\
-		&\leq
-		\Norm{\attraction}_1 + \Norm{N^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{1}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
+		&=
+		\Norm{\attraction}_1 + \Norm{KN^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{K}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
 		\\
-		&\leq
-		\Norm{\attraction}_1 + N^{\alpha} \cdot \lebsge (\Ball^{d-1}(N^{-\alpha})) + \int_{N^{-\alpha}}^1 \: \frac{1}{\norm{x}} \: dx
+		&\footnotemark[1]=
+		\Norm{\attraction}_1 + KN^{\alpha} \cdot \lebsge (\Ball^{d-1}[N^{-\alpha}]) + \int_{N^{-\alpha}}^1 \: \frac{K}{\norm{x}} \: dx
 		\\
 		& \leq
 		\Norm{\attraction}_1 
-		+ N^{\alpha} \max \left\{
+		+ KN^{\alpha} 
+		\max \left\{
 				\pi (N^{-\alpha})^2
 				,\frac{4}{3} \pi (N^{-\alpha})^3
 			\right\}
 			+
+		\\
+		&\qquad
+			+
+			K
 			\max \left\{
 				\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
 				,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
@@ -856,30 +863,30 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\\
 		& \leq 
 		\Norm{\attraction}_1 
-		+ N^{\alpha-2\alpha} 2 \pi
-		+ 2 \pi \cdot 2 \max \left\{
+		+ K N^{\alpha-2\alpha} 2 \pi
+		+ K 2 \pi \cdot 2 \max \left\{
 		\int_0^1 dr
 		,\int_0^1  r\: dr
 		\right\}
 		\\
 		& \leq
 		\Norm{\attraction}_1
-		+ 6\pi 
+		+ K6\pi 
 	\end{align*}
+	\footnotetext[1]{$\lebsge(\Ball^{d-1}[N^{-\alpha}])$ indicates the Lebesgue measure of the $d-1$-ball of radius $N^{-\alpha}$}
 	
 	And obviously we have that
 	
 	\begin{equation*}
 		\Norm{\cutoffSinAttraction \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{1}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = 1
+		\Norm{\frac{K}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = K
 	\end{equation*}
 	
 	Then the first inequality is proven.
 	
-	[[treat the case with the power of 2]]
 	Let us proceed with the power $2$.
-	Let us choose this decomposition:
+	Choose this decomposition:
 	
 	\begin{align*}
 		\genAttraction^2 
@@ -900,13 +907,13 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		}_{=:(\genAttraction^2)_\infty}
 	\end{align*}
 	
-	Then we have that
+	Then, proceeding as before, we have that
 	
 	\begin{equation*}
 		\Norm{(\genAttraction^2)_1}_1 
 		\leq
 		\Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \int \norm{\cutoffSinAttraction}  \1_{\norm{x} \leq 1}
-		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty 6\pi
+		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K6\pi
 	\end{equation*}
 	
 	And regarding the other term:
@@ -915,7 +922,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{\attraction \cutoffSinAttraction \1_{\norm{x} > 1}
 			+ \cutoffSinAttraction^2 \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{\attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{1}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = \Norm{\attraction}_\infty + 1
+		\Norm{\frac{K\attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{K^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = K\Norm{\attraction}_\infty + K^2
 	\end{equation*}
 	
 \end{proof}
@@ -929,11 +936,11 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift defined in \ref{ch2:def:drift-&-diffusion}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $\alpha \geq 0$ defined in \ref{ch2:def:drift-&-diffusion}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
-		\item All the coordinates of $\amba^p$ are \iid.
+		\item All the coordinates of $\amba^p$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
 			\exists K_0.\forall p,m,t.
@@ -971,7 +978,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then for these sets are valid the laws of large numbers, \ie for all $\gamma\in\N$ exists $C_\gamma >0$ such that:
+	Then for these sets are valid the laws of large numbers, \ie for all $\gamma\in\N$ exists $C_\gamma >0$ 
+	[[put here all the correct conditions of independence for $C$ (maybe call it $K$)]]
+	such that:
 	\begin{align}
 		& \PrbOf{S^{N,\xi}_\amba}{}
 			\leq C_\gamma N^{-\gamma}
