@@ -1006,8 +1006,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{align*}
 	Notice that 
 	\begin{align*}
-		\PrbTFoot{}{S^{N,\xi}_\star}
-		& =\PrbTFoot{}{
+		\PrbOf{S^{N,\xi}_\star}
+		& =\PrbOf{
 				\sup_{1\leq k \leq N} 
 				\norm{
 					\drift_k^N(t, \mfsol^N) 
@@ -1018,67 +1018,31 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}
 		\\
 		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
-			\PrbTFoot{}{\norm{
+			\PrbOf{\norm{
 					\drift^N_{k,i}(t, \mfsol^N) 
 					- \ETFoot{\star}{
 						\drift^N_{k,i}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
 			}
+			\\
+		&\leq
+		N \cdot 3 \cdot
+		\max_{k,i}
+		\:
+		\underbrace{
+		\PrbOf{\norm{
+				\drift^N_{k,i}(t, \mfsol^N) 
+				- \ETFoot{\star}{
+					\drift^N_{k,i}(t,\mfsol^N)
+				}
+			} \geq N^{-\xi} 
+		}
+	}_{\Iu(k,i)}
 	\end{align*}
 	where $\drift_{k,i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th particle.
-	Let us find, then, a bound which is valid for every coordinate $(k,i)$.
-	Since the expression for each coordinate has the same form, it is enough to tame the case $(1,1)$, \ie
-	\begin{align*}
-		\PrbTFoot{}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{\star}{
-					\drift^N_{1,1}(t,\mfsol^N)
-				}
-			} \geq N^{-\xi} 
-		}{}
-	\end{align*}
+	Since the expression has the same form for each coordinate $(k,i)$, we assume that the maximum of $\Iu(k,i)$ is reached in $(1,1)$, and tame with a bound independent from such assumption.
 	
-	Now notice that, if we are treating the case $S^{N,\xi}_\amba$, then we can treat the expression above in this way:
-	\begin{align*}
-		&\PrbTFoot{}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{1}{
-					\drift^N_{1,1}(t,\mfsol^N)
-				}
-			} \geq N^{-\xi} 
-		}{} =
-		\\
-		&=
-		\int 
-		\underbrace{
-			\PrbCondTimes{\norm{
-					\drift^N_{1,1}(t, \mfsol^N) 
-					- \ETFoot{\star}{
-						\drift^N_{1,1}(t,\mfsol)
-					}
-				} \geq N^{-\xi} 
-			}{\mfamba^1 = x, }
-		}_{\leq  ?}
-		\:
-		\adens^1(x)
-		\:
-		dx
-	\end{align*}
-	
-	Therefore, for both the cases $S^{N,i}_\star$ we need to find a bound for the expression
-	
-	\begin{equation*}
-		\PrbTFoot{\star}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{\star}{
-					\drift^N_{1,1}(t,\mfsol)
-				}
-			} \geq N^{-\xi} 
-		}{}
-	\end{equation*}
-	
-	where $\star$ is either $1$ or is absent.
 	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2n}$ for a generic $n \in \N$.
 	\begin{align*}
 		&\PrbTFoot{\star}{\norm{
