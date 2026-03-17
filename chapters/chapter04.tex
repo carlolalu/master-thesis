@@ -71,11 +71,11 @@ With this background in mind, we state the next result, of which the proof will 
 
 In this part we want to show that
 
-\begin{equation}
+\begin{equation}\label{ch4:experiment-label}
 \diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 \leq
 \sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
-\end{equation}\label{ch4:result:dini-of-sup}
+\end{equation}
 
 Consider the random function
 
@@ -504,17 +504,23 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 
 \begin{remark}
 	One might be tempted to ask why we did not exploit the stronger result 
-	\begin{equation}
+	\begin{equation}\label{ch4:remark:del-dini-stronger?}
 		\diniu^+_t g_\star(t) 
 		\leq
 		\diniu^+_t g(t)
 	\end{equation}
 	for the statement.
 	But after observing more carefully one finds out that such result is valid only under the condition \ref{ch4:cond:proof-dini-T1}, and not in general.
-	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\diniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\diniu^+_t g_\star(t)$ is always non-negative, which would break the statement above.
+	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\diniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\diniu^+_t g_\star(t)$ is always non-negative, which would break the statement \ref{ch4:remark:del-dini-stronger?}.
 \end{remark}
 
-Thus we proved \ref{ch4:result:dini-of-sup}.
+Thus we proved the statement \ref{ch4:experiment-label}:
+
+\begin{equation}
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\leq
+	\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+\end{equation}
 
 \subsection{Get rid of the integral sign in the derivation}
 
@@ -726,20 +732,20 @@ In this subsection we prove a more general result than the one that we will use 
 	\begin{equation}
 		\norm{\cutoffSinAttraction}
 		\leq 
-		K \left( 
+		K_\curlywedge \left( 
 			\frac{1}{\norm{x}} \wedge N^\alpha
 		\right)
 		=
 		\left\{
 		\begin{aligned}
-			&\frac{K}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
+			&\frac{K_\curlywedge}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
 			\\
-			&K\:N^{\alpha}						&& \text{otherwise}
+			&K_\curlywedge\:N^{\alpha}						&& \text{otherwise}
 		\end{aligned}
 		\right.
 	\end{equation}
-	for some positive constant $K$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
-	Then we define the generalised attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
+	for some positive constant $K_\curlywedge$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
+	Then we define the generalised attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha, K_\curlywedge) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
 	\begin{equation}
 		\left\{
 		\begin{aligned}
@@ -806,11 +812,11 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 The second lemma that we need is a simple evaluation of these quantities for the generalised attraction.
 
 \begin{lemma}\label{ch4:lemma:eval-norm-gen-attr}
-	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_\attraction$ depending on $\attraction$ such that
+	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
 	\begin{align}
 		\Norm{\genAttraction}_{1 \wedge \infty}, \:
 		\Norm{\genAttraction^2}_{1 \wedge \infty} 
-		\leq K_\attraction
+		\leq K_{\attraction,\curlywedge}
 	\end{align}
 \end{lemma}
 
@@ -839,14 +845,14 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		=
 		\\
 		&=
-		\Norm{\attraction}_1 + \Norm{KN^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{K}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
+		\Norm{\attraction}_1 + \Norm{K_\curlywedge N^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{K_\curlywedge}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
 		\\
 		&\footnotemark[1]=
-		\Norm{\attraction}_1 + KN^{\alpha} \cdot \lebsge (\Ball^{d-1}[N^{-\alpha}]) + \int_{N^{-\alpha}}^1 \: \frac{K}{\norm{x}} \: dx
+		\Norm{\attraction}_1 + K_\curlywedge N^{\alpha} \cdot \lebsge (\Ball^{d-1}[N^{-\alpha}]) + \int_{N^{-\alpha}}^1 \: \frac{K_\curlywedge}{\norm{x}} \: dx
 		\\
 		& \leq
 		\Norm{\attraction}_1 
-		+ KN^{\alpha} 
+		+ K_\curlywedge N^{\alpha} 
 		\max \left\{
 				\pi (N^{-\alpha})^2
 				,\frac{4}{3} \pi (N^{-\alpha})^3
@@ -855,7 +861,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\\
 		&\qquad
 			+
-			K
+			K_\curlywedge
 			\max \left\{
 				\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
 				,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
@@ -863,15 +869,15 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\\
 		& \leq 
 		\Norm{\attraction}_1 
-		+ K N^{\alpha-2\alpha} 2 \pi
-		+ K 2 \pi \cdot 2 \max \left\{
+		+ K_\curlywedge N^{\alpha-2\alpha} 2 \pi
+		+ K_\curlywedge 2 \pi \cdot 2 \max \left\{
 		\int_0^1 dr
 		,\int_0^1  r\: dr
 		\right\}
 		\\
 		& \leq
 		\Norm{\attraction}_1
-		+ K6\pi 
+		+ K_\curlywedge 6\pi 
 	\end{align*}
 	\footnotetext[1]{$\lebsge(\Ball^{d-1}[N^{-\alpha}])$ indicates the Lebesgue measure of the $d-1$-ball of radius $N^{-\alpha}$}
 	
@@ -880,7 +886,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 	\begin{equation*}
 		\Norm{\cutoffSinAttraction \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{K}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = K
+		\Norm{\frac{K_\curlywedge}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = K_\curlywedge
 	\end{equation*}
 	
 	Then the first inequality is proven.
@@ -913,7 +919,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{(\genAttraction^2)_1}_1 
 		\leq
 		\Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \int \norm{\cutoffSinAttraction}  \1_{\norm{x} \leq 1}
-		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K6\pi
+		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K_\curlywedge 6\pi
 	\end{equation*}
 	
 	And regarding the other term:
@@ -922,7 +928,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{\attraction \cutoffSinAttraction \1_{\norm{x} > 1}
 			+ \cutoffSinAttraction^2 \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{K\attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{K^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = K\Norm{\attraction}_\infty + K^2
+		\Norm{\frac{K_\curlywedge \attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{K_\curlywedge^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = K_\curlywedge\Norm{\attraction}_\infty + K_\curlywedge^2
 	\end{equation*}
 	
 \end{proof}
@@ -931,30 +937,25 @@ Now we can finally approach the conditional law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
-\begin{proposition}
+\begin{proposition}\label{ch4:prop:conditional-LLN}
 	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $\alpha \geq 0$ defined in \ref{ch2:def:drift-&-diffusion}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2} $ defined in \ref{ch4:def:generalised-attr&drift}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
-		\item All the coordinates of $\amba^p$ are \iid under the p. measure $\PrbCondTimes{}{}$.
+		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists K_0.\forall p,m,t.
+			\exists K_{dens}.\forall p,m,t.
 			\qquad
 			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_{dens}
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
-	Fix now $0<\xi<\frac{1}{2}$
-	
-	[[here the correct conditions on $\xi$ and $\alpha$]]
-	
-	
-	 and define the sets
+	Fix now $\xi>0$ such that $ \xi + \alpha < \frac{1}{2}$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -978,21 +979,17 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then for these sets are valid the laws of large numbers, \ie for all $\gamma\in\N$ exists $C_\gamma >0$ 
-	[[put here all the correct conditions of independence for $C$ (maybe call it $K$)]]
-	such that:
+	Then for these sets are valid the laws of large numbers, \ie for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ independent from $N, \alpha,\xi$ such that:
 	\begin{align}
 		& \PrbOf{S^{N,\xi}_\amba}{}
-			\leq C_\gamma N^{-\gamma}
+			\leq K_n N^{-n}
 		&& \label{ch4:lemma:cond-lln-1}
 		\\
 		& \PrbOf{S^{N,\xi}}{}
-			\leq C_\gamma N^{-\gamma}
+			\leq C_n N^{-n}
 		&& \label{ch4:lemma:cond-lln-2}
 	\end{align}
-	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then 
-	
-	[[put here correct consequences if $\alpha =0$]]
+	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$ and obtain that the law of large numbers are valid for every $ 0 < \xi < \frac{1}{2}$.
 \end{proposition}
 
 \begin{proof}
@@ -1038,22 +1035,24 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				}
 			} \geq N^{-\xi} 
 		}
-	}_{\Iu(k,i)}
+	}_{\Ch(k,i)}
 	\end{align*}
 	where $\drift_{k,i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th particle.
-	Since the expression has the same form for each coordinate $(k,i)$, we assume that the maximum of $\Iu(k,i)$ is reached in $(1,1)$, and tame with a bound independent from such assumption.
+	Since the expression has the same form for each coordinate $(k,i)$, we assume that the maximum of $\Ch(k,i)$ is reached in $(1,1)$, and tame with a bound independent from such assumption.
 	
 	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2n}$ for a generic $n \in \N$.
 	\begin{align*}
-		&\PrbTFoot{\star}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{\star}{
-					\drift^N_{1,1}(t,\mfsol^N)
-				}
-			} \geq N^{-\xi} 
-		} \leq
+		&=
+		3N \cdot
+		\PrbOf{\norm{
+					\drift^N_{1,1}(t, \mfsol^N) 
+					- \ETFoot{\star}{
+						\drift^N_{1,1}(t,\mfsol^N)
+					}
+				} \geq N^{-\xi} 
+			}
 		\\
-		&\leq \frac{1}{ (N^{-\xi})^{2n} } \ETFoot{\star}{
+		&\leq \frac{3N}{ (N^{-\xi})^{2n} } \E{
 				\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
 				- \ETFoot{\star}{
@@ -1063,19 +1062,21 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}
 		\\
 		& \footnotemark[1]=
-		 N^{\xi 2n} \ETFoot{\star}{
+		3
+		 N^{\xi 2n + 1} \E{
 			\norm{
 			\frac{1}{N} 
 			\sum _{m = 1}^{\hmactive_t} 
 				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-			- \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p}  \ETFoot{\star}{
+			- \frac{1}{N} \sum _{m = 1}^{\hmactive_t} 
+			 \ETFoot{\star}{
 				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 			}
 		}^{2n}
 		}
 		\\
-		& = N^{\xi 2 n} \frac{1}{N^{2n}} 
-		\ETFoot{\star}{
+		& = 3 N^{\xi 2 n + 1} \frac{1}{N^{2n}} 
+		\E{
 			\norm{
 			\sum _{m = 1}^{\hmactive_t} 
 			\left[
@@ -1085,8 +1086,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}^{2n}
 	}
 		\\
-		&= N^{(\xi -1) 2 n}
-		\ETFoot{\star}{
+		&= 3 N^{(\xi -1) 2 n + 1}
+		\E{
 			\norm{
 				\sum _{m = 1}^{\hmactive_t} 
 				\left[
@@ -1121,8 +1122,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Then we obtain
 	
 		\begin{align*}
-		&= N^{(\xi -1) 2 n}
-			\ETFoot{\star}{
+		&= 3 N^{(\xi -1) 2 n + 1}
+		\E{
 				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
 				\frac{(2n)!}{(\beta)!}
 				\prod_{m=1}^{\hmactive_t}
@@ -1131,7 +1132,20 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				}^{\beta_m}
 			}
 		\\
-		& = N^{(\xi -1) 2 n}
+		& = 3 N^{(\xi -1) 2 n + 1}
+		\E{
+			\ETFoot{\star}{
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
+			\frac{(2n)!}{(\beta)!}
+			\prod_{m=1}^{\hmactive_t}
+			\norm{
+				\Psi_m - \psi_m^\star
+			}^{\beta_m}
+		}
+		}
+		\\
+		& = 3 N^{(\xi -1) 2 n + 1}
+		\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}
 		\frac{(2n)!}{(\beta)!}
 		\ETFoot{\star}{
@@ -1139,7 +1153,22 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\norm{
 				\Psi_m - \psi_m^\star
 			}^{\beta_m}
-		} =
+		}}
+	\\
+	& = 
+	\underbrace{
+	3(2n)! 
+	}_{K_n}
+	N^{(\xi -1) 2 n + 1}
+	\E{
+		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+		\ETFoot{\star}{
+			\prod_{m=1}^{\hmactive_t}
+			\norm{
+				\Psi_m - \psi_m^\star
+			}^{\beta_m}
+	}}
+=
 	\end{align*}
 	
 	Notice now that for each $m$ the \rvs
@@ -1155,75 +1184,53 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
 	
-	\begin{equation}
-	\begin{aligned}\label{ch4:cond-lln:before-claim}
-		&= N^{(\xi -1) 2 n}
+	\begin{equation}\label{ch4:proof-of-cond-lln:calculations-before-claim}
+	\begin{aligned}
+		&= K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
-		\frac{(2n)!}{(\beta)!}
 		\ETFoot{\star}{
 			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
-					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-					-
-					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+					\Psi_m - \psi_m^\star
 				}^{\beta_m}
-		}} = 
+		}} }
 	\\
-		&= N^{(\xi -1) 2 n}
+		&= K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-	\frac{(2n)!}{(\beta)!}
 	\prod_{m=1}^{\hmactive_t}
 		\ETFoot{\star}{
 			\ETFoot{1}{
 				\norm{
-					(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-					-
-					\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+					\Psi_m - \psi_m^\star
 				}^{\beta_m}
 			}
 		}
-	\\
-	& = N^{(\xi -1) 2 n}
-	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-	\frac{(2n)!}{(\beta)!}
-	\prod_{m=1}^{\hmactive_t}
-	\ETFoot{\star}{
-			\norm{
-				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-				-
-				\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-			}^{\beta_m}
-		}
-	\\
-	& \leq N^{(\xi -1) 2 n}
-	(2n)^{2n}
-	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-	\prod_{m=1}^{\hmactive_t}
-	\ETFoot{\star}{
-		\norm{
-			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-			-
-			\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-		}^{\beta_m}
 	}
 	\\
-	& = N^{(\xi -1) 2 n}
-	(2n)^{2n}
+	& = K_n
+	N^{(\xi -1) 2 n + 1}
+	\E{
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 	\prod_{m=1}^{\hmactive_t}
 	\underbrace{
 	\ETFoot{\star}{
-		\norm{
-			\Psi_m - \psi_m^\star 
-		}^{\beta_m}
-	}
-	}_{\leq ?} 
+			\norm{
+				\Psi_m - \psi_m^\star
+			}^{\beta_m}
+		}
+	}_{\leq ?}
+}
+\\
 	\end{aligned}
 	\end{equation}
 	
-	\begin{claim}\label{ch4:claim:bound-on-Psi-psi}
-		There exists a constant $K_{\attraction,\text{dens}}>0$ depending only on $\attraction$ and on $K_{\text{dens}}$ such that
+	\begin{claim}\label{ch4:proof-of-cond-lln:claim:bound-on-Psi-psi}
+		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction$ and on $K_{\text{dens}}$ such that
 		\begin{equation}
 			\ETFoot{\star}{
 				\norm{
@@ -1237,7 +1244,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				\\
 				& 0 		&&\text{if} \quad \beta_m = 1
 				\\
-				&(K_{\attraction,\text{dens}} N^{\alpha })^{\beta_m -2}	\quad		&&\text{otherwise}
+				&(K_{\attraction,\text{dens}, \curlywedge} N^{\alpha })^{\beta_m -2}	\quad		&&\text{otherwise}
 			\end{aligned}
 			\right.
 		\end{equation}
@@ -1269,7 +1276,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			= 	\ETFoot{\star}{
 				\norm{
 					\Psi_m
-					- \psi_m^\star
+					- \ETFoot{\star}{\Psi_m}
 				}
 			}	= 0
 		\end{equation*}
@@ -1300,7 +1307,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\\
 			& = 2 \Norm{\genAttraction}_\infty = 2 (\Norm{\attraction}_\infty +  \Norm{\cutoffSinAttraction}_\infty )
 			\\
-			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  4 N^{\alpha}
+			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  K_\curlywedge 4 N^{\alpha}
 		\end{align*}
 		
 		where the last inequality is valid if $N$ is big enough.
@@ -1309,7 +1316,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\begin{align*}
 			\Norm{\Psi_m - \psi_m^\star }_\infty^{\beta_m - 2} 
 			\leq 
-			4^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			(K_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
 		\end{align*}
 		
 		Let us now check the other term:
@@ -1391,9 +1398,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right)^2
 			\\
 			& =
-			K_\attraction (1 + K_{\text{dens}})
-			+ 3 K_\attraction^2 (1 + K_{\text{dens}})^2
-			= K_{\attraction, \text{dens}} \leq (K_{\attraction, \text{dens}})^{\beta_m -2}
+			K_{\curlywedge,\attraction} (1 + K_{\text{dens}})
+			+ 3 K_{\curlywedge,\attraction}^2 (1 + K_{\text{dens}})^2
+			= K_{\attraction,\text{dens}, \curlywedge} \leq (K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2}
 		\end{align*}
 		\footnotetext[1]{By \ref{ch4:lemma:<-1+infty-norm} and \ref{ch4:lemma:eval-norm-gen-attr}}
 		
@@ -1403,237 +1410,284 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m} }
 			&\leq \Norm{\Psi_m - \psi_m^\star }^{\beta_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
 			\\
-			&\leq (4N^\alpha K_{\attraction, \text{dens}})^{\beta_m -2} = (K_{\attraction, \text{dens}} N^\alpha)^{\beta_m -2} 
+			&\leq (4N^\alpha K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2} = (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
 		\end{align*}
+		And this concludes the proof of the claim.
 	\end{proof}
 	
-	Then, going on with our calculations from \ref{ch4:cond-lln:before-claim}, exploiting claim \ref{ch4:claim:bound-on-Psi-psi}, we have that
+	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{ch4:proof-of-cond-lln:calculations-before-claim} and exploiting the claim \ref{ch4:proof-of-cond-lln:claim:bound-on-Psi-psi}, we have that
 	
 	\begin{align*}
-		&\PrbTFoot{\star}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
+		\PrbOf{S^{N,\xi}_\star}
+		& =\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\norm{
+				\drift_k^N(t, \mfsol^N) 
 				- \ETFoot{\star}{
-					\drift^N_{1,1}(t,\mfsol^N)
+					\drift^N_k(t,\mfsol^N)
 				}
-			} \geq N^{-\xi} 
-		} \leq
+			}_\infty \geq N^{-\xi} 
+		}
 		\\
 		&\leq
-		N^{(\xi -1) 2 n}
-		(2n)^{2n}
-		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-		\prod_{m=1}^{\hmactive_t}
-			\ETFoot{\star}{
-				\norm{
-					\Psi_m - \psi_m^\star 
-				}^{\beta_m}
+		N \cdot 3 \cdot
+		\max_{k,i}
+		\:
+			\PrbOf{\norm{
+					\drift^N_{k,i}(t, \mfsol^N) 
+					- \ETFoot{\star}{
+						\drift^N_{k,i}(t,\mfsol^N)
+					}
+				} \geq N^{-\xi} 
+			}
+		\\
+		&\leq
+		K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+			\prod_{m=1}^{\hmactive_t}
+				\ETFoot{\star}{
+					\norm{
+						\Psi_m - \psi_m^\star
+					}^{\beta_m}
+				}
 			}
 			\\
 		&\leq
-		N^{(\xi -1) 2 n}
-		(2n)^{2n}
-		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-		\underbrace{
-		\prod_{m=1}^{\hmactive_t}
-			\left(
-				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(K_{\attraction, \text{dens}} N^\alpha)^{\beta_m -2} 
-			\right)
-		}_{=:\Iu = \Iu (\beta)}
+		K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+			\underbrace{
+				\prod_{m=1}^{\hmactive_t}
+				\left(
+				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+				\right)
+			}_{=:\Iu = \Iu (\beta)}
+		}
 	\end{align*}
 	
-	First of all we can notice that whenever the multi-index $\beta$ has an entry $\beta_m =0$, the whole product term $\Iu$ goes to $0$.
-	Second, we notice that if the multi-index $\beta$ has an entry $\beta_m =1$, this does not influence the product term $\Iu$, and therefore
+	Let us take a closer look at $\Iu$.
 	
-	\begin{align*}
-		&= 
-		N^{(\xi -1) 2 n}
-		(2n)^{2n}
-		\sum_{\substack{
-			\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-			\\
-			\forall m. \beta_m \neq 1
-			}}\
+	\begin{claim}
+		\begin{equation}
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+			\leq
+			K_{\attraction,\text{dens}, \curlywedge,n}\
+			N^{2\alpha(n-1)}\
+			(\hmactive_t)^n
+		\end{equation}
+	\end{claim}
+	
+	\begin{proof}[Proof of the claim]
+		First of all notice that if the multi-index $\beta$ has an entry $\beta_m =1$, then $\Iu(\beta) = 0$.
+		Besides, if $\beta_m=0$, then its entry does not influence $\Iu$.
+		In equations:
+		
+		\begin{align*}
+			\Iu(\beta)&= 
 			\prod_{m=1}^{\hmactive_t}
 			\left(
-			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} (K_{\attraction, \text{dens}} N^\alpha)^{\beta_m -2} 
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
 			\right)
 			\\
-			& = 
-			N^{(\xi -1) 2 n}
-			K_n
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+			&= 
+			\prod_{
+				\substack{
+					m=1
 					\\
-					\forall m. \beta_m \neq 1
-			}}\
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{\beta_m -2} 
+					\beta_m \neq 0
+				}
+			}^{\hmactive_t}
+				\left(
+					\1_{\beta_m \geq 2} (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+				\right)
 			\\
-			& =
-			N^{(\xi -1) 2 n}
-			K_n
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+			& = 
+			\prod_{
+				\substack{
+					m=1
 					\\
-					\forall m. \beta_m \neq 1
-			}}\
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{\beta_m}
+					\beta_m \neq 0
+				}
+			}^{\hmactive_t}
+			(\1_{\beta_m \neq 1} K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			\\
+			&=
+			\1_{\beta_m \neq 1}
+			\prod_{
+				\substack{
+					m=1
+					\\
+					\beta_m \neq 0
+				}
+			}^{\hmactive_t}
+			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m}
 			\:
 			\cdot
 			\:
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{-2} 
+			\prod_{
+				\substack{
+					m=1
+					\\
+					\beta_m \neq 0
+				}
+			}^{\hmactive_t}
+			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2} 
 			\\
 			&=			
-			N^{(\xi -1) 2 n}
-			K_n
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-					\\
-					\forall m. \beta_m \neq 1
-			}}\
-			(K_{\attraction, \text{dens}} N^\alpha)^{\sum_{\beta_m \neq 0} \beta_m}
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{-2} 
-			\\
-			&=
-			N^{(\xi -1) 2 n}
-			K_n
-			(K_{\attraction, \text{dens}} N^\alpha)^{2n}
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-					\\
-					\forall m. \beta_m \neq 1
-			}}\
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{-2}
-			\\
-			&=
-			N^{(\xi + \alpha -1) 2 n}
-			K_{n,\attraction, \text{dens}}
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-					\\
-					\forall m. \beta_m \neq 1
-			}}\
-			\prod_{\beta_m \neq 0}
-			(K_{\attraction, \text{dens}} N^\alpha)^{-2}
-	\end{align*}
-	
-	We now need to take a closer look at the multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ and its entries.	
-	Let us define the quantity
-	
-	\begin{equation}
-		\# \left\{ \beta_m \neq 0 \right\}  := \# \{ 
-		i 
-		\:
-		\big|
-		\:
-		\beta_i  \: \text{ is non-zero entry of } \: \beta
-		\}
-	\end{equation}
-	
-	Observe that since the minimum value that we allow in an entry $\beta_m$  is $2$, then the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ such that $\beta_1 + \cdots + \beta_{\hmactive_t} =2n$, will be $n$ ($n$ entries of value $2$).
-	Then we can write:
-	
-	\begin{align*}
-		&\PrbTFoot{\star}{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{\star}{
-					\drift^N_{1,1}(t,\mfsol^N)
-				}
-			} \geq N^{-\xi} 
-		} \leq
-		\\
-		&\leq
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-				\\
-				\forall m. \beta_m \neq 1
-		}}\
-		\prod_{\beta_m \neq 0}
-		(K_{\attraction, \text{dens}} N^\alpha)^{-2}
-		\\
-		&=
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\quad
-		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-				\\
-				\forall m. \beta_m \neq 1
-				\\
-				\# \left\{ \beta_m \neq 0 \right\} = k
-		}}\
-		\prod_{\beta_m \neq 0}
-		(K_{\attraction, \text{dens}} N^\alpha)^{-2}
-		\\
-		&=
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\quad
-		(K_{\attraction, \text{dens}} N^\alpha)^{-2k}
-		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-				\\
-				\forall m. \beta_m \neq 1
-				\\
-				\# \left\{ \beta_m \neq 0 \right\} = k
-		}}\
-		1
-		\\
-		&\leq
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		(K_{\attraction, \text{dens}} )^{-2}
-		\sum_{k=1}^{n}\
-		N^{-2k\alpha}
-		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-				\\
-				\forall m. \beta_m \neq 1
-				\\
-				\# \left\{ \beta_m \neq 0 \right\} = k
-		}}\
-		1
-		\\
-		&=
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\
-		N^{-2k\alpha}
-		\underbrace{
-		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-				\\
-				\forall m. \beta_m \neq 1
-				\\
-				\# \left\{ \beta_m \neq 0 \right\} = k
-		}}\
-		1
-	}_{\Ch}
+			\1_{\beta_m \neq 1}
+			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\sum_{\beta_m \neq 0} \beta_m}
+			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2\sum_{\beta_m \neq 0} 1} 
 		\end{align*}
 		
-		We can notice that the term $\Ch$ is simply counting:
+		Therefore:
 		
 		\begin{equation*}
-			\Ch
+			\begin{aligned}
+				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+				&=
+				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+				\1_{\beta_m \neq 1}
+				(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\sum_{\beta_m \neq 0} \beta_m}
+				(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2\sum_{\beta_m \neq 0} 1} 
+				\\
+				&= 
+				\sum_{\substack{
+						\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+						\\
+						\forall m. \beta_m \neq 1
+				}}\
+				(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2\sum_{\beta_m \neq 0} 1}
+				N^{2n\alpha}
+				N^{-2\alpha\sum_{\beta_m \neq 0} 1} =
+			\end{aligned}
+		\end{equation*}
+		
+		We now need to take a closer look at the multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ and its entries.	
+		For each $\beta_m$ define the quantity
+		
+		\begin{equation*}
+			\# \left\{ \beta_m \neq 0 \right\}  := \# \{ 
+			i 
+			\:
+			\big|
+			\:
+			\beta_i  \: \text{ is non-zero entry of } \: \beta
+			\}
 			=
+			\sum_{\beta_m \neq 0} 1
+		\end{equation*}
+		
+		Observe that we are taking into consideration only multi-indices in this set:
+		
+		\begin{equation*}
+			\left\{
+			\beta = \left( \beta_1, \ldots , \beta_{\hmactive_t}  \right)\
+			\big|\
+			|\beta | = 2n,\
+			\forall m. \beta_m \neq 1
+			\right\}
+		\end{equation*}
+		
+		Observe then that since the minimum value that we allow in an entry $\beta_m$  is $2$, then the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ such that $|\beta | = \beta_1 + \cdots + \beta_{\hmactive_t} = 2n$, will be $n$ ($n$ entries of value $2$).
+		Then we can write
+		
+		\begin{align*}
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+			&= 
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+			}}\
+			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 \# \left\{ \beta_m \neq 0 \right\}  }
+			N^{2n\alpha}
+			N^{-2\alpha \# \left\{ \beta_m \neq 0 \right\}  } =
+			\\
+			&\leq
+			\sum_{k =1}^n\
+			 \sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}}\
+			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 k}
+			N^{2n\alpha}
+			N^{-2\alpha k} 
+			\\
+			&=
+			N^{2n\alpha}
+			\sum_{k =1}^n\
+			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 k}
+			N^{-2\alpha k} 
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}} 1
+		\\
+		&\leq
+		(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2}
+		N^{2n\alpha}
+		\sum_{k =1}^n\
+			N^{-2\alpha k} 
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}} 1
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}
+		N^{2n\alpha}
+		\sum_{k =1}^n\
+		N^{-2\alpha k} 
+		\sum_{\substack{
+				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\\
+				\forall m. \beta_m \neq 1
+				\\
+				\# \left\{ \beta_m \neq 0 \right\}  = k
+		}} 1
+		\end{align*}
+		
+		We can notice that the last term is simply counting:
+		
+		\begin{equation*}
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}} 1
+		=
 			\# \left\{
 			\beta = (\beta_m)_{m=1}^{\hmactive_t} \ | \
 			\sum \beta_m = 2n, \
 			\forall m. \beta_m \neq 1, \
 			\#^{\widehat{0}} (\beta ) = k
 			\right\}
-			=
 		\end{equation*}
-	
-		It can be tamed with the classical stars and bars problem, with $k -1$ bars and $n$ stars (technically there are $2n$ stars, but the condition $\beta_m \neq 1$ is equivalent to require that between each bars we have only even quantities):
+		
+		It can be evaluated with the classical stars and bars problem, with $k -1$ bars and $n$ stars (technically there are $2n$ stars, but the condition $\beta_m \neq 1$ is equivalent to require that between each bars we have only even quantities):
 		
 		\begin{align*}
+			&\# \left\{
+			\beta = (\beta_m)_{m=1}^{\hmactive_t} \ | \
+			\sum \beta_m = 2n, \
+			\forall m. \beta_m \neq 1, \
+			\#^{\widehat{0}} (\beta ) = k
+			\right\} 
+			\\
 			&= \# \left(
 			\text{ways to choose $k$ entries in $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$}
 			\right) \cdot
@@ -1654,9 +1708,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right)
 			\left(
 			\begin{gathered}
-				 n + k -1
+				n + k -1
 				\\
-				 k - 1
+				k - 1
 			\end{gathered}
 			\right)
 			\\
@@ -1673,70 +1727,187 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			(\hmactive_t)^k  (n +k)^{k-1}
 		\end{align*}
 		
-		Then, returning back to the main inequality we have
+		Then, resuming, we have:
 		
 		\begin{align*}
-			&\PrbTFoot{\star}{\norm{
-					\drift^N_{1,1}(t, \mfsol^N) 
-					- \ETFoot{\star}{
-						\drift^N_{1,1}(t,\mfsol^N)
-					}
-				} \geq N^{-\xi} 
-			} \leq
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+			&\leq
+			K_{\attraction,\text{dens}, \curlywedge,n}
+			N^{2n\alpha}
+			\sum_{k =1}^n\
+			N^{-2\alpha k} 
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}} 1
 		\\
 		&\leq
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\
-		N^{-2k\alpha}
+		K_{\attraction,\text{dens}, \curlywedge,n}
+		N^{2n\alpha}
+		\sum_{k =1}^n\
+		N^{-2\alpha k}
 		(\hmactive_t)^k  (n +k)^{k-1}
 		\\
 		&\leq
-		K_{n,\attraction, \text{dens}}
-		(n +n )^{n-1}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\
-		N^{-2k\alpha}(\hmactive_t)^k
+		K_{\attraction,\text{dens}, \curlywedge,n}
+		N^{2n\alpha}
+		\sum_{k =1}^n\
+		N^{-2\alpha}
+		(\hmactive_t)^n 
+		n^n
 		\\
 		&=
-		K_{n,\attraction, \text{dens}}
-		N^{(\xi + \alpha -1) 2 n}
-		\sum_{k=1}^{n}\
-		N^{-2k\alpha}(\hmactive_t)^k
+		\left(
+			K_{\attraction,\text{dens}, \curlywedge,n}\cdot\
+			n^n\cdot\
+			\sum_{k =1}^n\
+			1
+		\right)
+		N^{2n\alpha}
+		N^{-2\alpha}
+		(\hmactive_t)^n
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{2\alpha(n-1)}\
+		(\hmactive_t)^n
 		\end{align*}
-		
-		This bound is independent from the coordinate $(1,1)$ of the drift, thus we can write:
-		
-		\begin{align*}
-			\PrbOf{S^{N, \xi}_\star}
-		\end{align*}
-		
-		\begin{equation}
-			\PrbTFoot{\star}{\norm{
-					\drift^N_{1,1}(t, \mfsol^N) 
-					- \ETFoot{\star}{
-						\drift^N_{1,1}(t,\mfsol^N)
-					}
-				} \geq N^{-\xi} 
-			} 
-			\leq
-			K_{\attraction,\text{dens}, n}
-			N^{(\xi -1) 2 n}
-			\hmactive_t^n 
-			\leq
-			K_{\attraction,\text{dens}, n}
-			N^{- n}
-			\hmactive_t^n
-		\end{equation}
-	[[solve this problem]]
+		And this concludes the proof of the claim.
+	\end{proof}
+	
+	Resuming everything and applying the last claim we obtain:
+	
+	\begin{align*}
+		\PrbOf{S^{N,\xi}_\star}
+		& =\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\norm{
+				\drift_k^N(t, \mfsol^N) 
+				- \ETFoot{\star}{
+					\drift^N_k(t,\mfsol^N)
+				}
+			}_\infty \geq N^{-\xi} 
+		}
+		\\
+		&\leq
+		N \cdot 3 \cdot
+		\max_{k,i}
+		\:
+		\PrbOf{\norm{
+				\drift^N_{k,i}(t, \mfsol^N) 
+				- \ETFoot{\star}{
+					\drift^N_{k,i}(t,\mfsol^N)
+				}
+			} \geq N^{-\xi} 
+		}
+		\\
+		&\leq
+		K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
+			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+				\prod_{m=1}^{\hmactive_t}
+				\left(
+				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+				\right)
+		}
+		\\
+		&
+		\leq
+		K_n
+		N^{(\xi -1) 2 n + 1}
+		\E{
+			K_{\attraction,\text{dens}, \curlywedge,n}\
+			N^{2\alpha(n-1)}\
+			(\hmactive_t)^n
+		}
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\E{
+			(\hmactive_t)^n
+		}
+		\leq
+	\end{align*}
+	
+	Now we need to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$.
+	From \cite{poisson-moments-estimate} we have that for each $P$, Poisson \rv of parameter $\mu$
+	
+	\begin{equation*}
+		\E{
+			|P|^n
+		}
+		\leq
+		\exp \left(
+			\frac{n^2}{2\mu}
+		\right)
+	\end{equation*}
+	
+	Then we have that
+	
+	\begin{align*}
+		\PrbOf{S^{N,\xi}_\star}
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\E{
+			(\hmactive_t)^n
+		}
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\exp \left(
+			\frac{n^2}{2\lambda N t}
+		\right)
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		e^{n^2}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		e^{-2\lambda t N}
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		(e^{2\lambda t})^{-N}
+	\end{align*}
+	
+	Notice that, at this point, in the limit for $N \xrightarrow{} \infty$, the exponential dominates the powers of $N$, and there we are safe.
+	Still, we want this to be the case $\forall N \in \N$, \ie also for small $N$s.
+	In such case we can use the hypothesis that $\xi >0, \alpha \geq 0$ and that $\xi + \alpha  \leq \frac{1}{2} 	$ to obtain that 
+	
+	\begin{equation*}
+		(\xi + \alpha-1)\
+		2 n + 1 -2\alpha
+		\leq
+		\left( \frac{1}{2} - 1 \right) 2 n + 1 -2 \frac{1}{2} = -n
+	\end{equation*}
+	
+	and therefore we obtain that
+	
+	\begin{equation*}
+		\PrbOf{S^{N,\xi}_\star}
+		\leq
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\underbrace{
+					(e^{2\lambda t})^{-N}
+			}_{\leq 1}
+		\\
+		\leq 
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{-n}
+	\end{equation*}
 	
 \end{proof}
 
 
-
 \subsection{The less conditional law of large numbers}
-
-[[[problem: in the previous lemma the constant depends on the process $\hmactive_t$, which is allright but should be explicitly stated there]]]
 
 \begin{proposition}
 	
