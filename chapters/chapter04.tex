@@ -968,7 +968,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2} $ defined in \ref{ch4:def:generalised-attr&drift}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $\alpha\geq 0$ defined in \ref{ch4:def:generalised-attr&drift}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -981,7 +981,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
-	Fix now $\xi>0$ such that $ \xi + \alpha \leq \frac{1}{2}$ and define the sets
+	Fix now $\xi>0$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -1005,18 +1005,31 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then for these sets are valid the laws of large numbers, \ie for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ independent from $N, \alpha,\xi$ such that:
+	Then, signing as $S_\star^{N, \xi}$ either of the two sets, for $S_\star^{N, \xi}$ is valid the laws of large numbers, \ie for all $\gamma>0, \forall n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ (independent from $N, \alpha,\xi$) and $\overline{N}\in N$ such that:
 	\begin{align}
-		& \PrbOf{S^{N,\xi}_\amba}{}
-			\leq K_n N^{-n}
-		&& \label{ch4:LLN1:cond-1}
-		\\
-		& \PrbOf{S^{N,\xi}}{}
-			\leq C_n N^{-n}
-		&& \label{ch4:LLN1:cond-2}
+		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\star}{}
+			\leq 
+			K_n\
+			t^n\
+			N^{-\gamma}
+		&& \label{ch4:LLN1:bound}
 	\end{align}
-	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$ and obtain that the law of large numbers are valid for every $ 0 < \xi \leq \frac{1}{2}$.
+	
+	Furthermore, if $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$, the subsequent weaker bound is valid $\forall n > \frac{1}{C}$ and $\forall \in \N $:
+	
+	\begin{align}
+		&\PrbOf{S^{N,\xi}_\star}{}
+		\leq 
+		K_n\
+		t^n\
+		N^{-Cn + 1}
+		&& \label{ch4:LLN1:weaker-bound}
+	\end{align}
 \end{proposition}
+
+\begin{remark}
+	Recall that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$.
+\end{remark}
 
 \begin{proof}
 	For the sake of shortness, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
@@ -1865,7 +1878,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{align*}
 	
 	Now we need to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$.
-	From \cite{poisson-moments-estimate} we have that for each $P$, Poisson \rv of parameter $\mu$
+	From \cite{poisson-moments-estimate} we have that for each $P \sim \Pois(\mu)$
 	
 	\begin{equation*}
 		\E{
@@ -1875,6 +1888,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\exp \left(
 			\frac{n^2}{2\mu}
 		\right)
+		\mu^n
 	\end{equation*}
 	
 	Then we have that
@@ -1894,49 +1908,110 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\exp \left(
 			\frac{n^2}{2\lambda N t}
 		\right)
+		(\lambda N t)^n
 		\\
 		&=
 		K_{\attraction,\text{dens}, \curlywedge,n}\
 		e^{n^2}\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		(\lambda t)^n\
+		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
 		e^{-2\lambda t N}
 		\\
 		&=
-		K_{\attraction,\text{dens}, \curlywedge,n}\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		t^n\
+		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
 		(e^{2\lambda t})^{-N}
 	\end{align*}
 	
-	Notice that, at this point, in the limit for $N \xrightarrow{} \infty$, the exponential dominates the powers of $N$, and there we are safe.
-	Still, we want this to be the case $\forall N \in \N$, \ie also for small $N$s.
-	In such case we can use the hypothesis that $\xi >0, \alpha \geq 0$ and that $\xi + \alpha  \leq \frac{1}{2} 	$ to obtain that 
+	Notice that, at this point, in the limit for $N \xrightarrow{} \infty$, the exponential dominates every power of $N$,
+	\ie for every $\gamma > 0$ and $\forall \epsilon >0$ exists $\overline{N}=\overline{N}(\epsilon) \in \N$ such that $\forall N > \overline{N} $ we have that
+	
+	\begin{align*}
+		& N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
+		e^{-N}\
+		N^\gamma
+		< \epsilon
+		\Longleftrightarrow
+		\\
+		& \Longleftrightarrow\
+		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
+		e^{-N}\
+		< \epsilon\
+		N^{-\gamma}
+	\end{align*}
+	
+	Choose $\epsilon =1$ and then you obtain that $\exists \overline{N}=\overline{N}(1) \in \N$ such that $	\forall N > \overline{N}$
+	
+	\begin{align*}
+		\PrbOf{S^{N,\xi}_\star}
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		t^n\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\E{
+			(\hmactive_t)^n
+		}
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		t^n\
+		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
+		e^{-2t\lambda N}
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		t^n\
+		N^{-\gamma} 
+		= 
+		K_n\
+		t^n\
+		N^{-\gamma}
+	\end{align*}
+	
+	And thus the bound \ref{ch4:LLN1:bound} is proved.
+	
+	Let us now prove the weaker bound \ref{ch4:LLN1:weaker-bound} valid for all $N$ and for all $n>\frac{1}{C}$.
+	Assume, as per statement, that $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$.
+	Then it is true that
 	
 	\begin{equation*}
-		(\xi + \alpha-1)\
+		\left(
+		\xi + \alpha
+		- \frac{1}{2}
+		\right)
 		2 n + 1 -2\alpha
 		\leq
-		\left( \frac{1}{2} - 1 \right) 2 n + 1 -2 \frac{1}{2} = -n
+		\left( \frac{1-C}{2} - \frac{1}{2} \right) 2 n + 1 -2 \cdot 0 = -Cn +1
+		\quad
+		(< 0)
 	\end{equation*}
+		
 	
 	and therefore we obtain that
 	
-	\begin{equation*}
+	\begin{align*}
 		\PrbOf{S^{N,\xi}_\star}
-		\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		t^n\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\underbrace{
-					(e^{2\lambda t})^{-N}
-			}_{\leq 1}
+		\overbrace{
+					e^{-2t\lambda N}
+			}^{\leq 1}
 		\\
-		\leq 
+		&\leq 
 		K_{\attraction,\text{dens}, \curlywedge,n}\
-		N^{-n}
-	\end{equation*}
-	And this concludes the proof of the first law of large numbers.
+		t^n\
+		N^{-Cn + 1}
+		=
+		K_n\
+		t^n\
+		N^{-Cn + 1}
+	\end{align*}
+	
+	And thus also the second condition is proved, concluding the proof of the first law of large numbers.
 \end{proof}
-
-From this section on we will use only the usual non-generalized attraction $\attraction$ and so the symbol $\drift$ will indicate only the correspondent drift.
 
 \subsection{The second law of large numbers}
 
@@ -1957,6 +2032,8 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	\end{enumerate}
 	
 	[[regulate these conditions for the mean-field particles as requirements in chapter 3 and not here maybe]]
+	
+	[[regulate the conditions on xi here under]]
 	
 	Choose $0  < \xi \leq \frac{1}{4}$ and define the sets
 	
