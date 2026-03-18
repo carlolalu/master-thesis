@@ -1184,7 +1184,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
 	
-	\begin{equation}\label{ch4:proof-of-cond-lln:calculations-before-claim}
+	\begin{equation}\label{proof-of-LLN1:calculations-before-claim}
 	\begin{aligned}
 		&= K_n
 		N^{(\xi -1) 2 n + 1}
@@ -1229,7 +1229,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{aligned}
 	\end{equation}
 	
-	\begin{claim}\label{ch4:proof-of-cond-lln:claim:bound-on-Psi-psi}
+	\begin{claim}\label{proof-of-LLN1:claim:bound-on-Psi-psi}
 		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction$ and on $K_{\text{dens}}$ such that
 		\begin{equation}
 			\ETFoot{\star}{
@@ -1415,7 +1415,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		And this concludes the proof of the claim.
 	\end{proof}
 	
-	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{ch4:proof-of-cond-lln:calculations-before-claim} and exploiting the claim \ref{ch4:proof-of-cond-lln:claim:bound-on-Psi-psi}, we have that
+	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{proof-of-LLN1:calculations-before-claim} and exploiting the claim \ref{proof-of-LLN1:claim:bound-on-Psi-psi}, we have that
 	
 	\begin{align*}
 		\PrbOf{S^{N,\xi}_\star}
@@ -1459,37 +1459,43 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-			\underbrace{
 				\prod_{m=1}^{\hmactive_t}
 				\left(
-				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(
+				\underbrace{
+					K_{\attraction,\text{dens}, \curlywedge} N^\alpha
+				}_{=:\Iu}
+					)^{\beta_m -2} 
 				\right)
-			}_{=:\Iu = \Iu (\beta)}
 		}
 	\end{align*}
 	
-	Let us take a closer look at $\Iu$.
+	We can assume that $\Iu \geq 1$ (eventually modulate the value $K_{\attraction,\text{dens}, \curlywedge} $ accordingly).
 	
-	\begin{claim}
+	\begin{claim}\label{ch4:proof-of-LLN1:sum-prod-Iu-inequality}
+		$\Iu \geq 1$ is independent from the multi-index $\beta$, therefore
 		\begin{equation}
-			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+			\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}
+			\left(
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}
+			\Iu^{\beta_m -2} 
+			\right)
 			\leq
-			K_{\attraction,\text{dens}, \curlywedge,n}\
-			N^{2\alpha(n-1)}\
-			(\hmactive_t)^n
+			\Iu^{2n-2}\
+			(M)^n\
+			K_n
 		\end{equation}
 	\end{claim}
 	
 	\begin{proof}[Proof of the claim]
-		First of all notice that if the multi-index $\beta$ has an entry $\beta_m =1$, then $\Iu(\beta) = 0$.
-		Besides, if $\beta_m=0$, then its entry does not influence $\Iu$.
+		First of all notice that if the multi-index $\beta$ has an entry $\beta_m =1$, then the whole product under $\prod_{m=1}^{M}$ goes to $0$.
+		Besides, if $\beta_m=0$, then the relative factor is $1$ and therefore does not influence the product.
 		In equations:
 		
 		\begin{align*}
-			\Iu(\beta)&= 
-			\prod_{m=1}^{\hmactive_t}
+			&\prod_{m=1}^M
 			\left(
-			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} \Iu^{\beta_m -2} 
 			\right)
 			\\
 			&= 
@@ -1499,20 +1505,21 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\beta_m \neq 0
 				}
-			}^{\hmactive_t}
+			}^M
 				\left(
-					\1_{\beta_m \geq 2} (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+					\1_{\beta_m \geq 2} \Iu^{\beta_m -2} 
 				\right)
-			\\
-			& = 
+			\
+			= 
+			\
 			\prod_{
 				\substack{
 					m=1
 					\\
 					\beta_m \neq 0
 				}
-			}^{\hmactive_t}
-			(\1_{\beta_m \neq 1} K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			}^M
+			(\1_{\beta_m \neq 1} \Iu^{\beta_m -2} )
 			\\
 			&=
 			\1_{\beta_m \neq 1}
@@ -1522,8 +1529,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\beta_m \neq 0
 				}
-			}^{\hmactive_t}
-			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m}
+			}^M
+			\Iu^{\beta_m}
 			\:
 			\cdot
 			\:
@@ -1533,39 +1540,50 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\beta_m \neq 0
 				}
-			}^{\hmactive_t}
-			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2} 
+			}^M
+			\Iu^{-2} 
 			\\
 			&=			
 			\1_{\beta_m \neq 1}
-			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\sum_{\beta_m \neq 0} \beta_m}
-			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2\sum_{\beta_m \neq 0} 1} 
+			\Iu^{\sum_{\beta_m \neq 0} \beta_m}
+			\Iu^{-2\sum_{\beta_m \neq 0} 1} 
 		\end{align*}
 		
 		Therefore:
 		
 		\begin{equation*}
 			\begin{aligned}
-				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+				\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}
+				\left(
+				\1_{\beta_m = 0} + \1_{\beta_m \geq 2}
+				\Iu^{\beta_m -2} 
+				\right)
 				&=
-				\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
+				\sum_{\beta_1 + \cdots + \beta_{M} =2n}\
 				\1_{\beta_m \neq 1}
-				(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\sum_{\beta_m \neq 0} \beta_m}
-				(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{-2\sum_{\beta_m \neq 0} 1} 
+				\Iu^{\sum_{\beta_m \neq 0} \beta_m}
+				\Iu^{-2\sum_{\beta_m \neq 0} 1} 
 				\\
 				&= 
 				\sum_{\substack{
-						\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+						\beta_1 + \cdots + \beta_{M} =2n
 						\\
 						\forall m. \beta_m \neq 1
 				}}\
-				(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2\sum_{\beta_m \neq 0} 1}
-				N^{2n\alpha}
-				N^{-2\alpha\sum_{\beta_m \neq 0} 1} =
+				\Iu^{\sum_{\beta_m \neq 0} \beta_m}
+				\Iu^{-2\sum_{\beta_m \neq 0} 1} 
+				\\
+				&= 
+				\sum_{\substack{
+						\beta_1 + \cdots + \beta_{M} =2n
+						\\
+						\forall m. \beta_m \neq 1
+				}}\
+				\Iu^{2n-2(\sum_{\beta_m \neq 0} 1)}  
 			\end{aligned}
 		\end{equation*}
 		
-		We now need to take a closer look at the multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ and its entries.	
+		We now need to take a closer look at the multi-index $\beta = (\beta_1, \ldots, \beta_{M})$ and its entries.	
 		For each $\beta_m$ define the quantity
 		
 		\begin{equation*}
@@ -1584,94 +1602,79 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		
 		\begin{equation*}
 			\left\{
-			\beta = \left( \beta_1, \ldots , \beta_{\hmactive_t}  \right)\
+			\beta = \left( \beta_1, \ldots , \beta_{M}  \right)\
 			\big|\
 			|\beta | = 2n,\
 			\forall m. \beta_m \neq 1
 			\right\}
 		\end{equation*}
 		
-		Observe then that since the minimum value that we allow in an entry $\beta_m$  is $2$, then the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$ such that $|\beta | = \beta_1 + \cdots + \beta_{\hmactive_t} = 2n$, will be $n$ ($n$ entries of value $2$).
+		Therefore, since the minimum value that we allow in an entry $\beta_m$  is $2$, the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{M})$ such that $|\beta | = \beta_1 + \cdots + \beta_{M} = 2n$, will be $n$ ($n$ entries of value $2$).
 		Then we can write
 		
 		\begin{align*}
-			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
-			&= 
 			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\beta_1 + \cdots + \beta_M =2n
 					\\
 					\forall m. \beta_m \neq 1
 			}}\
-			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 \# \left\{ \beta_m \neq 0 \right\}  }
-			N^{2n\alpha}
-			N^{-2\alpha \# \left\{ \beta_m \neq 0 \right\}  } =
-			\\
-			&\leq
-			\sum_{k =1}^n\
-			 \sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+			\Iu^{2n-2(\sum_{\beta_m \neq 0} 1)} 
+			&=
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_M =2n
 					\\
 					\forall m. \beta_m \neq 1
-					\\
-					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}}\
-			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 k}
-			N^{2n\alpha}
-			N^{-2\alpha k} 
+			\Iu^{2n-2(\# \left\{ \beta_m \neq 0 \right\} )}
 			\\
 			&=
-			N^{2n\alpha}
 			\sum_{k =1}^n\
-			(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2 k}
-			N^{-2\alpha k} 
 			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\beta_1 + \cdots + \beta_M =2n
+					\\
+					\forall m. \beta_m \neq 1
+					\\
+					\# \left\{ \beta_m \neq 0 \right\}  = k
+			}}\
+			\Iu^{2n-2k}
+			\\
+			&=
+			\sum_{k =1}^n\
+			\Iu^{2n-2k}\
+			\sum_{\substack{
+					\beta_1 + \cdots + \beta_M =2n
 					\\
 					\forall m. \beta_m \neq 1
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}} 1
 		\\
-		&\leq
-		(K_{\attraction,\text{dens}, \curlywedge})^{2n- 2}
-		N^{2n\alpha}
+		&\footnotemark[1] \leq
+		\Iu^{2n-2}\
 		\sum_{k =1}^n\
-			N^{-2\alpha k} 
-			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
-					\\
-					\forall m. \beta_m \neq 1
-					\\
-					\# \left\{ \beta_m \neq 0 \right\}  = k
-			}} 1
-		\\
-		&=
-		K_{\attraction,\text{dens}, \curlywedge,n}
-		N^{2n\alpha}
-		\sum_{k =1}^n\
-		N^{-2\alpha k} 
 		\sum_{\substack{
-				\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+				\beta_1 + \cdots + \beta_{M} =2n
 				\\
 				\forall m. \beta_m \neq 1
 				\\
 				\# \left\{ \beta_m \neq 0 \right\}  = k
 		}} 1
 		\end{align*}
+		\footnotetext[1]{$\Iu\geq 1$}
 		
 		We can notice that the last term is simply counting:
 		
 		\begin{equation*}
 			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\beta_1 + \cdots + \beta_{M} =2n
 					\\
 					\forall m. \beta_m \neq 1
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}} 1
-		=
+			=
 			\# \left\{
-			\beta = (\beta_m)_{m=1}^{\hmactive_t} \ | \
+			\beta = (\beta_m)_{m=1}^{M} \ | \
 			\sum \beta_m = 2n, \
 			\forall m. \beta_m \neq 1, \
 			\#^{\widehat{0}} (\beta ) = k
@@ -1682,14 +1685,14 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		
 		\begin{align*}
 			&\# \left\{
-			\beta = (\beta_m)_{m=1}^{\hmactive_t} \ | \
+			\beta = (\beta_m)_{m=1}^{M} \ | \
 			\sum \beta_m = 2n, \
 			\forall m. \beta_m \neq 1, \
 			\#^{\widehat{0}} (\beta ) = k
 			\right\} 
 			\\
 			&= \# \left(
-			\text{ways to choose $k$ entries in $\beta = (\beta_1, \ldots, \beta_{\hmactive_t})$}
+			\text{ways to choose $k$ entries in $\beta = (\beta_1, \ldots, \beta_{M})$}
 			\right) \cdot
 			\\
 			&\qquad
@@ -1701,7 +1704,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			& =
 			\left(
 			\begin{gathered}
-				\hmactive_t
+				M
 				\\
 				k
 			\end{gathered}
@@ -1715,66 +1718,57 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right)
 			\\
 			&=
-			\frac{\hmactive_t \cdot (\hmactive_t -1)\cdots  \cdot (\hmactive_t -k +1)}{k!} \cdot \frac{(n +k -1) \cdot (n +k -2)\cdots \cdot (n + 1)}{(k-1)!}
+			\frac{M \cdot (M -1)\cdots  \cdot (M -k +1)}{k!} \cdot \frac{(n +k -1) \cdot (n +k -2)\cdots \cdot (n + 1)}{(k-1)!}
 			\\
 			& \leq
-			\left[ \hmactive_t \cdot (\hmactive_t -1)\cdots  \cdot (\hmactive_t -k +1)\right]
+			\left[ M \cdot (M -1)\cdots  \cdot (M -k +1)\right]
 			\left[ (n +k -1) \cdot (n +k -2)\cdots \cdot (n + 1)\right]
 			\\
-			&= (\hmactive_t)_{(k)} (n +k -1)_{(k-1)}
+			&= (M)_{(k)} (n +k -1)_{(k-1)}
 			\\
 			&\leq
-			(\hmactive_t)^k  (n +k)^{k-1}
+			(M)^k  (n +k)^{k-1}
 		\end{align*}
 		
-		Then, resuming, we have:
+		Then, resuming, we have
 		
 		\begin{align*}
-			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\ \Iu(\beta) 
+			&\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}
+			\left(
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}
+			\Iu^{\beta_m -2} 
+			\right)
+			\leq
+			\\
 			&\leq
-			K_{\attraction,\text{dens}, \curlywedge,n}
-			N^{2n\alpha}
+			\Iu^{2n-2}\
 			\sum_{k =1}^n\
-			N^{-2\alpha k} 
 			\sum_{\substack{
-					\beta_1 + \cdots + \beta_{\hmactive_t} =2n
+					\beta_1 + \cdots + \beta_{M} =2n
 					\\
 					\forall m. \beta_m \neq 1
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}} 1
-		\\
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}
-		N^{2n\alpha}
-		\sum_{k =1}^n\
-		N^{-2\alpha k}
-		(\hmactive_t)^k  (n +k)^{k-1}
-		\\
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}
-		N^{2n\alpha}
-		\sum_{k =1}^n\
-		N^{-2\alpha}
-		(\hmactive_t)^n 
-		n^n
-		\\
-		&=
-		\left(
-			K_{\attraction,\text{dens}, \curlywedge,n}\cdot\
-			n^n\cdot\
+			\\
+			&\leq
+			\Iu^{2n-2}\
 			\sum_{k =1}^n\
+			(M)^k  (n +k)^{k-1}
+			\\
+			&\leq
+			\Iu^{2n-2}\
+			(M)^n\
+			(2n)^n\
+			\sum_{k =1}^n
 			1
-		\right)
-		N^{2n\alpha}
-		N^{-2\alpha}
-		(\hmactive_t)^n
-		\\
-		&=
-		K_{\attraction,\text{dens}, \curlywedge,n}\
-		N^{2\alpha(n-1)}\
-		(\hmactive_t)^n
+			\\
+			&=
+			\Iu^{2n-2}\
+			(M)^n\
+			K_n
 		\end{align*}
+		
 		And this concludes the proof of the claim.
 	\end{proof}
 	
@@ -1820,9 +1814,20 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		K_n
 		N^{(\xi -1) 2 n + 1}
 		\E{
-			K_{\attraction,\text{dens}, \curlywedge,n}\
-			N^{2\alpha(n-1)}\
-			(\hmactive_t)^n
+			K_n
+			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{2n-2}\
+			(\hmactive_t)^n\
+			K_n
+		}
+		\\
+		&=
+		K_n\
+		K_n\
+		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
+		N^{(\xi -1) 2 n + 1}\
+		N^{2n\alpha-2\alpha}\
+		\E{
+			(\hmactive_t)^n\
 		}
 		\\
 		&=
