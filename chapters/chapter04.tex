@@ -722,7 +722,33 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 
 [[introduce this properly with the correct inequality]]
 
-\subsection{The conditional law of large numbers}
+\subsection{Notation convention}\label{ch4:notation}
+
+From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (\ie $\amba^k$ or $\mfamba^k$, depending on the context):
+
+\begin{align*}
+	\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			\PrbTFoot{}{\cdot}&:= \PrbCondTimes{\cdot}{}
+	\\
+	\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\text{$k$-th amoeba},	}			&				\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\text{$k$-th amoeba }, }
+	\\
+	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
+\end{align*}
+
+Furthermore, a subscript $\star$ will mean ambiguity in the presence of the subscript:
+
+\begin{align*}
+	\EFoot{\star}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\star}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
+	\\
+	\ETFoot{\star}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\star}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
+\end{align*}
+
+Finally we will indicate constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
+
+\begin{equation*}
+	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
+\end{equation*}
+
+\subsection{The first law of large numbers}
 
 In this subsection we prove a more general result than the one that we will use in main result: we will use an attraction which also admits a cut-off Coulomb-type of singularity.
 
@@ -933,11 +959,11 @@ The second lemma that we need is a simple evaluation of these quantities for the
 	
 \end{proof}
 
-Now we can finally approach the conditional law of large numbers.
+Now we can finally approach the first law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
-\begin{proposition}\label{ch4:prop:conditional-LLN}
+\begin{proposition}[The first law of large numbers]\label{ch4:prop:LLN1}
 	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
@@ -949,13 +975,13 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists K_{dens}.\forall p,m,t.
+			\exists K_{dens}.\forall p,m.
 			\qquad
 			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_{dens}
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
 	\end{enumerate}
-	Fix now $\xi>0$ such that $ \xi + \alpha < \frac{1}{2}$ and define the sets
+	Fix now $\xi>0$ such that $ \xi + \alpha \leq \frac{1}{2}$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -983,25 +1009,24 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{align}
 		& \PrbOf{S^{N,\xi}_\amba}{}
 			\leq K_n N^{-n}
-		&& \label{ch4:lemma:cond-lln-1}
+		&& \label{ch4:LLN1:cond-1}
 		\\
 		& \PrbOf{S^{N,\xi}}{}
 			\leq C_n N^{-n}
-		&& \label{ch4:lemma:cond-lln-2}
+		&& \label{ch4:LLN1:cond-2}
 	\end{align}
-	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$ and obtain that the law of large numbers are valid for every $ 0 < \xi < \frac{1}{2}$.
+	In particular, this means that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$ and obtain that the law of large numbers are valid for every $ 0 < \xi \leq \frac{1}{2}$.
 \end{proposition}
 
 \begin{proof}
-	For the sake of shortness we will use the subsequent notation:
-	\begin{align*}
-		\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			K_{x,y,z}&:= \: \text{generic constant $>0$ and dependent on $x,y,z$}
-		\\
-		\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\mfamba^k, }				&				S^{N, \xi}_\star &:= \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
-		\\
-		\ETFoot{\star}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}
-	\end{align*}
+	For the sake of shortness, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
+	
+	\begin{equation*}
+		S^{N, \xi}_\star := \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
+	\end{equation*}
+	
 	Notice that 
+	
 	\begin{align*}
 		\PrbOf{S^{N,\xi}_\star}
 		& =\PrbOf{
@@ -1908,17 +1933,86 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		K_{\attraction,\text{dens}, \curlywedge,n}\
 		N^{-n}
 	\end{equation*}
+	And this concludes the proof of the first law of large numbers.
+\end{proof}
+
+From this section on we will use only the usual non-generalized attraction $\attraction$ and so the symbol $\drift$ will indicate only the correspondent drift.
+
+\subsection{The second law of large numbers}
+
+To prove the second law of large numbers it will be necessary to prove that a specific \rv $\Zrv_t^1$ has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
+
+\begin{proposition}[The second law of large numbers]\label{ch4:prop:LLN2}
+	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas.
+	Assume that
+	\begin{enumerate}
+		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
+		\begin{equation*}
+			\exists K_{dens}.\forall p,m,t.
+			\qquad
+			\Norm{\cdens_t^m}_\infty, \Norm{\adens_t^p}_\infty < K_{dens}
+		\end{equation*}
+		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ respectively.
+		\item The amoebas' mass $\amass(t) := \int \adens_t(x) \: dx$ is constant through time.
+	\end{enumerate}
 	
+	[[regulate these conditions for the mean-field particles as requirements in chapter 3 and not here maybe]]
+	
+	Choose $0  < \xi \leq \frac{1}{4}$ and define the sets
+	
+		\begin{equation*}
+		\begin{aligned}
+			R^{N,\xi}_\amba
+			&:= \left\{ \sup_{1\leq k \leq N} 
+			\Norm{
+					\ECondTimes{
+						\drift^N_k(t,\mfsol^N)
+					}{\mfamba^k,}
+					-
+					\ECond{\drift^N_k(t,\mfsol^N)}{\mfamba^k}
+			}_\infty 
+			\geq N^{-\xi} 
+			\right\}
+			\\
+			R^{N, \xi}
+			&:= \left\{ \sup_{1\leq k \leq N} 
+			\Norm{
+				\ECondTimes{
+					\drift^N_k(t,\mfsol^N)
+				}{}
+				-
+				\E{\drift^N_k(t,\mfsol^N)}
+			}_\infty 
+			\geq N^{-\xi} 
+			\right\}
+		\end{aligned}
+	\end{equation*}
+	Then for these sets are valid the laws of large numbers, \ie for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
+	
+	[[put here the exact conditions of dependence of the constant K and for n (I think more than 2)]]
+	
+	\begin{align}
+		& \PrbOf{R^{N,\xi}_\amba}{}
+		\leq K_n N^{-n}
+		&& \label{ch4:LLN2:cond-1}
+		\\
+		& \PrbOf{R^{N,\xi}}{}
+		\leq K_n N^{-n}
+		&& \label{ch4:LLN2:cond-2}
+	\end{align}
+\end{proposition}
+
+
+\begin{proof}
+	As for the first law of large numbers, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
+	
+	\begin{equation*}
+		R^{N, \xi}_\star := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
+	\end{equation*}
 \end{proof}
 
 
-\subsection{The less conditional law of large numbers}
 
 
-\begin{proposition}
-	
-\end{proposition}
 
-\begin{proposition}
-	
-\end{proposition}
+
