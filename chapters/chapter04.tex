@@ -722,44 +722,21 @@ Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 
 [[introduce this properly with the correct inequality]]
 
-\subsection{Notation convention}\label{ch4:notation}
+\subsection{Generalized attraction}
 
-From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (\ie $\amba^k$ or $\mfamba^k$, depending on the context):
+Only for this section we will use a more general case for the attraction: we will use an additional term which also admits a cut-off Coulomb-type of singularity.
 
-\begin{align*}
-	\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			\PrbTFoot{}{\cdot}&:= \PrbCondTimes{\cdot}{}
-	\\
-	\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\text{$k$-th amoeba},	}			&				\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\text{$k$-th amoeba }, }
-	\\
-	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
-\end{align*}
 
-Furthermore, a subscript $\star$ will mean ambiguity in the presence of the subscript:
-
-\begin{align*}
-	\EFoot{\star}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\star}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
-	\\
-	\ETFoot{\star}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\star}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
-\end{align*}
-
-Finally we will indicate constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
-
-\begin{equation*}
-	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
-\end{equation*}
-
-\subsection{The first law of large numbers}
-
-In this subsection we prove a more general result than the one that we will use in main result: we will use an attraction which also admits a cut-off Coulomb-type of singularity.
-
-\begin{definition}[Generalised attraction and drift]\label{ch4:def:generalised-attr&drift}
+\begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch4:def:generalised-attr&drift}
 	Let $\alpha \geq 0$.
 	Let $\cutoffSinAttraction = \cutoffSinAttraction (N, \alpha) : \R^d \longrightarrow \R^d$ be a function such that
 	\begin{equation}
+		0
+		\leq 
 		\norm{\cutoffSinAttraction}
 		\leq 
 		K_\curlywedge \left( 
-			\frac{1}{\norm{x}} \wedge N^\alpha
+		\frac{1}{\norm{x}} \wedge N^\alpha
 		\right)
 		=
 		\left\{
@@ -800,13 +777,13 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 	For a function $f$ define the eventually infinite quantities
 	\begin{gather*}
 		\Norm{f}_{1 \wedge \infty} := 
-			\inf_{f_1 + f_\infty = f} 
-			\left( 
-				\Norm{f_1}_1 + \Norm{f_\infty}_\infty
-			\right)
+		\inf_{f_1 + f_\infty = f} 
+		\left( 
+		\Norm{f_1}_1 + \Norm{f_\infty}_\infty
+		\right)
 		\\
 		\Norm{f}_{1 \vee \infty} := 
-			\Norm{f}_1 + \Norm{f}_\infty
+		\Norm{f}_1 + \Norm{f}_\infty
 	\end{gather*}
 	Then for arbitrary functions $f,g$ it is true that
 	\begin{equation}
@@ -835,7 +812,7 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 	Since this is valid for every decomposition $g_1 + g_\infty = g$, we have our result.
 \end{proof}
 
-The second lemma that we need is a simple evaluation of these quantities for the generalised attraction.
+The second lemma that we need is a simple evaluation of these quantities for the generalized attraction.
 
 \begin{lemma}\label{ch4:lemma:eval-norm-gen-attr}
 	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
@@ -880,18 +857,18 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{\attraction}_1 
 		+ K_\curlywedge N^{\alpha} 
 		\max \left\{
-				\pi (N^{-\alpha})^2
-				,\frac{4}{3} \pi (N^{-\alpha})^3
-			\right\}
-			+
+		\pi (N^{-\alpha})^2
+		,\frac{4}{3} \pi (N^{-\alpha})^3
+		\right\}
+		+
 		\\
 		&\qquad
-			+
-			K_\curlywedge
-			\max \left\{
-				\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
-				,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
-			\right\}
+		+
+		K_\curlywedge
+		\max \left\{
+		\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
+		,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
+		\right\}
 		\\
 		& \leq 
 		\Norm{\attraction}_1 
@@ -924,7 +901,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\genAttraction^2 
 		&= 
 		\left(
-			\attraction + \cutoffSinAttraction
+		\attraction + \cutoffSinAttraction
 		\right)^2
 		= \attraction^2 + 2 \attraction \cutoffSinAttraction + \cutoffSinAttraction^2 
 		\\
@@ -945,7 +922,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{(\genAttraction^2)_1}_1 
 		\leq
 		\Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \int \norm{\cutoffSinAttraction}  \1_{\norm{x} \leq 1}
-		 \leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K_\curlywedge 6\pi
+		\leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K_\curlywedge 6\pi
 	\end{equation*}
 	
 	And regarding the other term:
@@ -958,6 +935,37 @@ The second lemma that we need is a simple evaluation of these quantities for the
 	\end{equation*}
 	
 \end{proof}
+
+
+
+\subsection{Notation convention}\label{ch4:notation}
+
+From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (\ie $\amba^k$ or $\mfamba^k$, depending on the context):
+
+\begin{align*}
+	\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			\PrbTFoot{}{\cdot}&:= \PrbCondTimes{\cdot}{}
+	\\
+	\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\text{$k$-th amoeba},	}			&				\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\text{$k$-th amoeba }, }
+	\\
+	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
+\end{align*}
+
+Furthermore, a subscript $\star$ will mean ambiguity in the presence of the subscript:
+
+\begin{align*}
+	\EFoot{\star}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\star}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
+	\\
+	\ETFoot{\star}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\star}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
+\end{align*}
+
+Finally we will indicate constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
+
+\begin{equation*}
+	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
+\end{equation*}
+
+\subsection{The first law of large numbers}
+
 
 Now we can finally approach the first law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
@@ -1015,7 +1023,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		&& \label{ch4:LLN1:bound}
 	\end{align}
 	
-	Furthermore, if $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$, the subsequent weaker bound is valid $\forall n > \frac{1}{C}$ and $\forall \in \N $:
+	Furthermore, if $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$, the subsequent weaker bound is valid $\forall n \in \N$ and $\forall \in \N $:
 	
 	\begin{align}
 		&\PrbOf{S^{N,\xi}_\star}{}
@@ -2021,13 +2029,14 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas.
 	Assume that
 	\begin{enumerate}
-		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
+		\item The densities of all coordinates of $\mfsol_t^N$ with respect to $\PrbCondTimes{\cdot}{}$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
 		\begin{equation*}
-			\exists K_{dens}.\forall p,m,t.
+			\exists K_{dens}.\forall p,m. \forall t.
 			\qquad
-			\Norm{\cdens_t^m}_\infty, \Norm{\adens_t^p}_\infty < K_{dens}
+			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\R^d)}} < K_{dens}
 		\end{equation*}
 		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ respectively.
+		[[here explain better the relationship with teh conditional probability]]
 		\item The amoebas' mass $\amass(t) := \int \adens_t(x) \: dx$ is constant through time.
 	\end{enumerate}
 	
@@ -2035,7 +2044,7 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	
 	[[regulate the conditions on xi here under]]
 	
-	Choose $0  < \xi \leq \frac{1}{4}$ and define the sets
+	Choose $0  < \xi \leq \frac{1}{2}$ and define the sets
 	
 		\begin{equation*}
 		\begin{aligned}
@@ -2043,10 +2052,10 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\Norm{
 					\ECondTimes{
-						\drift^N_k(t,\mfsol^N)
+						\drift^N_k(t,\mfsol_t^N)
 					}{\mfamba^k,}
 					-
-					\ECond{\drift^N_k(t,\mfsol^N)}{\mfamba^k}
+					\ECond{\drift^N_k(t,\mfsol_t^N)}{\mfamba^k}
 			}_\infty 
 			\geq N^{-\xi} 
 			\right\}
@@ -2055,26 +2064,30 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\Norm{
 				\ECondTimes{
-					\drift^N_k(t,\mfsol^N)
+					\drift^N_k(t,\mfsol_t^N)
 				}{}
 				-
-				\E{\drift^N_k(t,\mfsol^N)}
+				\E{\drift^N_k(t,\mfsol_t^N)}
 			}_\infty 
 			\geq N^{-\xi} 
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then for these sets are valid the laws of large numbers, \ie for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
+	Then, signing with $R^{N,\xi}_\star$ either of the two sets, for $R^{N,\xi}_\star$ is valid the law of large numbers, \ie for all $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
 	
 	[[put here the exact conditions of dependence of the constant K and for n (I think more than 2)]]
 	
 	\begin{align}
 		& \PrbOf{R^{N,\xi}_\amba}{}
-		\leq K_n N^{-n}
+		\leq K_n\
+		  t^{2(n-1)}\
+		   N^{-Cn + 1}
 		&& \label{ch4:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
-		\leq K_n N^{-n}
+		\leq K_n\
+		 t^{2(n-1)}\
+		 N^{-Cn + 1}\
 		&& \label{ch4:LLN2:cond-2}
 	\end{align}
 \end{proposition}
@@ -2086,6 +2099,107 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	\begin{equation*}
 		R^{N, \xi}_\star := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
 	\end{equation*}
+	
+	[[correct from here on]]
+	
+	Then we can write, as for the previous proof:
+	\begin{align*}
+		\PrbOf{R^{N, \xi}_\star}
+		&= \leq
+		\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\ETFoot
+				{\star}
+				{\drift^N_k(t,\mfsol^N)}
+				-
+				\EFoot{\star}{\drift^N_k(t,\mfsol^N)}
+			}_\infty 
+			\geq 
+			N^{-\xi} 
+		}
+		\\
+		&\leq
+		\sum_{i=1}^{d}
+		\sum_{k=1}^{N}
+		\max_{k,i}\
+		\PrbOf{
+			\Norm{
+				\ETFoot
+				{\star}
+				{\drift^N_{k,i}(t,\mfsol^N)}
+				-
+				\EFoot{\star}{\drift^N_{k,i}(t,\mfsol^N)}
+			}_\infty 
+			\geq 
+			N^{-\xi} 
+		}
+		=
+	\end{align*}
+	
+	Suppose, as in the proof of the previous LLN, that the maximum is reached in the coordinate $(i,k)=(1,1)$.
+	
+	\begin{align*}
+		&=
+		d\
+		N\
+		\PrbOf{
+			\Norm{
+				\ETFoot
+				{\star}
+				{\drift^N_{1,1}(t,\mfsol_t^N)}
+				-
+				\EFoot{\star}{\drift^N_{1,1}(t,\mfsol_t^N)}
+			}_\infty 
+			\geq 
+			N^{-\xi} 
+		}
+		\\
+		& \footnotemark[1]\leq
+		3\
+		N\
+		N^{\xi 2n} \E{
+			\norm{
+				\frac{1}{N} 
+				\sum _{m = 1}^{\hmactive_t} 
+				\ETFoot
+				{\star}
+				{
+					(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
+				}
+				- \frac{1}{N} 
+				\EFoot{\star}{
+					\sum _{m = 1}^{\hmactive_t} 
+					\ETFoot{\star}{
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
+					}
+				}
+			}^{2n}
+		}
+		\\
+		&=
+		3\
+		N^{1 + 2n(\xi - 1)}\
+		\E{
+			\norm{
+				\sum _{m = 1}^{\hmactive_t} 
+				\ETFoot
+				{\star}
+				{
+					(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
+				}
+				-
+				\EFoot{\star}{
+					\sum _{m = 1}^{\hmactive_t} 
+					\ETFoot{\star}{
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
+					}
+				}
+			}^{2n}
+		}
+	\end{align*}
+	\footnotetext[1]{Markov inequality with $f(x) = |x|^(2n)$}
+	
 \end{proof}
 
 
