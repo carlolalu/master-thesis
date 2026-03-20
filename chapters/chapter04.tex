@@ -950,12 +950,12 @@ From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb
 	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
 \end{align*}
 
-Furthermore, a subscript $\star$ will mean ambiguity in the presence of the subscript:
+Furthermore, a subscript $\ast$ will mean ambiguity in the presence of the subscript:
 
 \begin{align*}
-	\EFoot{\star}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\star}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
+	\EFoot{\ast}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
 	\\
-	\ETFoot{\star}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\star}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
+	\ETFoot{\ast}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
 \end{align*}
 
 Finally we will indicate constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
@@ -974,7 +974,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 \begin{proposition}[The first law of large numbers]\label{ch4:prop:LLN1}
 	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
-		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^\NumParticles_t
+		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
 	\end{equation}
 	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $\alpha\geq 0$ defined in \ref{ch4:def:generalised-attr&drift}.
 	Assume that:
@@ -983,11 +983,11 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists K_{dens}.\forall p,m.
-			\qquad
+			\exists K_{dens}>0.\
+			\forall p,m.\
 			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_{dens}
 		\end{equation*}
-		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ respectively.
+		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
 	\end{enumerate}
 	Fix now $\xi>0$ and define the sets
 	\begin{equation*}
@@ -1013,9 +1013,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing as $S_\star^{N, \xi}$ either of the two sets, for $S_\star^{N, \xi}$ is valid the laws of large numbers, \ie for all $\gamma>0, \forall n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ (independent from $N, \alpha,\xi$) and $\overline{N}\in N$ such that:
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie for all $\gamma>0, \forall n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ (independent from $N, \alpha,\xi$) and $\overline{N}\in N$ such that:
 	\begin{align}
-		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\star}{}
+		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 			\leq 
 			K_n\
 			t^n\
@@ -1026,7 +1026,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Furthermore, if $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$, the subsequent weaker bound is valid $\forall n \in \N$ and $\forall \in \N $:
 	
 	\begin{align}
-		&\PrbOf{S^{N,\xi}_\star}{}
+		&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
 		K_n\
 		t^n\
@@ -1043,18 +1043,18 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	For the sake of shortness, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
-		S^{N, \xi}_\star := \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
+		S^{N, \xi}_\ast := \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
 	\end{equation*}
 	
 	Notice that 
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		& =\PrbOf{
 				\sup_{1\leq k \leq N} 
 				\norm{
 					\drift_k^N(t, \mfsol^N) 
-					- \ETFoot{\star}{
+					- \ETFoot{\ast}{
 						\drift^N_k(t,\mfsol^N)
 					}
 				}_\infty \geq N^{-\xi} 
@@ -1063,7 +1063,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
 			\PrbOf{\norm{
 					\drift^N_{k,i}(t, \mfsol^N) 
-					- \ETFoot{\star}{
+					- \ETFoot{\ast}{
 						\drift^N_{k,i}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
@@ -1076,7 +1076,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\underbrace{
 		\PrbOf{\norm{
 				\drift^N_{k,i}(t, \mfsol^N) 
-				- \ETFoot{\star}{
+				- \ETFoot{\ast}{
 					\drift^N_{k,i}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
@@ -1092,7 +1092,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		3N \cdot
 		\PrbOf{\norm{
 					\drift^N_{1,1}(t, \mfsol^N) 
-					- \ETFoot{\star}{
+					- \ETFoot{\ast}{
 						\drift^N_{1,1}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
@@ -1101,7 +1101,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		&\leq \frac{3N}{ (N^{-\xi})^{2n} } \E{
 				\norm{
 				\drift^N_{1,1}(t, \mfsol^N) 
-				- \ETFoot{\star}{
+				- \ETFoot{\ast}{
 					\drift^N_{1,1}(t,\mfsol^N)
 					}
 				}^{2n}
@@ -1115,7 +1115,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\sum _{m = 1}^{\hmactive_t} 
 				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 			- \frac{1}{N} \sum _{m = 1}^{\hmactive_t} 
-			 \ETFoot{\star}{
+			 \ETFoot{\ast}{
 				(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 			}
 		}^{2n}
@@ -1127,7 +1127,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\sum _{m = 1}^{\hmactive_t} 
 			\left[
 			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-			- \ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+			- \ETFoot{\ast}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 			\right]
 		}^{2n}
 	}
@@ -1142,8 +1142,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					}_{:=\Psi_m}
 					-
 					\underbrace{
-						\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
-					}_{=\ETFoot{\star}{\Psi_m}=: \psi_m^\star}
+						\ETFoot{\ast}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+					}_{=\ETFoot{\ast}{\Psi_m}=: \psi_m^\ast}
 				\right]
 			}^{2n}
 		}
@@ -1151,7 +1151,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{align*}
 	\footnotetext[1]{{Here $(\genAttraction)_1$ indicates the first coordinate of $\genAttraction$, and not a first part of any decomposition of $\genAttraction$.}}
 	
-	Setting $\Zhi_m := |\Psi_m - \psi_m^\star|$, we can apply the multinomial formula:
+	Setting $\Zhi_m := |\Psi_m - \psi_m^\ast|$, we can apply the multinomial formula:
 	
 	\begin{align}
 		\left( \sum_{m=1}^M \Zhi_m \right)^{2n}
@@ -1174,18 +1174,18 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				\frac{(2n)!}{(\beta)!}
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
-					\Psi_m - \psi_m^\star
+					\Psi_m - \psi_m^\ast
 				}^{\beta_m}
 			}
 		\\
 		& = 3 N^{(\xi -1) 2 n + 1}
 		\E{
-			\ETFoot{\star}{
+			\ETFoot{\ast}{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
 			\frac{(2n)!}{(\beta)!}
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
-				\Psi_m - \psi_m^\star
+				\Psi_m - \psi_m^\ast
 			}^{\beta_m}
 		}
 		}
@@ -1194,10 +1194,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}
 		\frac{(2n)!}{(\beta)!}
-		\ETFoot{\star}{
+		\ETFoot{\ast}{
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
-				\Psi_m - \psi_m^\star
+				\Psi_m - \psi_m^\ast
 			}^{\beta_m}
 		}}
 	\\
@@ -1208,10 +1208,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	N^{(\xi -1) 2 n + 1}
 	\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
-		\ETFoot{\star}{
+		\ETFoot{\ast}{
 			\prod_{m=1}^{\hmactive_t}
 			\norm{
-				\Psi_m - \psi_m^\star
+				\Psi_m - \psi_m^\ast
 			}^{\beta_m}
 	}}
 =
@@ -1220,12 +1220,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Notice now that for each $m$ the \rvs
 	
 	\begin{equation}
-		 \Psi_m - \psi_m^\star 
+		 \Psi_m - \psi_m^\ast 
 		 \quad
 		 = 
 		 \quad
 		 (\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-		- \ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+		- \ETFoot{\ast}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 	\end{equation}
 	
 	are $\indep$ under $\PrbTFoot{1}{\cdot} = \PrbCondTimes{\cdot}{\mfamba^1,}$, therefore
@@ -1236,11 +1236,11 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		N^{(\xi -1) 2 n + 1}
 		\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
-		\ETFoot{\star}{
+		\ETFoot{\ast}{
 			\ETFoot{1}{
 				\prod_{m=1}^{\hmactive_t}
 				\norm{
-					\Psi_m - \psi_m^\star
+					\Psi_m - \psi_m^\ast
 				}^{\beta_m}
 		}} }
 	\\
@@ -1249,10 +1249,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\E{
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 	\prod_{m=1}^{\hmactive_t}
-		\ETFoot{\star}{
+		\ETFoot{\ast}{
 			\ETFoot{1}{
 				\norm{
-					\Psi_m - \psi_m^\star
+					\Psi_m - \psi_m^\ast
 				}^{\beta_m}
 			}
 		}
@@ -1264,9 +1264,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 	\prod_{m=1}^{\hmactive_t}
 	\underbrace{
-	\ETFoot{\star}{
+	\ETFoot{\ast}{
 			\norm{
-				\Psi_m - \psi_m^\star
+				\Psi_m - \psi_m^\ast
 			}^{\beta_m}
 		}
 	}_{\leq ?}
@@ -1275,12 +1275,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{aligned}
 	\end{equation}
 	
-	\begin{claim}\label{proof-of-LLN1:claim:bound-on-Psi-psi}
+	\begin{claim}\label{ch4:proof-of-LLN1:claim:bound-on-Psi-psi}
 		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction$ and on $K_{\text{dens}}$ such that
 		\begin{equation}
-			\ETFoot{\star}{
+			\ETFoot{\ast}{
 				\norm{
-					\Psi_m - \psi_m^\star 
+					\Psi_m - \psi_m^\ast 
 				}^{\beta_m}
 			}
 			\leq 
@@ -1300,29 +1300,29 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			If $\beta_m =0$ we have
 		
 		\begin{equation*}
-			\ETFoot{\star}{
+			\ETFoot{\ast}{
 				\norm{
 					\Psi_m
-					- \psi_m^\star
+					- \psi_m^\ast
 				}^0
-			} = \ETFoot{\star}{ \ETFoot{1}{ 1} } = 1
+			} = \ETFoot{\ast}{ \ETFoot{1}{ 1} } = 1
 		\end{equation*}
 		
 		If instead $\beta_m =1$ we have:
 		\begin{equation*}
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^1 }
+			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^1 }
 			=
-			\ETFoot{\star}{
+			\ETFoot{\ast}{
 				\ETFoot{1}{
 					\norm{
 						\Psi_m
-						- \psi_m^\star
+						- \psi_m^\ast
 					}
 			}}
-			= 	\ETFoot{\star}{
+			= 	\ETFoot{\ast}{
 				\norm{
 					\Psi_m
-					- \ETFoot{\star}{\Psi_m}
+					- \ETFoot{\ast}{\Psi_m}
 				}
 			}	= 0
 		\end{equation*}
@@ -1331,20 +1331,20 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Here we have
 		
 		\begin{align*}
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m} }
+			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{\beta_m} }
 			& =
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m - 2} \cdot \norm{\Psi_m - \psi_m^\star }^{2}}
+			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{\beta_m - 2} \cdot \norm{\Psi_m - \psi_m^\ast }^{2}}
 			\\
-			&\leq \Norm{\Psi_m - \psi_m^\star }^{\beta_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
+			&\leq \Norm{\Psi_m - \psi_m^\ast }^{\beta_m - 2}_\infty \cdot \ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{2} }
 		\end{align*}
 		
 		Then we can dominate the two terms separately.
 		
 		\begin{align*}
-			\Norm{\Psi_m - \psi_m^\star }_\infty 
+			\Norm{\Psi_m - \psi_m^\ast }_\infty 
 			&= \Norm{(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
 				-
-				\ETFoot{\star}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
+				\ETFoot{\ast}{ \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)}
 			}_\infty
 			\\
 			&=\Norm{\genAttraction}_\infty + \Norm{\genAttraction \star \cdens^m}_\infty
@@ -1360,7 +1360,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Then
 		
 		\begin{align*}
-			\Norm{\Psi_m - \psi_m^\star }_\infty^{\beta_m - 2} 
+			\Norm{\Psi_m - \psi_m^\ast }_\infty^{\beta_m - 2} 
 			\leq 
 			(K_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
 		\end{align*}
@@ -1368,60 +1368,60 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Let us now check the other term:
 		
 		\begin{align*}
-			&\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} } =
+			&\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{2} } =
 			\\
-			&= \ETFoot{\star}{
+			&= \ETFoot{\ast}{
 				\ETFoot{1}{
 				\norm{
 			(\genAttraction)_1(\mfamba^1 - \mfcamp^m)
-			- \psi_m^\star }^{2}
+			- \psi_m^\ast }^{2}
 		}
 	}
 		\\
 		&=
-		\ETFoot{\star}{
+		\ETFoot{\ast}{
 		\int
 		\left(
 			(\genAttraction)_1(\mfamba^1 - x)
-			- \psi_m^\star \right)^{2}
+			- \psi_m^\ast \right)^{2}
 			\:
 			\cdens^m(x)
 			\:
 			dx
 		}
 		\\
-		& = \ETFoot{\star}{
+		& = \ETFoot{\ast}{
 			\int
 			(\genAttraction)_1^2(\mfamba^1 - x)
 			\cdens^m(x)
 			dx
 			- \int 2
 			(\genAttraction)_1(\mfamba^1 - x)
-			\psi_m^\star
+			\psi_m^\ast
 			\cdens^m(x)
 			dx
 			+
-			(\psi_m^\star)^2
+			(\psi_m^\ast)^2
 			 \int
 			\cdens^m(x)
 			dx
 		}
 		\\
-		&= \ETFoot{\star}{
+		&= \ETFoot{\ast}{
 			\left( (\genAttraction)_1^2 \star \cdens^m \right) (\mfamba^1)
-			- 2 \psi_m^\star \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)
-			+(\psi_m^\star)^2
+			- 2 \psi_m^\ast \left( (\genAttraction)_1 \star \cdens^m \right) (\mfamba^1)
+			+(\psi_m^\ast)^2
 		}
 		\\
-		& \leq \ETFoot{\star}{
+		& \leq \ETFoot{\ast}{
 			\Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
-			+ 2 \psi_m^\star \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
-			+(\psi_m^\star)^2
+			+ 2 \psi_m^\ast \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
+			+(\psi_m^\ast)^2
 		}
 		\\
 		&= \Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
-		+ 2 \psi_m^\star \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
-		+(\psi_m^\star)^2 
+		+ 2 \psi_m^\ast \Norm{(\genAttraction)_1 \star \cdens^m}_\infty
+		+(\psi_m^\ast)^2 
 		\\
 		&\leq 
 		\Norm{(\genAttraction)_1^2 \star \cdens^m}_\infty
@@ -1453,23 +1453,23 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Then we have
 		
 		\begin{align*}
-			\ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{\beta_m} }
-			&\leq \Norm{\Psi_m - \psi_m^\star }^{\beta_m - 2}_\infty \cdot \ETFoot{\star}{\norm{\Psi_m - \psi_m^\star }^{2} }
+			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{\beta_m} }
+			&\leq \Norm{\Psi_m - \psi_m^\ast }^{\beta_m - 2}_\infty \cdot \ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{2} }
 			\\
 			&\leq (4N^\alpha K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2} = (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
 		\end{align*}
 		And this concludes the proof of the claim.
 	\end{proof}
 	
-	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{proof-of-LLN1:calculations-before-claim} and exploiting the claim \ref{proof-of-LLN1:claim:bound-on-Psi-psi}, we have that
+	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{proof-of-LLN1:calculations-before-claim} and exploiting the claim \ref{ch4:proof-of-LLN1:claim:bound-on-Psi-psi}, we have that
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		& =\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\norm{
 				\drift_k^N(t, \mfsol^N) 
-				- \ETFoot{\star}{
+				- \ETFoot{\ast}{
 					\drift^N_k(t,\mfsol^N)
 				}
 			}_\infty \geq N^{-\xi} 
@@ -1481,7 +1481,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\:
 			\PrbOf{\norm{
 					\drift^N_{k,i}(t, \mfsol^N) 
-					- \ETFoot{\star}{
+					- \ETFoot{\ast}{
 						\drift^N_{k,i}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
@@ -1493,9 +1493,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\E{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 			\prod_{m=1}^{\hmactive_t}
-				\ETFoot{\star}{
+				\ETFoot{\ast}{
 					\norm{
-						\Psi_m - \psi_m^\star
+						\Psi_m - \psi_m^\ast
 					}^{\beta_m}
 				}
 			}
@@ -1521,7 +1521,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{claim}\label{ch4:proof-of-LLN1:sum-prod-Iu-inequality}
 		$\Iu \geq 1$ is independent from the multi-index $\beta$, therefore
 		\begin{equation}
-			\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}
+			\sum_{\beta_1 + \cdots + \beta_M =2n}\
+			\prod_{m=1}^{M}\
 			\left(
 			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}
 			\Iu^{\beta_m -2} 
@@ -1821,12 +1822,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Resuming everything and applying the last claim we obtain:
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		& =\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\norm{
 				\drift_k^N(t, \mfsol^N) 
-				- \ETFoot{\star}{
+				- \ETFoot{\ast}{
 					\drift^N_k(t,\mfsol^N)
 				}
 			}_\infty \geq N^{-\xi} 
@@ -1838,7 +1839,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\:
 		\PrbOf{\norm{
 				\drift^N_{k,i}(t, \mfsol^N) 
-				- \ETFoot{\star}{
+				- \ETFoot{\ast}{
 					\drift^N_{k,i}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
@@ -1902,7 +1903,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Then we have that
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		&\leq
 		K_{\attraction,\text{dens}, \curlywedge,n}\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
@@ -1952,7 +1953,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Choose $\epsilon =1$ and then you obtain that $\exists \overline{N}=\overline{N}(1) \in \N$ such that $	\forall N > \overline{N}$
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		&\leq
 		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
 		t^n\
@@ -1999,7 +2000,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	and therefore we obtain that
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\star}
+		\PrbOf{S^{N,\xi}_\ast}
 		&\leq
 		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
 		t^n\
@@ -2029,13 +2030,15 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas.
 	Assume that
 	\begin{enumerate}
-		\item The densities of all coordinates of $\mfsol_t^N$ with respect to $\PrbCondTimes{\cdot}{}$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
+		\item The densities of all coordinates of $\mfsol_t^N$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
 		\begin{equation*}
-			\exists K_{dens}.\forall p,m. \forall t.
+			\exists K_{dens,T} >0.\
+			\forall p,m.\
+			\forall t \leq T.\
 			\qquad
-			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\R^d)}} < K_{dens}
+			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\infty}(\R^d)} < K_{dens, T}
 		\end{equation*}
-		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ respectively.
+		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ under $ \PrbCondTimes{\cdot}{}$ respectively.
 		[[here explain better the relationship with teh conditional probability]]
 		\item The amoebas' mass $\amass(t) := \int \adens_t(x) \: dx$ is constant through time.
 	\end{enumerate}
@@ -2073,7 +2076,7 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\star$ either of the two sets, for $R^{N,\xi}_\star$ is valid the law of large numbers, \ie for all $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
+	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
 	
 	[[put here the exact conditions of dependence of the constant K and for n (I think more than 2)]]
 	
@@ -2097,23 +2100,23 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	As for the first law of large numbers, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
-		R^{N, \xi}_\star := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
+		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
 	\end{equation*}
 	
 	[[correct from here on]]
 	
 	Then we can write, as for the previous proof:
 	\begin{align*}
-		\PrbOf{R^{N, \xi}_\star}
+		\PrbOf{R^{N, \xi}_\ast}
 		&= \leq
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\Norm{
 				\ETFoot
-				{\star}
+				{\ast}
 				{\drift^N_k(t,\mfsol^N)}
 				-
-				\EFoot{\star}{\drift^N_k(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^N_k(t,\mfsol^N)}
 			}_\infty 
 			\geq 
 			N^{-\xi} 
@@ -2124,13 +2127,13 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 		\sum_{k=1}^{N}
 		\max_{k,i}\
 		\PrbOf{
-			\Norm{
+			\norm{
 				\ETFoot
-				{\star}
+				{\ast}
 				{\drift^N_{k,i}(t,\mfsol^N)}
 				-
-				\EFoot{\star}{\drift^N_{k,i}(t,\mfsol^N)}
-			}_\infty 
+				\EFoot{\ast}{\drift^N_{k,i}(t,\mfsol^N)}
+			}
 			\geq 
 			N^{-\xi} 
 		}
@@ -2138,19 +2141,20 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	\end{align*}
 	
 	Suppose, as in the proof of the previous LLN, that the maximum is reached in the coordinate $(i,k)=(1,1)$.
+	Now we will use again the original notation \ref{ch2:model}.
 	
 	\begin{align*}
 		&=
 		d\
 		N\
 		\PrbOf{
-			\Norm{
+			\norm{
 				\ETFoot
-				{\star}
+				{\ast}
 				{\drift^N_{1,1}(t,\mfsol_t^N)}
 				-
-				\EFoot{\star}{\drift^N_{1,1}(t,\mfsol_t^N)}
-			}_\infty 
+				\EFoot{\ast}{\drift^N_{1,1}(t,\mfsol_t^N)}
+			}
 			\geq 
 			N^{-\xi} 
 		}
@@ -2158,52 +2162,450 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 		& \footnotemark[1]\leq
 		3\
 		N\
-		N^{\xi 2n} \E{
-			\norm{
-				\frac{1}{N} 
-				\sum _{m = 1}^{\hmactive_t} 
+		N^{\xi 2n}\
+		\E{\norm{
 				\ETFoot
-				{\star}
-				{
-					(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
-				}
-				- \frac{1}{N} 
-				\EFoot{\star}{
-					\sum _{m = 1}^{\hmactive_t} 
-					\ETFoot{\star}{
-						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
-					}
-				}
+				{\ast}
+				{\drift^N_{1,1}(t,\mfsol_t^N)}
+				-
+				\EFoot{\ast}{\drift^N_{1,1}(t,\mfsol_t^N)}
+			}^{2n} }
+		\\
+		&=
+		3\
+		N^{1 +\xi 2n}\
+		\E{
+			\norm{
+			\frac{1}{N}\
+			\sum_{p=1}^{N}\
+			\sum _{g = 1}^{\hmactive_t^p} 
+			\ETFoot
+			{\ast}
+			{
+				(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+			}
+			- 
+			\frac{1}{N}\
+			\sum_{p=1}^{N}\
+			\EFoot{\ast}{
+				\sum _{g = 1}^{\hmactive_t^p}\
+				(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+			}
 			}^{2n}
 		}
 		\\
 		&=
 		3\
-		N^{1 + 2n(\xi - 1)}\
+		N^{1 +(\xi-1) 2n}\
 		\E{
 			\norm{
-				\sum _{m = 1}^{\hmactive_t} 
-				\ETFoot
-				{\star}
-				{
-					(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
-				}
-				-
-				\EFoot{\star}{
-					\sum _{m = 1}^{\hmactive_t} 
-					\ETFoot{\star}{
-						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^m)
+			\sum_{p=1}^{N}\
+			\left(
+				\underbrace{
+					\sum _{g = 1}^{\hmactive_t^p} 
+					\ETFoot
+					{\ast}
+					{
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
 					}
-				}
-			}^{2n}
-		}
+				}_{=:\Phi_p^\ast}
+				-
+				\underbrace{
+					\EFoot{\ast}{
+						\sum _{g = 1}^{\hmactive_t^p}\
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+					}
+				}_{=\EFoot{\ast}{\Phi_p^\ast}=: \phi_p^\ast}
+			\right)
+		}^{2n}
+		} = 
 	\end{align*}
-	\footnotetext[1]{Markov inequality with $f(x) = |x|^(2n)$}
+	\footnotetext[1]{Markov inequality with $f(x) = |x|^{2n}$}
 	
+	As for the first law of large numbers, we apply on $\Zhi_p :=\norm{\Phi_p^\ast - \phi_p^\ast}\:$ the multinomial formula
+	
+	\begin{equation*}
+		\left( \sum_{p=1}^N \Zhi_p \right)^{2n}
+		= \sum_{\beta_1 + \cdots + \beta_N =2n} 
+		\:
+		\frac{(2n)!}{(\beta)!}\
+		\prod_{p=1}^N \Zhi_p^{\beta_p}
+	\end{equation*}
+	
+	obtaining
+	
+	\begin{align*}
+		&=
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\E{
+			\sum_{\beta_1 + \cdots + \beta_N =2n}\
+			\frac{(2n)!}{(\beta)!}\
+			\prod_{p=1}^N\
+			\norm{
+				\Phi_p^\ast - \phi_p^\ast
+			}^{\beta_p}
+		}
+		\\
+		&=		
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{\beta_1 + \cdots + \beta_N =2n}\
+		\frac{(2n)!}{(\beta)!}\
+		\E{
+			\prod_{p=1}^N\
+			\norm{
+				\Phi_p^\ast - \phi_p^\ast
+			}^{\beta_p}
+		}	=
+	\end{align*}
+	
+	Now notice that 
+	
+	\begin{equation*}
+		\Phi_p^\ast - \phi_p^\ast
+		= 
+		\sum _{g = 1}^{\hmactive_t^p} 
+		\ETFoot
+		{\ast}
+		{
+			(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+		}
+		-
+		\EFoot{\ast}{
+			\sum _{g = 1}^{\hmactive_t^p}\
+			(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+		}
+	\end{equation*}
+	
+	depends exclusively on $\hmactive_t^p, \mfcamp_t^{p,g}$ for a fixed $p$ (and eventually on $\mfamba_t^1$ if $\ast = 1$).
+	Plus, for different $p$ the quantities above are \iid under $\PrbFoot{\ast}{}$ and thus we can go on with the calculations so:
+	
+	\begin{align*}
+		&=		
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{\beta_1 + \cdots + \beta_N =2n}\
+		\frac{(2n)!}{(\beta)!}\
+		\E{
+			\EFoot{\ast}{
+				\prod_{p=1}^N\
+				\norm{
+					\Phi_p^\ast - \phi_p^\ast
+				}^{\beta_p}
+			}
+		}
+		\\
+		&=
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{\beta_1 + \cdots + \beta_N =2n}\
+		\frac{(2n)!}{(\beta)!}\
+		\prod_{p=1}^N\
+		\E{
+			\EFoot{\ast}{
+				\norm{
+					\Phi_1^\ast - \phi_1^\ast
+				}^{\beta_p}
+			}
+		}
+		\\
+		&=
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{\beta_1 + \cdots + \beta_N =2n}\
+		\frac{(2n)!}{(\beta)!}\
+		\prod_{p=1}^N\
+		\E{
+				\norm{
+					\Phi_1^\ast - \phi_1^\ast
+				}^{\beta_p}
+		}
+		\\
+		&\leq
+		3\
+		(2n)!\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{\beta_1 + \cdots + \beta_N =2n}\
+		\prod_{p=1}^N\
+		\E{
+			\norm{
+				\Phi_1^\ast - \phi_1^\ast
+			}^{\beta_p}
+		}
+		=
+	\end{align*}
+		
+		Now, since $\phi_1^\ast = \EFoot{\ast}{\Phi_1^\ast}$, we can deduce, as for the first law of large numbers:
+		
+	\begin{align*}
+		&=
+		K_n\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{
+			\substack{
+				\beta_1 + \cdots + \beta_N =2n
+				\\
+				\forall p. \beta_p \neq 1
+			}
+		}\
+		\prod_{p=1}^N\
+		\left(
+			\1_{\beta_p=0}
+			+
+			\1_{\beta_p \geq 2}
+			\E{
+				\norm{
+					\Phi_1^\ast - \phi_1^\ast
+				}^{\beta_p}
+			}
+		\right)
+	\end{align*}
+	
+	Now we need to use the subsequent bound for $\E{
+		\norm{
+			\Phi_1^\ast - \phi_1^\ast
+		}^{\beta_p}
+	}$, which will be proved at the end of this proposition:
+	
+	[[here insert the reference to the precise porposition + insert the precise dependency for the constant you are going to use]]
+	
+	\begin{equation}\label{ch4:proof-of-LLN2:bound-for-phip}
+		\exists K > 0.
+		\qquad\
+		\E{
+			\norm{
+				\Phi_1^\ast - \phi_1^\ast
+			}^q
+		} 
+		\leq 
+		(Kt)^q
+	\end{equation}
+	
+	Applying this to our calculations, and resuming all since the beginning, we obtain that:
+	
+	\begin{align*}
+		&\PrbOf{R^{N, \xi}_\ast}
+		\leq
+		\sum_{i=1}^{d}
+		\sum_{k=1}^{N}
+		\max_{k,i}\
+		\PrbOf{
+			\norm{
+				\ETFoot
+				{\ast}
+				{\drift^N_{k,i}(t,\mfsol^N)}
+				-
+				\EFoot{\ast}{\drift^N_{k,i}(t,\mfsol^N)}
+			}
+			\geq 
+			N^{-\xi} 
+		}
+		\\
+		&\leq
+		3\
+		N^{1 +(\xi-1) 2n}\
+		\E{
+			\norm{
+				\sum_{p=1}^{N}\
+				\left(
+				\underbrace{
+					\sum _{g = 1}^{\hmactive_t^p} 
+					\ETFoot
+					{\ast}
+					{
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+					}
+				}_{=:\Phi_p^\ast}
+				-
+				\underbrace{
+					\EFoot{\ast}{
+						\sum _{g = 1}^{\hmactive_t^p}\
+						(\genAttraction)_1(\mfamba_t^1 - \mfcamp_t^{p,g})
+					}
+				}_{=\EFoot{\ast}{\Phi_p^\ast}=: \phi_p^\ast}
+				\right)
+			}^{2n}
+		} 
+		\\
+		&\leq
+		K_n\
+		N^{1 +(\xi-1) 2n}\
+		\sum_{
+			\substack{
+				\beta_1 + \cdots + \beta_N =2n
+				\\
+				\forall p. \beta_p \neq 1
+			}
+		}\
+		\prod_{p=1}^N\
+		\left(
+		\1_{\beta_p=0}
+		+
+		\1_{\beta_p \geq 2}
+		\E{
+			\norm{
+				\Phi_1^\ast - \phi_1^\ast
+			}^{\beta_p}
+		}
+		\right)
+		\\
+		&\leq
+		K_n\
+		N^{1 +(\xi-1) 2n}\
+		\underbrace{
+			\sum_{
+				\substack{
+					\beta_1 + \cdots + \beta_N =2n
+					\\
+					\forall p. \beta_p \neq 1
+				}
+			}\
+			\prod_{p=1}^N\
+			\left(
+			\1_{\beta_p=0}
+			+
+			\1_{\beta_p \geq 2}
+			(Kt)^{\beta_p}
+			\right)
+		}_{}
+		\leq
+	\end{align*}
+	
+	Now apply the claim \ref{ch4:proof-of-LLN1:sum-prod-Iu-inequality} of the proof of the first law of large numbers \ref{ch4:prop:LLN1}:
+	
+	\begin{align*}
+		&\leq
+		K_n\
+		N^{1 +(\xi-1) 2n}\
+		\overbrace{
+			K_n
+			(N)^n\
+			(K t)^{2n-2}\
+		}^{}
+		\\
+		&=
+		K_n\
+		t^{2(n-1)}\
+		N^{
+			1 + \left( 2\xi -2 + 1 \right)n
+			}\
+		=
+		K_n\
+		t^{2(n-1)}\
+		N^{
+			1 + ( 2\xi - 1 )n
+		}\
+	\end{align*}
+	
+	Therefore, for every $C$ such that $0 < C < 1 -2\xi$, we have that
+	
+	\begin{equation}
+		1 + ( 2\xi - 1 )n < 1 - Cn
+	\end{equation}
+	
+	and therefore we can conclude the proof:
+	
+	\begin{equation*}
+		\PrbOf{R^{N, \xi}_\ast}
+		\leq
+		K_n\
+		t^{2(n-1)}\
+		N^{
+			1 + ( 2\xi - 1 )n
+		}\
+		\leq
+		K_n\
+		t^{2(n-1)}\
+		N^{
+			1 - Cn
+		}\
+	\end{equation*}
 \end{proof}
 
+Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 
+\begin{proposition}
+	Consider the \rv
+	
+	\begin{equation}
+		\Phi_p^\ast (k,i)\
+		:=\
+		\sum _{g = 1}^{\hmactive_t^p} 
+		\ETFoot
+		{\ast}
+		{
+			(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{p,g})
+		}
+	\end{equation}
+	
+	and its average $\phi_p^\ast (k,i) := \EFoot{\ast}{\Phi_p^\ast(k,i)}$, where $\ast$ is either $k$ or absent.
+	Then it is true that exists $K>0$ such that
+	
+	\begin{equation}
+		\forall k,i.
+		\qquad
+		\E{
+			\norm{
+				\Phi_1^\ast(k,i) - \phi_1^\ast(k,i)
+			}^q
+		} 
+		\leq 
+		(Kt)^q
+	\end{equation}	
+	
+	[[show here all the dependencies on K]]
+	[[should you maybe modify, in the proof of the lln2, the phi function to be dependent also on the coordinate $k,j$? that would make it more clear that the function does not depend on $k,j$]]
+\end{proposition}
 
-
-
+\begin{proof}
+	First, let us observe closely the object in question.
+	
+	\begin{align*}
+		\Phi_p^\ast (k,i)\
+		&=\
+		\sum _{g = 1}^{\hmactive_t^p} 
+		\ETFoot
+		{\ast}
+		{
+			(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{p,g})
+		}
+		\\		
+		&=
+		\sum _{g = 1}^{\hmactive_t^p}
+		\ETFoot
+		{\ast}
+		{
+			\ETFoot
+			{k}
+			{
+				(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{p,g})
+			}
+		}
+		\\
+		&=
+		\sum _{g = 1}^{\hmactive_t^p}
+		\ETFoot
+		{\ast}{
+			\int 
+				(\genAttraction)_i(\mfamba_t^k - x)\
+				\cdens_t^{p,g}(x)
+			dx
+		}\
+		\\
+		&=
+		\sum _{g = 1}^{\hmactive_t^p}
+		\ETFoot
+		{\ast}{
+			\left(
+			(\genAttraction)_i \star \cdens_t^{p,g}
+			\right)
+			(\mfamba_t^k)
+		}
+	\end{align*}
+	\footnotetext[1]{Fubini}
+	
+	
+	
+\end{proof}
 
