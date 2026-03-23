@@ -2841,41 +2841,6 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		\end{equation}
 		\footnotetext[1]{\ref{ch4:lemma:eval-norm-gen-attr}}
 	
-	Now we will use the notation $\cdens_t^{1,g} = \cdens_t^{\btime^{1,g}}$, to make explicit the fact that such density depends on the birth time $\btime^{1,g}$.
-	In addition to this, since $(\hmactive_t^p)_p$ are \iid and so are $(\btime^{p,g})_p$, to avoid mistaking the objects in $\Theta_1$ with the ones in $\theta_1$, we will write:
-	
-	\begin{align*}
-		\Theta_1 - \theta_1 
-		&=
-			\ETFoot{\ast}{
-				\sum _{g = 1}^{\hmactive_t^1}
-				\cdens_t^{1,g}
-				(y - \mfamba_t^k)
-			}
-		-
-			\EFoot
-			{\ast}{
-				\sum _{g = 1}^{\hmactive_t^1}
-				\cdens_t^{1,g}
-				(y - \mfamba_t^k)
-			}
-			\\
-			&=
-			\ETFoot{\ast}{
-				\sum _{g = 1}^{\hmactive_t^1}
-				\cdens_t^{1,g}
-				(y - \mfamba_t^k)
-			}
-			-
-			\EFoot
-			{\ast}{
-				\sum _{g = 1}^{\hmactive_t^2}
-				\cdens_t^{2,g}
-				(y - \mfamba_t^k)
-			}\
-			= \Theta_1 - \theta_2
-	\end{align*}
-	
 	Resuming all this we have that:
 	
 	\begin{align*}
@@ -2889,10 +2854,566 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 			(K_{\attraction,\curlywedge})^q
 			\Norm{
 				\Theta_1 - \theta_2
-			}_{1 \vee \infty}
+			}_{1 \vee \infty}^q
 		}		
+		\\
+		&=
+		K_{\attraction,\curlywedge,q}
+		\E{
+			\left(
+			\Norm{
+				\Theta_1 - \theta_2
+			}_{\Lpspace^1}
+			+
+			\Norm{
+				\Theta_1 - \theta_2
+			}_{\Lpspace^\infty}
+			\right)^q
+		}
+		\\
+		\footnotemark[2] &=
+		K_{\attraction,\curlywedge,q}
+		\E{
+			\sum_{j=0}^{q}
+						\left(
+			\begin{gathered}
+				q
+				\\
+				j
+			\end{gathered}
+			\right)\
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^\infty}^{j}
+		}
+		\\
+		&=
+		K_{\attraction,\curlywedge,q}\
+		\sum_{j=0}^{q}
+		\left(
+		\begin{gathered}
+			q
+			\\
+			j
+		\end{gathered}
+		\right)\
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^\infty}^{j}
+		}
+	\end{align*}
+	\footnotetext[2]{If the $1$- and $\infty$-norm of $\Theta_1 - \theta_1$ are finite, which will be proved}
+	
+	Let us start to find a bound for the infinity norm of $\Theta_1 - \theta_1$:
+	
+	\begin{align*}
+		\Norm{
+			\Theta_1 - \theta_1
+		}_{\Lpspace^\infty}
+		&=\Norm{
+			\ETFoot{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+		-
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+		}_\infty
+		\\
+		&\leq
+		\Norm{
+			\ETFoot{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+		}_\infty
+			+
+			\Norm{
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+		}_\infty
+		\\
+		&\leq
+		\sum _{g = 1}^{\hmactive_t^1}
+		\ETFoot{\ast}{
+			\Norm{
+			\cdens_t^{1,g}
+			}_\infty
+		}
+		+
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\Norm{
+				\cdens_t^{1,g}
+			}_\infty
+			}
+			\\
+			&\leq
+			\sum _{g = 1}^{\hmactive_t^1}
+			K_{dens}
+			+
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+					K_{dens}
+			}\
+			=\
+			K_{dens}\
+			(\hmactive_t^1 + \lambda t)
 	\end{align*}
 	
+	And thus we can write 
+	
+	\begin{align*}
+		&\E{
+			\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}^q
+		}\leq
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q}
+		\sum_{j=0}^{q}
+		\left(
+		\begin{gathered}
+			q
+			\\
+			j
+		\end{gathered}
+		\right)\
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			(K_{dens})^j\
+			(\hmactive_t^1 + \lambda t)^{j}
+		}
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q}
+		\sum_{j=0}^{q}
+		(q!)
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			(K_{dens})^q\
+			\sum_{u=1}^j
+			\left(
+			\begin{gathered}
+				j
+				\\
+				u
+			\end{gathered}
+			\right)\
+			(\hmactive_t^1)^u (\lambda t)^{j-u}
+		}
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q}\
+		(q!)\
+		(K_{dens})^q\
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			\sum_{u=1}^j
+			(j!)\
+			(\hmactive_t^1)^j (\lambda t)^j
+		}
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q}\
+		(q!)\
+		(K_{dens})^q\
+		\sum_{j=0}^{q}\
+		j\
+		(j!)\
+		(\lambda t)^j\
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j 
+		}
+		\\
+		&\leq
+		\underbrace{
+			K_{\attraction,\curlywedge,q}\
+			(q!)\
+			(K_{dens})^q\
+					q\
+			(q!)\
+			(\lambda t)^q\
+		}_{}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\Theta_1 - \theta_1
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j 
+		}
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j 
+		}  
+	\end{align*}
+		
+	Now we will use the notation $\cdens_t^{1,g} = \cdens_t^{\btime^{1,g}}$, to make explicit the fact that such density depends on the birth time $\btime^{1,g}$.
+	
+	Observe also that the random objects $\hmactive_t^1, \btime^{1,g}$ of $\theta_1$ are completely averaged out \emph{inside} $\theta_1$, and essentially do not have a direct relationship with the correspondent objects $\hmactive_t^1, \btime^{1,g}$ of $\Theta_1$.
+	To avoid such confusion we exploit the fact that $\hmactive_t^1 \sim \hmactive_t^2, \btime^{1,g} \sim \btime^{2,g}$ and then we can write
+	
+	\begin{equation}
+		\theta_1 = \EFoot
+		{\ast}{
+			\sum _{g = 1}^{\hmactive_t^2}
+			\cdens_t^{\btime^{2,g}}
+			(y - \mfamba_t^k)
+		} = \theta_2 =: \theta
+	\end{equation}
+	
+	obtaining thus that
+	
+	\begin{align*}
+		&\E{
+			\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}^q
+		}\leq
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{2,g}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j 
+		}  
+		\\
+		&= K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 \neq 0}			
+		} +
+		\\
+		&\qquad
+		+ K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				0
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 = 0}			
+		}
+	\end{align*}
+	
+	Let us calculate the second term first:
+	
+	\begin{align*}
+		&K_{\attraction,\curlywedge,q,dens}\
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\theta
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 = 0}			
+		} =
+		\\
+		&=K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\Norm{
+				\theta
+			}_{\Lpspace^1}^q\
+			(\hmactive_t^1)^0\
+			\1_{\hmactive_t^1 = 0}			
+		} =
+		\\
+		&=K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\Norm{
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^q
+			\1_{\hmactive_t^1 = 0}			
+		} =
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\Norm{
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{+\infty}
+					\underbrace{
+						\cdens_t^{\btime^{2,g}}
+						(y - \mfamba_t^k)
+					}_{\geq 0}
+					\underbrace{
+						\1_{g \leq \hmactive_t^2}
+					}_{
+					\1_{\btime^{2,g} \leq t}
+					}
+				}
+			}_{\Lpspace^1}^q\
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+				\Norm{
+					\sum _{g = 1}^{+\infty}
+					\EFoot
+					{\ast}{
+						\int_0^t
+							\cdens_t^{\tau}
+							(y - \mfamba_t^k)\
+							\PrbOf{\btime^{2,g} = d\ \tau}
+					}
+				}_{\Lpspace^1}^q\
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&=		
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\Norm{
+				\EFoot
+				{\ast}{
+					\int_0^t
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+					\underbrace{
+						\sum _{g = 1}^{+\infty}\
+						\PrbOf{\btime^{2,g} = d\ \tau}
+					}_{
+						\lambda\:d\tau
+					}
+				}
+			}_{\Lpspace^1}^q\
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&=				
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\Norm{
+				\EFoot
+				{\ast}{
+					\int_0^t
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+					\lambda\
+					d\tau
+				}
+			}_{\Lpspace^1}^q\
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\left(
+			\int
+				\left|
+					\EFoot
+					{\ast}{
+						\int_0^t
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+						\lambda\
+						d\tau
+					}
+				\right|
+				dy\
+				\right)^q
+			\1_{\hmactive_t^1 = 0}			
+		}=
+	\end{align*}
+	
+	Then, since $\cdens_t^\tau$ is non-negative, we can leave out the absolute value and use Fubini directly:
+	
+	\begin{align*}
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\left(
+			\EFoot{\ast}{
+				\int_0^t
+				\lambda\
+				\overbrace{
+					\int
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+					dy\
+				}^{ 1 }
+				d\tau\
+			}
+			\right)^q
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		\E{
+			\left(
+			t \lambda
+			\right)^q
+			\1_{\hmactive_t^1 = 0}			
+		}
+		=
+		K_{\attraction,\curlywedge,q,dens}\
+		(\lambda\
+		t)^q\
+		\PrbOf{\hmactive_t^1 = 0} =
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}\
+		(\lambda\
+		t)^q\
+		e^{-t\lambda}\
+		\leq
+		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^q
+	\end{align*}
+	
+	The first term will require a bit more effort. Proceeding as before to calculate $\theta$, and using Fubini and the tower property we obtain:
+	
+	\begin{align*}
+		&K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 \neq 0}\
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}
+					} =
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\Eonly\
+		\Biggl[\
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 \neq 0}\
+			\cdot
+			\\
+			&\qquad
+			\cdot
+			\underbrace{
+				\ECond{
+				\Norm{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\ETFoot{\ast}{
+						\cdens_t^{\btime^{1,g}}
+						(y - \mfamba_t^k)
+					}
+					-
+					\lambda
+					\int_0^t
+					\EFoot
+					{\ast}{
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+					}
+					d\tau
+				}_{\Lpspace^1}^{q-j}			
+				}{
+				\hmactive_t^1}
+			}_{=:\Zhi}\
+		\Biggr] =
+	\end{align*}
+	
+	Let us focus only on the term $\Zhi$:
 	
 \end{proof}
 
