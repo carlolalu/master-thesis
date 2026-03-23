@@ -785,6 +785,7 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 		\Norm{f}_{1 \vee \infty} := 
 		\Norm{f}_1 + \Norm{f}_\infty
 	\end{gather*}
+	where, if $f$ has a $d$-dimensional domain, we consider $\Norm{f}_p := \max_k \Norm{f_k}$ (here $f_k$ is the $k$-th coordinate of $f$).
 	Then for arbitrary functions $f,g$ it is true that
 	\begin{equation}
 		\Norm{f \star g}_\infty
@@ -2540,14 +2541,14 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 	\end{equation}
 	
 	and its average $\phi_p^\ast (k,i) := \EFoot{\ast}{\Phi_p^\ast(k,i)}$, where $\ast$ is either $k$ or absent.
-	Then it is true that exists $K>0$ such that
+	Then exists $K>0$ such that
 	
 	\begin{equation}
-		\forall k,i.
+		\forall p,k,i.
 		\qquad
 		\E{
 			\norm{
-				\Phi_1^\ast(k,i) - \phi_1^\ast(k,i)
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
 			}^q
 		} 
 		\leq 
@@ -2559,52 +2560,338 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 \end{proposition}
 
 \begin{proof}
-	First, let us observe closely the object in question.
+	Observe that since the $(\hmactive_t^p)_p$ are \iid, then we have that also $(\Phi_p^\ast (k,i))_p$ are \iid, and thus we can operate directly with $\Phi_1^\ast (k,i)$.
+	Then let us observe closely the object in question.
 	
 	\begin{align*}
-		\Phi_p^\ast (k,i)\
+		\Phi_1^\ast (k,i)\
 		&=\
-		\sum _{g = 1}^{\hmactive_t^p} 
+		\sum _{g = 1}^{\hmactive_t^1} 
 		\ETFoot
 		{\ast}
 		{
-			(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{p,g})
+			(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{1,g})
 		}
 		\\		
 		&=
-		\sum _{g = 1}^{\hmactive_t^p}
+		\sum _{g = 1}^{\hmactive_t^1}
 		\ETFoot
 		{\ast}
 		{
 			\ETFoot
 			{k}
 			{
-				(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{p,g})
+				(\genAttraction)_i(\mfamba_t^k - \mfcamp_t^{1,g})
 			}
-		}
-		\\
-		&=
-		\sum _{g = 1}^{\hmactive_t^p}
+		}\
+		=
+		\sum _{g = 1}^{\hmactive_t^1}
 		\ETFoot
 		{\ast}{
 			\int 
 				(\genAttraction)_i(\mfamba_t^k - x)\
-				\cdens_t^{p,g}(x)
+				\cdens_t^{1,g}(x)
 			dx
-		}\
+		}
 		\\
 		&=
-		\sum _{g = 1}^{\hmactive_t^p}
+		\sum _{g = 1}^{\hmactive_t^1}
 		\ETFoot
 		{\ast}{
 			\left(
-			(\genAttraction)_i \star \cdens_t^{p,g}
+			(\genAttraction)_i 
+			\star 
+			\cdens_t^{1,g}
 			\right)
 			(\mfamba_t^k)
+		}\
+		= 
+		\sum _{g = 1}^{\hmactive_t^1}
+		\ETFoot
+		{\ast}{
+			\int
+			(\genAttraction)_i (y)\
+			\cdens_t^{1,g}
+			(y - \mfamba_t^k)
+			dy
 		}
+		\\
+		\footnotemark[1] & =
+		\sum _{g = 1}^{\hmactive_t^1}
+			\int
+			(\genAttraction)_i (y)\
+			\ETFoot
+			{\ast}{
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			dy
+			=
+			\int
+			(\genAttraction)_i (y)\
+			\ETFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			dy
 	\end{align*}
 	\footnotetext[1]{Fubini}
 	
+	Then in the same way we can observe that
+	
+	\begin{align*}
+		\phi_1^\ast (k,i)\
+		&=\
+		\EFoot
+		{\ast}
+		{
+		\Phi_1^\ast (k,i)
+		}\
+		=
+		\EFoot
+		{\ast}
+		{
+			\int
+			(\genAttraction)_i (y)\
+			\ETFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			dy
+		}
+		\\
+		&=
+			\int
+			(\genAttraction)_i (y)\
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			dy
+	\end{align*}
+	
+	Then we can write
+	
+	\begin{equation}
+		\label{ch4:in-LLN2:norm-of-rv}
+		\begin{aligned}
+			&\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}\
+			=
+			\\
+			& 
+			=\
+			\norm{
+				\int
+				(\genAttraction)_i (y)\
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				dy
+				-
+				\int
+				(\genAttraction)_i (y)\
+				\EFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				dy
+			}
+			\\
+			& =
+			\norm{
+				\int
+				(\genAttraction)_i (y)\
+				\left(
+				\ETFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				\right)\
+				dy
+			}
+			\\
+			&\leq
+			\int
+			\norm{(\genAttraction)_i (y)}\
+			\cdot
+			\norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+			}
+			dy
+		\end{aligned}
+	\end{equation}
+	
+	We want to detach $(\genAttraction)_i$ from the rest of the object.
+	In order to do that we can use an argument very similar to the one illustrated in \ref{ch4:lemma:<-1+infty-norm}.
+	
+	\begin{claim}
+		Let $f,g$ be functions.
+		Then
+		\begin{equation}
+			\Norm{f\cdot g}_1 \leq \Norm{f}_{1 \wedge \infty} \cdot \Norm{g}_{1 \vee \infty}
+		\end{equation}
+	\end{claim}
+	
+	\begin{proof}
+		Choose a decomposition $f_1 + f_\infty = f$ and proceed with Hölder-inequality, analogously to \ref{ch4:lemma:<-1+infty-norm}:
+		\begin{equation}
+			\Norm{f\cdot g}_1 = \Norm{f_1\cdot g}_1 + \Norm{f_\infty\cdot g}_1 \leq \Norm{f_1}_1\Norm{g}_\infty + \Norm{f_\infty}_\infty \Norm{g}_1
+		\end{equation}
+		Since this is valid for every decomposition we have the thesis, and this ends the proof of the claim.
+	\end{proof}
+	
+	Exploiting this for the calculations of \ref{ch4:in-LLN2:norm-of-rv} we have:
+	
+	\begin{equation}
+		\label{ch4:in-LLN2:bound-for-norm-of-rv}
+		\begin{aligned}
+			\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}&\leq
+			\int
+			\norm{(\genAttraction)_i (y)}\
+			\cdot
+			\norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+			}
+			dy
+			\\
+			&\leq
+			\Norm{(\genAttraction)_i }_{1 \wedge \infty}\
+			\cdot
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{1,g}
+					(y - \mfamba_t^k)
+				}
+			}_{1 \vee \infty}
+			\\
+			\footnotemark[1] &\leq
+			K_{\attraction,\curlywedge}
+				\cdot
+				\Norm{
+					\underbrace{
+					\ETFoot{\ast}{
+						\sum _{g = 1}^{\hmactive_t^1}
+						\cdens_t^{1,g}
+						(y - \mfamba_t^k)
+					}
+				}_{=:\Theta_1}
+					-
+					\underbrace{
+					\EFoot
+					{\ast}{
+						\sum _{g = 1}^{\hmactive_t^1}
+						\cdens_t^{1,g}
+						(y - \mfamba_t^k)
+					}
+				}_{=:\theta_1^\ast = \EFoot{\ast}{\Theta_1^\ast}}
+				}_{1 \vee \infty}
+			\end{aligned}
+		\end{equation}
+		\footnotetext[1]{\ref{ch4:lemma:eval-norm-gen-attr}}
+	
+	Now we will use the notation $\cdens_t^{1,g} = \cdens_t^{\btime^{1,g}}$, to make explicit the fact that such density depends on the birth time $\btime^{1,g}$.
+	In addition to this, since $(\hmactive_t^p)_p$ are \iid and so are $(\btime^{p,g})_p$, to avoid mistaking the objects in $\Theta_1$ with the ones in $\theta_1$, we will write:
+	
+	\begin{align*}
+		\Theta_1 - \theta_1 
+		&=
+			\ETFoot{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+		-
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			\\
+			&=
+			\ETFoot{\ast}{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\cdens_t^{1,g}
+				(y - \mfamba_t^k)
+			}
+			-
+			\EFoot
+			{\ast}{
+				\sum _{g = 1}^{\hmactive_t^2}
+				\cdens_t^{2,g}
+				(y - \mfamba_t^k)
+			}\
+			= \Theta_1 - \theta_2
+	\end{align*}
+	
+	Resuming all this we have that:
+	
+	\begin{align*}
+		\E{
+			\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}^q
+		}
+		&\leq
+		\E{
+			(K_{\attraction,\curlywedge})^q
+			\Norm{
+				\Theta_1 - \theta_2
+			}_{1 \vee \infty}
+		}		
+	\end{align*}
 	
 	
 \end{proof}
