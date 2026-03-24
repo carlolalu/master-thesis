@@ -1901,6 +1901,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\mu^n
 	\end{equation*}
 	
+	[[CORRECT FROM HERE ON: A DIVISION IN AN EXPONENTIAL IS NOT A SUBTRACTION. CORRECT CONSEQUENTLY ALSO THE STATEMENT OF THE 1st law of large numbers]]
+	
 	Then we have that
 	
 	\begin{align*}
@@ -2040,7 +2042,6 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\infty}(\R^d)} < K_{dens, T}
 		\end{equation*}
 		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ under $ \PrbCondTimes{\cdot}{}$ respectively.
-		[[here explain better the relationship with teh conditional probability]]
 		\item The amoebas' mass $\amass(t) := \int \adens_t(x) \: dx$ is constant through time.
 	\end{enumerate}
 	
@@ -2544,6 +2545,7 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 	Then exists $K>0$ such that
 	
 	\begin{equation}
+		\forall q \geq 1.\
 		\forall p,k,i.
 		\qquad
 		\E{
@@ -3413,7 +3415,510 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		\Biggr] =
 	\end{align*}
 	
-	Let us focus only on the term $\Zhi$:
+	Let us focus only on the term $\Zhi$.
+	Since such term is being conditioned on the set $\{\hmactive_t^1 \neq 0\}$ we are able to do this:
+	
+	\begin{align*}
+		\Zhi &= \ECond{
+			\Norm{
+				\sum _{g = 1}^{\hmactive_t^1}
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\lambda
+				\int_0^t
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+				d\tau
+			}_{\Lpspace^1}^{q-j}			
+		}{\hmactive_t^1}
+			\\
+			&=
+			\ECond{
+				\Norm{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\ETFoot{\ast}{
+						\cdens_t^{\btime^{1,g}}
+						(y - \mfamba_t^k)
+					}
+					-
+					\frac{\hmactive_t^1}{\hmactive_t^1}
+					\lambda
+					\int_0^t
+					\EFoot
+					{\ast}{
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+					}
+					d\tau
+				}_{\Lpspace^1}^{q-j}			
+			}{\hmactive_t^1}
+			\\
+			&=
+			\ECond{
+				\Norm{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\left(
+						\ETFoot{\ast}{
+							\cdens_t^{\btime^{1,g}}
+							(y - \mfamba_t^k)
+						}
+						-
+						\frac{\lambda}{\hmactive_t^1}
+						\int_0^t
+						\EFoot
+						{\ast}{
+							\cdens_t^{\tau}
+							(y - \mfamba_t^k)\
+						}
+						d\tau
+					\right)
+				}_{\Lpspace^1}^{q-j}			
+			}{\hmactive_t^1}
+			\\
+			&=\ECond{
+				\left(
+				\int
+				\norm{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\left(
+					\ETFoot{\ast}{
+						\cdens_t^{\btime^{1,g}}
+						(y - \mfamba_t^k)
+					}
+					-
+					\frac{\lambda}{\hmactive_t^1}
+					\int_0^t
+					\EFoot
+					{\ast}{
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+					}
+					d\tau
+					\right)
+				}
+				dy
+				\right)^{q-j}
+			}{\hmactive_t^1}
+			\\
+			&\leq
+			\ECond{
+				\left(
+				\int
+					\sum _{g = 1}^{\hmactive_t^1}
+					\norm{
+					\ETFoot{\ast}{
+						\cdens_t^{\btime^{1,g}}
+						(y - \mfamba_t^k)
+					}
+					-
+					\frac{\lambda}{\hmactive_t^1}
+					\int_0^t
+					\EFoot
+					{\ast}{
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+					}
+					d\tau
+				}
+				dy
+				\right)^{q-j}
+			}{\hmactive_t^1}
+			\\
+			&=
+			\ECond{
+				\left(
+				\sum _{g = 1}^{\hmactive_t^1}
+				\underbrace{
+					\int				
+					\norm{
+						\ETFoot{\ast}{
+							\cdens_t^{\btime^{1,g}}
+							(y - \mfamba_t^k)
+						}
+						\left(
+						\frac{\int_0^t d\tau}{t}
+						\right)
+						-
+						\frac{\lambda}{\hmactive_t^1}
+						\int_0^t
+						\EFoot
+						{\ast}{
+							\cdens_t^{\tau}
+							(y - \mfamba_t^k)\
+						}
+						d\tau
+					}
+					dy
+				}_{}
+				\right)^{q-j}
+			}{\hmactive_t^1}			
+	\end{align*}
+	
+	Let us focus on each single addend:
+	
+	\begin{align*}
+		&
+		\int				
+		\norm{
+			\ETFoot{\ast}{
+				\cdens_t^{\btime^{1,g}}
+				(y - \mfamba_t^k)
+			}
+			\left(
+			\frac{\int_0^t d\tau}{t}
+			\right)
+			-
+			\frac{\lambda}{\hmactive_t^1}
+			\int_0^t
+			\EFoot
+			{\ast}{
+				\cdens_t^{\tau}
+				(y - \mfamba_t^k)\
+			}
+			d\tau
+		}
+		dy =
+		\\
+			&= \int				
+			\norm{
+				\frac{1}{t}
+				\int_0^t 
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				d\tau
+				-
+				\frac{\lambda}{\hmactive_t^1}
+				\int_0^t
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+				d\tau
+			}
+			dy
+		\\
+		&=
+			\int				
+			\norm{
+				\int_0^t
+				\frac{1}{t}
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\frac{\lambda}{\hmactive_t^1}
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+				d\tau
+			}
+			dy
+		\\
+		&\leq
+			\int
+			\int_0^t		
+			\norm{
+				\frac{1}{t}
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\frac{\lambda}{\hmactive_t^1}
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+			}
+			d\tau\
+			dy
+		\\
+		&=
+			\int_0^t
+			\int
+			\norm{
+				\frac{1}{t}
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\frac{\lambda}{\hmactive_t^1}
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+			}
+			dy\
+			d\tau
+			\\
+			&\leq
+			\int_0^t
+			\int
+			\norm{
+				\frac{1}{t}
+				\ETFoot{\ast}{
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+			}
+			+
+			\norm{
+				\frac{\lambda}{\hmactive_t^1}
+				\EFoot
+				{\ast}{
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+				}
+			}
+			dy\
+			d\tau = 
+	\end{align*}
+	
+	And since the two quantities are already $\geq 0$ we can forget the absolute value and obtain, by the linearity of the integral and Fubini:
+	
+	\begin{align*}
+		&=
+		\int_0^t
+		\int
+			\frac{1}{t}
+			\ETFoot{\ast}{
+				\cdens_t^{\btime^{1,g}}
+				(y - \mfamba_t^k)
+			}
+			dy\
+			d\tau
+		+
+		\int_0^t
+		\int
+			\frac{\lambda}{\hmactive_t^1}
+			\EFoot
+			{\ast}{
+				\cdens_t^{\tau}
+				(y - \mfamba_t^k)\
+			}
+		dy\
+		d\tau
+		\\
+		&=
+		\int_0^t
+		\frac{1}{t}
+		\ETFoot{\ast}{
+			\int
+			\cdens_t^{\btime^{1,g}}
+			(y - \mfamba_t^k)
+			dy\
+		}
+		d\tau
+		+
+		\int_0^t
+		\frac{\lambda}{\hmactive_t^1}
+		\EFoot
+		{\ast}{
+			\int
+			\cdens_t^{\tau}
+			(y - \mfamba_t^k)\
+			dy
+		}
+		d\tau
+		\\
+		&= 
+		\int_0^t
+		\frac{1}{t}
+		d\tau
+		+
+		\int_0^t
+		\frac{\lambda}{\hmactive_t^1}
+		d\tau\
+		=\
+		1
+		+
+		\frac{t\lambda}{\hmactive_t^1}\
+		\leq
+		1 + t\lambda
+	\end{align*}
+	
+	At this point we can write
+	
+	\begin{align*}
+		\Zhi &\leq
+		\ECond{
+			\left(
+			\sum _{g = 1}^{\hmactive_t^1}
+				\int				
+				\norm{
+					\ETFoot{\ast}{
+						\cdens_t^{\btime^{1,g}}
+						(y - \mfamba_t^k)
+					}
+					-
+					\frac{\lambda}{\hmactive_t^1}
+					\int_0^t
+					\EFoot
+					{\ast}{
+						\cdens_t^{\tau}
+						(y - \mfamba_t^k)\
+					}
+					d\tau
+				}
+				dy
+			\right)^{q-j}
+		}{\hmactive_t^1}
+		\\
+		&\leq
+		\ECond{
+			\left(
+			\sum _{g = 1}^{\hmactive_t^1}
+			1 + t\lambda
+			\right)^{q-j}
+		}{\hmactive_t^1}\
+		=\
+		(\hmactive_t^1)^{q-j}\
+		(1 + t\lambda)^{q-j}\
+		\leq\
+		(\hmactive_t^1)^{q-j}\
+		(q-j)\
+		(q-j)!\
+		(t\lambda)^{q-j}
+	\end{align*}
+	
+	Resuming everything, we have that 
+	
+	\begin{align*}
+		&\E{
+			\norm{
+				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+			}^q
+		}\leq
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q,dens}
+		\sum_{j=0}^{q}\
+		\E{
+			\Norm{
+				\ETFoot{\ast}{
+					\sum _{g = 1}^{\hmactive_t^1}
+					\cdens_t^{\btime^{1,g}}
+					(y - \mfamba_t^k)
+				}
+				-
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^{q-j}\
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 \neq 0}			
+		}
+		+
+		\\
+		&\qquad
+		+
+		K_{\attraction,\curlywedge,q,dens}
+		\E{
+			\Norm{
+				\EFoot
+				{\ast}{
+					\sum _{g = 1}^{\hmactive_t^2}
+					\cdens_t^{\btime^{2,g}}
+					(y - \mfamba_t^k)
+				}
+			}_{\Lpspace^1}^q\
+			\1_{\hmactive_t^1 = 0}			
+		}
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q,dens}\
+		\sum_{j=0}^{q}\
+		\E{
+			(\hmactive_t^1)^{q-j}\
+			(q-j)\
+			(q-j)!\
+			(t\lambda)^{q-j}
+			(\hmactive_t^1)^j\
+			\1_{\hmactive_t^1 \neq 0}
+		} +
+		K_{\attraction,\curlywedge,q,dens}\
+		t^q
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q,dens}\
+		\left(
+			\sum_{j=0}^{q}\
+			q(q!) \lambda^q\
+			t^q\
+			\E{
+				(\hmactive_t^1)^q\
+				\1_{\hmactive_t^1 \neq 0}
+			}
+			+
+			t^q
+		\right)
+		\\
+		&\leq
+		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^q\
+		\left(
+		\E{
+			(\hmactive_t^1)^q\
+		}
+		+
+		1
+		\right) \leq 
+	\end{align*}
+	
+	Again we can use the result of \cite{poisson-moments-estimate}, \ie 
+	
+	\begin{equation*}
+			\E{
+				\norm{
+					P \sim \Pois(\mu)			
+				}^n
+			}
+		\leq\
+			\left(
+				\frac{n}{\log (1 + \frac{n}{\mu})}
+			\right)^n
+		\leq\
+			\exp 
+			\left(
+			\frac{n^2}{2\mu}
+			\right)
+			\mu^n			
+	\end{equation*}
+	
+	to obtain that 
+	
+	\begin{align*}
+		&\leq
+		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^q\
+		\left(
+		\exp 
+			\left(
+				\frac{q^2}{2 t \lambda}
+			\right)
+			(t\lambda)^q
+			+
+			1
+		\right) 
+	\end{align*}
 	
 \end{proof}
 
