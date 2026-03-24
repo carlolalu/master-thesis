@@ -1203,9 +1203,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}}
 	\\
 	& = 
-	\underbrace{
-	3(2n)! 
-	}_{K_n}
+	3(2n)!\
 	N^{(\xi -1) 2 n + 1}
 	\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1233,7 +1231,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	
 	\begin{equation}\label{proof-of-LLN1:calculations-before-claim}
 	\begin{aligned}
-		&= K_n
+		&=
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
 		\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n} \
@@ -1245,7 +1244,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				}^{\beta_m}
 		}} }
 	\\
-		&= K_n
+		&=
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1259,7 +1259,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}
 	}
 	\\
-	& = K_n
+	& =
+	3(2n)!\
 	N^{(\xi -1) 2 n + 1}
 	\E{
 	\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1489,7 +1490,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}
 		\\
 		&\leq
-		K_n
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1502,7 +1503,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			}
 			\\
 		&\leq
-		K_n
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1529,9 +1530,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\Iu^{\beta_m -2} 
 			\right)
 			\leq
-			\Iu^{2n-2}\
+			(2n)^n\
 			(M)^n\
-			K_n
+			\Iu^{2n-2}
 		\end{equation}
 	\end{claim}
 	
@@ -1544,9 +1545,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			&\prod_{m=1}^M
 			\left(
 			\1_{\beta_m = 0} + \1_{\beta_m \geq 2} \Iu^{\beta_m -2} 
-			\right)
-			\\
-			&= 
+			\right) = 
 			\prod_{
 				\substack{
 					m=1
@@ -1568,8 +1567,10 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 				}
 			}^M
 			(\1_{\beta_m \neq 1} \Iu^{\beta_m -2} )
+			=
 			\\
-			&=
+			&\qquad
+			=
 			\1_{\beta_m \neq 1}
 			\prod_{
 				\substack{
@@ -1589,9 +1590,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\beta_m \neq 0
 				}
 			}^M
-			\Iu^{-2} 
-			\\
-			&=			
+			\Iu^{-2}\
+			=			
 			\1_{\beta_m \neq 1}
 			\Iu^{\sum_{\beta_m \neq 0} \beta_m}
 			\Iu^{-2\sum_{\beta_m \neq 0} 1} 
@@ -1661,20 +1661,22 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Then we can write
 		
 		\begin{align*}
-			\sum_{\substack{
+			&\sum_{\substack{
 					\beta_1 + \cdots + \beta_M =2n
 					\\
 					\forall m. \beta_m \neq 1
 			}}\
-			\Iu^{2n-2(\sum_{\beta_m \neq 0} 1)} 
-			&=
+			\Iu^{2n-2(\sum_{\beta_m \neq 0} 1)} \
+			=\
 			\sum_{\substack{
 					\beta_1 + \cdots + \beta_M =2n
 					\\
 					\forall m. \beta_m \neq 1
 			}}\
 			\Iu^{2n-2(\# \left\{ \beta_m \neq 0 \right\} )}
+			=
 			\\
+			\qquad
 			&=
 			\sum_{k =1}^n\
 			\sum_{\substack{
@@ -1684,9 +1686,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}}\
-			\Iu^{2n-2k}
-			\\
-			&=
+			\Iu^{2n-2k}\
+			=\
 			\sum_{k =1}^n\
 			\Iu^{2n-2k}\
 			\sum_{\substack{
@@ -1696,8 +1697,8 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}} 1
-		\\
-		&\footnotemark[1] \leq
+		\quad
+		\footnotemark[1] \leq
 		\Iu^{2n-2}\
 		\sum_{k =1}^n\
 		\sum_{\substack{
@@ -1781,14 +1782,12 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		Then, resuming, we have
 		
 		\begin{align*}
-			&\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}
+			\sum_{\beta_1 + \cdots + \beta_M =2n}\ \prod_{m=1}^{M}&
 			\left(
 			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}
 			\Iu^{\beta_m -2} 
-			\right)
-			\leq
-			\\
-			&\leq
+			\right)\
+			\leq\
 			\Iu^{2n-2}\
 			\sum_{k =1}^n\
 			\sum_{\substack{
@@ -1798,23 +1797,24 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 					\\
 					\# \left\{ \beta_m \neq 0 \right\}  = k
 			}} 1
+		\leq
 			\\
 			&\leq
 			\Iu^{2n-2}\
 			\sum_{k =1}^n\
-			(M)^k  (n +k)^{k-1}
-			\\
-			&\leq
+			(M)^k  (n +k)^{k-1}\
+			\leq\
 			\Iu^{2n-2}\
 			(M)^n\
-			(2n)^n\
+			(2n)^{n-1}\
 			\sum_{k =1}^n
 			1
+			=
 			\\
-			&=
-			\Iu^{2n-2}\
+			&\leq
+			(2n)^n\
 			(M)^n\
-			K_n
+			\Iu^{2n-2}\
 		\end{align*}
 		
 		And this concludes the proof of the claim.
@@ -1847,7 +1847,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		}
 		\\
 		&\leq
-		K_n
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
@@ -1859,31 +1859,22 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\\
 		&
 		\leq
-		K_n
+		3(2n)!\
 		N^{(\xi -1) 2 n + 1}
 		\E{
-			K_n
+			(2n)^n\
 			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{2n-2}\
 			(\hmactive_t)^n\
-			K_n
 		}
 		\\
 		&=
-		K_n\
-		K_n\
 		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
-		N^{(\xi -1) 2 n + 1}\
-		N^{2n\alpha-2\alpha}\
-		\E{
-			(\hmactive_t)^n\
-		}
-		\\
-		&=
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		3(2n)!
+		(2n)^n\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 		\E{
 			(\hmactive_t)^n
-		}
+		}\
 		\leq
 	\end{align*}
 	
@@ -1910,21 +1901,26 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	Then we have that
 	
 	\begin{align*}
-		\PrbOf{S^{N,\xi}_\ast}
 		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\E{
-			(\hmactive_t)^n
-		}
-		\\
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
+		3(2n)!
+		(2n)^n\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 		\exp \left(
-			\frac{n^2}{2\lambda N t}
+		\frac{n^2}{2\lambda N t}
 		\right)
 		(\lambda N t)^n
+		\\
+		&\leq
+		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
+		3(2n)!
+		(2n)^n\
+		\lambda^n\
+		t^n
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\exp \left(
+		\frac{n^2}{2\lambda N t}
+		\right)
 		\\
 		&=
 		K_{\attraction,\text{dens}, \curlywedge,n}\
