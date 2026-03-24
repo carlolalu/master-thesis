@@ -1894,15 +1894,19 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\E{
 			|P|^n
 		}
-		\leq
-		\exp \left(
-			\frac{n^2}{2\mu}
-		\right)
+		\leq\
+			\left(
+			\frac{n}{\log (1 + \frac{n}{\mu})}
+			\right)^n
+		\leq\
+			\exp \left(
+				\frac{n^2}{2\mu}
+			\right)
 		\mu^n
 	\end{equation*}
 	
 	[[CORRECT FROM HERE ON: A DIVISION IN AN EXPONENTIAL IS NOT A SUBTRACTION. CORRECT CONSEQUENTLY ALSO THE STATEMENT OF THE 1st law of large numbers]]
-	
+	[[IN ANY WAY MAYBE i HAVE A SOLUTION: CHOOSE A SMALL N DEPENDENT ON T and see that the constant depends on t in a good way]]
 	Then we have that
 	
 	\begin{align*}
@@ -3910,14 +3914,24 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		K_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		\left(
-		\exp 
 			\left(
-				\frac{q^2}{2 t \lambda}
+			\frac{q}{\log (1 + \frac{q}{t\lambda})}
+			\right)^q
+			+
+			1
+		\right)\
+		\leq\
+			K_{\attraction,\curlywedge,q,dens,\lambda}\
+			t^q\
+			\left(
+			\exp 
+			\left(
+			\frac{q^2}{2 t \lambda}
 			\right)
 			(t\lambda)^q
 			+
 			1
-		\right) 
+			\right)\
 	\end{align*}
 	
 \end{proof}
