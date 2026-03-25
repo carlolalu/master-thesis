@@ -1,4 +1,19 @@
 
+
+The following chapter focuses on showing, in some sense, that the quantity
+
+\begin{equation}
+	\Norm{
+		\drift^N(t, \mfsol_t^N)
+		-
+		\mfdrift^N(t, \mfsol_t^N)
+	}
+\end{equation}
+
+is, in most of cases, smaller and smaller as $N$ (the number of amoebas) is growing.
+
+
+
 [[introduce this properly with the correct inequality]]
 [[prove it at the end of the whole chapter]]
 
@@ -6,10 +21,9 @@
 
 \subsection{Generalized attraction}
 
-Only for this section we will use a more general case for the attraction: we will use an additional term which also admits a cut-off Coulomb-type of singularity.
+Only for this chapter we will use a more general case for the attraction: we will use an additional term which also admits a cut-off Coulomb-type of singularity.
 
-
-\begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch4:def:generalised-attr&drift}
+\begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch5:def:generalised-attr&drift}
 	Let $\alpha \geq 0$.
 	Let $\cutoffSinAttraction = \cutoffSinAttraction (N, \alpha) : \R^d \longrightarrow \R^d$ be a function such that
 	\begin{equation}
@@ -42,9 +56,25 @@ Only for this section we will use a more general case for the attraction: we wil
 		\end{aligned}
 		\right.
 	\end{equation}
+	Analogous is the case for the generalized mean-field drift:
+		\begin{equation}
+		\left\{
+		\begin{aligned}
+			{}^{\genAttraction}\mfdrift_k(t,x, (\hmactive^k_t)_k) &:= \mfdrift_p(t,x) := 
+			\lambda
+			\int
+				(\genAttraction \star \cdens_t^\tau) (x)
+			d{\:\tau}
+			&& 1\leq k \leq N
+			\\
+			{}^{\genAttraction}\mfdrift_{p,g}(t,x) &:= 0
+			&& \text{if } \exists (p,g)
+		\end{aligned}
+		\right.
+	\end{equation}
 \end{definition}
 
-For the sake of shortness we will simply write $\drift$ for ${}^{\genAttraction}\drift$ all along this subsection, where such generalised attraction is used.
+For the sake of shortness we will simply write $\drift,\mfdrift$ for ${}^{\genAttraction}\drift, {}^{\genAttraction}\mfdrift$ all along this subsection, where such generalised attraction is used.
 
 [[here tikz figure]]
 
@@ -55,7 +85,7 @@ For the sake of shortness we will simply write $\drift$ for ${}^{\genAttraction}
 Before proceeding to the law of large numbers we need to gather some preliminary lemmas.
 The first is a simple result of \autocite{peter-boers}, that we simply report here.
 
-\begin{lemma}\label{ch4:lemma:<-1+infty-norm}
+\begin{lemma}\label{ch5:lemma:<-1+infty-norm}
 	For a function $f$ define the eventually infinite quantities
 	\begin{gather*}
 		\Norm{f}_{1 \wedge \infty} := 
@@ -97,7 +127,7 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 
 The second lemma that we need is a simple evaluation of these quantities for the generalized attraction.
 
-\begin{lemma}\label{ch4:lemma:eval-norm-gen-attr}
+\begin{lemma}\label{ch5:lemma:eval-norm-gen-attr}
 	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
 	\begin{align}
 		\Norm{\genAttraction}_{1 \wedge \infty}, \:
@@ -221,7 +251,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 
 
 
-\subsection{Notation convention}\label{ch4:notation}
+\subsection{Notation convention}\label{ch5:notation}
 
 From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (\ie $\amba^k$ or $\mfamba^k$, depending on the context):
 
@@ -247,19 +277,19 @@ Finally we will indicate constants with the symbol $K$, and a subscript will ind
 	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
 \end{equation*}
 
-\section{The first law of large numbers}
+\section{The first part of the law of large numbers}
 
 
-Now we can finally approach the first law of large numbers.
+Now we can finally approach the first part of the law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
-\begin{proposition}[The first law of large numbers]\label{ch4:prop:LLN1}
+\begin{proposition}[The first part of the law of large numbers]\label{ch5:prop:LLN1}
 	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2}$ defined in \ref{ch4:def:generalised-attr&drift}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2}$ defined in \ref{ch5:def:generalised-attr&drift}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -304,7 +334,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		K_n\
 		t^n\
 		N^{-(1-C) n}
-		&& \label{ch4:LLN1:bound}
+		&& \label{ch5:LLN1:bound}
 	\end{align}
 \end{proposition}
 
@@ -313,7 +343,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 \end{remark}
 
 We will now prove such result.
-For the sake of shortness, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
+For the sake of shortness, together with the convention at \ref{ch5:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
 		S^{N, \xi}_\ast := \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
@@ -549,7 +579,7 @@ For the sake of shortness, together with the convention at \ref{ch4:notation}, w
 		\end{aligned}
 	\end{equation}
 	
-	\begin{claim}\label{ch4:proof-of-LLN1:claim:bound-on-Psi-psi}
+	\begin{claim}\label{ch5:proof-of-LLN1:claim:bound-on-Psi-psi}
 		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction,K_{\text{dens}}$,  and there exists $\overline{N}$ depending on $K_\curlywedge,\attraction, \alpha$ such that
 		\begin{equation}
 			\forall N > \overline{N}.\qquad
@@ -723,7 +753,7 @@ For the sake of shortness, together with the convention at \ref{ch4:notation}, w
 			+ 3 K_{\curlywedge,\attraction}^2 (1 + K_{\text{dens}})^2
 			= K_{\attraction,\text{dens}, \curlywedge} \leq (K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2}
 		\end{align*}
-		\footnotetext[1]{By \ref{ch4:lemma:<-1+infty-norm} and \ref{ch4:lemma:eval-norm-gen-attr}}
+		\footnotetext[1]{By \ref{ch5:lemma:<-1+infty-norm} and \ref{ch5:lemma:eval-norm-gen-attr}}
 		
 		Then we have
 		
@@ -736,7 +766,7 @@ For the sake of shortness, together with the convention at \ref{ch4:notation}, w
 		And this concludes the proof of the claim.
 	\end{proof}
 	
-	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{proof-of-LLN1:calculations-before-claim} and exploiting the claim \ref{ch4:proof-of-LLN1:claim:bound-on-Psi-psi}, we have that
+	Now we finally obtained a bound independent from the coordinate $(1,1)$ of the drift, thus, resuming with calculations from \ref{proof-of-LLN1:calculations-before-claim} and exploiting the claim \ref{ch5:proof-of-LLN1:claim:bound-on-Psi-psi}, we have that
 	
 	\begin{align*}
 		\PrbOf{S^{N,\xi}_\ast}
@@ -793,7 +823,7 @@ For the sake of shortness, together with the convention at \ref{ch4:notation}, w
 	
 	We can assume that $\Iu \geq 1$ (eventually modulate the value $K_{\attraction,\text{dens}, \curlywedge} $ accordingly).
 	
-	\begin{claim}\label{ch4:proof-of-LLN1:sum-prod-Iu-inequality}
+	\begin{claim}\label{ch5:proof-of-LLN1:sum-prod-Iu-inequality}
 		$\Iu \geq 1$ is independent from the multi-index $\beta$, therefore
 		\begin{equation}
 			\sum_{\beta_1 + \cdots + \beta_M =2n}\
@@ -1254,11 +1284,11 @@ For the sake of shortness, together with the convention at \ref{ch4:notation}, w
 	And thus the proof of the proposition is finished.
 
 
-\section{The second law of large numbers}
+\section{The second part of the law of large numbers}
 
-To prove the second law of large numbers it will be necessary to prove that a specific \rv has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
+To prove the second part of the law of large numbers it will be necessary to prove that a specific \rv has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
 
-\begin{proposition}[The second law of large numbers]\label{ch4:prop:LLN2}
+\begin{proposition}[The second part of the law of large numbers]\label{ch5:prop:LLN2}
 	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.
 	Assume that
 	\begin{enumerate}
@@ -1315,18 +1345,18 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 		K_n\
 		t^{4(n-1)}\
 		N^{-Cn + 1}
-		&& \label{ch4:LLN2:cond-1}
+		&& \label{ch5:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
 		\leq K_n\
 		t^{4(n-1)}\
 		N^{-Cn + 1}\
-		&& \label{ch4:LLN2:cond-2}
+		&& \label{ch5:LLN2:cond-2}
 	\end{align}
 \end{proposition}
 
 Let us prove this result.
-As for the first law of large numbers, together with the convention at \ref{ch4:notation}, we will use the subsequent notation:
+As for the first part of the law of large numbers, together with the convention at \ref{ch5:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
 		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
@@ -1451,7 +1481,7 @@ As for the first law of large numbers, together with the convention at \ref{ch4:
 	\end{align*}
 	\footnotetext[1]{Markov inequality with $f(x) = |x|^{2n}$}
 	
-	As for the first law of large numbers, we apply on $\Zhi_p :=\norm{\Phi_p^\ast - \phi_p^\ast}\:$ the multinomial formula
+	As for the first part of the law of large numbers, we apply on $\Zhi_p :=\norm{\Phi_p^\ast - \phi_p^\ast}\:$ the multinomial formula
 	
 	\begin{equation*}
 		\left( \sum_{p=1}^N \Zhi_p \right)^{2n}
@@ -1565,7 +1595,7 @@ As for the first law of large numbers, together with the convention at \ref{ch4:
 		=
 	\end{align*}
 	
-	Now, since $\phi_1^\ast = \EFoot{\ast}{\Phi_1^\ast}$, we can deduce, as for the first law of large numbers:
+	Now, since $\phi_1^\ast = \EFoot{\ast}{\Phi_1^\ast}$, we can deduce, as for the first part of the law of large numbers:
 	
 	\begin{align*}
 		&=
@@ -1595,9 +1625,9 @@ As for the first law of large numbers, together with the convention at \ref{ch4:
 		\norm{
 			\Phi_1^\ast - \phi_1^\ast
 		}^{\beta_p}
-	}$, which will be proved in this proposition \ref{ch4:prop:bound-for-rv-lln2}:
+	}$, which will be proved in this proposition \ref{ch5:prop:bound-for-rv-lln2}:
 	
-	\begin{equation*}\label{ch4:proof-of-LLN2:bound-for-phip}
+	\begin{equation*}\label{ch5:proof-of-LLN2:bound-for-phip}
 		\exists K_{\attraction,\curlywedge,q,dens,\lambda} > 0.
 		\qquad\
 		\E{
@@ -1704,7 +1734,7 @@ As for the first law of large numbers, together with the convention at \ref{ch4:
 		\leq
 	\end{align*}
 	
-	Now apply claim \ref{ch4:proof-of-LLN1:sum-prod-Iu-inequality} from the proof of the first law of large numbers \ref{ch4:prop:LLN1} to bound $\Bh$:
+	Now apply claim \ref{ch5:proof-of-LLN1:sum-prod-Iu-inequality} from the proof of the first part of the law of large numbers \ref{ch5:prop:LLN1} to bound $\Bh$:
 	
 	\begin{align*}
 		&\leq
@@ -1757,9 +1787,9 @@ As for the first law of large numbers, together with the convention at \ref{ch4:
 	
 \subsection{Bound the average (general) attraction exercised by the cAMP released by a single amoeba}
 
-Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
+Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 
-\begin{proposition}\label{ch4:prop:bound-for-rv-lln2}
+\begin{proposition}\label{ch5:prop:bound-for-rv-lln2}
 	Consider the \rv
 	
 	\begin{equation}
@@ -1926,7 +1956,7 @@ Then let us observe closely the object in question.
 	Then we can write
 	
 	\begin{equation}
-		\label{ch4:in-LLN2:norm-of-rv}
+		\label{ch5:in-LLN2:norm-of-rv}
 		\begin{aligned}
 			&\norm{
 				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
@@ -2000,7 +2030,7 @@ Then let us observe closely the object in question.
 	\end{equation}
 	
 	We want to detach $(\genAttraction)_i$ from the rest of the object.
-	In order to do that we can use an argument very similar to the one illustrated in \ref{ch4:lemma:<-1+infty-norm}.
+	In order to do that we can use an argument very similar to the one illustrated in \ref{ch5:lemma:<-1+infty-norm}.
 	
 	\begin{claim}
 		Let $f,g$ be functions.
@@ -2011,17 +2041,17 @@ Then let us observe closely the object in question.
 	\end{claim}
 	
 	\begin{proof}
-		Choose a decomposition $f_1 + f_\infty = f$ and proceed with Hölder-inequality, analogously to \ref{ch4:lemma:<-1+infty-norm}:
+		Choose a decomposition $f_1 + f_\infty = f$ and proceed with Hölder-inequality, analogously to \ref{ch5:lemma:<-1+infty-norm}:
 		\begin{equation}
 			\Norm{f\cdot g}_1 = \Norm{f_1\cdot g}_1 + \Norm{f_\infty\cdot g}_1 \leq \Norm{f_1}_1\Norm{g}_\infty + \Norm{f_\infty}_\infty \Norm{g}_1
 		\end{equation}
 		Since this is valid for every decomposition we have the thesis, and this ends the proof of the claim.
 	\end{proof}
 	
-	Exploiting this for the calculations of \ref{ch4:in-LLN2:norm-of-rv} we have:
+	Exploiting this for the calculations of \ref{ch5:in-LLN2:norm-of-rv} we have:
 	
 	\begin{equation}
-		\label{ch4:in-LLN2:bound-for-norm-of-rv}
+		\label{ch5:in-LLN2:bound-for-norm-of-rv}
 		\begin{aligned}
 			\norm{
 				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
@@ -2086,7 +2116,7 @@ Then let us observe closely the object in question.
 			}_{1 \vee \infty}
 		\end{aligned}
 	\end{equation}
-	\footnotetext[1]{\ref{ch4:lemma:eval-norm-gen-attr}}
+	\footnotetext[1]{\ref{ch5:lemma:eval-norm-gen-attr}}
 	
 	Resuming all this we have that:
 	
