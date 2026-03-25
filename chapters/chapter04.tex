@@ -977,7 +977,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $\alpha\geq 0$ defined in \ref{ch4:def:generalised-attr&drift}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2}$ defined in \ref{ch4:def:generalised-attr&drift}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -990,7 +990,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
 	\end{enumerate}
-	Fix now $\xi>0$ and define the sets
+	Let $\xi >0$ be such that $0<\xi + \alpha < \frac{1}{2}$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -1014,25 +1014,15 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie for all $\gamma>0, \forall n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, n}  >0$ (independent from $N, \alpha,\xi$) and $\overline{N}\in N$ such that:
+	
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $C$ such that $2(\alpha + \xi) \leq C < 1$ and for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
 	\begin{align}
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 			\leq 
 			K_n\
 			t^n\
-			N^{-\gamma}
+			N^{-(1-C) n}
 		&& \label{ch4:LLN1:bound}
-	\end{align}
-	
-	Furthermore, if $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$, the subsequent weaker bound is valid $\forall n \in \N$ and $\forall \in \N $:
-	
-	\begin{align}
-		&\PrbOf{S^{N,\xi}_\ast}{}
-		\leq 
-		K_n\
-		t^n\
-		N^{-Cn + 1}
-		&& \label{ch4:LLN1:weaker-bound}
 	\end{align}
 \end{proposition}
 
@@ -1278,8 +1268,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\end{equation}
 	
 	\begin{claim}\label{ch4:proof-of-LLN1:claim:bound-on-Psi-psi}
-		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction$ and on $K_{\text{dens}}$ such that
+		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction,K_{\text{dens}}$,  and there exists $\overline{N}$ depending on $K_\curlywedge,\attraction, \alpha$ such that
 		\begin{equation}
+			\forall N > \overline{N}.\qquad
 			\ETFoot{\ast}{
 				\norm{
 					\Psi_m - \psi_m^\ast 
@@ -1358,7 +1349,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  K_\curlywedge 4 N^{\alpha}
 		\end{align*}
 		
-		where the last inequality is valid if $N$ is big enough.
+		where the last inequality is valid if $N$ is big enough, \ie $N > \overline{N}(\alpha, \curlywedge, \attraction)$.
 		Then
 		
 		\begin{align*}
@@ -1875,162 +1866,118 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\E{
 			(\hmactive_t)^n
 		}\
+		\\
+		&=
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\E{
+			(\hmactive_t)^n
+		}\
 		\leq
 	\end{align*}
 	
 	Now we need to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$.
-	From \cite{poisson-moments-estimate} we have that for each $P \sim \Pois(\mu)$
+	In \cite[Equation (1.3-14)]{handbook-poisson} we have that for each $P \sim \Pois(\mu)$
 	
 	\begin{equation*}
 		\E{
 			|P|^n
 		}
-		\leq\
+		=
+		\sum_{k=1}^{n}
+		\mu^k
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
+		=\
+		\sum_{k=1}^{n}
+		\mu^k
+		\left(
+			\frac{1}{k!}\
+			\sum_{i=0}^{k}\
+			(-1)^{k-i}\
 			\left(
-			\frac{n}{\log (1 + \frac{n}{\mu})}
-			\right)^n
-		\leq\
-			\exp \left(
-				\frac{n^2}{2\mu}
-			\right)
-		\mu^n
+			\begin{gathered}
+				k
+				\\
+				i
+			\end{gathered}
+			\right)\
+			i^n
+		\right)
 	\end{equation*}
 	
-	[[CORRECT FROM HERE ON: A DIVISION IN AN EXPONENTIAL IS NOT A SUBTRACTION. CORRECT CONSEQUENTLY ALSO THE STATEMENT OF THE 1st law of large numbers]]
-	[[IN ANY WAY MAYBE i HAVE A SOLUTION: CHOOSE A SMALL N DEPENDENT ON T and see that the constant depends on t in a good way]]
+	
 	Then we have that
 	
 	\begin{align*}
 		&\leq
-		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
-		3(2n)!
-		(2n)^n\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\exp \left(
-		\frac{n^2}{2\lambda N t}
-		\right)
-		(\lambda N t)^n
-		\\
-		&\leq
-		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
-		3(2n)!
-		(2n)^n\
-		\lambda^n\
-		t^n
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\exp \left(
-		\frac{n^2}{2\lambda N t}
-		\right)
-		\\
-		&=
 		K_{\attraction,\text{dens}, \curlywedge,n}\
-		e^{n^2}\
-		(\lambda t)^n\
-		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
-		e^{-2\lambda t N}
+		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+		\sum_{k=1}^{n}
+		(Nt\lambda)^k
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
+		\\
+		&\leq
+		K_{\attraction,\text{dens}, \curlywedge,n}\
+		\underbrace{
+			N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+			N^n\
+		}_{}\
+			t^n
+		\lambda^n
+		\sum_{k=1}^{n}
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
 		\\
 		&=
-		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
+		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
-		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
-		(e^{2\lambda t})^{-N}
-	\end{align*}
-	
-	Notice that, at this point, in the limit for $N \xrightarrow{} \infty$, the exponential dominates every power of $N$,
-	\ie for every $\gamma > 0$ and $\forall \epsilon >0$ exists $\overline{N}=\overline{N}(\epsilon) \in \N$ such that $\forall N > \overline{N} $ we have that
-	
-	\begin{align*}
-		& N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
-		e^{-N}\
-		N^\gamma
-		< \epsilon
-		\Longleftrightarrow
-		\\
-		& \Longleftrightarrow\
-		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
-		e^{-N}\
-		< \epsilon\
-		N^{-\gamma}
-	\end{align*}
-	
-	Choose $\epsilon =1$ and then you obtain that $\exists \overline{N}=\overline{N}(1) \in \N$ such that $	\forall N > \overline{N}$
-	
-	\begin{align*}
-		\PrbOf{S^{N,\xi}_\ast}
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
-		t^n\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\E{
-			(\hmactive_t)^n
-		}
-		\\
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
-		t^n\
-		N^{(\xi + \alpha - \frac{1}{2}) 2 n + 1 -2\alpha}\
-		e^{-2t\lambda N}
-		\\
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
-		t^n\
-		N^{-\gamma} 
-		= 
-		K_n\
-		t^n\
-		N^{-\gamma}
-	\end{align*}
-	
-	And thus the bound \ref{ch4:LLN1:bound} is proved.
-	
-	Let us now prove the weaker bound \ref{ch4:LLN1:weaker-bound} valid for all $N$ and for all $n>\frac{1}{C}$.
-	Assume, as per statement, that $\exists 0 < C < 1$ such that $\xi + \alpha < \frac{1- C}{2}$.
-	Then it is true that
-	
-	\begin{equation*}
-		\left(
-		\xi + \alpha
-		- \frac{1}{2}
-		\right)
-		2 n + 1 -2\alpha
+		N^{ [2(\xi + \alpha) - 2 + 1] n + 1 -2\alpha}\
 		\leq
-		\left( \frac{1-C}{2} - \frac{1}{2} \right) 2 n + 1 -2 \cdot 0 = -Cn +1
-		\quad
-		(< 0)
-	\end{equation*}
-		
-	
-	and therefore we obtain that
-	
-	\begin{align*}
-		\PrbOf{S^{N,\xi}_\ast}
-		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,\lambda,n}\
-		t^n\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\overbrace{
-					e^{-2t\lambda N}
-			}^{\leq 1}
-		\\
-		&\leq 
-		K_{\attraction,\text{dens}, \curlywedge,n}\
-		t^n\
-		N^{-Cn + 1}
-		=
-		K_n\
-		t^n\
-		N^{-Cn + 1}
 	\end{align*}
 	
-	And thus also the second condition is proved, concluding the proof of the first law of large numbers.
+	Then, for every $C$ such that $2(\xi + \alpha) \leq C < 1$ (it is guaranteed to exist because $\alpha + \xi < \frac{1}{2}$), and since $\alpha < \frac{1}{2}$ we have
+	
+	\begin{align*}
+		\leq\
+		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		t^n\
+		N^{ \left(C - 1\right) n + 1 -2\cdot \frac{1}{2}}\
+		&\leq\
+		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		t^n\
+		N^{ (C-1)n}\\
+		&=\
+		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		t^n\
+		N^{ -(1-C)n}\
+	\end{align*}
+	
+	And thus the proof is finished.
 \end{proof}
 
 \subsection{The second law of large numbers}
 
-To prove the second law of large numbers it will be necessary to prove that a specific \rv $\Zrv_t^1$ has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
+To prove the second law of large numbers it will be necessary to prove that a specific \rv has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
 
 \begin{proposition}[The second law of large numbers]\label{ch4:prop:LLN2}
-	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas.
+	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.
 	Assume that
 	\begin{enumerate}
 		\item The densities of all coordinates of $\mfsol_t^N$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
@@ -2046,8 +1993,8 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	\end{enumerate}
 	
 	[[regulate these conditions for the mean-field particles as requirements in chapter 3 and not here maybe]]
-	
-	[[regulate the conditions on xi here under]]
+	[[ do you really need all this conditions on the mass of amoebas right now?]]
+	[[regulate the conditions on xi here under, and realise if you need to tell those also in the propostion afterwards]]
 	
 	Choose $0  < \xi \leq \frac{1}{2}$ and define the sets
 	
@@ -2078,20 +2025,19 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n > 0$ independent from $N,\xi$ such that:
-	
-	[[put here the exact conditions of dependence of the constant K and for n (I think more than 2)]]
+	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $C>0$ such that $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n = K_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
 	
 	\begin{align}
 		& \PrbOf{R^{N,\xi}_\amba}{}
-		\leq K_n\
-		  t^{2(n-1)}\
+		\leq
+		K_n\
+		  t^{4(n-1)}\
 		   N^{-Cn + 1}
 		&& \label{ch4:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
 		\leq K_n\
-		 t^{2(n-1)}\
+		 t^{4(n-1)}\
 		 N^{-Cn + 1}\
 		&& \label{ch4:LLN2:cond-2}
 	\end{align}
@@ -2368,22 +2314,22 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 		\norm{
 			\Phi_1^\ast - \phi_1^\ast
 		}^{\beta_p}
-	}$, which will be proved at the end of this proposition:
+	}$, which will be proved in this proposition \ref{ch4:prop:bound-for-rv-lln2}:
 	
-	[[here insert the reference to the precise porposition + insert the precise dependency for the constant you are going to use]]
-	
-	\begin{equation}\label{ch4:proof-of-LLN2:bound-for-phip}
-		\exists K > 0.
+	\begin{equation*}\label{ch4:proof-of-LLN2:bound-for-phip}
+		\exists K_{\attraction,\curlywedge,q,dens,\lambda} > 0.
 		\qquad\
 		\E{
 			\norm{
 				\Phi_1^\ast - \phi_1^\ast
-			}^q
+			}^{\beta_p}
 		} 
 		\leq 
-		(Kt)^q
-	\end{equation}
+		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^2)^{\beta_p}
+	\end{equation*}
 	
+	loosing the dependence of the constant on $q$.	
 	Applying this to our calculations, and resuming all since the beginning, we obtain that:
 	
 	\begin{align*}
@@ -2468,33 +2414,36 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 			\1_{\beta_p=0}
 			+
 			\1_{\beta_p \geq 2}
-			(Kt)^{\beta_p}
+			\left(
+			(\max_{q\leq n} K_{\attraction,\curlywedge,q,dens,\lambda})\
+			t^2
+			\right)^{\beta_p}
 			\right)
-		}_{}
+		}_{\Bh}
 		\leq
 	\end{align*}
 	
-	Now apply the claim \ref{ch4:proof-of-LLN1:sum-prod-Iu-inequality} of the proof of the first law of large numbers \ref{ch4:prop:LLN1}:
+	Now apply claim \ref{ch4:proof-of-LLN1:sum-prod-Iu-inequality} from the proof of the first law of large numbers \ref{ch4:prop:LLN1} to bound $\Bh$:
 	
 	\begin{align*}
 		&\leq
 		K_n\
 		N^{1 +(\xi-1) 2n}\
-		\overbrace{
-			K_n
-			(N)^n\
-			(K t)^{2n-2}\
-		}^{}
+			(2n)^n\
+			\left(
+			(\max_{q\leq n} K_{\attraction,\curlywedge,q,dens,\lambda})\
+			t^2
+			\right)^{2n-2}\
 		\\
 		&=
-		K_n\
-		t^{2(n-1)}\
+		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		t^{4(n-1)}\
 		N^{
 			1 + \left( 2\xi -2 + 1 \right)n
 			}\
 		=
-		K_n\
-		t^{2(n-1)}\
+		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		t^{4(n-1)}\
 		N^{
 			1 + ( 2\xi - 1 )n
 		}\
@@ -2511,14 +2460,14 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 	\begin{equation*}
 		\PrbOf{R^{N, \xi}_\ast}
 		\leq
-		K_n\
-		t^{2(n-1)}\
+		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		t^{4(n-1)}\
 		N^{
 			1 + ( 2\xi - 1 )n
 		}\
 		\leq
-		K_n\
-		t^{2(n-1)}\
+		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		t^{4(n-1)}\
 		N^{
 			1 - Cn
 		}\
@@ -2527,7 +2476,7 @@ To prove the second law of large numbers it will be necessary to prove that a sp
 
 Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 
-\begin{proposition}
+\begin{proposition}\label{ch4:prop:bound-for-rv-lln2}
 	Consider the \rv
 	
 	\begin{equation}
@@ -2542,7 +2491,7 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 	\end{equation}
 	
 	and its average $\phi_p^\ast (k,i) := \EFoot{\ast}{\Phi_p^\ast(k,i)}$, where $\ast$ is either $k$ or absent.
-	Then exists $K>0$ such that
+	Then exists $K_{\attraction,\curlywedge,q,dens,\lambda}>0$ such that
 	
 	\begin{equation}
 		\forall q \geq 1.\
@@ -2554,7 +2503,8 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 			}^q
 		} 
 		\leq 
-		(Kt)^q
+		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^2)^q
 	\end{equation}	
 	
 	[[show here all the dependencies on K]]
@@ -3240,19 +3190,23 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		&=
 		K_{\attraction,\curlywedge,q,dens}\
 		\E{
-				\Norm{
-					\sum _{g = 1}^{+\infty}
-					\EFoot
-					{\ast}{
-						\int_0^t
-							\cdens_t^{\tau}
-							(y - \mfamba_t^k)\
-							\PrbOf{\btime^{2,g} = d\ \tau}
-					}
-				}_{\Lpspace^1}^q\
+			\Norm{
+				\sum _{g = 1}^{+\infty}
+				\EFoot
+				{\ast}{
+					\int_0^t
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+					\PrbOf{\btime^{2,g} = d\ \tau}
+				}
+			}_{\Lpspace^1}^q\
 			\1_{\hmactive_t^1 = 0}			
-		}
-		\\
+		}=
+	\end{align*}
+	
+	Since all the functions involved are positive we can move the infinity sum freely in and out of the integral:
+	
+	\begin{align*}
 		&=		
 		K_{\attraction,\curlywedge,q,dens}\
 		\E{
@@ -3350,7 +3304,7 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		K_{\attraction,\curlywedge,q,dens}\
 		(\lambda\
 		t)^q\
-		e^{-t\lambda}\
+		\underbrace{e^{-t\lambda}}_{\leq 1}\
 		\leq
 		K_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q
@@ -3419,26 +3373,7 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 	Since such term is being conditioned on the set $\{\hmactive_t^1 \neq 0\}$ we are able to do this:
 	
 	\begin{align*}
-		\Zhi &= \ECond{
-			\Norm{
-				\sum _{g = 1}^{\hmactive_t^1}
-				\ETFoot{\ast}{
-					\cdens_t^{\btime^{1,g}}
-					(y - \mfamba_t^k)
-				}
-				-
-				\lambda
-				\int_0^t
-				\EFoot
-				{\ast}{
-					\cdens_t^{\tau}
-					(y - \mfamba_t^k)\
-				}
-				d\tau
-			}_{\Lpspace^1}^{q-j}			
-		}{\hmactive_t^1}
-			\\
-			&=
+		\Zhi &=
 			\ECond{
 				\Norm{
 					\sum _{g = 1}^{\hmactive_t^1}
@@ -3876,59 +3811,96 @@ Let us show that the bound used in \ref{ch4:proof-of-LLN2:bound-for-phip} holds.
 		t^q\
 		\left(
 		\E{
-			(\hmactive_t^1)^q\
+			(\hmactive_t^1)^q
 		}
 		+
 		1
-		\right) \leq 
+		\right)
+		= 
 	\end{align*}
 	
-	Again we can use the result of \cite{poisson-moments-estimate}, \ie 
+	Again we use the result \cite[Equation (1.3-14)]{handbook-poisson}, \ie that for each $P \sim \Pois(\mu)$
 	
 	\begin{equation*}
-			\E{
-				\norm{
-					P \sim \Pois(\mu)			
-				}^n
-			}
-		\leq\
-			\left(
-				\frac{n}{\log (1 + \frac{n}{\mu})}
-			\right)^n
-		\leq\
-			\exp 
-			\left(
-			\frac{n^2}{2\mu}
-			\right)
-			\mu^n			
+		\E{
+			|P|^n
+		}
+		=
+		\sum_{k=1}^{n}
+		\mu^k
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
+		=\
+		\sum_{k=1}^{n}
+		\mu^k
+		\left(
+		\frac{1}{k!}\
+		\sum_{i=0}^{k}\
+		(-1)^{k-i}\
+		\left(
+		\begin{gathered}
+			k
+			\\
+			i
+		\end{gathered}
+		\right)\
+		i^n
+		\right)
 	\end{equation*}
+	
+	[[COORECT FROM HERE ON]]
 	
 	to obtain that 
 	
 	\begin{align*}
-		&\leq
+		=
 		K_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		\left(
-			\left(
-			\frac{q}{\log (1 + \frac{q}{t\lambda})}
-			\right)^q
-			+
-			1
+		\sum_{k=1}^{q}
+		(t\lambda)^k
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
+		+
+		1
 		\right)\
+		&
 		\leq\
-			K_{\attraction,\curlywedge,q,dens,\lambda}\
-			t^q\
-			\left(
-			\exp 
-			\left(
-			\frac{q^2}{2 t \lambda}
-			\right)
-			(t\lambda)^q
-			+
-			1
-			\right)\
+		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^q\
+		(t\lambda)^q\
+		\left(
+		\sum_{k=1}^{q}
+		\left\{
+		\begin{gathered}
+			n
+			\\
+			k
+		\end{gathered}
+		\right\}\
+		+
+		1
+		\right)\
+		\\
+		&=
+		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^{2q}\
+		=\
+		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		t^2)^q
 	\end{align*}
+	
+	And the proof is finally finished.
 	
 \end{proof}
 
