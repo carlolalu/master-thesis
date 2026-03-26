@@ -1,5 +1,3 @@
-
-
 The following chapter focuses on showing, in some sense, that the quantity
 
 \begin{equation}
@@ -7,15 +5,122 @@ The following chapter focuses on showing, in some sense, that the quantity
 		\drift^N(t, \mfsol_t^N)
 		-
 		\mfdrift^N(t, \mfsol_t^N)
-	}
+	}_\infty
 \end{equation}
 
-is, in most of cases, smaller and smaller as $N$ (the number of amoebas) is growing.
+is very unlikely to be big as $N$ (the number of amoebas) grows, where the attraction taken in consideration is slightly more general than the one considered till now (has an added Coulomb-type singularity).
+More formally we would like to prove that, chosen some $\xi>0$ (with some extra condition)
 
+\begin{equation}
+	\PrbOf{
+		\Norm{
+			\drift^N(t, \mfsol_t^N)
+			-
+			\mfdrift^N(t, \mfsol_t^N)
+	}_\infty
+	\geq
+	N^{-\xi}
+	}
+	\leq
+	K_n\
+	(t^{4n} \: \vee \: 1)\
+	N^{-K_\xi n + 1}
+\end{equation}
 
+for all $n \in \N$, where $K_n$ is a constant dependent on $n$ and independent from $\xi, N$, and $K_\xi$ is a constant dependent only on $\xi$.
+To prove it the idea is to notice that for the $k$-th particle
 
-[[introduce this properly with the correct inequality]]
-[[prove it at the end of the whole chapter]]
+\begin{align*}
+	N^{-\xi}\
+	&\leq
+	\Norm{
+		\drift_k^N(t, \mfsol_t^N)
+		-
+		\mfdrift_k^N(t, \mfsol_t^N)
+	}_\infty
+	\\
+	&=
+	\Norm{
+		\drift_k^N(t, \mfsol_t^N)
+		-
+		\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+	}_\infty
+	\\
+	&\leq
+	\Norm{
+		\drift_k^N(t, \mfsol_t^N)
+		-
+		\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+	}_\infty +
+	\\
+	&\qquad\quad
+	+
+	\Norm{
+		\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+		-
+		\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+	}_\infty
+\end{align*}
+
+and therefore
+
+\begin{equation}\label{ch5:sketch-dividi-et-impera}
+	\begin{aligned}
+		&
+		\PrbOf{
+			\Norm{
+				\drift^N(t, \mfsol_t^N)
+				-
+				\mfdrift^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			N^{-\xi}
+		}
+		= 
+		\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\drift_k^N(t, \mfsol_t^N)
+				-
+				\mfdrift_k^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			N^{-\xi}
+		}
+		\leq
+		\\
+		&\leq
+		\overbrace{
+			\PrbOf{
+				\sup_{1\leq k \leq N} 
+				\Norm{
+					\drift_k^N(t, \mfsol_t^N)
+					-
+					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				}_\infty
+				\geq
+				N^{-\xi}
+		}}^{\text{Term 1}}\ +
+		\\
+		&\qquad\quad
+		+
+		\underbrace{
+			\PrbOf{
+				\sup_{1\leq k \leq N} 
+				\Norm{
+					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+					-
+					\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+				}_\infty
+				\geq
+				N^{-\xi}
+			}
+		}_{\text{Term 2}}
+	\end{aligned}
+\end{equation}
+
+and consequently we can bound separately the two addends.
+The first section is an explains the generalization of the attraction and shows some estimate about it, the two central sections treat respectively the first and the second term, and the final fourth section composes all the pieces together in a ready-to-use tool.
 
 \section{Necessary premises}
 
@@ -23,7 +128,7 @@ is, in most of cases, smaller and smaller as $N$ (the number of amoebas) is grow
 
 Only for this chapter we will use a more general case for the attraction: we will use an additional term which also admits a cut-off Coulomb-type of singularity.
 
-\begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch5:def:generalised-attr&drift}
+\begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch5:def:generalized-attr&drift}
 	Let $\alpha \geq 0$.
 	Let $\cutoffSinAttraction = \cutoffSinAttraction (N, \alpha) : \R^d \longrightarrow \R^d$ be a function such that
 	\begin{equation}
@@ -44,7 +149,7 @@ Only for this chapter we will use a more general case for the attraction: we wil
 		\right.
 	\end{equation}
 	for some positive constant $K_\curlywedge$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
-	Then we define the generalised attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha, K_\curlywedge) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalised drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
+	Then we define the generalized attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha, K_\curlywedge) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalized drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
 	\begin{equation}
 		\left\{
 		\begin{aligned}
@@ -74,7 +179,7 @@ Only for this chapter we will use a more general case for the attraction: we wil
 	\end{equation}
 \end{definition}
 
-For the sake of shortness we will simply write $\drift,\mfdrift$ for ${}^{\genAttraction}\drift, {}^{\genAttraction}\mfdrift$ all along this subsection, where such generalised attraction is used.
+For the sake of shortness we will simply write $\drift,\mfdrift$ for ${}^{\genAttraction}\drift, {}^{\genAttraction}\mfdrift$ all along this subsection, where such generalized attraction is used.
 
 [[here tikz figure]]
 
@@ -128,7 +233,7 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 The second lemma that we need is a simple evaluation of these quantities for the generalized attraction.
 
 \begin{lemma}\label{ch5:lemma:eval-norm-gen-attr}
-	Let $\genAttraction$ be the generalised attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
+	Let $\genAttraction$ be the generalized attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
 	\begin{align}
 		\Norm{\genAttraction}_{1 \wedge \infty}, \:
 		\Norm{\genAttraction^2}_{1 \wedge \infty} 
@@ -289,7 +394,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalised} drift of parameter $0 \leq \alpha < \frac{1}{2}$ defined in \ref{ch5:def:generalised-attr&drift}.
+	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalized} drift of parameter $\alpha$ defined in \ref{ch5:def:generalized-attr&drift}.
 	Assume that:
 	\begin{enumerate}
 		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
@@ -302,7 +407,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
 	\end{enumerate}
-	Let $\xi >0$ be such that $0<\xi + \alpha < \frac{1}{2}$ and define the sets
+	Consider $\xi >0$ be such that $0<\xi + \alpha < \frac{1}{2}$ and define the sets
 	\begin{equation*}
 		\begin{aligned}
 			S^{N,\xi}_\amba
@@ -327,13 +432,13 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{aligned}
 	\end{equation*}
 	
-	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $C$ such that $2(\alpha + \xi) \leq C < 1$ and for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $K_\xi$ such that $0 < K_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
 	\begin{align}
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
 		K_n\
 		t^n\
-		N^{-(1-C) n}
+		N^{-K_\xi n + 1}
 		&& \label{ch5:LLN1:bound}
 	\end{align}
 \end{proposition}
@@ -1264,22 +1369,18 @@ For the sake of shortness, together with the convention at \ref{ch5:notation}, w
 		\leq
 	\end{align*}
 	
-	Then, for every $C$ such that $2(\xi + \alpha) \leq C < 1$ (it is guaranteed to exist because $\alpha + \xi < \frac{1}{2}$), and since $\alpha < \frac{1}{2}$ we have
+	Then, for every $K = K_\xi$ such that $0 < K_\xi \leq 1 - 2(\alpha + \xi)$ (it is guaranteed to exist because $\alpha + \xi < \frac{1}{2}$), we have
 	
-	\begin{align*}
+	\begin{equation*}
 		\leq\
 		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
-		N^{ \left(C - 1\right) n + 1 -2\cdot \frac{1}{2}}\
-		&\leq\
+		N^{ -K_\xi n + 1 -2\cdot 0}\
+		\leq\
 		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
-		N^{ (C-1)n}\\
-		&=\
-		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
-		t^n\
-		N^{ -(1-C)n}\
-	\end{align*}
+		N^{ -K_\xi n + 1}
+	\end{equation*}
 	
 	And thus the proof of the proposition is finished.
 
@@ -1337,20 +1438,20 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $C>0$ such that $0< C < 1 - 2\xi$ and for all $n\in\N$ exists $K_n = K_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
+	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=K_\xi$ such that $0< K_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $K_n = K_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
 	
 	\begin{align}
 		& \PrbOf{R^{N,\xi}_\amba}{}
 		\leq
 		K_n\
 		t^{4(n-1)}\
-		N^{-Cn + 1}
+		N^{-K_\xi n + 1}
 		&& \label{ch5:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
 		\leq K_n\
 		t^{4(n-1)}\
-		N^{-Cn + 1}\
+		N^{-K_\xi n + 1}\
 		&& \label{ch5:LLN2:cond-2}
 	\end{align}
 \end{proposition}
@@ -1760,10 +1861,10 @@ As for the first part of the law of large numbers, together with the convention 
 		}\
 	\end{align*}
 	
-	Therefore, for every $C$ such that $0 < C < 1 -2\xi$, we have that
+	Therefore, for every $K_\xi$ such that $0 < K_\xi \leq 1 -2\xi$, we have that
 	
 	\begin{equation}
-		1 + ( 2\xi - 1 )n < 1 - Cn
+		1 + ( 2\xi - 1 )n \leq 1 - K_\xi n
 	\end{equation}
 	
 	and therefore we can conclude the proof:
@@ -1780,7 +1881,7 @@ As for the first part of the law of large numbers, together with the convention 
 		K_{\attraction,\curlywedge,n,dens,\lambda}\
 		t^{4(n-1)}\
 		N^{
-			1 - Cn
+			1 - K_\xi n
 		}\
 	\end{equation*}
 	
@@ -3225,4 +3326,126 @@ Then let us observe closely the object in question.
 	
 	And the proof is finally finished.
 	
+\section{Composing all the pieces together}
 
+\begin{proposition}[Law of large numbers]
+	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $K_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$ and choose a value $0 < K_\xi \leq 1 - 2(\alpha + \xi)$.
+	
+	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, K_\curlywedge) > 0$ such that for all $n \in \N$ exists $K_n > 0$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
+	\begin{equation}
+		\PrbOf{
+			\Norm{
+				\drift^N(t, \mfsol_t^N)
+				-
+				\mfdrift^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			N^{-\xi}
+		}
+		\leq
+		K_n\
+		(t^{4n} \: \vee \: 1)\
+		N^{-K_\xi n + 1}
+	\end{equation}
+	
+	In particular, if $\drift(t, \cdot)$ is the usual drift of \ref{ch2:def:drift-&-diffusion}, then $\alpha$ can be chosen equal to $0$.
+\end{proposition}
+
+\begin{proof}
+	Recall that from \ref{ch5:sketch-dividi-et-impera} we want to use the strategy "dividi et impera":
+	
+	\begin{align*}
+		&
+		\PrbOf{
+			\Norm{
+				\drift^N(t, \mfsol_t^N)
+				-
+				\mfdrift^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			N^{-\xi}
+		}
+		= 
+		\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\drift_k^N(t, \mfsol_t^N)
+				-
+				\mfdrift_k^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			N^{-\xi}
+		}
+		\leq
+		\\
+		&\leq
+			\PrbOf{
+				\sup_{1\leq k \leq N} 
+				\Norm{
+					\drift_k^N(t, \mfsol_t^N)
+					-
+					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				}_\infty
+				\geq
+				N^{-\xi}
+		} +
+		\\
+		&\qquad\quad
+		+
+			\PrbOf{
+				\sup_{1\leq k \leq N} 
+				\Norm{
+					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+					-
+					\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+				}_\infty
+				\geq
+				N^{-\xi}
+			}\
+			\leq
+	\end{align*}
+	
+	and thus "dividi", while the "impera" part of the strategy is given by the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}, which yield
+	
+	\begin{align*}
+		&\leq
+		K_n\
+		t^n\
+		N^{-K_\xi n + 1}
+		+
+		K_n\
+		t^{4(n-1)}\
+		N^{-K_\xi n + 1}
+		\\
+		&=
+		K_n\
+		(
+		t^n\
+		+
+		t^{4(n-1)}\
+		)\
+		N^{-K_\xi n + 1}
+		\\
+		&\leq
+		K_n\
+		2\
+		(
+		t^n\
+		\vee
+		t^{4(n-1)}\
+		)\
+		N^{-K_\xi n + 1}
+		\\
+		&\leq
+		K_n\
+		(
+		1
+		\vee
+		t^{4(n-1)}\
+		)\
+		N^{-K_\xi n + 1}
+	\end{align*}
+	
+	And the result is proved.
+\end{proof}
