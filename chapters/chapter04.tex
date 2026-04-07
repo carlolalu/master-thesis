@@ -68,12 +68,12 @@ With this background in mind, we state the next result, of which the proof will 
 
 \section{Advance beyond the $\sup$}
 
-In this part we want to show that
+In this part we want to show that $\exists s_T \in [0,T]$ such that
 
 \begin{equation}\label{ch4:experiment-label}
 \diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 \leq
-\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+\diniu^+_{s_T} \norm{\sol_{s_T}^N-\mfsol_{s_T}^N}_\infty
 \end{equation}
 
 Consider the random function
@@ -312,15 +312,23 @@ and $g_\star \in \SkoroFUp$.
 \begin{lemma}
 Let $g$ be a function in $\SkoroFUp$.
 Then
-\begin{equation}
+\begin{equation}\label{ch4:eq:sup-dini-exchange}
 \diniu^+_t g_\star(t)
 =
 \diniu^+_t \sup_{0\leq s \leq t} g(s) 
 \leq
-\sup_{0\leq s \leq t} \diniu^+_s g(s)
-=
-\left( \diniu^+ g \right)_\star (t)
-\end{equation}\label{ch4:eq:sup-dini-exchange}
+	\left(
+	\diniu^+_0 g(0)
+	\right)
+	\vee 
+	\left(
+	\diniu^+_t g(t)
+	\right) 
+=: 
+	\diniu^+_{s_t} g(s_t)
+\end{equation}
+
+with $s_t \in \{ 0, t\}$
 \end{lemma}
 
 \begin{proof}
@@ -353,7 +361,13 @@ And thus in such case we have that
 	\leq
 	\diniu_0^+g(0)
 	\leq
-	\sup_{s \in [0,t]} \diniu_s^+g(s)
+		\left(
+		\diniu^+_0 g(0)
+		\right)
+		\vee 
+		\left(
+		\diniu^+_t g(t)
+		\right) 
 	=
 	\rhs (\ref{ch4:eq:sup-dini-exchange})
 \end{equation}
@@ -496,29 +510,25 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 	\\
 	&= \diniu^+_t g(t) 
 	\leq
-	\sup_{s\in [0,t]} \diniu^+_s g(s) = \rhs(\ref{ch4:eq:sup-dini-exchange})
+			\left(
+	\diniu^+_0 g(0)
+	\right)
+	\vee 
+	\left(
+	\diniu^+_t g(t)
+	\right) 
+	=
+	\rhs (\ref{ch4:eq:sup-dini-exchange})
 	\end{align*}
 	And thus the result stated above is valid.
 \end{proof}
-
-\begin{remark}
-	One might be tempted to ask why we did not exploit the stronger result 
-	\begin{equation}\label{ch4:remark:del-dini-stronger?}
-		\diniu^+_t g_\star(t) 
-		\leq
-		\diniu^+_t g(t)
-	\end{equation}
-	for the statement.
-	But after observing more carefully one finds out that such result is valid only under the condition \ref{ch4:cond:proof-dini-T1}, and not in general.
-	A quick check is given by the fact that $g$ in general is \emph{not} increasing and thus $\diniu^+_t g(t)$ might be negative, while $g_\star$ is non -decreasing, hence $\diniu^+_t g_\star(t)$ is always non-negative, which would break the statement \ref{ch4:remark:del-dini-stronger?}.
-\end{remark}
 
 Thus we proved the statement \ref{ch4:experiment-label}:
 
 \begin{equation}
 	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 	\leq
-	\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\diniu^+_{s_T} \norm{\sol_{s_T}^N-\mfsol_{s_T}^N}_\infty
 \end{equation}
 
 \section{Get rid of the integral sign in the derivation}
