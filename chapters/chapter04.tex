@@ -582,19 +582,13 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 	& =
 		\underbrace{
 			\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
-		}_{\invquest \leq (1, \ldots, 1) ?}
+		}_{?}
 		\Big(
 			\underbrace{
 				\partial^+_t
-				\int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
-			}_{\invquest = \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N) ?}
-		\Big)_{i=1}^{d\NumParticles_t}
-	\\
-	& \leq \sum_i \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
-	\\
-	& \leq \sum_i \norm{\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)} = \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_1
-	\\
-	& \leq d\NumParticles_t \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+				\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s
+			}_{\invquest = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N) ?}
+		\Big)_{j=1}^{d\NumParticles_t}
 \end{align*}
 
 To prove that this sketch is yielding the correct result we need to analyse and confirm a couple of results on the way.
@@ -603,7 +597,7 @@ The first is an easy computation.
 \begin{lemma}\label{ch4:lemma:derive-infinity-norm}
 	Considering eventually the derivative $\partial_i \norm{x}_\infty$ in the distributional sense we have that
 	\begin{equation}
-		\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}} \leq 1
+		\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}}
 	\end{equation}
 	and therefore that $\nabla \norm{x}_\infty \leq (1, \ldots, 1)$.
 \end{lemma}
@@ -624,12 +618,12 @@ The second one is a confirmation of an intuitive fact:
 
 \begin{lemma}\label{ch4:lemma:right-diff-of-integral}
 	The quantity 
-	\begin{equation}
+	\begin{equation}\label{ch4:derivation-of-lebesgue}
 		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
 	\end{equation}
 	is right-differentiable in each of its coordinates and is such that
 	\begin{equation}
-		\partial^+ \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s = \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+		\partial_t^+ \int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
 	\end{equation}
 	almost everywhere.
 \end{lemma}
@@ -640,6 +634,7 @@ The second one is a confirmation of an intuitive fact:
 		\Zhi_i(t) := \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s,
 	\end{equation}
 	the $i$-th coordinate of the object of interest.
+	In order to prove our thesis we will prove that $\Zhi_i(t)$ is differentiable and that its derivative is the \rhs(\ref{ch4:derivation-of-lebesgue}).
 	Then our thesis is that for all $t$
 	\begin{align*}
 		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi_i(t+h) - \Zhi_i(t)}{h} 
@@ -673,8 +668,6 @@ The second one is a confirmation of an intuitive fact:
 	
 	\begin{align*}
 		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
-		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
-		\\
 		&= \lim_{h\rightarrow 0^+} \frac{1}{
 			\lebsge(E_h)
 		} \int_{E_h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d\lebsge(s)
@@ -683,6 +676,59 @@ The second one is a confirmation of an intuitive fact:
 	\end{align*}
 	almost everywhere, and this concludes the proof.
 \end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+Then we can write
+
+\begin{align*}
+	\diniu^+_t 
+	\;
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&=
+	\diniu^+_t 
+	\;
+	\Big|
+	\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I(t)}
+	\Big|_\infty
+	\\
+	& =
+	\partial^+_t
+	\;
+	\norm{
+		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+	}_\infty
+	\\
+	& =
+	\underbrace{
+		\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
+	}_{?}
+	\Big(
+	\underbrace{
+		\partial^+_t
+		\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s
+	}_{\invquest = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N) ?}
+	\Big)_{j=1}^{d\NumParticles_t}
+\end{align*}
+
+
+
+
+
+
+
+
+
+
 
 Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
 

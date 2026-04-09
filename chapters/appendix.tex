@@ -7,11 +7,21 @@ We must take only sequences where only the first coordinates (finitely) are diff
 \begin{definition}
 Define the space of the cAMP particles spawned by an amoeba as:
 \begin{equation}
-\R^d_{camp}:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d) := \{x = (x_g)_{g\in\N} : \exists G\in\N_0.\forall g\geq G. x_g =\star\}
+\R^d_{camp}:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d) := 
+\{
+	x = (x_g)_{g\in\N}\
+	:\
+	\exists G\in\N_0.\
+	\forall g < G.\
+	x_g \in \R^d\
+	\text{ and }\
+	\forall g\geq G.\
+	x_g =\star
+\}
 \end{equation}
 Define the space of configurations for all particles as
 \begin{equation}
-Conf:=(\R^d)^N \times\big(\R^d_{camp}\big)^N
+\Conf:=(\R^d)^N \times\big(\R^d_{camp}\big)^N
 \end{equation}
 For each configuration of particles $x\in Conf$ sign its coordinates as 
 \begin{equation*}
@@ -33,63 +43,34 @@ where the absence of a coordinate in the list means that such coordinate is set 
 This definition is important to have processes and function with domains and codomains which are constant throughout time.
 For example:
 
-\begin{definition} Let $S$ be the space of strictly increasing sequences on $\R+$. Then define $\drift: \R_+ \times Conf \times S^N \longrightarrow Conf$ as
+\begin{definition}\label{ch3:formal-def-drift-diffus}
+	Let $S$ be the space of \cadlag increasing functions $f:\R+ \longrightarrow \N_0$ (basically the space of increasing "stairs" with steps of integer height). Then define $\drift: \R_+ \times \Conf \times S^N \longrightarrow \Conf$ and $\diffusion: \Conf \longrightarrow \Conf$ as
 \begin{equation}
 \left\{
 \begin{aligned}
 &\drift_p(t,x,(\hmactive_t^p)_p) = \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(x^p - x^{p,g})
-	&& 1\leq p \leq N
+	&&
 \\
 &\drift_{p,g}(t,x) = 0
 	&& \text{if } \btime^{p,g} \leq t
 \\
 &\drift_{p,g}(t,x) = \star
 	&& \text{otherwise}
-\end{aligned}
-\right.
-\end{equation}
-Let $\diffusion:Conf\longrightarrow Conf$ be defined as
-\begin{equation}
-\left\{
-\begin{aligned}
+\\
 &\diffusion_p:= \sigma_A
 &
 \\
 &\diffusion_{p,g} = \sigma_C
-	&& \text{if } \btime^{p,g} \leq t
+&& \text{if } \btime^{p,g} \leq t
 \\
 &\diffusion_{p,g} = \star
-	&& \text{otherwise}
-\end{aligned}
-\right.
-\end{equation}
-\end{definition}\label{ch3:formal-def-drift-diffus}
-
-Now we need to see what does it mean to formally solve a piecewise define SDE with a quasi-brownian motion as ours:
-
-\begin{definition}
-Given a Brownian motion $B$ and a stopping time $T$ we define the quasi Brownian motion
-\begin{equation}
-\quasibm_t^{B,T} :=
-\left\{
-\begin{aligned}
-& 0 
-& t<T
-\\
-&B_{t} - B_{T}
-& t \geq T
+&& \text{otherwise}
 \end{aligned}
 \right.
 \end{equation}
 \end{definition}
 
-Notice then that in the system \ref{ch2:model:deterministic-parenting} we have that
-\begin{equation}
-\quasibm^{B^{p,g}, T^{p,g}} = \quasibm^{p,g}
-\end{equation}
-
-
-
+Now we need to see what does it mean to formally solve a piecewise define SDE with a quasi-brownian motion as ours:
 
 %todo
 [[[REWRITE FROM HERE ON]]]
@@ -106,7 +87,7 @@ A solution to \ref{ch2:model:deterministic-parenting} is given by
 \begin{itemize}
 \item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb)$
 \item $N$ indipendent Poisson processes $(\hmactive^p)_{1\leq p\leq N}$ on $\Omega$
-\item $(\Flt_t)_t$-adapted processes $\sol,B:\R_+ \longrightarrow Conf$ such that 
+\item $(\Flt_t)_t$-adapted processes $\sol,B:\R_+ \longrightarrow \Conf$ such that 
 	\begin{itemize}
 	\item $(\hmactive^p)_{1\leq p\leq N}$ do not depend on $(\sol,B)$
 	\item Under the random measure $\Prb(\quad\cdot\quad \big| (\hmactive^p)_{1\leq p\leq N, t\in\R_+})$ we have that $(\sol,B)$ solves $E(\drift((\hmactive_t^p)_p), \diffusion)$ in the coordinates different from $\star$ piecewise on $I_m=[\btime_m,\btime_{m+1}]$ with the opportune modifications from $B^{p,g}$ to $\quasibm^{p,g}$
@@ -116,4 +97,33 @@ A solution to \ref{ch2:model:deterministic-parenting} is given by
 
 
 
-\section{Conditioned LLN with an attraction with singularity}\label{app:conditioned-LLN-with-singularity}
+\section{Notation convention}
+
+
+\subsection{Conditional expectations and probabilities}\label{app:notation}
+
+Mainly in the proofs of the laws of large numbers we will need to do long calculations with conditional expectations and probabilities.
+For this reason the subsequent less heavy notation has been adopted: a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (usually $\mfamba^k$, but depending on the context it could be also $\amba^k$):
+
+\begin{align*}
+	\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			\PrbTFoot{}{\cdot}&:= \PrbCondTimes{\cdot}{}
+	\\
+	\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\text{$k$-th amoeba},	}			&				\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\text{$k$-th amoeba }, }
+	\\
+	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
+\end{align*}
+
+Furthermore, a subscript $\ast$ will mean ambiguity in the presence of the subscript:
+
+\begin{align*}
+	\EFoot{\ast}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
+	\\
+	\ETFoot{\ast}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
+\end{align*}
+
+Finally we will indicate generic constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
+
+\begin{equation*}
+	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
+\end{equation*}
+

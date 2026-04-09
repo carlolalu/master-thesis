@@ -124,8 +124,6 @@ The first section is an explains the generalization of the attraction and shows 
 
 \section{Necessary premises}
 
-\subsection{Generalized attraction}
-
 Only for this chapter we will use a more general case for the attraction: we will use an additional term which also admits a cut-off Coulomb-type of singularity.
 
 \begin{definition}[Coulomb-type attraction-potential, generalized attraction and drift]\label{ch5:def:generalized-attr&drift}
@@ -197,12 +195,12 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 		\inf_{f_1 + f_\infty = f} 
 		\left( 
 		\Norm{f_1}_1 + \Norm{f_\infty}_\infty
-		\right)
-		\\
+		\right),
+		\qquad
+		\qquad
 		\Norm{f}_{1 \vee \infty} := 
 		\Norm{f}_1 + \Norm{f}_\infty
 	\end{gather*}
-	where, if $f$ has a $d$-dimensional domain, we consider $\Norm{f}_p := \max_k \Norm{f_k}$ (here $f_k$ is the $k$-th coordinate of $f$).
 	Then for arbitrary functions $f,g$ it is true that
 	\begin{equation}
 		\Norm{f \star g}_\infty
@@ -351,36 +349,8 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\leq 
 		\Norm{\frac{K_\curlywedge \attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{K_\curlywedge^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = K_\curlywedge\Norm{\attraction}_\infty + K_\curlywedge^2
 	\end{equation*}
-	
 \end{proof}
 
-
-
-\subsection{Notation convention}\label{ch5:notation}
-
-From now on, when long calculations will be held, a tilde above $\E{\cdot}, \Prb$ will indicate conditioning with respect to $ (\btime^{p,g})_{p,g}$, and a subscript $k$ will indicate a conditioning with respect to the $k$-th amoeba (\ie $\amba^k$ or $\mfamba^k$, depending on the context):
-
-\begin{align*}
-	\ETFoot{}{\cdot}&:=\ECondTimes{\cdot}{}			& 			\PrbTFoot{}{\cdot}&:= \PrbCondTimes{\cdot}{}
-	\\
-	\ETFoot{k}{\cdot}&:=\ECondTimes{\cdot}{\text{$k$-th amoeba},	}			&				\PrbTFoot{k}{\cdot}&:= \PrbCondTimes{\cdot}{\text{$k$-th amoeba }, }
-	\\
-	\EFoot{k}{\cdot}&:=\ECond{\cdot}{\text{$k$-th amoeba}}				&				\PrbFoot{k}{\cdot}&:=\PrbCond{\cdot}{\text{$k$-th amoeba}}
-\end{align*}
-
-Furthermore, a subscript $\ast$ will mean ambiguity in the presence of the subscript:
-
-\begin{align*}
-	\EFoot{\ast}{} &:=  \: \text{either of }	\EFoot{}{\cdot}, \EFoot{k}{\cdot}				&		\PrbFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbFoot{}{\cdot}, \PrbFoot{k}{\cdot}		
-	\\
-	\ETFoot{\ast}{} &:=  \: \text{either of }	\ETFoot{}{\cdot}, \ETFoot{k}{\cdot}			&		\PrbTFoot{\ast}{\cdot}&:= \: \text{either of }	\PrbTFoot{}{\cdot}, \PrbTFoot{k}{\cdot}		
-\end{align*}
-
-Finally we will indicate constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
-
-\begin{equation*}
-	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
-\end{equation*}
 
 \section{The first part of the law of large numbers}
 
@@ -448,7 +418,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 \end{remark}
 
 We will now prove such result.
-For the sake of shortness, together with the convention at \ref{ch5:notation}, we will use the subsequent notation:
+For the sake of shortness, together with the convention at \ref{app:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
 		S^{N, \xi}_\ast := \: \text{either of $S^{N, \xi}_\amba$ and $S^{N, \xi}$}
@@ -1457,7 +1427,7 @@ To prove the second part of the law of large numbers it will be necessary to pro
 \end{proposition}
 
 Let us prove this result.
-As for the first part of the law of large numbers, together with the convention at \ref{ch5:notation}, we will use the subsequent notation:
+As for the first part of the law of large numbers, together with the convention at \ref{app:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
 		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}

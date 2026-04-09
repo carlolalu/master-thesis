@@ -157,7 +157,7 @@ This function is called \emph{parenting function}, and for each $m\in\N$ the ran
 	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
 \end{align*}
 
-And since $\Zhi(p,g,s)ds=d\Gma_{g,\lambda} (s)$, it is independent from $p$, we have that $\Prb (\Parentof(m) = p) = const(m)$ and thus uniformly distirbuted on $\{1,\ldots,N\}$.
+And since $\Zhi(p,g,s)ds=d\Gma_{g,\lambda} (s)$, it is independent from $p$, we have that $\Prb (\Parentof(m) = p) = const(m)$ and thus uniformly distributed on $\{1,\ldots,N\}$.
 \end{proof}
 
 Then we can reformulate the model \ref{ch2:model} as:
@@ -217,15 +217,15 @@ which is a more conceptual notation to formally mean
 X_t = \rho_0 + \int_0^t \drift(t, X_t) \,dt + \int_0^t \diffusion(t, X_t) \,d B_t
 \end{equation}\label{ch2:eq:general-sde-integral-form}
 
-where $\drift \in \R^\Iu$, $\diffusion \in \R^{\Iu \times \Ch}$ are given vectorial and matricial functions respectively (the given initial distribution $\rho_0$ is optional).
+where $\drift \in \R^n$, $\diffusion \in \R^{n \times m}$ are given vectorial and matricial functions respectively (the given initial distribution $\rho_0$ is optional).
 They are called \emph{drift} and \emph{diffusion} (or \emph{volatility}) respectively.
 We sign such SDE as a $E(\drift,\diffusion)$.
 \begin{definition}
 A solution for $E(\drift,\diffusion)$ consists of
 \begin{itemize}
 \item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb) $
-\item an $\Ch$-dimensional $(\Flt_t)_t$-Brownian motion $B = (B^1, \ldots, B^\Ch)$
-\item an $(\Flt_t)_t$-adapted $\Iu$-dimensional process $X_t$ with $\Cspace^0$ sample paths
+\item an $m$-dimensional $(\Flt_t)_t$-Brownian motion $B = (B^1, \ldots, B^m)$
+\item an $(\Flt_t)_t$-adapted $n$-dimensional process $X_t$ with $\Cspace^0$ sample paths
 \end{itemize}
 such that they satisfy the equation $E(\drift,\diffusion)$.
 If furthermore $X_0 = x$ we say that $X$ solves $E_x(\drift,\diffusion)$.
