@@ -61,9 +61,10 @@ With this background in mind, we state the next result, of which the proof will 
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
-		 d N \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+		\max_{ s\in \{0,T\} } \left\{ 
+			\norm{\drift^N(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
+		\right\}
 	\end{equation}
-	where $\NumParticles_T = N + \hmactive_T$ is the number of particles present at time $T$ in the whole system.
 \end{lemma}
 
 \section{Advance beyond the $\sup$}
@@ -73,7 +74,9 @@ In this part we want to show that $\exists s_T \in [0,T]$ such that
 \begin{equation}\label{ch4:experiment-label}
 \diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 \leq
-\diniu^+_{s_T} \norm{\sol_{s_T}^N-\mfsol_{s_T}^N}_\infty
+\max_{ s\in \{0,T\} } \left\{ 
+	\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+\right\}
 \end{equation}
 
 Consider the random function
@@ -528,7 +531,9 @@ Thus we proved the statement \ref{ch4:experiment-label}:
 \begin{equation}
 	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 	\leq
-	\diniu^+_{s_T} \norm{\sol_{s_T}^N-\mfsol_{s_T}^N}_\infty
+	\max_{ s\in \{0,T\} } \left\{ 
+		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+	\right\}
 \end{equation}
 
 \section{Get rid of the integral sign in the derivation}
@@ -567,10 +572,10 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\diniu^+_t 
 		\;
 		\Big|
-\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I(t)}
+\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I_t}
 \Big|_\infty
 	\\
-	& \quad \left( \text{if $\forall j.\; I_j(t)$ is right-differentiable} \right)
+	& \quad \left( \text{if $\forall j.\; I_t^j$ is right-differentiable} \right)
 	\\
 	& =
 		\partial^+_t
@@ -581,7 +586,7 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 	\\
 	& =
 		\underbrace{
-			\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
+			\left[ \nabla_x \norm{x}_\infty \right]_{x = I_t}
 		}_{?}
 		\Big(
 			\underbrace{
@@ -595,23 +600,22 @@ To prove that this sketch is yielding the correct result we need to analyse and 
 The first is an easy computation.
 
 \begin{lemma}\label{ch4:lemma:derive-infinity-norm}
-	Considering eventually the derivative $\partial_i \norm{x}_\infty$ in the distributional sense we have that
+	Almost everywhere we have that
 	\begin{equation}
-		\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}}
+		\partial_i \norm{x}_\infty = sgn(x_i)\1_{\norm{x_i} = max_j \norm{x_j}}
 	\end{equation}
-	and therefore that $\nabla \norm{x}_\infty \leq (1, \ldots, 1)$.
 \end{lemma}
 \begin{proof}
-	Let us suppose that $\norm{x}_\infty = x_i$.
+	Let us suppose that $\norm{x}_\infty = \norm{x_i}$.
 	Then
 	\begin{align*}
 		\partial_i \norm{x}_\infty = \partial_i |x_i| = sgn(x_i)
 	\end{align*}
-	If instead there is $j \neq i$ such that $\norm{x}_\infty = x_j$, then
+	If instead there is $j \neq i$ such that $\norm{x}_\infty = \norm{x_j} > \norm{x_i}$, then
 	\begin{align*}
 		\partial_i \norm{x}_\infty = \partial_i |x_j| = 0
 	\end{align*}
-	Hence $\partial_i \norm{x}_\infty = sgn(x_i)\1_{x_i = max_j \norm{x_j}} \leq 1$.
+	Hence $\partial_i \norm{x}_\infty = sgn(x_i)\1_{\norm{x_i} = max_j \norm{x_j}}$.
 \end{proof}
 
 The second one is a confirmation of an intuitive fact:
@@ -677,18 +681,6 @@ The second one is a confirmation of an intuitive fact:
 	almost everywhere, and this concludes the proof.
 \end{proof}
 
-
-
-
-
-
-
-
-
-
-
-
-
 Then we can write
 
 \begin{align*}
@@ -699,10 +691,10 @@ Then we can write
 	\diniu^+_t 
 	\;
 	\Big|
-	\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I(t)}
+	\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
+		_{:= I_t = ( I_t^j )_{j=1}^N}
 	\Big|_\infty
-	\\
-	& =
+	=
 	\partial^+_t
 	\;
 	\norm{
@@ -710,66 +702,149 @@ Then we can write
 	}_\infty
 	\\
 	& =
-	\underbrace{
-		\left[ \nabla_x \norm{x}_\infty \right]_{x = I(t)}
-	}_{?}
+	\sum_{j=1}^{N}
+		\left( \partial_j \norm{x_j}_\infty \right)_{x_j = I_t^j}
 	\Big(
-	\underbrace{
 		\partial^+_t
 		\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s
-	}_{\invquest = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N) ?}
-	\Big)_{j=1}^{d\NumParticles_t}
+	\Big)
+	\\
+	& =
+	\sum_{j=1}^N
+	\left( \sgn(I_t^j)\1_{\norm{I_t^j} = \norm{I_t}_\infty } \right)
+	\Big(
+	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
+	\Big)
+	\\
+	& \leq
+	\sum_{j=1}^N
+	\left( \1_{\norm{I_t^j} = \norm{I_t}_\infty } \right)
+	\left|
+	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
+	\right| = 
 \end{align*}
 
+Now observe that for two different coordinates $i \neq j$ we have that
+
+\begin{align*}
+	&\left\{ \norm{I_t^j} = \norm{I_t}_\infty \right\} 
+		\cup
+	\left\{ \norm{I_t^i} = \norm{I_t}_\infty \right\} 
+	\subseteq
+	\left\{ \omega : \norm{I_t^j} = \norm{I_t^i} \right\} 
+	=
+	\\
+	&= \left\{ \omega :\
+		\norm{\int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N)ds} = \norm{\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N)ds}
+	\right\}
+\end{align*}
+
+\begin{claim}
+	For $i \neq j$ we have that $\PrbOf{\norm{I_t^j} = \norm{I_t^i}} = 0$
+\end{claim}
+
+\begin{proof}
+	\begin{align*}
+		&\PrbOf{\norm{I_t^j} = \norm{I_t^i}} = 
+		\PrbCondTimes{\norm{I_t^j} - \norm{I_t^i} = 0}{} = 
+		\ECondTimes{
+			\1_{0}(\norm{I_t^j} - \norm{I_t^i})
+		}{} =
+		\\
+		&= \int
+		 \1_{\{0\}}
+		\underbrace{
+			\left(
+				\norm{\int_0^t \drift_i(s, x) - \mfdrift_i(s, y)ds} - \norm{\int_0^t \drift_j(s, x) - \mfdrift_j(s,y)ds}
+			\right) 
+		}_{=: \Zhi_t(x,y)}
+		d(\sol_s^N,  \mfsol_s^N)_\star \PrbOf{x,y}
+	\end{align*}
+	
+	where in the last inequality we consider all the birth times as deterministic.	
+	If we we prove that the set $\{(x,y)\::\:\Zhi_t(x,y) = 0\}$ is such that
+	
+	\begin{equation*}
+		\lebsge(\{(x,y)\::\:\Zhi_t(x,y) = 0\})=0
+	\end{equation*}
+	
+	then the integral above is $0$, yielding the thesis.
+	We will show this exploiting the implicit function theorem, proving that the set above is locally the graph of a function and has thus measure $0$.
+	Let us see that one of its derivatives is always different from $0$, in order to fullfill the conditions of the implicit function theorem.
+	First notice that for some indices $k,l$ (corresponding to $i$, where $k\in \{1, \ldots, d\}$) and $p,q$ (corresponding to $j$, where $p\in \{1, \ldots, d\}$) we have that
+	
+	\begin{align*}
+		\Zhi_t(x,y) &= \norm{\int_0^t \drift_i(s, x) - \mfdrift_i(s, y)ds} - \norm{\int_0^t \drift_j(s, x) - \mfdrift_j(s,y)ds}
+		\\
+		&= \norm{\int_0^t \drift_i(s, x) - \lambda \left(\attraction_k \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^l)ds}
+		\\ 
+		&\qquad 
+		- \norm{\int_0^t \drift_j(s, x) - \lambda \left(\attraction_p \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^q)ds}
+	\end{align*}
+	
+	where eventually $k=p$ or $l=q$ (exclusively one of the two conditions).
+	Therefore, since all functions involved are integrable and their derivative are integrable and dominated, we can derive under the integral with respect to the coordinate $y^l$ and obtain almost everywhere:
+	
+	\begin{align*}
+		\partial_{y^l} \Zhi_t(x,y) &= 
+		\norm{\int_0^t \partial_{y^l} \drift_i(s, x) - \lambda \partial_{y^l} \left(\attraction_k \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^l)ds}
+		\\ 
+		&\qquad 
+		- \norm{\int_0^t \partial_{y^l} \drift_j(s, x) - \lambda \partial_{y^l} \left(\attraction_p \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^q)ds}
+		\\
+		&= \lambda \norm{\int_0^t \left(\attraction'_k \star \int_0^s \cdens_s^\tau  d\tau \right) (y^l)ds} - \1_{l=q} \lambda \norm{\int_0^t \left(\attraction'_p \star \int_0^s \cdens_s^\tau  d\tau \right) (y^l)ds}
+		\\
+		&= \lambda \norm{\left(\attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^l)} - \1_{l=q} \lambda \norm{\left(\attraction'_p \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^l)} = 
+	\end{align*}
+	
+	Define now $g_t(x):=\left( \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (x)$ and observe that since $ \cdens_s^\tau(x)$ has a constant mass when $s \geq \tau $ (after the correspondent birth time), then $g_t(x)$ is a non-negative function with positive mass.
+	Therefore, and since also $\attraction$ is a positive function, we have that
+	
+	[[the above property given for $\cdens$ should be written in chapter 3]]
+	
+	\begin{align*}
+			&= \lambda \norm{\left(\attraction'_k \star g_t \right) (y^l)} - \1_{l=q} \lambda \norm{\left(\attraction'_p \star g_t \right) (y^l)}
+			= \lambda \left(\attraction'_k \star g_t \right) (y^l) - \1_{l=q} \lambda \left(\attraction'_p \star g_t \right) (y^l)
+			\\
+			& = \lambda\
+			\left(
+			\left(
+				\attraction'_k - \1_{l=q}\attraction'_p
+			\right)
+			\star
+			g_t \right) (y^l)
+	\end{align*}
+	
+	
+	
+\end{proof}
 
 
 
 
+[[the point here above requires a bigger justification]]
 
+Then we can exclude the $\omega$s from these kind of sets to obtain almost surely that
 
+\begin{align*}
+	& =
+	\sum_{j=1}^N
+	\left( \1_{\forall i\neq j.\: I_t^j = \Norm{I_t}_\infty > I_t^i} \right)
+	\left|
+	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
+	\right| = 
+\end{align*}
 
+Observe now that the sets obtained have empty intersections, therefore, for some specific coordinate $\tilde{j}$ where the integral $I_t$ reaches its maximum we have
 
-
+\begin{align*}
+	& =
+	\left|
+	\drift_{\tilde{j}}(t, \sol_t^N) - \mfdrift_{\tilde{j}}(t, \mfsol_t^N)
+	\right| \leq 
+	\norm{
+		\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)
+	}_\infty
+\end{align*}
 
 Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
-
-\begin{proof}[Proof of \ref{ch4:lemma:del-dini-of-all}]\label{ch4:proof:del-dini-of-all}
-	In \ref{ch4:result:dini-of-sup} we have already shown that the inequality
-		\begin{equation}
-		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
-		\leq
-		\sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
-	\end{equation}
-	is valid.
-	Then, because of \ref{ch4:lemma:right-diff-of-integral} and \ref{ch4:lemma:derive-infinity-norm}, we have that the obtained function is right-differentiable, therefore
-	\begin{align*}
-		& \sup_{0 \leq t \leq T} \diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty
-		\\
-		& = \sup_{0 \leq t \leq T} \diniu^+_t \norm{\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_\infty
-		\\
-		&= \sup_{0 \leq t \leq T} \partial^+_t \norm{\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_\infty
-		\\
-			&\leq \sup_{0 \leq t \leq T} \sum_{i=1}^{d \NumParticles_t} \partial^+_t \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
-			&& {\ref{ch4:lemma:derive-infinity-norm}} 
-		\\
-			&\leq \sup_{0 \leq t \leq T} \sum_{i=1}^{d \NumParticles_t} 
-				\norm{
-					\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
-				}
-			&& \ref{ch4:lemma:right-diff-of-integral} 
-		\\
-		& \text{(the drift is $0$ for the cAMP)}
-		\\
-		&= \sup_{0 \leq t \leq T} \sum_{i=1}^{d N} 
-		\norm{
-			\drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
-		}
-		\\
-		& \leq \sup_{0 \leq t \leq T} d N
-		\norm{
-			\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)
-		}_\infty
-		& = d N \sup_{0 \leq t \leq T} \norm{\drift^N(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
-	\end{align*}
-	And the proof is concluded.
-\end{proof}
