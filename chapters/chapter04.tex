@@ -57,27 +57,29 @@ With this background in mind, we state the next result, of which the proof will 
 \begin{lemma}\label{ch4:lemma:del-dini-of-all}
 	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
 	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
-	Then we have that
+	Then we have that for all $T>0$
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
-		\max_{ s\in \{0,T\} } \left\{ 
-			\norm{\drift^N(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
-		\right\}
+		d \cdot 
+			\norm{\drift^N(T, \sol_T^N) - \mfdrift(T, \mfsol_T^N)}_\infty
 	\end{equation}
 \end{lemma}
 
 \section{Advance beyond the $\sup$}
 
-In this part we want to show that $\exists s_T \in [0,T]$ such that
+In this part we want to show this lemma.
 
-\begin{equation}\label{ch4:experiment-label}
-\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
-\leq
-\max_{ s\in \{0,T\} } \left\{ 
-	\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
-\right\}
-\end{equation}
+\begin{lemma}\label{ch4:lemma:advance-after-sup}
+	For all $T>0$
+	\begin{equation}
+		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\leq
+		\max_{ s\in \{0,T\} } \left\{ 
+		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+		\right\}
+	\end{equation}
+\end{lemma}
 
 Consider the random function
 
@@ -536,25 +538,49 @@ Thus we proved the statement \ref{ch4:experiment-label}:
 	\right\}
 \end{equation}
 
-\section{Get rid of the integral sign in the derivation}
+\section{Get rid of the integral in the derivation}
+
+Here the result we need to show is this:
+
+\begin{lemma}\label{ch4:lemma:get-rid-of-integral}
+	\begin{equation*}
+		\norm{\sol_t^N-\mfsol_t^N}_\infty \leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+	\end{equation*}
+\end{lemma}
 
 Notice that since the mean-field particles are coupled with the system \ref{ch2:model}, and since the initial conditions $\adens_0$ are the same for all the amoebas, we have that
 
 \begin{align*}
 	\norm{\sol_t^N-\mfsol_t^N}_\infty 
-	&= \norm{
-		\sol_0^N 
+	&= \max \left\{
+	\norm{\amba_t - \mfamba_t}_\infty,
+	\norm{\camp_t - \mfcamp_t}_\infty
+	\right\}
+	\\
+	&= \max \Bigg\{
+	\norm{
+		\amba_0 
 		+ \int_0^t \drift(s, \sol_s^N) d s
 		+ 
 		\sigma B_t^N
 	-
 	\left(
-		\mfsol_0^N 
+		\mfamba_0
 		+ \int_0^t \drift(s, \mfsol_s^N) d s
 		+ 
 		\sigma B_t^N
 	\right)
-	}_\infty
+	}_\infty,
+	\\
+	&\qquad
+		\norm{
+			\left(
+				\amba_{\btime_{m}} + \quasibm_t^m
+				-
+				(\mfamba_{\btime_{m}} + \quasibm_t^m)
+			\right)_{m}
+		}_\infty
+	\Bigg\}
 	\\
 	&=
 	\norm{
@@ -572,10 +598,11 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\diniu^+_t 
 		\;
 		\Big|
-\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}_{:= I_t}
+\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
+	_{:= I_t = (I_t^{p;i})_{p=1, i=1}^{N,d}}
 \Big|_\infty
 	\\
-	& \quad \left( \text{if $\forall j.\; I_t^j$ is right-differentiable} \right)
+	& \quad \left( \text{if $\forall p,i.\; I_t^{p;i}$ is right-differentiable} \right)
 	\\
 	& =
 		\partial^+_t
@@ -591,18 +618,17 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\Big(
 			\underbrace{
 				\partial^+_t
-				\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s
-			}_{\invquest = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N) ?}
-		\Big)_{j=1}^{d\NumParticles_t}
+				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
+			}_{\invquest = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N) ?}
+		\Big)_{p,i=1}^{N,d}
 \end{align*}
 
-To prove that this sketch is yielding the correct result we need to analyse and confirm a couple of results on the way.
 The first is an easy computation.
 
 \begin{lemma}\label{ch4:lemma:derive-infinity-norm}
 	Almost everywhere we have that
 	\begin{equation}
-		\partial_i \norm{x}_\infty = sgn(x_i)\1_{\norm{x_i} = max_j \norm{x_j}}
+		\partial_i \norm{x}_\infty = sgn(x_i)\1_{\norm{x_i} = \norm{x}_\infty}
 	\end{equation}
 \end{lemma}
 \begin{proof}
@@ -627,7 +653,7 @@ The second one is a confirmation of an intuitive fact:
 	\end{equation}
 	is right-differentiable in each of its coordinates and is such that
 	\begin{equation}
-		\partial_t^+ \int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s = \drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
+		\partial_t^+ \int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
 	\end{equation}
 	almost everywhere.
 \end{lemma}
@@ -635,20 +661,20 @@ The second one is a confirmation of an intuitive fact:
 \begin{proof}
 	Consider
 	\begin{equation}
-		\Zhi_i(t) := \int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s,
+		\Zhi(t) := \int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s,
 	\end{equation}
 	the $i$-th coordinate of the object of interest.
-	In order to prove our thesis we will prove that $\Zhi_i(t)$ is differentiable and that its derivative is the \rhs(\ref{ch4:derivation-of-lebesgue}).
+	In order to prove our thesis we will prove that $\Zhi(t)$ is differentiable and that its derivative is the \rhs(\ref{ch4:derivation-of-lebesgue}).
 	Then our thesis is that for all $t$
 	\begin{align*}
-		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi_i(t+h) - \Zhi_i(t)}{h} 
-		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi(t+h) - \Zhi(t)}{h} 
+		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
 		\\
 		&= \lim_{h\rightarrow 0^+} \frac{1}{
 				\lebsge((t, t+ h))
-			} \int_{(t,t+h)} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d\lebsge(s)
+			} \int_{(t,t+h)} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d\lebsge(s)
 		\\
-		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+		&= \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
 	\end{align*}
 	To prove this we just need to exploit the Lebesgue differentiation theorem (see \autocite[Theorem 3.21]{folland}), \ie check that the integrand is in $\Lpspace^1_{loc}$ (true by the definition of the solutions $\sol$ and $\mfsol$) and that $\{E_h\}_{h>0} := \big\{ (t,t+h) \big\}_{h>0}$ is a collection of Borel sets shrinking nicely to $t$.
 	The latter condition means to verify that:
@@ -674,9 +700,9 @@ The second one is a confirmation of an intuitive fact:
 		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
 		&= \lim_{h\rightarrow 0^+} \frac{1}{
 			\lebsge(E_h)
-		} \int_{E_h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d\lebsge(s)
+		} \int_{E_h} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d\lebsge(s)
 		\\
-		&= \drift_i(t, \sol_t^N) - \mfdrift_i(t, \mfsol_t^N)
+		&= \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
 	\end{align*}
 	almost everywhere, and this concludes the proof.
 \end{proof}
@@ -688,163 +714,196 @@ Then we can write
 	\;
 	\norm{\sol_t^N-\mfsol_t^N}_\infty 
 	&=
-	\diniu^+_t 
-	\;
-	\Big|
-	\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
-		_{:= I_t = ( I_t^j )_{j=1}^N}
-	\Big|_\infty
-	=
 	\partial^+_t
 	\;
-	\norm{
-		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-	}_\infty
+	\Bigg|
+		\Bigg(
+			\underbrace{ 
+				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
+			}_{:= I_t^{p;i} }
+		\Bigg)_{p,i=1}^{N,d}
+	\Bigg|_\infty
 	\\
 	& =
-	\sum_{j=1}^{N}
-		\left( \partial_j \norm{x_j}_\infty \right)_{x_j = I_t^j}
+	\sum_{p=1}^{N}
+	\sum_{i=1}^d
+		\left( \partial_{p;i} \norm{x_{p;i}}_\infty \right)_{x_{p;i} = I_t^{p;i}}
 	\Big(
 		\partial^+_t
-		\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N) d s
+		\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
 	\Big)
 	\\
 	& =
-	\sum_{j=1}^N
-	\left( \sgn(I_t^j)\1_{\norm{I_t^j} = \norm{I_t}_\infty } \right)
+	\sum_{p=1}^{N}
+	\sum_{i=1}^d
+	\left( \sgn(I_t^{p;i})\1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\Big(
-	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
+	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
 	\Big)
 	\\
 	& \leq
-	\sum_{j=1}^N
-	\left( \1_{\norm{I_t^j} = \norm{I_t}_\infty } \right)
+	\sum_{p=1}^{N}
+	\sum_{i=1}^d
+	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\left|
-	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
-	\right| = 
+	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	\right|
 \end{align*}
 
-Now observe that for two different coordinates $i \neq j$ we have that
+We want to get rid of the sum in $N$.
+To do that we need to prove that $|I_t^{p;i}|$ reaches $\norm{I_t}_\infty$ only for one $p$ at a time.
+Or more weakly, that for two different amoebas $p\neq q$, the probability that $\norm{I_t^{p;i}}= \norm{I_t^{q;j}}= \norm{I_t}_\infty$ for some coordinate $i,j$ is $0$.
 
-\begin{align*}
-	&\left\{ \norm{I_t^j} = \norm{I_t}_\infty \right\} 
-		\cup
-	\left\{ \norm{I_t^i} = \norm{I_t}_\infty \right\} 
-	\subseteq
-	\left\{ \omega : \norm{I_t^j} = \norm{I_t^i} \right\} 
-	=
-	\\
-	&= \left\{ \omega :\
-		\norm{\int_0^t \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N)ds} = \norm{\int_0^t \drift_j(s, \sol_s^N) - \mfdrift_j(s, \mfsol_s^N)ds}
-	\right\}
-\end{align*}
-
-\begin{claim}
-	For $i \neq j$ we have that $\PrbOf{\norm{I_t^j} = \norm{I_t^i}} = 0$
-\end{claim}
+\begin{lemma}
+	For all $t>0$ and for all $p \neq q$ we have that $\PrbOf{\exists i,j.\:\norm{I_t^{p;i}}= \norm{I_t^{q;j}}} = 0$
+\end{lemma}
 
 \begin{proof}
+	
+	We just need to prove that this happens conditionally with respect to the birth times.
 	\begin{align*}
-		&\PrbOf{\norm{I_t^j} = \norm{I_t^i}} = 
-		\PrbCondTimes{\norm{I_t^j} - \norm{I_t^i} = 0}{} = 
-		\ECondTimes{
-			\1_{0}(\norm{I_t^j} - \norm{I_t^i})
+		&\PrbCondTimes{\exists i,j.\:\norm{I_t^{p;i}} - \norm{I_t^{q;j}} = 0}{} \leq
+			\sum_{i=1,j=1}^{d,d} \PrbCondTimes{\norm{I_t^{p;i}}- \norm{I_t^{q;j}} = 0}{} =
+			\\
+			&=
+			\sum_{i=1,j=1}^{d,d}
+			\ECondTimes{
+			\1_{0}( \norm{I_t^{p;i}}- \norm{I_t^{q;j}} )
 		}{} =
 		\\
-		&= \int
+		&= 
+		\sum_{i=1,j=1}^{d,d}
+		\int
 		 \1_{\{0\}}
+		 \Bigg(
 		\underbrace{
-			\left(
-				\norm{\int_0^t \drift_i(s, x) - \mfdrift_i(s, y)ds} - \norm{\int_0^t \drift_j(s, x) - \mfdrift_j(s,y)ds}
-			\right) 
+				\norm{\int_0^t \drift_{p;i}(s, x) - \mfdrift_{p;i}(s, y)ds} - \norm{\int_0^t \drift_{q;j}(s, x) - \mfdrift_{q;j}(s,y)ds}
 		}_{=: \Zhi_t(x,y)}
-		d(\sol_s^N,  \mfsol_s^N)_\star \PrbOf{x,y}
+		\Bigg)
+		d(\sol_s^N,  \mfsol_s^N)_\star \PrbCondTimes{x,y}{}
 	\end{align*}
 	
-	where in the last inequality we consider all the birth times as deterministic.	
+	where in the last inequality we treat all the birth times as deterministic.	
 	If we we prove that the set $\{(x,y)\::\:\Zhi_t(x,y) = 0\}$ is such that
 	
 	\begin{equation*}
-		\lebsge(\{(x,y)\::\:\Zhi_t(x,y) = 0\})=0
+		\lebsge(\{(x,y)	\in	\R^{d \NumParticles_t} \times \R^{d \NumParticles_t}	\::\:\Zhi_t(x,y) = 0\})=0
 	\end{equation*}
 	
-	then the integral above is $0$, yielding the thesis.
-	We will show this exploiting the implicit function theorem, proving that the set above is locally the graph of a function and has thus measure $0$.
-	Let us see that one of its derivatives is always different from $0$, in order to fullfill the conditions of the implicit function theorem.
-	First notice that for some indices $k,l$ (corresponding to $i$, where $k\in \{1, \ldots, d\}$) and $p,q$ (corresponding to $j$, where $p\in \{1, \ldots, d\}$) we have that
+	then the integral above is $0$ (since the laws of the stochastic processes involved are absolutely continuous with respect to the Lebesgue measure), yielding the thesis.
+	We will show this exploiting the implicit function theorem, proving that the set above is locally the graph of a function $f:\R^{d \NumParticles_t} \times \R^{d \NumParticles_t - 1} \longrightarrow \R$ and has thus Lebesgue measure $0$ in $\R^{d \NumParticles_t} \times \R^{d \NumParticles_t}$.
+	First we can write
 	
 	\begin{align*}
-		\Zhi_t(x,y) &= \norm{\int_0^t \drift_i(s, x) - \mfdrift_i(s, y)ds} - \norm{\int_0^t \drift_j(s, x) - \mfdrift_j(s,y)ds}
+		\Zhi_t(x,y) &= \norm{\int_0^t \drift_{p;i}(s, x) - \mfdrift_{p;i}(s, y)ds} - \norm{\int_0^t \drift_{q;j}(s, x) - \mfdrift_{q;j}(s,y)ds}
 		\\
-		&= \norm{\int_0^t \drift_i(s, x) - \lambda \left(\attraction_k \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^l)ds}
-		\\ 
-		&\qquad 
-		- \norm{\int_0^t \drift_j(s, x) - \lambda \left(\attraction_p \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^q)ds}
+		&= \norm{\int_0^t \drift_{p;i}(s, x) - \lambda \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
+		- \norm{\int_0^t \drift_{q;j}(s, x) - \lambda \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q;j})   ds}
 	\end{align*}
 	
-	where eventually $k=p$ or $l=q$ (exclusively one of the two conditions).
-	Therefore, since all functions involved are integrable and their derivative are integrable and dominated, we can derive under the integral with respect to the coordinate $y^l$ and obtain almost everywhere:
+	where $y^p,y^q \in \R^d$. 
+	
+	Let us see that at least one of its derivatives is always different from $0$, in order to fullfill the conditions of the implicit function theorem.
+	Since all functions involved are integrable and their derivative are integrable and dominated, we can derive under the integral with respect to the coordinates $y^{p;i}$ and obtain almost everywhere:
 	
 	\begin{align*}
-		\partial_{y^l} \Zhi_t(x,y) &= 
-		\norm{\int_0^t \partial_{y^l} \drift_i(s, x) - \lambda \partial_{y^l} \left(\attraction_k \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^l)ds}
-		\\ 
-		&\qquad 
-		- \norm{\int_0^t \partial_{y^l} \drift_j(s, x) - \lambda \partial_{y^l} \left(\attraction_p \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^q)ds}
+		\partial_{y^{p;i}} \Zhi_t(x,y) 
+		&=\norm{\int_0^t \partial_{y^{p;i}} \drift_{p;i}(s, x) - \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
 		\\
-		&= \lambda \norm{\int_0^t \left(\attraction'_k \star \int_0^s \cdens_s^\tau  d\tau \right) (y^l)ds} - \1_{l=q} \lambda \norm{\int_0^t \left(\attraction'_p \star \int_0^s \cdens_s^\tau  d\tau \right) (y^l)ds}
+		&\qquad
+		- \norm{\int_0^t \partial_{y^{p;i}} \drift_{q;j}(s, x) - \lambda \partial_{y^{p;i}} \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q;j})   ds}
 		\\
-		&= \lambda \norm{\left(\attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^l)} - \1_{l=q} \lambda \norm{\left(\attraction'_p \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^l)} = 
+		&= \norm{\int_0^t \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
+		= \norm{\int_0^t \lambda \left(\attraction'_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
+		\\
+		&= \lambda\norm{\left( \attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p;i})}
 	\end{align*}
 	
-	Define now $g_t(x):=\left( \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (x)$ and observe that since $ \cdens_s^\tau(x)$ has a constant mass when $s \geq \tau $ (after the correspondent birth time), then $g_t(x)$ is a non-negative function with positive mass.
-	Therefore, and since also $\attraction$ is a positive function, we have that
+	Define now $g_t(x):=\left( \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (x)$ and observe that since $ \cdens_s^\tau(x)$ has a constant mass when $s \geq \tau $ (after the correspondent birth time), then for all $t>0$ we have that $g_t(x)$ is a positive function with positive mass.
+	Since also $\attraction$ is a positive function, we have necessarily that
 	
-	[[the above property given for $\cdens$ should be written in chapter 3]]
+	\begin{equation*}
+		\partial_{y^{p;i}} \Zhi_t(x,y)  = \lambda\norm{\left( \attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p;i})} > 0
+	\end{equation*}
 	
-	\begin{align*}
-			&= \lambda \norm{\left(\attraction'_k \star g_t \right) (y^l)} - \1_{l=q} \lambda \norm{\left(\attraction'_p \star g_t \right) (y^l)}
-			= \lambda \left(\attraction'_k \star g_t \right) (y^l) - \1_{l=q} \lambda \left(\attraction'_p \star g_t \right) (y^l)
-			\\
-			& = \lambda\
-			\left(
-			\left(
-				\attraction'_k - \1_{l=q}\attraction'_p
-			\right)
-			\star
-			g_t \right) (y^l)
-	\end{align*}
-	
-	
-	
+	Then the implicit function theorem can be applied and the thesis is valid.
 \end{proof}
 
-
-
-
-[[the point here above requires a bigger justification]]
-
-Then we can exclude the $\omega$s from these kind of sets to obtain almost surely that
+This statement allows as to say that with probability $1$ there exist some index $k \in \{1, \ldots, N\}$ such that 
 
 \begin{align*}
-	& =
-	\sum_{j=1}^N
-	\left( \1_{\forall i\neq j.\: I_t^j = \Norm{I_t}_\infty > I_t^i} \right)
+	\diniu^+_t 
+	\;
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	& \leq
+	\sum_{p=1}^{N}
+	\sum_{i=1}^d
+	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\left|
-	\drift_j(t, \sol_t^N) - \mfdrift_j(t, \mfsol_t^N)
-	\right| = 
+	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	\right|
+	\\
+	&= \sum_{i=1}^d
+	\left( \1_{\norm{I_t^{k;i}} = \norm{I_t}_\infty } \right)
+	\left|
+	\drift_{k;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	\right|
+	\\
+	&\leq 
+	 \sum_{i=1}^d
+	 1
+	 \cdot
+	 \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+	\leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
 \end{align*}
 
-Observe now that the sets obtained have empty intersections, therefore, for some specific coordinate $\tilde{j}$ where the integral $I_t$ reaches its maximum we have
+And thus the result \ref{ch4:lemma:get-rid-of-integral} is proved.
+
+\section{Assembling the proof of lemma \ref{ch4:lemma:del-dini-of-all}}\label{ch4:proof:del-dini-of-all}
+
+For $T >0$ we have that
 
 \begin{align*}
-	& =
-	\left|
-	\drift_{\tilde{j}}(t, \sol_t^N) - \mfdrift_{\tilde{j}}(t, \mfsol_t^N)
-	\right| \leq 
-	\norm{
-		\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)
-	}_\infty
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	&\leq
+	\max_{ s\in \{0,T\} } 
+	\left\{ 
+		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+	\right\}
+	&& \ref{ch4:lemma:advance-after-sup}
+	\\
+	& \max_{ s\in \{0,T\} } 
+	\left\{ 
+		d \norm{\drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
+	\right\}
+	&& \ref{ch4:lemma:get-rid-of-integral}
 \end{align*}
 
-Finally we can show that the result \ref{ch4:lemma:del-dini-of-all}:
+Now notice that since for every amoeba $p$ $\hmactive_0^p =0$ with probability $1$, then we have that
+
+\begin{equation*}
+	\drift_p(0, \sol_0^N)
+	= \frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_0^q} \attraction(\amba_s^p - \camp_s^{q,g}) 
+	= 0
+\end{equation*}
+
+and the same is valid for the mean-field drift:
+
+\begin{equation*}
+\mfdrift(0, \mfsol_0^N)_\infty
+= \lambda \left(\attraction \star \int_0^0 \cdens_0^\tau 	d \tau \right) (y^{p;i})  
+= 0
+\end{equation*}
+
+Then we have that
+
+\begin{equation*}
+	\max_{ s\in \{0,T\} } 
+	\left\{ 
+	d \norm{\drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
+	\right\}
+	= d \norm{\drift(T, \sol_T^N) - \mfdrift(T, \mfsol_T^N)}_\infty 
+\end{equation*}
+
+And the proof is concluded.
+

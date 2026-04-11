@@ -1,3 +1,4 @@
+\label{ch3}
 \section{What are effective equations?}
 
 Effective equations are macroscopic description of system of many particles interacting with each others.
@@ -236,14 +237,20 @@ But we are still operating with the law of some processes, rather than with them
 
 \section{How make a smart guess for the effective equations and prove that it is the correct choice}
 
+\begin{remark}
+	Here the number of amoebas involved in the model starts to be relevant, thus both for stochastic processes $\sol_t$ and functions $\drift$ dependent on it, such number will be signed as a superscript: $\sol_t^N, \:\drift^N$.
+	This shall not create ambiguity, in the case in which we want to sign the components of a multivariate stochastic process $\sol_t^N$: they shall be $\sol_t^{N,p,g}$.
+	A further element to avoid confusion is that the number of amoebas will always use the variable name $N$.
+\end{remark}
+
 Instead of guessing the PDE, the idea is to guess the equivalent-mean field particles $\mfsol = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t})$ solutions to a system of equations 
 
 \begin{equation}
 \left\{
 \begin{aligned}
-d \mfamba^p_t &= \mfdrift^{N,p}(t,\mfamba_t^p) d t + \sigma_A d B_t^p &
+d \mfamba^p_t &= \mfdrift^{N}_p(t,\mfamba_t^p) d t + \sigma_A d B_t^p &
 \\
-\mfcamp^{p,g}_t &= \text{ (some spawning position } \mfspawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift^{N,p}(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
+\mfcamp^{p,g}_t &= \text{ (some spawning position } \mfspawnpos_{\btime^{p,g}}^{p,g})) + \mfdrift_p^N(t,\mfcamp_t^p) + \sigma_C \quasibm_t^{p,g} &\text{from time }\btime^{p,g}
 \end{aligned}
 \right.
 \end{equation}\label{ch3:eq:approximate-mean-field-equations}
@@ -252,9 +259,9 @@ where the drift terms $\mfdrift^{N,k}$ are calculated by taking the average of t
 
 \begin{equation}
 \begin{aligned}
-\mfdrift^{N,p}(t, x) &:= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
+\mfdrift_p^N(t, x) &:= \ECond{\drift^N_p(t, \mfsol_t)}{ \mfsol_t^p} (x)
 \\
-\mfdrift^{N,p,g}(t, x) &:= \ECond{\drift^{N,k}(t, \mfsol_t)}{ \mfsol_t^{p,g} } (x)
+\mfdrift_{p,g}^{N}(t, x) &:= \ECond{\drift_{p,g}^N(t, \mfsol_t)}{ \mfsol_t^{p,g} } (x)
 \end{aligned}
 \end{equation}
 
@@ -272,11 +279,11 @@ This is made in order to express the distance between the mean-field particles a
 \begin{aligned}
 | \sol_t^k - \mfsol_t^k | 
 &= \left| 
-		\int_0^t \drift^{N,k}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift^{N,k}(t,\mfsol_s^k) d s + \sigma B_t^k 
+		\int_0^t \drift_{k}^{N}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift_k^{N}(t,\mfsol_s^k) d s + \sigma B_t^k 
 	\right|
 \\
 &= 
-	\left| \int_0^t \drift^{N,k}(s,\sol_s)  - \mfdrift^{N,k}(t,\mfsol_s^k) d s
+	\left| \int_0^t \drift_k^{N}(s,\sol_s)  - \mfdrift_k^{N}(t,\mfsol_s^k) d s
 	\right|
 \end{aligned}
 \end{equation}
@@ -292,10 +299,10 @@ The disadvantage of not having identical distributions, is that crafting a law o
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
 \begin{align*}
-\forall p,g. \quad \mfdrift^{N,p,g}(t, \mfsol_t^{p,g}) 
-:&= \ECond {\drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}}
+\forall p,g. \quad \mfdrift_{p,g}^{N}(t, \mfsol_t^{p,g}) 
+:&= \ECond {\drift_{p,g}^{N}(t, \mfsol_t) }{\mfsol_t^{p,g}}
 \\
-&=\ECond {\ \ECondTimes{ \drift^{N,p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
+&=\ECond {\ \ECondTimes{ \drift_{p,g}^{N}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
 \\
 &= \E {\ECondTimes{ 0 }{} }  = 0
 \end{align*}
@@ -386,12 +393,12 @@ where $\star$ is the convolution in space.
 Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
 
 \begin{align*}
-\mfdrift^{N,p}(t, x) 
-:&= \ECond{\drift^{N,p}(t, \mfsol_t)}{ \mfsol_t^p} (x)
+\mfdrift_p^N(t, x) 
+:&= \ECond{\drift_p^N(t, \mfsol_t)}{ \mfsol_t^p} (x)
 \\
 &= \ECond{\; 
 		\ECondTimes{
-			\drift^{N,p}(t, \mfsol_t)		
+			\drift_p^N(t, \mfsol_t)		
 		}{\mfamba_t^p=x, }
 	\;}{\mfamba_t^p=x}
 \\
@@ -492,9 +499,9 @@ Since the argument in the expectation value is coordinate-wise positive, we can 
 		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
 	\right) (x) 
 	\quad
-	=: \mfdrift^{N,p} (t, x) 
+	=: \mfdrift_p^N (t, x) 
 	\equiv
-	\mfdrift^{p} (t, x)
+	\mfdrift_p (t, x)
 \end{align*}
 
 With these calculations we have that the mean-field amoebas are the solution of the system
@@ -515,10 +522,11 @@ and $\adens$ is therefore given by the Kolmogorov equation
 
 \begin{equation}
 \begin{aligned}
-\partial_t \adens(t, x) &= 
+\partial_t \adens(t, x) 
+&\footnotemark[1]= 
 	- \sum_{i=1}^d \partial_{x_i} 
 		\left[
-			\mfdrift_i^{p}(t,x) \adens(t,x)
+			\mfdrift_{p;i}(t,x) \adens(t,x)
 		\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 = 	- \sum_{i=1}^d \partial_{x_i} 
@@ -566,6 +574,7 @@ and $\adens$ is therefore given by the Kolmogorov equation
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens			
 \end{aligned}
 \end{equation}
+\footnotetext[1]{Recall the notation for the $1$-dimensional components of the drift and diffusion: \ref{app:notation}.}
 
 If we would decide to express such equations with the analytical solution of $\cdens$ this would become
 
