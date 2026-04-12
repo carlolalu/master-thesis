@@ -78,5 +78,185 @@ In fact we have that
 \end{align*}
 
 where in the latter inequality we applied Markov with $f(x) = \norm{x}$.
+Then we need to find a bound for $\E{\auxProc_T^N} $.
+Bear in mind though, that the functions involved are not continuous but \cadlag, thus the classic Groenwall argument cannot be applied.
+We will instead of that use \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
+Consider $0 < t \leq T$ and calculate then:
 
-\cite[Theorem 8.1]{groenwall-non-continuous-functions}
+\begin{align*}
+	\diniu^+_t \auxProc_t^N 
+	&= 
+	\left( \1_{\diniu^+_t \auxProc_t^N >0 } + \1_{\diniu^+_t \auxProc_t^N \leq 0}\right) \cdot \diniu^+_t \auxProc_t^N 
+	\\
+	&\leq
+	 \1_{\diniu^+_t \auxProc_t^N >0 }\
+	\diniu_t^+  
+	\left(	
+	1 \wedge \big( 
+	N^{\cutparameter}
+	\sup_{0 \leq s \leq t}
+	\Norm{
+		\sol_s^N - \mfsol_s^N
+	}_\infty \big)
+	\right)
+	\\
+	&\footnotemark[1]\leq
+	\1_{\diniu^+_t \auxProc_t^N >0 }\
+	\left[
+	0 \vee 
+	\Big(
+	N^{\cutparameter}d  
+	\norm{\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty
+	\Big)
+	\right]	
+	\\
+	&\leq
+	 \1_{\diniu^+_t \auxProc_t^N >0 }\
+	  N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
+	  +  \1_{\diniu^+_t \auxProc_t^N >0 }\
+	  N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+\end{align*}
+\footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
+
+Recall that $\drift^N$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore:
+
+\begin{align*}
+	\leq
+	  d\
+	  \frac{2l\hmactive_t}{N}\
+	  \underbrace{
+		  \1_{\diniu^+_t \auxProc_t^N >0 }\
+		   \cdot 
+		   N^{\cutparameter}\
+		   \norm{\sol_t^N - \mfsol_t^N}_\infty
+	   }_{}
+	     + N^{\cutparameter}\
+	     d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+\end{align*}
+
+Now observe that if $N^{\cutparameter}\norm{\sol_t^N - \mfsol_t^N}_\infty \geq 1$ then $\auxProc_t^N =1$, which is the maximum value that $\auxProc_t^N$ can reach.
+This means that in such case we have $\diniu^+_t\auxProc_t^N \leq 0$, because the function, in the near future either remains constant or decreases.
+This means that
+
+\begin{equation*}
+	\left\{
+		\diniu^+_t \auxProc_t^N >0 
+	\right\} 
+	\subseteq 
+	\left\{
+		N^{\cutparameter}\norm{\sol_t^N - \mfsol_t^N}_\infty < 1
+	\right\} 
+\end{equation*}
+
+and consequently 
+
+\begin{equation*}
+		\1_{\diniu^+_t \auxProc_t^N >0 }\
+		\cdot 
+		N^{\cutparameter}\
+		\norm{\sol_t^N - \mfsol_t^N}_\infty
+	\leq
+		\left(
+			1
+			\vee
+			\big(
+			N^{\cutparameter}\
+			\norm{\sol_t^N - \mfsol_t^N}_\infty
+			\big)
+		\right)
+	\leq
+		1
+		\vee
+		\big(
+		N^{\cutparameter}\
+		\sup_{s\in[0,t]} \norm{\sol_s^N - \mfsol_s^N}_\infty
+		\big)
+	=
+		\auxProc_t^N 
+\end{equation*}
+
+Therefore we can write
+
+\begin{align*}
+	\diniu^+_t \auxProc_t^N 
+	&\leq
+	d\
+	\frac{2l\hmactive_t}{N}\
+	\underbrace{
+		\1_{\diniu^+_t \auxProc_t^N >0 }\
+		\cdot 
+		N^{\cutparameter}\
+		\norm{\sol_t^N - \mfsol_t^N}_\infty
+	}_{}
+	+ N^{\cutparameter}\
+	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	\\
+	&\leq
+	d\
+	\frac{2l\hmactive_t}{N}\
+	\auxProc_t^N 
+	+N^{\cutparameter}\
+	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+\end{align*}
+
+Integrating over $[0,T]$ we then obtain:
+
+\begin{align*}
+	 \auxProc_T^N - \auxProc_0^N &= \auxProc_T^N = \int_0^T \diniu^+_t \auxProc_t^N dt
+	 \\
+	 &= \int_0^T 
+	 	d\
+	 	\frac{2l\hmactive_t}{N}\
+	 	\auxProc_t^N 
+	 	+N^{\cutparameter}\
+	 	 d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	 	dt
+	 	\\
+	 	& \leq
+	 \int_0^T 
+	 3\cdot2\cdot l\
+	 \frac{\hmactive_T}{N}\
+	 \auxProc_t^N dt
+	 + 3N^{\cutparameter}\
+	 \int_0^T 
+	 \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	 dt
+	 \\
+	 &=
+	\int_0^T 
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\auxProc_t^N dt
+	+ 
+	N^{\cutparameter}\
+	K
+	\underbrace{
+		\int_0^T 
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+	}_{\Zhi}
+\end{align*}
+
+Notice now that if the second addend $\Zhi$ is positive almost surely, then we can proceed to apply \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
+
+\begin{lemma}
+	$\PrbOf{\int_0^T 
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt = 0} = 0 $
+\end{lemma}
+
+\begin{proof}
+	Again we proceed similarly to \ref{ch4:only-one-amoeba-will-survive}: we just need to prove that the result holds with respect to $\PrbCondTimes{}{}$.
+	First notice that
+	
+	\begin{align*}
+		&\PrbCondTimes{\int_0^T 
+			\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+			dt = 0}{}=
+			\\
+			&=
+		\PrbCondTimes{\text{for a.e. } t \in [0, T].\
+			\big|\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)\big|_\infty 
+		= 0}{}
+	\end{align*}
+\end{proof}

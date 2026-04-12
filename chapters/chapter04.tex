@@ -57,12 +57,12 @@ With this background in mind, we state the next result, of which the proof will 
 \begin{lemma}\label{ch4:lemma:del-dini-of-all}
 	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
 	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
-	Then we have that for all $T>0$
+	Then we have that with probability $!$, for all $T>0$
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
 		d \cdot 
-			\norm{\drift^N(T, \sol_T^N) - \mfdrift(T, \mfsol_T^N)}_\infty
+			\norm{\drift^N(T, \sol_T^N) - \mfdrift^N(T, \mfsol_T^N)}_\infty
 	\end{equation}
 \end{lemma}
 
@@ -754,7 +754,7 @@ We want to get rid of the sum in $N$.
 To do that we need to prove that $|I_t^{p;i}|$ reaches $\norm{I_t}_\infty$ only for one $p$ at a time.
 Or more weakly, that for two different amoebas $p\neq q$, the probability that $\norm{I_t^{p;i}}= \norm{I_t^{q;j}}= \norm{I_t}_\infty$ for some coordinate $i,j$ is $0$.
 
-\begin{lemma}
+\begin{lemma}\label{ch4:only-one-amoeba-will-survive}
 	For all $t>0$ and for all $p \neq q$ we have that $\PrbOf{\exists i,j.\:\norm{I_t^{p;i}}= \norm{I_t^{q;j}}} = 0$
 \end{lemma}
 
@@ -874,7 +874,7 @@ For $T >0$ we have that
 	\\
 	& \max_{ s\in \{0,T\} } 
 	\left\{ 
-		d \norm{\drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
+		d \norm{\drift(s, \sol_s^N) - \mfdrift^N(s, \mfsol_s^N)}_\infty
 	\right\}
 	&& \ref{ch4:lemma:get-rid-of-integral}
 \end{align*}
@@ -900,9 +900,9 @@ Then we have that
 \begin{equation*}
 	\max_{ s\in \{0,T\} } 
 	\left\{ 
-	d \norm{\drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N)}_\infty
+	d \norm{\drift^N(s, \sol_s^N) - \mfdrift^N(s, \mfsol_s^N)}_\infty
 	\right\}
-	= d \norm{\drift(T, \sol_T^N) - \mfdrift(T, \mfsol_T^N)}_\infty 
+	= d \norm{\drift^N(T, \sol_T^N) - \mfdrift^N(T, \mfsol_T^N)}_\infty 
 \end{equation*}
 
 And the proof is concluded.
