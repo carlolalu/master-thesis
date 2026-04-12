@@ -1,6 +1,7 @@
 \begin{proposition}
 	Let $\sol_t^N$ be the solution to the model \ref{ch2:model} and let $\mfsol_t^N$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
-	Then 
+	Let $T > 0$.
+	Then there exists a constant $K$ independent from $N$ such that
 	\begin{equation}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
@@ -66,21 +67,16 @@ In fact we have that
 	\\
 	&=
 	\PrbOf{  
-		\auxProc_t^N
+		\auxProc_T^N
 		\geq
 		1
 	}\
 	\leq\
 	\E{ 
-		\auxProc_t^N
+		\auxProc_T^N
 	} 
 \end{align*}
 
 where in the latter inequality we applied Markov with $f(x) = \norm{x}$.
 
-[[modify this]]
-
-
-Because of these equations we need to bound $\E{ \auxProc_t^N } $: this can be done exploiting \cite[Theorems 1.4.1, 1.4.2]{groenwall-with-dini-derivatives}, \ie the Groenwall inequality with Dini derivative (where the function in question has a countable number of discontinuouties).
-
-[[check that the theorem put the discontinuouties on the correct function. I suspect that the correct way to do this is with mollification, which should still be quite doable. Maybe I should put it in the chapter on dini derivatives]]
+\cite[Theorem 8.1]{groenwall-non-continuous-functions}
