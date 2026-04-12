@@ -354,6 +354,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 
 \section{The first part of the law of large numbers}
 
+[[in general you should make a simple statement at the beginning of this chapter, and of the next one, where you do explain that every inequality involving a power of 't' can be cut to one if t is less than 0, this to avoid clutter in the notation. You should then correct all the instances around here]]
 
 Now we can finally approach the first part of the law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
@@ -407,14 +408,22 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
 		K_n\
-		t^n\
+		(t \vee 1)^n\
 		N^{-K_\xi n + 1}
 		&& \label{ch5:LLN1:bound}
 	\end{align}
 \end{proposition}
 
-\begin{remark}
-	Recall that if $\drift^N_k$ is the usual drift with the gaussian potential, then one can choose $\alpha = 0$.
+
+\begin{remark}\label{ch5:assumption-t,lambda>1-proofs}
+	All along the subsequent proof it will be assumed that $\lambda \geq 1$ and that the time $t\geq 1$.
+	This is because in general for $0 < p <q$ we have that
+	
+	\begin{equation*}
+		t^p \leq (t \vee 1)^q
+	\end{equation*}
+	
+	and this clutters the notation and creates only non-necessary headaches for a function of $t$ which cannot explode (all the powers involved are positive integers).
 \end{remark}
 
 We will now prove such result.
@@ -440,9 +449,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\\
 		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
 		\PrbOf{\norm{
-				\drift^N_{k,i}(t, \mfsol^N) 
+				\drift^N_{k;i}(t, \mfsol^N) 
 				- \ETFoot{\ast}{
-					\drift^N_{k,i}(t,\mfsol^N)
+					\drift^N_{k;i}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		}
@@ -453,34 +462,34 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\:
 		\underbrace{
 			\PrbOf{\norm{
-					\drift^N_{k,i}(t, \mfsol^N) 
+					\drift^N_{k;i}(t, \mfsol^N) 
 					- \ETFoot{\ast}{
-						\drift^N_{k,i}(t,\mfsol^N)
+						\drift^N_{k;i}(t,\mfsol^N)
 					}
 				} \geq N^{-\xi} 
 			}
-		}_{\Ch(k,i)}
+		}_{\Ch(k;i)}
 	\end{align*}
-	where $\drift_{k,i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th particle.
-	Since the expression has the same form for each coordinate $(k,i)$, we assume that the maximum of $\Ch(k,i)$ is reached in $(1,1)$, and tame with a bound independent from such assumption.
+	where recall that $\drift_{k;i}$ indicates the $i$-th coordinate for the $d$-dimensional drift of the $k$-th particle.
+	Since the expression has the same form for each coordinate $(k;i)$, we assume that the maximum of $\Ch(k;i)$ is reached in $(1;1)$, and tame with a bound independent from such assumption.
 	
 	We shall begin by applying Markov inequality with function $f(x):= \norm{x}^{2n}$ for a generic $n \in \N$.
 	\begin{align*}
 		&=
 		3N \cdot
 		\PrbOf{\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
+				\drift^N_{1;1}(t, \mfsol^N) 
 				- \ETFoot{\ast}{
-					\drift^N_{1,1}(t,\mfsol^N)
+					\drift^N_{1;1}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		}
 		\\
 		&\leq \frac{3N}{ (N^{-\xi})^{2n} } \E{
 			\norm{
-				\drift^N_{1,1}(t, \mfsol^N) 
+				\drift^N_{1;1}(t, \mfsol^N) 
 				- \ETFoot{\ast}{
-					\drift^N_{1,1}(t,\mfsol^N)
+					\drift^N_{1;1}(t,\mfsol^N)
 				}
 			}^{2n}
 		}
@@ -860,9 +869,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\max_{k,i}
 		\:
 		\PrbOf{\norm{
-				\drift^N_{k,i}(t, \mfsol^N) 
+				\drift^N_{k;i}(t, \mfsol^N) 
 				- \ETFoot{\ast}{
-					\drift^N_{k,i}(t,\mfsol^N)
+					\drift^N_{k;i}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		}
@@ -1217,9 +1226,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\max_{k,i}
 		\:
 		\PrbOf{\norm{
-				\drift^N_{k,i}(t, \mfsol^N) 
+				\drift^N_{k;i}(t, \mfsol^N) 
 				- \ETFoot{\ast}{
-					\drift^N_{k,i}(t,\mfsol^N)
+					\drift^N_{k;i}(t,\mfsol^N)
 				}
 			} \geq N^{-\xi} 
 		}
@@ -1263,57 +1272,13 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\leq
 	\end{align*}
 	
-	Now we need to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$.
-	In \cite[Equation (1.3-14)]{handbook-poisson} we have that for each $P \sim \Pois(\mu)$
-	
-	\begin{equation*}
-		\E{
-			|P|^n
-		}
-		=
-		\sum_{k=1}^{n}
-		\mu^k
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
-		=\
-		\sum_{k=1}^{n}
-		\mu^k
-		\left(
-		\frac{1}{k!}\
-		\sum_{i=0}^{k}\
-		(-1)^{k-i}\
-		\left(
-		\begin{gathered}
-			k
-			\\
-			i
-		\end{gathered}
-		\right)\
-		i^n
-		\right)
-	\end{equation*}
-	
-	
-	Then we have that
-	
+	Now we can use the result \ref{app:Poisson-moments} to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$:
+		
 	\begin{align*}
 		&\leq
 		K_{\attraction,\text{dens}, \curlywedge,n}\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\sum_{k=1}^{n}
-		(Nt\lambda)^k
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
+		f^{\uparrow}(n)\: (Nt\lambda)^n
 		\\
 		&\leq
 		K_{\attraction,\text{dens}, \curlywedge,n}\
@@ -1321,16 +1286,8 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 			N^n\
 		}_{}\
-		t^n
-		\lambda^n
-		\sum_{k=1}^{n}
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
+		(t^n
+		\lambda^n)
 		\\
 		&=
 		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
@@ -1420,13 +1377,14 @@ To prove the second part of the law of large numbers it will be necessary to pro
 		\\
 		& \PrbOf{R^{N,\xi}}{}
 		\leq K_n\
-		t^{4(n-1)}\
+		(t \vee 1)^{4(n-1)}\
 		N^{-K_\xi n + 1}\
 		&& \label{ch5:LLN2:cond-2}
 	\end{align}
 \end{proposition}
 
 Let us prove this result.
+As for the first law of large numbers at the remark \ref{ch5:assumption-t,lambda>1-proofs}, we assume here as well that $t,\lambda\geq1$.
 As for the first part of the law of large numbers, together with the convention at \ref{app:notation}, we will use the subsequent notation:
 	
 	\begin{equation*}
@@ -1460,9 +1418,9 @@ As for the first part of the law of large numbers, together with the convention 
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{k,i}(t,\mfsol^N)}
+				{\drift^N_{k;i}(t,\mfsol^N)}
 				-
-				\EFoot{\ast}{\drift^N_{k,i}(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^N_{k;i}(t,\mfsol^N)}
 			}
 			\geq 
 			N^{-\xi} 
@@ -1481,9 +1439,9 @@ As for the first part of the law of large numbers, together with the convention 
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{1,1}(t,\mfsol_t^N)}
+				{\drift^N_{1;1}(t,\mfsol_t^N)}
 				-
-				\EFoot{\ast}{\drift^N_{1,1}(t,\mfsol_t^N)}
+				\EFoot{\ast}{\drift^N_{1;1}(t,\mfsol_t^N)}
 			}
 			\geq 
 			N^{-\xi} 
@@ -1496,9 +1454,9 @@ As for the first part of the law of large numbers, together with the convention 
 		\E{\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{1,1}(t,\mfsol_t^N)}
+				{\drift^N_{1;1}(t,\mfsol_t^N)}
 				-
-				\EFoot{\ast}{\drift^N_{1,1}(t,\mfsol_t^N)}
+				\EFoot{\ast}{\drift^N_{1;1}(t,\mfsol_t^N)}
 			}^{2n} }
 		\\
 		&=
@@ -1724,9 +1682,9 @@ As for the first part of the law of large numbers, together with the convention 
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{k,i}(t,\mfsol^N)}
+				{\drift^N_{k;i}(t,\mfsol^N)}
 				-
-				\EFoot{\ast}{\drift^N_{k,i}(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^N_{k;i}(t,\mfsol^N)}
 			}
 			\geq 
 			N^{-\xi} 
@@ -1888,7 +1846,7 @@ Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 		} 
 		\leq 
 		(K_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^2)^q
+		(t \vee 1)^2)^q
 	\end{equation}
 \end{proposition}
 
@@ -1908,6 +1866,7 @@ Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 \end{remark}
 
 Let us prove this result.
+As for the first part of the law of large numbers at the remark \ref{ch5:assumption-t,lambda>1-proofs}, we assume here also that $t,\lambda\geq1$.
 Observe that since the $(\hmactive_t^p)_p$ are \iid, then we have that also $(\Phi_p^\ast (k,i))_p$ are \iid, and thus we can operate directly with $\Phi_1^\ast (k,i)$.
 Then let us observe closely the object in question.
 	
@@ -3199,7 +3158,7 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 \neq 0}
 		}
 		+
-		t^q
+		(t \vee1)^q\
 		\right)
 		\\
 		&\leq
@@ -3212,59 +3171,18 @@ Then let us observe closely the object in question.
 		+
 		1
 		\right)
-		= 
+		\leq
 	\end{align*}
 	
-	Again we use the result \cite[Equation (1.3-14)]{handbook-poisson}, \ie that for each $P \sim \Pois(\mu)$
-	
-	\begin{equation*}
-		\E{
-			|P|^n
-		}
-		=
-		\sum_{k=1}^{n}
-		\mu^k
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
-		=\
-		\sum_{k=1}^{n}
-		\mu^k
-		\left(
-		\frac{1}{k!}\
-		\sum_{i=0}^{k}\
-		(-1)^{k-i}\
-		\left(
-		\begin{gathered}
-			k
-			\\
-			i
-		\end{gathered}
-		\right)\
-		i^n
-		\right)
-	\end{equation*}
-	
-	to obtain that 
+	Again we use the result \ref{app:Poisson-moments} to obtain that 
 	
 	\begin{align*}
-		=
+		\leq
 		K_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		\left(
-		\sum_{k=1}^{q}
-		(t\lambda)^k
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
+		f^{\uparrow}(q)\
+		(t\lambda)^q
 		+
 		1
 		\right)\
@@ -3272,16 +3190,9 @@ Then let us observe closely the object in question.
 		\leq\
 		K_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
-		(t\lambda)^q\
+		t^q\
 		\left(
-		\sum_{k=1}^{q}
-		\left\{
-		\begin{gathered}
-			n
-			\\
-			k
-		\end{gathered}
-		\right\}\
+		f^{\uparrow}(q)\
 		+
 		1
 		\right)\
@@ -3315,7 +3226,7 @@ Then let us observe closely the object in question.
 		}
 		\leq
 		K_n\
-		(t^{4n} \: \vee \: 1)\
+		(t \vee 1)^{4n}\
 		N^{-K_\xi n + 1}
 	\end{equation}
 	
@@ -3323,6 +3234,7 @@ Then let us observe closely the object in question.
 \end{proposition}
 
 \begin{proof}
+	Once again we assume the assumptions of remark \ref{ch5:assumption-t,lambda>1-proofs}, \ie that $t,\lambda\geq1$.
 	Recall that from \ref{ch5:sketch-dividi-et-impera} we want to use the strategy "dividi et impera":
 	
 	\begin{align*}
@@ -3391,9 +3303,9 @@ Then let us observe closely the object in question.
 		&=
 		K_n\
 		(
-		t^n\
-		+
-		t^{4(n-1)}\
+			t^n\
+			+
+			t^{4(n-1)}\
 		)\
 		N^{-K_\xi n + 1}
 		\\
@@ -3401,19 +3313,15 @@ Then let us observe closely the object in question.
 		K_n\
 		2\
 		(
-		t^n\
-		\vee
-		t^{4(n-1)}\
+			t^n\
+			\vee
+			t^{4(n-1)}\
 		)\
 		N^{-K_\xi n + 1}
 		\\
 		&\leq
 		K_n\
-		(
-		1
-		\vee
 		t^{4(n-1)}\
-		)\
 		N^{-K_\xi n + 1}
 	\end{align*}
 	
