@@ -1,7 +1,7 @@
 \begin{proposition}
 	Let $\sol_t^N$ be the solution to the model \ref{ch2:model} and let $\mfsol_t^N$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
-	Let $T > 0$.
-	Then there exists a constant $K$ independent from $N$ such that
+	Let $T > 0$ and let $0< \delta <\xi <\frac{1}{2}$.
+	Then there exists an $\overline{N}>0$ and an increasing continuous function $F^{\uparrow}: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
 	\begin{equation}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
@@ -10,8 +10,10 @@
 			}_\infty 
 			\geq
 			N^{-\cutparameter}
-		} \leq 
-		[[write here the proper bound]]
+		}
+		\leq\
+		F^{\uparrow}(T)\
+		N^{-(\xi-\delta)}
 	\end{equation}
 \end{proposition}
 
@@ -80,11 +82,21 @@ Then we need to find a bound for $\E{\auxProc_T^N} $.
 
 \section{Stochastic estimate with Groenwall}
 
-Bear in mind though, that the functions involved are not continuous but \cadlag, thus the classic Groenwall argument cannot be applied.
+Bear in mind that the functions involved are not continuous but \cadlag, thus neither the classic Groenwall argument nor the one generalised for dini derivatives \cite[Theorem 1.4.1]{groenwall-with-dini-derivatives} can be applied.
+We will instead of that use the one from \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}:
 
-[[Here underline how Groenwall cannot be used directly on the average because you stumble on E M t J t and this cannot be controlled with Hoelder because M t is unbounded]]
+\begin{lemma}
+	Let $T >0, c>0$. Let $u(\cdot)$ be a Borel-measurable bounded non-negative function on $[0,S]$ and let $v(\cdot)$ be a non-negative integrable function in $[0,S]$.
+	If for all $T \in [0,S]$
+		\begin{equation*}
+			u(T) \leq \int_0^T u(t) v(t) dt + c
+		\end{equation*}
+	then for all $T \in [0,S]$
+			\begin{equation*}
+				u(T) \leq c\int_0^T \exp(v(t) )dt
+			\end{equation*}
+\end{lemma}
 
-We will instead of that use the generalized version \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
 Consider $0 < t \leq T$ and calculate then:
 
 \begin{align*}
@@ -387,8 +399,8 @@ Therefore we obtain that
 	dt
 	\cdot
 	\exp \left(
-	K_\attraction\
-	\frac{\hmactive_T}{N}\
+	\int_0^T K_\attraction\
+	\frac{\hmactive_T}{N}dt
 	\right)
 \end{equation*}
 
@@ -481,8 +493,8 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		dt
 		\cdot
 		\exp \left(
-		K_\attraction\
-		\frac{\hmactive_T}{N}\
+		\int_0^T K_\attraction\
+		\frac{\hmactive_T}{N}dt
 		\right)
 	}
 	\\
@@ -491,6 +503,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 	K
 	\E{
 		\int_0^S
+		\left[
 		N^{-\xi}
 		+
 		K_\attraction\
@@ -500,10 +513,11 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\lambda S
 		\right)\
 		\1_{\setB_t^c}\
+		\right]
 		dt
 		\cdot
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -514,7 +528,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 	N^{-\xi}\
 	\E{
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	} +
@@ -533,7 +547,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		dt
 		\cdot
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -543,14 +557,14 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 	S\
 	\E{
 		\exp \left(
-		K_\attraction\
+TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	} +
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
+K_\attraction\
 	\E{
 		\frac{\hmactive_S}{N}\
 		\int_0^S
@@ -558,7 +572,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		dt
 		\cdot
 		\exp \left(
-		K_\attraction\
+TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -574,7 +588,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		dt
 		\cdot
 		\exp \left(
-		K_\attraction\
+TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}=
@@ -588,7 +602,7 @@ K\
 S\
 \E{
 	\exp \left(
-	K_\attraction\
+TK_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }
@@ -599,7 +613,7 @@ K_\attraction\
 	\frac{\hmactive_S}{N}\
 	\1_{\setB_t^c}\
 	\exp \left(
-	K_\attraction\
+TK_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }\
@@ -614,7 +628,7 @@ S\
 \E{
 	\1_{\setB_t^c}\
 	\exp \left(
-	K_\attraction\
+TK_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }
@@ -629,7 +643,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 		\frac{\hmactive_S}{N}\
 		\1_{\setB_t^c}\
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}\
@@ -644,7 +658,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 		(\1_{\setB_t^c})^q\
 		\left(
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 		\right)^q
@@ -665,7 +679,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 	\E{
 		\left(
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 		\right)^{qv}
@@ -683,7 +697,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 	\cdot
 	\E{
 		\exp \left(
-		\frac{qvK_\attraction}{N}\
+		\frac{qvTK_\attraction}{N}\
 		\hmactive_T
 		\right)
 	}^\frac{1}{qv}
@@ -695,7 +709,7 @@ and analogously, the last expectation value yields:
 \E{
 	\1_{\setB_t^c}\
 	\exp \left(
-	K_\attraction\
+	TK_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 } 
@@ -707,7 +721,7 @@ and analogously, the last expectation value yields:
 \E{
 	\left(
 	\exp \left(
-	K_\attraction\
+	TK_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 	\right)^{v}
@@ -718,7 +732,7 @@ and analogously, the last expectation value yields:
 \cdot
 \E{
 	\exp \left(
-	\frac{vK_\attraction}{N}\
+	\frac{vTK_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^{\frac{1}{v}}
@@ -734,7 +748,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	S\
 	\E{
 		\exp \left(
-		\frac{K_\attraction}{N}\
+		\frac{TK_\attraction}{N}\
 		\hmactive_T
 		\right)
 	}
@@ -745,7 +759,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 		\frac{\hmactive_S}{N}\
 		\1_{\setB_t^c}\
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}\
@@ -760,7 +774,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	\E{
 		\1_{\setB_t^c}\
 		\exp \left(
-		K_\attraction\
+		TK_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -772,7 +786,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	S\
 	\E{
 		\exp \left(
-		\frac{K_\attraction}{N}\
+		\frac{TK_\attraction}{N}\
 		\hmactive_T
 		\right)
 	} +
@@ -790,7 +804,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 \PrbOf{\setB_t^c}\
 \E{
 	\exp \left(
-	\frac{qvK_\attraction}{N}\
+	\frac{qvTK_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^\frac{1}{qv}
@@ -805,7 +819,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 \PrbOf{\setB_t^c}\
 \E{
 	\exp \left(
-	\frac{vK_\attraction}{N}\
+	\frac{vTK_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^{\frac{1}{v}}
@@ -890,7 +904,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_\attraction\lambda T} + \epsilon)+
+	(e^{K_\attraction\lambda T^2} + \epsilon)+
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
@@ -903,7 +917,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 		(t \vee 1)^{4n}\
 		N^{-K_\xi n+ 1}
 		\right)\
-		(e^{qvK_\attraction \lambda T} + \epsilon)^\frac{1}{qv}
+		(e^{qvK_\attraction \lambda T^2} + \epsilon)^\frac{1}{qv}
 	dt +
 	\\
 	&\qquad
@@ -917,14 +931,14 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 		(t \vee 1)^{4n}\
 		N^{-K_\xi n+ 1}
 		\right)\
-		(e^{vK_\attraction \lambda T} + \epsilon)^\frac{1}{v}
+		(e^{vK_\attraction \lambda T^2} + \epsilon)^\frac{1}{v}
 	dt
 	\\
 	& =
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
@@ -936,7 +950,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	T\
 	(t \vee 1)^{4n}\
 	N^{-K_\xi n+ 1}
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	dt +
 	\\
 	&\qquad
@@ -946,7 +960,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	\int_0^S
 	(t \vee 1)^{4n}\
 	N^{-K_\xi n+ 1}\
-	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	dt \leq
 \end{align*}
 
@@ -957,7 +971,7 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
@@ -965,7 +979,7 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	K_{p,\lambda,n,\attraction}\
 	T\
 	(S \vee 1)^{4n}\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	\int_0^S\
 	dt +
 	\\
@@ -974,7 +988,7 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	K_{\attraction,n,\lambda}\
 	S\
 	(S \vee 1)^{4n}\
-	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	\int_0^S
 	dt 
 	\\
@@ -982,7 +996,7 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
@@ -990,7 +1004,7 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	K_{p,\lambda,n,\attraction}\
 	S^2\
 	(S \vee 1)^{4n}\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	+
 	\\
 	&\qquad
@@ -998,18 +1012,18 @@ then, since the only term in the integral which is depending on $t$ is $(t \vee 
 	K_{\attraction,n,\lambda}\
 	S^2\
 	(S \vee 1)^{4n}\
-	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	\\
 	&\leq 
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T} + \epsilon) + 
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon) + 
 	N^{\cutparameter-K_\xi n+ 1}\
 	K_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
 	2\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 	\leq
 \end{align*}
 
@@ -1022,11 +1036,11 @@ Choose now $n$ so that $N^{\cutparameter-K_\xi n+ 1} < N^{\cutparameter-\xi}$. T
 	\left\{
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T} + \epsilon) ,\
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon) ,\
 	K_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
 	2\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 	\right\}
 	\\
 	&\leq
@@ -1035,15 +1049,15 @@ Choose now $n$ so that $N^{\cutparameter-K_\xi n+ 1} < N^{\cutparameter-\xi}$. T
 	(S \vee 1)^{4n+2}\
 	\max\
 	\left\{\
-	(e^{K_{\attraction,\lambda} T} + \epsilon) ,\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{\attraction,\lambda} T^2} + \epsilon) ,\
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 	\right\}
 	\\
 	&\leq
 	N^{\cutparameter-\xi}\
 	K_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 \end{align*}
 
 Resuming we get
@@ -1054,7 +1068,7 @@ Resuming we get
 	N^{\cutparameter-\xi}\
 	K_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 \end{equation*}
 
 Since this equation is valid for all $S >T$ we also have that 
@@ -1065,5 +1079,27 @@ Since this equation is valid for all $S >T$ we also have that
 	N^{\cutparameter-\xi}\
 	K_{p,\lambda,n,\attraction}\
 	(T \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 \end{equation*}
+
+Define now the continuous increasing function
+
+\begin{equation*}
+	F^{\uparrow}(T) := K_{p,\lambda,n,\attraction}\
+	(T \vee 1)^{4n+2}\
+	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+\end{equation*}
+
+to obtain
+
+\begin{equation*}
+	\E{\auxProc_T^N}
+	\leq
+	F^{\uparrow}(T)\
+	N^{\cutparameter-\xi}\
+	=\
+	F^{\uparrow}(T)\
+	N^{-(\xi - \cutparameter)}\
+\end{equation*}
+
+And thus the main result has been proven.
