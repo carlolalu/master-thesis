@@ -170,7 +170,7 @@ Finally we will indicate generic constants with the symbol $K$, and a subscript 
 \end{equation*}
 
 
-\section{Estimates of a Poisson \rv higher moments}
+\section{Estimates of a Poisson \rv higher moments and moment generating function}
 
 \begin{lemma}\label{app:Poisson-moments}
 	Let $P \sim \Pois(\mu)$ be a Poisson \rv of parameter $mu$.
@@ -276,3 +276,13 @@ Finally we will indicate generic constants with the symbol $K$, and a subscript 
 	
 	to obtain the thesis.
 \end{proof}
+
+We have also this useful result from \cite[Equation (1.6-9)]{handbook-poisson}.
+
+\begin{lemma}\label{app:Poisson-generating-function}
+	Let $P \sim \Pois(\mu)$ be a Poisson \rv of parameter $\mu$.
+	Then its moment generating function is given by:
+	\begin{equation*}
+		\E{\exp(sP)} =  \exp[\mu(e^s-1)]
+	\end{equation*}
+\end{lemma}

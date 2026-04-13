@@ -779,8 +779,10 @@ Or more weakly, that for two different amoebas $p\neq q$, the probability that $
 		\underbrace{
 				\norm{\int_0^t \drift_{p;i}(s, x) - \mfdrift_{p;i}(s, y)ds} - \norm{\int_0^t \drift_{q;j}(s, x) - \mfdrift_{q;j}(s,y)ds}
 		}_{=: \Zhi_t(x,y)}
-		\Bigg)
-		d(\sol_s^N,  \mfsol_s^N)_\star \PrbCondTimes{x,y}{}
+		\Bigg)\cdot
+		\\
+		&\qquad\qquad\qquad
+		\cdot d(\sol_s^N,  \mfsol_s^N)_\star \PrbCondTimes{x,y}{}
 	\end{align*}
 	
 	where in the last inequality we treat all the birth times as deterministic.	
@@ -797,8 +799,8 @@ Or more weakly, that for two different amoebas $p\neq q$, the probability that $
 	\begin{align*}
 		\Zhi_t(x,y) &= \norm{\int_0^t \drift_{p;i}(s, x) - \mfdrift_{p;i}(s, y)ds} - \norm{\int_0^t \drift_{q;j}(s, x) - \mfdrift_{q;j}(s,y)ds}
 		\\
-		&= \norm{\int_0^t \drift_{p;i}(s, x) - \lambda \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
-		- \norm{\int_0^t \drift_{q;j}(s, x) - \lambda \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q;j})   ds}
+		&= \norm{\int_0^t \drift_{p;i}(s, x) - \lambda \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p})  ds} 
+		- \norm{\int_0^t \drift_{q;j}(s, x) - \lambda \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q})   ds}
 	\end{align*}
 	
 	where $y^p,y^q \in \R^d$. 
@@ -808,25 +810,96 @@ Or more weakly, that for two different amoebas $p\neq q$, the probability that $
 	
 	\begin{align*}
 		\partial_{y^{p;i}} \Zhi_t(x,y) 
-		&=\norm{\int_0^t \partial_{y^{p;i}} \drift_{p;i}(s, x) - \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
+		&=\sgn(I_t^{p;i})\
+		\int_0^t \partial_{y^{p;i}} \drift_{p;i}(s, x) - \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p})  ds
 		\\
 		&\qquad
-		- \norm{\int_0^t \partial_{y^{p;i}} \drift_{q;j}(s, x) - \lambda \partial_{y^{p;i}} \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q;j})   ds}
+		- \partial_{y^{p;i}}\
+		\norm{\int_0^t \drift_{q;j}(s, x) - \lambda \left(\attraction_j \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{q})   ds}
 		\\
-		&= \norm{\int_0^t \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
-		= \norm{\int_0^t \lambda \left(\attraction'_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p;i})  ds} 
+		&=\sgn(I_t^{p;i})\
+		\int_0^t \lambda \partial_{y^{p;i}} \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p})  ds =
+	\end{align*}
+	
+	Now notice that both $\attraction_i$ and $\partial_i \attraction_i$ are bounded and integrable, and that by hypothesis also $\cdens_s^\tau $ is bounded and integrable, therefore we can transport the derivative $\partial_{y^{p;i}}$ inside the convolution (see \eg \cite[Theorem 2.27]{folland}) and obtain:
+	
+	\begin{align*}
+		&= \sgn(I_t^{p;i})\
+		\int_0^t \lambda \left(\partial_i\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p})  ds
 		\\
-		&= \lambda\norm{\left( \attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p;i})}
+		&= 
+		\sgn(I_t^{p;i})\
+		\lambda\
+		\left( \partial_i\attraction_i \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p})
 	\end{align*}
 	
 	Define now $g_t(x):=\left( \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (x)$ and observe that since $ \cdens_s^\tau(x)$ has a constant mass when $s \geq \tau $ (after the correspondent birth time), then for all $t>0$ we have that $g_t(x)$ is a positive function with positive mass.
-	Since also $\attraction$ is a positive function, we have necessarily that
+	Since also $\partial_i\attraction_i$ is a function always $\neq 0$, we have necessarily, whenever $ \sgn(I_t^{p;i}) \neq 0$, that $\partial_{y^{p;i}} \Zhi_t(x,y) \neq 0$, and thus that the correspondent set can be described locally as the graph of some function $f_\Zhi$.
+		
+	If instead $ \sgn(I_t^{p;i}) = 0$, \ie $ I_t^{p;i} = 0$, we can act in a similar fashion, but with a different function:
 	
 	\begin{equation*}
-		\partial_{y^{p;i}} \Zhi_t(x,y)  = \lambda\norm{\left( \attraction'_k \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p;i})} > 0
+		\Ch_t(x,y) := I_t^{p;i} = \int_0^t \drift_{p;i}(s, x) - \lambda \left(\attraction_i \star \int_0^s \cdens_s^\tau 	d \tau \right) (y^{p})  ds
 	\end{equation*}
 	
-	Then the implicit function theorem can be applied and the thesis is valid.
+	And now we can show that the set $\left\{
+	(x,y)\
+	|\
+	I_t^{p;i} = 0
+	\right\} = \left\{
+	\Ch_t(x,y) = 0
+	\right\} $ is locally the graph of some function with the implicit function theorem, obtaining the same result.
+	In fact, proceeding as before, we have that
+	
+	\begin{equation*}
+		\partial_{y^{p;i}} \Ch_t(x,y) 
+		=
+		\lambda\
+		\left( \partial_i\attraction_i \star \int_0^t \int_0^s \cdens_s^\tau  d\tau  ds \right) (y^{p}) > 0
+	\end{equation*}
+	
+	And thus also in this case we have an implicit function $f_\Ch$ which locally represents the set $\left\{
+	\Ch_t(x,y) = 0
+	\right\} $.
+	Resuming, we can write:
+	
+	\begin{align*}
+		\lebsge
+		\left(
+			\left\{
+			\Zhi_t(x,y) = 0
+			\right\}
+				\right)
+		&=\
+		\lebsge
+		\left(
+		\left\{
+			\Zhi_t(x,y) = 0,\
+			I_t^{p;i} \neq 0
+		\right\}\
+		\cup\
+		\left\{
+			\Ch_t(x,y) = 0
+		\right\}\
+		\right)
+		\\
+		&=\
+		\lebsge
+		\Big(
+			\left\{
+				\text{Graph of } f_\Zhi:\R^{d \NumParticles_t} \times \R^{d \NumParticles_t - 1} \longrightarrow \R
+			\right\}\
+			\cup
+			\\
+			&\qquad\qquad
+			\cup\
+			\left\{
+				\text{Graph of } f_\Ch:\R^{d \NumParticles_t} \times \R^{d \NumParticles_t - 1} \longrightarrow \R
+			\right\}\
+			\Big)
+		 = 0
+	\end{align*}
+	And thus the thesis is reached.
 \end{proof}
 
 This statement allows as to say that with probability $1$ there exist some index $k \in \{1, \ldots, N\}$ such that 

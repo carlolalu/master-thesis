@@ -15,8 +15,6 @@
 	\end{equation}
 \end{proposition}
 
-\section{Proof}
-
 The proof is based on the usage of the Groenwall argument on the auxiliary process 
 
 \begin{equation}
@@ -79,17 +77,22 @@ In fact we have that
 
 where in the latter inequality we applied Markov with $f(x) = \norm{x}$.
 Then we need to find a bound for $\E{\auxProc_T^N} $.
+
+\section{Stochastic estimate with Groenwall}
+
 Bear in mind though, that the functions involved are not continuous but \cadlag, thus the classic Groenwall argument cannot be applied.
-We will instead of that use \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
+
+[[Here underline how Groenwall cannot be used directly on the average because you stumble on E M t J t and this cannot be controlled with Hoelder because M t is unbounded]]
+
+We will instead of that use the generalized version \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
 Consider $0 < t \leq T$ and calculate then:
 
 \begin{align*}
 	\diniu^+_t \auxProc_t^N 
 	&= 
-	\left( \1_{\diniu^+_t \auxProc_t^N >0 } + \1_{\diniu^+_t \auxProc_t^N \leq 0}\right) \cdot \diniu^+_t \auxProc_t^N 
-	\\
-	&\leq
-	 \1_{\diniu^+_t \auxProc_t^N >0 }\
+	\left( \1_{\{\diniu^+_t \auxProc_t^N >0 \}} + \1_{\{\diniu^+_t \auxProc_t^N \leq 0\}}\right) \cdot \diniu^+_t \auxProc_t^N 
+	\leq
+	 \1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	\diniu_t^+  
 	\left(	
 	1 \wedge \big( 
@@ -99,9 +102,21 @@ Consider $0 < t \leq T$ and calculate then:
 		\sol_s^N - \mfsol_s^N
 	}_\infty \big)
 	\right)
+	\leq
+	\\
+	&\leq
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
+	\left(	
+	\diniu_t^+ 1 \wedge \diniu_t^+ \big( 
+	N^{\cutparameter}
+	\sup_{0 \leq s \leq t}
+	\Norm{
+		\sol_s^N - \mfsol_s^N
+	}_\infty \big)
+	\right)
 	\\
 	&\footnotemark[1]\leq
-	\1_{\diniu^+_t \auxProc_t^N >0 }\
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	\left[
 	0 \vee 
 	\Big(
@@ -111,9 +126,10 @@ Consider $0 < t \leq T$ and calculate then:
 	\right]	
 	\\
 	&\leq
-	 \1_{\diniu^+_t \auxProc_t^N >0 }\
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	  N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
-	  +  \1_{\diniu^+_t \auxProc_t^N >0 }\
+	  +  
+	  \1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	  N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
 \end{align*}
 \footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
@@ -182,12 +198,10 @@ Therefore we can write
 	&\leq
 	d\
 	\frac{2l\hmactive_t}{N}\
-	\underbrace{
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
 		\norm{\sol_t^N - \mfsol_t^N}_\infty
-	}_{}
 	+ N^{\cutparameter}\
 	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 	\\
@@ -230,17 +244,34 @@ Integrating over $[0,T]$ we then obtain:
 	+ 
 	N^{\cutparameter}\
 	K
-	\underbrace{
 		\int_0^T 
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 		dt
-	}_{\Zhi}
+	\leq
 \end{align*}
 
-Notice now that if the second addend $\Zhi$ is positive almost surely, then we can proceed to apply \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
+Choose now some $S >T$ to obtain
+
+\begin{equation*}
+	\leq
+	\int_0^T 
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\auxProc_t^N dt
+	+ 
+	N^{\cutparameter}\
+	K
+	\underbrace{
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+	}_{=:\Iu}
+\end{equation*}
+
+Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
 
 \begin{lemma}
-	$\PrbOf{\int_0^T 
+	$\PrbOf{\int_0^S 
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 		dt = 0} = 0 $
 \end{lemma}
@@ -250,13 +281,789 @@ Notice now that if the second addend $\Zhi$ is positive almost surely, then we c
 	First notice that
 	
 	\begin{align*}
-		&\PrbCondTimes{\int_0^T 
+		&\PrbCondTimes{\int_0^S
 			\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 			dt = 0}{}=
 			\\
-			&=
-		\PrbCondTimes{\text{for a.e. } t \in [0, T].\
-			\big|\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)\big|_\infty 
-		= 0}{}
+		&= \PrbCondTimes{
+			\forall p,i.\
+			\int_0^S
+			\norm{\drift_{p;i}^N(t, \mfsol_t^N) - \mfdrift_{p;i}^N(t, \mfsol_t^N)}
+			dt
+			= 0
+			}{}
+		\\
+		&\leq
+		\sum_{p,i}\
+		\PrbCondTimes{ \int_0^S
+			\norm{\drift_{p;i}^N(t, \mfsol_t^N) - \mfdrift_{p;i}^N(t, \mfsol_t^N)}
+			dt
+			}{}
+		\\
+		&=
+		\sum_{p,i}\
+		\int
+		\1_{\{0\}}
+		\Big(
+		\underbrace{
+			\int_0^S
+				\norm{\drift_{p;i}^N(t, x) - \mfdrift_{p;i}^N(t, x)}
+			dt
+		}_{\Zhi_S(x,y)}
+		\Big)
+		\cdot
+		\PrbCondTimes{\mfsol_t^N =dx}{}
 	\end{align*}
+	
+	Let us show that $\left\{
+	\Zhi_S = 0
+	\right\}$ has measure $0$.
+	Here we will write "$\forall^\lebsge t \in [0,S]$" with the meaning of "for almost every $t \in [0,S]$ with respect to the measure $\lebsge$".
+	
+	\begin{align*}
+		x \in \left\{		\Zhi_S = 0		\right\} \quad 
+		&\Longleftrightarrow\
+		\forall^\lebsge t \in [0,S].\quad
+			\norm{\drift_{p;i}^N(t, x) - \mfdrift_{p;i}^N(t, x)}
+			= 0
+			\\
+		&\Longleftrightarrow\
+		\forall^\lebsge t \in [0,S].\quad
+			\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \attraction(x^p - x^{N+m}) 
+			 - \lambda \left(\attraction_i \star \int_0^t \cdens_t^\tau 	d \tau \right) (x^{p})
+		= 0
+		\\
+		&\Longleftrightarrow\
+		\forall^\lebsge t \in [0,S].\quad
+					\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \left(\attraction \star \delta_{x^{N+m}}\right) (x^p ) 
+			- \left(\attraction_i \star \lambda \int_0^t \cdens_t^\tau 	d \tau \right) (x^{p})
+		= 0
+		\\
+		&\Longleftrightarrow\
+		\forall^\lebsge t \in [0,S].\quad
+		\left[\attraction \star 
+		\left(
+		\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \delta_{x^{N+m}}
+		- \lambda \int_0^t \cdens_t^\tau 	d \tau \right) 
+		\right]
+		(x^{p})
+		= 0
+		\\
+		&\Longleftrightarrow\
+		\forall^\lebsge t \in [0,S].\quad
+		\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \delta_{x^{N+m}}
+		= \lambda \int_0^t \cdens_t^\tau 	d \tau
+	\end{align*}
+	
+	Now observe that if $\hmactive_t = 0$, the last equality is trivially not satisfied because its \lhs is $0$ while its \rhs is positive.
+	If instead $\hmactive_t \neq 0$ we would have a pure distribution on the \lhs and $\Lpspace^1$ function on the \rhs, which is of course also not attainable.
+	Then $ \left\{	\Zhi_S = 0	\right\}$ is the empty set, and the thesis is proved.	
 \end{proof}
+
+With this lemma we have that the conditions of \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions} are fullfilled for the inequality
+
+\begin{equation*}
+	\auxProc_T^N \leq 
+	\int_0^T 
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\auxProc_t^N dt
+	+ 
+	N^{\cutparameter}\
+	K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+\end{equation*}
+
+Therefore we obtain that 
+
+\begin{equation*}\label{ch6:just-applied-Groenwall}
+	\auxProc_T^N \leq 
+	N^{\cutparameter}\
+	K
+	\int_0^S
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	dt
+	\cdot
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+\end{equation*}
+
+\section{Law of large numbers and averaging}
+
+Define the set
+
+\begin{equation*}
+	\setB_t := \left\{
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq N^{-\xi}
+	\right\}
+\end{equation*}
+
+for some $0 < \xi < \frac{1}{2}$.
+Then we have 
+\begin{align*}
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	&=
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+		\1_{\setB_t
+		}
+		+
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+		\1_{\setB_t^c
+		}
+		\\
+		&\leq
+		N^{-\xi}
+		+
+		\norm{
+		\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \attraction(\mfamba^p - \mfcamp^{m}) 
+		- \lambda \left(\attraction \star \int_0^t \cdens_t^\tau 	d \tau \right) (\mfamba^{p})
+	}_\infty
+		\1_{\setB_t^c}
+		\\
+		&\leq
+		N^{-\xi}
+		+
+		\left(
+			\frac{\hmactive_t}{N} \Norm{\attraction}_\infty
+			+
+			\lambda \int_0^t \Norm{ \attraction \star\cdens_t^\tau }_\infty d \tau  
+		\right)\
+		\1_{\setB_t^c}
+		\\
+		&\leq
+		N^{-\xi}
+		+		
+		\left(
+		K_\attraction
+		\frac{\hmactive_t}{N} 
+		+
+		\lambda \int_0^t \Norm{ \attraction }_\infty \Norm{\cdens_t^\tau}_1 d \tau  
+		\right)\
+		\1_{\setB_t^c}
+		\\
+		&\leq
+		N^{-\xi}
+		+
+		K_\attraction\
+		\left(
+		\frac{\hmactive_t}{N} 
+		+
+		\lambda t
+		\right)\
+		\1_{\setB_t^c}\quad
+		\leq
+		N^{-\xi}
+		+
+		K_\attraction\
+		\left(
+		\frac{\hmactive_S}{N} 
+		+
+		\lambda S
+		\right)\
+		\1_{\setB_t^c}
+\end{align*}
+
+where the probability of $\setB_t^c$ is described by the law of large numbers \ref{ch5:LLN}.
+Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calculate
+
+\begin{align*}
+	\E{\auxProc_T^N}
+	&\leq 
+	\E{
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+	\\
+	&\leq
+	N^{\cutparameter}\
+	K
+	\E{
+		\int_0^S
+		N^{-\xi}
+		+
+		K_\attraction\
+		\left(
+		\frac{\hmactive_S}{N} 
+		+
+		\lambda S
+		\right)\
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+	\\
+	&= N^{\cutparameter}\
+	K\
+	S\
+	N^{-\xi}\
+	\E{
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\E{
+		\left(
+		\frac{\hmactive_S}{N} 
+		+
+		\lambda S
+		\right)\
+		\int_0^S
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+	\\
+	&= N^{\cutparameter-\xi}\
+	K\
+	S\
+	\E{
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\E{
+		\frac{\hmactive_S}{N}\
+		\int_0^S
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\lambda\
+	S\
+	\E{
+		\int_0^S
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}=
+\end{align*}
+
+Now use Fubini on the last two terms to get to:
+
+\begin{align*}
+&= N^{\cutparameter-\xi}\
+K\
+S\
+\E{
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+}
++ N^{\cutparameter}\
+K_\attraction\
+\int_0^S\
+\E{
+	\frac{\hmactive_S}{N}\
+	\1_{\setB_t^c}\
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+}\
+dt +
+\\
+&\qquad
++ N^{\cutparameter}\
+K_\attraction\
+\lambda\
+S\
+\int_0^S
+\E{
+	\1_{\setB_t^c}\
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+}
+dt
+\end{align*}
+
+At this point we do need to separate the stochastic variables in pieces of which are able to calculate the average.
+Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1}{p} + \frac{1}{q} = 1 $ and apply Hoelder twice to the second addend's expectation:
+
+\begin{align*}
+	&\E{
+		\frac{\hmactive_S}{N}\
+		\1_{\setB_t^c}\
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}\
+	\leq 
+	\E{
+		\left(
+		\frac{\hmactive_S}{N}\
+		\right)^p
+	}^{\frac{1}{p}}
+	\cdot
+	\E{
+		(\1_{\setB_t^c})^q\
+		\left(
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+		\right)^q
+	}^{\frac{1}{q}} \leq
+	\\
+	&\qquad
+	\leq
+	N^{-1}
+	\E{
+		\left(\hmactive_S
+		\right)^p
+	}^{\frac{1}{p}}
+	\cdot
+	\E{
+		(\1_{\setB_t^c})^{qu}\
+	}^{\frac{1}{qu}}
+	\cdot
+	\E{
+		\left(
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+		\right)^{qv}
+	}^{\frac{1}{qv}}
+	\\
+	& \qquad =
+	N^{-1}
+	\E{
+		\left(\hmactive_S
+		\right)^p
+	}^{\frac{1}{p}}
+	\cdot
+	\PrbOf{\setB_t^c
+	}^{\frac{1}{qu}}
+	\cdot
+	\E{
+		\exp \left(
+		\frac{qvK_\attraction}{N}\
+		\hmactive_T
+		\right)
+	}^\frac{1}{qv}
+\end{align*}
+
+and analogously, the last expectation value yields:
+
+\begin{align*}
+\E{
+	\1_{\setB_t^c}\
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+} 
+&\leq 
+\E{
+	(\1_{\setB_t^c})^{u}\
+}^{\frac{1}{u}}
+\cdot
+\E{
+	\left(
+	\exp \left(
+	K_\attraction\
+	\frac{\hmactive_T}{N}\
+	\right)
+	\right)^{v}
+}^{\frac{1}{v}}
+\\
+&=
+\PrbOf{\setB_t^c}^{\frac{1}{u}}
+\cdot
+\E{
+	\exp \left(
+	\frac{vK_\attraction}{N}\
+	\hmactive_T
+	\right)
+}^{\frac{1}{v}}
+\end{align*}
+
+Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
+
+\begin{align}\label{ch6:pre-final-evaluation-on-avg-J}
+	\E{\auxProc_T^N} 
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	\E{
+		\exp \left(
+		\frac{K_\attraction}{N}\
+		\hmactive_T
+		\right)
+	}
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\int_0^S\
+	\E{
+		\frac{\hmactive_S}{N}\
+		\1_{\setB_t^c}\
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}\
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\lambda\
+	S\
+	\int_0^S
+	\E{
+		\1_{\setB_t^c}\
+		\exp \left(
+		K_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+	dt
+	\\
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	\E{
+		\exp \left(
+		\frac{K_\attraction}{N}\
+		\hmactive_T
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\int_0^S\
+	N^{-1}
+\E{
+	\left(\hmactive_S
+	\right)^p
+}^{\frac{1}{p}}
+\cdot
+\PrbOf{\setB_t^c}\
+\E{
+	\exp \left(
+	\frac{qvK_\attraction}{N}\
+	\hmactive_T
+	\right)
+}^\frac{1}{qv}
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\lambda\
+	S\
+	\int_0^S
+\PrbOf{\setB_t^c}\
+\E{
+	\exp \left(
+	\frac{vK_\attraction}{N}\
+	\hmactive_T
+	\right)
+}^{\frac{1}{v}}
+	dt
+\end{align}
+
+Now we can evaluate the probability of $\setB_t^c$ with the law of large numbers (\ref{ch5:LLN}): for each $n\in \N$ there is some $\overline{N}$ such that for every $N \geq \overline{N}$ we have that
+
+\begin{equation*}
+	\PrbOf{\setB_t^c}\ 
+	\leq 
+	K_n\
+	(t \vee 1)^{4n}\
+	N^{-K_\xi n+ 1}
+\end{equation*}
+
+for some constant $K_\xi$.
+The higher moments of $\hmactive_T$ can be evaluated with \ref{app:Poisson-moments} obtaining (for $N$ big enough, so that the Poisson parameter is $\geq 1$)
+
+\begin{equation*}
+	\E{
+		\left(\hmactive_S
+		\right)^p
+	} \leq
+	f^{\uparrow}(p) (\lambda N T)^p
+\end{equation*}
+
+Finally we can notice that for every $a$ the expectation values of the exponentials $\E{
+	\exp \left(
+	\frac{a}{N}\
+	\hmactive_T
+	\right) }$
+is nothing else than an evaluation in $\frac{a}{N}$ of the moment generating function of the Poisson random variable $\hmactive_t$. By the result of \ref{app:Poisson-generating-function} such quantities are:
+
+\begin{align*}
+	\E{
+		\exp \left(
+	\frac{a}{N}\
+	\hmactive_T
+	\right) }
+	= \exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
+\end{align*}
+
+Then we can use De l'Hopital to see that:
+
+\begin{align*}
+	\lim_N\
+	\exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
+	&=
+	\exp\left[
+	\lim_N\
+	\frac{e^{\frac{a}{N}}-1}{
+		\left(\frac{1}{\lambda N T } \right)}
+	\right]
+	&
+	=
+	\exp\left[
+	\lim_N\
+	\frac{e^{\frac{a}{N}}(-1)\frac{a}{N^2}}{
+		\left(\frac{-1}{\lambda TN^2 } \right)}
+	\right]	
+	= \exp\left[
+	a\lambda T e^0
+	\right]	=e^{a\lambda T}
+\end{align*}
+
+This means that if we choose $\epsilon >0$ than there exists $\overline{N}= \overline{N}_{a, \epsilon} >0$ such that, if $N > \overline{N}$, then 
+
+\begin{equation*}
+	\E{
+		\exp \left(
+		\frac{a}{N}\
+		\hmactive_T
+		\right) } \leq e^{a\lambda T} + \epsilon
+\end{equation*}
+
+With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-avg-J} to calculate that, for $N$ big enough we have
+
+\begin{align*}
+	\E{\auxProc_T^N} 
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	(e^{K_\attraction\lambda T} + \epsilon)+
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\int_0^S\
+	N^{-1}
+	\left[f^{\uparrow}(p) (\lambda N T)^p\right]^{\frac{1}{p}}\
+		\left(
+		K_n\
+		(t \vee 1)^{4n}\
+		N^{-K_\xi n+ 1}
+		\right)\
+		(e^{qvK_\attraction \lambda T} + \epsilon)^\frac{1}{qv}
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_\attraction\
+	\lambda\
+	S\
+	\int_0^S
+		\left(
+		K_n\
+		(t \vee 1)^{4n}\
+		N^{-K_\xi n+ 1}
+		\right)\
+		(e^{vK_\attraction \lambda T} + \epsilon)^\frac{1}{v}
+	dt
+	\\
+	& =
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	\\
+	&\qquad
+	+
+	N^{\cutparameter}\
+	K_\attraction\
+	\int_0^S\
+	N^{-1}N\
+	K_{p,\lambda,n}\
+	T\
+	(t \vee 1)^{4n}\
+	N^{-K_\xi n+ 1}
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_{\attraction,n,\lambda}\
+	S\
+	\int_0^S
+	(t \vee 1)^{4n}\
+	N^{-K_\xi n+ 1}\
+	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	dt \leq
+\end{align*}
+
+then, since the only term in the integral which is depending on $t$ is $(t \vee 1)^{4n}\leq (S \vee 1)^{4n}$, we do get
+
+\begin{align*}
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	\\
+	&\qquad
+	+
+	N^{\cutparameter-K_\xi n+ 1}\
+	K_{p,\lambda,n,\attraction}\
+	T\
+	(S \vee 1)^{4n}\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	\int_0^S\
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter-K_\xi n+ 1}\
+	K_{\attraction,n,\lambda}\
+	S\
+	(S \vee 1)^{4n}\
+	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	\int_0^S
+	dt 
+	\\
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	(e^{K_{\attraction,\lambda} T} + \epsilon)
+	\\
+	&\qquad
+	+
+	N^{\cutparameter-K_\xi n+ 1}\
+	K_{p,\lambda,n,\attraction}\
+	S^2\
+	(S \vee 1)^{4n}\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^\frac{1}{qv}
+	+
+	\\
+	&\qquad
+	+ N^{\cutparameter-K_\xi n+ 1}\
+	K_{\attraction,n,\lambda}\
+	S^2\
+	(S \vee 1)^{4n}\
+	(e^{K_{v,\attraction,\lambda} T} + \epsilon)^\frac{1}{v}
+	\\
+	&\leq 
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	(e^{K_{\attraction,\lambda} T} + \epsilon) + 
+	N^{\cutparameter-K_\xi n+ 1}\
+	K_{p,\lambda,n,\attraction}\
+	(S \vee 1)^{4n+2}\
+	2\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	\leq
+\end{align*}
+
+Choose now $n$ so that $N^{\cutparameter-K_\xi n+ 1} < N^{\cutparameter-\xi}$. Then
+
+\begin{align*}
+	&\leq
+	N^{\cutparameter-\xi}\
+	\max\
+	\left\{
+	K\
+	S\
+	(e^{K_{\attraction,\lambda} T} + \epsilon) ,\
+	K_{p,\lambda,n,\attraction}\
+	(S \vee 1)^{4n+2}\
+	2\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	\right\}
+	\\
+	&\leq
+	N^{\cutparameter-\xi}\
+	K_{p,\lambda,n,\attraction}\
+	(S \vee 1)^{4n+2}\
+	\max\
+	\left\{\
+	(e^{K_{\attraction,\lambda} T} + \epsilon) ,\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+	\right\}
+	\\
+	&\leq
+	N^{\cutparameter-\xi}\
+	K_{p,\lambda,n,\attraction}\
+	(S \vee 1)^{4n+2}\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+\end{align*}
+
+Resuming we get
+
+\begin{equation*}
+	\E{\auxProc_T^N}
+	\leq
+	N^{\cutparameter-\xi}\
+	K_{p,\lambda,n,\attraction}\
+	(S \vee 1)^{4n+2}\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+\end{equation*}
+
+Since this equation is valid for all $S >T$ we also have that 
+
+\begin{equation*}
+	\E{\auxProc_T^N}
+	\leq
+	N^{\cutparameter-\xi}\
+	K_{p,\lambda,n,\attraction}\
+	(T \vee 1)^{4n+2}\
+	(e^{K_{q,v,\attraction,\lambda} T} + \epsilon)^{K_{q,v}}
+\end{equation*}
