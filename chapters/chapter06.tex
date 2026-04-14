@@ -410,7 +410,7 @@ Define the set
 
 \begin{equation*}
 	\setB_t := \left\{
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq N^{-\xi}
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq 2N^{-\xi}
 	\right\}
 \end{equation*}
 
@@ -428,7 +428,7 @@ Then we have
 		}
 		\\
 		&\leq
-		N^{-\xi}
+		2N^{-\xi}
 		+
 		\norm{
 		\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \attraction(\mfamba^p - \mfcamp^{m}) 
@@ -437,7 +437,7 @@ Then we have
 		\1_{\setB_t^c}
 		\\
 		&\leq
-		N^{-\xi}
+		2N^{-\xi}
 		+
 		\left(
 			\frac{\hmactive_t}{N} \Norm{\attraction}_\infty
@@ -447,7 +447,7 @@ Then we have
 		\1_{\setB_t^c}
 		\\
 		&\leq
-		N^{-\xi}
+		2N^{-\xi}
 		+		
 		\left(
 		K_\attraction
@@ -458,7 +458,7 @@ Then we have
 		\1_{\setB_t^c}
 		\\
 		&\leq
-		N^{-\xi}
+		2N^{-\xi}
 		+
 		K_\attraction\
 		\left(
@@ -468,7 +468,7 @@ Then we have
 		\right)\
 		\1_{\setB_t^c}\quad
 		\leq
-		N^{-\xi}
+		2N^{-\xi}
 		+
 		K_\attraction\
 		\left(
@@ -504,7 +504,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 	\E{
 		\int_0^S
 		\left[
-		N^{-\xi}
+		2N^{-\xi}
 		+
 		K_\attraction\
 		\left(
