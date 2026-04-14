@@ -1,29 +1,131 @@
 Till now we treated the simplest model, where at the moment of spawning the cAMP was a lonely molecule simply roaming around of \Bm.
 This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba.
 
+\section{The definition and its mean field particles candidate}
 
 [[here quote some paper AND some youtube video connected to it]]
 
-Let us then fix the spatial dimension $d=2$ for the sake of simplicity, and consider always the same Poisson process $(\hmactive_t^p)_p$.
-Let $\NumCampRelease \in \N$ be the (deterministic) number of cAMP molecules being spawned at each birth time $\btime^{p,g}$ and let $\cdrift \in \R_+$ be the (constant deterministic) modulus of their drift velocity at each of these instants.
+Consider the same Poisson process $(\hmactive_t^p)_p$ and their correspondent $\hmactive_t$, with the respective birth times.
+Let $\NumCampRelease \in \N$ be the (deterministic) number of cAMP molecules being spawned at each birth time $\btime^{p,g}=\btime_m$ and let $\frac{\cdrift}{N} \in \R_+$ be the (constant deterministic) scale-invariant modulus of their drift velocity at each of these instants.
 Then, at each $\btime^{p,g}=\btime_m$ we would release the particles
 
 \begin{equation*}
-	\{ \camp^{p,g,1}, \ldots, \camp^{p,g,l}, \camp^{p,g,\NumCampRelease}\} = \{ \camp^{m,1}, \ldots, \camp^{m,l}, \camp^{m,\NumCampRelease}\} 
+	\{ \camp^{p,g,1}, \ldots, \camp^{p,g,l}, \ldots, \camp^{p,g,\NumCampRelease}\} = \{ \camp^{m,1}, \ldots, \camp^{m,l},\ldots, \camp^{m,\NumCampRelease}\} 
 \end{equation*}
 
 While the dynamic equation for the $N$ amoebas remains the same, at this point the dynamic for the cAMP changes.
 First, each of them will have its quasi-\Bm.
-Besides that, we can imagine this molecules to spawn at random directions
-
-
-
-
-
-
+Besides that, each $\camp^{p,g,l}=\camp^{m,l}$ should drift in a constant random direction $\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$, \ie uniformly-distributed on the $d$-dimensional sphere.
 
 \begin{center}
 	\begin{tikzpicture}
+		\coordinate (center) at (0,0);
+		
+		\draw[thin] (center) circle (2cm);
+		
+		\foreach \index in {1,...,10} {
+			\tikzmath{\gonia=36*\index+ 20*rand;}
+			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=\gonia);
+			
+			\ifnum \index < 11
+			\draw[violet,->] (center) -- (A);
+			\coordinate (B) at (canvas polar cs:radius=4cm,angle=\gonia);
+			\node at (B) {\tiny $\camp^{p,g,\index}$};
+			\else
+			\draw[violet,dashed,->] (center) -- (A);
+			\fi
+		}
+		
+		\node[anchor=north west] at (center) {$\amba^i$};
+	\end{tikzpicture}
+\end{center}
+
+Then the model is described as
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		(\hmactive^p_t)_{p=1}^N 
+		&\text{ \iid and } \sim \Pois_{\lambda t}
+		\qquad\indep\qquad
+		(\cgonia_{p,g,l})_{p,g,l=1}^{N,+\infty, \NumCampRelease}\  \text{ \iid and } \sim \Unf(\Sphere^d)
+		&
+		\\
+		 \btime^{p,g} &:= \inf \{ t : \hmactive^p_t \geq g \}
+		&
+		\\
+		\amba_t^p 
+		&= \amba_0^p 
+		+ \int_0^t \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(\amba_s^p - \camp_s^{q,g,l}) d s
+		+ \sigma^A B_t^p
+		&
+		\\
+		\camp_t^{p,g,l} 
+		&\qquad\text{does not exist} 
+		&\text{if} \quad t < \btime^{p,g}
+		\\
+		\camp_t^{p,g,l}
+		&= \amba_{\btime^{p,g}}^p + \int_{0}^t \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} d s
+		+\sigma_C \quasibm_t^{p,g,l}
+		&\text{if} \quad t \geq \btime^{p,g}
+		\\
+		&= \amba_{\btime^{p,g}}^p + (\btime^{p,g} - t)\frac{\cdrift}{N}  \cgonia_{p,g,l} d s 
+		+\sigma_C \quasibm_t^{p,g,l}
+			&
+	\end{aligned}
+	\right.
+\end{equation}\label{ch7:model:pulsing-waves}
+
+or, using the process $\hmactive_t$:
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\hmactive_t
+		&\sim \Pois_{\lambda t}
+		\qquad\indep\qquad
+		(\cgonia_{m,l})_{m,l=1}^{+\infty, \NumCampRelease}\  \text{ \iid and } \sim \Unf(\Sphere^d)
+		&
+		\\
+		\btime_m &:= \inf \{ t : \hmactive_t \geq m \}
+		&
+		\\
+		\amba_t^p 
+		&= \amba_0^p 
+		+ \int_0^t \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m,l}) d s
+		+ \sigma^A B_t^p
+		&
+		\\
+		\camp_t^{m,l} 
+		&\qquad\text{does not exist} 
+		&\text{if} \quad t < \btime_m
+		\\
+		\camp_t^{m,l}
+		&= \amba_{\btime_{m}}^p + \int_{0}^t \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} d s
+		+\sigma_C \quasibm_t^{m,l}
+		&\text{if} \quad t \geq \btime^{m}
+		\\
+		&= \amba_{\btime_{m}}^p + (\btime_m - t)\frac{\cdrift}{N}  \cgonia_{m,l} d s 
+		+\sigma_C \quasibm_t^{m,l}
+		&
+	\end{aligned}
+	\right.
+\end{equation}\label{ch7:model:pulsing-waves:alternative}
+
+We could eventually ask fro more regularity to obtain deterministically that the mesh of cAMP leaving the amoeba is equidistributed, \ie we would have that only $\cgonia_{p,g,1}$ is random, and all the other unit vectors $\cgonia_{p,g,l}$ would be simply arranged on $\Sphere^d$ in such way as to be equidistant from each others, thus by rotating $\cgonia_{p,g,1}$ of a fixed angle along a fixed axis.
+In two dimensions this would mean
+
+\begin{equation*}
+	\cgonia_{p,g,l} := \text{deterministic rotation depending on $l$} (\cgonia_{p,g,l})
+\end{equation*}
+
+as it can be seen in the subsequent figure:
+
+[[scale this figure so that it fits]]
+
+\begin{center}
+	\begin{tikzpicture}
+		
 		\coordinate (center) at (0,0);
 		
 		\draw[thin] (center) circle (2cm);
@@ -34,7 +136,7 @@ Besides that, we can imagine this molecules to spawn at random directions
 			\ifnum \index < 11
 			\draw[violet,->] (center) -- (A);
 			\coordinate (B) at (canvas polar cs:radius=4cm,angle=20*\index);
-			\node at (B) {\tiny $\camp^{p,g,\index}$};
+			\node at (B) {\tiny $C^{k,\index}$};
 			\else
 			\draw[violet,dashed,->] (center) -- (A);
 			\fi
@@ -44,17 +146,37 @@ Besides that, we can imagine this molecules to spawn at random directions
 		\draw[violet,->] (center) -- (A);
 		
 		\coordinate (B) at (canvas polar cs:radius=4cm,angle=20*13);
-		\node at (B) {\tiny $\camp^{p,g,l}$};
+		\node at (B) {\tiny $C^{k,l}$};
 		
 		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*14);
 		\draw[violet,dashed,->] (center) -- (A);
+		
 		
 		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=340);
 		\draw[violet,->] (center) -- (A);
 		
 		\coordinate (B) at (canvas polar cs:radius=4cm,angle=340);
-		\node at (B) {\tiny $\camp^{p,g,\NumCampRelease}$};
+		\node at (B) {\tiny $C^{k,L(i,n)}$};
 		
-		\node[anchor=north west] at (center) {$\amba^i$};
+		\node[anchor=north west] at (center) {$A^i$};
+		
 	\end{tikzpicture}
 \end{center}
+
+
+\subsubsection{Existence and uniqueness}
+
+Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE under the random probability $\PrbCond{\cdot}{(\cgonia_{m,l})_{m,l},\ (\btime_m)_m}$, and thus we only need to verify the local lipschitzianity and the sublinear growth (both in space for a fixed time $t$) to obtain existence and uniqueness of solutions for fixed initial conditions (recall, the conditions of \ref{ch2:cond:E-and-U-lipsch+subgrowth}).
+
+\begin{lemma}
+	[[here lipschitz constant]]
+\end{lemma}
+
+\subsubsection{Mean-field particles candidate}
+
+
+\section{Proof that the candidate is the correct candidate}
+
+\subsection{Dini derivation and law of large numbers}
+
+\subsection{Final proof}
