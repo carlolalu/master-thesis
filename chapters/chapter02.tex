@@ -8,7 +8,7 @@ Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2
 In words we can describe this design in this way:
 \begin{enumerate}
 \item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coefficient $\sigma_\amba$
-\item Each amoeba $\amba^p$ attracted to the cAMP molecules with a potential $\potential$ which has properties [[PROPERTIES MODELLED ON THE GAUSSIAN]]
+\item Each amoeba $\amba^p$ attracted to the cAMP molecules with a potential $\potential: \R^d \longrightarrow \R_+$. We require that $\nabla \potential =:\attraction$ is Lebesgue-integrable (\ie $\in \Lpspace^1$), essentialy bounded (\ie $\in \Lpspace^\infty$) and $\Cspace^\infty$. One could think of $\potential$ as a $d$-dimensional Gaussian to imagine something more concrete.
 \item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ indipendent of $p$
 \item Each cAMP molecule is born at the position of its parent and is subjected from that time on to its own Brownian motion with constant diffusion coefficient $\sigma_\camp$
 \item All the Brownian motions for each particle are indipendent from each others
@@ -76,7 +76,7 @@ Then in our case, since $\forall p,g$ a unique \Bm and birth time is identified,
 \end{equation}
 
 which is lighter on notation.
-With these independent processes we can now finally write down the model as a set of Poisson processes and stochastic differential equations:
+With these independent processes we can now finally write down the model as the set of Poisson processes and stochastic differential equations
 
 \begin{equation}
 \left\{
@@ -106,6 +106,8 @@ With these independent processes we can now finally write down the model as a se
 \end{aligned}
 \right.
 \end{equation}\label{ch2:model}
+
+with $\attraction \in \Lpspace^1 \cap \Lpspace^\infty \cap \Cspace^\infty$.
 
 \paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (\ie the system is piecewise defined in time, according to stochastic times).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
