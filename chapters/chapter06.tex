@@ -83,9 +83,9 @@ Then we need to find a bound for $\E{\auxProc_T^N} $.
 \section{Stochastic estimate with Groenwall}
 
 Bear in mind that the functions involved are not continuous but \cadlag, thus neither the classic Groenwall argument nor the one generalised for dini derivatives \cite[Theorem 1.4.1]{groenwall-with-dini-derivatives} can be applied.
-We will instead of that use the one from \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}:
+We will instead of that use the subsequent result from \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}:
 
-\begin{lemma}
+\begin{lemma}	\label{ch6:lemma-groenwall-generalized}
 	Let $T >0, c>0$. Let $u(\cdot)$ be a Borel-measurable bounded non-negative function on $[0,S]$ and let $v(\cdot)$ be a non-negative integrable function in $[0,S]$.
 	If for all $T \in [0,S]$
 		\begin{equation*}
@@ -151,7 +151,8 @@ Recall that $\drift^N$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore
 \begin{align*}
 	\leq
 	  d\
-	  \frac{2l\hmactive_t}{N}\
+	  K_\attraction\
+	  \frac{\hmactive_t}{N}\
 	  \underbrace{
 		  \1_{\diniu^+_t \auxProc_t^N >0 }\
 		   \cdot 
@@ -209,7 +210,8 @@ Therefore we can write
 	\diniu^+_t \auxProc_t^N 
 	&\leq
 	d\
-	\frac{2l\hmactive_t}{N}\
+	K_\attraction\
+	\frac{\hmactive_t}{N}\
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
@@ -219,7 +221,8 @@ Therefore we can write
 	\\
 	&\leq
 	d\
-	\frac{2l\hmactive_t}{N}\
+	K_\attraction\
+	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
 	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
@@ -232,23 +235,14 @@ Integrating over $[0,T]$ we then obtain:
 	 \\
 	 &= \int_0^T 
 	 	d\
-	 	\frac{2l\hmactive_t}{N}\
+	 	K_\attraction\
+	 	\frac{\hmactive_t}{N}\
 	 	\auxProc_t^N 
 	 	+N^{\cutparameter}\
 	 	 d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 	 	dt
 	 	\\
 	 	& \leq
-	 \int_0^T 
-	 3\cdot2\cdot l\
-	 \frac{\hmactive_T}{N}\
-	 \auxProc_t^N dt
-	 + 3N^{\cutparameter}\
-	 \int_0^T 
-	 \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
-	 dt
-	 \\
-	 &=
 	\int_0^T 
 	K_\attraction\
 	\frac{\hmactive_T}{N}\
@@ -280,7 +274,7 @@ Choose now some $S >T$ to obtain
 	}_{=:\Iu}
 \end{equation*}
 
-Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions}.
+Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply \ref{ch6:lemma-groenwall-generalized}.
 
 \begin{lemma}
 	$\PrbOf{\int_0^S 
@@ -372,7 +366,7 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 	Then $ \left\{	\Zhi_S = 0	\right\}$ is the empty set, and the thesis is proved.	
 \end{proof}
 
-With this lemma we have that the conditions of \cite[Chapter 1, Theorem 8.1]{groenwall-non-continuous-functions} are fullfilled for the inequality
+With this lemma we have that the conditions of \ref{ch6:lemma-groenwall-generalized} are fullfilled for the inequality
 
 \begin{equation*}
 	\auxProc_T^N \leq 
@@ -1071,7 +1065,7 @@ Resuming we get
 	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
 \end{equation*}
 
-Since this equation is valid for all $S >T$ we also have that 
+Since the \rhs is $\Cspace^0$ and is valid for all $S >T$ we also have that 
 
 \begin{equation*}
 	\E{\auxProc_T^N}
