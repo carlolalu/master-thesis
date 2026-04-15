@@ -18,35 +18,92 @@ First, each of them will have its quasi-\Bm.
 Besides that, at each fixed birth time $\btime_m$ the molecules $(\camp^{p,g,l})_{l=1}^\NumCampRelease = (\camp^{m,l})_{l=1}^\NumCampRelease$ should expand radially with respect to the position $\amba_{\btime_m}^p$.
 A solution to this would be that each $\camp^{p,g,l} = \camp^{m,l}$ expands in a constant random direction $\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$, \ie uniformly-distributed on the $d$-dimensional sphere, as in the figure \ref{ch7:fig:chaotic-waves}.
 
-\begin{figure}[h]\label{ch7:fig:chaotic-waves}
+\begin{figure}[h]
+	\begin{center}
+		\begin{tikzpicture}[scale=0.6]
+			\coordinate (center) at (0,0);
+			\draw[thin] (center) circle (2cm);
+			\foreach \index in {1,...,6} {
+				\tikzmath{\gonia=20*\index;}
+				\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=\gonia);
+				\draw[violet,->] (center) -- (A);
+				\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=\gonia);
+				\node at (B) {\tiny $\camp^{p,g,\index}$};
+			}
+			
+			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=-120);
+			\draw[violet,->] (center) -- (A);
+			\coordinate (B) at (canvas polar cs:radius=4.2cm,angle=-120);
+			\node at (B) {\tiny $\camp^{p,g,\NumCampRelease}$};
+			
+			\node[anchor=north west] at (center) {$\amba^i$};
+		\end{tikzpicture}
+	\end{center}
+\caption{The molecules expanding, each at a random direction, with $d=2$. Notice the not uniform wave front.}
+\label{ch7:fig:chaotic-waves}
+\end{figure}
+
+This might seem to allow also configurations which are too chaotic, with a not uniform wave front (meaning that we could have $\NumCampRelease-1$ particles all running in approximately the same direction and just $1$ in the opposite one), contrary to what happens in nature.
+The solution is to fix the relative position of the drifting velocities and require that the they are, at least approximately, uniformly arranged on the unit sphere (see Fig. \ref{ch7:fig:waves} for the case $d=2$).
+
+\begin{figure}[h]
 \begin{center}
-	\begin{tikzpicture}
+	\begin{tikzpicture}[scale=0.6]
 		\coordinate (center) at (0,0);
 		\draw[thin] (center) circle (2cm);
-		\foreach \index in {1,...,10} {
-			\tikzmath{\gonia=36*\index+ 50*rand;}
-			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=\gonia);
+		\foreach \index in {0,1,...,12} {
+			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*\index);
 			\ifnum \index < 11
 			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4.2cm,angle=\gonia);
-			\node at (B) {\tiny $\camp^{p,g,\index}$};
+			\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=20*\index);
+			\node at (B) {\tiny $\camp^{k,\index}$};
 			\else
 			\draw[violet,dashed,->] (center) -- (A);
 			\fi
 		}
-		\node[anchor=north west] at (center) {$\amba^i$};
+		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*13);
+		\draw[violet,->] (center) -- (A);
+		
+		\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=20*13);
+		\node at (B) {\tiny $\camp^{k,l}$};
+		
+		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*14);
+		\draw[violet,dashed,->] (center) -- (A);
+		
+		
+		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=340);
+		\draw[violet,->] (center) -- (A);
+		\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=340);
+		\node at (B) {\tiny $\camp^{k,\NumCampRelease}$};
+		\node[anchor=north west] at (center) {$\amba^p$};
 	\end{tikzpicture}
 \end{center}
-\caption{The molecules expanding, each at a random direction, with $d=2$.}
+	\caption{The molecules expanding with equidistant directions on the unit sphere in dimension $d=2$.}
+	\label{ch7:fig:waves}
 \end{figure}
 
-[[[COORECT FROM HERE ON: REGULARISE MODEL]]]
+The stochasticity is then given, at each birth time, by rotating randomly the whole directions all together in the same way.
+With $d=2$ the solution of arranging $\NumCampRelease$ points evenly on the circle is trivial: just leave a point on the circle every $\frac{2\pi}{\NumCampRelease}$ radiants.
+With $d=3$ there is considerable literature about distributing $\NumCampRelease$ points evenly on a sphere, depending also on the definition of "uniformly arranged" (see for example \cite{spherical-codes-and-designs}), but as we will see the particular arrangement does not influence the final solution, so fix a set of points on the sphere which are at least approximately evenly spaced, for the sake of reproducing nature (\eg take inspiration from the spherical Fibonnaci points set in \cite{spherical-fibonacci-example}).
+Let these points be
 
-This is seems though too chaotic, as it appears in the figure, because we would imagine the amoeba to have a wave front which is uniform.
-The solution is given by having $\cgonia_{p,g,1}=\cgonia^{m,1} \sim \Unf(\Sphere^d)$ be random, and then fix  
+\begin{equation*}
+	(e_1, \theta_2, \ldots, \theta_\NumCampRelease) \in \Sphere^d
+\end{equation*}
 
-$\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$
+where $e_1$ is the unit vector $(1, 0, 0)$ or $(1,0)$ depending on the dimension.
+For each $l$ fix a rotation $\rotation_l$ such that $\rotation_l(e_1) = \theta_l$ (then $\rotation_1 = \id$) and notice then that:
 
+\begin{equation*}
+	(e_1, \theta_2, \ldots, \theta_\NumCampRelease) = (\rotation_1, \rotation_2, \ldots, \rotation_\NumCampRelease)\: (e_1, e_1, \ldots, e_1)
+\end{equation*}
+
+\ie we can identify the arrangement with the rotation of the unit vector $e_1$ that are needed to find the other $\theta_l$.
+Then let $\cgonia_{p,g,1} = \cgonia_{m,1} \sim \Unf(\Sphere^d)$ and for each $l \neq 1$ let $\cgonia_{p,g,l}:= \rotation_l (\cgonia_{p,g,1})$, \ie the whole arrangement of direction at the time $\btime^{p,g} = \btime_m$ is given by
+
+\begin{equation*}
+	(\cgonia_{p,g,1}, \cgonia_{p,g,2}, \ldots, \cgonia_{p,g,\NumCampRelease}) = (\rotation_1, \rotation_2, \ldots, \rotation_\NumCampRelease)\: (\cgonia_{p,g,1}, \cgonia_{p,g,1}, \ldots, \cgonia_{p,g,1})
+\end{equation*}
 
 Then the model is described as
 
@@ -56,10 +113,12 @@ Then the model is described as
 		(\hmactive^p_t)_{p=1}^N 
 		&\text{ \iid and } \sim \Pois_{\lambda t}
 		\qquad\indep\qquad
-		(\cgonia_{p,g,l})_{p,g,l=1}^{N,+\infty, \NumCampRelease}\  \text{ \iid and } \sim \Unf(\Sphere^d)
+		(\cgonia_{p,g,1})_{p,g}^{N,+\infty} \quad \text{ \iid and } \sim \Unf(\Sphere^d)
 		&
 		\\
 		 \btime^{p,g} &:= \inf \{ t : \hmactive^p_t \geq g \}
+		 \qquad\quad\qquad
+		 (\cgonia_{p,g,l})_{p,g,l}^{N,+\infty, \NumCampRelease} := \big(\rotation_l (\cgonia_{p,g,1}) \big)_{p,g,l}^{N,+\infty, \NumCampRelease} 
 		&
 		\\
 		\amba_t^p 
@@ -84,103 +143,114 @@ Then the model is described as
 	\right.
 \end{equation}\label{ch7:model:pulsing-waves}
 
-or, using the process $\hmactive_t$:
-
-\begin{equation}
-	\left\{
-	\begin{aligned}
-		\hmactive_t
-		&\sim \Pois_{\lambda t}
-		\qquad\indep\qquad
-		(\cgonia_{m,l})_{m,l=1}^{+\infty, \NumCampRelease}\  \text{ \iid and } \sim \Unf(\Sphere^d)
-		&
-		\\
-		\btime_m &:= \inf \{ t : \hmactive_t \geq m \}
-		&
-		\\
-		\amba_t^p 
-		&= \amba_0^p 
-		+ \int_0^t \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m,l}) d s
-		+ \sigma^A B_t^p
-		&
-		\\
-		\camp_t^{m,l} 
-		&\qquad\text{does not exist} 
-		&\text{if} \quad t < \btime_m
-		\\
-		\camp_t^{m,l}
-		&= \amba_{\btime_{m}}^p + \int_{0}^t \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} d s
-		+\sigma_C \quasibm_t^{m,l}
-		&\text{if} \quad t \geq \btime^{m}
-		\\
-		&= \amba_{\btime_{m}}^p + (\btime_m - t)\frac{\cdrift}{N}  \cgonia_{m,l} d s 
-		+\sigma_C \quasibm_t^{m,l}
-		&
-	\end{aligned}
-	\right.
-\end{equation}\label{ch7:model:pulsing-waves:alternative}
-
-We could eventually ask fro more regularity to obtain deterministically that the mesh of cAMP leaving the amoeba is equidistributed, \ie we would have that only $\cgonia_{p,g,1}$ is random, and all the other unit vectors $\cgonia_{p,g,l}$ would be simply arranged on $\Sphere^d$ in such way as to be equidistant from each others, thus by rotating $\cgonia_{p,g,1}$ of a fixed angle along a fixed axis.
-In two dimensions this would mean
+As in the case of the basic model, we can eventually relabel the molecules according to 
 
 \begin{equation*}
-	\cgonia_{p,g,l} := \text{deterministic rotation depending on $l$} (\cgonia_{p,g,l})
+	\hmactive_t := \sum_{p=1}^N \hmactive_t^p,
+	\qquad
+	\btime_m := \text{arrival times of $\hmactive_t$},
+	\qquad
+	(p,g)\ \rightsquigarrow\ m
 \end{equation*}
-
-as it can be seen in the subsequent figure:
-
-[[scale this figure so that it fits]]
-
-\begin{center}
-	\begin{tikzpicture}
-		
-		\coordinate (center) at (0,0);
-		
-		\draw[thin] (center) circle (2cm);
-		
-		\foreach \index in {0,1,...,12} {
-			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*\index);
-			
-			\ifnum \index < 11
-			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4cm,angle=20*\index);
-			\node at (B) {\tiny $C^{k,\index}$};
-			\else
-			\draw[violet,dashed,->] (center) -- (A);
-			\fi
-		}
-		
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*13);
-		\draw[violet,->] (center) -- (A);
-		
-		\coordinate (B) at (canvas polar cs:radius=4cm,angle=20*13);
-		\node at (B) {\tiny $C^{k,l}$};
-		
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*14);
-		\draw[violet,dashed,->] (center) -- (A);
-		
-		
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=340);
-		\draw[violet,->] (center) -- (A);
-		
-		\coordinate (B) at (canvas polar cs:radius=4cm,angle=340);
-		\node at (B) {\tiny $C^{k,L(i,n)}$};
-		
-		\node[anchor=north west] at (center) {$A^i$};
-		
-	\end{tikzpicture}
-\end{center}
 
 
 \subsubsection{Existence and uniqueness}
 
-Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE under the random probability $\PrbCond{\cdot}{(\cgonia_{m,l})_{m,l},\ (\btime_m)_m}$, and thus we only need to verify the local lipschitzianity and the sublinear growth (both in space for a fixed time $t$) to obtain existence and uniqueness of solutions for fixed initial conditions (recall, the conditions of \ref{ch2:cond:E-and-U-lipsch+subgrowth}).
+Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE under the random probability $\PrbCond{\cdot}{(\cgonia_{m,l})_{m,l},\ (\btime_m)_m}$, and thus we only need to verify the local lipschitzianity and the sublinear growth (both in space for a fixed time $t$) of the drift to obtain existence and uniqueness of solutions for fixed initial conditions (recall, the conditions of \ref{ch2:cond:E-and-U-lipsch+subgrowth}).
+
+
+\begin{remark}
+	Now the dimension of the solution is given by:
+	\begin{equation*}
+		\NumParticles_t := N + \NumCampRelease\cdot\sum_{p=1}^N \hmactive_t^p = \overbrace{N}^{\# \text{amoebas}} + \overbrace{\NumCampRelease \hmactive_t}^{\# \text{cAMP}}
+	\end{equation*}
+	and the drift by:
+	\begin{align*}
+		&\drift_{p}^N (s,x) = \drift_{p} (s,x) = \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l})
+		\\
+		&
+		\drift_{p,g}^N (s, x) = \drift_{p,g} (s, x) = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} 
+	\end{align*}
+\end{remark}
 
 \begin{lemma}
-	[[here lipschitz constant]]
+	The function $\drift^N$ is Lipschitz in space with fixed time with Lipschitz constant of
+	\begin{equation*}
+		\frac{K_{\attraction,\NumCampRelease}}{N}
+		\hmactive_s
+	\end{equation*}
+	where $K_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
+	Furthermore $\drift^N$ grows sublinearly (in space with fixed time).
 \end{lemma}
 
+\begin{proof}
+	Let us see the Lipschitzianity first. Let $l$ be the Lipschitz constant of $\attraction$. Then:
+	
+	\begin{align*}
+		\Norm{\drift(s,x) - \drift(s,y)}_\infty 
+		&= \max \left\{
+		\max_{p\leq N}
+		\norm{\drift_p(s,x) - \drift_p(s,y)}_\infty,
+		\max_{m \leq \hmactive_s}
+		\norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} - \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty
+		\right\}
+		\\
+		&= \max_{p\leq N}\
+		\norm{\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l}) - \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(y^p - y^{q,g,l})}_\infty
+		\\
+		& \leq
+		\frac{1}{N}
+		\sum _{q = 1}^{N}
+		\sum _{l = 1}^{\NumCampRelease}
+		\sum_{g = 1}^{\hmactive_s^q}\
+		\max_{p\leq N}\
+		\norm{\attraction(x^p - x^{q,g,l}) - \attraction(y^p - y^{q,g,l})}_\infty
+		\\
+		& \leq
+		\frac{1}{N}
+		\sum _{q = 1}^{N}
+		\sum _{l = 1}^{\NumCampRelease}
+		\sum_{g = 1}^{\hmactive_s^q}\
+		\max_{p\leq N}\
+		l
+		\norm{(x^p - y^p) - ( x^{q,g,l}- y^{q,g,l})}_\infty
+		\\
+		&\leq
+		\frac{l}{N}
+		\sum _{q = 1}^{N}
+		\sum _{l = 1}^{\NumCampRelease}
+		\sum_{g = 1}^{\hmactive_s^q}\
+		\left(
+		\max_{p\leq N}\
+		\norm{(x^p - y^p)}_\infty + \norm{ ( x^{q,g,l}- y^{q,g,l})}_\infty
+		\right)
+		\\
+		&\leq
+		\frac{l}{N}
+		\sum _{q = 1}^{N}
+		\sum _{l = 1}^{\NumCampRelease}
+		\sum_{g = 1}^{\hmactive_s^q}\
+		\left(
+		\Norm{x - y}_\infty + \Norm{x - y}_\infty 
+		\right)
+		\leq
+		\frac{l\NumCampRelease2}{N}
+		\sum _{q = 1}^{N}
+		\hmactive_s^q\
+		\Norm{x - y}_\infty
+		\\
+		&=
+		\frac{K_{\attraction,\NumCampRelease}}{N}
+		\hmactive_s\
+		\Norm{x - y}_\infty
+	\end{align*}
+	
+	The sublinearity is done exactly as in the case of the basic model at \ref{ch2:lemma:lipsch-of-drift}, where a constant is added by the presence of the components $\Norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty \leq \frac{\cdrift}{N}$.
+\end{proof}
+
 \subsubsection{Mean-field particles candidate}
+
+The mean-field particles candidates are derived as in the case of the basic model:
 
 
 \section{Proof that the candidate is the correct candidate}
