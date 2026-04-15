@@ -1,9 +1,9 @@
 Till now we treated the simplest model, where at the moment of spawning the cAMP was a lonely molecule simply roaming around of \Bm.
-This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba.
+This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba: in this chapter we build a model with the purpose of describing more accurately this phenomenon.
 
-\section{The definition and its mean field particles candidate}
+\section{The definitions and its mean field particles candidate}
 
-[[here quote some paper AND some youtube video connected to it]]
+[[here quote some paper AND some youtube video connected to it. Maybe even show a picture from some paper about it]]
 
 Consider the same Poisson process $(\hmactive_t^p)_p$ and their correspondent $\hmactive_t$, with the respective birth times.
 Let $\NumCampRelease \in \N$ be the (deterministic) number of cAMP molecules being spawned at each birth time $\btime^{p,g}=\btime_m$ and let $\frac{\cdrift}{N} \in \R_+$ be the (constant deterministic) scale-invariant modulus of their drift velocity at each of these instants.
@@ -15,30 +15,38 @@ Then, at each $\btime^{p,g}=\btime_m$ we would release the particles
 
 While the dynamic equation for the $N$ amoebas remains the same, at this point the dynamic for the cAMP changes.
 First, each of them will have its quasi-\Bm.
-Besides that, each $\camp^{p,g,l}=\camp^{m,l}$ should drift in a constant random direction $\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$, \ie uniformly-distributed on the $d$-dimensional sphere.
+Besides that, at each fixed birth time $\btime_m$ the molecules $(\camp^{p,g,l})_{l=1}^\NumCampRelease = (\camp^{m,l})_{l=1}^\NumCampRelease$ should expand radially with respect to the position $\amba_{\btime_m}^p$.
+A solution to this would be that each $\camp^{p,g,l} = \camp^{m,l}$ expands in a constant random direction $\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$, \ie uniformly-distributed on the $d$-dimensional sphere, as in the figure \ref{ch7:fig:chaotic-waves}.
 
+\begin{figure}[h]\label{ch7:fig:chaotic-waves}
 \begin{center}
 	\begin{tikzpicture}
 		\coordinate (center) at (0,0);
-		
 		\draw[thin] (center) circle (2cm);
-		
 		\foreach \index in {1,...,10} {
-			\tikzmath{\gonia=36*\index+ 20*rand;}
+			\tikzmath{\gonia=36*\index+ 50*rand;}
 			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=\gonia);
-			
 			\ifnum \index < 11
 			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4cm,angle=\gonia);
+			\coordinate (B) at (canvas polar cs:radius=4.2cm,angle=\gonia);
 			\node at (B) {\tiny $\camp^{p,g,\index}$};
 			\else
 			\draw[violet,dashed,->] (center) -- (A);
 			\fi
 		}
-		
 		\node[anchor=north west] at (center) {$\amba^i$};
 	\end{tikzpicture}
 \end{center}
+\caption{The molecules expanding, each at a random direction, with $d=2$.}
+\end{figure}
+
+[[[COORECT FROM HERE ON: REGULARISE MODEL]]]
+
+This is seems though too chaotic, as it appears in the figure, because we would imagine the amoeba to have a wave front which is uniform.
+The solution is given by having $\cgonia_{p,g,1}=\cgonia^{m,1} \sim \Unf(\Sphere^d)$ be random, and then fix  
+
+$\cgonia_{p,g,l}=\cgonia^{m,l} \sim \Unf(\Sphere^d)$
+
 
 Then the model is described as
 
