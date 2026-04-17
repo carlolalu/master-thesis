@@ -68,18 +68,18 @@ Now we need a concept of \emph{distance} between measures: the \emph{$p$-Wassers
 First we need the concept of \emph{coupling} of measures.
 
 \begin{definition}
-Consider the space of Borel probability measures on $\R^\Ch$
+Consider the space of Borel probability measures on $\R^u$
 \begin{equation}
-\PrbMeas := \PrbMeas (\R^\Ch) := 
+\PrbMeas := \PrbMeas (\R^u) := 
 	\{\mu :
-		\mu \text{ is a \emph{Borel} prob. meas. on } \R^\Ch
+		\mu \text{ is a \emph{Borel} prob. meas. on } \R^u
 	\}
 \end{equation}
-and let $\mu, \nu \in \PrbMeas$. A \emph{coupling of $\mu$ and $\nu$} is a measure $\gamma \in \PrbMeas (\R^\Ch \times \R^\Ch)$ such that for all Borel-measurable and bounded functions $\phi$ we have
+and let $\mu, \nu \in \PrbMeas$. A \emph{coupling of $\mu$ and $\nu$} is a measure $\gamma \in \PrbMeas (\R^u \times \R^u)$ such that for all Borel-measurable and bounded functions $\phi$ we have
 \begin{equation}
-\int_{\R^\Ch \times \R^\Ch} \phi(x) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(x) \,d\mu(x) 
+\int_{\R^u \times \R^u} \phi(x) \,d\gamma(x,y) = \int_{\R^u} \phi(x) \,d\mu(x) 
 \quad \text{ and } \quad
-\int_{\R^\Ch \times \R^\Ch} \phi(y) \,d\gamma(x,y) = \int_{\R^\Ch} \phi(y) \,d\nu(x) 
+\int_{\R^u \times \R^u} \phi(y) \,d\gamma(x,y) = \int_{\R^u} \phi(y) \,d\nu(x) 
 \end{equation}\label{ch3:def-coupling}
 We sign as $\Gamma(\mu,\nu)$ the set of couplings of $\mu$ and $\nu$.
 \end{definition}
@@ -87,7 +87,7 @@ We sign as $\Gamma(\mu,\nu)$ the set of couplings of $\mu$ and $\nu$.
 \begin{remark}
 \begin{enumerate}
 \item The set $\Gamma(\mu,\nu)$ is never empty because the product measure $\mu \otimes \nu$ is always in it.
-\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^\Ch \times \R^\Ch \longrightarrow \R^\Ch$, we can observe that the condition \ref{ch3:def-coupling} is equivalent to require that
+\item By signing as $\pi_i(x_1, x_2):= x_i$ the projection $\pi_i: \R^u \times \R^u \longrightarrow \R^u$, we can observe that the condition \ref{ch3:def-coupling} is equivalent to require that
 \begin{equation}
 (\pi_1 )_\star \gamma = \mu
 \quad \text{ and } \quad
@@ -123,19 +123,19 @@ In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}
 This is equivalent to \ref{ch3:def-coupling}, with $\overline{\gamma}$ playing the role of the density of the coupling $\gamma$.
 With this example in mind we could ask ourselves which is the best among such transformations of $\mu$ into $\nu$.
 To do that we need to associate to each coupling $\gamma \in \Gamma(\mu,nu)$ a value, which indicates how "good" a plan $\gamma$ might be.
-If we have a notion of distance $dist$ on our space $\R^\Ch$, then a plan can be evaluated with how much net distance we cover to transport all the earth around, \ie with the expression
+If we have a notion of distance $dist$ on our space $\R^u$, then a plan can be evaluated with how much net distance we cover to transport all the earth around, \ie with the expression
 
 \begin{equation}
 \int dist(x,y) \,d\gamma(x,y)
 \end{equation}
 
 In this way we can say that two measures $\mu,\nu$ are near to each others if we can find a coupling $\gamma \in \Gamma(\mu,\nu)$ such that its evaluation is very low.
-With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^\Ch$ (meaning $\frac{|\cdot|_1}{\Ch}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
+With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^u$ (meaning $\frac{|\cdot|_1}{u}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
 
 \begin{definition}
-Consider the space of Borel probability measures with finite $1$-moments on $\R^\Ch$
+Consider the space of Borel probability measures with finite $1$-moments on $\R^u$
 \begin{equation}
-\PrbMeas_1 := \PrbMeas_1(\R^\Ch) := 
+\PrbMeas_1 := \PrbMeas_1(\R^u) := 
 	\{\mu \in \PrbMeas :
 		\int |x| d \mu (x) < \infty
 	\} \subseteq \PrbMeas
@@ -143,7 +143,7 @@ Consider the space of Borel probability measures with finite $1$-moments on $\R^
 Then the $1$-Wasserstein distance between two measures $\mu,\nu \in \PrbMeas_p$ is defined as
 \begin{equation}
 W_1(\mu,\nu):= \inf_{\gamma \in \Gamma(\mu,\nu)}
-	\int_{\R^\Ch \times \R^\Ch} \frac{1}{\Ch}\sum_{i=1}^{\Ch} |x_i-y_i| d\gamma(x,y)
+	\int_{\R^u \times \R^u} \frac{1}{u}\sum_{i=1}^{u} |x_i-y_i| d\gamma(x,y)
 \end{equation}
 \end{definition}
 
