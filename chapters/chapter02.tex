@@ -1,4 +1,4 @@
-This chapter will define a toy model of reality and prove that it has a solution.
+This chapter will define a microscopic model of reality and prove that it has a solution.
 A key difference with the real situation will be that the amoeba will release a single cAMP with no initial velocity for each spawning moment.
 The second important difference is that the release of cAMP will be regulated by a Poisson process, thus ignoring the fact that in reality the amoebas should respond to each trace of cAMP with the release of a chemical cry of more chemotaxin.
 Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2,3\}$, thus not the phase space.
@@ -8,6 +8,7 @@ Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2
 In words we can describe this design in this way:
 \begin{enumerate}
 \item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coefficient $\sigma_\amba$
+\item Each amoeba at time $t=0$ is in the same random position $\adens_0 \in \Lpspace^1$.
 \item Each amoeba $\amba^p$ attracted to the cAMP molecules with a potential $\potential: \R^d \longrightarrow \R_+$. We require that $\nabla \potential =:\attraction$ is Lebesgue-integrable (\ie $\in \Lpspace^1$), essentialy bounded (\ie $\in \Lpspace^\infty$), $\Cspace^\infty$ and globally Lipschitz. One could think of $\potential$ as a $d$-dimensional Gaussian to imagine something more concrete.
 \item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ indipendent of $p$
 \item Each cAMP molecule is born at the position of its parent and is subjected from that time on to its own Brownian motion with constant diffusion coefficient $\sigma_\camp$
@@ -90,7 +91,7 @@ With these independent processes we can now finally write down the model as the 
 &
 \\
 \amba_t^p 
-&= \amba_0^p 
+&= \adens_0
 + \int_0^t \frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(\amba_s^p - \camp_s^{q,g}) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}
@@ -177,7 +178,7 @@ Then we can reformulate the model \ref{ch2:model} as:
 &
 \\
 \amba_t^p 
-&= \amba_0^p 
+&= \adens_0 
 + \int_0^t \frac{1}{N} \sum _{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^m) d s
 + 
 \overbrace{\sigma^A B_t^p}^{\int_0^t \sigma_A d B_s^p}

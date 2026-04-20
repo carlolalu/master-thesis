@@ -11,3 +11,5 @@
 - drawings drawings, drawings. Geogebra?
 
 - hint at solution of PIDE and explain what you must require to have a solution for the mean field particles
+
+- write both in the basic model and in the other one, that you start in a density po_0 equal for everybody
