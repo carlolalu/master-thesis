@@ -23,7 +23,14 @@ A macroscopic description of this model for the amoebas' part is a density $\ade
 \end{equation*}
 
 This description is macroscopic, because we loose the information about each individual, but we still describe the movement of the individuals as a whole.
-In this chapter we first craft a candidate for such a density and an associated system of SDEs, and then we explain exactly in which sense do we require convergence of the measures above, and how to prove it.
+In this chapter we explain such condition and how to prove it in a more handy way.
+Furthermore, we craft a candidate for $\adens(t,\cdot)$.
+Finally we hint at the idea of finding a similar macroscopic description for the cAMP part, namely a density $\cdens(t,\cdot)$ such that
+
+\begin{equation*}
+	\empmeas_t^{(\camp),N} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
+\end{equation*}
+
 
 \section{Convergence of empirical measures}
 
@@ -224,40 +231,90 @@ Then we need a bridge from the PDE-world to the SDE-world: the Fokker-Planck equ
 Given an SDE
 
 \begin{equation}\label{ch3:SDE-for-Fokker-Planck}
-	\mfamba_t = \adens_0 + \int_0^t \drift(t, \mfamba_t) \,dt + \int_0^t \diffusion(t, X_t) \,d B_t
+	\mfamba_t = \adens_0 + \int_0^t \mfdrift(t, \mfamba_t) \,dt + \int_0^t \mfdiffusion(t, X_t) \,d B_t
 \end{equation}
 
-if this has a solution $X_t$, then its density $\adens(t, \cdot)$ satifies the PDE
+if this has a solution $\mfamba_t$, then its density $\adens(t, \cdot)$ satifies the PDE
 
 \begin{equation*}\label{ch3:fokker-planck-PDE}
 	\left\{
 		\begin{aligned}
 			\partial_t \adens(t,x) 
-			&=  - \sum_{i=1}^{d} \partial_{x_i}[ \drift^i(t,x) \adens(t,x)] 
+			&=  - \sum_{i=1}^{d} \partial_{x_i}[ \mfdrift^i(t,x) \adens(t,x)] 
 			+ \sum_{i=1}^{d} \sum_{j=1}^{d} \frac{\partial^2}{\partial_{x_i}\partial_{x_j}} [D_{ij}(t,x) \adens(t,x)]
 			\\
 			\adens(0,x) &= \adens_0
 			\\
 			D_{ij}
-			&:= \frac{1}{2} \sum_{k} \sigma^{ik}\sigma^{jk} = \frac{1}{2} (\sigma \sigma^T)_{ij}
+			&:= \frac{1}{2} \sum_{k} \mfdiffusion^{ik}\mfdiffusion^{jk} = \frac{1}{2} (\mfdiffusion \mfdiffusion^T)_{ij}
 		\end{aligned}
 	\right.
 \end{equation*}
 
 The viceversa is also true: if we encounter a PDE of the form \ref{ch3:fokker-planck-PDE} with solution $\adens_t$, then we can observe the system \ref{ch3:SDE-for-Fokker-Planck} knowing that its solution has $\adens_t$ as density. 
-
-The idea is to exploit this to build somehow a system of $N$ \iid particles 
+The idea is, in simple words, to exploit this to build somehow a system of $N$ \iid particles 
 
 \begin{equation}
 	\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N
 \end{equation}
 
-which for every $t$ are always particularly close (in space) to the solutions $\amba_t^{(N)}=(\amba_t^p)_{p=1}^N$ of the system \ref{ch2:model} (the exact condition is exposed in the next statement).
-In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly 
-$
-	\bigotimes_{p=1}^{N}\adens_t
-$
-and we then just need to show that this "closeness" in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein}.
+which for every $t$ are with a high probability particularly close (in space) to the solutions $\amba_t^{(N)}=(\amba_t^p)_{p=1}^N$ of the system \ref{ch2:model}.
+In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly $\bigotimes_{p=1}^{N}\adens_t$ and we then just need to show that this closeness in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein}.
+The precise statement will be explained in \ref{label}, after defining such particles.
+
+[[complete the reference here above]]
+
+More intuitively, if we have such particles $\mfamba_t^{(N)}$ remaining close enough to the original ones $\amba_t^{(N)}$, we should expect their respective empirical densities 
+
+\begin{equation*}
+	\empmeas_t^{(\mfamba),N} = \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p},\qquad 
+	\empmeas_t^{(\amba),N} := \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
+\end{equation*}
+
+to be close, and thus tend to the same limit in $N$, which we would expect to be the same one given by the Fokker-Planck equation.
+The same concept will be roughly applied also to the cAMP, meaning that, under the conditional probability measure $\PrbCondTimes{\cdot}{}$, we will search also for $\hmactive_t$ independent particles $\mfcamp_t^{(N)}$ remaining close to the original $\camp_t^{(N)}$.
+This not only because it is conceptually more useful to  think in two entire systems of both amoebas and cAMP being close to each others, but also because we hope that it is possible to show, in further work, that this implies also the convergence of measures for the cAMP part, \ie that there is a density $\cdens_t$ easily derivable (with Fokker-Planck and other tools) from $\mfcamp_t^{(N)}$ such that 
+
+\begin{equation*}
+	\empmeas_t^{(\camp),N}, \empmeas_t^{(\mfcamp),N} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
+\end{equation*}
+
+where $\empmeas_t^{(\mfcamp),N}$ is the empirical measure of $\mfcamp_t^{(N)}$.
+Then, practically, we are trying to craft a system of $N+\hmactive_t$ particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ with these characteristics:
+
+\begin{enumerate}
+	\item The particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ should be coupled with their counterparts $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$ (\ie they should have the same \Bm in their stochastic evolution), in order to control more easily the distance between the two.
+	Indeed in such case the distance process $\sol_t^N -\mfsol_t^N$ is a finite variation process and can be thus more easily treated, depending only on the two drifts, and not on the diffusions.
+	\item The single particles $\mfamba_t^1, \ldots, \mfamba_t^N$ must be \iid so that on each one of them can be described by the same SDE and thus we can use Fokker-Planck separately to have $N$ identical densities $\adens_t^p = \adens_t$.
+	This is necessary to be sure that the empirical measure $\empmeas_t^{(\mfamba),N} = \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p}$ tends to the $\adens_t$ in the sense that will be described in the next section.
+	\item Under the conditional probability $\PrbCondTimes{\cdot}{}$ the particles $\mfcamp_t^1, \ldots, \mfcamp_t^{\hmactive_t}$ should be at least independent.
+	It would be desirable to have them \iid to easily apply Fokker-Planck also in this case, but this is not possible.
+	In fact we need the distance process $\sol_t^N - \mfsol_t^N$ to be well defined and this can happen only if the two process $\mfsol_t^N$ and $\sol_t^N$ have the same dimension at each time $t$ (meaning that in both system we spawn one particle at each random time $\btime_m$, which implies that the \Bms of the spawned particles are starting at different times and thus cannot be identically distributed).
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Formally we have this statement
 
 \begin{lemma}
@@ -292,13 +349,63 @@ Formally we have this statement
 		\xrightarrow {N \rightarrow \infty} 0
 	\end{equation*}
 	
+	Here the proof will be shown for $\Psi_t^{N}$, the case is analogous for $\Psi_t^{N, (k)}$.
+	
+	\begin{align*}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) &=
+		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\int_{\R^{dN}\times \R^{dN}} \frac{1}{dN}\
+		\sum_{i=1}^d\
+		\sum_{p=1}^N\
+		\norm{x^{p;i} - y^{p;i}}\
+		d\gamma(x,y)
+		\\
+		&\leq
+		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\int_{\R^{dN}\times \R^{dN}}
+		\norm{x-y}_\infty\
+		d\gamma(x,y)
+		\leq
+	\end{align*}
+	
+	Since $\mfamba_t^{(N)} = (\mfamba_t^p)_{p=1}^N$ are \iid each with law $\adens_t$, we can take the specific coupling 
+	
+	\begin{equation*}
+		\overline{\gamma} := \Psi_t^{N} \otimes (\bigotimes_{p=1}^{N}\adens_t) = \law(\amba_t^{(N)}) \otimes \law(\mfamba_t^{(N)})
+	\end{equation*}
+	
+	and obtain
+	
+	\begin{align*}
+				&\leq
+		\int_{\R^{dN}\times \R^{dN}}
+		\norm{x-y}_\infty\
+		d \law(\amba_t^{(N)}) (x)\
+		d \law(\mfamba_t^{(N)}) (y)
+		\\
+		&=
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+		}
+	\end{align*}
+	
+	Then, if we define the set
+	
+	\begin{equation*}
+		\Xi_t := \left\{
+		\norm{
+			\amba_t^{(N)} - \mfamba_t^{(N)}
+		}_\infty \geq N^{-\cutparameter}
+		\right\}
+	\end{equation*}
+	
+	we can split the 	
 	[[continue from here on, the proof is quite straightforward]]
 \end{proof}
-
-[[explain that the cAMP were put here because it is useful to include them for two reasons: 1. it could be possible to prove such result also for cAMP in another time 2. it is useful to think about that for the expanded model for the same reason]]
-
-
-
 
 
 
@@ -345,25 +452,30 @@ Formally we have this statement
 
 With this in mind we can imagine to search for a system of $N$ particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ of which we easily know how to describe the law of by Fokker-Planck, but that remain close enough to the original system \ref{ch2:model}, up to imposing the same initial condition $\adens_0$.
 Then we can set our candidate for the role of effective equation as the solution $\adens_t$ to its Fokker-Planck equation.
-In fact intuitively, if we have such particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ , since they remain always close enough to the original ones $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$, we should expect their respective empirical densities 
 
-\begin{equation*}
-	\empmeas_t^{(\mfamba),N} = \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p},\qquad 
-	\empmeas_t^{(\amba),N} := \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
-\end{equation*}
 
-to be close, and thus tend to the same limit in $N$, which we would expect to be the same one given by the Fokker Planck equation.
-More practically we want that;
-\begin{enumerate}
-	\item The particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ should be coupled with their counterparts $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$ (\ie they should have the same \Bm in their stochastic evolution), in order to control more easily the distance between the two.
-	Indeed in such case the distance process $\sol_t^N -\mfsol_t^N$ is a finite variation process and can be thus more easily treated, depending only on the two drifts, and not on the diffusions.
-	\item The single particles $\mfamba_t^1, \ldots, \mfamba_t^N$ must be \iid so that on each one of them can be described by the same SDE and thus we can use Fokker-Planck separately to have $N$ identical densities $\adens_t^p = \adens_t$.
-	This is necessary to be sure that the empirical measure $\empmeas_t^{(\mfamba),N} = \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p}$ tends to the $\adens_t$ in the sense that will be described in the next section.
-	\item Under the conditional probability $\PrbCondTimes{\cdot}{}$ the particles $\mfcamp_t^1, \ldots, \mfcamp_t^{\hmactive_t}$ should be at least indipendent.
-	It would be desirable to have them \iid to easily apply Fokker-Planck also in this case, but this is not possible, because we need the distance process $\sol_t^N - \mfsol_t^N$ to be well defined and this can happen only if the two process $\mfsol_t^N$ and $\sol_t^N$ have the same dimension at each time $t$.
-	Besides, they must also be coupled with their respective counterparts $(\camp_t^m)_m$, which depends on quasi-\Bms starting at random times.
-	For this reason $\mfcamp_t^1, \ldots, \mfcamp_t^{\hmactive_t}$ must be created at same random times as their counterparts, but must be at least independent.
-\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 For now these were parameters on the movement of such particles, but we still have not pointed out at the main ingredient of our recipe: the idea is that the macroscopic behaviour is dictated by the \emph{average} dynamic of the system, more precisely, by the \emph{mean} field felt by each amoeba $\amba_t^p$ (and analogously for the cAMP $\camp_t^m$):
 
