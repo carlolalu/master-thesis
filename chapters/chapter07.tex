@@ -34,12 +34,12 @@ A solution to this would be that each $\camp^{p,g,l} = \camp^{m,l}$ expands in a
 			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=-120);
 			\draw[violet,->] (center) -- (A);
 			\coordinate (B) at (canvas polar cs:radius=4.2cm,angle=-120);
-			\node at (B) {\tiny $\camp^{p,g,\NumCampRelease}$};
+			\node at (B) {\tiny $\camp^{p,g,7}$};
 			
 			\node[anchor=north west] at (center) {$\amba^i$};
 		\end{tikzpicture}
 	\end{center}
-\caption{The molecules expanding, each at a random direction, with $d=2$. Notice the not uniform wave front.}
+\caption{The molecules expanding, each at a random direction, with $d=2, \NumCampRelease=7$ ($7$ children). Notice the not uniform wave front.}
 \label{ch7:fig:chaotic-waves}
 \end{figure}
 
@@ -51,34 +51,17 @@ The solution is to fix the relative position of the drifting velocities and requ
 	\begin{tikzpicture}[scale=0.6]
 		\coordinate (center) at (0,0);
 		\draw[thin] (center) circle (2cm);
-		\foreach \index in {0,1,...,12} {
-			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*\index);
-			\ifnum \index < 11
+		\foreach \index in {1,...,12} {
+			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=30*\index);
 			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=20*\index);
+			\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=30*\index);
 			\node at (B) {\tiny $\camp^{k,\index}$};
-			\else
-			\draw[violet,dashed,->] (center) -- (A);
-			\fi
-		}
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*13);
-		\draw[violet,->] (center) -- (A);
+		}		
 		
-		\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=20*13);
-		\node at (B) {\tiny $\camp^{k,l}$};
-		
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=20*14);
-		\draw[violet,dashed,->] (center) -- (A);
-		
-		
-		\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=340);
-		\draw[violet,->] (center) -- (A);
-		\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=340);
-		\node at (B) {\tiny $\camp^{k,\NumCampRelease}$};
 		\node[anchor=north west] at (center) {$\amba^p$};
 	\end{tikzpicture}
 \end{center}
-	\caption{The molecules expanding with equidistant directions on the unit sphere in dimension $d=2$.}
+	\caption{The molecules expanding with equidistant directions on the unit sphere in dimension $d=2, \NumCampRelease=10$.}
 	\label{ch7:fig:waves}
 \end{figure}
 
@@ -136,7 +119,7 @@ Then the model is described as
 		+\sigma_C \quasibm_t^{p,g,l}
 		&\text{if} \quad t \geq \btime^{p,g}
 		\\
-		&= \amba_{\btime^{p,g}}^p + (\btime^{p,g} - t)\frac{\cdrift}{N}  \cgonia_{p,g,l} d s 
+		&= \amba_{\btime^{p,g}}^p + (\btime^{p,g} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) d s 
 		+\sigma_C \quasibm_t^{p,g,l}
 			&
 	\end{aligned}
@@ -153,10 +136,7 @@ As in the case of the basic model, we can eventually relabel the molecules accor
 	(p,g)\ \rightsquigarrow\ m
 \end{equation*}
 
-
-\subsubsection{Existence and uniqueness}
-
-Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE under the random probability $\PrbCond{\cdot}{(\cgonia_{m,l})_{m,l},\ (\btime_m)_m}$, and thus we only need to verify the local lipschitzianity and the sublinear growth (both in space for a fixed time $t$) of the drift to obtain existence and uniqueness of solutions for fixed initial conditions (recall, the conditions of \ref{ch2:cond:E-and-U-lipsch+subgrowth}).
+Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE under the random probability $\PrbCond{\cdot}{(\cgonia_{m,l})_{m,l},\ (\btime_m)_m}$, and thus to obtain the existence and uniqueness of solutions for fixed initial conditions (recall, the conditions of \ref{ch2:cond:E-and-U-lipsch+subgrowth}), we only need to verify the local lipschitzianity and the sublinear growth (both in space for a fixed time $t$) of the drift.
 
 
 \begin{remark}
@@ -166,10 +146,10 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	\end{equation*}
 	and the drift by:
 	\begin{align*}
-		&\drift_{p}^N (s,x) = \drift_{p} (s,x) = \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l})
+		&\drift_{p}^N (s,x) = \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l})
 		\\
 		&
-		\drift_{p,g}^N (s, x) = \drift_{p,g} (s, x) = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} 
+		\drift_{p,g,l}^N (s, x) = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) 
 	\end{align*}
 \end{remark}
 
@@ -184,7 +164,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 \end{lemma}
 
 \begin{proof}
-	Let us see the Lipschitzianity first. Let $l$ be the Lipschitz constant of $\attraction$. Then:
+	Let us see the Lipschitzianity first. Use the relabelling notation for the cAMP part with $(p,g) = m$. Let $l$ be the Lipschitz constant of $\attraction$. Then:
 	
 	\begin{align*}
 		\Norm{\drift(s,x) - \drift(s,y)}_\infty 
@@ -192,7 +172,9 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\max_{p\leq N}
 		\norm{\drift_p(s,x) - \drift_p(s,y)}_\infty,
 		\max_{m \leq \hmactive_s}
-		\norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} - \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty
+		\overbrace{
+			\norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} - \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty
+		}^{=0}
 		\right\}
 		\\
 		&= \max_{p\leq N}\
@@ -248,9 +230,246 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	The sublinearity is done exactly as in the case of the basic model at \ref{ch2:lemma:lipsch-of-drift}, where a constant is added by the presence of the components $\Norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty \leq \frac{\cdrift}{N}$.
 \end{proof}
 
-\subsubsection{Mean-field particles candidate}
+\subsection{Mean-field particles candidate}
 
-The mean-field particles candidates are derived as in the case of the basic model:
+The mean-field particles candidates are derived similarly to the case of the basic model.
+Let us start with the amoebas' part:
+
+\begin{align*}
+	\mfdrift_p^N(t, x) 
+	:&= \ECond{\drift_p^N(t, \mfsol_t)}{ \mfsol_t^p} (x)\
+	= \ECond{\; 
+		\ECondTimes{
+			\drift_p^N(t, \mfsol_t)		
+		}{\mfamba_t^p=x, }
+		\;}{\mfamba_t^p=x}
+	\\
+	&= \ECond{\; 
+		\ECondTimes{
+			\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l})
+		}{\mfamba_t^p=x, }
+		\;}{\mfamba_t^p=x}
+	\\
+	&=
+	\frac{1}{N}
+	\sum _{q = 1}^{N} 	
+	 \E{\; 
+	 	 \sum _{l = 1}^{\NumCampRelease} 
+		\sum_{g = 1}^{\hmactive_t^p} 
+		\ECondTimes{
+			\attraction(x - \mfcamp_t^{q,g,l}) 
+		}{}
+		\;}
+	\\
+	&= 
+	\frac{1}{N}
+	\sum _{q = 1}^{N} 
+	\E{\; 
+		 \sum _{l = 1}^{\NumCampRelease} 
+		\sum_{g = 1}^{\hmactive_t^q} 
+		\left( \attraction \star \cdens_t^{\btime^{q,g},l} \right) (x)
+		\;}
+	=
+\end{align*}
+
+where $\cdens_t^{\btime^{q,g},l}$ is the density of the mean-field cAMP particle $\mfcamp_t^{q,g,l}$ released at the birth time $\btime^{q,g}$.
+Now recall that $\hmactive^q \sim \hmactive^1$ and thus also $\btime^{q,g} \sim \btime^{1,g}$, therefore
+
+\begin{align*}
+	&= \frac{1}{N}\
+	\sum _{q = 1}^{N} 
+	\E{\; 
+		 \sum _{l = 1}^{\NumCampRelease}
+		\sum_{g = 1}^{\hmactive_t^1} 
+		\left( \attraction \star \cdens_t^{\btime^{1,g},l} \right) (x)
+		\;}
+	\:=\: 
+	\sum _{l = 1}^{\NumCampRelease}\
+	\E{\; 
+		\sum_{g = 1}^{\hmactive_t^1} 
+		\left( \attraction \star \cdens_t^{\btime^{1,g},l} \right) (x)
+		\;}
+	\\
+	&= \sum _{l = 1}^{\NumCampRelease}\
+	\E{\; 
+		\sum_{g = 1}^{\infty} 
+		\underbrace{
+			\overbrace{
+				\1_{g \leq \hmactive_t^1}
+			}^{
+				\1_{\btime^{1,g} \leq t}
+			}
+			\left( \attraction \star \cdens_t^{\btime^{1,g},l} \right) (x)
+		}_{\text{(coordinatewise)}\geq 0}
+		\;}\
+		= 
+	\sum _{l = 1}^{\NumCampRelease}\
+	\sum_{g = 1}^{\infty}
+	\E{\; \1_{\btime^{1,g} \leq t}
+		\left( \attraction \star \cdens_t^{\btime^{1,g},l} \right) (x)
+		\;} 
+		\\
+&= \sum _{l = 1}^{\NumCampRelease}\
+\sum_{g = 1}^{\infty}
+	\int
+	\1_{\tau \leq t}
+	\left( \attraction \star \cdens_t^{\tau,l} \right) (x)
+	d \underbrace{\Prb ( \btime^{1,g} = \tau )}_{\Gma_{\lambda, g}}
+	\\
+	&= 
+	 \sum _{l = 1}^{\NumCampRelease}\
+	\sum_{g = 1}^{\infty}
+	\int_0^t
+	\left( \attraction \star \cdens_t^{\tau,l} \right) (x)
+	\frac{\lambda^g}{(g-1)!} x^{g-1} \; e^{ - \lambda x}
+	d \tau
+	\\
+	&= 
+	\sum _{l = 1}^{\NumCampRelease}\
+	\int_0^t
+	\left( \attraction \star \cdens_t^\tau \right) (x)
+	\lambda
+	\underbrace{
+		\sum_{g = 1}^{\infty} \frac{(\lambda x)^{g-1}}{(g-1)!}
+	}_{e^{\lambda x}}
+	e^{ - \lambda x}
+	d \tau
+	\\
+	&= 
+	\sum _{l = 1}^{\NumCampRelease}\
+	\lambda \int_0^t
+	\left( \attraction \star \cdens_t^{\tau,l} \right) (x)
+	d \tau
+	=
+	\left( 
+	\attraction \star \int_0^t \sum _{l = 1}^{\NumCampRelease}\
+	\lambda \cdens_t^{\tau,l} d \tau
+	\right) (x) 
+	\quad
+	= \mfdrift_p^N (t, x) 
+	\equiv
+	\mfdrift_p (t, x)
+\end{align*}
+
+For the cAMP's part we can obtain quickly a result with these two observations:
+\begin{itemize}
+	\item Since $\cgonia_{p,g,1}$ is uniformly distributed on the sphere $\Sphere^d$, which has a central symmetry around its center $0\ni\R^d$ (\ie the sphere is invariant under the map $x \longmapsto -x$), we have that $\E{\cgonia_{p,g,1}}= (\text{center of mass of $\Sphere^d$}) =0$.
+	\item Since $\cgonia_{p,g,1}$ is uniformly distributed it is easy to prove that since every rotation $\rotation_l$ is deterministic we have that
+	\begin{equation*}
+		\E{\cgonia_{p,g,l}} = \E{\rotation_l(\cgonia_{p,g,1})} = \rotation_l \left(\E{\cgonia_{p,g,1}} \right) = \rotation_l (0) = 0
+	\end{equation*}
+\end{itemize}
+
+Recall that the random direction/angle $\cgonia_{p,g,1}$ and the birth time $\btime^{p,g}$ are independent by hypothesis.
+Then we have that
+
+\begin{align*}
+	\mfdrift_{p,g,l}^N (t, x)  
+	&=
+	\E{\drift_{p,g,l}^N (t, x) }
+	= 
+	\E{
+		\1_{\geq \btime^{p,g}}(t)  \frac{\cdrift}{N}  \cgonia_{p,g,l}
+	} 
+	\\
+	&= 
+	\E{
+		\1_{\geq \btime^{p,g}}(t)  \frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) 
+	}
+	=
+	\frac{\cdrift}{N}  
+	\E{
+			\1_{\geq \btime^{p,g}}(t) 
+	}\
+	\overbrace{
+		\E{ \rotation_l (\cgonia_{p,g,1}) }
+	}^{=0} = 0 \equiv: \mfdrift_{p,g} (t, x)  
+\end{align*}
+
+Then the particles $\left(
+\camp_t^{p,g,l}
+\right)_{l =1}^\NumCampRelease$
+are \iid, and therefore we can observe that $\cdens^{\btime^{p,g},l} \equiv: \cdens^{\btime^{p,g}}$ are independent from $l$.
+Then we can further simplify the expression of the mean-field for the amoeba's part:
+
+\begin{equation*}
+	\mfdrift_p (t, x) = 
+	\NumCampRelease\
+	\lambda \int_0^t
+	\left( \attraction \star \cdens_t^{\tau} \right) (x)
+	d \tau
+	=
+	\left( 
+	\attraction \star \int_0^t \NumCampRelease
+	\lambda \cdens_t^{\tau} d \tau
+	\right) (x) 
+	\quad
+\end{equation*}
+
+Then we have that the mean-field of the pulsing wave model is exactly the mean-drift of the basic model (see \ref{ch3:MF-particles}) but scaled by a factor $\NumCampRelease$.
+This is true not only for the amoebas' part, but also for the cAMP part, because $\NumCampRelease\cdot 0 = 0$ (with the difference in dimension between the two models, because with the pulsing wave one we have $\NumCampRelease$ times more cAMP molecules).
+Then we can write exactly the same models that we set for the basic model at \ref{ch3:EFFECTIVE-EQS}, \ref{ch3:MF-particles} and \ref{ch3:integro-differential-system}, but scaled of a factor $\NumCampRelease$ and with one more index $l$ for the cAMP part:
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\mfamba_t^0 &\sim \adens_0
+		\\
+		\mfamba_t^p &= \int_0^t \left( 
+		\attraction \star \int_0^s \NumCampRelease\lambda \cdens_s^\tau 	d \tau
+		\right) (\mfamba_s^p) ds + \sigma_A B_t^p
+		\\
+		\mfcamp_t^{p,g,l} &= \mfamba_{\btime^{p,g}}^p + \sigma_\camp \quasibm_t^{p,g} &&\text{ from time }\btime^{p,g}
+	\end{aligned}
+	\right.
+\end{equation}
+
+and the respective effective equations are given by
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\adens(0, \cdot) &= \adens_0
+		\\
+		\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+		\star \int_0^t \NumCampRelease\lambda \cdens_t^\tau 	d \tau
+		\right)
+		\adens
+		\right]
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
+		\\
+		\cdens^\tau(t, \cdot) 
+		& \equiv 0
+		&&\text{if } t < \tau
+		\\
+		\cdens^\tau(\tau, \cdot) 
+		&= \adens(\tau, \cdot)
+		&&
+		\\
+		\partial_t \cdens^\tau
+		&= \frac{d\sigma_\camp^2}{2} \bigtriangleup \cdens^\tau
+		&&\text{if } t \geq \tau
+	\end{aligned}
+	\right.
+\end{equation}
+
+or, expressing the density of cAMP molecules analytically (exactly as in \ref{ch3:eq:eff-eq-camp-analytical-sol}) we have
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\adens(0, \cdot) &= \adens_0
+		\\
+		\partial_t \adens &=  \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
+		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(t, \cdot) 
+		d \tau
+		\right)
+		\adens
+		\right]
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+	\end{aligned}
+	\right.
+\end{equation}
 
 
 \section{Proof that the candidate is the correct candidate}
