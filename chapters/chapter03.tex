@@ -1,5 +1,7 @@
 \label{ch3}
 
+In this chapter we follow a similar path to the one traced by \cite{ana}.
+
 \section{Introduction}
 
 In the previous chapter we have defined a microscopic system, \ie a system where we track the movement of each individual.
@@ -163,10 +165,10 @@ The reason why we cover this concept is this result (from \autocite[Corollary 6.
 	If $(X,d)$ is a Polish space, and $\overline{d}$ is a bounded distance inducing the same topology on $X$ as $d$, then the convergence of measures in the $1$-Wasserstein sense for $\overline{d}$ is equivalent to the usual weak convergence of probability measures in $\BorelPrbMeas_1(\R^u)$.
 \end{theorem}
 
-Then, by requiring that $\adens_t$ is Borel-measurable, we have the subsequent statement:
+Then we have the subsequent statement:
 
 \begin{lemma}\label{ch3:lemma-sznitman-wasserstein}
-	Let $\empmeas_t^{(\amba),N},\Psi_t^{N, (k)},\Psi_t^{N}$ be as in \ref{ch3:proposition:sznitman} and let $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$.
+	Let $\empmeas_t^{(\amba),N},\adens_t, \Psi_t^{N, (k)},\Psi_t^{N}$ be as in \ref{ch3:proposition:sznitman} and let $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$.
 	Then the condition
 	\begin{equation}\label{ch3:w-1-convergence-condition}
 		\sup_{0\leq t\leq T}
@@ -184,7 +186,7 @@ Then, by requiring that $\adens_t$ is Borel-measurable, we have the subsequent s
 \end{lemma}
 
 \begin{remark}
-	Notice that the condition that $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$ is not particularly strict, it translates to require that the amoebas do not have the possibility to have an infinite velocity.
+	Notice that the condition that $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$ is not particularly strict, it translates to requiring that the amoebas do not have the possibility to have an infinite velocity.
 \end{remark}
 
 \begin{proof}
@@ -198,28 +200,6 @@ Then, by requiring that $\adens_t$ is Borel-measurable, we have the subsequent s
 	By the proposition \ref{ch3:proposition:sznitman}, this implies that the \rv $\empmeas_t^{(\amba),N}$ converges in law to $\adens_t$.
 \end{proof}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \subsection{Effective equations and mean-field particles}
 
 We want to find a good candidate $\adens_t := a(t, \cdot)$, but we have no analytical description of the solution of \ref{ch2:model}, we have only its evolution in time.
@@ -230,9 +210,17 @@ Effective equations are description of the evolution of the macroscopic descript
 \end{equation*}
 
 satisfied by $\adens_t$, the macroscopic description of our system.
-More precisely, we expect this to happen up to the imposition of the same initial conditions, namely when we also impose that $\adens(0, \cdot) = \adens_0$, where $\adens_0 \in \Lpspace^1(\R^d) \cup \Lpspace^\infty(\R^d)$ is the density of $\amba_0^p$ imposed in the model \ref{ch2:model}.
-This might work, but we do not know yet how to find a candidate, and even if we had one, it would still be cumbersome to work with it: we have a discrete object on one side (the empirical measure), and a continuous one on the other.
-Then we need a bridge from the PDE-world to the SDE-world: the Fokker-Planck equation.
+More precisely, we expect this to happen up to the imposition of the same initial conditions, namely when we also impose that $\adens(0, \cdot) = \adens_0$, where $\adens_0$ is the density of $\amba_0^p$ imposed in the model \ref{ch2:model}.
+This might work, but we do not know yet how to find a candidate, and even if we had one, it would still be cumbersome to work with it:
+since we have no analytical solution for the model \ref{ch2:model}, we cannot work directly with the marginals $\Psi_t^N$, and we are thus stuck with the empirical measure
+
+\begin{equation*}
+\empmeas_t^{(\amba),N} := \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
+\end{equation*}
+
+which is a discrete object.
+On the other side we have $\adens_t$, which is a continuous guy.
+Then we need a bridge from the PDE-world to the SDE-world: the Fokker-Planck equation (refer for example to \autocite[Theorem 8.1.1]{oksendal}).
 Given an SDE
 
 \begin{equation}\label{ch3:SDE-for-Fokker-Planck}
@@ -241,7 +229,8 @@ Given an SDE
 
 if this has a solution $X_t$, then its density $\adens(t, \cdot)$ satifies the PDE
 
-\begin{equation}\label{ch3:fokker-planck-PDE}
+\begin{equation*}\label{ch3:fokker-planck-PDE}
+	\left\{
 		\begin{aligned}
 			\partial_t \adens(t,x) 
 			&=  - \sum_{i=1}^{d} \partial_{x_i}[ \drift^i(t,x) \adens(t,x)] 
@@ -250,14 +239,112 @@ if this has a solution $X_t$, then its density $\adens(t, \cdot)$ satifies the P
 			\adens(0,x) &= \adens_0
 			\\
 			D_{ij}
-			&= \frac{1}{2} \sum_{k} \sigma^{ik}\sigma^{jk} = \frac{1}{2} (\sigma \sigma^T)_{ij}
+			&:= \frac{1}{2} \sum_{k} \sigma^{ik}\sigma^{jk} = \frac{1}{2} (\sigma \sigma^T)_{ij}
 		\end{aligned}
-\end{equation}
+	\right.
+\end{equation*}
 
 The viceversa is also true: if we encounter a PDE of the form \ref{ch3:fokker-planck-PDE} with solution $\adens_t$, then we can observe the system \ref{ch3:SDE-for-Fokker-Planck} knowing that its solution has $\adens_t$ as density. 
 
+The idea is to exploit this to build somehow a system of $N$ \iid particles 
+
+\begin{equation}
+	\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N
+\end{equation}
+
+which for every $t$ are always particularly close (in space) to the solutions $\amba_t^{(N)}=(\amba_t^p)_{p=1}^N$ of the system \ref{ch2:model} (the exact condition is exposed in the next statement).
+In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly 
+$
+	\bigotimes_{p=1}^{N}\adens_t
+$
+and we then just need to show that this "closeness" in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein}.
+Formally we have this statement
+
+\begin{lemma}
+	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be a system of \iid particles such that the density of each $\mfamba_t^p$ is $\adens_t$.
+	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
+	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
+	\begin{equation}\label{ch3:condition-closeness}
+		\PrbOf{\max_{1\leq p \leq N} \norm{\amba_t^p - \mfamba_t^p}_\infty > N^{-\cutparameter}
+		}
+		\leq\
+		K\
+		N^{-(\xi-\cutparameter)}
+	\end{equation}
+	Then we have that
+	\begin{equation*}
+		\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	By the lemma \ref{ch3:lemma-sznitman-wasserstein}  it is sufficient to show that the condition \ref{ch3:condition-closeness} implies 
+	\begin{equation*}
+		\sup_{0\leq t\leq T}
+		W_1 \big(
+		\Psi_t^{N, (k)}, \bigotimes_{p=1}^{k}\adens_t
+		\big),
+		\quad
+		\sup_{0\leq t\leq T}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big),
+		\xrightarrow {N \rightarrow \infty} 0
+	\end{equation*}
+	
+	[[continue from here on, the proof is quite straightforward]]
+\end{proof}
+
+[[explain that the cAMP were put here because it is useful to include them for two reasons: 1. it could be possible to prove such result also for cAMP in another time 2. it is useful to think about that for the expanded model for the same reason]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 With this in mind we can imagine to search for a system of $N$ particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ of which we easily know how to describe the law of by Fokker-Planck, but that remain close enough to the original system \ref{ch2:model}, up to imposing the same initial condition $\adens_0$.
-Then we can set our candidate for the role of effective equation as its Fokker-Planck equation.
+Then we can set our candidate for the role of effective equation as the solution $\adens_t$ to its Fokker-Planck equation.
 In fact intuitively, if we have such particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ , since they remain always close enough to the original ones $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$, we should expect their respective empirical densities 
 
 \begin{equation*}
@@ -446,7 +533,7 @@ But we are still operating with the law of some processes, rather than with them
 %= \mfamba_0 + \int_0^t \mfdrift(s,\mfamba_s) ds + \sigma_A dB_t
 %\end{equation}
 %
-%Furthermore, by \autocite[Theorem 8.1.1]{oksendal}, we know that, if $\adens(t,x)$ is a solution to \ref{ch3:eq:shape-effective-eqs-for-mf-particles}, then $\law(\mfamba_t) = \adens(t,x)$, \ie $\adens(t, \cdot)$ is the \emph{Kolmogorov forward equation} for latter SDE.
+%
 %
 %Now we can finally formulate a way to operate with the processes rather than with their laws.
 %
