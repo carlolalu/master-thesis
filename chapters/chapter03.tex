@@ -314,11 +314,9 @@ Then, imposing the same initial condition as for \ref{ch2:model}, the candidate 
 	\right.
 \end{equation}
 
-where, to enforce the independence of the cAMP, we ask that the spawning positions $P_{\btime^{p,g}}^{p,g}$ are independent from each others and from the $\mfamba^p$.
 We call such particles the \emph{mean-field particles}, for obvious reasons.
 
-
-\section{Calculate the mean-field and guess the spawning position}
+\subsection{Calculate the mean-field and guess the spawning position}
 
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
@@ -635,18 +633,16 @@ Then our whole system of mean-field particles is given by
 \begin{equation}\label{ch3:MF-particles}
 \left\{
 \begin{aligned}
-\mfamba_t^0 &\sim \adens_0
-\\
-\mfamba_t^p &= \int_0^t \left( 
+\mfamba_t^p &= \adens_0 + \int_0^t \left( 
 		\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
-	\right) (\mfamba_s^p) ds + \sigma_A B_t^p
+	\right) (\mfamba_s^p) ds + \diffusion_\amba B_t^p
 \\
 \mfcamp_t^{p,g} &= \mfamba_{\btime^{p,g}}^p + \sigma_\camp \quasibm_t^{p,g} &&\text{ from time }\btime^{p,g}
 \end{aligned}
 \right.
 \end{equation}
 
-and the respective effective equations are given by
+where $\cdens_t^\tau$ is defined by the correspondent effective equations:
 
 \begin{equation}\label{ch3:EFFECTIVE-EQS}
 \left\{
@@ -675,7 +671,7 @@ and the respective effective equations are given by
 \right.
 \end{equation}
 
-or, expressing the density of cAMP molecules analytically (\ref{ch3:eq:eff-eq-camp-analytical-sol}) we have
+The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the density of cAMP molecules with its analytical expression (\ref{ch3:eq:eff-eq-camp-analytical-sol}) to obtain
 
 \begin{equation}\label{ch3:integro-differential-system}
 \left\{
@@ -693,102 +689,10 @@ or, expressing the density of cAMP molecules analytically (\ref{ch3:eq:eff-eq-ca
 \right.
 \end{equation}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Solution of the systems and their properties}
-
-\subsection{Solution of of the effective equation}
-
-The system \ref{ch3:integro-differential-system} is a non-linear integro-differential equation.
-The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
-
-\begin{theorem}
-Let $E$ be a Banach space and let $C \subseteq E$ be a non-empty closed convex subset of $E$.
-Let $F: C \longrightarrow C$ be a $\Cspace^0$ map such that $F(C) \subseteq K$, where $K\subseteq C$ is a compact subset of $C$.
-Then $F$ has a fixed point in $K$.
-\end{theorem}
-
-The usual procedure to apply the theorem is to divide the linear part from the non-linear one, to invert the linear operator with the green function of the linear operator, and then to verify that, with a domain in the space of functions with the characteristics that we do desire, the operator respects the conditions of the fixed point schauder theorem.
-
-[[explain this section up better]]
-
-[[explain better the section here down, and underline the base space of the lp-space: do we fix teh time or not? are they bochner space?]]
-
-Assuming that this is the case, and that $\adens \in \Lpspace^1 \cap \Lpspace^\infty$, then also $\cdens^\tau$ is in such space.
-With these considerations, we can easily deduce that also the system of mean-field particles \ref{ch3:MF-particles} has a solution, because $\mfdrift$ is bounded and locally Lipschitz:
-
-[[FIND PROOF IN YOUR NOTES]]
-
-
-\begin{remark}
-Notice that for the mean-field particles it is not valid that $\mfcamp^{p,g}$ is spawning on $\mfamba^p_{\btime^{p,g}}$, and it is not even true that it spawns in a controllable way "near" to it with some kind of continuouty (provided that $N$ is maintained fixed).
-This "lack of continuouty" will have consequences.
-\end{remark}\label{ch3:rmk:mf-not-c0}
-
-\subsection{The distance process form}
-
-
-
-\begin{equation}
-	\begin{aligned}
-		| \sol_t^k - \mfsol_t^k | 
-		&= \left| 
-		\int_0^t \drift_{k}^{N}(s,\sol_s) d s + \sigma B_t^k - \int_0^t \mfdrift_k^{N}(t,\mfsol_s^k) d s + \sigma B_t^k 
-		\right|
-		\\
-		&= 
-		\left| \int_0^t \drift_k^{N}(s,\sol_s)  - \mfdrift_k^{N}(t,\mfsol_s^k) d s
-		\right|
-	\end{aligned}
-\end{equation}
-
-\subsection{Solution of the mean-field particle system and condition for convergence}
+Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
 \begin{lemma}
-	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be a system of \iid particles such that each $\mfamba_t^p$ solves the system \ref{ch3:SDE-for-Fokker-Planck} for some drift $\mfdrift$ such that for all $t$
-	
-	
-	such that the density of each $\mfamba_t^p$ is $\adens_t$.
+	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be the amoebas part of the solution of \ref{ch3:MF-particles}.
 	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
 	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
 	\begin{equation}\label{ch3:condition-closeness}
@@ -848,20 +752,20 @@ This "lack of continuouty" will have consequences.
 	
 	and obtain
 	
-	\begin{align*}
-		&\leq
+	\begin{equation*}
+		\leq
 		\int_{\R^{dN}\times \R^{dN}}
 		\norm{x-y}_\infty\
 		d \law(\amba_t^{(N)}) (x)\
 		d \law(\mfamba_t^{(N)}) (y)
-		\\
-		&=
+		=
 		\E{
 			\norm{
 				\amba_t^{(N)} - \mfamba_t^{(N)}
 			}_\infty
 		}
-	\end{align*}
+		=
+	\end{equation*}
 	
 	Then, if we define the set
 	
@@ -869,14 +773,261 @@ This "lack of continuouty" will have consequences.
 		\Xi_t := \left\{
 		\norm{
 			\amba_t^{(N)} - \mfamba_t^{(N)}
-		}_\infty \geq N^{-\cutparameter}
+		}_\infty < N^{-\cutparameter}
 		\right\}
 	\end{equation*}
 	
-	we can split the 	
-	[[continue from here on, the proof is quite straightforward]]
+	by the condition \ref{ch3:condition-closeness} we have that $\PrbOf{\Xi_t^c} \leq K	N^{-(\xi-\cutparameter)}$ and therefore
+	
+	\begin{align*}
+		&=
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t}
+		}
+		+
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t^c}
+		}
+		\leq		
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t}
+		} 
+		+ 
+		N^{-\cutparameter}
+		\\
+		&=
+		\E{
+			\norm{
+					 \adens_0 + \int_0^t \left( 
+					\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
+					\right) (\mfamba_s^p) ds + \diffusion_\amba B_t^p
+					-
+					\left(
+						\adens_0
+						+ \int_0^t \frac{1}{N} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m}) d s
+						+ 
+						\diffusion_\amba B_t^p
+					\right)
+				}_\infty
+				\1_{\Xi_t}
+		} +
+		\\
+		&\qquad\qquad
+		+ 
+		N^{-\cutparameter}
+		\\
+		&=
+		\E{
+			\norm{
+				\int_0^t \left( 
+				\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
+				\right) (\mfamba_s^p)
+				-
+				\frac{1}{N} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m}) d s
+			}_\infty
+			\1_{\Xi_t}
+		}
+		+ 
+		N^{-\cutparameter}
+		\\
+		&\leq
+		\E{
+				\int_0^t 
+				\Norm{
+					\left( 
+					\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
+					\right)
+				}_\infty
+				ds
+				\1_{\Xi_t}
+				+
+				\frac{t}{N} \hmactive_t \Norm{\attraction}_\infty
+				\1_{\Xi_t}
+		}
+		+
+		N^{-\cutparameter}
+		\\
+		&\leq
+		\E{
+			\int_0^t 
+			\Norm{\attraction}_\infty
+			\Norm{
+				\int_0^s \lambda \cdens_s^\tau 	d \tau
+			}_1
+			ds
+			\1_{\Xi_t}
+		}
+			+
+			\frac{t}{N} \Norm{\attraction}_\infty
+			\E{
+				\hmactive_t
+				\1_{\Xi_t}
+			}
+		+
+		N^{-\cutparameter}
+		\\
+		&=
+		\Norm{\attraction}_\infty
+		\lambda
+		\frac{t^2}{2}
+		\E{
+			\1_{\Xi_t}
+		}
+		+
+		\frac{t}{N} \Norm{\attraction}_\infty
+		\E{
+			\hmactive_t
+			\1_{\Xi_t}
+		}
+		+
+		N^{-\cutparameter}
+		\leq
+	\end{align*}
+	
+	Now we can use Hölder on $ \E{
+		\hmactive_t
+		\1_{\Xi_t}
+	}$ for some $p,q\in (1, +\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$ together with the bound on the measure $\Xi_t$ to obtain that
+	
+	\begin{align*}
+		&\leq
+		\Norm{\attraction}_\infty
+		\lambda
+		\frac{t^2}{2}
+		K	N^{-(\xi-\cutparameter)}
+		+
+		\frac{t}{N} \Norm{\attraction}_\infty
+		(\E{(\hmactive_t)^q})^\frac{1}{q}
+		\underbrace{
+			\E{
+				\1_{\Xi_t}^p
+			}^\frac{1}{p}
+		}_{\leq K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}}
+		+
+		N^{-\cutparameter}
+	\end{align*}
+	
+	Then, applying the estimate of Poisson processes moments from \ref{app:Poisson-moments} we obtain that
+	
+	\begin{align*}
+		&\leq
+		\Norm{\attraction}_\infty
+		\lambda
+		\frac{t^2}{2}
+		K	N^{-(\xi-\cutparameter)}
+		+
+		\frac{t}{N} \Norm{\attraction}_\infty
+		(f^{\uparrow}(q)^\frac{1}{q}\: (\lambda Nt)^{q\frac{1}{q}} \vee 1)
+		K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+		=
+	\end{align*}
+	
+	Supposing that $\lambda Nt \geq 1$ (which is true for $N$ sufficiently big if $t>0$), and indicating with $K_{x,y,z}$ every generic constant $K>0$ dependent on the mathematical objects $x,y,z$ (\ref{app:notation}) we obtain that
+	
+	\begin{align*}
+		&=
+		K_{\attraction, \lambda}
+		t^2
+		N^{-(\xi-\cutparameter)}
+		+
+		t\
+		K_{\attraction,\lambda,q,p}\
+		t
+		N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+	\end{align*}
+	
+	Resuming, then, we have that
+	
+	\begin{equation*}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) 
+		\leq
+		K_{\attraction, \lambda}
+		t^2
+		N^{-(\xi-\cutparameter)}
+		+
+		t^2\
+		K_{\attraction,\lambda,q,p}\
+		N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+	\end{equation*}
+	
+	and thus 
+	
+	\begin{equation*}
+		\sup_{t\in[0,T]} W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) 
+		\leq
+		K_{\attraction, \lambda}
+		T^2
+		N^{-(\xi-\cutparameter)}
+		+
+		T^2\
+		K_{\attraction,\lambda,q,p}\
+		N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+		\xrightarrow{N\rightarrow +\infty} 0
+	\end{equation*}
+	
+	where the limit goes to $0$ because $0< \cutparameter < \xi < \frac{1}{2}$.
 \end{proof}
 
+\section{Solution of the systems and their properties}
+
+\subsection{Solution of of the effective equation}
+
+The system \ref{ch3:integro-differential-system} is a non-linear integro-differential equation.
+In other words, it is a pretty wild beast.
+The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
+
+\begin{theorem}\label{ch3:fixed-point-schauder-theorem}
+Let $E$ be a Banach space and let $C \subseteq E$ be a non-empty closed convex subset of $E$.
+Let $F: C \longrightarrow C$ be a $\Cspace^0$ map such that $F(C) \subseteq K$, where $K\subseteq C$ is a compact subset of $C$.
+Then $F$ has a fixed point in $K$.
+\end{theorem}
+
+The usual procedure to apply the theorem is to separate the linear part from the non-linear one, to invert the linear operator with the green function of the linear operator, and then to verify that, with a domain in the space of functions with the characteristics that we do desire, the operator respects the hypothesis of the theorem \ref{ch3:fixed-point-schauder-theorem}.
+This is not proved in this master thesis, but it is assumed that the solution exist.
+Notice furthermore that the existence of a sufficiently regular solution $\adens_t$ to the system \ref{ch3:integro-differential-system} is equivalent to require the existence of solutions $\adens_t$ and $\cdens_t^\tau$ for each $\tau \in \R_+$ to \ref{ch3:EFFECTIVE-EQS}.
+
+With this view on the problem we make this assumptions regarding the solutions $\adens_t, \cdens_t$ of the system \ref{ch3:EFFECTIVE-EQS}:
+\begin{enumerate}\label{ch3:conditions-on-eff-equ-solutions}
+	\item There are solution $\adens_t,\cdens_t^\tau \in \Lpspace^1(\R^d)$ (for every $\tau \geq0$) for \ref{ch3:integro-differential-system} and it is valid that $\int \adens_t dx = 1= \int \cdens_t^\tau dx$, meaning that $\forall t$ they are probability distributions.
+	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that $\forall T> 0$ there is a constant $K_T > 0$ such that 
+	\begin{equation*}
+		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)}, \sup_{t\leq T} \Norm{\cdens_t}_{\Lpspace^\infty(\R^d)} \leq K_T 
+	\end{equation*}
+	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
+\end{enumerate}
+
+
+
+
+\begin{lemma}
+	[[lipschitzianity and so on of the mean-field system to guarantee existence and uniqueness]]
+\end{lemma}
+
+
+\begin{remark}
+	[[The distance process properties, if any, like the continuouity]]
+\end{remark}
 
 
 

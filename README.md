@@ -2,14 +2,21 @@
 
 - consistency in the usage of the norm / double norm
 
-- make a decent chapter 3 (take inspiration from a na and do it only for ht eamoebas, leave the camp out)
-
 - drawings drawings, drawings. Geogebra?
-
-- hint at solution of PIDE and explain what you must require to have a solution for the mean field particles
-
-- write both in the basic model and in the other one, that you start in a density po_0 equal for everybody
 
 - correct the section regarding the del dini derivation: show that you 
 derived a more general result than the one that you need, because your 
-paths are C^0 and not cadlag.
+paths are C^0 and not cadlag. The keyword is "ch3:rmk:mf-not-c0"
+
+- correct, in the law of large numbers, the notation for the conditions 
+on the l^\infty limitation on the norm of the densities: it should be 
+specific that it is not K_dens and that the constnat we use is 
+INCREASING in T.
+
+- read it multiple times
+
+- take care of the appendix, maybe either cut the incredible big space, 
+or speak very very hintingly about stuff, saying "we might have to prove 
+that the conditional measure is regular, with the theorem tal dei tali, 
+thus must prove that the space i Polish if provided with the optimal 
+topology.

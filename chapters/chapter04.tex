@@ -583,11 +583,20 @@ Notice that since the mean-field particles are coupled with the system \ref{ch2:
 	\Bigg\}
 	\\
 	&=
+	\max \Bigg\{
 	\norm{
 		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
-	}_\infty
+	}_\infty,
+		\amba_{\btime_{m}}
+		-
+		\mfamba_{\btime_{m}}
+	\Bigg\}
 \end{align*}
 
+Notice that $\amba_{\btime_{m}}
+-
+\mfamba_{\btime_{m}}$ is not dependent on $t$ unless $t = \btime_m$.
+Since this does not essentially change the final outcome (just adds a factor $2$ in front of one of the coordinated fro the amoebas), we assume that $t \neq \btime_m$.
 Therefore, if we try to Dini-derive such quantity we might sketch this:
 
 \begin{align*}
@@ -599,7 +608,7 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\;
 		\Big|
 \underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
-	_{:= I_t = (I_t^{p;i})_{p=1, i=1}^{N,d}}
+	_{:= I_t = (I_t^{p;i})_{p,i}}
 \Big|_\infty
 	\\
 	& \quad \left( \text{if $\forall p,i.\; I_t^{p;i}$ is right-differentiable} \right)
@@ -620,7 +629,7 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 				\partial^+_t
 				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
 			}_{\invquest = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N) ?}
-		\Big)_{p,i=1}^{N,d}
+		\Big)_{p,i}
 \end{align*}
 
 The first is an easy computation.
@@ -721,7 +730,7 @@ Then we can write
 			\underbrace{ 
 				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
 			}_{:= I_t^{p;i} }
-		\Bigg)_{p,i=1}^{N,d}
+		\Bigg)_{p,i}
 	\Bigg|_\infty
 	\\
 	& =
