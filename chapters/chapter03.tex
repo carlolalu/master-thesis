@@ -1039,65 +1039,67 @@ With this view on the problem we make this assumptions regarding the solutions $
 		\Norm{\mfdrift(t,x) - \mfdrift(t,y)}_\infty 
 		&=
 		\max_{1\leq p\leq N}
+		\max_{1\leq i \leq d}
 		\left\{
 			\norm{\left( 
-				\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
-				\right) (x) 
+				\attraction_i \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+				\right) (x^p) 
 				-
 				\left( 
-				\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
-				\right) (y) 
+				\attraction_i \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+				\right) (y^p) 
 			}
 		\right\}
 		\\
-		&= 
-		\lambda\
-		\norm{\left( 
-			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
-			\right) (x) 
-			-
-			\left( 
-			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
-			\right) (y) 
-		}
-		\\
 		&=
+		\max_{1\leq p\leq N}
+		\max_{1\leq i \leq d}
+		\left\{
 		\lambda\
 		\norm{
 			\int
-			\attraction (x-z)
+			\attraction_i (x^p-z)
 			\left( 
 			\int_0^t \cdens_t^\tau (z)	d \tau
 			\right)
 			dz
 			-
 			\int 
-			\attraction(y-z) 
+			\attraction_i (y^p-z) 
 			\left( 
 			\int_0^t \cdens_t^\tau (z)	d \tau
 			\right)
 			dz 
 		}
+		\right\}
 		\\
 		&=
+		\max_{1\leq p\leq N}
+		\max_{1\leq i \leq d}
+		\left\{
 		\lambda\
 		\norm{
 			\int
-			\left( \attraction (x-z) - \attraction(y-z) \right)
+			\left( \attraction_i (x^p-z) - \attraction_i (y^p-z) \right)
 			\left( 
 			\int_0^t \cdens_t^\tau (z)	d \tau
 			\right)
 			dz
 		}
+		\right\}
 		\\
 		&\leq
+		\max_{1\leq p\leq N}
+		\max_{1\leq i \leq d}
+		\left\{
 		\lambda\
 		\int
-			\norm{ \attraction (x-z) - \attraction(y-z) }
+			\norm{ \attraction_i (x^p-z) - \attraction_i (y^p-z) }
 			\left( 
 			\int_0^t \cdens_t^\tau (z)	d \tau
 			\right)
 		dz
+		\right\}
 		\leq
 	\end{align*}
 	
@@ -1106,18 +1108,23 @@ With this view on the problem we make this assumptions regarding the solutions $
 	
 	\begin{align*}
 		&\leq
+		\max_{1\leq p\leq N}
+		\max_{1\leq i \leq d}
+		\left\{
 		\lambda\
 		\int
 		l\
-		\norm{ (x-z) - (y-z) }
+		\norm{ (x^p-z) - (y^p-z) }_\infty
 		\left( 
 		\int_0^t \cdens_t^\tau (z)	d \tau
 		\right)
-		dz\
+		dz
+		\right\}
 		\\
 		&=\
-		l
-		\norm{x-y}
+		l		
+		\max_{1\leq p\leq N}
+		\norm{x^p-y^p}_\infty
 		\int_0^t 
 		\overbrace{
 			\int
@@ -1125,7 +1132,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 			dz
 		}^{=1}
 		d \tau\
-		\leq
+		=
 		tl
 		\Norm{x-y}_\infty
 	\end{align*}
