@@ -989,11 +989,9 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	where the limit goes to $0$ because $0< \cutparameter < \xi < \frac{1}{2}$.
 \end{proof}
 
-\section{Solution of the systems and their properties}
+\section{Solution of the derived systems and their properties}
 
-\subsection{Solution of of the effective equation}
-
-The system \ref{ch3:integro-differential-system} is a non-linear integro-differential equation.
+The system \ref{ch3:integro-differential-system} is a non-linear partial integro-differential equation (non-linear PIDE).
 In other words, it is a pretty wild beast.
 The best instrument to prove that it does possess a solution is the Schauder fixed point theorem (see \autocite[Exercise 6.26]{brezis}, which does not guarantee unicity:
 
@@ -1017,17 +1015,162 @@ With this view on the problem we make this assumptions regarding the solutions $
 	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
 \end{enumerate}
 
-
-
-
 \begin{lemma}
-	[[lipschitzianity and so on of the mean-field system to guarantee existence and uniqueness]]
+	The mean-field drift $\mfdrift(t,x)$ defined in \ref{ch3:MF-particles} coordinate-wise as
+	\begin{equation*}
+		\mfdrift_p(t,x) = 
+		 \left( 
+		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+		\right) (x)
+	\end{equation*}
+	is Lipschitz and bounded in space with bound
+	\begin{equation*}
+		\Norm{\mfdrift(t,x)}_\infty \leq K_{\attraction, \lambda} t
+	\end{equation*}
+	for a constant $K_{\attraction, \lambda} > 0$ depending on $\attraction, \lambda$.
 \end{lemma}
 
-
 \begin{remark}
-	[[The distance process properties, if any, like the continuouity]]
+	This lemma obviously imply that the mean-field drift is sublinearly growing in space with a fixed time, and thus that by the theorem \ref{ch2:cond:E-and-U-lipsch+subgrowth} the existence and uniqueness of solution for the system \ref{ch3:MF-particles} is guaranteed.
 \end{remark}
+
+\begin{proof}
+	\begin{align*}
+		\Norm{\mfdrift(t,x) - \mfdrift(t,y)}_\infty 
+		&=
+		\max_{1\leq p\leq N}
+		\left\{
+			\norm{\left( 
+				\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+				\right) (x) 
+				-
+				\left( 
+				\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+				\right) (y) 
+			}
+		\right\}
+		\\
+		&= 
+		\lambda\
+		\norm{\left( 
+			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
+			\right) (x) 
+			-
+			\left( 
+			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
+			\right) (y) 
+		}
+		\\
+		&=
+		\lambda\
+		\norm{
+			\int
+			\attraction (x-z)
+			\left( 
+			\int_0^t \cdens_t^\tau (z)	d \tau
+			\right)
+			dz
+			-
+			\int 
+			\attraction(y-z) 
+			\left( 
+			\int_0^t \cdens_t^\tau (z)	d \tau
+			\right)
+			dz 
+		}
+		\\
+		&=
+		\lambda\
+		\norm{
+			\int
+			\left( \attraction (x-z) - \attraction(y-z) \right)
+			\left( 
+			\int_0^t \cdens_t^\tau (z)	d \tau
+			\right)
+			dz
+		}
+		\\
+		&\leq
+		\lambda\
+		\int
+			\norm{ \attraction (x-z) - \attraction(y-z) }
+			\left( 
+			\int_0^t \cdens_t^\tau (z)	d \tau
+			\right)
+		dz
+		\leq
+	\end{align*}
+	
+	Let $l$ be the Lipschitz constant of $\attraction$.
+	Then we have that
+	
+	\begin{align*}
+		&\leq
+		\lambda\
+		\int
+		l\
+		\norm{ (x-z) - (y-z) }
+		\left( 
+		\int_0^t \cdens_t^\tau (z)	d \tau
+		\right)
+		dz\
+		\\
+		&=\
+		l
+		\norm{x-y}
+		\int_0^t 
+		\overbrace{
+			\int
+			\cdens_t^\tau (z)
+			dz
+		}^{=1}
+		d \tau\
+		\leq
+		tl
+		\Norm{x-y}_\infty
+	\end{align*}
+	
+	Regarding the bound we have that
+	
+	\begin{align*}
+		\Norm{\mfdrift(t,x)}_\infty
+		&=
+		\max_{1\leq p\leq N}
+		\left\{
+		\norm{\left( 
+			\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
+			\right) (x) 
+		}
+		\right\}
+		\\
+		&\leq
+		\lambda
+		\Norm{
+			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
+		}_{\Lpspace^\infty(\R^d)}
+		\leq
+		\lambda
+		\Norm{
+			\attraction
+		}_\infty
+		\Norm{
+			\int_0^t \cdens_t^\tau 	d \tau
+		}_{\Lpspace^1(\R^d)}
+		\\
+		&\leq
+		\lambda
+		\Norm{
+			\attraction
+		}_\infty
+		\int_0^t \int \cdens_t^\tau dx	d \tau
+		=
+		\lambda
+		\Norm{
+			\attraction
+		}_\infty
+		t
+	\end{align*}
+\end{proof}
 
 
 

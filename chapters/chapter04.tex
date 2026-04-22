@@ -596,7 +596,7 @@ Notice that since the mean-field particles are coupled with the system \ref{ch2:
 Notice that $\amba_{\btime_{m}}
 -
 \mfamba_{\btime_{m}}$ is not dependent on $t$ unless $t = \btime_m$.
-Since this does not essentially change the final outcome (just adds a factor $2$ in front of one of the coordinated fro the amoebas), we assume that $t \neq \btime_m$.
+Since this does not essentially change the final outcome (just adds a factor $2$ in front of the \rhs of \ref{ch4:lemma:get-rid-of-integral}), we assume that $t \neq \btime_m$.
 Therefore, if we try to Dini-derive such quantity we might sketch this:
 
 \begin{align*}
@@ -955,7 +955,7 @@ For $T >0$ we have that
 	\right\}
 	&& \ref{ch4:lemma:advance-after-sup}
 	\\
-	& \max_{ s\in \{0,T\} } 
+	&\leq \max_{ s\in \{0,T\} } 
 	\left\{ 
 		d \norm{\drift(s, \sol_s^N) - \mfdrift^N(s, \mfsol_s^N)}_\infty
 	\right\}

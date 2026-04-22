@@ -20,3 +20,9 @@ or speak very very hintingly about stuff, saying "we might have to prove
 that the conditional measure is regular, with the theorem tal dei tali, 
 thus must prove that the space i Polish if provided with the optimal 
 topology.
+
+- use the bound on the mean-field particle drift to make smoother certain proofs in the last part
+
+- use a uniform notation for the drift and so on.
+
+- finish chapter 7

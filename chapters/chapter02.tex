@@ -237,7 +237,7 @@ If furthermore $X_0 = x$ we say that $X$ solves $E_x(\drift,\diffusion)$.
 To ensure existence (strong existence, meaning that we can find a solution on each filtered probability space endowed with a Brownian motion) and uniqueness (path uniqueness, meaning that having two solutions $X_t, Y_t$ with the same initial conditions, they are indistinguishable, \ie $\PrbOf{ \forall	t. X_t = Y_t }=1 $) of solutions for $E(\drift, \diffusion)$ we need to require conditions on $\drift, \diffusion$. There are two main results:
 \begin{itemize}
 \item \autocite[Thm 8.3]{le-gall}: If the two coefficients are Lipschitz (eventually only locally) in space and continuous in time, then there is existence and uniqueness of solutions for $E(\drift, \diffusion)$:
-\begin{equation*}
+\begin{equation*}\label{ch2:cond:E-and-U-lipsch+c-0-in-time}
 \left\{
 \begin{aligned}
 \forall t .( |\drift(t, x)-\drift(t,y)| &< L_\drift |x-y| &\text{ and } |\diffusion(t, x)-\diffusion(t,y)| &< L_\diffusion |x-y|) \\
@@ -246,7 +246,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \right.
 \end{equation*}
 \item \autocite[Thm 9.4]{baldi}: If the two coefficients are Lipschitz in space (as before) and have sublinear growth in space, then there is existence and uniqueness of solutions for $E(\drift, \diffusion)$:
-\begin{equation*}
+\begin{equation*}\label{ch2:cond:E-and-U-lipsch+subgrowth}
 \left\{
 \begin{aligned}
 &\forall t .(|\drift(t, x)-\drift(t,y)| < L_\drift |x-y| 
@@ -258,7 +258,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 &|\diffusion(t, x)| < M_\diffusion (1 + |x|)
 \end{aligned}
 \right.
-\end{equation*}\label{ch2:cond:E-and-U-lipsch+subgrowth}
+\end{equation*}
 \end{itemize}
 
 \subsection{Reducing the model to the SDE framework}
