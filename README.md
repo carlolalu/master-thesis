@@ -15,7 +15,7 @@ on the l^\infty limitation on the norm of the densities: it should be
 specific that it is not K_dens and that the constnat we use is 
 INCREASING in T.
 
-- read it multiple times
+- read it twice
 
 - take care of the appendix, maybe either cut the incredible big space, 
 or speak very very hintingly about stuff, saying "we might have to prove 
@@ -49,5 +49,3 @@ follow this pattern , with different constants.
 - in chapter 3 conjecture (or explain at the very end, that it would be 
 cool to show that also the camp law can be hinted at, but that this must 
 be done manually then.
-
-- check the ciryllic letters: their usage with 'text' makes it stick to the next letter. The solution is to use them ALWAYS in a math environment.

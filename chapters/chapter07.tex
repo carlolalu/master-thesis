@@ -1,5 +1,5 @@
 Till now we treated the simplest model, where at the moment of spawning the cAMP was a lonely molecule simply roaming around of \Bm.
-This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba: in this chapter we build a model with the purpose of describing more accurately this phenomenon.
+This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba: in this chapter we build a model with the purpose of describing more accurately this phenomenon, and we sketch how one should be able to derive a macroscopic model which is very similar to the one of the basic model.
 
 \section{The definition}
 
@@ -153,14 +153,21 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	\end{align*}
 \end{remark}
 
-\begin{lemma}
+\begin{lemma}\label{ch7:lemma:drift:lip-and-bound}
 	The function $\drift^N$ is Lipschitz in space with fixed time with Lipschitz constant of
 	\begin{equation*}
 		\frac{K_{\attraction,\NumCampRelease}}{N}
 		\hmactive_s
 	\end{equation*}
 	where $K_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
-	Furthermore $\drift^N$ grows sublinearly (in space with fixed time).
+	Furthermore $\drift^N$ is bounded
+	
+	\begin{equation*}
+		\Norm{\drift^N(s,x)}_\infty \leq K_{\NumCampRelease, \attraction}\
+		(\hmactive_s + \cdrift)
+	\end{equation*}
+	
+	and it grows therefore sublinearly in space with fixed time.
 \end{lemma}
 
 \begin{proof}
@@ -168,14 +175,17 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	
 	\begin{align*}
 		\Norm{\drift(s,x) - \drift(s,y)}_\infty 
-		&= \max \left\{
+		&= \max \Bigg\{
 		\max_{p\leq N}
 		\norm{\drift_p(s,x) - \drift_p(s,y)}_\infty,
-		\max_{m \leq \hmactive_s}
+		\\
+		&\qquad
+		\max_{1 \leq m \leq \hmactive_s}
+		\max_{1 \leq l \leq \NumCampRelease}
 		\overbrace{
 			\norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l} - \1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty
 		}^{=0}
-		\right\}
+		\Bigg\}
 		\\
 		&= \max_{p\leq N}\
 		\norm{\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l}) - \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(y^p - y^{q,g,l})}_\infty
@@ -227,7 +237,52 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\Norm{x - y}_\infty
 	\end{align*}
 	
-	The sublinearity is done exactly as in the case of the basic model at \ref{ch2:lemma:lipsch-of-drift}, where a constant is added by the presence of the components $\Norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty \leq \frac{\cdrift}{N}$.
+	Regarding the bound we have that
+	
+	\begin{align*}
+		\Norm{\drift(s,x)}_\infty &=
+		\max 
+		\left\{
+			\max_{p\leq N}
+			\norm{\drift_p(s,x)}_\infty,
+			\max_{1 \leq m \leq \hmactive_s}
+			\max_{1 \leq l \leq \NumCampRelease}
+				\norm{\1_{\geq \btime_m}(s)  \frac{\cdrift}{N}  \cgonia_{m,l}}_\infty
+		\right\}
+		\\
+		&\leq
+		\max 
+		\left\{
+		\max_{p\leq N}
+		\norm{
+			\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l}) 
+		}_\infty,
+		\frac{\cdrift}{N}
+		\right\}
+		\\
+		&\leq
+		\max 
+		\left\{
+		\max_{p\leq N}
+		\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} 
+		\norm{
+			\attraction(x^p - x^{q,g,l})  
+		}_\infty,
+		\frac{\cdrift}{N}
+		\right\}\
+		\\
+		&\leq\
+		\frac{1}{N}
+		\left(
+			\NumCampRelease \hmactive_s 
+			\Norm{ \attraction }_\infty
+			+
+			\cdrift
+		\right)\
+		\leq\
+		K_{\NumCampRelease, \attraction}\
+		(\hmactive_s + \cdrift)
+	\end{align*}
 \end{proof}
 
 \subsection{Mean-field particles candidate}
@@ -472,8 +527,48 @@ or, expressing the density of cAMP molecules analytically (exactly as in \ref{ch
 \end{equation}
 
 We make exactly the same assumption as \ref{ch3:conditions-on-eff-equ-solutions} on the densities $\adens_t, \cdens_t$.
-It is easy to show that then the existence and uniqueness of solutions for the mean-field particles can be proven in the same way as for the basic model.
+It is easy to show that then the existence and uniqueness of solutions for the mean-field particles can be proven in the same way as for the basic model, and that we have a similar bound for the mean-field drift:
 
+\begin{lemma}
+	The mean-field drift $\mfdrift(t,x)$ defined in \ref{ch3:MF-particles} coordinate-wise as
+	\begin{equation*}
+		\mfdrift_p(t,x) = 
+		\left( 
+		\attraction \star \int_0^t \NumCampRelease \lambda \cdens_t^\tau 	d \tau
+		\right) (x)
+	\end{equation*}
+	is Lipschitz and bounded in space with bound
+	\begin{equation*}
+		\Norm{\mfdrift(t,x)}_\infty \leq K_{\attraction, \lambda,\NumCampRelease} t
+	\end{equation*}
+	for a constant $K_{\attraction, \lambda,\NumCampRelease} > 0$.
+\end{lemma}
+
+\subsection{Convergence}
+
+Notice that since also in the case of the pulsing waves model the amoebas $\amba_t^{(N)} = (\amba_t^1, \ldots, \amba_t^N)$ are exchangeable, the condition 
+
+\begin{equation*}
+	\empmeas_t^{(\amba),N} \xrightarrow{N\longrightarrow +\infty} \adens(t,\cdot)
+\end{equation*}
+
+can be proven with the proposition of Sznitman \ref{ch3:proposition:sznitman}, as for the basic model.
+Analogously the lemma \ref{ch3:proposition:sznitman} works smoothly as before, and so \ref{ch3:w-1-convergence-condition}.
+Then, to obtain the convergence condition above, it is enough to prove that
+
+\begin{equation}
+	\PrbOf{  
+		\sup_{0 \leq t \leq T}
+		\Norm{
+			\sol_t^N - \mfsol_t^N
+		}_\infty 
+		\geq
+		N^{-\cutparameter}
+	}
+	\leq\
+	F^{\uparrow}(T)\
+	N^{-(\xi-\delta)}
+\end{equation}
 
 \section{Preliminaries for the final proof}
 
@@ -606,14 +701,14 @@ We need though to take care also of the cAMP part this time.
 Let
 
 \begin{align*}
-	I^\camp(t) &:= \left(
+	I_t &:= \left(
 	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
 	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
 	+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 	\right)_{m,l}
 		 &\in (\R^d)^{\hmactive_t + \NumCampRelease}
 	\\	
-	I_{m,l;i}^\camp(t) &:= 
+	I^{m,l;i}_t &:= 
 		\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
 		+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
@@ -637,7 +732,7 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	\sum_{1\leq m \leq \hmactive_t}
 	\sum_{1\leq l \leq \NumCampRelease}\
 	\1_{
-		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+		\norm{I^{m,l;i}_t} = \norm{I_t}_\infty
 		}\
 	\diniu_t^+
 	I_{m,l;i}
@@ -647,7 +742,7 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	\sum_{1\leq m \leq \hmactive_t}
 	\sum_{1\leq l \leq \NumCampRelease}\
 	\1_{
-		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+		\norm{I^{m,l;i}_t} = \norm{I_t}_\infty
 	}\
 	\diniu_t^+
 	\left[
@@ -663,37 +758,17 @@ Notice, as in the basic model case, that if $t\neq \btime_m$ the term $\amba_{\b
 As for the basic model case, since $t= \btime_m$ happens with probability $0$, we simply remove from the space $\Omega$ the correspondent paths.
 Then we can write:
 
-\begin{align*}
-	&=
-	\sum_{1\leq i \leq d}
-	\sum_{1\leq m \leq \hmactive_t}
-	\sum_{1\leq l \leq \NumCampRelease}\
-	\1_{
-		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
-	}\
-	\Bigg\{\1_{t\neq\btime_m}
-	\diniu_t^+
-	\Big[
-	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
-	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} +
-	\\
-	&\qquad
-	+ 
-	(\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
-	\Big]
-	\Bigg\}
-	\\
-	&
+\begin{equation*}
 	=
 	-
 	\sum_{1\leq i \leq d}
 	\sum_{1\leq m \leq \hmactive_t}
 	\sum_{1\leq l \leq \NumCampRelease}\	
 	\1_{
-		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+		\norm{I^{m,l;i}_t} = \norm{I_t}_\infty
 	}\
 	\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
-\end{align*}
+\end{equation*}
 
 Again, as for the amoebas' part in the lemma \ref{ch4:only-one-amoeba-will-survive}, we want to get rid of $\sum_{1\leq m \leq \hmactive_t}$,  namely to show that only one addend for such sum survives \ie
 
@@ -702,9 +777,9 @@ Again, as for the amoebas' part in the lemma \ref{ch4:only-one-amoeba-will-survi
 	\begin{equation*}
 		\PrbOf{
 			\exists i,j,l,k.\:
-			I_{m,l;i}^\camp(t)
+			I^{m,l;i}_t
 			=
-			I_{n,k;j}^\camp(t)
+			I^{n,k;j}_t
 		} = 0
 	\end{equation*}
 \end{lemma}
@@ -713,9 +788,9 @@ We sketch only the proof of such result, because we expect it to work.
 
 \begin{proof}[Sketch of a possible proof]
 	All the variables involved are continuous, thus their laws are non-atomic.
-	We expect that the condition $I_{m,l;i}^\camp(t)
+	We expect that the condition $I^{m,l;i}_t
 	=
-	I_{n,k;j}^\camp(t)$ requires that some quantities involved are the same on manifolds of dimension inferior to the whole configuration space, yielding the result.
+	I^{n,k;j}_t$ requires that some quantities involved are the same on manifolds of dimension inferior to the whole configuration space, yielding the result.
 	We can reduce the complexity of the problem conditioning the probability with respect to the angles $\cgonia_{m,1}, \cgonia_{n,1}$.
 \end{proof}
 
@@ -782,7 +857,7 @@ Then we can resume the whole proof as
 
 where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the correspondent drifts for the cAMP molecules.
 
-\subsection{Law of large numbers}
+\subsection{Sketch of proof for the Law of large numbers}
 
 Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but for the sake of clarity we stick to the more classic attraction.
 
@@ -801,7 +876,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
  	\end{equation*}
 \end{proposition}
 
-\begin{proof}
+\begin{proof}[Sketch of proof]
 	Notice that
 	\begin{align*}
 		(1+\NumCampRelease)N^{-\xi} 
@@ -842,7 +917,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 		\frac{\cdrift}{N}
 	\end{align*}
 	
-	With these consideration in mind we can then write
+	With these consideration in mind and using the trivial principle \ref{app:pA-pB-less-than} we can then write
 	
 	\begin{align*}
 		&\PrbOf{
@@ -907,7 +982,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 		} = 0
 	\end{align*}
 	
-	and therefore we can write that
+	and therefore, again by \ref{app:pA-pB-less-than}, we can write that
 	
 	\begin{align*}
 		&\leq
@@ -940,7 +1015,9 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 		\leq
 	\end{align*}
 	
-	and this element can be dominated exactly by the law of large numbers \ref{ch5:LLN} previously found, because the mean-field drift is simply scaled by a factor $\NumCampRelease$:
+	The addends have now the same shape as in \ref{ch5:LLN}.
+	Not only, the random variables involved have densities respecting the exact same conditions by hypothesis and their drifts for the amoebas are simply scaled by a factor $\NumCampRelease$ with respect to the basic model.
+	Thus, even though the statement \ref{ch5:LLN} cannot be directly used to obtain a bound for such addends (in \ref{ch5:LLN} by hypothesis we require that $\mfsol_t$ are the solution specifically to the mean-field basic model), we expect that the proof can be followed exactly as in the basic model case but scaled of $\NumCampRelease$, obtaining
 	
 	\begin{align*}
 		\leq
@@ -955,9 +1032,9 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 	\end{align*}
 \end{proof}
 
-\section{Final proof}
+\section{Sketch of the final proof}
 
-The condition 
+We expect the condition 
 
 \begin{equation}
 	\PrbOf{  
@@ -973,6 +1050,158 @@ The condition
 	N^{-(\xi-\delta)}
 \end{equation}
 
-can be proven exactly as in chapter \ref{ch6} exploiting the updated version of the law of large numbers.
-Notice that since also in the case of the pulsing waves model the amoebas are exchangeable, the chain of conditions \ref{ch3:proposition:sznitman}, \ref{ch3:lemma-sznitman-wasserstein} and \ref{ch3:w-1-convergence-condition} work smoothly as before.
+to be provable exactly as in chapter \ref{ch6}, even with the same symbol, with the only difference being a scaling of a factor $\NumCampRelease$ for the function $F^{\uparrow}(T)$.
+This because the lemmas for the Dini derivation still have the same form, and the law of large numbers has only a scaling for some constant, and we still have bounds for both the drift and the mean-field drift, thus all the proof concept holds on the exact same principles.
+Define
 
+
+\begin{equation}
+	\auxProc_T^N := 1 \wedge \left( 
+	N^{\cutparameter}
+	\sup_{0 \leq t \leq T}
+	\Norm{
+		\sol_t^N - \mfsol_t^N
+	}_\infty \right)
+\end{equation}
+
+As before, we have that
+
+\begin{align*}
+	\PrbOf{  
+		\sup_{0 \leq t \leq T}
+		\Norm{
+			\sol_t^N - \mfsol_t^N
+		}_\infty 
+		\geq
+		N^{-\cutparameter}
+	}
+	&=
+	\PrbOf{  
+		\Big(
+		N^{\cutparameter}\:
+		\sup_{0 \leq t \leq T}
+		\Norm{
+			\sol_t^N - \mfsol_t^N
+		}_\infty 
+		\Big)
+		\wedge
+		1
+		\geq
+		1
+	}
+	\\
+	&=
+	\PrbOf{  
+		\auxProc_T^N
+		\geq
+		1
+	}\
+	\leq\
+	\E{ 
+		\auxProc_T^N
+	} 
+\end{align*}
+
+
+Consider $0 < t \leq T$ and calculate then:
+
+\begin{align*}
+	\diniu^+_t \auxProc_t^N 
+	&= 
+	\left( \1_{\{\diniu^+_t \auxProc_t^N >0 \}} + \1_{\{\diniu^+_t \auxProc_t^N \leq 0\}}\right) \cdot \diniu^+_t \auxProc_t^N 
+	\leq
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
+	\diniu_t^+  
+	\left(	
+	1 \wedge \big( 
+	N^{\cutparameter}
+	\sup_{0 \leq s \leq t}
+	\Norm{
+		\sol_s^N - \mfsol_s^N
+	}_\infty \big)
+	\right)
+	\leq
+	\\
+	&\leq
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
+	N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
+	+  
+	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
+	N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+\end{align*}
+\footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
+
+Recall that $\drift^N$ is Lipschitz (\ref{ch7:lemma:drift:lip-and-bound}) therefore:
+
+\begin{align*}
+	\leq
+	d\
+	\frac{K_{\attraction,\NumCampRelease}}{N}
+	\hmactive_t
+	\underbrace{
+		\1_{\diniu^+_t \auxProc_t^N >0 }\
+		\cdot 
+		N^{\cutparameter}\
+		\norm{\sol_t^N - \mfsol_t^N}_\infty
+	}_{}
+	+ N^{\cutparameter}\
+	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+\end{align*}
+
+As for the basic model, we can infer that
+
+\begin{equation*}
+		\1_{\diniu^+_t \auxProc_t^N >0 }\
+		\cdot 
+		N^{\cutparameter}\
+		\norm{\sol_t^N - \mfsol_t^N}_\infty
+	\leq
+		\auxProc_t^N 
+\end{equation*}
+
+Therefore we can write
+
+\begin{align*}
+	\diniu^+_t \auxProc_t^N 
+	&\leq
+	{K_{\attraction,\NumCampRelease,d}}
+	\frac{\hmactive_t}{N}\
+	\auxProc_t^N 
+	+N^{\cutparameter}\
+	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+\end{align*}
+
+Integrating over $[0,T]$ we then obtain:
+
+\begin{align*}
+	\auxProc_T^N - \auxProc_0^N &\leq
+	\int_0^T
+	{K_{\attraction,\NumCampRelease,d}}\
+	\frac{\hmactive_T}{N}\
+	\auxProc_t^N dt
+	+ 
+	N^{\cutparameter}\
+	K
+	\int_0^T 
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	dt
+	\leq
+\end{align*}
+
+Choose now some $S >T$ to obtain
+
+\begin{equation*}
+	\leq
+	\int_0^T 
+	{K_{\attraction,\NumCampRelease,d}}\
+	\frac{\hmactive_T}{N}\
+	\auxProc_t^N dt
+	+ 
+	N^{\cutparameter}\
+	K
+	\underbrace{
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+	}_{=:\Iu}
+\end{equation*}
