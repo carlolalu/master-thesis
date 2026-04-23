@@ -475,7 +475,9 @@ We make exactly the same assumption as \ref{ch3:conditions-on-eff-equ-solutions}
 It is easy to show that then the existence and uniqueness of solutions for the mean-field particles can be proven in the same way as for the basic model.
 
 
-\section{Preliminaries for the final proof: Dini derivation and law of large numbers}
+\section{Preliminaries for the final proof}
+
+\subsection{Dini derivation}
 
 The paths of the distance process
 
@@ -483,14 +485,309 @@ The paths of the distance process
 	\Norm{ \sol_t^N - \mfsol_t^N}_\infty
 \end{equation*}
 
-for the pulsing wave model solution $\sol_t^N$ and its mean-field counterpart $\mfsol_t^N$ are $\Cspace^0$ and thus also \cadlag, therefore the lemma \ref{ch4:lemma:advance-after-sup} remains valid.
+for the pulsing wave model solution $\sol_t^N$ and its mean-field counterpart $\mfsol_t^N$ are $\Cspace^0$ and thus also \cadlag, therefore the lemma \ref{ch4:lemma:advance-after-sup} remains valid:
+
+	\begin{equation}
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\leq
+	\max_{ s\in \{0,T\} } \left\{ 
+	\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+	\right\}
+\end{equation}
+
 We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:get-rid-of-integral}.
 
-[[for the dini derivation show only that the integral part of the camp changes and must be shown to not cause problems but the rest is absolutely the same]]
+\begin{align*}
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&= \max \left\{
+	\norm{\amba_t^{(N)} - \mfamba_t^{(N)}}_\infty,
+	\norm{\camp_t^{(N)}  - \mfcamp_t^{(N)}}_\infty
+	\right\}
+	\\
+	&= \max \Bigg\{
+	\norm{
+		\amba_0^{(N)} 
+		+ \int_0^t \drift^{(A),N} (s, \sol_s^N) d s
+		+ 
+		\sigma B_t^N
+		-
+		\left(
+		\mfamba_0^{(N)} 
+		+ \int_0^t \drift^{(A),N}(s, \mfsol_s^N) d s
+		+ 
+		\sigma B_t^N
+		\right)
+	}_\infty,
+	\\
+	&\qquad
+	\max_{1\leq m \leq \hmactive_t}
+	\max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)}  
+		- (\mfamba_{\btime_{m}}^{(N),\Parentof(m)}  + \quasibm_t^m)
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty
+	\Bigg\}
+	\\
+	&=
+	\max \Bigg\{
+	\norm{
+		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+	}_\infty,	
+	\\
+	&\qquad
+	\max_{1\leq m \leq \hmactive_t}	
+	\max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty
+	\Bigg\}
+\end{align*}
 
+where $\drift^{(A),N}, \mfdrift^{(\amba),N}$ represents the amoebas' parts of the correspondent drifts.
+Let us define
+
+\begin{align*}
+	&[\amba] := \left\{ \norm{
+		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+	}_\infty = \norm{\sol_t^N-\mfsol_t^N}_\infty \right\}
+	\qquad
+	\\
+	&
+	[\camp] := \left\{ \max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty = \norm{\sol_t^N-\mfsol_t^N}_\infty \right\}
+\end{align*}
+
+Then by recalling the form of the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm} we can obtain that
+
+\begin{align*}
+	\diniu_t^+
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&=
+	\1_{[\amba]}\
+	\diniu_t^+\
+	\norm{
+		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+	}_\infty + 
+	\\
+	&\qquad
+	+ 
+	\1_{[\camp]}\
+	\diniu_t^+\
+	\max_{1\leq m \leq \hmactive_t}	
+	\max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty
+\end{align*}
+
+It is quite easy to prove that the amoebas' part yields the same result as in the basic model case:
+
+\begin{equation*}
+	\diniu_t^+ \norm{
+		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+	}_\infty 
+	\leq
+	d \norm{
+		\drift^{(A),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+	}_\infty 
+\end{equation*}
+
+This because the only difference between this model and the previous one for the amoebas is the finite sum $\sum_{l =1}^{\NumCampRelease}$ and thus an analogous form of lemma \ref{ch4:only-one-amoeba-will-survive} for this distance is valid as well.
+We need though to take care also of the cAMP part this time.
+Let
+
+\begin{align*}
+	I^\camp(t) &:= \left(
+	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	\right)_{m,l}
+		 &\in (\R^d)^{\hmactive_t + \NumCampRelease}
+	\\	
+	I_{m,l;i}^\camp(t) &:= 
+		\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+		 &\in \R
+\end{align*}
+
+Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm} we have that
+
+\begin{align*}
+	&\diniu_t^+
+	\max_{1\leq m \leq \hmactive_t}	
+	\max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty=
+	\\
+	&=
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq m \leq \hmactive_t}
+	\sum_{1\leq l \leq \NumCampRelease}\
+	\1_{
+		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+		}\
+	\diniu_t^+
+	I_{m,l;i}
+	\\
+	&=
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq m \leq \hmactive_t}
+	\sum_{1\leq l \leq \NumCampRelease}\
+	\1_{
+		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+	}\
+	\diniu_t^+
+	\left[
+	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	\right]
+	=
+\end{align*}
+
+Notice, as in the basic model case, that if $t\neq \btime_m$ the term $\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
+- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} $ is independent from $t$ and it is thus erased with the derivation.
+As for the basic model case, since $t= \btime_m$ happens with probability $0$, we simply remove from the space $\Omega$ the correspondent paths.
+Then we can write:
+
+\begin{align*}
+	&=
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq m \leq \hmactive_t}
+	\sum_{1\leq l \leq \NumCampRelease}\
+	\1_{
+		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+	}\
+	\Bigg\{\1_{t\neq\btime_m}
+	\diniu_t^+
+	\Big[
+	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} +
+	\\
+	&\qquad
+	+ 
+	(\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	\Big]
+	\Bigg\}
+	\\
+	&
+	=
+	-
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq m \leq \hmactive_t}
+	\sum_{1\leq l \leq \NumCampRelease}\	
+	\1_{
+		\norm{I_{m,l;i}^\camp(t)} = \norm{I^\camp(t)}_\infty
+	}\
+	\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+\end{align*}
+
+Again, as for the amoebas' part in the lemma \ref{ch4:only-one-amoeba-will-survive}, we want to get rid of $\sum_{1\leq m \leq \hmactive_t}$,  namely to show that only one addend for such sum survives \ie
+
+\begin{lemma}\label{ch7:only-one-camp-will-survive}
+	For all $t>0$ and for all $m \neq n$ we have that 
+	\begin{equation*}
+		\PrbOf{
+			\exists i,j,l,k.\:
+			I_{m,l;i}^\camp(t)
+			=
+			I_{n,k;j}^\camp(t)
+		} = 0
+	\end{equation*}
+\end{lemma}
+
+We sketch only the proof of such result, because we expect it to work.
+
+\begin{proof}[Sketch of a possible proof]
+	All the variables involved are continuous, thus their laws are non-atomic.
+	We expect that the condition $I_{m,l;i}^\camp(t)
+	=
+	I_{n,k;j}^\camp(t)$ requires that some quantities involved are the same on manifolds of dimension inferior to the whole configuration space, yielding the result.
+	We can reduce the complexity of the problem conditioning the probability with respect to the angles $\cgonia_{m,1}, \cgonia_{n,1}$.
+\end{proof}
+
+Then we can resume the whole proof as
+
+\begin{align*}
+	\diniu_t^+
+	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	&=
+	\1_{[\amba]}\
+	\diniu_t^+\
+	\norm{
+		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) ds
+	}_\infty + 
+	\\
+	&\qquad
+	+ 
+	\1_{[\camp]}\
+	\diniu_t^+\
+	\max_{1\leq m \leq \hmactive_t}	
+	\max_{1\leq l \leq \NumCampRelease}
+	\norm{
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+	}_\infty
+	\\
+	&\leq
+	d \norm{
+		\drift^{(\amba),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+	}_\infty 
+	-
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq l \leq \NumCampRelease}\
+	\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	\\
+	&\leq
+	d \norm{
+		\drift^{(A),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+	}_\infty 
+	+
+	\sum_{1\leq i \leq d}
+	\sum_{1\leq l \leq \NumCampRelease}\
+	\max_{m,l;i}
+	\norm{
+		\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	}
+	\\
+	&=
+	d \norm{
+		\drift^{(\amba),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+	}_\infty 
+	+
+	d\NumCampRelease\
+	\norm{
+		\drift^{(\camp),N}(t, \sol_t^N) - \mfdrift^{(\camp),N}(t, \mfsol_t^N)
+	}_\infty
+	\\
+	&\leq
+	K_{d, \NumCampRelease} \norm{
+		\drift^{N}(t, \sol_t^N) - \mfdrift^{N}(t, \mfsol_t^N)
+	}_\infty
+\end{align*}
+
+where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the correspondent drifts for the cAMP molecules.
+
+\subsection{Law of large numbers}
 [[for the law of large numbers show that everything is analogous exactly to the situation before for the amoebas, and show that the situation for the camp is easy to manage]]
 
 \section{Final proof}
 
 [[just state that it remains the same if you move in a certain way.]]
+
+[[show that since the amba molecules are exchangeable you can deduce the same results as chapter 3]]
 

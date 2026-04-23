@@ -26,3 +26,13 @@ topology.
 - use a uniform notation for the drift and so on.
 
 - finish chapter 7
+
+- conjecture in the conclusion for the a model where the amoebas do not 
+just react with their movements, but they do actually answer chemically 
+as well to different chemical signals. They speak, so to say. Explain 
+the implications mathematically and how this changes the model and the 
+model solution because of the lack of independence.
+
+- in chapter 3 conjecture (or explain at the very end, that it would be 
+cool to show that also the camp law can be hinted at, but that this must 
+be done manually then.

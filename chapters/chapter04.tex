@@ -544,42 +544,41 @@ Here the result we need to show is this:
 
 \begin{lemma}\label{ch4:lemma:get-rid-of-integral}
 	\begin{equation*}
-		\norm{\sol_t^N-\mfsol_t^N}_\infty \leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+		\diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty \leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
 	\end{equation*}
 \end{lemma}
 
-Notice that since the mean-field particles are coupled with the system \ref{ch2:model}, and since the initial conditions $\adens_0$ are the same for all the amoebas, we have that
+Notice that the mean-field particles are coupled with the system \ref{ch2:model}, and the initial conditions $\adens_0$ are the same for all the amoebas. Then we have
 
 \begin{align*}
 	\norm{\sol_t^N-\mfsol_t^N}_\infty 
 	&= \max \left\{
-	\norm{\amba_t - \mfamba_t}_\infty,
-	\norm{\camp_t - \mfcamp_t}_\infty
+	\norm{\amba_t^{(N)} - \mfamba_t^{(N)}}_\infty,
+	\norm{\camp_t^{(N)}  - \mfcamp_t^{(N)}}_\infty
 	\right\}
 	\\
 	&= \max \Bigg\{
 	\norm{
-		\amba_0 
-		+ \int_0^t \drift(s, \sol_s^N) d s
+		\amba_0^{(N)} 
+		+ \int_0^t \drift^{N} (s, \sol_s^N) d s
 		+ 
 		\sigma B_t^N
 	-
 	\left(
-		\mfamba_0
-		+ \int_0^t \drift(s, \mfsol_s^N) d s
+		\mfamba_0^{(N)} 
+		+ \int_0^t \drift^N(s, \mfsol_s^N) d s
 		+ 
 		\sigma B_t^N
 	\right)
 	}_\infty,
 	\\
 	&\qquad
+	\max_{1\leq m \leq \hmactive_t}
 		\norm{
-			\left(
-				\amba_{\btime_{m}} + \quasibm_t^m
+				\amba_{\btime_{m}}^{(N),\Parentof(m)}  + \quasibm_t^m
 				-
-				(\mfamba_{\btime_{m}} + \quasibm_t^m)
-			\right)_{m}
-		}_\infty
+				(\mfamba_{\btime_{m}}^{(N),\Parentof(m)}  + \quasibm_t^m)
+		}
 	\Bigg\}
 	\\
 	&=
@@ -587,18 +586,18 @@ Notice that since the mean-field particles are coupled with the system \ref{ch2:
 	\norm{
 		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
 	}_\infty,	
+	\max_{1\leq m \leq \hmactive_t}
 	\norm{
-		\amba_{\btime_{m}}
+		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		-
-		\mfamba_{\btime_{m}}
-	}_\infty
+		\mfamba_{\btime_{m}}^{(N),\Parentof(m)} 
+	}
 	\Bigg\}
 \end{align*}
 
-Notice that $\amba_{\btime_{m}}
+Notice that $\amba_{\btime_{m}}^{(N)} 
 -
-\mfamba_{\btime_{m}}$ is not dependent on $t$ unless $t = \btime_m$.
-Since this does not essentially change the final outcome (just adds a factor $2$ in front of the \rhs of \ref{ch4:lemma:get-rid-of-integral}), we assume that $t \neq \btime_m$.
+\mfamba_{\btime_{m}}^{(N)} $ is not dependent on $t$ and it is therefore removed with the derivation $\diniu^+_t$, unless $t = \btime_m$. Since the latter case happens with probability $0$ we simply remove the paths for which this manifests, \ie we assume that $t \neq \btime_m$.
 Therefore, if we try to Dini-derive such quantity we might sketch this:
 
 \begin{align*}
