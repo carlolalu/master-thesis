@@ -1,4 +1,12 @@
-\section{What is a solution to the toy model, formally}\label{app:formal-def-solution}
+\section{Space of solutions, formally}\label{app:formal-def-solution}
+
+[[see who references the label]]
+
+[[use theorem 2.8.2 from dudley to add the point to Rd and use the paragraph 13.2 to have that the product of such spaces can be seen as a polish space.
+use chapter 2.4 from dudley to put a metrico n the function spaces for the hmactive processes, if necessary.
+Or should I maybe see this as a putting a function from R+ to the configuration spaces and N times the natural numbers (for the thing).
+Maybe use theorem 2.4.5 from dudley and see, for every T>0 the space [0,T] as the compact space, and then the rest of the space a metric maybe polish space
+You can actually see it as a skochorod space (which is polish) over a polish space, and thus a polish space. Complicated but doable]]
 
 First we define the space of configurations of cAMP molecules spawned by a single amoeba.
 Here the $\star$ means that a particle has not been spawned yet.
@@ -39,6 +47,30 @@ x &= (x^1, \ldots, x^N,
 \end{equation*}
 where the absence of a coordinate in the list means that such coordinate is set to $\star$.
 \end{definition}
+
+\begin{remark}
+	Notice that 
+	\begin{align*}
+		\R^d_{camp}
+		&:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d)\
+		\subseteq\
+		\bigoplus_{g=1}^\N (\{\star\} \sqcup \R^d)\
+		=
+		\\
+		&:=
+		\{
+			x = (x_g)_{g\in\N}\
+			:\
+			\exists G\in\N_0.\
+			\forall g\geq G.\
+			x_g =\star
+		\}
+	\end{align*}
+	If we would be able to see $\{\star\} \sqcup \R^d$ as a space with some algebraic structure wehre $\star$ plays a special
+	And the latter one, among the other things, a categorical construct on which one can put quite a lot of structure.
+	This is useful in case we would like to inquire about properties about such spaces.
+\end{remark}
+
 
 This definition is important to have processes and function with domains and codomains which are constant throughout time.
 For example:
