@@ -1,6 +1,6 @@
 ## todo
 
-- VERIFY: is it a big conceptual error the one that you used in the lln? P(x + y > something) \leq P(x > smt) + P( y > something)?
+- add quotes to the lemma of P(A + B \geq a + b) \leq PA + PB in the law of large numbers
 
 - consistency in the usage of the norm / double norm
 
@@ -27,7 +27,13 @@ topology.
 
 - use a uniform notation for the drift and so on.
 
-- finish chapter 7
+- finish chapter 7:
+
+	+ if you are sloppy, declare it more explicitly
+	
+	+ show that the macroscopic model is completely independent from the rotation
+
+	+ retake this fact in the conclusion chapter to say that this is not an interesting scientific question
 
 - conjecture in the conclusion for the a model where the amoebas do not 
 just react with their movements, but they do actually answer chemically 
@@ -35,6 +41,13 @@ as well to different chemical signals. They speak, so to say. Explain
 the implications mathematically and how this changes the model and the 
 model solution because of the lack of independence.
 
+- conjecture in the conclusion that the dimension should not influence 
+also your supposition: if somebody would like to see how a 
+42-dimensional amoebas' model looks like, the eqautions should still 
+follow this pattern , with different constants.
+
 - in chapter 3 conjecture (or explain at the very end, that it would be 
 cool to show that also the camp law can be hinted at, but that this must 
 be done manually then.
+
+- check the ciryllic letters: their usage with 'text' makes it stick to the next letter. The solution is to use them ALWAYS in a math environment.

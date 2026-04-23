@@ -99,8 +99,8 @@ A solution to \ref{ch2:model:deterministic-parenting} is given by
 
 \subsection{Cyrillic variables}
 
-The cyrillic letters \Ch, \Zhi and \Iu are used in this master thesis for mathematical objects that need to be temporarily addressed (\eg in proofs), for which thus we do not want to use greek or latin letters which would be useful in other places.
-Do not feel intimidated by them: \Ch is pronounced as the sound "tsch" in German, \Zhi as the "j" in the french word "bonjour" and \Iu as the english word "you".
+The cyrillic letters $\Ch$, $\Zhi$ and $\Iu$ are used in this master thesis for mathematical objects that need to be temporarily addressed (\eg in proofs), for which thus we do not want to use greek or latin letters which would be useful in other places.
+Do not feel intimidated by them: $\Ch$ is pronounced as the sound "tsch" in German, $\Zhi$ as the "j" in the french word "bonjour" and $\Iu$ as the english word "you".
 
 \subsection{System, drift and diffusion}
 
@@ -173,9 +173,10 @@ Finally we will indicate generic constants with the symbol $K$, and a subscript 
 \end{equation*}
 
 
-\section{Estimates of a Poisson \rv higher moments and moment generating function}
+\section{Small tricks in stochastics}
 
-\begin{lemma}\label{app:Poisson-moments}
+\begin{lemma}[Estimates of the moments of a Poisson \rv]
+	\label{app:Poisson-moments}
 	Let $P \sim \Pois(\mu)$ be a Poisson \rv of parameter $mu$.
 	Then there is an increasing function $f^{\uparrow}: \N \longrightarrow \N$ independent from $\mu$ such that 
 	\begin{equation*}
@@ -282,10 +283,32 @@ Finally we will indicate generic constants with the symbol $K$, and a subscript 
 
 We have also this useful result from \cite[Equation (1.6-9)]{handbook-poisson}.
 
-\begin{lemma}\label{app:Poisson-generating-function}
+\begin{lemma}[The moment generating function of a Poisson \rv]
+	\label{app:Poisson-generating-function}
 	Let $P \sim \Pois(\mu)$ be a Poisson \rv of parameter $\mu$.
 	Then its moment generating function is given by:
 	\begin{equation*}
 		\E{\exp(sP)} =  \exp[\mu(e^s-1)]
 	\end{equation*}
 \end{lemma}
+
+The next one is a one liner proof that looks absolutely trivial here. Yet in some very cumbersome calculations, where the \rvs involved are nasty, we might miss that some inequalities happen because of this obvious fact.
+
+\begin{lemma}
+	Let $A,B$ be non-negative \rvs and let $a,b \in R_+$.
+	Then we have that
+	\begin{equation*}
+		\PrbOf{A+B \geq a +b} \leq \PrbOf{A \geq a} + \PrbOf{B \geq b}
+	\end{equation*}	
+\end{lemma}
+
+\begin{proof}
+	\begin{align*}
+		\PrbOf{A+B \geq a +b} &= 
+		\PrbOf{A \geq a, A+B \geq a +b} + \PrbOf{A < a, A+B \geq a +b} 
+		=
+		\PrbOf{A \geq a, A+B \geq a +b} + \PrbOf{B \geq b, A+B \geq a +b} 
+		\leq
+		\PrbOf{A \geq a} + \PrbOf{B \geq b}
+	\end{align*}	
+\end{proof}
