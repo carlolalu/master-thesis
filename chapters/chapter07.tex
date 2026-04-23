@@ -783,11 +783,196 @@ Then we can resume the whole proof as
 where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the correspondent drifts for the cAMP molecules.
 
 \subsection{Law of large numbers}
-[[for the law of large numbers show that everything is analogous exactly to the situation before for the amoebas, and show that the situation for the camp is easy to manage]]
+
+Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but for the sake of clarity we stick to the more classic attraction.
+
+\begin{proposition}
+ 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. Then there exists $\overline{N},K_\xi >0$ such that for all  $n\in \N$ there exists $K_{n, \NumCampRelease}$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
+ 	\begin{equation*}
+ 		\PrbOf{
+ 			\norm{
+ 				\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+ 			}_\infty
+ 			\geq
+ 			(1+2\NumCampRelease)N^{-\xi}
+ 		}
+ 		\leq
+ 		K_{n,\NumCampRelease} (t \vee 1)^{4n} N^{-K_\xi n +1}
+ 	\end{equation*}
+\end{proposition}
+
+\begin{proof}
+	Notice that
+	\begin{align*}
+		(1+\NumCampRelease)N^{-\xi} 
+		&\leq 
+		\norm{
+			\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+		}_\infty
+		\\
+		&= 
+		\max 
+		\Bigg\{
+		\norm{
+			\left(
+			\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+			-
+			\left( \attraction \star \int_0^t \NumCampRelease\lambda \cdens_t^\tau \right) (\mfamba_t^p)
+			\right)_{p}
+		}_\infty,
+		\\
+		&\qquad
+		\norm{
+			\left(
+			\1_{\geq \btime^{p,g}}(t)  \frac{\cdrift}{N}  \cgonia_{p,g,l} 
+			\right)_{p,g,l}
+		}_\infty
+		\Bigg\}
+		\\
+		&\leq
+		\sum _{l = 1}^{\NumCampRelease} 
+		\norm{
+			\left(
+			\frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+			-
+			\left( \attraction \star \int_0^t \lambda \cdens_t^\tau \right) (\mfamba_t^p)
+			\right)_{p}
+		}_\infty
+		+
+		\frac{\cdrift}{N}
+	\end{align*}
+	
+	With these consideration in mind we can then write
+	
+	\begin{align*}
+		&\PrbOf{
+			\norm{
+				\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+			}_\infty
+			\geq
+			(1+2\NumCampRelease)N^{-\xi}
+		}
+		\leq
+		\\
+		&\leq
+		\PrbOf{
+		\sum _{l = 1}^{\NumCampRelease} 
+		\norm{
+			\left(
+			\frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+			-
+			\left( \attraction \star \int_0^t \lambda \cdens_t^\tau \right) (\mfamba_t^p)
+			\right)_{p}
+		}_\infty
+		+
+		\frac{\cdrift}{N}\
+		\geq
+		(1+2\NumCampRelease)N^{-\xi}
+		}
+		\\
+		&\leq
+		\PrbOf{
+			\sum _{l = 1}^{\NumCampRelease} 
+			\norm{
+				\left(
+				\frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+				-
+				\left( \attraction \star \int_0^t \lambda \cdens_t^\tau \right) (\mfamba_t^p)
+				\right)_{p}
+			}_\infty
+			\geq
+			2\NumCampRelease N^{-\xi}
+		}
+		+
+		\PrbOf{
+			\frac{\cdrift}{N}\
+			\geq
+			N^{-\xi}
+		}
+		\leq
+	\end{align*}
+	
+	Now focus on the cAMP part and see that, since $\xi < \frac{1}{2}$, for $N$ big enough we have that
+	
+	\begin{align*}
+		\PrbOf{
+			\frac{\cdrift}{N}\
+			\geq
+			N^{-\xi}
+		} &= 
+		\PrbOf{
+			\cdrift\
+			\geq
+			N^{1-\xi}
+		} = 0
+	\end{align*}
+	
+	and therefore we can write that
+	
+	\begin{align*}
+		&\leq
+		\PrbOf{
+			\sum _{l = 1}^{\NumCampRelease} 
+			\norm{
+				\left(
+				\frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+				-
+				\left( \attraction \star \int_0^t \lambda \cdens_t^\tau \right) (\mfamba_t^p)
+				\right)_{p}
+			}_\infty
+			\geq
+			2\NumCampRelease N^{-\xi}
+		}
+		\\
+		&\leq
+		\sum _{l = 1}^{\NumCampRelease}\
+		\PrbOf{
+			\norm{
+				\left(
+				\frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_t^q} \attraction(\mfamba_t^p - \mfcamp_t^{q,g,l}) 
+				-
+				\left( \attraction \star \int_0^t \lambda \cdens_t^\tau \right) (\mfamba_t^p)
+				\right)_{p}
+			}_\infty
+			\geq
+			2N^{-\xi}
+		}
+		\leq
+	\end{align*}
+	
+	and this element can be dominated exactly by the law of large numbers \ref{ch5:LLN} previously found, because the mean-field drift is simply scaled by a factor $\NumCampRelease$:
+	
+	\begin{align*}
+		\leq
+		\sum _{l = 1}^{\NumCampRelease}\
+		K_n\
+		(t \vee 1)^{4n}\
+		N^{-K_\xi n + 1}
+		=
+		K_{n,\NumCampRelease}\
+		(t \vee 1)^{4n}\
+		N^{-K_\xi n + 1}
+	\end{align*}
+\end{proof}
 
 \section{Final proof}
 
-[[just state that it remains the same if you move in a certain way.]]
+The condition 
 
-[[show that since the amba molecules are exchangeable you can deduce the same results as chapter 3]]
+\begin{equation}
+	\PrbOf{  
+		\sup_{0 \leq t \leq T}
+		\Norm{
+			\sol_t^N - \mfsol_t^N
+		}_\infty 
+		\geq
+		N^{-\cutparameter}
+	}
+	\leq\
+	F^{\uparrow}(T)\
+	N^{-(\xi-\delta)}
+\end{equation}
+
+can be proven exactly as in chapter \ref{ch6} exploiting the updated version of the law of large numbers.
+Notice that since also in the case of the pulsing waves model the amoebas are exchangeable, the chain of conditions \ref{ch3:proposition:sznitman}, \ref{ch3:lemma-sznitman-wasserstein} and \ref{ch3:w-1-convergence-condition} work smoothly as before.
 

@@ -1,5 +1,7 @@
 ## todo
 
+- VERIFY: is it a big conceptual error the one that you used in the lln? P(x + y > something) \leq P(x > smt) + P( y > something)?
+
 - consistency in the usage of the norm / double norm
 
 - drawings drawings, drawings. Geogebra?
