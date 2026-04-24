@@ -1,12 +1,15 @@
 Till now we treated the simplest model, where at the moment of spawning the cAMP was a lonely molecule simply roaming around of \Bm.
-This is though very far from reality, where the cAMP is released in waves expanding radially around the amoeba: in this chapter we build a model with the purpose of describing more accurately this phenomenon, and we sketch how one should be able to derive a macroscopic model which is very similar to the one of the basic model.
+This is though very far from reality, where the chemoattractant is released in waves expanding radially around the amoeba, as can be observed in various videos (\eg \cite{ze-frank}).
+There in fact, marking the molecules radioactively, one is able to see clearly the waves of molecules expanding around the amoebas.
+In this chapter we build a generalized version of the previous simple system with the purpose of describing more accurately this phenomenon, and we sketch how one should be able to derive effective equations which are only the scaled version of the ones in \ref{ch3:EFFECTIVE-EQS}.
 
-\section{The definition}
+\section{The microscopic definition and its correspondent mesoscopic and macroscopic description}
 
-[[here quote some paper AND some youtube video connected to it. Maybe even show a picture from some paper about it]]
+[[here put maybe a picture of the cAMP waves from some paper with precise reference]]
 
 Consider the same Poisson process $(\hmactive_t^p)_p$ and their correspondent $\hmactive_t$, with the respective birth times.
-Let $\NumCampRelease \in \N$ be the (deterministic) number of cAMP molecules being spawned at each birth time $\btime^{p,g}=\btime_m$ and let $\frac{\cdrift}{N} \in \R_+$ be the (constant deterministic) scale-invariant modulus of their drift velocity at each of these instants.
+Let $\NumCampRelease \in \N$ be the (deterministic) number of cAMP molecules being spawned at each birth time $\btime^{p,g}=\btime_m$ and let $\frac{\cdrift}{N} \in \R_+$ be the modulus of their drift velocity at each of these instants.
+Notice that such speed is chosen to be deterministic and constant, and that the factor $\frac{1}{N}$ is the necessary coupling constant.
 Then, at each $\btime^{p,g}=\btime_m$ we would release the particles
 
 \begin{equation*}
@@ -22,18 +25,18 @@ A solution to this would be that each $\camp^{p,g,l} = \camp^{m,l}$ expands in a
 	\begin{center}
 		\begin{tikzpicture}[scale=0.6]
 			\coordinate (center) at (0,0);
-			\draw[thin] (center) circle (2cm);
+			\draw[thin] (center) circle (3.8cm);
 			\foreach \index in {1,...,6} {
 				\tikzmath{\gonia=20*\index;}
 				\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=\gonia);
 				\draw[violet,->] (center) -- (A);
-				\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=\gonia);
+				\coordinate (B) at (canvas polar cs:radius=4.5cm,angle=\gonia);
 				\node at (B) {\tiny $\camp^{p,g,\index}$};
 			}
 			
 			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=-120);
 			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4.2cm,angle=-120);
+			\coordinate (B) at (canvas polar cs:radius=4.5cm,angle=-120);
 			\node at (B) {\tiny $\camp^{p,g,7}$};
 			
 			\node[anchor=north west] at (center) {$\amba^i$};
@@ -50,11 +53,11 @@ The solution is to fix the relative position of the drifting velocities and requ
 \begin{center}
 	\begin{tikzpicture}[scale=0.6]
 		\coordinate (center) at (0,0);
-		\draw[thin] (center) circle (2cm);
+		\draw[thin] (center) circle (3.8cm);
 		\foreach \index in {1,...,12} {
 			\coordinate (A) at (canvas polar cs:radius=3.8cm,angle=30*\index);
 			\draw[violet,->] (center) -- (A);
-			\coordinate (B) at (canvas polar cs:radius=4.3cm,angle=30*\index);
+			\coordinate (B) at (canvas polar cs:radius=4.5cm,angle=30*\index);
 			\node at (B) {\tiny $\camp^{k,\index}$};
 		}		
 		
@@ -287,6 +290,10 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		(\hmactive_s + \cdrift)
 	\end{align*}
 \end{proof}
+
+\begin{remark}
+	Notice that now the system \ref{ch2:model} is just a specific case of the system \ref{ch7:model:pulsing-waves} with $\NumCampRelease=1$ and cAMP drift $\cdrift=0$.
+\end{remark}
 
 \subsection{Mean-field particles candidate}
 
@@ -547,6 +554,11 @@ It is easy to show that then the existence and uniqueness of solutions for the m
 	\end{equation*}
 	for a constant $K_{\attraction, \lambda,\NumCampRelease} > 0$.
 \end{lemma}
+
+\begin{remark}\label{ch7:only-important-parameter-is-NumCampRelease}
+	Notice how the macroscopic description is completely independent from the rotations $\rotation_l$, from the angles $(\cgonia^{m,l})$ and from the constant $\cdrift$.
+	This means that the only determinant parameter for the macroscopic behaviour is given by $\NumCampRelease$, the number of molecules released at each birth time.
+\end{remark}
 
 \subsection{Convergence}
 

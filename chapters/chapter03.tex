@@ -711,9 +711,9 @@ Notice furthermore that the existence of a sufficiently regular solution $\adens
 With this view on the problem we make this assumptions regarding the solutions $\adens_t, \cdens_t$ of the system \ref{ch3:EFFECTIVE-EQS}:
 \begin{enumerate}\label{ch3:conditions-on-eff-equ-solutions}
 	\item There are solution $\adens_t,\cdens_t^\tau \in \Lpspace^1(\R^d)$ (for every $\tau \geq0$) for \ref{ch3:integro-differential-system} and it is valid that $\int \adens_t dx = 1= \int \cdens_t^\tau dx$, meaning that $\forall t$ they are probability distributions.
-	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that $\forall T> 0$ there is a constant $K_T > 0$ such that 
+	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that there is an increasing, positive and continuous function $\densBound(T)=:\densBound_T$ in $T$ such that 
 	\begin{equation*}
-		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)}, \sup_{t\leq T} \Norm{\cdens_t}_{\Lpspace^\infty(\R^d)} \leq K_T 
+		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)}, \sup_{t\leq T} \Norm{\cdens_t}_{\Lpspace^\infty(\R^d)} \leq \densBound_T 
 	\end{equation*}
 	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
 \end{enumerate}
@@ -883,6 +883,13 @@ With this view on the problem we make this assumptions regarding the solutions $
 		t
 	\end{align*}
 \end{proof}
+
+\paragraph{Continuity}
+It is important to underline that also the mesoscopic particles $\mfsol_t^N = ( \mfamba_t , \mfcamp_t)$ have continuous paths in the sense of \ref{ch2:system-continuous-glueing}, because the mean-field particles $\mfcamp_t^m$ are spawning on the position of the mean-field amoebas $\mfamba_t^{\Parentof(m)}$.
+This will be relevant to inquire about the properties of the distance process 
+\begin{equation*}
+	\Norm{\sol_t - \mfsol_t}_\infty
+\end{equation*}
 
 \section{The best condition to prove the convergence}
 
