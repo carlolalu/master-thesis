@@ -57,7 +57,7 @@ With this background in mind, we state the next result, of which the proof will 
 \begin{lemma}\label{ch4:lemma:del-dini-of-all}
 	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
 	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
-	Then we have that with probability $!$, for all $T>0$
+	Then we have that with probability $1$, for all $T>0$
 	\begin{equation}
 		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
 		\leq
@@ -81,39 +81,66 @@ In this part we want to show this lemma.
 	\end{equation}
 \end{lemma}
 
+Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\sol_t^N-\mfsol_t^N$ is continuous, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions for such function (\cadlag and with a finite number of discontinuouty and such that in every such point the function can only jump up).
+This result can be in fact exploited for mesoscopic models $\mfsol_t$ which spawn new molecules $\camp_t$ in random position, and not along the path of other already existing particles (but this is not our case).
 Consider the random function
 
 \begin{equation}
-\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
+	\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
 \end{equation}
 
 and look at its paths.
 Such function is surely continuous between birth times $\btime_m$, but what happens at such instants?
 
-\begin{lemma}
-The paths of $\Ch(t)$ are \cadlag and have only a finite number of discontinuouties on $[0,T]$.
-Furthermore, considering $\Ch(t-) := \lim_{h\rightarrow 0^-} \Ch(t+h)$, we have that
+
+
+[[use the word mesoscopic model also in the chapter 3]]
+
+[[reorder the things in this chapter: define now the space skoro, do some observation on its elements, then prove that your paths are continuous. Sketch that if the particles would be spawned randomly the model would have paths in skoro]]
+
+[[observe that the distance between the newborn particles and all the others is starting from $0$ every time, and this is the origin of continuouty. Maybe put this into another chapter, like at the verye end of chapter 2 and chapteer 3]]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{lemma}\label{ch4:distance-is-c0}
+The paths of $\Ch(t)$ continuous.
+In particular are \cadlag, have only a finite number of discontinuouties on $[0,T]$ and if $\Ch(t-) := \lim_{h\rightarrow 0^-} \Ch(t+h)$, we have that
 \begin{equation}
 \forall \btime_m. \Ch(\btime_m-) \leq \Ch(\btime_m)
 \end{equation}
 \end{lemma}
 
 \begin{remark}
-Notice that this does \emph{not} necessarily mean that $\Ch$ has increasing paths, it only means that such paths, if they do have a jump, it's necessarily a jump up.
-Such condition, on \cadlag functions $g$, can be simply stated as:
-\begin{equation}
-	\forall t. \quad g(t-) \leq g(t+)
-	\quad 
-	\left( =g(t) \right)
-\end{equation}
+	Let $g$ be a function such that it is \cadlag, has only a finite number of discontinuouties on $[0,T]$ and if $g(t-) := \lim_{h\rightarrow 0^-} g(t+h)$ then for every discontinuouity $s$ we have
+	
+	\begin{equation*}
+		\forall s. g(s-) \leq g(s)
+	\end{equation*}
+	
+	This does \emph{not} necessarily mean that $g$ has increasing paths, it only means that such paths, if they do have a jump, it's necessarily a jump up.
+	Such condition, on \cadlag functions $g$, can be simply stated as:
+	\begin{equation}
+		\forall t. \quad g(t-) \leq g(t+)
+		\quad 
+		\left( =g(t) \right)
+	\end{equation}
 \end{remark}
 
-\begin{figure}[h]
-\begin{tikzpicture}
-\end{tikzpicture}
-\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouity AT THE RANDOM TIMES with the jump up]]]}
-\end{figure}
-\label{ch4:fig:discontinuous distance}
 
 \begin{proof}
 Since both $\sol_t^N$  and $\mfsol_t^N$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
@@ -177,6 +204,13 @@ Let $\SkoroF$ be the set of functions $g: \R_+ \longrightarrow \R_+$ such that:
 \end{itemize}
 Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$, or equivalently, such that $\forall t. g(t-) \leq g(t+)$.
 \end{definition}
+
+\begin{figure}[h]
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouity AT THE RANDOM TIMES with the jump up]]]}
+\end{figure}
+\label{ch4:fig:discontinuous distance}
 
 By the previous lemma the paths of $\Ch$ are elements in $\SkoroFUp$.
 

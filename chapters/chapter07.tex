@@ -163,7 +163,9 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	Furthermore $\drift^N$ is bounded
 	
 	\begin{equation*}
-		\Norm{\drift^N(s,x)}_\infty \leq K_{\NumCampRelease, \attraction}\
+		\Norm{\drift^N(s,x)}_\infty \leq 
+		\frac{1}{N}
+		K_{\NumCampRelease, \attraction}\
 		(\hmactive_s + \cdrift)
 	\end{equation*}
 	
@@ -280,6 +282,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 			\cdrift
 		\right)\
 		\leq\
+		\frac{1}{N}
 		K_{\NumCampRelease, \attraction}\
 		(\hmactive_s + \cdrift)
 	\end{align*}
@@ -529,7 +532,7 @@ or, expressing the density of cAMP molecules analytically (exactly as in \ref{ch
 We make exactly the same assumption as \ref{ch3:conditions-on-eff-equ-solutions} on the densities $\adens_t, \cdens_t$.
 It is easy to show that then the existence and uniqueness of solutions for the mean-field particles can be proven in the same way as for the basic model, and that we have a similar bound for the mean-field drift:
 
-\begin{lemma}
+\begin{lemma}\label{ch7:mfdrift-lip-and-bound}
 	The mean-field drift $\mfdrift(t,x)$ defined in \ref{ch3:MF-particles} coordinate-wise as
 	\begin{equation*}
 		\mfdrift_p(t,x) = 
@@ -539,7 +542,8 @@ It is easy to show that then the existence and uniqueness of solutions for the m
 	\end{equation*}
 	is Lipschitz and bounded in space with bound
 	\begin{equation*}
-		\Norm{\mfdrift(t,x)}_\infty \leq K_{\attraction, \lambda,\NumCampRelease} t
+		\Norm{\mfdrift(t,x)}_\infty \leq 
+		K_{\attraction, \lambda,\NumCampRelease} t
 	\end{equation*}
 	for a constant $K_{\attraction, \lambda,\NumCampRelease} > 0$.
 \end{lemma}
@@ -861,7 +865,7 @@ where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the cor
 
 Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but for the sake of clarity we stick to the more classic attraction.
 
-\begin{proposition}
+\begin{proposition}\label{ch7:LLN}
  	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. Then there exists $\overline{N},K_\xi >0$ such that for all  $n\in \N$ there exists $K_{n, \NumCampRelease}$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
  	\begin{equation*}
  		\PrbOf{
@@ -1052,6 +1056,9 @@ We expect the condition
 
 to be provable exactly as in chapter \ref{ch6}, even with the same symbol, with the only difference being a scaling of a factor $\NumCampRelease$ for the function $F^{\uparrow}(T)$.
 This because the lemmas for the Dini derivation still have the same form, and the law of large numbers has only a scaling for some constant, and we still have bounds for both the drift and the mean-field drift, thus all the proof concept holds on the exact same principles.
+
+\subsubsection{Use Groenwall on an auxiliary process}
+
 Define
 
 
@@ -1064,7 +1071,7 @@ Define
 	}_\infty \right)
 \end{equation}
 
-As before, we have that
+Exactly as before, we have that
 
 \begin{align*}
 	\PrbOf{  
@@ -1075,27 +1082,8 @@ As before, we have that
 		\geq
 		N^{-\cutparameter}
 	}
-	&=
-	\PrbOf{  
-		\Big(
-		N^{\cutparameter}\:
-		\sup_{0 \leq t \leq T}
-		\Norm{
-			\sol_t^N - \mfsol_t^N
-		}_\infty 
-		\Big)
-		\wedge
-		1
-		\geq
-		1
-	}
-	\\
-	&=
-	\PrbOf{  
-		\auxProc_T^N
-		\geq
-		1
-	}\
+	\leq\
+	\ldots\
 	\leq\
 	\E{ 
 		\auxProc_T^N
@@ -1103,26 +1091,12 @@ As before, we have that
 \end{align*}
 
 
-Consider $0 < t \leq T$ and calculate then:
+Consider $0 < t \leq T$ and have then, as previously:
 
 \begin{align*}
 	\diniu^+_t \auxProc_t^N 
-	&= 
-	\left( \1_{\{\diniu^+_t \auxProc_t^N >0 \}} + \1_{\{\diniu^+_t \auxProc_t^N \leq 0\}}\right) \cdot \diniu^+_t \auxProc_t^N 
+	&
 	\leq
-	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
-	\diniu_t^+  
-	\left(	
-	1 \wedge \big( 
-	N^{\cutparameter}
-	\sup_{0 \leq s \leq t}
-	\Norm{
-		\sol_s^N - \mfsol_s^N
-	}_\infty \big)
-	\right)
-	\leq
-	\\
-	&\leq
 	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
 	+  
@@ -1131,11 +1105,11 @@ Consider $0 < t \leq T$ and calculate then:
 \end{align*}
 \footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
 
-Recall that $\drift^N$ is Lipschitz (\ref{ch7:lemma:drift:lip-and-bound}) therefore:
+Again we exploit the lipschitzianity of $\drift^N$ (\ref{ch7:lemma:drift:lip-and-bound}) but simply with a different constant with respect to the basic model case:
 
 \begin{align*}
 	\leq
-	d\
+	3\
 	\frac{K_{\attraction,\NumCampRelease}}{N}
 	\hmactive_t
 	\underbrace{
@@ -1145,7 +1119,7 @@ Recall that $\drift^N$ is Lipschitz (\ref{ch7:lemma:drift:lip-and-bound}) theref
 		\norm{\sol_t^N - \mfsol_t^N}_\infty
 	}_{}
 	+ N^{\cutparameter}\
-	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	3\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
 \end{align*}
 
 As for the basic model, we can infer that
@@ -1164,36 +1138,21 @@ Therefore we can write
 \begin{align*}
 	\diniu^+_t \auxProc_t^N 
 	&\leq
-	{K_{\attraction,\NumCampRelease,d}}
+	{K_{\attraction,\NumCampRelease}}
 	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
-	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
-\end{align*}
-
-Integrating over $[0,T]$ we then obtain:
-
-\begin{align*}
-	\auxProc_T^N - \auxProc_0^N &\leq
-	\int_0^T
-	{K_{\attraction,\NumCampRelease,d}}\
-	\frac{\hmactive_T}{N}\
-	\auxProc_t^N dt
-	+ 
-	N^{\cutparameter}\
 	K
-	\int_0^T 
 	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
-	dt
-	\leq
 \end{align*}
 
-Choose now some $S >T$ to obtain
+Integrating over $[0,T]$ and choosing some $S > T$ we then obtain:
 
 \begin{equation*}
+	\auxProc_T^N = \auxProc_T^N - \auxProc_0^N 
 	\leq
 	\int_0^T 
-	{K_{\attraction,\NumCampRelease,d}}\
+	{K_{\attraction,\NumCampRelease}}\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
@@ -1205,3 +1164,186 @@ Choose now some $S >T$ to obtain
 		dt
 	}_{=:\Iu}
 \end{equation*}
+
+We should again prove that the term $\Iu$ is different from $0$ with probability $1$, but this should hold since $\mfdrift$ is simply $L$ scaled with respect to the basic model case, and $\drift$ is the sum of $\NumCampRelease$ processes distributed very similarly to the basic model case.
+We assume this holds, and by applying the Groenwall lemma in his form \ref{ch6:lemma-groenwall-generalized} we obtain:
+
+\begin{equation}\label{ch7:just-applied-Groenwall}
+	\begin{aligned}
+		\auxProc_T^N 
+		&\leq 
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		\int_0^T K_{\attraction,\NumCampRelease}\
+		\frac{\hmactive_T}{N}dt
+		\right)
+		\\
+		&=
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		T
+		K_{\attraction,\NumCampRelease}\
+		\frac{\hmactive_T}{N}
+		\right)
+	\end{aligned}
+\end{equation}
+
+\subsubsection{Apply the law of large number and on the average}
+
+Again we can now use the law of large numbers and the bounds on the drift $\drift$ and mean-field drift $\mfdrift$, which are essentially the same bounds as before, but with different constants. Define the set
+
+\begin{equation*}
+	\setB_t := \left\{
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq 2N^{-\xi}
+	\right\}
+\end{equation*}
+
+for some $0 < \xi < \frac{1}{2}$.
+Then, for $N$ big enough, by the law of large numbers \ref{ch7:LLN} and exploiting the bounds from the lemmas \ref{ch7:lemma:drift:lip-and-bound} and \ref{ch7:mfdrift-lip-and-bound} we have that
+
+
+\begin{align*}
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	&=
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+	\1_{\setB_t
+	}
+	+
+	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+	\1_{\setB_t^c
+	}
+	\\
+	&\leq
+	2N^{-\xi}
+	+
+	\left(
+	\Norm{
+		\drift^N(t, \cdot)
+	}_{\Lpspace^\infty(\R^d)}
+	+
+	\Norm{
+		\mfdrift^N(t, \cdot)
+	}_{\Lpspace^\infty(\R^d)}	
+	\right)
+	\1_{\setB_t^c}
+	\\
+	&\leq
+		2N^{-\xi}
+		+
+		\left(
+			\frac{1}{N}
+			K_{\NumCampRelease, \attraction}\
+			(\hmactive_t + \cdrift)
+			+
+			K_{\attraction, \lambda,\NumCampRelease} t
+		\right)
+		\1_{\setB_t^c}
+\end{align*}
+
+Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calculate
+
+\begin{align*}
+	\E{\auxProc_T^N}
+	&\leq 
+	\E{
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		T
+		K_{\attraction,\NumCampRelease}\
+		\frac{\hmactive_T}{N}
+		\right)
+	}
+	\\
+	&\leq
+	N^{\cutparameter}\
+	K
+	\E{
+		\int_0^S
+			\left[
+				2N^{-\xi}
+				+
+				\left(
+				\frac{1}{N}
+				K_{\NumCampRelease, \attraction}\
+				(\hmactive_t + \cdrift)
+				+
+				K_{\attraction, \lambda,\NumCampRelease} t
+				\right)
+				\1_{\setB_t^c}
+			\right]
+		dt
+		\cdot
+		\exp \left(
+			T
+			K_{\attraction,\NumCampRelease}\
+			\frac{\hmactive_T}{N}
+		\right)
+	}
+	\\
+	&= N^{\cutparameter}\
+	K\
+	S\
+	N^{-\xi}\
+	\E{
+		\exp \left(
+		T\
+		K_{\attraction,\NumCampRelease}\
+		\frac{\hmactive_T}{N}\
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_{\attraction,\NumCampRelease}\
+	S\
+	\E{
+		\frac{\hmactive_S}{N} 
+		\int_0^S
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		TK_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_{\attraction,\NumCampRelease}\
+	\left(
+	K_{\attraction,\NumCampRelease}\
+	\frac{\cdrift}{N}\
+	S\
+	+
+	K_{\attraction,\NumCampRelease,\lambda}\
+	S^2
+	\right)\
+	\E{
+		\int_0^S
+		\1_{\setB_t^c}\
+		dt
+		\cdot
+		\exp \left(
+		TK_\attraction\
+		\frac{\hmactive_T}{N}\
+		\right)
+	}
+\end{align*}
+
+[[correct from here on]]
