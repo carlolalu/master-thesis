@@ -23,8 +23,8 @@ A macroscopic description of this model for the amoebas' part is a density $\ade
 \end{equation*}
 
 This description is macroscopic, because we loose the information about each individual, but we still describe the movement of the individuals as a whole.
-In this chapter we explain such condition and how to prove it in a more handy way.
-Furthermore, we craft a candidate for $\adens(t,\cdot)$.
+In this chapter we craft a candidate for $\adens(t,\cdot)$ and we explain the condition above and how to prove it in a more handy way.
+Specifically we build a mesoscopic model, \ie a model between the macroscopic and the microscopic one, which serves as a bridge.
 Finally we hint at the idea of finding a similar macroscopic description for the cAMP part, namely a density $\cdens(t,\cdot)$ such that
 
 \begin{equation*}
@@ -57,7 +57,8 @@ For this to be a valid definition we need to have a $\sigma$-algebra on $\PrbMea
 
 Then the condition that we actually need to show is the convergence in law of the \rv $\empmeas_t^{(\amba),N}$ to the (constant) \rv $\adens_t$:
 
-\begin{align*}
+\begin{equation}\label{ch3:cumbersome-condition-convergence-in-Pspace}
+	\begin{aligned}
 	\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
 	\qquad \Longleftrightarrow
 	\quad
@@ -65,7 +66,8 @@ Then the condition that we actually need to show is the convergence in law of th
 	\E{F(\empmeas_t^{(\amba),N})}
 	\xrightarrow{N \rightarrow \infty} 
 	\E{F(\adens_t)}
-\end{align*}
+	\end{aligned}
+\end{equation}
 
 This condition is cumbersome, and we can do better than it.
 Thanks to the theorem \cite[Proposition 2.2]{sznitman} we can find a less scary condition:
@@ -882,7 +884,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\end{align*}
 \end{proof}
 
-\section{The best condition we need to prove the convergence}
+\section{The best condition to prove the convergence}
 
 Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
@@ -1223,3 +1225,38 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	
 	where the limit goes to $0$ because $0< \cutparameter < \xi < \frac{1}{2}$.
 \end{proof}
+
+
+\section{A macroscopic description for the cAMP molecules?}
+
+The cAMP molecules are created at a rate $\lambda$, and each molecule created at a random time $\tau$ has a density fullfilling
+
+\begin{equation*}
+	\left\{
+\begin{aligned}
+	\cdens^\tau(t, \cdot) 
+	& \equiv 0
+	&&\text{if } t < \tau
+	\\
+	\cdens^\tau(\tau, \cdot) 
+	&= \adens(\tau, \cdot)
+	&&
+	\\
+	\partial_t \cdens^\tau
+	&= \frac{d\sigma_\camp^2}{2} \bigtriangleup \cdens^\tau
+	&&\text{if } t \geq \tau
+\end{aligned}
+\right.
+\end{equation*}
+
+This, together with the form of the effective equations \ref{ch3:EFFECTIVE-EQS}, where the $\adens_t$ should follow the cAMP by the convolution, seems to suggest that
+
+\begin{equation*}
+	\empmeas_t^{(\camp),N} 
+	\xrightarrow{N\longrightarrow +\infty} 
+		\cdens(t,\cdot) :=
+		 \int_0^t \lambda \cdens_t^\tau 	d \tau
+\end{equation*}
+
+The problem is that the cAMP molecules, both in the microscopic and in the mesoscopic model, are \emph{not} exchangeable, and thus the proposition of Sznitman \ref{ch3:proposition:sznitman} cannot be used, and one might have to manually use the condition \ref{ch3:cumbersome-condition-convergence-in-Pspace}.
+This might be easier than this, but no effort was done to inquire about it.

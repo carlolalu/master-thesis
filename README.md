@@ -22,8 +22,6 @@ that the conditional measure is regular, with the theorem tal dei tali,
 thus must prove that the space i Polish if provided with the optimal 
 topology.
 
-- use the bound on the mean-field particle drift to make smoother certain proofs in the last part
-
 - use a uniform notation for the drift and so on.
 
 - finish chapter 7:
@@ -34,6 +32,8 @@ topology.
 
 	+ retake this fact in the conclusion chapter to say that this is not an interesting scientific question
 
+	+ Notice that the basic model is a particular case of the pulsing waves model
+	
 - conjecture in the conclusion for the a model where the amoebas do not 
 just react with their movements, but they do actually answer chemically 
 as well to different chemical signals. They speak, so to say. Explain 
@@ -44,7 +44,3 @@ model solution because of the lack of independence.
 also your supposition: if somebody would like to see how a 
 42-dimensional amoebas' model looks like, the eqautions should still 
 follow this pattern , with different constants.
-
-- in chapter 3 conjecture (or explain at the very end, that it would be 
-cool to show that also the camp law can be hinted at, but that this must 
-be done manually then.

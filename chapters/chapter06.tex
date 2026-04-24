@@ -415,7 +415,7 @@ Therefore we obtain that
 	\end{aligned}
 \end{equation*}
 
-\section{Law of large numbers and averaging}
+\section{Law of large numbers and averaging}\label{ch6:2nd-part-of-the-proof}
 
 Define the set
 
@@ -484,7 +484,8 @@ Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-dr
 where the probability of $\setB_t^c$ is described by the law of large numbers \ref{ch5:LLN}.
 Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calculate
 
-\begin{align*}
+\begin{equation}\label{ch6:3-terms before-estimates}
+	\begin{aligned}
 	\E{\auxProc_T^N}
 	&\leq 
 	\E{
@@ -525,19 +526,22 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\right)
 	}
 	\\
-	&= N^{-(\xi-\cutparameter)}\
-	K\
-	S\
-	\E{
-		\exp \left(
-			T
-			K_\attraction\
-			\frac{\hmactive_T}{N}
-		\right)
-	} +
-	\\
-		&\qquad
-		+ N^{\cutparameter}\
+	&= 
+	\overbrace{
+		N^{-(\xi-\cutparameter)}\
+		K\
+		S\
+		\E{
+			\exp \left(
+				T
+				K_\attraction\
+				\frac{\hmactive_T}{N}
+			\right)
+		}
+	}^{\text{Term }1}
+		+ 
+		\overbrace{
+		N^{\cutparameter}\
 		K_{\attraction, \lambda} 
 		\E{
 			\frac{\hmactive_S}{N} 
@@ -550,24 +554,33 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
+	}^{\text{Term }2}
 	\\
 	&\qquad
-		+ N^{\cutparameter}\
+		+ 
+		\underbrace{
+		N^{\cutparameter}\
 		K_{\attraction, \lambda}
 		S\
-		\E{
-			\int_0^S
-			\1_{\setB_t^c}\
-			dt
-			\cdot
-			\exp \left(
-			TK_\attraction\
-			\frac{\hmactive_T}{N}\
-			\right)
-		}
-\end{align*}
+			\E{
+				\int_0^S
+				\1_{\setB_t^c}\
+				dt
+				\cdot
+				\exp \left(
+				TK_\attraction\
+				\frac{\hmactive_T}{N}\
+				\right)
+			}
+		}_{\text{Term }3}
+	\end{aligned}
+\end{equation}
 
-Now use Fubini on the last two terms to get to:
+Now observe: the first term has a negative power of $N$, which means that if the expectation value of the only random element present in it does not depend on $N$, then the whole term is tamed (\ie it tends to $0$ as $N$ grows).
+The other two terms instead have a positive power of $N$, thus will need that the \rvs present in $\E{}$, when evaluated, will yields some estimate with a sufficiently strong negative power of $N$ to contrast $N^{\cutparameter}$. 
+Luckily inside $\E{}$ appears $\1_{\setB_t^c}$ which, with the law of large numbers, serves exactly this purpose.
+Let us see this strategy in action.
+Use Fubini on the last two terms to get to:
 
 \begin{align*}
 &=
