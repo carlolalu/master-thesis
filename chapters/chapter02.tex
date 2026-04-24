@@ -513,7 +513,7 @@ The same is true for the drift of the cAMP.
 This is not the case for the drift in the case of amoebas though: since $\hmactive^p_t$ are \cadlag, then also the coordinate functions $\drift_p(t, x)$ are \cadlag, \ie not $\Cspace^0$ in time.
 We need thus to use the result \ref{ch2:cond:E-and-U-lipsch+subgrowth}.
 
-\begin{lemma}
+\begin{lemma}\label{ch2:lemma:lipsch-of-drift}
 The drift function $\drift(t, x, (\hmactive^p)_p)$ defined coordinate-wise in \ref{ch2:def:drift-&-diffusion} as
 \begin{equation*}
 \drift(t,x) := \drift(t,x, (\hmactive^p_t)_t) := 
@@ -534,14 +534,18 @@ L_N := K_\attraction \frac{\hmactive_t}{N} = \frac{K_\attraction }{N} \sum_{k=1}
 where $K_\attraction$ is a constant depending on the Lipschitz constant of $\attraction$,
 \ie
 \begin{equation}
-\forall t \in \R_+.\ || \drift(t,x) - \drift(t,y)||_\infty \leq L_N || x-y||_\infty
+\forall t \in \R_+.\ \Norm{ \drift(t,x) - \drift(t,y)}_\infty \leq L_N \Norm{x-y}_\infty
 \end{equation}
-\item It is bounded, hence in particular it grows sublinearly in space:
+\item There is a constant $K_{\attraction}>0$ such that
 \begin{equation*}
-\exists M > 0.\,\forall t \in \R_+.\ |\drift(t,x) - \drift(t,y)| \leq M (1+|x|)
+\Norm{ \drift(t,x)}_\infty\
+\leq\
+K_{\attraction}\
+\frac{\hmactive_t}{N}
 \end{equation*}
+\ie it is bounded, hence in particular it grows sublinearly in space.
 \end{enumerate}
-\end{lemma}\label{ch2:lemma:lipsch-of-drift}
+\end{lemma}
 
 \begin{remark}
 Since we work in a finite Banach space all norms are equivalent, thus for these properties we could choose any of them.
@@ -589,19 +593,20 @@ Fix $t,x,y$ and let $l$ be the Lipschitz constant of $\attraction$. Then
 \end{equation*}
 
 where $K_\attraction := 2l$. Thus the Lipschitzianity has been proved.
-The sublinearity is easily achieved because the potential is bounded, and thus $\drift$ is bounded.
-For example, using the $\infty$-norm we have:
+The drift $\drift$ is bounded:
 \begin{equation*}
 \begin{aligned}
-|| \drift(t, x)||_\infty
+\Norm{\drift(t,x)}_\infty\
 	& \leq \frac{l}{N} \max_{k\in\{1,\ldots,N\}}
 		\sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
-		\underbrace{|| \attraction(x^k - x^{p,g})||_\infty}
+		\underbrace{\Norm{\attraction(x^k - x^{p,g})}_\infty}
 			_{\leq \cdot || \attraction||_\infty}
 	\\
-	& \leq \frac{l \sum_{p=1}^{N} \hmactive_t^p ||\attraction||_\infty}{N}
-	\\
-	& = \frac{L_N}{2} ||\attraction||_\infty \leq \frac{L_N}{2} ||\attraction||_\infty (1 + ||x||_\infty)
+	&
+	\leq \frac{l \sum_{p=1}^{N} \hmactive_t^p \Norm{\attraction}_\infty}{N}
+	= 
+	K_{\attraction}\
+	\frac{\hmactive_t}{N}
 \end{aligned}
 \end{equation*}
 \end{proof}

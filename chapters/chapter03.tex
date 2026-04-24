@@ -689,307 +689,8 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \right.
 \end{equation}
 
-Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
-\begin{lemma}
-	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be the amoebas part of the solution of \ref{ch3:MF-particles}.
-	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
-	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
-	\begin{equation}\label{ch3:condition-closeness}
-		\PrbOf{\max_{1\leq p \leq N} \norm{\amba_t^p - \mfamba_t^p}_\infty > N^{-\cutparameter}
-		}
-		\leq\
-		K\
-		N^{-(\xi-\cutparameter)}
-	\end{equation}
-	Then we have that
-	\begin{equation*}
-		\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
-	\end{equation*}
-\end{lemma}
-
-\begin{proof}
-	By the lemma \ref{ch3:lemma-sznitman-wasserstein}  it is sufficient to show that the condition \ref{ch3:condition-closeness} implies 
-	\begin{equation*}
-		\sup_{0\leq t\leq T}
-		W_1 \big(
-		\Psi_t^{N, (k)}, \bigotimes_{p=1}^{k} \adens_t
-		\big),
-		\quad
-		\sup_{0\leq t\leq T}
-		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
-		\big),
-		\xrightarrow {N \rightarrow \infty} 0
-	\end{equation*}
-	
-	Here the proof will be shown for $\Psi_t^{N}$, the case is analogous for $\Psi_t^{N, (k)}$.
-	
-	\begin{align*}
-		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
-		\big) &=
-		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
-		\int_{\R^{dN}\times \R^{dN}} \frac{1}{dN}\
-		\sum_{i=1}^d\
-		\sum_{p=1}^N\
-		\norm{x^{p;i} - y^{p;i}}\
-		d\gamma(x,y)
-		\\
-		&\leq
-		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
-		\int_{\R^{dN}\times \R^{dN}}
-		\norm{x-y}_\infty\
-		d\gamma(x,y)
-		\leq
-	\end{align*}
-	
-	Since $\mfamba_t^{(N)} = (\mfamba_t^p)_{p=1}^N$ are \iid each with law $\adens_t$, we can take the specific coupling 
-	
-	\begin{equation*}
-		\overline{\gamma} := \Psi_t^{N} \otimes (\bigotimes_{p=1}^{N}\adens_t) = \law(\amba_t^{(N)}) \otimes \law(\mfamba_t^{(N)})
-	\end{equation*}
-	
-	and obtain
-	
-	\begin{equation*}
-		\leq
-		\int_{\R^{dN}\times \R^{dN}}
-		\norm{x-y}_\infty\
-		d \law(\amba_t^{(N)}) (x)\
-		d \law(\mfamba_t^{(N)}) (y)
-		=
-		\E{
-			\norm{
-				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
-		}
-		=
-	\end{equation*}
-	
-	Then, if we define the set
-	
-	\begin{equation*}
-		\Xi_t := \left\{
-		\norm{
-			\amba_t^{(N)} - \mfamba_t^{(N)}
-		}_\infty < N^{-\cutparameter}
-		\right\}
-	\end{equation*}
-	
-	by the condition \ref{ch3:condition-closeness} we have that $\PrbOf{\Xi_t^c} \leq K	N^{-(\xi-\cutparameter)}$ and therefore
-	
-	\begin{align*}
-		&=
-		\E{
-			\norm{
-				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
-			\1_{\Xi_t}
-		}
-		+
-		\E{
-			\norm{
-				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
-			\1_{\Xi_t^c}
-		}
-		\leq		
-		\E{
-			\norm{
-				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
-			\1_{\Xi_t}
-		} 
-		+ 
-		N^{-\cutparameter}
-		\\
-		&=
-		\E{
-			\norm{
-					 \adens_0 + \int_0^t \left( 
-					\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
-					\right) (\mfamba_s^p) ds + \diffusion_\amba B_t^p
-					-
-					\left(
-						\adens_0
-						+ \int_0^t \frac{1}{N} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m}) d s
-						+ 
-						\diffusion_\amba B_t^p
-					\right)
-				}_\infty
-				\1_{\Xi_t}
-		} +
-		\\
-		&\qquad\qquad
-		+ 
-		N^{-\cutparameter}
-		\\
-		&=
-		\E{
-			\norm{
-				\int_0^t \left( 
-				\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
-				\right) (\mfamba_s^p)
-				-
-				\frac{1}{N} \sum_{m = 1}^{\hmactive_s} \attraction(\amba_s^p - \camp_s^{m}) d s
-			}_\infty
-			\1_{\Xi_t}
-		}
-		+ 
-		N^{-\cutparameter}
-		\\
-		&\leq
-		\E{
-				\int_0^t 
-				\Norm{
-					\left( 
-					\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
-					\right)
-				}_\infty
-				ds
-				\1_{\Xi_t}
-				+
-				\frac{t}{N} \hmactive_t \Norm{\attraction}_\infty
-				\1_{\Xi_t}
-		}
-		+
-		N^{-\cutparameter}
-		\\
-		&\leq
-		\E{
-			\int_0^t 
-			\Norm{\attraction}_\infty
-			\Norm{
-				\int_0^s \lambda \cdens_s^\tau 	d \tau
-			}_1
-			ds
-			\1_{\Xi_t}
-		}
-			+
-			\frac{t}{N} \Norm{\attraction}_\infty
-			\E{
-				\hmactive_t
-				\1_{\Xi_t}
-			}
-		+
-		N^{-\cutparameter}
-		\\
-		&=
-		\Norm{\attraction}_\infty
-		\lambda
-		\frac{t^2}{2}
-		\E{
-			\1_{\Xi_t}
-		}
-		+
-		\frac{t}{N} \Norm{\attraction}_\infty
-		\E{
-			\hmactive_t
-			\1_{\Xi_t}
-		}
-		+
-		N^{-\cutparameter}
-		\leq
-	\end{align*}
-	
-	Now we can use Hölder on $ \E{
-		\hmactive_t
-		\1_{\Xi_t}
-	}$ for some $p,q\in (1, +\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$ together with the bound on the measure $\Xi_t$ to obtain that
-	
-	\begin{align*}
-		&\leq
-		\Norm{\attraction}_\infty
-		\lambda
-		\frac{t^2}{2}
-		K	N^{-(\xi-\cutparameter)}
-		+
-		\frac{t}{N} \Norm{\attraction}_\infty
-		(\E{(\hmactive_t)^q})^\frac{1}{q}
-		\underbrace{
-			\E{
-				\1_{\Xi_t}^p
-			}^\frac{1}{p}
-		}_{\leq K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}}
-		+
-		N^{-\cutparameter}
-	\end{align*}
-	
-	Then, applying the estimate of Poisson processes moments from \ref{app:Poisson-moments} we obtain that
-	
-	\begin{align*}
-		&\leq
-		\Norm{\attraction}_\infty
-		\lambda
-		\frac{t^2}{2}
-		K	N^{-(\xi-\cutparameter)}
-		+
-		\frac{t}{N} \Norm{\attraction}_\infty
-		(f^{\uparrow}(q)^\frac{1}{q}\: (\lambda Nt)^{q\frac{1}{q}} \vee 1)
-		K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}
-		+
-		N^{-\cutparameter}
-		=
-	\end{align*}
-	
-	Supposing that $\lambda Nt \geq 1$ (which is true for $N$ sufficiently big if $t>0$), and indicating with $K_{x,y,z}$ every generic constant $K>0$ dependent on the mathematical objects $x,y,z$ (\ref{app:notation}) we obtain that
-	
-	\begin{align*}
-		&=
-		K_{\attraction, \lambda}
-		t^2
-		N^{-(\xi-\cutparameter)}
-		+
-		t\
-		K_{\attraction,\lambda,q,p}\
-		t
-		N^\frac{-(\xi-\cutparameter)}{p}
-		+
-		N^{-\cutparameter}
-	\end{align*}
-	
-	Resuming, then, we have that
-	
-	\begin{equation*}
-		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
-		\big) 
-		\leq
-		K_{\attraction, \lambda}
-		t^2
-		N^{-(\xi-\cutparameter)}
-		+
-		t^2\
-		K_{\attraction,\lambda,q,p}\
-		N^\frac{-(\xi-\cutparameter)}{p}
-		+
-		N^{-\cutparameter}
-	\end{equation*}
-	
-	and thus 
-	
-	\begin{equation*}
-		\sup_{t\in[0,T]} W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
-		\big) 
-		\leq
-		K_{\attraction, \lambda}
-		T^2
-		N^{-(\xi-\cutparameter)}
-		+
-		T^2\
-		K_{\attraction,\lambda,q,p}\
-		N^\frac{-(\xi-\cutparameter)}{p}
-		+
-		N^{-\cutparameter}
-		\xrightarrow{N\rightarrow +\infty} 0
-	\end{equation*}
-	
-	where the limit goes to $0$ because $0< \cutparameter < \xi < \frac{1}{2}$.
-\end{proof}
-
-\section{Solution of the derived systems and their properties}
+\subsection{Solution of the derived systems and their properties}
 
 The system \ref{ch3:integro-differential-system} is a non-linear partial integro-differential equation (non-linear PIDE).
 In other words, it is a pretty wild beast.
@@ -1015,7 +716,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
 \end{enumerate}
 
-\begin{lemma}
+\begin{lemma}\label{ch3:mfdrift-lips-and-bounded}
 	The mean-field drift $\mfdrift(t,x)$ defined in \ref{ch3:MF-particles} coordinate-wise as
 	\begin{equation*}
 		\mfdrift_p(t,x) = 
@@ -1025,7 +726,9 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\end{equation*}
 	is Lipschitz and bounded in space with bound
 	\begin{equation*}
-		\Norm{\mfdrift(t,x)}_\infty \leq K_{\attraction, \lambda} t
+		\Norm{\mfdrift(t,x)}_\infty 
+		\leq 
+		K_{\attraction, \lambda} t
 	\end{equation*}
 	for a constant $K_{\attraction, \lambda} > 0$ depending on $\attraction, \lambda$.
 \end{lemma}
@@ -1179,5 +882,344 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\end{align*}
 \end{proof}
 
+\section{The best condition we need to prove the convergence}
 
+Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
+\begin{lemma}
+	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be the amoebas part of the solution of \ref{ch3:MF-particles}.
+	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
+	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
+	\begin{equation}\label{ch3:condition-closeness}
+		\PrbOf{\max_{1\leq p \leq N} \norm{\amba_t^p - \mfamba_t^p}_\infty > N^{-\cutparameter}
+		}
+		\leq\
+		K\
+		N^{-(\xi-\cutparameter)}
+	\end{equation}
+	Then we have that
+	\begin{equation*}
+		\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
+	\end{equation*}
+\end{lemma}
+
+\begin{proof}
+	By the lemma \ref{ch3:lemma-sznitman-wasserstein}  it is sufficient to show that the condition \ref{ch3:condition-closeness} implies 
+	\begin{equation*}
+		\sup_{0\leq t\leq T}
+		W_1 \big(
+		\Psi_t^{N, (k)}, \bigotimes_{p=1}^{k} \adens_t
+		\big),
+		\quad
+		\sup_{0\leq t\leq T}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big),
+		\xrightarrow {N \rightarrow \infty} 0
+	\end{equation*}
+	
+	Here the proof will be shown for $\Psi_t^{N}$, the case is analogous for $\Psi_t^{N, (k)}$.
+	
+	\begin{align*}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) &=
+		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\int_{\R^{dN}\times \R^{dN}} \frac{1}{dN}\
+		\sum_{i=1}^d\
+		\sum_{p=1}^N\
+		\norm{x^{p;i} - y^{p;i}}\
+		d\gamma(x,y)
+		\\
+		&\leq
+		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\int_{\R^{dN}\times \R^{dN}}
+		\norm{x-y}_\infty\
+		d\gamma(x,y)
+		\leq
+	\end{align*}
+	
+	Since $\mfamba_t^{(N)} = (\mfamba_t^p)_{p=1}^N$ are \iid each with law $\adens_t$, we can take the specific coupling 
+	
+	\begin{equation*}
+		\overline{\gamma} := \Psi_t^{N} \otimes (\bigotimes_{p=1}^{N}\adens_t) = \law(\amba_t^{(N)}) \otimes \law(\mfamba_t^{(N)})
+	\end{equation*}
+	
+	and obtain
+	
+	\begin{equation*}
+		\leq
+		\int_{\R^{dN}\times \R^{dN}}
+		\norm{x-y}_\infty\
+		d \law(\amba_t^{(N)}) (x)\
+		d \law(\mfamba_t^{(N)}) (y)
+		=
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+		}
+		=
+	\end{equation*}
+	
+	Then, if we define the set
+	
+	\begin{equation*}
+		\Xi_t := \left\{
+		\norm{
+			\amba_t^{(N)} - \mfamba_t^{(N)}
+		}_\infty \geq N^{-\cutparameter}
+		\right\}
+	\end{equation*}
+	
+	by the condition \ref{ch3:condition-closeness} we have that $\PrbOf{\Xi_t} \leq K	N^{-(\xi-\cutparameter)}$ and therefore
+	
+	\begin{align*}
+		&=
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t}
+		}
+		+
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t^c}
+		}
+		\leq		
+		\E{
+			\norm{
+				\amba_t^{(N)} - \mfamba_t^{(N)}
+			}_\infty
+			\1_{\Xi_t}
+		} 
+		+ 
+		N^{-\cutparameter}
+		\\
+		&=
+		\E{
+			\norm{
+				\adens_0 + \int_0^t \drift(s, \mfamba_s^p) ds + \diffusion_\amba B_t^p
+				-
+				\left(
+				\adens_0
+				+ \int_0^t \mfdrift(s, \mfamba_s^p) d s
+				+ 
+				\diffusion_\amba B_t^p
+				\right)
+			}_\infty
+			\1_{\Xi_t}
+		} + 
+		N^{-\cutparameter}
+		\\
+		&=
+		\E{
+			\norm{
+				\int_0^t
+					\drift(s, \mfamba_s^p) - \mfdrift(s, \mfamba_s^p)
+				d s
+			}_\infty
+			\1_{\Xi_t}
+		}
+		+ 
+		N^{-\cutparameter}\
+		\leq\
+		\E{
+			\int_0^t 
+			\Norm{
+				\drift(s, \cdot)
+			}_\infty
+			+
+			\Norm{
+			 	\mfdrift(s, \cdot)
+			}_\infty
+			ds\
+			\1_{\Xi_t}
+		}
+		+
+		N^{-\cutparameter}
+	\end{align*}
+	
+	Recalling now the bound for the drift (\ref{ch2:lemma:lipsch-of-drift}) and the mean-field drift (\ref{ch3:mfdrift-lips-and-bounded}) we can proceed as following
+	
+	\begin{align*}
+		&\leq
+			\E{
+				\int_0^t 
+				K_{\attraction}\
+				\frac{\hmactive_s}{N}
+				+
+				K_{\attraction, \lambda} s\			
+				ds\
+				\1_{\Xi_t}
+			}
+			+
+			N^{-\cutparameter}\
+		\\
+		&\leq\
+			\E{
+				t
+				K_{\attraction}\
+				\frac{\hmactive_t}{N}\
+				\1_{\Xi_t}
+			}
+			+
+			\E{
+				K_{\attraction, \lambda} 
+				\frac{t^2}{2}\
+				\1_{\Xi_t}
+			}
+			+
+			N^{-\cutparameter}
+		\\
+		&=
+		\frac{tK_{\attraction}}{N}\
+		\E{
+			\hmactive_t
+			\1_{\Xi_t}
+		}
+		+
+		K_{\attraction, \lambda} 
+		\frac{t^2}{2}\
+		\E{
+			\1_{\Xi_t}
+		}
+		+
+		N^{-\cutparameter}
+		\leq
+	\end{align*}
+	
+	Now we can use Hölder on $ \E{
+		\hmactive_t
+		\1_{\Xi_t}
+	}$ for some $p,q\in (1, +\infty)$ such that $\frac{1}{p} + \frac{1}{q} = 1$ together with the bound on the measure of $\Xi_t$ to obtain that
+	
+	\begin{align*}
+		&\leq\
+			\frac{tK_{\attraction}}{N}\
+			(\E{(\hmactive_t)^q})^\frac{1}{q}
+				\E{
+					\1_{\Xi_t}^p
+				}^\frac{1}{p}
+			+
+			K_{\attraction, \lambda} 
+			t^2\
+			\E{
+				\1_{\Xi_t}
+			}
+			+
+			N^{-\cutparameter}
+			\\
+		&\leq\
+			\frac{tK_{\attraction}}{N}\
+			(\E{(\hmactive_t)^q})^\frac{1}{q}\
+			K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}\
+			+
+			K_{\attraction, \lambda} 
+			t^2\
+			K\
+			N^{-(\xi-\cutparameter)}
+			+
+			N^{-\cutparameter}
+		\\
+		&=\
+			\frac{t\
+				K_{\attraction,p}
+			}{N}\
+			(\E{(\hmactive_t)^q})^\frac{1}{q}\
+			N^\frac{-(\xi-\cutparameter)}{p}\
+			+
+			K_{\attraction, \lambda} 
+			t^2\
+			N^{-(\xi-\cutparameter)}
+			+
+			N^{-\cutparameter}
+	\end{align*}
+	
+	Then, applying the estimate of Poisson processes moments from \ref{app:Poisson-moments} we obtain that
+	
+	\begin{align*}
+		&\leq
+			\frac{t\
+				K_{\attraction,p}
+			}{N}\
+				(f^{\uparrow}(q)^\frac{1}{q}\: (\lambda Nt)^{q\frac{1}{q}} \vee 1)\
+			N^\frac{-(\xi-\cutparameter)}{p}\
+			+
+			K_{\attraction, \lambda} 
+			t^2\
+			N^{-(\xi-\cutparameter)}
+			+
+			N^{-\cutparameter}
+	\end{align*}
+	
+	Supposing that $\lambda Nt \geq 1$ (which is true for $N$ sufficiently big if $t>0$) we obtain that
+	
+	\begin{align*}
+		&=
+				\frac{t\
+					K_{\attraction,p,q, \lambda}
+				}{N}\
+				(Nt)
+				N^\frac{-(\xi-\cutparameter)}{p}\
+			+
+				K_{\attraction, \lambda} 
+				t^2\
+				N^{-(\xi-\cutparameter)}
+			+
+				N^{-\cutparameter}
+		\\
+			&\leq
+				K_{\attraction,p,q, \lambda}\
+				t^2\
+				N^\frac{-(\xi-\cutparameter)}{p}\
+				+
+				K_{\attraction, \lambda} 
+				t^2\
+				N^{-(\xi-\cutparameter)}
+				+
+				N^{-\cutparameter}
+	\end{align*}
+	
+	Resuming, then, we have that
+	
+	\begin{equation*}
+		W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) 
+		\leq
+		K_{\attraction, \lambda}
+		t^2
+		N^{-(\xi-\cutparameter)}
+		+
+		t^2\
+		K_{\attraction,\lambda,q,p}\
+		N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+	\end{equation*}
+	
+	and thus 
+	
+	\begin{equation*}
+		\sup_{t\in[0,T]} W_1 \big(
+		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\big) 
+		\leq
+		K_{\attraction, \lambda}
+		T^2
+		N^{-(\xi-\cutparameter)}
+		+
+		T^2\
+		K_{\attraction,\lambda,q,p}\
+		N^\frac{-(\xi-\cutparameter)}{p}
+		+
+		N^{-\cutparameter}
+		\xrightarrow{N\rightarrow +\infty} 0
+	\end{equation*}
+	
+	where the limit goes to $0$ because $0< \cutparameter < \xi < \frac{1}{2}$.
+\end{proof}

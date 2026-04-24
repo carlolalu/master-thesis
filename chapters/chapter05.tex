@@ -62,7 +62,7 @@ To prove it the idea is to notice that for the $k$-th particle
 	}_\infty
 \end{align*}
 
-and therefore
+and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we can obtain
 
 \begin{equation}\label{ch5:sketch-dividi-et-impera}
 	\begin{aligned}
@@ -85,9 +85,32 @@ and therefore
 				\mfdrift_k^N(t, \mfsol_t^N)
 			}_\infty
 			\geq
-			N^{-\xi}
+			N^{-\xi}\
 		}
 		\leq
+		\\
+		&\leq
+		\Prb \Bigg(
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\drift_k^N(t, \mfsol_t^N)
+				-
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+			}_\infty
+			+
+			\\
+			&\qquad\quad
+			+
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				-
+				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+			}_\infty
+			\geq
+			N^{-\xi}\
+			+N^{-\xi}\
+		\Bigg)
 		\\
 		&\leq
 		\overbrace{
@@ -120,7 +143,8 @@ and therefore
 \end{equation}
 
 and consequently we can bound separately the two addends.
-The first section is an explains the generalization of the attraction and shows some estimate about it, the two central sections treat respectively the first and the second term, and the final fourth section composes all the pieces together in a ready-to-use tool.
+This was the "dividi" part of the usual strategy "dividi et impera".
+The first section is an explains the generalization of the attraction $\attraction$ and shows some estimate about it, the two central sections treat respectively the first and the second term, and the final fourth section composes all the pieces together in a ready-to-use tool.
 
 \section{Necessary premises}
 
@@ -3259,38 +3283,60 @@ Then let us observe closely the object in question.
 			\geq
 			2N^{-\xi}
 		}
-		\leq
+		=
 		\\
+		&=
+		\Prb \Bigg(
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\drift_k^N(t, \mfsol_t^N)
+				-
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+			}_\infty
+		 +
+		\\
+		&\qquad\quad
+		+
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				-
+				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+			}_\infty
+			\geq
+			N^{-\xi} + N^{-\xi}
+		\Bigg)
+	\end{align*}
+	
+	and thus "dividi" is the principle \ref{app:pA-pB-less-than}, while the "impera" part of the strategy is given by the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}.
+	Therefore we can obtain
+	
+	\begin{align*}
 		&\leq
-			\PrbOf{
-				\sup_{1\leq k \leq N} 
-				\Norm{
-					\drift_k^N(t, \mfsol_t^N)
-					-
-					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
-				}_\infty
-				\geq
-				N^{-\xi}
+		\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\drift_k^N(t, \mfsol_t^N)
+				-
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+			}_\infty
+			\geq
+			N^{-\xi}
 		} +
 		\\
 		&\qquad\quad
 		+
-			\PrbOf{
-				\sup_{1\leq k \leq N} 
-				\Norm{
-					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
-					-
-					\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
-				}_\infty
-				\geq
-				N^{-\xi}
-			}\
-			\leq
-	\end{align*}
-	
-	and thus "dividi", while the "impera" part of the strategy is given by the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}, which yield
-	
-	\begin{align*}
+		\PrbOf{
+			\sup_{1\leq k \leq N} 
+			\Norm{
+				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				-
+				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+			}_\infty
+			\geq
+			N^{-\xi}
+		}\
+		\\
 		&\leq
 		K_n\
 		t^n\

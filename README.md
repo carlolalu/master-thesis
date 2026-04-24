@@ -1,18 +1,13 @@
 ## todo
 
-- add quotes to the lemma of P(A + B \geq a + b) \leq PA + PB in the law of large numbers
-
 - consistency in the usage of the norm / double norm
 
-- in the lemmas where you show that the drifts are lipschitz, provide also a bound for them and exploit both in the final proof and also in the law of large numbers (shorter)
-
-- follow the indications in chapter 4 on how to show that certain paths are continuous in your models. Correct consequently the chapter 4.
-
-- drawings?
-
-- correct the section regarding the del dini derivation: show that you 
+- follow the indications in chapter 4 on how to show that certain paths are continuous in your models. Correct consequently the chapter 4..
+correct the section regarding the del dini derivation: show that you 
 derived a more general result than the one that you need, because your 
 paths are C^0 and not cadlag. The keyword is "ch3:rmk:mf-not-c0"
+
+- drawings?
 
 - correct, in the law of large numbers, the notation for the conditions 
 on the l^\infty limitation on the norm of the densities: it should be 

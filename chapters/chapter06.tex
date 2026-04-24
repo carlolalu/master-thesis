@@ -386,17 +386,33 @@ With this lemma we have that the conditions of \ref{ch6:lemma-groenwall-generali
 Therefore we obtain that 
 
 \begin{equation*}\label{ch6:just-applied-Groenwall}
-	\auxProc_T^N \leq 
-	N^{\cutparameter}\
-	K
-	\int_0^S
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
-	dt
-	\cdot
-	\exp \left(
-	\int_0^T K_\attraction\
-	\frac{\hmactive_T}{N}dt
-	\right)
+	\begin{aligned}
+		\auxProc_T^N 
+		&\leq 
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		\int_0^T K_\attraction\
+		\frac{\hmactive_T}{N}dt
+		\right)
+		\\
+		&\leq 
+		N^{\cutparameter}\
+		K
+		\int_0^S
+		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		dt
+		\cdot
+		\exp \left(
+		T
+		K_\attraction\
+		\frac{\hmactive_T}{N}
+		\right)
+	\end{aligned}
 \end{equation*}
 
 \section{Law of large numbers and averaging}
@@ -410,7 +426,7 @@ Define the set
 \end{equation*}
 
 for some $0 < \xi < \frac{1}{2}$.
-Then we have 
+Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-drift} and \ref{ch3:mfdrift-lips-and-bounded} for the drift and the mesoscopic drift we obtain
 \begin{align*}
 	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 	&=
@@ -423,55 +439,46 @@ Then we have
 		}
 		\\
 		&\leq
-		2N^{-\xi}
-		+
-		\norm{
-		\frac{1}{N} \sum _{m = 1}^{\hmactive_t} \attraction(\mfamba^p - \mfcamp^{m}) 
-		- \lambda \left(\attraction \star \int_0^t \cdens_t^\tau 	d \tau \right) (\mfamba^{p})
-	}_\infty
-		\1_{\setB_t^c}
-		\\
-		&\leq
-		2N^{-\xi}
-		+
-		\left(
-			\frac{\hmactive_t}{N} \Norm{\attraction}_\infty
+			2N^{-\xi}
 			+
-			\lambda \int_0^t \Norm{ \attraction \star\cdens_t^\tau }_\infty d \tau  
+			\left(
+				\Norm{\drift^N(t, \cdot)}_\infty\
+				+
+				\Norm{\mfdrift^N(t, \cdot)}_\infty\
+			\right)
+			\1_{\setB_t^c}
+		\\
+		&\leq
+		2N^{-\xi}
+		+
+		\left(
+			K_{\attraction}\
+			\frac{\hmactive_t}{N}
+			+
+			K_{\attraction, \lambda} t
 		\right)\
 		\1_{\setB_t^c}
 		\\
 		&\leq
 		2N^{-\xi}
-		+		
+		+
+		K_{\attraction, \lambda} 
 		\left(
-		K_\attraction
-		\frac{\hmactive_t}{N} 
+		\frac{\hmactive_t}{N}
 		+
-		\lambda \int_0^t \Norm{ \attraction }_\infty \Norm{\cdens_t^\tau}_1 d \tau  
-		\right)\
-		\1_{\setB_t^c}
-		\\
-		&\leq
-		2N^{-\xi}
-		+
-		K_\attraction\
-		\left(
-		\frac{\hmactive_t}{N} 
-		+
-		\lambda t
+		t
 		\right)\
 		\1_{\setB_t^c}\quad
-		\leq
+		\leq\
 		2N^{-\xi}
 		+
-		K_\attraction\
+		K_{\attraction, \lambda} 
 		\left(
-		\frac{\hmactive_S}{N} 
+		\frac{\hmactive_S}{N}
 		+
-		\lambda S
+		S
 		\right)\
-		\1_{\setB_t^c}
+		\1_{\setB_t^c}\quad
 \end{align*}
 
 where the probability of $\setB_t^c$ is described by the law of large numbers \ref{ch5:LLN}.
@@ -481,33 +488,34 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 	\E{\auxProc_T^N}
 	&\leq 
 	\E{
-		N^{\cutparameter}\
-		K
+		N^{\cutparameter}
+		K\
 		\int_0^S
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 		dt
 		\cdot
 		\exp \left(
-		\int_0^T K_\attraction\
-		\frac{\hmactive_T}{N}dt
+		T
+		K_\attraction\
+		\frac{\hmactive_T}{N}
 		\right)
 	}
 	\\
 	&\leq
-	N^{\cutparameter}\
-	K
+	N^{\cutparameter}
+	K\
 	\E{
 		\int_0^S
 		\left[
-		2N^{-\xi}
-		+
-		K_\attraction\
-		\left(
-		\frac{\hmactive_S}{N} 
-		+
-		\lambda S
-		\right)\
-		\1_{\setB_t^c}\
+			2N^{-\xi}
+			+
+			K_{\attraction, \lambda} 
+			\left(
+			\frac{\hmactive_S}{N}
+			+
+			S
+			\right)\
+			\1_{\setB_t^c}\quad
 		\right]
 		dt
 		\cdot
@@ -517,82 +525,53 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\right)
 	}
 	\\
-	&= N^{\cutparameter}\
-	K\
-	S\
-	N^{-\xi}\
-	\E{
-		\exp \left(
-		TK_\attraction\
-		\frac{\hmactive_T}{N}\
-		\right)
-	} +
-	\\
-	&\qquad
-	+ N^{\cutparameter}\
-	K_\attraction\
-	\E{
-		\left(
-		\frac{\hmactive_S}{N} 
-		+
-		\lambda S
-		\right)\
-		\int_0^S
-		\1_{\setB_t^c}\
-		dt
-		\cdot
-		\exp \left(
-		TK_\attraction\
-		\frac{\hmactive_T}{N}\
-		\right)
-	}
-	\\
-	&= N^{\cutparameter-\xi}\
+	&= N^{-(\xi-\cutparameter)}\
 	K\
 	S\
 	\E{
 		\exp \left(
-TK_\attraction\
-		\frac{\hmactive_T}{N}\
+			T
+			K_\attraction\
+			\frac{\hmactive_T}{N}
 		\right)
 	} +
 	\\
-	&\qquad
-	+ N^{\cutparameter}\
-K_\attraction\
-	\E{
-		\frac{\hmactive_S}{N}\
-		\int_0^S
-		\1_{\setB_t^c}\
-		dt
-		\cdot
-		\exp \left(
-TK_\attraction\
-		\frac{\hmactive_T}{N}\
-		\right)
-	}
+		&\qquad
+		+ N^{\cutparameter}\
+		K_{\attraction, \lambda} 
+		\E{
+			\frac{\hmactive_S}{N} 
+			\int_0^S
+			\1_{\setB_t^c}\
+			dt
+			\cdot
+			\exp \left(
+			TK_\attraction\
+			\frac{\hmactive_T}{N}\
+			\right)
+		}
 	\\
 	&\qquad
-	+ N^{\cutparameter}\
-	K_\attraction\
-	\lambda\
-	S\
-	\E{
-		\int_0^S
-		\1_{\setB_t^c}\
-		dt
-		\cdot
-		\exp \left(
-TK_\attraction\
-		\frac{\hmactive_T}{N}\
-		\right)
-	}=
+		+ N^{\cutparameter}\
+		K_{\attraction, \lambda}
+		S\
+		\E{
+			\int_0^S
+			\1_{\setB_t^c}\
+			dt
+			\cdot
+			\exp \left(
+			TK_\attraction\
+			\frac{\hmactive_T}{N}\
+			\right)
+		}
 \end{align*}
 
 Now use Fubini on the last two terms to get to:
 
 \begin{align*}
-&= N^{\cutparameter-\xi}\
+&=
+N^{\cutparameter-\xi}\
 K\
 S\
 \E{
@@ -602,7 +581,7 @@ TK_\attraction\
 	\right)
 }
 + N^{\cutparameter}\
-K_\attraction\
+K_{\attraction, \lambda}
 \int_0^S\
 \E{
 	\frac{\hmactive_S}{N}\
@@ -616,8 +595,7 @@ dt +
 \\
 &\qquad
 + N^{\cutparameter}\
-K_\attraction\
-\lambda\
+K_{\attraction, \lambda}
 S\
 \int_0^S
 \E{
@@ -733,9 +711,10 @@ and analogously, the last expectation value yields:
 }^{\frac{1}{v}}
 \end{align*}
 
-Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
+Then we can write:
 
-\begin{align}\label{ch6:pre-final-evaluation-on-avg-J}
+\begin{equation}\label{ch6:pre-final-evaluation-on-avg-J}
+	\begin{aligned}
 	\E{\auxProc_T^N} 
 	&\leq
 	N^{\cutparameter-\xi}\
@@ -743,12 +722,14 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	S\
 	\E{
 		\exp \left(
-		\frac{TK_\attraction}{N}\
-		\hmactive_T
+		TK_\attraction\
+		\frac{\hmactive_T}{N}\
 		\right)
 	}
+	\\
+	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
+	K_{\attraction, \lambda}
 	\int_0^S\
 	\E{
 		\frac{\hmactive_S}{N}\
@@ -762,8 +743,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
-	\lambda\
+	K_{\attraction, \lambda}
 	S\
 	\int_0^S
 	\E{
@@ -788,7 +768,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
+	K_{\attraction, \lambda}
 	\int_0^S\
 	N^{-1}
 \E{
@@ -807,8 +787,7 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
-	\lambda\
+	K_{\attraction, \lambda}
 	S\
 	\int_0^S
 \PrbOf{\setB_t^c}\
@@ -819,7 +798,8 @@ Therefore, since the $\Prb(\text{any event}) \leq 1$, we can write:
 	\right)
 }^{\frac{1}{v}}
 	dt
-\end{align}
+\end{aligned}
+\end{equation}
 
 Now we can evaluate the probability of $\setB_t^c$ with the law of large numbers (\ref{ch5:LLN}): for each $n\in \N$ there is some $\overline{N}$ such that for every $N \geq \overline{N}$ we have that
 
@@ -832,7 +812,7 @@ Now we can evaluate the probability of $\setB_t^c$ with the law of large numbers
 \end{equation*}
 
 for some constant $K_\xi$.
-The higher moments of $\hmactive_T$ can be evaluated with \ref{app:Poisson-moments} obtaining (for $N$ big enough, so that the Poisson parameter is $\geq 1$)
+Regarding the higher moments of $\hmactive_T$, they can be evaluated with \ref{app:Poisson-moments} obtaining (assume $N$ big enough, so that the Poisson parameter is $\geq 1$ and the notation is smoother)
 
 \begin{equation*}
 	\E{
@@ -842,59 +822,134 @@ The higher moments of $\hmactive_T$ can be evaluated with \ref{app:Poisson-momen
 	f^{\uparrow}(p) (\lambda N T)^p
 \end{equation*}
 
-Finally we can notice that for every $a$ the expectation values of the exponentials $\E{
-	\exp \left(
-	\frac{a}{N}\
-	\hmactive_T
-	\right) }$
-is nothing else than an evaluation in $\frac{a}{N}$ of the moment generating function of the Poisson random variable $\hmactive_t$. By the result of \ref{app:Poisson-generating-function} such quantities are:
+There is only one \rv of which we still need to evaluate the expectation value:
+	
+\begin{lemma}\label{ch6:evaluate-moment-generating-func-in-lim-N}
+	Consider the quantity
+	\begin{equation*}
+		\E{
+			\exp \left(
+			\frac{a}{N}\
+			\hmactive_T
+			\right) 
+		}
+	\end{equation*}
+	where $\hmactive_T \sim \Pois(\lambda N t)$.
+	Then $\forall\epsilon > 0$ there exists $\overline{N}= \overline{N}_{a, \epsilon} >0$ such that, if $N > \overline{N}$
+	
+	\begin{equation*}
+		\E{
+			\exp \left(
+			\frac{a}{N}\
+			\hmactive_T
+			\right) } \leq e^{a\lambda T} + \epsilon
+	\end{equation*}
+\end{lemma}
 
-\begin{align*}
-	\E{
-		\exp \left(
-	\frac{a}{N}\
-	\hmactive_T
-	\right) }
-	= \exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
-\end{align*}
+\begin{proof}
+	The expectation
+	\begin{equation*}
+		\E{
+			\exp \left(
+			\frac{a}{N}\
+			\hmactive_T
+			\right) 
+		}
+	\end{equation*}
+	is nothing else than an evaluation in $\frac{a}{N}$ of the moment generating function of the Poisson random variable $\hmactive_t$. 
+	By the result of \ref{app:Poisson-generating-function} such quantities are:
+	
+	\begin{align*}
+		\E{
+			\exp \left(
+			\frac{a}{N}\
+			\hmactive_T
+			\right) }
+		= \exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
+	\end{align*}
+	
+	Then we can use De l'Hopital to see that:
+	
+	\begin{align*}
+		\lim_N\
+		\exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
+		&=
+		\exp\left[
+		\lim_N\
+		\frac{e^{\frac{a}{N}}-1}{
+			\left(\frac{1}{\lambda N T } \right)}
+		\right]
+		&
+		=
+		\exp\left[
+		\lim_N\
+		\frac{e^{\frac{a}{N}}(-1)\frac{a}{N^2}}{
+			\left(\frac{-1}{\lambda TN^2 } \right)}
+		\right]	
+		= \exp\left[
+		a\lambda T e^0
+		\right]	=e^{a\lambda T}
+	\end{align*}
+	
+	This means that if we choose $\epsilon >0$ than there exists $\overline{N}= \overline{N}_{a, \epsilon} >0$ such that, if $N > \overline{N}$, then 
+	
+	\begin{equation*}
+		\E{
+			\exp \left(
+			\frac{a}{N}\
+			\hmactive_T
+			\right) } \leq e^{a\lambda T} + \epsilon
+	\end{equation*}
+\end{proof}
 
-Then we can use De l'Hopital to see that:
-
-\begin{align*}
-	\lim_N\
-	\exp\left[\lambda N T (e^{\frac{a}{N}}-1)\right]
-	&=
-	\exp\left[
-	\lim_N\
-	\frac{e^{\frac{a}{N}}-1}{
-		\left(\frac{1}{\lambda N T } \right)}
-	\right]
-	&
-	=
-	\exp\left[
-	\lim_N\
-	\frac{e^{\frac{a}{N}}(-1)\frac{a}{N^2}}{
-		\left(\frac{-1}{\lambda TN^2 } \right)}
-	\right]	
-	= \exp\left[
-	a\lambda T e^0
-	\right]	=e^{a\lambda T}
-\end{align*}
-
-This means that if we choose $\epsilon >0$ than there exists $\overline{N}= \overline{N}_{a, \epsilon} >0$ such that, if $N > \overline{N}$, then 
-
-\begin{equation*}
-	\E{
-		\exp \left(
-		\frac{a}{N}\
-		\hmactive_T
-		\right) } \leq e^{a\lambda T} + \epsilon
-\end{equation*}
-
-With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-avg-J} to calculate that, for $N$ big enough we have
+Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J}, for $N$ big enough we have that
 
 \begin{align*}
 	\E{\auxProc_T^N} 
+	&\leq
+	N^{\cutparameter-\xi}\
+	K\
+	S\
+	\E{
+		\exp \left(
+		\frac{TK_\attraction}{N}\
+		\hmactive_T
+		\right)
+	} +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_{\attraction, \lambda}
+	\int_0^S\
+	N^{-1}
+	\E{
+		\left(\hmactive_S
+		\right)^p
+	}^{\frac{1}{p}}
+	\cdot
+	\PrbOf{\setB_t^c}\
+	\E{
+		\exp \left(
+		\frac{qvTK_\attraction}{N}\
+		\hmactive_T
+		\right)
+	}^\frac{1}{qv}
+	dt +
+	\\
+	&\qquad
+	+ N^{\cutparameter}\
+	K_{\attraction, \lambda}
+	S\
+	\int_0^S
+	\PrbOf{\setB_t^c}\
+	\E{
+		\exp \left(
+		\frac{vTK_\attraction}{N}\
+		\hmactive_T
+		\right)
+	}^{\frac{1}{v}}
+	dt
+	\\
 	&\leq
 	N^{\cutparameter-\xi}\
 	K\
@@ -903,7 +958,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
+	K_{\attraction,\lambda}\
 	\int_0^S\
 	N^{-1}
 	\left[f^{\uparrow}(p) (\lambda N T)^p\right]^{\frac{1}{p}}\
@@ -917,8 +972,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_\attraction\
-	\lambda\
+	K_{\attraction,\lambda}
 	S\
 	\int_0^S
 		\left(
@@ -938,7 +992,7 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	&\qquad
 	+
 	N^{\cutparameter}\
-	K_\attraction\
+	K_{\attraction,\lambda}
 	\int_0^S\
 	N^{-1}N\
 	K_{p,\lambda,n}\
@@ -959,7 +1013,8 @@ With these estimates in mind we can go on from \ref{ch6:pre-final-evaluation-on-
 	dt \leq
 \end{align*}
 
-then, since the only term in the integral which is depending on $t$ is $(t \vee 1)^{4n}\leq (S \vee 1)^{4n}$, we do get
+Now observe that the only term in the integral which is depending on $t$ is $(t \vee 1)^{4n}\leq (S \vee 1)^{4n}$.
+Then we do get
 
 \begin{align*}
 	&\leq
