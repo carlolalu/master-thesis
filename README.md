@@ -2,6 +2,8 @@
 
 ## very high priority
 
+- correct the solution to the heat equation: you must have the convolution with respect to alfa(TAU,) and not alfa (t,). Chekc the whole thesis for this
+
 - follow the indications in chapter 4 on how to show that certain paths 
 are continuous in your models. Correct consequently the chapter 4.. 
 correct the section regarding the del dini derivation: show that you 

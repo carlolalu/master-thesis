@@ -122,7 +122,7 @@ Then the model is described as
 		+\sigma_C \quasibm_t^{p,g,l}
 		&\text{if} \quad t \geq \btime^{p,g}
 		\\
-		&= \amba_{\btime^{p,g}}^p + (\btime^{p,g} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) d s 
+		&= \amba_{\btime^{p,g}}^p + (t - \btime^{p,g})\frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) d s 
 		+\sigma_C \quasibm_t^{p,g,l}
 			&
 	\end{aligned}
@@ -526,7 +526,7 @@ or, expressing the density of cAMP molecules analytically (exactly as in \ref{ch
 		\adens(0, \cdot) &= \adens_0
 		\\
 		\partial_t \adens &=  \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
-		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(t, \cdot) 
+		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 		d \tau
 		\right)
 		\adens
@@ -589,6 +589,8 @@ Then, to obtain the convergence condition above, it is enough to prove that
 \section{Preliminaries for the final proof}
 
 \subsection{Dini derivation}
+
+[[correct teh drift of the cAMP all along this section (it does not have the minus sign)]]
 
 The paths of the distance process
 

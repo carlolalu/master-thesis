@@ -395,7 +395,7 @@ Therefore, considering the $d$-dimensional heat-kernel $\heatkernel_t^{D_\camp}$
 \cdens^\tau(t, x) 
 &= 
 	\left(
-		\heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 
+		\heatkernel_{t-\tau}^{D_\camp} \star \adens(\tau, \cdot) 
 	\right) (x)
 \\
 \heatkernel_s^{D_\camp}(x) &:= \frac{1}{
@@ -681,7 +681,7 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \adens(0, \cdot) &= \adens_0
 \\
 \partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
-		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(t, \cdot) 
+		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	 	d \tau
 			\right)
 			\adens
