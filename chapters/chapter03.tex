@@ -1259,11 +1259,20 @@ The cAMP molecules are created at a rate $\lambda$, and each molecule created at
 This, together with the form of the effective equations \ref{ch3:EFFECTIVE-EQS}, where the $\adens_t$ should follow the cAMP by the convolution, seems to suggest that
 
 \begin{equation*}
-	\empmeas_t^{(\camp),N} 
+	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{(\camp),N} 
 	\xrightarrow{N\longrightarrow +\infty} 
 		\cdens(t,\cdot) :=
 		 \int_0^t \lambda \cdens_t^\tau 	d \tau
 \end{equation*}
 
 The problem is that the cAMP molecules, both in the microscopic and in the mesoscopic model, are \emph{not} exchangeable, and thus the proposition of Sznitman \ref{ch3:proposition:sznitman} cannot be used, and one might have to manually use the condition \ref{ch3:cumbersome-condition-convergence-in-Pspace}.
-This might be easier than this, but no effort was done to inquire about it.
+There are some properties of the cAMP particles which show somehow symmetry, namely, under the conditional probability $\PrbCondTimes{\cdot}{}$:
+\begin{itemize}
+	\item The spawning position of each $\camp_t^{p,g}$ is given by $\amba_t^p$, and the amoebas are exchangeable.
+	Even better, $\mfcamp_t^{p,g}$ are spawning on $\mfamba_t^p$, and the latter ones are \iid.
+	\item Each $\camp_t^{p,g}$ moves of a quasi-\Bm starting at $\btime^{p,g}$, and these birth times are \iid with respect to the parameter $p$. Since the mesoscopic molecules $\mfcamp_t^{p,g}$ are coupled with the microscopic ones, the same happens for them 
+\end{itemize}
+Because of these facts, for each generation $g$, we have that $(\camp^{p,g})_p$ are exchangeable and $(\mfcamp^{p,g})_p$ are \iid. 
+Other nuances come from the fact that the the number of molecules spawned is stochastically distributed with the \rvs $(\hmactive_t^p)_p$, and thus also for the $W_1$-convergence a bit work would be necessary (maybe even approximating first with the conditional probability $\PrbCondTimes{\cdot}{}$ and then with $\Prb$).
+Because of this apparent difficulties, and since the key question of this work was focused on the macroscopic description of the amoebas, not a lot of effort has been spent on this topic, leaving it for eventual future works.
+
