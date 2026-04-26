@@ -145,20 +145,20 @@ If we have a notion of distance $dist$ on our space $\R^u$, then a plan can be e
 \end{equation}
 
 In this way we can say that two measures $\mu,\nu$ are near to each others if we can find a coupling $\gamma \in \Gamma(\mu,\nu)$ such that its evaluation is very low.
-With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^u$ (meaning $\frac{|\cdot|_1}{u}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
+With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^u$ (meaning $\frac{\norm{\cdot}_1}{u}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
 
 \begin{definition}
 	Consider the space of Borel probability measures with finite $1$-moments on $\R^u$
 	\begin{equation}
 		\BorelPrbMeas_1 := \BorelPrbMeas_1(\R^u) := 
 		\{\mu \in \BorelPrbMeas :
-		\int |x| d \mu (x) < \infty
+		\int \norm{x} d \mu (x) < \infty
 		\} \subseteq \BorelPrbMeas
 	\end{equation}
 	Then the $1$-Wasserstein distance between two measures $\mu,\nu \in \BorelPrbMeas_1$ is defined as
 	\begin{equation}
 		W_1(\mu,\nu):= \inf_{\gamma \in \Gamma(\mu,\nu)}
-		\int_{\R^u \times \R^u} \frac{1}{u}\sum_{i=1}^{u} |x_i-y_i| d\gamma(x,y)
+		\int_{\R^u \times \R^u} \frac{1}{u}\sum_{i=1}^{u} \norm{x_i-y_i} d\gamma(x,y)
 	\end{equation}
 \end{definition}
 

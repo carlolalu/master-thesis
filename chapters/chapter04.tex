@@ -81,14 +81,14 @@ In this part we want to show this lemma.
 	\end{equation}
 \end{lemma}
 
-Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\norm{\sol_t^N-\mfsol_t^N}_\infty$ has continuous paths, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions for the latter mathematical object (\cadlag, with a finite number of discontinuouties and such that in every such point the function can only jump up).
+Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\norm{\sol_t^N-\mfsol_t^N}_\infty$ has continuous paths, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions.
 In fact, defining the random function
 
 \begin{equation}
 	\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
 \end{equation}
 
-and considering its paths $\Ch(t)(\omega)$ for $\omega \in \Omega$, we have that this is continuous between birth times $(\btime_m)_m$, but the behaviour at such instants depends on the spawning position of the cAMP.
+and considering its paths $\Ch(t)$, we have that these are continuous in between the birth times $(\btime_m)_m$, but the behaviour at such instants depends on the spawning position of the cAMP.
 For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ in random position, and not necessarily along the path of other already existing particles $\amba_t^p$, we would have a this more general class of paths:
 
 \begin{definition}
@@ -98,7 +98,7 @@ For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ 
 		\item $g$ is \cadlag
 		\item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
 	\end{itemize}
-	Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$, or equivalently, such that $\forall t. g(t-) \leq g(t+)$.
+	Furthermore, considering $g(t-) := \lim_{s \rightarrow t^-} g(s)$ and $g(t+) := \lim_{s \rightarrow t^+} g(s)$, we define the set $\SkoroFUp$ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$.
 \end{definition}
 
 \begin{figure}[h]
@@ -108,52 +108,27 @@ For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ 
 \end{figure}
 \label{ch4:fig:discontinuous distance}
 
-
-[[reorder the things in this chapter: define now the space skoro, do some observation on its elements, then prove that your paths are continuous. Sketch that if the particles would be spawned randomly the model would have paths in skoro]]
-
-[[observe that the distance between the newborn particles and all the others is starting from $0$ every time, and this is the origin of continuouty. Maybe put this into another chapter, like at the verye end of chapter 2 and chapteer 3]]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{lemma}\label{ch4:distance-is-c0}
-The paths of $\Ch(t)$ continuous.
-In particular are \cadlag, have only a finite number of discontinuouties on $[0,T]$ and if $\Ch(t-) := \lim_{h\rightarrow 0^-} \Ch(t+h)$, we have that
-\begin{equation}
-\forall \btime_m. \Ch(\btime_m-) \leq \Ch(\btime_m)
-\end{equation}
-\end{lemma}
-
 \begin{remark}
-	Let $g$ be a function such that it is \cadlag, has only a finite number of discontinuouties on $[0,T]$ and if $g(t-) := \lim_{h\rightarrow 0^-} g(t+h)$ then for every discontinuouity $s$ we have
+	Let $g$ be a \cadlag function.
+	Then the condition
 	
 	\begin{equation*}
-		\forall s. g(s-) \leq g(s)
+		 \text{if $g$ is discontinuous in $t_i$ then } g(t_i-) < g(t_i)
 	\end{equation*}
 	
-	This does \emph{not} necessarily mean that $g$ has increasing paths, it only means that such paths, if they do have a jump, it's necessarily a jump up.
-	Such condition, on \cadlag functions $g$, can be simply stated as:
-	\begin{equation}
-		\forall t. \quad g(t-) \leq g(t+)
-		\quad 
-		\left( =g(t) \right)
-	\end{equation}
+	is equivalent to 
+	
+	\begin{equation*}
+		\forall t. g(t-) \leq g(t+) = g(t)
+	\end{equation*}
+	
+	Notice that such property does not necessarily imply that $g$ is increasing, it only means that if it has a jump, it's necessarily a jump up.
 \end{remark}
 
+\begin{lemma}\label{ch4:distance-is-c0}
+	The paths of $\Ch(t)=\norm{\sol_t^N - \mfsol_t^N}_\infty$ are continuous.
+	In particular are elements of $\SkoroFUp$.
+\end{lemma}
 
 \begin{proof}
 Since both $\sol_t^N$  and $\mfsol_t^N$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
@@ -167,7 +142,8 @@ and analogously for $\mfsol_t^N$. Therefore the paths of $\norm{\sol_t^N - \mfso
 
 Let us now prove that  $\Ch(\btime_m-) \leq \Ch(\btime_m)$ for every discontinuouty $\btime_m$ in $[0,T]$.
 We have that
-\begin{align*}
+\begin{equation}\label{ch4:distance-paths-inequality}
+	\begin{aligned}
 	\Ch(\btime_m-) &= \lim_{t\rightarrow\btime_{m+1}^-} \Ch(t) = \lim_{t\rightarrow\btime_{m+1}^-} \norm{ \sol_t^N - \mfsol_t^N}_\infty
 	\\
 	& = \lim_{t\rightarrow\btime_{m+1}^-} \max \left\{ 
@@ -201,18 +177,23 @@ We have that
 	\right\}
 	\\
 	& = \norm{ \sol_{\btime_{m+1}}^N -\mfsol_{\btime_{m+1}}^N}_\infty = \Ch(\btime_{m+1})
-\end{align*}
+	\end{aligned}
+\end{equation}
+
+In particular, since the cAMP molecules are spawning on the positions of some amooebas, \ie
+
+\begin{equation*}
+	\camp_{\btime_{m+1}}^{m+1} - \mfcamp_{\btime_{m+1}}^{m+1} = \amba_{\btime_{m+1}}^{\Parentof(m+1)} - \mfamba_{\btime_{m+1}}^{\Parentof(m+1)}
+\end{equation*}
+
+then the inequality above becomes an equality, and thus the paths are continuous.
 \end{proof}
 
 \begin{remark}
-	Notice that, as noted in \ref{ch3:rmk:mf-not-c0}, we have that the trajectory of the mean-field cAMP does not start on any amoeba, \ie there is no bifurcation of paths at birth times, hence the possibility of a jump at each birth time $\btime_m$.
+	Notice that if the mean-field cAMP would not be born on some mean-field amoeba, \ie there is no bifurcation of paths at birth times, at each birth time $\btime_m$ it would be possible to have that the equation \ref{ch4:distance-paths-inequality} becomes a strict inequality.
 \end{remark}
 
-
-
-
-
-By the previous lemma the paths of $\Ch$ are elements in $\SkoroFUp$.
+Now we need to work on how to Dini-derive the $\sup$ operator of functions in $\SkoroFUp$.
 
 \begin{lemma}
 Let $g \in \SkoroFUp$ and consider $g_\star (t) := \sup_{0\leq s \leq t} g(s)$.
@@ -262,7 +243,6 @@ and $g_\star \in \SkoroFUp$.
 	\end{align}
 	
 	Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \max_{[0,t]} g$.
-	
 	Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
 	\begin{claim}
 		The set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
@@ -363,8 +343,9 @@ Then
 	\left(
 	\diniu^+_t g(t)
 	\right) 
-=: 
-	\diniu^+_{s_t} g(s_t)
+=
+	\max_{s\in\{0,T\}}
+	\diniu^+_s g(s)
 \end{equation}
 
 with $s_t \in \{ 0, t\}$
@@ -562,7 +543,7 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 	And thus the result stated above is valid.
 \end{proof}
 
-Thus we proved the statement \ref{ch4:experiment-label}:
+Thus we proved the statement \ref{ch4:lemma:advance-after-sup}:
 
 \begin{equation}
 	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty

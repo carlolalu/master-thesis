@@ -3,7 +3,7 @@
 	Let $P \sim \Pois(\mu)$ be a Poisson \rv of parameter $mu$.
 	Then there is an increasing function $\Fup: \N \longrightarrow \N$ independent from $\mu$ such that 
 	\begin{equation*}
-		\E{|P|^n} \leq  \Fup(n)\: (\mu^n \vee 1)
+		\E{\norm{P}^n} \leq  \Fup(n)\: (\mu^n \vee 1)
 	\end{equation*}
 \end{lemma}
 
@@ -12,7 +12,7 @@
 	
 	\begin{equation*}
 		\E{
-			|P|^n
+			\norm{P}^n
 		}
 		=
 		\sum_{k=1}^{n}
@@ -55,7 +55,7 @@
 	
 	\begin{equation*}
 		\E{
-			|P|^n
+			\norm{P}^n
 		}
 		=
 		\sum_{k=1}^{n}

@@ -5,12 +5,6 @@
 - substitute the single | in the first chapters with the appropriate 
 norm command
 
-- follow the indications in chapter 4 on how to show that certain paths 
-are continuous in your models. Correct consequently the chapter 4.. 
-correct the section regarding the del dini derivation: show that you 
-derived a more general result than the one that you need, because your 
-paths are C^0 and not cadlag. The keyword is "ch3:rmk:mf-not-c0"
-
 - correct, in the law of large numbers, the notation for the conditions 
 on the l^\infty limitation on the norm of the densities: it should be 
 specific that it is not K_dens and that the constnat we use is 
