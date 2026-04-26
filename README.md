@@ -2,7 +2,7 @@
 
 ## very high priority
 
-- substitute all \invquest with logical operators, substitute all "K_" with "\const_"
+- substitute the single | in the first chapters with the appropriate norm command
 
 - follow the indications in chapter 4 on how to show that certain paths 
 are continuous in your models. Correct consequently the chapter 4.. 
@@ -13,7 +13,7 @@ paths are C^0 and not cadlag. The keyword is "ch3:rmk:mf-not-c0"
 - correct, in the law of large numbers, the notation for the conditions 
 on the l^\infty limitation on the norm of the densities: it should be 
 specific that it is not K_dens and that the constnat we use is 
-INCREASING in T.
+INCREASING in T. Do this using the common increasing function notation
 
 - read it twice
 

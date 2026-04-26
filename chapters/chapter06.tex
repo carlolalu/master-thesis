@@ -2,7 +2,7 @@
 \begin{proposition}
 	Let $\sol_t^N$ be the solution to the model \ref{ch2:model} and let $\mfsol_t^N$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
 	Let $T > 0$ and let $0< \delta <\xi <\frac{1}{2}$.
-	Then there exists an $\overline{N}>0$ and an increasing continuous function $F^{\uparrow}: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
+	Then there exists an $\overline{N}>0$ and an increasing continuous function $\Fup: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
 	\begin{equation}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
@@ -13,7 +13,7 @@
 			N^{-\cutparameter}
 		}
 		\leq\
-		F^{\uparrow}(T)\
+		\Fup(T)\
 		N^{-(\xi-\delta)}
 	\end{equation}
 \end{proposition}
@@ -832,7 +832,7 @@ Regarding the higher moments of $\hmactive_T$, they can be evaluated with \ref{a
 		\left(\hmactive_S
 		\right)^p
 	} \leq
-	f^{\uparrow}(p) (\lambda N T)^p
+	\Fup(p) (\lambda N T)^p
 \end{equation*}
 
 There is only one \rv of which we still need to evaluate the expectation value:
@@ -974,7 +974,7 @@ Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J},
 	\const_{\attraction,\lambda}\
 	\int_0^S\
 	N^{-1}
-	\left[f^{\uparrow}(p) (\lambda N T)^p\right]^{\frac{1}{p}}\
+	\left[\Fup(p) (\lambda N T)^p\right]^{\frac{1}{p}}\
 		\left(
 		\const_n\
 		(t \vee 1)^{4n}\
@@ -1148,7 +1148,7 @@ Since the \rhs is $\Cspace^0$ and is valid for all $S >T$ we also have that
 Define now the continuous increasing function
 
 \begin{equation*}
-	F^{\uparrow}(T) := \const_{p,\lambda,n,\attraction}\
+	\Fup(T) := \const_{p,\lambda,n,\attraction}\
 	(T \vee 1)^{4n+2}\
 	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 \end{equation*}
@@ -1158,10 +1158,10 @@ to obtain
 \begin{equation*}
 	\E{\auxProc_T^N}
 	\leq
-	F^{\uparrow}(T)\
+	\Fup(T)\
 	N^{\cutparameter-\xi}\
 	=\
-	F^{\uparrow}(T)\
+	\Fup(T)\
 	N^{-(\xi - \cutparameter)}\
 \end{equation*}
 
