@@ -2,17 +2,20 @@
 
 ## very high priority
 
-- substitute the single | in the first chapters with the appropriate 
-norm command
+- read it twice, search for '[['
+
+### less priority here under
 
 - correct, in the law of large numbers, the notation for the conditions 
 on the l^\infty limitation on the norm of the densities: it should be 
 specific that it is not K_dens and that the constnat we use is 
 INCREASING in T. Do this using the common increasing function notation
 
-- read it twice
+- thesis title
 
-### less priority here under
+- thesis institution name etc...
+
+- explain aevery symbol the first time it appears
 
 - drawings?
 

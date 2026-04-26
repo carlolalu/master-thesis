@@ -451,7 +451,7 @@ This will require some preliminary claims to be proved.
 	Under the condition \ref{ch4:cond:proof-dini-T1} in $t$ consider $\delta >0$ such that $g,g_\star$ are $\Cspace^0$ on $U_\delta^+:= [t,t+\delta)$.
 	Define
 	\begin{equation}
-		\xi_{t,\delta} := \xi_\delta := \xi := \inf \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\}
+		\xi_{t,\delta} := \xi_\delta := \xi := \inf \left\{ \nu \geq 0 \ : \  g_\star(t + \nu) = g_\star (t + \delta) \right\}
 	\end{equation}
 	Then $\xi$ is strictly positive, is $\leq \delta$ and is such that $g(t+\xi) = g_\star (t+ \xi) = g_\star(t + \delta)$.
 \end{claim}
@@ -465,7 +465,7 @@ This will require some preliminary claims to be proved.
 	
 	\paragraph{$(\logQuest{ \xi > 0 })$} Since $g_\star$ is $\Cspace^0$ on $[t,t+\delta)$, we have that
 	\begin{align*}
-		A :&= \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\} 
+		A :&= \left\{ \nu \geq 0 \ : \  g_\star(t + \nu) = g_\star (t + \delta) \right\} 
 		= (g_\star)|_{[t,t+\delta)}^{-1} \left( g_\star (t + \delta) \right) - t
 		\\
 		&= \Big( 
@@ -622,10 +622,10 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 	&=
 		\diniu^+_t 
 		\;
-		\Big|
-\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
-	_{:= I_t = (I_t^{p;i})_{p,i}}
-\Big|_\infty
+		\norm{
+			\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
+				_{:= I_t = (I_t^{p;i})_{p,i}}
+		}_\infty
 	\\
 	& \quad \left( \text{if $\forall p,i.\; I_t^{p;i}$ is right-differentiable} \right)
 	\\
@@ -660,11 +660,11 @@ The first is an easy computation.
 	Let us suppose that $\norm{x}_\infty = \norm{x_i}$.
 	Then
 	\begin{align*}
-		\partial_i \norm{x}_\infty = \partial_i |x_i| = sgn(x_i)
+		\partial_i \norm{x}_\infty = \partial_i \norm{x_i} = sgn(x_i)
 	\end{align*}
 	If instead there is $j \neq i$ such that $\norm{x}_\infty = \norm{x_j} > \norm{x_i}$, then
 	\begin{align*}
-		\partial_i \norm{x}_\infty = \partial_i |x_j| = 0
+		\partial_i \norm{x}_\infty = \partial_i \norm{x_j} = 0
 	\end{align*}
 	Hence $\partial_i \norm{x}_\infty = sgn(x_i)\1_{\norm{x_i} = max_j \norm{x_j}}$.
 \end{proof}
@@ -741,13 +741,13 @@ Then we can write
 	&=
 	\partial^+_t
 	\;
-	\Bigg|
+	\norm{
 		\Bigg(
 			\underbrace{ 
 				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
 			}_{:= I_t^{p;i} }
 		\Bigg)_{p,i}
-	\Bigg|_\infty
+	}_\infty
 	\\
 	& =
 	\sum_{p=1}^{N}
@@ -770,12 +770,12 @@ Then we can write
 	\sum_{p=1}^{N}
 	\sum_{i=1}^d
 	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
-	\left|
-	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
-	\right|
+	\norm{
+		\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	}
 \end{align*}
 
-We want to get rid of the sum in $N$, and in order to do that we need to prove that $|I_t^{p;i}|$ reaches $\norm{I_t}_\infty$ only for one $p$ at a time.
+We want to get rid of the sum in $N$, and in order to do that we need to prove that $\norm{I_t^{p;i}}$ reaches $\norm{I_t}_\infty$ only for one $p$ at a time.
 Or more weakly, that for two different amoebas $p\neq q$, the probability that $\norm{I_t^{p;i}}= \norm{I_t^{q;j}}= \norm{I_t}_\infty$ for some coordinate $i,j$ is $0$.
 This might seem obvious, because corresponds roughly to the statement that different particles will happen to be in the same point with probability $0$, but it is still not obvious from a mathematical point of view.
 
@@ -869,7 +869,7 @@ This might seem obvious, because corresponds roughly to the statement that diffe
 	
 	And now we can show that the set $\left\{
 	(x,y)\
-	|\
+	:\
 	I_t^{p;i} = 0
 	\right\} = \left\{
 	\Ch_t(x,y) = 0
@@ -937,15 +937,15 @@ This statement allows as to say that with probability $1$ there exist some index
 	\sum_{p=1}^{N}
 	\sum_{i=1}^d
 	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
-	\left|
-	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
-	\right|
+	\norm{
+		\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	}
 	\\
 	&= \sum_{i=1}^d
 	\left( \1_{\norm{I_t^{k;i}} = \norm{I_t}_\infty } \right)
-	\left|
-	\drift_{k;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
-	\right|
+	\norm{
+		\drift_{k;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	}
 	\\
 	&\leq 
 	 \sum_{i=1}^d

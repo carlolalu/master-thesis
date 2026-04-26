@@ -153,8 +153,11 @@ This function is called \emph{parenting function}, and for each $m\in\N$ the ran
 \\
 &= \sum_{g=1}^{\infty} \Prb (g = g, \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g)
 \\
-&= \sum_{g=1}^{\infty} \int \Prb( \sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g) 
-	\big| \btime^{p,g} = s) d\Prb(\btime^{p,g} = s)
+&= \sum_{g=1}^{\infty} \int 
+	\PrbCond{
+		\sum_{k\neq p} \hmactive_{\btime^{p,g}}^k = m - g
+	}{\btime^{p,g} = s}
+	d\PrbOf{\btime^{p,g} = s}
 \\
 &= \sum_{g=1}^{\infty} \int \Pois_{(N-1)s\lambda}(\{ m-g\})\1_{m-g \geq 0} 
 	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
@@ -240,7 +243,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \begin{equation*}\label{ch2:cond:E-and-U-lipsch+c-0-in-time}
 \left\{
 \begin{aligned}
-\forall t .( |\drift(t, x)-\drift(t,y)| &< L_\drift |x-y| &\text{ and } |\diffusion(t, x)-\diffusion(t,y)| &< L_\diffusion |x-y|) \\
+\forall t .( \norm{\drift(t, x)-\drift(t,y)} &< L_\drift \norm{x-y} &\text{ and } \norm{\diffusion(t, x)-\diffusion(t,y)} &< L_\diffusion \norm{x-y}) \\
 \drift &\in \Cspace^0 &\text{ and }\diffusion &\in \Cspace^0
 \end{aligned}
 \right.
@@ -249,13 +252,13 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \begin{equation*}\label{ch2:cond:E-and-U-lipsch+subgrowth}
 \left\{
 \begin{aligned}
-&\forall t .(|\drift(t, x)-\drift(t,y)| < L_\drift |x-y| 
+&\forall t .(\norm{\drift(t, x)-\drift(t,y)} < L_\drift \norm{x-y}
 &\:\text{ and }\:
-&|\diffusion(t, x)-\diffusion(t,y)| < L_\diffusion |x-y|) 
+&\norm{\diffusion(t, x)-\diffusion(t,y)} < L_\diffusion \norm{x-y}) 
 \\
-&\forall t .|\drift(t, x)| < M_b(1 + |x|) 
+&\forall t .\norm{\drift(t, x)} < M_b(1 + \norm{x}) 
 &\:\text{ and }\:
-&|\diffusion(t, x)| < M_\diffusion (1 + |x|)
+&\norm{\diffusion(t, x)} < M_\diffusion (1 + \norm{x})
 \end{aligned}
 \right.
 \end{equation*}
@@ -557,38 +560,38 @@ Fix $t,x,y$ and let $l$ be the Lipschitz constant of $\attraction$. Then
 
 \begin{equation*}
 \begin{aligned}
-	|| \drift(t, x) - \drift(t, y) ||_\infty
-	&= \max_{k\in\{1,\ldots,N\}} || \drift_k(t, x) - \drift_k(t, y) ||_\infty
+	\Norm{ \drift(t, x) - \drift(t, y) }_\infty
+	&= \max_{k\in\{1,\ldots,N\}} \Norm{ \drift_k(t, x) - \drift_k(t, y) }_\infty
 	\\
-	&= \max_{k\in\{1,\ldots,N\}} ||
+	&= \max_{k\in\{1,\ldots,N\}} \Norm{
 			\frac{1}{N} \sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(x^k - x^{p,g}) 
 			- \frac{1}{N} \sum_{p=1}^{N} \sum _{g = 1} ^{\hmactive_t^p} \attraction(y^k - y^{p,g}) 
-		||_\infty
+		}_\infty
 	\\
 	& \leq \frac{1}{N} \max_{k\in\{1,\ldots,N\}}
 			\sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
-			\underbrace{|| \attraction(x^k - x^{p,g}) - \attraction(y^k - y^{p,g}) ||_\infty}
-			_{\leq l ||(x^k - x^{p,g}) - (y^k - y^{p,g})||_\infty }
+			\underbrace{\Norm{ \attraction(x^k - x^{p,g}) - \attraction(y^k - y^{p,g}) }_\infty}
+			_{\leq l \Norm{(x^k - x^{p,g}) - (y^k - y^{p,g})}_\infty }
 	\\
 	& \leq \frac{l}{N} \max_{k\in\{1,\ldots,N\}}
 		\sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 			\big(
-			||x^k - y^k ||_\infty + || x^{p,g} - y^{p,g}||_\infty
+			\Norm{x^k - y^k }_\infty + \Norm{ x^{p,g} - y^{p,g}}_\infty
 			\big)
 	\\
 	& = \frac{l}{N} \sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 	\big(
-		\max_{k\in\{1,\ldots,N\}} ||x^k - y^k||_\infty + || x^{p,g} - y^{p,g}||_\infty
+		\max_{k\in\{1,\ldots,N\}} \Norm{x^k - y^k}_\infty + \Norm{x^{p,g} - y^{p,g}}_\infty
 	\big)
 	\\
 	& \leq \frac{l}{N} \sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 	\big(
-		||x - y ||_\infty + || x - y||_\infty
+		\Norm{x - y }_\infty + \Norm{ x - y}_\infty
 	\big) 
 	\\
-	&= \frac{2l}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty\
+	&= \frac{2l}{N} \sum_{p=1}^{N} \hmactive_t^p \Norm{x - y }_\infty\
 	=\
-	\frac{\const_\attraction}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty\
+	\frac{\const_\attraction}{N} \sum_{p=1}^{N} \hmactive_t^p \Norm{x - y }_\infty\
 \end{aligned}
 \end{equation*}
 
@@ -600,7 +603,7 @@ The drift $\drift$ is bounded:
 	& \leq \frac{l}{N} \max_{k\in\{1,\ldots,N\}}
 		\sum_{p=1}^{N} \sum_{g = 1}^{\hmactive_t^p}
 		\underbrace{\Norm{\attraction(x^k - x^{p,g})}_\infty}
-			_{\leq \cdot || \attraction||_\infty}
+			_{\leq \cdot \Norm{ \attraction}_\infty}
 	\\
 	&
 	\leq \frac{l \sum_{p=1}^{N} \hmactive_t^p \Norm{\attraction}_\infty}{N}

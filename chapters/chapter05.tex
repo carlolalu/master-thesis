@@ -378,7 +378,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 
 \section{The first part of the law of large numbers}
 
-[[in general you should make a simple statement at the beginning of this chapter, and of the next one, where you do explain that every inequality involving a power of 't' can be cut to one if t is less than 0, this to avoid clutter in the notation. You should then correct all the instances around here]]
+[[a refinement should be necessary to treat the bounds in $t$: stress that they all corresponds some increasing continuous function in $t$]]
 
 Now we can finally approach the first part of the law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
@@ -562,7 +562,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 	\end{align*}
 	\footnotetext[1]{{Here $(\genAttraction)_1$ indicates the first coordinate of $\genAttraction$, and not a first part of any decomposition of $\genAttraction$.}}
 	
-	Setting $\Zhi_m := |\Psi_m - \psi_m^\ast|$, we can apply the multinomial formula:
+	Setting $\Zhi_m := \norm{\Psi_m - \psi_m^\ast}$, we can apply the multinomial formula:
 	
 	\begin{align}
 		\left( \sum_{m=1}^M \Zhi_m \right)^{2n}
@@ -1049,7 +1049,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\# \left\{ \beta_m \neq 0 \right\}  := \# \{ 
 			i 
 			\:
-			\big|
+			:\
 			\:
 			\beta_i  \: \text{ is non-zero entry of } \: \beta
 			\}
@@ -1062,13 +1062,13 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\begin{equation*}
 			\left\{
 			\beta = \left( \beta_1, \ldots , \beta_{M}  \right)\
-			\big|\
-			|\beta | = 2n,\
+			:\
+			\norm{\beta} = 2n,\
 			\forall m. \beta_m \neq 1
 			\right\}
 		\end{equation*}
 		
-		Therefore, since the minimum value that we allow in an entry $\beta_m$  is $2$, the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{M})$ such that $|\beta | = \beta_1 + \cdots + \beta_{M} = 2n$, will be $n$ ($n$ entries of value $2$).
+		Therefore, since the minimum value that we allow in an entry $\beta_m$  is $2$, the maximum amount of non-zero entries, for a multi-index $\beta = (\beta_1, \ldots, \beta_{M})$ such that $\norm{\beta} = \beta_1 + \cdots + \beta_{M} = 2n$, will be $n$ ($n$ entries of value $2$).
 		Then we can write
 		
 		\begin{align*}
@@ -1134,7 +1134,8 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			}} 1
 			=
 			\# \left\{
-			\beta = (\beta_m)_{m=1}^{M} \ | \
+			\beta = (\beta_m)_{m=1}^{M} \ 
+			:\
 			\sum \beta_m = 2n, \
 			\forall m. \beta_m \neq 1, \
 			\#^{\widehat{0}} (\beta ) = k
@@ -1145,7 +1146,8 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		
 		\begin{align*}
 			&\# \left\{
-			\beta = (\beta_m)_{m=1}^{M} \ | \
+			\beta = (\beta_m)_{m=1}^{M} \
+			:\
 			\sum \beta_m = 2n, \
 			\forall m. \beta_m \neq 1, \
 			\#^{\widehat{0}} (\beta ) = k
@@ -1528,7 +1530,7 @@ As for the first part of the law of large numbers, together with the convention 
 			}^{2n}
 		} = 
 	\end{align*}
-	\footnotetext[1]{Markov inequality with $f(x) = |x|^{2n}$}
+	\footnotetext[1]{Markov inequality with $f(x) = \norm{x}^{2n}$}
 	
 	As for the first part of the law of large numbers, we apply on $\Zhi_p :=\norm{\Phi_p^\ast - \phi_p^\ast}\:$ the multinomial formula
 	
@@ -2623,16 +2625,16 @@ Then let us observe closely the object in question.
 		\E{
 			\left(
 			\int
-			\left|
-			\EFoot
-			{\ast}{
-				\int_0^t
-				\cdens_t^{\tau}
-				(y - \mfamba_t^k)\
-				\lambda\
-				d\tau
+			\norm{
+				\EFoot
+				{\ast}{
+					\int_0^t
+					\cdens_t^{\tau}
+					(y - \mfamba_t^k)\
+					\lambda\
+					d\tau
+				}
 			}
-			\right|
 			dy\
 			\right)^q
 			\1_{\hmactive_t^1 = 0}			
