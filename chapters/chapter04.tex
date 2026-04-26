@@ -482,7 +482,7 @@ This will require some preliminary claims to be proved.
 \label{ch4:fig:label-to-define}
 \begin{proof} We have that $\xi \leq \delta$ is trivially true by definition.
 	
-	\paragraph{$(\invquest \xi > 0?)$} Since $g_\star$ is $\Cspace^0$ on $[t,t+\delta)$, we have that
+	\paragraph{$(\logQuest{ \xi > 0 })$} Since $g_\star$ is $\Cspace^0$ on $[t,t+\delta)$, we have that
 	\begin{align*}
 		A :&= \left\{ \nu \geq 0 \ | \  g_\star(t + \nu) = g_\star (t + \delta) \right\} 
 		= (g_\star)|_{[t,t+\delta)}^{-1} \left( g_\star (t + \delta) \right) - t
@@ -499,7 +499,7 @@ This will require some preliminary claims to be proved.
 	Furthermore, because of \ref{ch4:cond:proof-dini-T1}, we have that $g_\star(t) < g_\star (t + \delta)$, and thus $0 \notin A$.
 	Hence $\xi > 0$.
 	
-	\paragraph{$(\invquest g(t+\xi) = g_\star (t+ \xi) ?)$} Suppose ad absurdum that $g(t+\xi) < g_\star (t + \xi)$.
+	\paragraph{$(\logQuest{ g(t+\xi) = g_\star (t+ \xi) })$} Suppose ad absurdum that $g(t+\xi) < g_\star (t + \xi)$.
 	Because of \ref{ch4:cond:proof-dini-T1}, and since $\xi > 0$, we have that $g_\star(t) < g_\star (t + \xi)$.
 	Then $\exists 0 < \nu < \xi$ such that
 	\begin{equation}
@@ -663,7 +663,7 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 			\underbrace{
 				\partial^+_t
 				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
-			}_{\invquest = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N) ?}
+			}_{\logQuest{ = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N) }}
 		\Big)_{p,i}
 \end{align*}
 
