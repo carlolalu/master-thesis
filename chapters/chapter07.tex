@@ -590,8 +590,6 @@ Then, to obtain the convergence condition above, it is enough to prove that
 
 \subsection{Dini derivation}
 
-[[correct teh drift of the cAMP all along this section (it does not have the minus sign)]]
-
 The paths of the distance process
 
 \begin{equation*}
@@ -638,7 +636,7 @@ We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:ge
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)}  
 		- (\mfamba_{\btime_{m}}^{(N),\Parentof(m)}  + \quasibm_t^m)
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m})\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 	\Bigg\}
 	\\
@@ -654,7 +652,7 @@ We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:ge
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m})\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 	\Bigg\}
 \end{align*}
@@ -673,7 +671,7 @@ Let us define
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty = \norm{\sol_t^N-\mfsol_t^N}_\infty \right\}
 \end{align*}
 
@@ -698,7 +696,7 @@ Then by recalling the form of the derivative of the infinity norm \ref{ch4:lemma
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 \end{align*}
 
@@ -722,14 +720,14 @@ Let
 	I_t &:= \left(
 	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
 	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
-	+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 	\right)_{m,l}
 		 &\in (\R^d)^{\hmactive_t + \NumCampRelease}
 	\\	
 	I^{m,l;i}_t &:= 
 		\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+		+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 		 &\in \R
 \end{align*}
 
@@ -742,7 +740,7 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty=
 	\\
 	&=
@@ -766,7 +764,7 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	\left[
 	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
 	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
-	+ (\btime^{m} - t)\frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
+	+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 	\right]
 	=
 \end{align*}
@@ -833,7 +831,7 @@ Then we can resume the whole proof as
 	\norm{
 		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
 		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
-		+ (\btime^{m} - t)\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 	\\
 	&\leq

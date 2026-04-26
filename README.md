@@ -2,7 +2,8 @@
 
 ## very high priority
 
-- substitute the single | in the first chapters with the appropriate norm command
+- substitute the single | in the first chapters with the appropriate 
+norm command
 
 - follow the indications in chapter 4 on how to show that certain paths 
 are continuous in your models. Correct consequently the chapter 4.. 
@@ -21,13 +22,15 @@ INCREASING in T. Do this using the common increasing function notation
 
 - drawings?
 
-- consistency in the usage of the norm / double norm
+- consistency in the usage of the norm / double norm, and specify how 
+you you use this in the appendix. Maybe you can write \norm{} everywhere 
+and just specify the subscript for the specific one you are using. Or 
+maybe write whatever you do in the appendix.
 
-- take care of the appendix, maybe either cut the incredible big space, 
-or speak very very hintingly about stuff, saying "we might have to prove 
-that the conditional measure is regular, with the theorem tal dei tali, 
-thus must prove that the space i Polish if provided with the optimal 
-topology.
+- take care of the space of solutions in the appendix and speak very 
+very hintingly about stuff, saying "we might have to prove that the 
+conditional measure is regular, with the theorem tal dei tali, thus must 
+prove that the space i Polish if provided with the optimal topology.
 
 - use a uniform notation for the drift and so on, and hint at this in 
 the notation section and in the places where you use it.
