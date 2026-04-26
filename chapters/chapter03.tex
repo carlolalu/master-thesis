@@ -256,8 +256,8 @@ The idea is, in simple words, to exploit this to build somehow a system of \iid 
 \end{equation}
 
 such that each $\mfamba_t^p$ solves a system of the form \ref{ch3:SDE-for-Fokker-Planck} and which for every $t$ are with a high probability particularly close (in space) to the solutions $\amba_t^{(N)}=(\amba_t^p)_{p=1}^N$ of the system \ref{ch2:model}.
-In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly $\bigotimes_{p=1}^{N}\adens_t$ and we then just need to show that this closeness in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein}.
-The precise statement is given at \ref{ch3:best-condition-convergence}.
+In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly $\bigotimes_{p=1}^{N}\adens_t$ and we then just need to show that this closeness in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein} (all this is precisely stated and proven at \ref{ch3:best-condition-convergence}).
+Since this new system $\mfamba_t^{(N)}$ would be between the microscopic description and the macroscopic one, it is often referred to as \emph{mesoscopic description/model}.
 More intuitively, if we have such particles $\mfamba_t^{(N)}$ remaining close enough to the original ones $\amba_t^{(N)}$, we should expect their respective empirical densities 
 
 \begin{equation*}
@@ -287,7 +287,7 @@ Then, practically, we are trying to craft a system of $N+\hmactive_t$ particles 
 	As we will see in the paragraph \ref{ch3:spawing-position-parameters}, we will not be able even to obtain the independence.
 \end{enumerate}
 
-Till now we found conditions on the system of these particles, but we still have not pointed out at the main way to provide our smart guess: the idea is that the macroscopic behaviour is dictated by the \emph{average} dynamic of the system, more precisely, by the \emph{mean} field felt by each amoeba $\amba_t^p$ and cAMP molecule $\camp_t^{p,g}$):
+Till now we found conditions on the mesoscopic system, but we still have not pointed out at the main way to provide our smart guess: the idea is that the macroscopic behaviour is dictated by the \emph{average} dynamic of the system, more precisely, by the \emph{mean} field felt by each amoeba $\amba_t^p$ and cAMP molecule $\camp_t^{p,g}$):
 
 \begin{align*}
 	\mfdrift_p^N(t, x) &:= \ECondTimes{\drift_p^N(t, \mfsol_t) }{\mfsol_t^{N,p} = x}

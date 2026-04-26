@@ -37,6 +37,8 @@ We follow \autocite{dini-derivatives} and \autocite{ana}.
 	\end{itemize}
 \end{remark}
 
+The proof of the first two points of the next lemma is easily achieved exploiting the properties of $\limsup$, while the third one is found in the quoted article.
+
 \begin{lemma}[Properties of Dini derivatives]
 	Let $f,h: \R \longrightarrow \R$ be $\Cspace^0$.
 	Then
@@ -49,8 +51,6 @@ We follow \autocite{dini-derivatives} and \autocite{ana}.
 			\end{equation}
 	\end{itemize}
 \end{lemma}
-
-The proof of the first two properties is easily achieved exploiting the properties of $\limsup$, while the third one is found in the quoted article.
 
 With this background in mind, we state the next result, of which the proof will be achieved by the end of the section (\ref{ch4:proof:del-dini-of-all}).
 
@@ -81,20 +81,33 @@ In this part we want to show this lemma.
 	\end{equation}
 \end{lemma}
 
-Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\sol_t^N-\mfsol_t^N$ is continuous, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions for such function (\cadlag and with a finite number of discontinuouty and such that in every such point the function can only jump up).
-This result can be in fact exploited for mesoscopic models $\mfsol_t$ which spawn new molecules $\camp_t$ in random position, and not along the path of other already existing particles (but this is not our case).
-Consider the random function
+Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\norm{\sol_t^N-\mfsol_t^N}_\infty$ has continuous paths, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions for the latter mathematical object (\cadlag, with a finite number of discontinuouties and such that in every such point the function can only jump up).
+In fact, defining the random function
 
 \begin{equation}
 	\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
 \end{equation}
 
-and look at its paths.
-Such function is surely continuous between birth times $\btime_m$, but what happens at such instants?
+and considering its paths $\Ch(t)(\omega)$ for $\omega \in \Omega$, we have that this is continuous between birth times $(\btime_m)_m$, but the behaviour at such instants depends on the spawning position of the cAMP.
+For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ in random position, and not necessarily along the path of other already existing particles $\amba_t^p$, we would have a this more general class of paths:
 
+\begin{definition}
+	Let $\SkoroF$ be the set of functions $g: \R_+ \longrightarrow \R_+$ such that:
+	\begin{itemize}
+		\item $g(0)=0$
+		\item $g$ is \cadlag
+		\item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
+	\end{itemize}
+	Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$, or equivalently, such that $\forall t. g(t-) \leq g(t+)$.
+\end{definition}
 
+\begin{figure}[h]
+	\begin{tikzpicture}
+	\end{tikzpicture}
+	\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouity AT THE RANDOM TIMES with the jump up]]]}
+\end{figure}
+\label{ch4:fig:discontinuous distance}
 
-[[use the word mesoscopic model also in the chapter 3]]
 
 [[reorder the things in this chapter: define now the space skoro, do some observation on its elements, then prove that your paths are continuous. Sketch that if the particles would be spawned randomly the model would have paths in skoro]]
 
@@ -195,22 +208,9 @@ We have that
 	Notice that, as noted in \ref{ch3:rmk:mf-not-c0}, we have that the trajectory of the mean-field cAMP does not start on any amoeba, \ie there is no bifurcation of paths at birth times, hence the possibility of a jump at each birth time $\btime_m$.
 \end{remark}
 
-\begin{definition}
-Let $\SkoroF$ be the set of functions $g: \R_+ \longrightarrow \R_+$ such that:
-\begin{itemize}
-\item $g(0)=0$
-\item $g$ is \cadlag
-\item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
-\end{itemize}
-Besides we define the set $\SkoroFUp $ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$, or equivalently, such that $\forall t. g(t-) \leq g(t+)$.
-\end{definition}
 
-\begin{figure}[h]
-	\begin{tikzpicture}
-	\end{tikzpicture}
-	\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouity AT THE RANDOM TIMES with the jump up]]]}
-\end{figure}
-\label{ch4:fig:discontinuous distance}
+
+
 
 By the previous lemma the paths of $\Ch$ are elements in $\SkoroFUp$.
 
