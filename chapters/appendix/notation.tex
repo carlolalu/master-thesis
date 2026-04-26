@@ -20,12 +20,47 @@ Whenever we have a measure $\mu$ on a space, to indicate a property $P(x)$ valid
 The cyrillic letters $\Ch$, $\Zhi$ and $\Iu$ are used in this master thesis for mathematical objects that need to be temporarily addressed (\eg in proofs), for which thus we do not want to use greek or latin letters which would be useful in other places.
 Do not feel intimidated by them: $\Ch$ is pronounced as the sound "tsch" in German, $\Zhi$ as the "j" in the french word "bonjour" and $\Iu$ as the english word "you".
 
-\subsection{Generic positive constants}
+\subsection{Generic positive constants and increasing functions}
 
 We will indicate generic constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
 
 \begin{equation*}
 	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
+\end{equation*}
+
+Sometimes we will operate on a fixed time $t$, considering certain quantities as constants $K_{t,y}$, but then it will be necessary to consider an object of the type
+
+\begin{equation*}
+	\sup_{t \in [0,T]} K_{t,y}
+\end{equation*}
+
+and show that this is bounded.
+Of course here the problem arises because $[0,T]$ is an infinite set.
+In such situation it is usually necessary to show that the function
+
+\begin{equation*}
+	f_y(t) := K_{t,y}
+\end{equation*}
+
+is increasing an continuous on $\R$, or bounded, so that we can write
+
+\begin{equation*}
+	\sup_{t \in [0,T]} K_{t,y} = \sup K_{T,y}
+\end{equation*}
+
+Similarly is the case when we want to bound quantities on discrete sets in $\N$ with the upper extremum: 
+
+\begin{equation*}
+	\logQuest{
+		\sup_{q \leq Q} K_{q} \leq K_Q 
+	}
+\end{equation*}
+
+also in this case it is a good solution to show that $f(q) := K_q$ is an increasing function.
+For this reasons we indicate with 
+
+\begin{equation*}
+	
 \end{equation*}
 
 \subsection{System, drift and diffusion}
