@@ -257,15 +257,7 @@ The idea is, in simple words, to exploit this to build somehow a system of \iid 
 
 such that each $\mfamba_t^p$ solves a system of the form \ref{ch3:SDE-for-Fokker-Planck} and which for every $t$ are with a high probability particularly close (in space) to the solutions $\amba_t^{(N)}=(\amba_t^p)_{p=1}^N$ of the system \ref{ch2:model}.
 In this way, if $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ are \iid, the marginals of $\mfamba_t^{(N)}$ are exactly $\bigotimes_{p=1}^{N}\adens_t$ and we then just need to show that this closeness in space for every time $t$ implies a closeness of the marginals of the two groups of particles, fullfilling \ref{ch3:lemma-sznitman-wasserstein}.
-The precise statement is given at \ref{label}.
-
-
-
-
-
-
-[[complete the reference here above]]
-
+The precise statement is given at \ref{ch3:best-condition-convergence}.
 More intuitively, if we have such particles $\mfamba_t^{(N)}$ remaining close enough to the original ones $\amba_t^{(N)}$, we should expect their respective empirical densities 
 
 \begin{equation*}
@@ -730,9 +722,9 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\begin{equation*}
 		\Norm{\mfdrift(t,x)}_\infty 
 		\leq 
-		K_{\attraction, \lambda} t
+		\const_{\attraction, \lambda} t
 	\end{equation*}
-	for a constant $K_{\attraction, \lambda} > 0$ depending on $\attraction, \lambda$.
+	for a constant $\const_{\attraction, \lambda} > 0$ depending on $\attraction, \lambda$.
 \end{lemma}
 
 \begin{remark}
@@ -895,7 +887,7 @@ This will be relevant to inquire about the properties of the distance process
 
 Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
-\begin{lemma}
+\begin{lemma}\label{ch3:best-condition-convergence}
 	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be the amoebas part of the solution of \ref{ch3:MF-particles}.
 	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
 	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
@@ -1058,10 +1050,10 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		&\leq
 			\E{
 				\int_0^t 
-				K_{\attraction}\
+				\const_{\attraction}\
 				\frac{\hmactive_s}{N}
 				+
-				K_{\attraction, \lambda} s\			
+				\const_{\attraction, \lambda} s\			
 				ds\
 				\1_{\Xi_t}
 			}
@@ -1071,13 +1063,13 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		&\leq\
 			\E{
 				t
-				K_{\attraction}\
+				\const_{\attraction}\
 				\frac{\hmactive_t}{N}\
 				\1_{\Xi_t}
 			}
 			+
 			\E{
-				K_{\attraction, \lambda} 
+				\const_{\attraction, \lambda} 
 				\frac{t^2}{2}\
 				\1_{\Xi_t}
 			}
@@ -1085,13 +1077,13 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 			N^{-\cutparameter}
 		\\
 		&=
-		\frac{tK_{\attraction}}{N}\
+		\frac{t\const_{\attraction}}{N}\
 		\E{
 			\hmactive_t
 			\1_{\Xi_t}
 		}
 		+
-		K_{\attraction, \lambda} 
+		\const_{\attraction, \lambda} 
 		\frac{t^2}{2}\
 		\E{
 			\1_{\Xi_t}
@@ -1108,13 +1100,13 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	
 	\begin{align*}
 		&\leq\
-			\frac{tK_{\attraction}}{N}\
+			\frac{t\const_{\attraction}}{N}\
 			(\E{(\hmactive_t)^q})^\frac{1}{q}
 				\E{
 					\1_{\Xi_t}^p
 				}^\frac{1}{p}
 			+
-			K_{\attraction, \lambda} 
+			\const_{\attraction, \lambda} 
 			t^2\
 			\E{
 				\1_{\Xi_t}
@@ -1123,11 +1115,11 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 			N^{-\cutparameter}
 			\\
 		&\leq\
-			\frac{tK_{\attraction}}{N}\
+			\frac{t\const_{\attraction}}{N}\
 			(\E{(\hmactive_t)^q})^\frac{1}{q}\
 			K^\frac{1}{p}	N^\frac{-(\xi-\cutparameter)}{p}\
 			+
-			K_{\attraction, \lambda} 
+			\const_{\attraction, \lambda} 
 			t^2\
 			K\
 			N^{-(\xi-\cutparameter)}
@@ -1136,12 +1128,12 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\\
 		&=\
 			\frac{t\
-				K_{\attraction,p}
+				\const_{\attraction,p}
 			}{N}\
 			(\E{(\hmactive_t)^q})^\frac{1}{q}\
 			N^\frac{-(\xi-\cutparameter)}{p}\
 			+
-			K_{\attraction, \lambda} 
+			\const_{\attraction, \lambda} 
 			t^2\
 			N^{-(\xi-\cutparameter)}
 			+
@@ -1153,12 +1145,12 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\begin{align*}
 		&\leq
 			\frac{t\
-				K_{\attraction,p}
+				\const_{\attraction,p}
 			}{N}\
 				(f^{\uparrow}(q)^\frac{1}{q}\: (\lambda Nt)^{q\frac{1}{q}} \vee 1)\
 			N^\frac{-(\xi-\cutparameter)}{p}\
 			+
-			K_{\attraction, \lambda} 
+			\const_{\attraction, \lambda} 
 			t^2\
 			N^{-(\xi-\cutparameter)}
 			+
@@ -1170,23 +1162,23 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\begin{align*}
 		&=
 				\frac{t\
-					K_{\attraction,p,q, \lambda}
+					\const_{\attraction,p,q, \lambda}
 				}{N}\
 				(Nt)
 				N^\frac{-(\xi-\cutparameter)}{p}\
 			+
-				K_{\attraction, \lambda} 
+				\const_{\attraction, \lambda} 
 				t^2\
 				N^{-(\xi-\cutparameter)}
 			+
 				N^{-\cutparameter}
 		\\
 			&\leq
-				K_{\attraction,p,q, \lambda}\
+				\const_{\attraction,p,q, \lambda}\
 				t^2\
 				N^\frac{-(\xi-\cutparameter)}{p}\
 				+
-				K_{\attraction, \lambda} 
+				\const_{\attraction, \lambda} 
 				t^2\
 				N^{-(\xi-\cutparameter)}
 				+
@@ -1200,12 +1192,12 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
 		\big) 
 		\leq
-		K_{\attraction, \lambda}
+		\const_{\attraction, \lambda}
 		t^2
 		N^{-(\xi-\cutparameter)}
 		+
 		t^2\
-		K_{\attraction,\lambda,q,p}\
+		\const_{\attraction,\lambda,q,p}\
 		N^\frac{-(\xi-\cutparameter)}{p}
 		+
 		N^{-\cutparameter}
@@ -1218,12 +1210,12 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
 		\big) 
 		\leq
-		K_{\attraction, \lambda}
+		\const_{\attraction, \lambda}
 		T^2
 		N^{-(\xi-\cutparameter)}
 		+
 		T^2\
-		K_{\attraction,\lambda,q,p}\
+		\const_{\attraction,\lambda,q,p}\
 		N^\frac{-(\xi-\cutparameter)}{p}
 		+
 		N^{-\cutparameter}

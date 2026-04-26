@@ -159,16 +159,16 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 \begin{lemma}\label{ch7:lemma:drift:lip-and-bound}
 	The function $\drift^N$ is Lipschitz in space with fixed time with Lipschitz constant of
 	\begin{equation*}
-		\frac{K_{\attraction,\NumCampRelease}}{N}
+		\frac{\const_{\attraction,\NumCampRelease}}{N}
 		\hmactive_s
 	\end{equation*}
-	where $K_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
+	where $\const_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
 	Furthermore $\drift^N$ is bounded
 	
 	\begin{equation*}
 		\Norm{\drift^N(s,x)}_\infty \leq 
 		\frac{1}{N}
-		K_{\NumCampRelease, \attraction}\
+		\const_{\NumCampRelease, \attraction}\
 		(\hmactive_s + \cdrift)
 	\end{equation*}
 	
@@ -237,7 +237,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\Norm{x - y}_\infty
 		\\
 		&=
-		\frac{K_{\attraction,\NumCampRelease}}{N}
+		\frac{\const_{\attraction,\NumCampRelease}}{N}
 		\hmactive_s\
 		\Norm{x - y}_\infty
 	\end{align*}
@@ -286,7 +286,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\right)\
 		\leq\
 		\frac{1}{N}
-		K_{\NumCampRelease, \attraction}\
+		\const_{\NumCampRelease, \attraction}\
 		(\hmactive_s + \cdrift)
 	\end{align*}
 \end{proof}
@@ -550,9 +550,9 @@ It is easy to show that then the existence and uniqueness of solutions for the m
 	is Lipschitz and bounded in space with bound
 	\begin{equation*}
 		\Norm{\mfdrift(t,x)}_\infty \leq 
-		K_{\attraction, \lambda,\NumCampRelease} t
+		\const_{\attraction, \lambda,\NumCampRelease} t
 	\end{equation*}
-	for a constant $K_{\attraction, \lambda,\NumCampRelease} > 0$.
+	for a constant $\const_{\attraction, \lambda,\NumCampRelease} > 0$.
 \end{lemma}
 
 \begin{remark}\label{ch7:only-important-parameter-is-NumCampRelease}
@@ -868,7 +868,7 @@ Then we can resume the whole proof as
 	}_\infty
 	\\
 	&\leq
-	K_{d, \NumCampRelease} \norm{
+	\const_{d, \NumCampRelease} \norm{
 		\drift^{N}(t, \sol_t^N) - \mfdrift^{N}(t, \mfsol_t^N)
 	}_\infty
 \end{align*}
@@ -880,7 +880,7 @@ where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the cor
 Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but for the sake of clarity we stick to the more classic attraction.
 
 \begin{proposition}\label{ch7:LLN}
- 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. Then there exists $\overline{N},K_\xi >0$ such that for all  $n\in \N$ there exists $K_{n, \NumCampRelease}$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
+ 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. Then there exists $\overline{N},\const_\xi >0$ such that for all  $n\in \N$ there exists $\const_{n, \NumCampRelease}$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
  	\begin{equation*}
  		\PrbOf{
  			\norm{
@@ -890,7 +890,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
  			(1+2\NumCampRelease)N^{-\xi}
  		}
  		\leq
- 		K_{n,\NumCampRelease} (t \vee 1)^{4n} N^{-K_\xi n +1}
+ 		\const_{n,\NumCampRelease} (t \vee 1)^{4n} N^{-\const_\xi n +1}
  	\end{equation*}
 \end{proposition}
 
@@ -1040,13 +1040,13 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 	\begin{align*}
 		\leq
 		\sum _{l = 1}^{\NumCampRelease}\
-		K_n\
+		\const_n\
 		(t \vee 1)^{4n}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		=
-		K_{n,\NumCampRelease}\
+		\const_{n,\NumCampRelease}\
 		(t \vee 1)^{4n}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 	\end{align*}
 \end{proof}
 
@@ -1124,7 +1124,7 @@ Again we exploit the lipschitzianity of $\drift^N$ (\ref{ch7:lemma:drift:lip-and
 \begin{align*}
 	\leq
 	3\
-	\frac{K_{\attraction,\NumCampRelease}}{N}
+	\frac{\const_{\attraction,\NumCampRelease}}{N}
 	\hmactive_t
 	\underbrace{
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
@@ -1152,7 +1152,7 @@ Therefore we can write
 \begin{align*}
 	\diniu^+_t \auxProc_t^N 
 	&\leq
-	{K_{\attraction,\NumCampRelease}}
+	{\const_{\attraction,\NumCampRelease}}
 	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
@@ -1166,7 +1166,7 @@ Integrating over $[0,T]$ and choosing some $S > T$ we then obtain:
 	\auxProc_T^N = \auxProc_T^N - \auxProc_0^N 
 	\leq
 	\int_0^T 
-	{K_{\attraction,\NumCampRelease}}\
+	{\const_{\attraction,\NumCampRelease}}\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
@@ -1193,7 +1193,7 @@ We assume this holds, and by applying the Groenwall lemma in his form \ref{ch6:l
 		dt
 		\cdot
 		\exp \left(
-		\int_0^T K_{\attraction,\NumCampRelease}\
+		\int_0^T \const_{\attraction,\NumCampRelease}\
 		\frac{\hmactive_T}{N}dt
 		\right)
 		\\
@@ -1206,7 +1206,7 @@ We assume this holds, and by applying the Groenwall lemma in his form \ref{ch6:l
 		\cdot
 		\exp \left(
 		T
-		K_{\attraction,\NumCampRelease}\
+		\const_{\attraction,\NumCampRelease}\
 		\frac{\hmactive_T}{N}
 		\right)
 	\end{aligned}
@@ -1256,17 +1256,17 @@ Then, for $N$ big enough, by the law of large numbers \ref{ch7:LLN} and exploiti
 		+
 		\left(
 			\frac{1}{N}
-			K_{\NumCampRelease, \attraction}\
+			\const_{\NumCampRelease, \attraction}\
 			(\hmactive_t + \cdrift)
 			+
-			K_{\attraction, \lambda,\NumCampRelease} t
+			\const_{\attraction, \lambda,\NumCampRelease} t
 		\right)
 		\1_{\setB_t^c}
 		\\
 		&\leq
 			2N^{-\xi}
 			+
-			K_{\attraction, \lambda,\NumCampRelease,\cdrift} 
+			\const_{\attraction, \lambda,\NumCampRelease,\cdrift} 
 			\left(
 				\frac{\hmactive_t}{N}
 				+
@@ -1279,7 +1279,7 @@ Then, for $N$ big enough, by the law of large numbers \ref{ch7:LLN} and exploiti
 		&\leq\
 			2N^{-\xi}
 			+
-			K_{\attraction, \lambda,\NumCampRelease,\cdrift} 
+			\const_{\attraction, \lambda,\NumCampRelease,\cdrift} 
 			\left(
 			\frac{\hmactive_S}{N}
 			+
@@ -1305,7 +1305,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 		\cdot
 		\exp \left(
 		T
-		K_{\attraction,\NumCampRelease}\
+		\const_{\attraction,\NumCampRelease}\
 		\frac{\hmactive_T}{N}
 		\right)
 	}
@@ -1318,7 +1318,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 			\left[
 				2N^{-\xi}
 				+
-				K_{\attraction, \lambda,\NumCampRelease,\cdrift} 
+				\const_{\attraction, \lambda,\NumCampRelease,\cdrift} 
 				\left(
 				\frac{\hmactive_S}{N}
 				+
@@ -1332,7 +1332,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 		\cdot
 		\exp \left(
 			T
-			K_{\attraction,\NumCampRelease}\
+			\const_{\attraction,\NumCampRelease}\
 			\frac{\hmactive_T}{N}
 		\right)
 	}
@@ -1344,7 +1344,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 		\E{
 			\exp \left(
 			T\
-			K_{\attraction,\NumCampRelease}\
+			\const_{\attraction,\NumCampRelease}\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -1354,7 +1354,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	+ 
 	\underbrace{
 		N^{\cutparameter}\
-		K_{\attraction, \lambda,\NumCampRelease,\cdrift}\
+		\const_{\attraction, \lambda,\NumCampRelease,\cdrift}\
 		\E{
 			\frac{\hmactive_S}{N} 
 			\int_0^S
@@ -1362,7 +1362,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 			dt
 			\cdot
 			\exp \left(
-			TK_\attraction\
+			T\const_\attraction\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -1373,7 +1373,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	+ 
 	\underbrace{
 		N^{\cutparameter}\
-		K_{\attraction, \lambda,\NumCampRelease,\cdrift}\
+		\const_{\attraction, \lambda,\NumCampRelease,\cdrift}\
 		\left(
 		1+S
 		\right)\
@@ -1383,7 +1383,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 			dt
 			\cdot
 			\exp \left(
-			TK_\attraction\
+			T\const_\attraction\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}

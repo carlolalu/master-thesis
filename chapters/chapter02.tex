@@ -160,7 +160,7 @@ This function is called \emph{parenting function}, and for each $m\in\N$ the ran
 	\underbrace{d\Prb(\btime^{p,g} = s)}_{:=\Zhi(p,g,s) ds}
 \end{align*}
 
-And since $\Zhi(p,g,s)ds=d\Gma_{g,\lambda} (s)$, it is independent from $p$, we have that $\Prb (\Parentof(m) = p) = const(m)$ and thus uniformly distributed on $\{1,\ldots,N\}$.
+And since $\Zhi(p,g,s)ds=d\Gma_{g,\lambda} (s)$, it is independent from $p$, we have that $\Prb (\Parentof(m) = p) = \const_m$ and thus uniformly distributed on $\{1,\ldots,N\}$.
 \end{proof}
 
 Then we can reformulate the model \ref{ch2:model} as:
@@ -529,18 +529,18 @@ is such that:
 \begin{enumerate}
 \item it is Lipschitz continuous in space with fixed time with Lipschitz constant
 \begin{equation*}
-L_N := K_\attraction \frac{\hmactive_t}{N} = \frac{K_\attraction }{N} \sum_{k=1}^N \hmactive_t^p
+L_N := \const_\attraction \frac{\hmactive_t}{N} = \frac{\const_\attraction }{N} \sum_{k=1}^N \hmactive_t^p
 \end{equation*}
-where $K_\attraction$ is a constant depending on the Lipschitz constant of $\attraction$,
+where $\const_\attraction$ is a constant depending on the Lipschitz constant of $\attraction$,
 \ie
 \begin{equation}
 \forall t \in \R_+.\ \Norm{ \drift(t,x) - \drift(t,y)}_\infty \leq L_N \Norm{x-y}_\infty
 \end{equation}
-\item There is a constant $K_{\attraction}>0$ such that
+\item There is a constant $\const_{\attraction}>0$ such that
 \begin{equation*}
 \Norm{ \drift(t,x)}_\infty\
 \leq\
-K_{\attraction}\
+\const_{\attraction}\
 \frac{\hmactive_t}{N}
 \end{equation*}
 \ie it is bounded, hence in particular it grows sublinearly in space.
@@ -588,11 +588,11 @@ Fix $t,x,y$ and let $l$ be the Lipschitz constant of $\attraction$. Then
 	\\
 	&= \frac{2l}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty\
 	=\
-	\frac{K_\attraction}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty\
+	\frac{\const_\attraction}{N} \sum_{p=1}^{N} \hmactive_t^p ||x - y ||_\infty\
 \end{aligned}
 \end{equation*}
 
-where $K_\attraction := 2l$. Thus the Lipschitzianity has been proved.
+where $\const_\attraction := 2l$. Thus the Lipschitzianity has been proved.
 The drift $\drift$ is bounded:
 \begin{equation*}
 \begin{aligned}
@@ -605,7 +605,7 @@ The drift $\drift$ is bounded:
 	&
 	\leq \frac{l \sum_{p=1}^{N} \hmactive_t^p \Norm{\attraction}_\infty}{N}
 	= 
-	K_{\attraction}\
+	\const_{\attraction}\
 	\frac{\hmactive_t}{N}
 \end{aligned}
 \end{equation*}

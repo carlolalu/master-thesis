@@ -22,12 +22,12 @@ More formally we would like to prove that, chosen some $\xi>0$ (with some extra 
 	N^{-\xi}
 	}
 	\leq
-	K_n\
+	\const_n\
 	(t^{4n} \: \vee \: 1)\
-	N^{-K_\xi n + 1}
+	N^{-\const_\xi n + 1}
 \end{equation}
 
-for all $n \in \N$, where $K_n$ is a constant dependent on $n$ and independent from $\xi, N$, and $K_\xi$ is a constant dependent only on $\xi$.
+for all $n \in \N$, where $\const_n$ is a constant dependent on $n$ and independent from $\xi, N$, and $\const_\xi$ is a constant dependent only on $\xi$.
 To prove it the idea is to notice that for the $k$-th particle
 
 \begin{align*}
@@ -158,20 +158,20 @@ Only for this chapter we will use a more general case for the attraction: we wil
 		\leq 
 		\norm{\cutoffSinAttraction}
 		\leq 
-		K_\curlywedge \left( 
+		\const_\curlywedge \left( 
 		\frac{1}{\norm{x}} \wedge N^\alpha
 		\right)
 		=
 		\left\{
 		\begin{aligned}
-			&\frac{K_\curlywedge}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
+			&\frac{\const_\curlywedge}{\norm{x}}			&& x \in \{ \norm{x} \geq N^{-\alpha}\}
 			\\
-			&K_\curlywedge\:N^{\alpha}						&& \text{otherwise}
+			&\const_\curlywedge\:N^{\alpha}						&& \text{otherwise}
 		\end{aligned}
 		\right.
 	\end{equation}
-	for some positive constant $K_\curlywedge$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
-	Then we define the generalized attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha, K_\curlywedge) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalized drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
+	for some positive constant $\const_\curlywedge$,	\ie such that it is less than a cut-off Coulomb-type singularity, with the cut-off of parameter $N^{\alpha}$.
+	Then we define the generalized attraction with cut-off of parameters $\alpha$ as $\genAttraction := \genAttraction(N, \alpha, \const_\curlywedge) := \attraction + \cutoffSinAttraction(N, \alpha)$, and the generalized drift as the drift of \ref{ch2:def:drift-&-diffusion} with $\attraction$ substituted with $\genAttraction$, \ie
 	\begin{equation}
 		\left\{
 		\begin{aligned}
@@ -255,11 +255,11 @@ The first is a simple result of \autocite{peter-boers}, that we simply report he
 The second lemma that we need is a simple evaluation of these quantities for the generalized attraction.
 
 \begin{lemma}\label{ch5:lemma:eval-norm-gen-attr}
-	Let $\genAttraction$ be the generalized attraction, then we have that there exists a constant $K_{\attraction,\curlywedge}$ depending only on $\attraction, K_\curlywedge$ such that
+	Let $\genAttraction$ be the generalized attraction, then we have that there exists a constant $\const_{\attraction,\curlywedge}$ depending only on $\attraction, \const_\curlywedge$ such that
 	\begin{align}
 		\Norm{\genAttraction}_{1 \wedge \infty}, \:
 		\Norm{\genAttraction^2}_{1 \wedge \infty} 
-		\leq K_{\attraction,\curlywedge}
+		\leq \const_{\attraction,\curlywedge}
 	\end{align}
 \end{lemma}
 
@@ -288,14 +288,14 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		=
 		\\
 		&=
-		\Norm{\attraction}_1 + \Norm{K_\curlywedge N^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{K_\curlywedge}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
+		\Norm{\attraction}_1 + \Norm{\const_\curlywedge N^\alpha \1_{0 \leq \norm{x} \leq N^{-\alpha}}}_1 + \Norm{\frac{\const_\curlywedge}{\norm{x}} \1_{N^{-\alpha} \leq \norm{x} \leq 1}}_1
 		\\
 		&\footnotemark[1]=
-		\Norm{\attraction}_1 + K_\curlywedge N^{\alpha} \cdot \lebsge (\Ball^{d-1}[N^{-\alpha}]) + \int_{N^{-\alpha}}^1 \: \frac{K_\curlywedge}{\norm{x}} \: dx
+		\Norm{\attraction}_1 + \const_\curlywedge N^{\alpha} \cdot \lebsge (\Ball^{d-1}[N^{-\alpha}]) + \int_{N^{-\alpha}}^1 \: \frac{\const_\curlywedge}{\norm{x}} \: dx
 		\\
 		& \leq
 		\Norm{\attraction}_1 
-		+ K_\curlywedge N^{\alpha} 
+		+ \const_\curlywedge N^{\alpha} 
 		\max \left\{
 		\pi (N^{-\alpha})^2
 		,\frac{4}{3} \pi (N^{-\alpha})^3
@@ -304,7 +304,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\\
 		&\qquad
 		+
-		K_\curlywedge
+		\const_\curlywedge
 		\max \left\{
 		\int_{N^{-\alpha}}^1  \: \frac{1}{r} r\: dr \:2\pi
 		,\int_{N^{-\alpha}}^1  \: \frac{1}{r} r^2\: dr \: 2 \pi \int_0^\pi \sin(\theta) d\theta
@@ -312,15 +312,15 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\\
 		& \leq 
 		\Norm{\attraction}_1 
-		+ K_\curlywedge N^{\alpha-2\alpha} 2 \pi
-		+ K_\curlywedge 2 \pi \cdot 2 \max \left\{
+		+ \const_\curlywedge N^{\alpha-2\alpha} 2 \pi
+		+ \const_\curlywedge 2 \pi \cdot 2 \max \left\{
 		\int_0^1 dr
 		,\int_0^1  r\: dr
 		\right\}
 		\\
 		& \leq
 		\Norm{\attraction}_1
-		+ K_\curlywedge 6\pi 
+		+ \const_\curlywedge 6\pi 
 	\end{align*}
 	\footnotetext[1]{$\lebsge(\Ball^{d-1}[N^{-\alpha}])$ indicates the Lebesgue measure of the $d-1$-ball of radius $N^{-\alpha}$}
 	
@@ -329,7 +329,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 	\begin{equation*}
 		\Norm{\cutoffSinAttraction \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{K_\curlywedge}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = K_\curlywedge
+		\Norm{\frac{\const_\curlywedge}{\norm{x}} \1_{\norm{x} > 1}}_\infty  = \const_\curlywedge
 	\end{equation*}
 	
 	Then the first inequality is proven.
@@ -362,7 +362,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{(\genAttraction^2)_1}_1 
 		\leq
 		\Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \int \norm{\cutoffSinAttraction}  \1_{\norm{x} \leq 1}
-		\leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty K_\curlywedge 6\pi
+		\leq \Norm{\attraction^2}_1 + 2 \Norm{\attraction}_\infty \const_\curlywedge 6\pi
 	\end{equation*}
 	
 	And regarding the other term:
@@ -371,7 +371,7 @@ The second lemma that we need is a simple evaluation of these quantities for the
 		\Norm{\attraction \cutoffSinAttraction \1_{\norm{x} > 1}
 			+ \cutoffSinAttraction^2 \1_{\norm{x} > 1}}_\infty 
 		\leq 
-		\Norm{\frac{K_\curlywedge \attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{K_\curlywedge^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = K_\curlywedge\Norm{\attraction}_\infty + K_\curlywedge^2
+		\Norm{\frac{\const_\curlywedge \attraction}{\norm{x}} \1_{\norm{x} > 1}}_\infty + \Norm{\frac{\const_\curlywedge^2}{\norm{x}^2} \1_{\norm{x} > 1}}_\infty  = \const_\curlywedge\Norm{\attraction}_\infty + \const_\curlywedge^2
 	\end{equation*}
 \end{proof}
 
@@ -396,9 +396,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists K_{dens}>0.\
+			\exists \const_{dens}>0.\
 			\forall p,m.\
-			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < K_{dens}
+			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < \const_{dens}
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
 	\end{enumerate}
@@ -427,13 +427,13 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{aligned}
 	\end{equation*}
 	
-	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $K_\xi$ such that $0 < K_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $K_n = K_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $\const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $\const_n = \const_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
 	\begin{align}
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
-		K_n\
+		\const_n\
 		(t \vee 1)^n\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		&& \label{ch5:LLN1:bound}
 	\end{align}
 \end{proposition}
@@ -688,7 +688,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 	\end{equation}
 	
 	\begin{claim}\label{ch5:proof-of-LLN1:claim:bound-on-Psi-psi}
-		There exists a constant $K_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction,K_{\text{dens}}$,  and there exists $\overline{N}$ depending on $K_\curlywedge,\attraction, \alpha$ such that
+		There exists a constant $\const_{\attraction,\text{dens}, \curlywedge}>0$ depending on $\attraction,\const_{\text{dens}}$,  and there exists $\overline{N}$ depending on $\const_\curlywedge,\attraction, \alpha$ such that
 		\begin{equation}
 			\forall N > \overline{N}.\qquad
 			\ETFoot{\ast}{
@@ -703,7 +703,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 				\\
 				& 0 		&&\text{if} \quad \beta_m = 1
 				\\
-				&(K_{\attraction,\text{dens}, \curlywedge} N^{\alpha })^{\beta_m -2}	\quad		&&\text{otherwise}
+				&(\const_{\attraction,\text{dens}, \curlywedge} N^{\alpha })^{\beta_m -2}	\quad		&&\text{otherwise}
 			\end{aligned}
 			\right.
 		\end{equation}
@@ -766,7 +766,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\\
 			& = 2 \Norm{\genAttraction}_\infty = 2 (\Norm{\attraction}_\infty +  \Norm{\cutoffSinAttraction}_\infty )
 			\\
-			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  K_\curlywedge 4 N^{\alpha}
+			& \leq 2 (2 \Norm{\cutoffSinAttraction}_\infty ) =  \const_\curlywedge 4 N^{\alpha}
 		\end{align*}
 		
 		where the last inequality is valid if $N$ is big enough, \ie $N > \overline{N}(\alpha, \curlywedge, \attraction)$.
@@ -775,7 +775,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\begin{align*}
 			\Norm{\Psi_m - \psi_m^\ast }_\infty^{\beta_m - 2} 
 			\leq 
-			(K_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			(\const_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
 		\end{align*}
 		
 		Let us now check the other term:
@@ -857,9 +857,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\right)^2
 			\\
 			& =
-			K_{\curlywedge,\attraction} (1 + K_{\text{dens}})
-			+ 3 K_{\curlywedge,\attraction}^2 (1 + K_{\text{dens}})^2
-			= K_{\attraction,\text{dens}, \curlywedge} \leq (K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2}
+			\const_{\curlywedge,\attraction} (1 + \const_{\text{dens}})
+			+ 3 \const_{\curlywedge,\attraction}^2 (1 + \const_{\text{dens}})^2
+			= \const_{\attraction,\text{dens}, \curlywedge} \leq (\const_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2}
 		\end{align*}
 		\footnotetext[1]{By \ref{ch5:lemma:<-1+infty-norm} and \ref{ch5:lemma:eval-norm-gen-attr}}
 		
@@ -869,7 +869,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{\beta_m} }
 			&\leq \Norm{\Psi_m - \psi_m^\ast }^{\beta_m - 2}_\infty \cdot \ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{2} }
 			\\
-			&\leq (4N^\alpha K_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2} = (K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			&\leq (4N^\alpha \const_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2} = (\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
 		\end{align*}
 		And this concludes the proof of the claim.
 	\end{proof}
@@ -922,14 +922,14 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\left(
 			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(
 			\underbrace{
-				K_{\attraction,\text{dens}, \curlywedge} N^\alpha
+				\const_{\attraction,\text{dens}, \curlywedge} N^\alpha
 			}_{=:\Iu}
 			)^{\beta_m -2} 
 			\right)
 		}
 	\end{align*}
 	
-	We can assume that $\Iu \geq 1$ (eventually modulate the value $K_{\attraction,\text{dens}, \curlywedge} $ accordingly).
+	We can assume that $\Iu \geq 1$ (eventually modulate the value $\const_{\attraction,\text{dens}, \curlywedge} $ accordingly).
 	
 	\begin{claim}\label{ch5:proof-of-LLN1:sum-prod-Iu-inequality}
 		$\Iu \geq 1$ is independent from the multi-index $\beta$, therefore
@@ -1264,7 +1264,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 			\prod_{m=1}^{\hmactive_t}
 			\left(
-			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
 			\right)
 		}
 		\\
@@ -1274,12 +1274,12 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			(2n)^n\
-			(K_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{2n-2}\
+			(\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{2n-2}\
 			(\hmactive_t)^n\
 		}
 		\\
 		&=
-		(K_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
+		(\const_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
 		3(2n)!
 		(2n)^n\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
@@ -1288,7 +1288,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		}\
 		\\
 		&=
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		\const_{\attraction,\text{dens}, \curlywedge,n}\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 		\E{
 			(\hmactive_t)^n
@@ -1300,12 +1300,12 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		
 	\begin{align*}
 		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		\const_{\attraction,\text{dens}, \curlywedge,n}\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 		f^{\uparrow}(n)\: (Nt\lambda)^n
 		\\
 		&\leq
-		K_{\attraction,\text{dens}, \curlywedge,n}\
+		\const_{\attraction,\text{dens}, \curlywedge,n}\
 		\underbrace{
 			N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 			N^n\
@@ -1314,23 +1314,23 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\lambda^n)
 		\\
 		&=
-		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
 		N^{ [2(\xi + \alpha) - 2 + 1] n + 1 -2\alpha}\
 		\leq
 	\end{align*}
 	
-	Then, for every $K = K_\xi$ such that $0 < K_\xi \leq 1 - 2(\alpha + \xi)$ (it is guaranteed to exist because $\alpha + \xi < \frac{1}{2}$), we have
+	Then, for every $K = \const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ (it is guaranteed to exist because $\alpha + \xi < \frac{1}{2}$), we have
 	
 	\begin{equation*}
 		\leq\
-		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
-		N^{ -K_\xi n + 1 -2\cdot 0}\
+		N^{ -\const_\xi n + 1 -2\cdot 0}\
 		\leq\
-		K_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
+		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
 		t^n\
-		N^{ -K_\xi n + 1}
+		N^{ -\const_\xi n + 1}
 	\end{equation*}
 	
 	And thus the proof of the proposition is finished.
@@ -1344,11 +1344,11 @@ To prove the second part of the law of large numbers it will be necessary to pro
 	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.
 	Assume that the densities of all coordinates of $\mfsol_t^N$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
 		\begin{equation*}
-			\exists K_{dens,T} >0.\
+			\exists \const_{dens,T} >0.\
 			\forall p,m.\
 			\forall t \leq T.\
 			\qquad
-			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\infty}(\R^d)} < K_{dens, T}
+			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\infty}(\R^d)} < \const_{dens, T}
 		\end{equation*}
 		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ under $ \PrbCondTimes{\cdot}{}$ respectively.
 	
@@ -1385,20 +1385,20 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=K_\xi$ such that $0< K_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $K_n = K_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
+	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=\const_\xi$ such that $0< \const_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $\const_n = \const_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
 	
 	\begin{align}
 		& \PrbOf{R^{N,\xi}_\amba}{}
 		\leq
-		K_n\
+		\const_n\
 		t^{4(n-1)}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		&& \label{ch5:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
-		\leq K_n\
+		\leq \const_n\
 		(t \vee 1)^{4(n-1)}\
-		N^{-K_\xi n + 1}\
+		N^{-\const_\xi n + 1}\
 		&& \label{ch5:LLN2:cond-2}
 	\end{align}
 \end{proposition}
@@ -1648,7 +1648,7 @@ As for the first part of the law of large numbers, together with the convention 
 	
 	\begin{align*}
 		&=
-		K_n\
+		\const_n\
 		N^{1 +(\xi-1) 2n}\
 		\sum_{
 			\substack{
@@ -1677,7 +1677,7 @@ As for the first part of the law of large numbers, together with the convention 
 	}$, which will be proved in this proposition \ref{ch5:prop:bound-for-rv-lln2}:
 	
 	\begin{equation*}\label{ch5:proof-of-LLN2:bound-for-phip}
-		\exists K_{\attraction,\curlywedge,q,dens,\lambda} > 0.
+		\exists \const_{\attraction,\curlywedge,q,dens,\lambda} > 0.
 		\qquad\
 		\E{
 			\norm{
@@ -1685,7 +1685,7 @@ As for the first part of the law of large numbers, together with the convention 
 			}^{\beta_p}
 		} 
 		\leq 
-		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^2)^{\beta_p}
 	\end{equation*}
 	
@@ -1737,7 +1737,7 @@ As for the first part of the law of large numbers, together with the convention 
 		} 
 		\\
 		&\leq
-		K_n\
+		\const_n\
 		N^{1 +(\xi-1) 2n}\
 		\sum_{
 			\substack{
@@ -1759,7 +1759,7 @@ As for the first part of the law of large numbers, together with the convention 
 		\right)
 		\\
 		&\leq
-		K_n\
+		\const_n\
 		N^{1 +(\xi-1) 2n}\
 		\underbrace{
 			\sum_{
@@ -1775,7 +1775,7 @@ As for the first part of the law of large numbers, together with the convention 
 			+
 			\1_{\beta_p \geq 2}
 			\left(
-			(\max_{q\leq n} K_{\attraction,\curlywedge,q,dens,\lambda})\
+			(\max_{q\leq n} \const_{\attraction,\curlywedge,q,dens,\lambda})\
 			t^2
 			\right)^{\beta_p}
 			\right)
@@ -1787,32 +1787,32 @@ As for the first part of the law of large numbers, together with the convention 
 	
 	\begin{align*}
 		&\leq
-		K_n\
+		\const_n\
 		N^{1 +(\xi-1) 2n}\
 		(2n)^n\
 		\left(
-		(\max_{q\leq n} K_{\attraction,\curlywedge,q,dens,\lambda})\
+		(\max_{q\leq n} \const_{\attraction,\curlywedge,q,dens,\lambda})\
 		t^2
 		\right)^{2n-2}\
 		\\
 		&=
-		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		\const_{\attraction,\curlywedge,n,dens,\lambda}\
 		t^{4(n-1)}\
 		N^{
 			1 + \left( 2\xi -2 + 1 \right)n
 		}\
 		=
-		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		\const_{\attraction,\curlywedge,n,dens,\lambda}\
 		t^{4(n-1)}\
 		N^{
 			1 + ( 2\xi - 1 )n
 		}\
 	\end{align*}
 	
-	Therefore, for every $K_\xi$ such that $0 < K_\xi \leq 1 -2\xi$, we have that
+	Therefore, for every $\const_\xi$ such that $0 < \const_\xi \leq 1 -2\xi$, we have that
 	
 	\begin{equation}
-		1 + ( 2\xi - 1 )n \leq 1 - K_\xi n
+		1 + ( 2\xi - 1 )n \leq 1 - \const_\xi n
 	\end{equation}
 	
 	and therefore we can conclude the proof:
@@ -1820,16 +1820,16 @@ As for the first part of the law of large numbers, together with the convention 
 	\begin{equation*}
 		\PrbOf{R^{N, \xi}_\ast}
 		\leq
-		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		\const_{\attraction,\curlywedge,n,dens,\lambda}\
 		t^{4(n-1)}\
 		N^{
 			1 + ( 2\xi - 1 )n
 		}\
 		\leq
-		K_{\attraction,\curlywedge,n,dens,\lambda}\
+		\const_{\attraction,\curlywedge,n,dens,\lambda}\
 		t^{4(n-1)}\
 		N^{
-			1 - K_\xi n
+			1 - \const_\xi n
 		}\
 	\end{equation*}
 	
@@ -1853,7 +1853,7 @@ Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 	\end{equation}
 	
 	and its average $\phi_p^\ast (k,i) := \EFoot{\ast}{\Phi_p^\ast(k,i)}$, where $\ast$ is either $k$ or absent.
-	Then exists $K_{\attraction,\curlywedge,q,dens,\lambda}>0$ such that
+	Then exists $\const_{\attraction,\curlywedge,q,dens,\lambda}>0$ such that
 	
 	\begin{equation}
 		\forall q \geq 1.\
@@ -1865,7 +1865,7 @@ Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 			}^q
 		} 
 		\leq 
-		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		(t \vee 1)^2)^q
 	\end{equation}
 \end{proposition}
@@ -2144,7 +2144,7 @@ Then let us observe closely the object in question.
 			}_{1 \vee \infty}
 			\\
 			\footnotemark[1] &\leq
-			K_{\attraction,\curlywedge}
+			\const_{\attraction,\curlywedge}
 			\cdot
 			\Norm{
 				\underbrace{
@@ -2178,14 +2178,14 @@ Then let us observe closely the object in question.
 		}
 		&\leq
 		\E{
-			(K_{\attraction,\curlywedge})^q
+			(\const_{\attraction,\curlywedge})^q
 			\Norm{
 				\Theta_1 - \theta_2
 			}_{1 \vee \infty}^q
 		}		
 		\\
 		&=
-		K_{\attraction,\curlywedge,q}
+		\const_{\attraction,\curlywedge,q}
 		\E{
 			\left(
 			\Norm{
@@ -2199,7 +2199,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		\footnotemark[2] &=
-		K_{\attraction,\curlywedge,q}
+		\const_{\attraction,\curlywedge,q}
 		\E{
 			\sum_{j=0}^{q}
 			\left(
@@ -2218,7 +2218,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		K_{\attraction,\curlywedge,q}\
+		\const_{\attraction,\curlywedge,q}\
 		\sum_{j=0}^{q}
 		\left(
 		\begin{gathered}
@@ -2295,15 +2295,15 @@ Then let us observe closely the object in question.
 		\\
 		&\leq
 		\sum _{g = 1}^{\hmactive_t^1}
-		K_{dens}
+		\const_{dens}
 		+
 		\EFoot
 		{\ast}{
 			\sum _{g = 1}^{\hmactive_t^1}
-			K_{dens}
+			\const_{dens}
 		}\
 		=\
-		K_{dens}\
+		\const_{dens}\
 		(\hmactive_t^1 + \lambda t)
 	\end{align*}
 	
@@ -2317,7 +2317,7 @@ Then let us observe closely the object in question.
 		}\leq
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q}
+		\const_{\attraction,\curlywedge,q}
 		\sum_{j=0}^{q}
 		\left(
 		\begin{gathered}
@@ -2330,19 +2330,19 @@ Then let us observe closely the object in question.
 			\Norm{
 				\Theta_1 - \theta_1
 			}_{\Lpspace^1}^{q-j}\
-			(K_{dens})^j\
+			(\const_{dens})^j\
 			(\hmactive_t^1 + \lambda t)^{j}
 		}
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q}
+		\const_{\attraction,\curlywedge,q}
 		\sum_{j=0}^{q}
 		(q!)
 		\E{
 			\Norm{
 				\Theta_1 - \theta_1
 			}_{\Lpspace^1}^{q-j}\
-			(K_{dens})^q\
+			(\const_{dens})^q\
 			\sum_{u=1}^j
 			\left(
 			\begin{gathered}
@@ -2355,9 +2355,9 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q}\
+		\const_{\attraction,\curlywedge,q}\
 		(q!)\
-		(K_{dens})^q\
+		(\const_{dens})^q\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2369,9 +2369,9 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q}\
+		\const_{\attraction,\curlywedge,q}\
 		(q!)\
-		(K_{dens})^q\
+		(\const_{dens})^q\
 		\sum_{j=0}^{q}\
 		j\
 		(j!)\
@@ -2385,9 +2385,9 @@ Then let us observe closely the object in question.
 		\\
 		&\leq
 		\underbrace{
-			K_{\attraction,\curlywedge,q}\
+			\const_{\attraction,\curlywedge,q}\
 			(q!)\
-			(K_{dens})^q\
+			(\const_{dens})^q\
 			q\
 			(q!)\
 			(\lambda t)^q\
@@ -2401,7 +2401,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2446,7 +2446,7 @@ Then let us observe closely the object in question.
 		}\leq
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2466,7 +2466,7 @@ Then let us observe closely the object in question.
 			(\hmactive_t^1)^j 
 		}  
 		\\
-		&= K_{\attraction,\curlywedge,q,dens}
+		&= \const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2488,7 +2488,7 @@ Then let us observe closely the object in question.
 		} +
 		\\
 		&\qquad
-		+ K_{\attraction,\curlywedge,q,dens}
+		+ \const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2509,7 +2509,7 @@ Then let us observe closely the object in question.
 	Let us calculate the second term first:
 	
 	\begin{align*}
-		&K_{\attraction,\curlywedge,q,dens}\
+		&\const_{\attraction,\curlywedge,q,dens}\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2519,7 +2519,7 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		} =
 		\\
-		&=K_{\attraction,\curlywedge,q,dens}\
+		&=\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\theta
@@ -2528,7 +2528,7 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		} =
 		\\
-		&=K_{\attraction,\curlywedge,q,dens}\
+		&=\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\EFoot
@@ -2542,7 +2542,7 @@ Then let us observe closely the object in question.
 		} =
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\EFoot
@@ -2563,7 +2563,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\sum _{g = 1}^{+\infty}
@@ -2583,7 +2583,7 @@ Then let us observe closely the object in question.
 	
 	\begin{align*}
 		&=		
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\EFoot
@@ -2603,7 +2603,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=				
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\Norm{
 				\EFoot
@@ -2619,7 +2619,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\left(
 			\int
@@ -2643,7 +2643,7 @@ Then let us observe closely the object in question.
 	
 	\begin{align*}
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\left(
 			\EFoot{\ast}{
@@ -2662,7 +2662,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\E{
 			\left(
 			t \lambda
@@ -2670,25 +2670,25 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		}
 		=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		(\lambda\
 		t)^q\
 		\PrbOf{\hmactive_t^1 = 0} =
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		(\lambda\
 		t)^q\
 		\underbrace{e^{-t\lambda}}_{\leq 1}\
 		\leq
-		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q
 	\end{align*}
 	
 	The first term will require a bit more effort. Proceeding as before to calculate $\theta$, and using Fubini and the tower property we obtain:
 	
 	\begin{align*}
-		&K_{\attraction,\curlywedge,q,dens}
+		&\const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			(\hmactive_t^1)^j\
@@ -2710,7 +2710,7 @@ Then let us observe closely the object in question.
 		} =
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\Eonly\
 		\Biggl[\
@@ -3116,7 +3116,7 @@ Then let us observe closely the object in question.
 		}\leq
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q,dens}
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -3140,7 +3140,7 @@ Then let us observe closely the object in question.
 		\\
 		&\qquad
 		+
-		K_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q,dens}
 		\E{
 			\Norm{
 				\EFoot
@@ -3154,7 +3154,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\sum_{j=0}^{q}\
 		\E{
 			(\hmactive_t^1)^{q-j}\
@@ -3164,11 +3164,11 @@ Then let us observe closely the object in question.
 			(\hmactive_t^1)^j\
 			\1_{\hmactive_t^1 \neq 0}
 		} +
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		t^q
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,dens}\
 		\left(
 		\sum_{j=0}^{q}\
 		q(q!) \lambda^q\
@@ -3182,7 +3182,7 @@ Then let us observe closely the object in question.
 		\right)
 		\\
 		&\leq
-		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		\left(
 		\E{
@@ -3198,7 +3198,7 @@ Then let us observe closely the object in question.
 	
 	\begin{align*}
 		\leq
-		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		\left(
 		f^{\uparrow}(q)\
@@ -3208,7 +3208,7 @@ Then let us observe closely the object in question.
 		\right)\
 		&
 		\leq\
-		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^q\
 		t^q\
 		\left(
@@ -3218,10 +3218,10 @@ Then let us observe closely the object in question.
 		\right)\
 		\\
 		&=
-		K_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^{2q}\
 		=\
-		(K_{\attraction,\curlywedge,q,dens,\lambda}\
+		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
 		t^2)^q
 	\end{align*}
 	
@@ -3230,10 +3230,10 @@ Then let us observe closely the object in question.
 \section{Composing all the pieces together}
 
 \begin{proposition}\label{ch5:LLN}[Law of large numbers]
-	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $K_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
-	Let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$ and choose a value $0 < K_\xi \leq 1 - 2(\alpha + \xi)$.
+	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$ and choose a value $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$.
 	
-	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, K_\curlywedge) > 0$ such that for all $n \in \N$ exists $K_n > 0$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
+	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, \const_\curlywedge) > 0$ such that for all $n \in \N$ exists $\const_n > 0$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
 	\begin{equation}
 		\PrbOf{
 			\Norm{
@@ -3245,9 +3245,9 @@ Then let us observe closely the object in question.
 			2N^{-\xi}
 		}
 		\leq
-		K_n\
+		\const_n\
 		(t \vee 1)^{4n}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 	\end{equation}
 	
 	In particular, if $\drift(t, \cdot)$ is the usual drift of \ref{ch2:def:drift-&-diffusion}, then $\alpha$ can be chosen equal to $0$.
@@ -3334,37 +3334,37 @@ Then let us observe closely the object in question.
 		}\
 		\\
 		&\leq
-		K_n\
+		\const_n\
 		t^n\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		+
-		K_n\
+		\const_n\
 		t^{4(n-1)}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		\\
 		&=
-		K_n\
+		\const_n\
 		(
 			t^n\
 			+
 			t^{4(n-1)}\
 		)\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		\\
 		&\leq
-		K_n\
+		\const_n\
 		2\
 		(
 			t^n\
 			\vee
 			t^{4(n-1)}\
 		)\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 		\\
 		&\leq
-		K_n\
+		\const_n\
 		t^{4(n-1)}\
-		N^{-K_\xi n + 1}
+		N^{-\const_\xi n + 1}
 	\end{align*}
 	
 	And the result is proved.

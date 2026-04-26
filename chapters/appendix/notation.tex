@@ -22,16 +22,16 @@ Do not feel intimidated by them: $\Ch$ is pronounced as the sound "tsch" in Germ
 
 \subsection{Generic positive constants and increasing functions}
 
-We will indicate generic constants with the symbol $K$, and a subscript will indicate on which mathematical objects such constants depend:
+We will indicate generic constants with the symbol $\const$, and a subscript will indicate on which mathematical objects such constants depend:
 
 \begin{equation*}
-	K_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
+	\const_{x,y,z}:= \: \text{generic const $>0$ dependent on $x,y,z$}
 \end{equation*}
 
-Sometimes we will operate on a fixed time $t$, considering certain quantities as constants $K_{t,y}$, but then it will be necessary to consider an object of the type
+Sometimes we will operate on a fixed time $t$, considering certain quantities as constants $\const_{t,y}$, but then it will be necessary to consider an object of the type
 
 \begin{equation*}
-	\sup_{t \in [0,T]} K_{t,y}
+	\sup_{t \in [0,T]} \const_{t,y}
 \end{equation*}
 
 and show that this is bounded.
@@ -39,24 +39,24 @@ Of course here the problem arises because $[0,T]$ is an infinite set.
 In such situation it is usually necessary to show that the function
 
 \begin{equation*}
-	f_y(t) := K_{t,y}
+	f_y(t) := \const_{t,y}
 \end{equation*}
 
 is increasing an continuous on $\R$, or bounded, so that we can write
 
 \begin{equation*}
-	\sup_{t \in [0,T]} K_{t,y} = \sup K_{T,y}
+	\sup_{t \in [0,T]} \const_{t,y} = \sup \const_{T,y}
 \end{equation*}
 
 Similarly is the case when we want to bound quantities on discrete sets in $\N$ with the upper extremum: 
 
 \begin{equation*}
 	\logQuest{
-		\sup_{q \leq Q} K_{q} \leq K_Q 
+		\sup_{q \leq Q} \const_{q} \leq \const_Q 
 	}
 \end{equation*}
 
-also in this case it is a good solution to show that $f(q) := K_q$ is an increasing function.
+also in this case it is a good solution to show that $f(q) := \const_q$ is an increasing function.
 For this reasons we indicate with 
 
 \begin{equation*}

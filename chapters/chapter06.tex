@@ -152,7 +152,7 @@ Recall that $\drift^N$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore
 \begin{align*}
 	\leq
 	  d\
-	  K_\attraction\
+	  \const_\attraction\
 	  \frac{\hmactive_t}{N}\
 	  \underbrace{
 		  \1_{\diniu^+_t \auxProc_t^N >0 }\
@@ -211,7 +211,7 @@ Therefore we can write
 	\diniu^+_t \auxProc_t^N 
 	&\leq
 	d\
-	K_\attraction\
+	\const_\attraction\
 	\frac{\hmactive_t}{N}\
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
@@ -222,7 +222,7 @@ Therefore we can write
 	\\
 	&\leq
 	d\
-	K_\attraction\
+	\const_\attraction\
 	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
@@ -236,7 +236,7 @@ Integrating over $[0,T]$ we then obtain:
 	 \\
 	 &= \int_0^T 
 	 	d\
-	 	K_\attraction\
+	 	\const_\attraction\
 	 	\frac{\hmactive_t}{N}\
 	 	\auxProc_t^N 
 	 	+N^{\cutparameter}\
@@ -245,7 +245,7 @@ Integrating over $[0,T]$ we then obtain:
 	 	\\
 	 	& \leq
 	\int_0^T 
-	K_\attraction\
+	\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
@@ -262,7 +262,7 @@ Choose now some $S >T$ to obtain
 \begin{equation*}
 	\leq
 	\int_0^T 
-	K_\attraction\
+	\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
@@ -372,7 +372,7 @@ With this lemma we have that the conditions of \ref{ch6:lemma-groenwall-generali
 \begin{equation*}
 	\auxProc_T^N \leq 
 	\int_0^T 
-	K_\attraction\
+	\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
@@ -396,7 +396,7 @@ Therefore we obtain that
 		dt
 		\cdot
 		\exp \left(
-		\int_0^T K_\attraction\
+		\int_0^T \const_\attraction\
 		\frac{\hmactive_T}{N}dt
 		\right)
 		\\
@@ -409,7 +409,7 @@ Therefore we obtain that
 		\cdot
 		\exp \left(
 		T
-		K_\attraction\
+		\const_\attraction\
 		\frac{\hmactive_T}{N}
 		\right)
 	\end{aligned}
@@ -452,17 +452,17 @@ Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-dr
 		2N^{-\xi}
 		+
 		\left(
-			K_{\attraction}\
+			\const_{\attraction}\
 			\frac{\hmactive_t}{N}
 			+
-			K_{\attraction, \lambda} t
+			\const_{\attraction, \lambda} t
 		\right)\
 		\1_{\setB_t^c}
 		\\
 		&\leq
 		2N^{-\xi}
 		+
-		K_{\attraction, \lambda} 
+		\const_{\attraction, \lambda} 
 		\left(
 		\frac{\hmactive_t}{N}
 		+
@@ -472,7 +472,7 @@ Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-dr
 		\leq\
 		2N^{-\xi}
 		+
-		K_{\attraction, \lambda} 
+		\const_{\attraction, \lambda} 
 		\left(
 		\frac{\hmactive_S}{N}
 		+
@@ -497,7 +497,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\cdot
 		\exp \left(
 		T
-		K_\attraction\
+		\const_\attraction\
 		\frac{\hmactive_T}{N}
 		\right)
 	}
@@ -510,7 +510,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\left[
 			2N^{-\xi}
 			+
-			K_{\attraction, \lambda} 
+			\const_{\attraction, \lambda} 
 			\left(
 			\frac{\hmactive_S}{N}
 			+
@@ -521,7 +521,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		dt
 		\cdot
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -534,7 +534,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		\E{
 			\exp \left(
 				T
-				K_\attraction\
+				\const_\attraction\
 				\frac{\hmactive_T}{N}
 			\right)
 		}
@@ -542,7 +542,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		+ 
 		\overbrace{
 		N^{\cutparameter}\
-		K_{\attraction, \lambda} 
+		\const_{\attraction, \lambda} 
 		\E{
 			\frac{\hmactive_S}{N} 
 			\int_0^S
@@ -550,7 +550,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 			dt
 			\cdot
 			\exp \left(
-			TK_\attraction\
+			T\const_\attraction\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -560,7 +560,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		+ 
 		\underbrace{
 		N^{\cutparameter}\
-		K_{\attraction, \lambda}
+		\const_{\attraction, \lambda}
 		S\
 			\E{
 				\int_0^S
@@ -568,7 +568,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 				dt
 				\cdot
 				\exp \left(
-				TK_\attraction\
+				T\const_\attraction\
 				\frac{\hmactive_T}{N}\
 				\right)
 			}
@@ -589,18 +589,18 @@ K\
 S\
 \E{
 	\exp \left(
-TK_\attraction\
+T\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }
 + N^{\cutparameter}\
-K_{\attraction, \lambda}
+\const_{\attraction, \lambda}
 \int_0^S\
 \E{
 	\frac{\hmactive_S}{N}\
 	\1_{\setB_t^c}\
 	\exp \left(
-TK_\attraction\
+T\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }\
@@ -608,13 +608,13 @@ dt +
 \\
 &\qquad
 + N^{\cutparameter}\
-K_{\attraction, \lambda}
+\const_{\attraction, \lambda}
 S\
 \int_0^S
 \E{
 	\1_{\setB_t^c}\
 	\exp \left(
-TK_\attraction\
+T\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 }
@@ -629,7 +629,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 		\frac{\hmactive_S}{N}\
 		\1_{\setB_t^c}\
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}\
@@ -644,7 +644,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 		(\1_{\setB_t^c})^q\
 		\left(
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 		\right)^q
@@ -665,7 +665,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 	\E{
 		\left(
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 		\right)^{qv}
@@ -683,7 +683,7 @@ Choose $p,q,u,v \in (1, +\infty)$ such that $\frac{1}{u} + \frac{1}{v} = \frac{1
 	\cdot
 	\E{
 		\exp \left(
-		\frac{qvTK_\attraction}{N}\
+		\frac{qvT\const_\attraction}{N}\
 		\hmactive_T
 		\right)
 	}^\frac{1}{qv}
@@ -695,7 +695,7 @@ and analogously, the last expectation value yields:
 \E{
 	\1_{\setB_t^c}\
 	\exp \left(
-	TK_\attraction\
+	T\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 } 
@@ -707,7 +707,7 @@ and analogously, the last expectation value yields:
 \E{
 	\left(
 	\exp \left(
-	TK_\attraction\
+	T\const_\attraction\
 	\frac{\hmactive_T}{N}\
 	\right)
 	\right)^{v}
@@ -718,7 +718,7 @@ and analogously, the last expectation value yields:
 \cdot
 \E{
 	\exp \left(
-	\frac{vTK_\attraction}{N}\
+	\frac{vT\const_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^{\frac{1}{v}}
@@ -735,20 +735,20 @@ Then we can write:
 	S\
 	\E{
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	\int_0^S\
 	\E{
 		\frac{\hmactive_S}{N}\
 		\1_{\setB_t^c}\
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}\
@@ -756,13 +756,13 @@ Then we can write:
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	S\
 	\int_0^S
 	\E{
 		\1_{\setB_t^c}\
 		\exp \left(
-		TK_\attraction\
+		T\const_\attraction\
 		\frac{\hmactive_T}{N}\
 		\right)
 	}
@@ -774,14 +774,14 @@ Then we can write:
 	S\
 	\E{
 		\exp \left(
-		\frac{TK_\attraction}{N}\
+		\frac{T\const_\attraction}{N}\
 		\hmactive_T
 		\right)
 	} +
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	\int_0^S\
 	N^{-1}
 \E{
@@ -792,7 +792,7 @@ Then we can write:
 \PrbOf{\setB_t^c}\
 \E{
 	\exp \left(
-	\frac{qvTK_\attraction}{N}\
+	\frac{qvT\const_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^\frac{1}{qv}
@@ -800,13 +800,13 @@ Then we can write:
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	S\
 	\int_0^S
 \PrbOf{\setB_t^c}\
 \E{
 	\exp \left(
-	\frac{vTK_\attraction}{N}\
+	\frac{vT\const_\attraction}{N}\
 	\hmactive_T
 	\right)
 }^{\frac{1}{v}}
@@ -819,12 +819,12 @@ Now we can evaluate the probability of $\setB_t^c$ with the law of large numbers
 \begin{equation*}
 	\PrbOf{\setB_t^c}\ 
 	\leq 
-	K_n\
+	\const_n\
 	(t \vee 1)^{4n}\
-	N^{-K_\xi n+ 1}
+	N^{-\const_\xi n+ 1}
 \end{equation*}
 
-for some constant $K_\xi$.
+for some constant $\const_\xi$.
 Regarding the higher moments of $\hmactive_T$, they can be evaluated with \ref{app:Poisson-moments} obtaining (assume $N$ big enough, so that the Poisson parameter is $\geq 1$ and the notation is smoother)
 
 \begin{equation*}
@@ -925,14 +925,14 @@ Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J},
 	S\
 	\E{
 		\exp \left(
-		\frac{TK_\attraction}{N}\
+		\frac{T\const_\attraction}{N}\
 		\hmactive_T
 		\right)
 	} +
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	\int_0^S\
 	N^{-1}
 	\E{
@@ -943,7 +943,7 @@ Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J},
 	\PrbOf{\setB_t^c}\
 	\E{
 		\exp \left(
-		\frac{qvTK_\attraction}{N}\
+		\frac{qvT\const_\attraction}{N}\
 		\hmactive_T
 		\right)
 	}^\frac{1}{qv}
@@ -951,13 +951,13 @@ Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J},
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction, \lambda}
+	\const_{\attraction, \lambda}
 	S\
 	\int_0^S
 	\PrbOf{\setB_t^c}\
 	\E{
 		\exp \left(
-		\frac{vTK_\attraction}{N}\
+		\frac{vT\const_\attraction}{N}\
 		\hmactive_T
 		\right)
 	}^{\frac{1}{v}}
@@ -967,62 +967,62 @@ Fix $\epsilon>0$. Then, continuing from \ref{ch6:pre-final-evaluation-on-avg-J},
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_\attraction\lambda T^2} + \epsilon)+
+	(e^{\const_\attraction\lambda T^2} + \epsilon)+
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction,\lambda}\
+	\const_{\attraction,\lambda}\
 	\int_0^S\
 	N^{-1}
 	\left[f^{\uparrow}(p) (\lambda N T)^p\right]^{\frac{1}{p}}\
 		\left(
-		K_n\
+		\const_n\
 		(t \vee 1)^{4n}\
-		N^{-K_\xi n+ 1}
+		N^{-\const_\xi n+ 1}
 		\right)\
-		(e^{qvK_\attraction \lambda T^2} + \epsilon)^\frac{1}{qv}
+		(e^{qv\const_\attraction \lambda T^2} + \epsilon)^\frac{1}{qv}
 	dt +
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction,\lambda}
+	\const_{\attraction,\lambda}
 	S\
 	\int_0^S
 		\left(
-		K_n\
+		\const_n\
 		(t \vee 1)^{4n}\
-		N^{-K_\xi n+ 1}
+		N^{-\const_\xi n+ 1}
 		\right)\
-		(e^{vK_\attraction \lambda T^2} + \epsilon)^\frac{1}{v}
+		(e^{v\const_\attraction \lambda T^2} + \epsilon)^\frac{1}{v}
 	dt
 	\\
 	& =
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
 	N^{\cutparameter}\
-	K_{\attraction,\lambda}
+	\const_{\attraction,\lambda}
 	\int_0^S\
 	N^{-1}N\
-	K_{p,\lambda,n}\
+	\const_{p,\lambda,n}\
 	T\
 	(t \vee 1)^{4n}\
-	N^{-K_\xi n+ 1}
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
+	N^{-\const_\xi n+ 1}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	dt +
 	\\
 	&\qquad
 	+ N^{\cutparameter}\
-	K_{\attraction,n,\lambda}\
+	\const_{\attraction,n,\lambda}\
 	S\
 	\int_0^S
 	(t \vee 1)^{4n}\
-	N^{-K_\xi n+ 1}\
-	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
+	N^{-\const_\xi n+ 1}\
+	(e^{\const_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	dt \leq
 \end{align*}
 
@@ -1034,24 +1034,24 @@ Then we do get
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
-	N^{\cutparameter-K_\xi n+ 1}\
-	K_{p,\lambda,n,\attraction}\
+	N^{\cutparameter-\const_\xi n+ 1}\
+	\const_{p,\lambda,n,\attraction}\
 	T\
 	(S \vee 1)^{4n}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	\int_0^S\
 	dt +
 	\\
 	&\qquad
-	+ N^{\cutparameter-K_\xi n+ 1}\
-	K_{\attraction,n,\lambda}\
+	+ N^{\cutparameter-\const_\xi n+ 1}\
+	\const_{\attraction,n,\lambda}\
 	S\
 	(S \vee 1)^{4n}\
-	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
+	(e^{\const_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	\int_0^S
 	dt 
 	\\
@@ -1059,38 +1059,38 @@ Then we do get
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon)
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon)
 	\\
 	&\qquad
 	+
-	N^{\cutparameter-K_\xi n+ 1}\
-	K_{p,\lambda,n,\attraction}\
+	N^{\cutparameter-\const_\xi n+ 1}\
+	\const_{p,\lambda,n,\attraction}\
 	S^2\
 	(S \vee 1)^{4n}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{qv}
 	+
 	\\
 	&\qquad
-	+ N^{\cutparameter-K_\xi n+ 1}\
-	K_{\attraction,n,\lambda}\
+	+ N^{\cutparameter-\const_\xi n+ 1}\
+	\const_{\attraction,n,\lambda}\
 	S^2\
 	(S \vee 1)^{4n}\
-	(e^{K_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
+	(e^{\const_{v,\attraction,\lambda} T^2} + \epsilon)^\frac{1}{v}
 	\\
 	&\leq 
 	N^{\cutparameter-\xi}\
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon) + 
-	N^{\cutparameter-K_\xi n+ 1}\
-	K_{p,\lambda,n,\attraction}\
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon) + 
+	N^{\cutparameter-\const_\xi n+ 1}\
+	\const_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
 	2\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 	\leq
 \end{align*}
 
-Choose now $n$ so that $N^{\cutparameter-K_\xi n+ 1} < N^{\cutparameter-\xi}$. Then
+Choose now $n$ so that $N^{\cutparameter-\const_\xi n+ 1} < N^{\cutparameter-\xi}$. Then
 
 \begin{align*}
 	&\leq
@@ -1099,28 +1099,28 @@ Choose now $n$ so that $N^{\cutparameter-K_\xi n+ 1} < N^{\cutparameter-\xi}$. T
 	\left\{
 	K\
 	S\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon) ,\
-	K_{p,\lambda,n,\attraction}\
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon) ,\
+	\const_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
 	2\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 	\right\}
 	\\
 	&\leq
 	N^{\cutparameter-\xi}\
-	K_{p,\lambda,n,\attraction}\
+	\const_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
 	\max\
 	\left\{\
-	(e^{K_{\attraction,\lambda} T^2} + \epsilon) ,\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{\attraction,\lambda} T^2} + \epsilon) ,\
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 	\right\}
 	\\
 	&\leq
 	N^{\cutparameter-\xi}\
-	K_{p,\lambda,n,\attraction}\
+	\const_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 \end{align*}
 
 Resuming we get
@@ -1129,9 +1129,9 @@ Resuming we get
 	\E{\auxProc_T^N}
 	\leq
 	N^{\cutparameter-\xi}\
-	K_{p,\lambda,n,\attraction}\
+	\const_{p,\lambda,n,\attraction}\
 	(S \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 \end{equation*}
 
 Since the \rhs is $\Cspace^0$ and is valid for all $S >T$ we also have that 
@@ -1140,17 +1140,17 @@ Since the \rhs is $\Cspace^0$ and is valid for all $S >T$ we also have that
 	\E{\auxProc_T^N}
 	\leq
 	N^{\cutparameter-\xi}\
-	K_{p,\lambda,n,\attraction}\
+	\const_{p,\lambda,n,\attraction}\
 	(T \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 \end{equation*}
 
 Define now the continuous increasing function
 
 \begin{equation*}
-	F^{\uparrow}(T) := K_{p,\lambda,n,\attraction}\
+	F^{\uparrow}(T) := \const_{p,\lambda,n,\attraction}\
 	(T \vee 1)^{4n+2}\
-	(e^{K_{q,v,\attraction,\lambda} T^2} + \epsilon)^{K_{q,v}}
+	(e^{\const_{q,v,\attraction,\lambda} T^2} + \epsilon)^{\const_{q,v}}
 \end{equation*}
 
 to obtain
