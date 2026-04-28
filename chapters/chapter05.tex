@@ -378,8 +378,6 @@ The second lemma that we need is a simple evaluation of these quantities for the
 
 \section{The first part of the law of large numbers}
 
-[[a refinement should be necessary to treat the bounds in $t$: stress that they all corresponds some increasing continuous function in $t$]]
-
 Now we can finally approach the first part of the law of large numbers.
 The proof is classical law of large numbers, following for example \autocite{ana}.
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
@@ -396,9 +394,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
 		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
-			\exists \const_{dens}>0.\
+			\exists \const_\dens>0.\
 			\forall p,m.\
-			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < \const_{dens}
+			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < \const_\dens
 		\end{equation*}
 		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
 	\end{enumerate}
@@ -427,20 +425,21 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{aligned}
 	\end{equation*}
 	
-	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $\const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $\const_n = \const_{dens,\attraction, \curlywedge, \lambda, n}  >0$ (independent from $N, \alpha,\xi$) so that it is valid:
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $\const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $\const_n = \const_{\attraction, \curlywedge, \lambda, n}  >0$ and an increasing positive function $\Fup_n$ (independent from $N, \alpha,\xi$)  so that it is valid:
 	\begin{align}
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
-		\const_n\
-		(t \vee 1)^n\
-		N^{-\const_\xi n + 1}
+			\const_n\
+			\Fup_n(\const_\dens)\
+			\Fup_n(t)\
+			N^{-\const_\xi n + 1}
 		&& \label{ch5:LLN1:bound}
 	\end{align}
 \end{proposition}
 
 
 \begin{remark}\label{ch5:assumption-t,lambda>1-proofs}
-	All along the subsequent proof it will be assumed that $\lambda \geq 1$ and that the time $t\geq 1$.
+	All along the subsequent proof it will be assumed that $t, \lambda \geq 1$.
 	This is because in general for $0 < p <q$ we have that
 	
 	\begin{equation*}
@@ -703,7 +702,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 				\\
 				& 0 		&&\text{if} \quad \beta_m = 1
 				\\
-				&(\const_{\attraction,\text{dens}, \curlywedge} N^{\alpha })^{\beta_m -2}	\quad		&&\text{otherwise}
+				&(\const_{\attraction, \curlywedge} 
+				\Fup(\const_\dens)
+				N^\alpha)^{\beta_m -2}	\quad		&&\text{otherwise}
 			\end{aligned}
 			\right.
 		\end{equation}
@@ -775,7 +776,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\begin{align*}
 			\Norm{\Psi_m - \psi_m^\ast }_\infty^{\beta_m - 2} 
 			\leq 
-			(\const_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
+				(\const_\curlywedge 4 )^{\beta_m -2} N^{\alpha (\beta_m -2)}
+			=
+				(\const_\curlywedge 4 N^\alpha)^{\beta_m -2}
 		\end{align*}
 		
 		Let us now check the other term:
@@ -859,7 +862,19 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			& =
 			\const_{\curlywedge,\attraction} (1 + \const_{\text{dens}})
 			+ 3 \const_{\curlywedge,\attraction}^2 (1 + \const_{\text{dens}})^2
-			= \const_{\attraction,\text{dens}, \curlywedge} \leq (\const_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2}
+			\\
+			&
+			\leq
+				(\const_{\curlywedge,\attraction} + 3 \const_{\curlywedge,\attraction}^2)\
+				[1 + \const_{\text{dens}} + (1 + \const_{\text{dens}})^2 ]
+			\\
+			& = 
+				\const_{\attraction, \curlywedge}\
+				\Fup(\const_\dens)
+			\leq 
+				[
+					\const_{\attraction, \curlywedge}\Fup(\const_\dens)
+				]^{\beta_m -2}
 		\end{align*}
 		\footnotetext[1]{By \ref{ch5:lemma:<-1+infty-norm} and \ref{ch5:lemma:eval-norm-gen-attr}}
 		
@@ -869,7 +884,17 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{\beta_m} }
 			&\leq \Norm{\Psi_m - \psi_m^\ast }^{\beta_m - 2}_\infty \cdot \ETFoot{\ast}{\norm{\Psi_m - \psi_m^\ast }^{2} }
 			\\
-			&\leq (4N^\alpha \const_{\attraction,\text{dens}, \curlywedge})^{\beta_m -2} = (\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			&\leq
+				(\const_\curlywedge 4 N^\alpha)^{\beta_m -2}
+				[
+					\const_{\attraction, \curlywedge}\Fup(\const_\dens)
+				]^{\beta_m -2}
+			&=
+					[
+						\const_{\attraction, \curlywedge} 
+						\Fup(\const_\dens)
+						N^\alpha
+					]^{\beta_m -2}
 		\end{align*}
 		And this concludes the proof of the claim.
 	\end{proof}
@@ -922,7 +947,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\left(
 			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(
 			\underbrace{
-				\const_{\attraction,\text{dens}, \curlywedge} N^\alpha
+				\const_{\attraction, \curlywedge} 
+				\Fup(\const_\dens)
+				N^\alpha
 			}_{=:\Iu}
 			)^{\beta_m -2} 
 			\right)
@@ -1266,7 +1293,11 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 			\sum_{\beta_1 + \cdots + \beta_{\hmactive_t} =2n}\
 			\prod_{m=1}^{\hmactive_t}
 			\left(
-			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{\beta_m -2} 
+			\1_{\beta_m = 0} + \1_{\beta_m \geq 2}(
+				\const_{\attraction, \curlywedge} 
+				\Fup(\const_\dens)
+				N^\alpha
+			)^{\beta_m -2} 
 			\right)
 		}
 		\\
@@ -1276,12 +1307,17 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		N^{(\xi -1) 2 n + 1}
 		\E{
 			(2n)^n\
-			(\const_{\attraction,\text{dens}, \curlywedge} N^\alpha)^{2n-2}\
+			(
+				\const_{\attraction, \curlywedge} 
+				\Fup(\const_\dens)
+				N^\alpha
+			)^{2n-2}\
 			(\hmactive_t)^n\
 		}
 		\\
 		&=
-		(\const_{\attraction,\text{dens}, \curlywedge})^{2n-2}\
+		(\const_{\attraction, \curlywedge})^{2n-2}\
+		[\Fup(\const_\dens)]^{2n-2}\
 		3(2n)!
 		(2n)^n\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
@@ -1290,7 +1326,8 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		}\
 		\\
 		&=
-		\const_{\attraction,\text{dens}, \curlywedge,n}\
+		\const_{\attraction,\curlywedge,n}\
+		\Fup_n(\const_\dens)\
 		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
 		\E{
 			(\hmactive_t)^n
@@ -1298,27 +1335,28 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\leq
 	\end{align*}
 	
-	Now we can use the result \ref{app:Poisson-moments} to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$:
+	Now we can use the result \ref{app:Poisson-moments} to evaluate the $n$-momenta of the Poisson process $\hmactive_t \sim \Pois(\lambda N t)$, and recall that by \ref{ch5:assumption-t,lambda>1-proofs} we assume without loss of generality that the Poisson parameter is bigger than $1$:
 		
 	\begin{align*}
 		&\leq
-		\const_{\attraction,\text{dens}, \curlywedge,n}\
-		N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-		\Fup(n)\: (Nt\lambda)^n
-		\\
-		&\leq
-		\const_{\attraction,\text{dens}, \curlywedge,n}\
-		\underbrace{
+			\const_{\attraction,\curlywedge,n}\
+			\Fup_n(\const_\dens)\
 			N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
-			N^n\
-		}_{}\
-		(t^n
-		\lambda^n)
+			\Fup(n)\
+			(Nt\lambda)^n
 		\\
 		&=
-		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
-		t^n\
-		N^{ [2(\xi + \alpha) - 2 + 1] n + 1 -2\alpha}\
+		\const_{\attraction,\curlywedge,n,\lambda}\
+		\Fup_n(\const_\dens)\
+		t^n
+			N^{(\xi + \alpha-1) 2 n + 1 -2\alpha}\
+			N^n\
+		\\
+		&\leq
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_n(\const_\dens)\
+			\Fup_n(t)\
+			N^{ [2(\xi + \alpha) - 2 + 1] n + 1 -2\alpha}\
 		\leq
 	\end{align*}
 	
@@ -1326,13 +1364,15 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 	
 	\begin{equation*}
 		\leq\
-		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
-		t^n\
-		N^{ -\const_\xi n + 1 -2\cdot 0}\
-		\leq\
-		\const_{\attraction,\text{dens}, \curlywedge,n, \lambda}\
-		t^n\
-		N^{ -\const_\xi n + 1}
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_n(\const_\dens)\
+			\Fup_n(t)\
+			N^{ -\const_\xi n + 1 -2\cdot 0}\
+		=\
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_n(\const_\dens)\
+			\Fup_n(t)\
+			N^{ -\const_\xi n + 1}
 	\end{equation*}
 	
 	And thus the proof of the proposition is finished.
@@ -1343,22 +1383,8 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 To prove the second part of the law of large numbers it will be necessary to prove that a specific \rv has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
 
 \begin{proposition}[The second part of the law of large numbers]\label{ch5:prop:LLN2}
-	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.
-	Assume that the densities of all coordinates of $\mfsol_t^N$ are uniformly bounded in $\Lpspace^{\infty}(\R^d)$, \ie
-		\begin{equation*}
-			\exists \const_{dens,T} >0.\
-			\forall p,m.\
-			\forall t \leq T.\
-			\qquad
-			\Norm{\cdens_t^m}_{\Lpspace^{\infty}(\R^d)}, \Norm{\adens_t^p}_{\Lpspace^{\infty}(\R^d)} < \const_{dens, T}
-		\end{equation*}
-		where $\adens_t^p$ and $\cdens_t^m$ are the laws of $\mfamba_t^p$ and $\mfcamp_t^m$ under $ \PrbCondTimes{\cdot}{}$ respectively.
-	
-	[[regulate these conditions for the mean-field particles as requirements in chapter 3 and not here maybe]]
-	[[ do you really need all this conditions on the mass of amoebas right now?]]
-	[[regulate the conditions on xi here under, and realise if you need to tell those also in the propostion afterwards]]
-	
-	Choose $0  < \xi \leq \frac{1}{2}$ and define the sets
+	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.	
+	Let $t \leq T$ and choose $0  < \xi \leq \frac{1}{2}$ and define the sets
 	
 	\begin{equation*}
 		\begin{aligned}
@@ -1387,20 +1413,21 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=\const_\xi$ such that $0< \const_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $\const_n = \const_{\attraction,\curlywedge,n,dens,\lambda} > 0$ independent from $N,\xi$ such that:
+	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=\const_\xi$ such that $0< \const_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $\const_n = \const_{\attraction,\curlywedge,n,\lambda} > 0$ and a positive increasing function $\Fup_n$ independent from $N,\xi$ such that:
 	
 	\begin{align}
 		& \PrbOf{R^{N,\xi}_\amba}{}
 		\leq
-		\const_n\
-		t^{4(n-1)}\
-		N^{-\const_\xi n + 1}
+			\const_n\
+			\Fup_n(T)\
+			N^{-\const_\xi n + 1}
 		&& \label{ch5:LLN2:cond-1}
 		\\
 		& \PrbOf{R^{N,\xi}}{}
-		\leq \const_n\
-		(t \vee 1)^{4(n-1)}\
-		N^{-\const_\xi n + 1}\
+		\leq 
+			\const_n\
+			\Fup_n(T)\
+			N^{-\const_\xi n + 1}\
 		&& \label{ch5:LLN2:cond-2}
 	\end{align}
 \end{proposition}
@@ -1412,8 +1439,6 @@ As for the first part of the law of large numbers, together with the convention 
 	\begin{equation*}
 		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
 	\end{equation*}
-	
-	[[correct from here on]]
 	
 	Then we can write, as for the previous proof:
 	\begin{align*}
@@ -1450,7 +1475,7 @@ As for the first part of the law of large numbers, together with the convention 
 		=
 	\end{align*}
 	
-	Suppose, as in the proof of the previous LLN, that the maximum is reached in the coordinate $(i,k)=(1,1)$.
+	Suppose, as in the proof of the previous LLN, that the maximum is reached in the coordinate $(k;i)=(1,1)$.
 	Now we will use again the original notation \ref{ch2:model}.
 	
 	\begin{align*}
@@ -1676,22 +1701,53 @@ As for the first part of the law of large numbers, together with the convention 
 		\norm{
 			\Phi_1^\ast - \phi_1^\ast
 		}^{\beta_p}
-	}$, which will be proved in this proposition \ref{ch5:prop:bound-for-rv-lln2}:
+	}$, which will be proved in this proposition \ref{ch5:prop:bound-for-rv-lln2} (just put $q = \beta_p$):
 	
 	\begin{equation*}\label{ch5:proof-of-LLN2:bound-for-phip}
-		\exists \const_{\attraction,\curlywedge,q,dens,\lambda} > 0.
-		\qquad\
 		\E{
 			\norm{
 				\Phi_1^\ast - \phi_1^\ast
 			}^{\beta_p}
 		} 
 		\leq 
-		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^2)^{\beta_p}
+		\const_{\attraction,\curlywedge,\beta_p,\lambda}\
+		\Fup(\beta_p,T)
 	\end{equation*}
 	
-	loosing the dependence of the constant on $q$.	
+	for some positive constant $\const_{\attraction,\curlywedge,q,\lambda}$ and some function $\Fup$ increasing in both arguments and continuous in $T$.
+	Then, supposing without loss of generality that $\rhs(\ref{ch5:proof-of-LLN2:bound-for-phip}) \geq 1$, maximizing on $\beta_p$ and elevating to $\beta_p$ we have
+	
+	\begin{align*}
+		\E{
+			\norm{
+				\Phi_1^\ast - \phi_1^\ast
+			}^{\beta_p}
+		} 
+		&\leq 
+		\const_{\attraction,\curlywedge,\beta_p,\lambda}\
+		\Fup(\beta_p,T)
+		\leq 
+			[
+				\max_{\beta_p}
+				\const_{\attraction,\curlywedge,\beta_p,\lambda}\
+				\Fup(\beta_p,T)
+			]^{\beta_p}
+		\\
+		&
+		=
+			[
+				\max_{\beta_p}
+				\const_{\attraction,\curlywedge,\beta_p,\lambda}\
+				\Fup(2n,T)
+			]^{\beta_p}
+		=
+			[
+				\const_{\attraction,\curlywedge,n,\lambda}\
+				\Fup_{n}(T)
+			]^{\beta_p}
+	\end{align*}
+	
+	loosing the dependence of the constant on $\beta_p$ before elevating to the power.	
 	Applying this to our calculations, and resuming all since the beginning, we obtain that:
 	
 	\begin{align*}
@@ -1777,8 +1833,8 @@ As for the first part of the law of large numbers, together with the convention 
 			+
 			\1_{\beta_p \geq 2}
 			\left(
-			(\max_{q\leq n} \const_{\attraction,\curlywedge,q,dens,\lambda})\
-			t^2
+				\const_{\attraction,\curlywedge,n,\lambda}\
+				\Fup_{n}(T)
 			\right)^{\beta_p}
 			\right)
 		}_{\Bh}
@@ -1793,19 +1849,19 @@ As for the first part of the law of large numbers, together with the convention 
 		N^{1 +(\xi-1) 2n}\
 		(2n)^n\
 		\left(
-		(\max_{q\leq n} \const_{\attraction,\curlywedge,q,dens,\lambda})\
-		t^2
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_{n}(T)
 		\right)^{2n-2}\
 		\\
 		&=
-		\const_{\attraction,\curlywedge,n,dens,\lambda}\
-		t^{4(n-1)}\
+		\const_{\attraction,\curlywedge,n,\lambda}\
+		\Fup_{n}(T)\
 		N^{
 			1 + \left( 2\xi -2 + 1 \right)n
 		}\
 		=
-		\const_{\attraction,\curlywedge,n,dens,\lambda}\
-		t^{4(n-1)}\
+		\const_{\attraction,\curlywedge,n,\lambda}\
+		\Fup_{n}(T)\
 		N^{
 			1 + ( 2\xi - 1 )n
 		}\
@@ -1822,17 +1878,17 @@ As for the first part of the law of large numbers, together with the convention 
 	\begin{equation*}
 		\PrbOf{R^{N, \xi}_\ast}
 		\leq
-		\const_{\attraction,\curlywedge,n,dens,\lambda}\
-		t^{4(n-1)}\
-		N^{
-			1 + ( 2\xi - 1 )n
-		}\
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_{n}(T)\
+			N^{
+				1 + ( 2\xi - 1 )n
+			}\
 		\leq
-		\const_{\attraction,\curlywedge,n,dens,\lambda}\
-		t^{4(n-1)}\
-		N^{
-			1 - \const_\xi n
-		}\
+			\const_{\attraction,\curlywedge,n,\lambda}\
+			\Fup_{n}(T)\
+			N^{
+				1 - \const_\xi n
+			}\
 	\end{equation*}
 	
 	
@@ -1841,7 +1897,7 @@ As for the first part of the law of large numbers, together with the convention 
 Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 
 \begin{proposition}\label{ch5:prop:bound-for-rv-lln2}
-	Consider the \rv
+	Let $t \leq T$ and consider the \rv
 	
 	\begin{equation}
 		\Phi_p^\ast (k,i)\
@@ -1855,20 +1911,20 @@ Let us show that the bound used in \ref{ch5:proof-of-LLN2:bound-for-phip} holds.
 	\end{equation}
 	
 	and its average $\phi_p^\ast (k,i) := \EFoot{\ast}{\Phi_p^\ast(k,i)}$, where $\ast$ is either $k$ or absent.
-	Then exists $\const_{\attraction,\curlywedge,q,dens,\lambda}>0$ such that
+	Then exists $\const_{\attraction,\curlywedge,q,\lambda}>0$ and an positive function $\Fup(q,T)$ increasing in both arguments, continuous in $T$ and bounded in $q$ such that
 	
 	\begin{equation}
 		\forall q \geq 1.\
 		\forall p,k,i.
 		\qquad
-		\E{
-			\norm{
-				\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
-			}^q
-		} 
+			\E{
+				\norm{
+					\Phi_p^\ast(k,i) - \phi_p^\ast(k,i)
+				}^q
+			} 
 		\leq 
-		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		(t \vee 1)^2)^q
+			\const_{\attraction,\curlywedge,q,\lambda}\
+			\Fup(q,T)
 	\end{equation}
 \end{proposition}
 
@@ -2294,18 +2350,52 @@ Then let us observe closely the object in question.
 				\cdens_t^{1,g}
 			}_\infty
 		}
-		\\
+	\end{align*}
+	
+	Recall now that by assumption \ref{ch3:conditions-on-eff-equ-solutions}, since $t\leq T$, we have that there exists a positive continuous increasing function $\Fup$ such that:
+	
+	\begin{equation*}
+			\Norm{\cdens_t^{1,g}}_{\Lpspace^\infty(\R^d)}\
+		\leq
+			\sup_{t,\tau \leq T}
+			\Norm{\cdens_t^\tau}_{\Lpspace^\infty(\R^d)}\
+		\leq
+			\Fup(T)
+	\end{equation*}
+	
+	and therefore we have that
+	
+	\begin{align*}
+		\Norm{
+			\Theta_1 - \theta_1
+		}_{\Lpspace^\infty}
 		&\leq
 		\sum _{g = 1}^{\hmactive_t^1}
-		\const_{dens}
+		\ETFoot{\ast}{
+			\Norm{
+				\cdens_t^{1,g}
+			}_\infty
+		}
 		+
 		\EFoot
 		{\ast}{
 			\sum _{g = 1}^{\hmactive_t^1}
-			\const_{dens}
+			\Norm{
+				\cdens_t^{1,g}
+			}_\infty
+		}
+		\\
+		&\leq
+		\sum _{g = 1}^{\hmactive_t^1}
+		\Fup(T)
+		+
+		\EFoot
+		{\ast}{
+			\sum _{g = 1}^{\hmactive_t^1}
+			\Fup(T)
 		}\
 		=\
-		\const_{dens}\
+		\Fup(T)
 		(\hmactive_t^1 + \lambda t)
 	\end{align*}
 	
@@ -2332,7 +2422,7 @@ Then let us observe closely the object in question.
 			\Norm{
 				\Theta_1 - \theta_1
 			}_{\Lpspace^1}^{q-j}\
-			(\const_{dens})^j\
+			(\Fup(T))^j\
 			(\hmactive_t^1 + \lambda t)^{j}
 		}
 		\\
@@ -2344,7 +2434,7 @@ Then let us observe closely the object in question.
 			\Norm{
 				\Theta_1 - \theta_1
 			}_{\Lpspace^1}^{q-j}\
-			(\const_{dens})^q\
+			(\Fup(T))^q\
 			\sum_{u=1}^j
 			\left(
 			\begin{gathered}
@@ -2359,7 +2449,7 @@ Then let us observe closely the object in question.
 		&\leq
 		\const_{\attraction,\curlywedge,q}\
 		(q!)\
-		(\const_{dens})^q\
+		(\Fup(T))^q\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2373,7 +2463,7 @@ Then let us observe closely the object in question.
 		&\leq
 		\const_{\attraction,\curlywedge,q}\
 		(q!)\
-		(\const_{dens})^q\
+		(\Fup(T))^q\
 		\sum_{j=0}^{q}\
 		j\
 		(j!)\
@@ -2389,11 +2479,12 @@ Then let us observe closely the object in question.
 		\underbrace{
 			\const_{\attraction,\curlywedge,q}\
 			(q!)\
-			(\const_{dens})^q\
 			q\
 			(q!)\
-			(\lambda t)^q\
+			\lambda^q\
 		}_{}
+		t^q
+		\Fup(q,T)
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2403,7 +2494,8 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2448,7 +2540,8 @@ Then let us observe closely the object in question.
 		}\leq
 		\\
 		&\leq
-		\const_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2468,7 +2561,9 @@ Then let us observe closely the object in question.
 			(\hmactive_t^1)^j 
 		}  
 		\\
-		&= \const_{\attraction,\curlywedge,q,dens}
+		&=
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2490,7 +2585,9 @@ Then let us observe closely the object in question.
 		} +
 		\\
 		&\qquad
-		+ \const_{\attraction,\curlywedge,q,dens}
+		+ 
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2511,7 +2608,7 @@ Then let us observe closely the object in question.
 	Let us calculate the second term first:
 	
 	\begin{align*}
-		&\const_{\attraction,\curlywedge,q,dens}\
+		&\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -2521,7 +2618,8 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		} =
 		\\
-		&=\const_{\attraction,\curlywedge,q,dens}\
+		&=\const_{\attraction,\curlywedge,q}
+		\Fup(q,T)\
 		\E{
 			\Norm{
 				\theta
@@ -2530,7 +2628,7 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		} =
 		\\
-		&=\const_{\attraction,\curlywedge,q,dens}\
+		&=\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\Norm{
 				\EFoot
@@ -2544,7 +2642,7 @@ Then let us observe closely the object in question.
 		} =
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\Norm{
 				\EFoot
@@ -2565,7 +2663,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\Norm{
 				\sum _{g = 1}^{+\infty}
@@ -2585,7 +2683,7 @@ Then let us observe closely the object in question.
 	
 	\begin{align*}
 		&=		
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\Norm{
 				\EFoot
@@ -2605,7 +2703,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=				
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\Norm{
 				\EFoot
@@ -2621,7 +2719,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\left(
 			\int
@@ -2645,7 +2743,7 @@ Then let us observe closely the object in question.
 	
 	\begin{align*}
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\left(
 			\EFoot{\ast}{
@@ -2664,7 +2762,7 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\Fup(q,T)\
 		\E{
 			\left(
 			t \lambda
@@ -2672,25 +2770,23 @@ Then let us observe closely the object in question.
 			\1_{\hmactive_t^1 = 0}			
 		}
 		=
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q}\:\Fup(q,T)\
 		(\lambda\
 		t)^q\
 		\PrbOf{\hmactive_t^1 = 0} =
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}\
-		(\lambda\
-		t)^q\
+		\const_{\attraction,\curlywedge,q,\lambda}\Fup(q,T)\
+		t^q\
 		\underbrace{e^{-t\lambda}}_{\leq 1}\
-		\leq
-		\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^q
+		=
+		\const_{\attraction,\curlywedge,q,\lambda}\Fup(q,T)\
 	\end{align*}
 	
 	The first term will require a bit more effort. Proceeding as before to calculate $\theta$, and using Fubini and the tower property we obtain:
 	
 	\begin{align*}
-		&\const_{\attraction,\curlywedge,q,dens}
+		&\const_{\attraction,\curlywedge,q}\:\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			(\hmactive_t^1)^j\
@@ -2712,7 +2808,7 @@ Then let us observe closely the object in question.
 		} =
 		\\
 		&=
-		\const_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q}\:\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\Eonly\
 		\Biggl[\
@@ -3095,17 +3191,23 @@ Then let us observe closely the object in question.
 		\ECond{
 			\left(
 			\sum _{g = 1}^{\hmactive_t^1}
-			1 + t\lambda
+			(1 + t\lambda)
 			\right)^{q-j}
 		}{\hmactive_t^1}\
 		=\
 		(\hmactive_t^1)^{q-j}\
 		(1 + t\lambda)^{q-j}\
+		\\
+		&
 		\leq\
-		(\hmactive_t^1)^{q-j}\
-		(q-j)\
-		(q-j)!\
-		(t\lambda)^{q-j}
+			(\hmactive_t^1)^{q-j}\
+			(q-j)\
+			(q-j)!\
+			(t\lambda)^{q-j}
+		=
+			(\hmactive_t^1)^{q-j}\
+			\const_{q,\lambda}\
+			\Fup(q,t)
 	\end{align*}
 	
 	Resuming everything, we have that 
@@ -3118,7 +3220,8 @@ Then let us observe closely the object in question.
 		}\leq
 		\\
 		&\leq
-		\const_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			\Norm{
@@ -3142,7 +3245,8 @@ Then let us observe closely the object in question.
 		\\
 		&\qquad
 		+
-		\const_{\attraction,\curlywedge,q,dens}
+		\const_{\attraction,\curlywedge,q}\
+		\Fup(q,T)\
 		\E{
 			\Norm{
 				\EFoot
@@ -3156,75 +3260,69 @@ Then let us observe closely the object in question.
 		}
 		\\
 		&\leq
-		\const_{\attraction,\curlywedge,q,dens}\
+		\const_{\attraction,\curlywedge,q,\lambda}\Fup(q,T)\
 		\sum_{j=0}^{q}\
 		\E{
 			(\hmactive_t^1)^{q-j}\
-			(q-j)\
-			(q-j)!\
-			(t\lambda)^{q-j}
+			\const_{q,\lambda}\
+			\Fup(q,T)
 			(\hmactive_t^1)^j\
 			\1_{\hmactive_t^1 \neq 0}
-		} +
-		\const_{\attraction,\curlywedge,q,dens}\
-		t^q
+		} +		
+		\const_{\attraction,\curlywedge,q,\lambda}\Fup(q,T)\
 		\\
 		&\leq
-		\const_{\attraction,\curlywedge,q,dens}\
-		\left(
-		\sum_{j=0}^{q}\
-		q(q!) \lambda^q\
-		t^q\
-		\E{
-			(\hmactive_t^1)^q\
-			\1_{\hmactive_t^1 \neq 0}
-		}
-		+
-		(t \vee1)^q\
-		\right)
+			\const_{\attraction,\curlywedge,q,\lambda}\
+			\left(
+				\Fup(q,T)
+				\sum_{j=0}^{q}\
+				\E{
+					(\hmactive_t^1)^q\
+					\1_{\hmactive_t^1 \neq 0}
+				}
+				+
+				\Fup(q,T)\
+			\right)
 		\\
 		&\leq
-		\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^q\
-		\left(
-		\E{
-			(\hmactive_t^1)^q
-		}
-		+
-		1
-		\right)
+		\const_{\attraction,\curlywedge,q,\lambda}\
+		\Fup(q,T)
+			\left(
+				\E{
+					(\hmactive_t^1)^q
+				}
+				+
+				1
+			\right)
 		\leq
 	\end{align*}
 	
-	Again we use the result \ref{app:Poisson-moments} to obtain that 
+	Again we use the result \ref{app:Poisson-moments}, together with the assumption \ref{ch5:LLN} to ensure that the Poisson parameter is $\geq1$, to obtain that 
 	
 	\begin{align*}
 		\leq
-		\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^q\
-		\left(
-		\Fup(q)\
-		(t\lambda)^q
-		+
-		1
-		\right)\
+		\const_{\attraction,\curlywedge,q,\lambda}\
+		\Fup(q,T)
+			\left(
+				\Fup(q)\
+				(t\lambda)^q
+				+
+				1
+			\right)\
 		&
 		\leq\
-		\const_{\attraction,\curlywedge,q,dens,\lambda}\
+		\const_{\attraction,\curlywedge,q,\lambda}\
+		\Fup(q,T)
 		t^q\
-		t^q\
-		\left(
-		\Fup(q)\
-		+
-		1
-		\right)\
-		\\
-		&=
-		\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^{2q}\
-		=\
-		(\const_{\attraction,\curlywedge,q,dens,\lambda}\
-		t^2)^q
+			\left(
+			1
+			+
+			1
+			\right)\
+		\leq\
+			\const_{\attraction,\curlywedge,q,\lambda}\
+			\Fup(q,T)
+		\leq
 	\end{align*}
 	
 	And the proof is finally finished.
@@ -3233,9 +3331,10 @@ Then let us observe closely the object in question.
 
 \begin{proposition}\label{ch5:LLN}[Law of large numbers]
 	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $t\leq T$.
 	Let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$ and choose a value $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$.
 	
-	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, \const_\curlywedge) > 0$ such that for all $n \in \N$ exists $\const_n > 0$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
+	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, \const_\curlywedge) > 0$ such that for all $n \in \N$ exists $\const_n > 0$ and an increasing positive function $\Fup_n$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
 	\begin{equation}
 		\PrbOf{
 			\Norm{
@@ -3248,7 +3347,7 @@ Then let us observe closely the object in question.
 		}
 		\leq
 		\const_n\
-		(t \vee 1)^{4n}\
+		\Fup_n(T)\
 		N^{-\const_\xi n + 1}
 	\end{equation}
 	
@@ -3308,6 +3407,10 @@ Then let us observe closely the object in question.
 	
 	and thus "dividi" is the principle \ref{app:pA-pB-less-than}, while the "impera" part of the strategy is given by the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}.
 	Therefore we can obtain
+	
+	[[adapt the from here on (both here, in the final proof if necessary (in fact your bound is independent on t, but your set is still dependent on it), and in chapter 7) to the new bound in time]]
+	
+	[[notice that the impera part for the first part of the law of large numbers requires you to specify that the constant $K_\dens$ is actually given by the $\Fup(T)$ of chapter 3 and show stuff on it]]
 	
 	\begin{align*}
 		&\leq

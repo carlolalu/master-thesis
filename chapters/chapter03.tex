@@ -703,9 +703,10 @@ Notice furthermore that the existence of a sufficiently regular solution $\adens
 With this view on the problem we make this assumptions regarding the solutions $\adens_t, \cdens_t$ of the system \ref{ch3:EFFECTIVE-EQS}:
 \begin{enumerate}\label{ch3:conditions-on-eff-equ-solutions}
 	\item There are solution $\adens_t,\cdens_t^\tau \in \Lpspace^1(\R^d)$ (for every $\tau \geq0$) for \ref{ch3:integro-differential-system} and it is valid that $\int \adens_t dx = 1= \int \cdens_t^\tau dx$, meaning that $\forall t$ they are probability distributions.
-	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that there is an increasing, positive and continuous function $\densBound(T)=:\densBound_T$ in $T$ such that 
+	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that there is an increasing, positive and continuous function $\Fup(T)$ in $T$ such that 
 	\begin{equation*}
-		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)}, \sup_{t\leq T} \Norm{\cdens_t}_{\Lpspace^\infty(\R^d)} \leq \densBound_T 
+		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)},\
+		\sup_{t,\tau\leq T} \Norm{\cdens_t^\tau}_{\Lpspace^\infty(\R^d)} \leq \Fup(T) 
 	\end{equation*}
 	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
 \end{enumerate}

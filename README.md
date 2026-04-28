@@ -2,14 +2,17 @@
 
 ## very high priority
 
-- read it twice, search for '[['
+- correct everything from the bound in T, showing that with your law of the large numbers
+
+- at the end of the chapter 7, for the final proof, quote the exact 
+equation that you refer to arrive to the same condition as the final 
+proof in chapter 6. and show that the constant are really really the same, and use the notation for the continuous increasing function in S, so that the two equations can really really look like the same
+
+- write the conclusion with the things written here under
 
 ### less priority here under
 
-- correct, in the law of large numbers, the notation for the conditions 
-on the l^\infty limitation on the norm of the densities: it should be 
-specific that it is not K_dens and that the constnat we use is 
-INCREASING in T. Do this using the common increasing function notation
+- read it twice, search for '[['
 
 - thesis title
 
