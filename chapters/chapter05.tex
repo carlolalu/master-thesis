@@ -383,6 +383,7 @@ The proof is classical law of large numbers, following for example \autocite{ana
 It uses a notation akin to the relabelled model defined in \ref{ch2:model-reformulation}.
 
 \begin{proposition}[The first part of the law of large numbers]\label{ch5:prop:LLN1}
+	
 	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
 		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
@@ -425,7 +426,7 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 		\end{aligned}
 	\end{equation*}
 	
-	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $\const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $\const_n = \const_{\attraction, \curlywedge, \lambda, n}  >0$ and an increasing positive function $\Fup_n$ (independent from $N, \alpha,\xi$)  so that it is valid:
+	Then, signing as $S_\ast^{N, \xi}$ either of the two sets, for $S_\ast^{N, \xi}$ is valid the laws of large numbers, \ie $\exists \overline{N} = \overline{N}(\alpha, \curlywedge)$ such that for all $\const_\xi$ such that $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$ and for all $n\in\N$ exists $\const_n = \const_{\attraction, \curlywedge, \lambda, n}  >0$ and an increasing positive continuous function $\Fup_n$ (independent from $N, \alpha,\xi$)  so that it is valid:
 	\begin{align}
 		& \forall N> \overline{N}.	&	&\PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
@@ -1383,6 +1384,7 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 To prove the second part of the law of large numbers it will be necessary to prove that a specific \rv has finite $q$-moments, but in order to better drive the comprehension and the attention of the reader this will be done after this proposition.
 
 \begin{proposition}[The second part of the law of large numbers]\label{ch5:prop:LLN2}
+	
 	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.	
 	Let $t \leq T$ and choose $0  < \xi \leq \frac{1}{2}$ and define the sets
 	
@@ -1413,34 +1415,28 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			\right\}
 		\end{aligned}
 	\end{equation*}
-	Then, signing with $R^{N,\xi}_\ast$ either of the two sets, for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=\const_\xi$ such that $0< \const_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $\const_n = \const_{\attraction,\curlywedge,n,\lambda} > 0$ and a positive increasing function $\Fup_n$ independent from $N,\xi$ such that:
+	Then, signing as
+	
+	\begin{equation*}
+		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}, 
+	\end{equation*}
+	
+	for $R^{N,\xi}_\ast$ is valid the law of large numbers, \ie for all $K=\const_\xi$ such that $0< \const_\xi \leq 1 - 2\xi$ and for all $n\in\N$ exists $\const_n = \const_{\attraction,\curlywedge,n,\lambda} > 0$ and a positive increasing continuous function $\Fup_n$ independent from $N,\xi$ such that:
 	
 	\begin{align}
-		& \PrbOf{R^{N,\xi}_\amba}{}
+		& \PrbOf{R^{N,\xi}_\ast}{}\
 		\leq
 			\const_n\
 			\Fup_n(T)\
 			N^{-\const_\xi n + 1}
-		&& \label{ch5:LLN2:cond-1}
-		\\
-		& \PrbOf{R^{N,\xi}}{}
-		\leq 
-			\const_n\
-			\Fup_n(T)\
-			N^{-\const_\xi n + 1}\
-		&& \label{ch5:LLN2:cond-2}
+		&& \label{ch5:LLN2:cond}
 	\end{align}
 \end{proposition}
 
 Let us prove this result.
 As for the first law of large numbers at the remark \ref{ch5:assumption-t,lambda>1-proofs}, we assume here as well that $t,\lambda\geq1$.
-As for the first part of the law of large numbers, together with the convention at \ref{app:notation}, we will use the subsequent notation:
-	
-	\begin{equation*}
-		R^{N, \xi}_\ast := \: \text{either of $R^{N, \xi}_\amba$ and $R^{N, \xi}$}
-	\end{equation*}
-	
-	Then we can write, as for the previous proof:
+As for the first part of the law of large numbers, together with $R^{N,\xi}_\ast$ we use the convention at \ref{app:notation}.
+Then we can write, as for the previous proof:
 	\begin{align*}
 		\PrbOf{R^{N, \xi}_\ast}
 		&= \leq
@@ -3330,11 +3326,12 @@ Then let us observe closely the object in question.
 \section{Composing all the pieces together}
 
 \begin{proposition}\label{ch5:LLN}[Law of large numbers]
-	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
-	Let $t\leq T$.
-	Let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$ and choose a value $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$.
 	
-	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, \const_\curlywedge) > 0$ such that for all $n \in \N$ exists $\const_n > 0$ and an increasing positive function $\Fup_n$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
+	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $t\leq T$ and let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$.
+	Choose a value $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$.
+	
+	Then it is valid the law of the large numbers, \ie there exists $\overline{N} = \overline{N}(\alpha, \const_\curlywedge) > 0$ such that for all $n \in \N$ exists an increasing positive continuous function $\Fup_n$ (independent from $N, \alpha, \xi$) so that for all $N > \overline{N}$
 	\begin{equation}
 		\PrbOf{
 			\Norm{
@@ -3346,7 +3343,6 @@ Then let us observe closely the object in question.
 			2N^{-\xi}
 		}
 		\leq
-		\const_n\
 		\Fup_n(T)\
 		N^{-\const_\xi n + 1}
 	\end{equation}
@@ -3356,9 +3352,11 @@ Then let us observe closely the object in question.
 
 \begin{proof}
 	Once again we make the assumptions of remark \ref{ch5:assumption-t,lambda>1-proofs}, \ie that $t,\lambda\geq1$.
-	Recall that from \ref{ch5:sketch-dividi-et-impera} we want to use the strategy "dividi et impera":
+	Recall that from \ref{ch5:sketch-dividi-et-impera} we want to use the strategy "dividi et impera".
+	For the "dividi" part we use the simple principle \ref{app:pA-pB-less-than}:
 	
-	\begin{align*}
+	\begin{equation} \label{ch5:lln:dividi}
+		\begin{aligned}
 		&
 		\PrbOf{
 			\Norm{
@@ -3403,16 +3401,7 @@ Then let us observe closely the object in question.
 			\geq
 			N^{-\xi} + N^{-\xi}
 		\Bigg)
-	\end{align*}
-	
-	and thus "dividi" is the principle \ref{app:pA-pB-less-than}, while the "impera" part of the strategy is given by the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}.
-	Therefore we can obtain
-	
-	[[adapt the from here on (both here, in the final proof if necessary (in fact your bound is independent on t, but your set is still dependent on it), and in chapter 7) to the new bound in time]]
-	
-	[[notice that the impera part for the first part of the law of large numbers requires you to specify that the constant $K_\dens$ is actually given by the $\Fup(T)$ of chapter 3 and show stuff on it]]
-	
-	\begin{align*}
+		\\
 		&\leq
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
@@ -3436,41 +3425,53 @@ Then let us observe closely the object in question.
 			}_\infty
 			\geq
 			N^{-\xi}
-		}\
-		\\
-		&\leq
+		}
+		\leq
+		\end{aligned}
+	\end{equation}
+	
+	For the "impera" part of the strategy we need to use the bounds \ref{ch5:prop:LLN1} and \ref{ch5:prop:LLN2}.
+	A bit of care is necessary regarding \ref{ch5:prop:LLN1}: we showed a law of large numbers for a general set of particles which had densities uniformly bounded in $\Lpspace^\infty(\R^d)$ by a constant $\const_\dens$
+	
+	\begin{equation*}
+		\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < \const_\dens
+	\end{equation*}
+	
+	This condition is fullfilled by the densities of the mean-field particles $\mfsol_t^{(N)}$ on $[0,T]$ with the lemma \ref{ch3:mfdrift-lips-and-bounded}:
+	
+	\begin{equation*}
+		\forall t, \tau \leq T.\
+		\Norm{\cdens_t^\tau}_\infty, \Norm{\adens_t^p}_\infty < \Fup(T)
+	\end{equation*}
+	
+	Then the \ref{ch5:LLN1:bound} gives us
+	
+	\begin{equation}\label{ch5:lln1-applied-to-mean-field-parts}
+		 \forall N> \overline{N}.	\PrbOf{S^{N,\xi}_\ast}{}
+		\leq 
 		\const_n\
-		t^n\
-		N^{-\const_\xi n + 1}
+		\Fup_n(\Fup(T))\
+		\Fup_n(t)\
+		N^{-\const_\xi n + 1}\
+		\leq\
+		\Fup_n(T)\
+		N^{-\const_\xi n + 1}\
+	\end{equation}
+	
+	Now we can proceed with the "impera" part of the strategy applying \ref{ch5:lln1-applied-to-mean-field-parts} and \ref{ch5:LLN2:cond} to \ref{ch5:lln:dividi}:
+	
+	\begin{equation*}
+		\leq
+		\Fup_n(T)\
+		N^{-\const_\xi n + 1}\
 		+
 		\const_n\
-		t^{4(n-1)}\
+		\Fup_n(T)\
+		N^{-\const_\xi n + 1}\
+		\leq
+		\Fup_n(T)\
 		N^{-\const_\xi n + 1}
-		\\
-		&=
-		\const_n\
-		(
-			t^n\
-			+
-			t^{4(n-1)}\
-		)\
-		N^{-\const_\xi n + 1}
-		\\
-		&\leq
-		\const_n\
-		2\
-		(
-			t^n\
-			\vee
-			t^{4(n-1)}\
-		)\
-		N^{-\const_\xi n + 1}
-		\\
-		&\leq
-		\const_n\
-		t^{4(n-1)}\
-		N^{-\const_\xi n + 1}
-	\end{align*}
+	\end{equation*}
 	
 	And the result is proved.
 \end{proof}

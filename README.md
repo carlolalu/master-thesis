@@ -2,11 +2,8 @@
 
 ## very high priority
 
-- correct everything from the bound in T, showing that with your law of the large numbers
-
-- at the end of the chapter 7, for the final proof, quote the exact 
-equation that you refer to arrive to the same condition as the final 
-proof in chapter 6. and show that the constant are really really the same, and use the notation for the continuous increasing function in S, so that the two equations can really really look like the same
+- in order to write the conclusions, see what happens when the diffusion 
+coefficient of the cAMP goes to infinity.
 
 - write the conclusion with the things written here under
 

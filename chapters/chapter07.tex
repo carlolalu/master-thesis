@@ -168,8 +168,8 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	\begin{equation*}
 		\Norm{\drift^N(s,x)}_\infty \leq 
 		\frac{1}{N}
-		\const_{\NumCampRelease, \attraction}\
-		(\hmactive_s + \cdrift)
+		\const_{\NumCampRelease, \attraction,\cdrift}\
+		(\hmactive_s + 1)
 	\end{equation*}
 	
 	and it grows therefore sublinearly in space with fixed time.
@@ -288,6 +288,10 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\frac{1}{N}
 		\const_{\NumCampRelease, \attraction}\
 		(\hmactive_s + \cdrift)
+		\leq
+			\frac{1}{N}
+			\const_{\NumCampRelease, \attraction,\cdrift}\
+			(\hmactive_s + 1)
 	\end{align*}
 \end{proof}
 
@@ -877,8 +881,12 @@ where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the cor
 
 Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but for the sake of clarity we stick to the more classic attraction.
 
-\begin{proposition}\label{ch7:LLN}
- 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. Then there exists $\overline{N},\const_\xi >0$ such that for all  $n\in \N$ there exists $\const_{n, \NumCampRelease}$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
+\begin{proposition}[Law of large numbers for the pulsing wave model]
+	
+	\label{ch7:LLN}
+ 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. 
+ 	Let $t\leq T$.
+ 	Then there exists $\overline{N},\const_\xi >0$ such that for all  $n\in \N$ there exists an increasing positive continuous function $\Fup_{n, \NumCampRelease}(t)$ in $t$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
  	\begin{equation*}
  		\PrbOf{
  			\norm{
@@ -888,7 +896,8 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
  			(1+2\NumCampRelease)N^{-\xi}
  		}
  		\leq
- 		\const_{n,\NumCampRelease} (t \vee 1)^{4n} N^{-\const_\xi n +1}
+ 		\Fup_{n, \NumCampRelease}(T)
+ 		N^{-\const_\xi n +1}
  	\end{equation*}
 \end{proposition}
 
@@ -1038,12 +1047,11 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 	\begin{align*}
 		\leq
 		\sum _{l = 1}^{\NumCampRelease}\
-		\const_n\
-		(t \vee 1)^{4n}\
-		N^{-\const_\xi n + 1}
+		\const_{n}
+		\Fup_{n}(T)
+		N^{-\const_\xi n +1}
 		=
-		\const_{n,\NumCampRelease}\
-		(t \vee 1)^{4n}\
+		\Fup_{n,\NumCampRelease}(T)
 		N^{-\const_\xi n + 1}
 	\end{align*}
 \end{proof}
@@ -1066,7 +1074,7 @@ We expect the condition
 	N^{-(\xi-\delta)}
 \end{equation}
 
-to be provable exactly as in chapter \ref{ch6}, even with the same symbol, with the only difference being a scaling of a factor $\NumCampRelease$ for the function $\Fup(T)$.
+to be provable exactly as in chapter \ref{ch6}, even with the same symbol, with the only difference being that  the function $\Fup(T)$ is dependent also on $\NumCampRelease$.
 This because the lemmas for the Dini derivation still have the same form, and the law of large numbers has only a scaling for some constant, and we still have bounds for both the drift and the mean-field drift, thus all the proof concept holds on the exact same principles.
 
 \subsubsection{Use Groenwall on an auxiliary process}
@@ -1115,46 +1123,40 @@ Consider $0 < t \leq T$ and have then, as previously:
 	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
 	N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
 \end{align*}
-\footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
 
 Again we exploit the lipschitzianity of $\drift^N$ (\ref{ch7:lemma:drift:lip-and-bound}) but simply with a different constant with respect to the basic model case:
 
 \begin{align*}
 	\leq
-	3\
+	d\
 	\frac{\const_{\attraction,\NumCampRelease}}{N}
 	\hmactive_t
-	\underbrace{
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
 		\norm{\sol_t^N - \mfsol_t^N}_\infty
-	}_{}
 	+ N^{\cutparameter}\
-	3\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
 \end{align*}
 
-As for the basic model, we can infer that
-
-\begin{equation*}
+As previously, we can infer that
+$
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
 		\norm{\sol_t^N - \mfsol_t^N}_\infty
 	\leq
 		\auxProc_t^N 
-\end{equation*}
-
-Therefore we can write
+$ and therefore
 
 \begin{align*}
 	\diniu^+_t \auxProc_t^N 
 	&\leq
-	{\const_{\attraction,\NumCampRelease}}
+	{\const_{\attraction,\NumCampRelease,d}}
 	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
-	K
+	\const_d
 	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 \end{align*}
 
@@ -1164,12 +1166,12 @@ Integrating over $[0,T]$ and choosing some $S > T$ we then obtain:
 	\auxProc_T^N = \auxProc_T^N - \auxProc_0^N 
 	\leq
 	\int_0^T 
-	{\const_{\attraction,\NumCampRelease}}\
+	{\const_{\attraction,\NumCampRelease,d}}\
 	\frac{\hmactive_T}{N}\
 	\auxProc_t^N dt
 	+ 
 	N^{\cutparameter}\
-	K
+	\const_d
 	\underbrace{
 		\int_0^S
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
@@ -1183,34 +1185,22 @@ We assume this holds, and by applying the Groenwall lemma in his form \ref{ch6:l
 \begin{equation}\label{ch7:just-applied-Groenwall}
 	\begin{aligned}
 		\auxProc_T^N 
-		&\leq 
+		&\leq
 		N^{\cutparameter}\
-		K
-		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
-		dt
-		\cdot
-		\exp \left(
-		\int_0^T \const_{\attraction,\NumCampRelease}\
-		\frac{\hmactive_T}{N}dt
-		\right)
-		\\
-		&=
-		N^{\cutparameter}\
-		K
+		\const_d
 		\int_0^S
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 		dt
 		\cdot
 		\exp \left(
 		T
-		\const_{\attraction,\NumCampRelease}\
+		\const_{\attraction,\NumCampRelease,d}\
 		\frac{\hmactive_T}{N}
 		\right)
 	\end{aligned}
 \end{equation}
 
-\subsubsection{Apply the law of large number and on the average}
+\subsubsection{Average and apply the law of large numbers}
 
 Again we can now use the law of large numbers and the bounds on the drift $\drift$ and mean-field drift $\mfdrift$, which are essentially the same bounds as before, but with different constants. Define the set
 
@@ -1296,27 +1286,27 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	&\leq 
 	\E{
 		N^{\cutparameter}\
-		K
+		\const_d
 		\int_0^S
 		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
 		dt
 		\cdot
 		\exp \left(
 		T
-		\const_{\attraction,\NumCampRelease}\
+		\const_{\attraction,\NumCampRelease,d}\
 		\frac{\hmactive_T}{N}
 		\right)
 	}
 	\\
 	&\leq
 	N^{\cutparameter}\
-	K
+	\const_d
 	\E{
 		\int_0^S
 			\left[
 				2N^{-\xi}
 				+
-				\const_{\attraction, \lambda,\NumCampRelease,\cdrift} 
+				\const_{\attraction, \lambda,\NumCampRelease,\cdrift,d} 
 				\left(
 				\frac{\hmactive_S}{N}
 				+
@@ -1330,7 +1320,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 		\cdot
 		\exp \left(
 			T
-			\const_{\attraction,\NumCampRelease}\
+			\const_{\attraction,\NumCampRelease,d}\
 			\frac{\hmactive_T}{N}
 		\right)
 	}
@@ -1338,11 +1328,11 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	&= 
 	\overbrace{
 		N^{-(\xi -\cutparameter)}\
-		K\
+		\const_d
 		\E{
 			\exp \left(
 			T\
-			\const_{\attraction,\NumCampRelease}\
+			\const_{\attraction,\NumCampRelease,d}\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -1352,7 +1342,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	+ 
 	\underbrace{
 		N^{\cutparameter}\
-		\const_{\attraction, \lambda,\NumCampRelease,\cdrift}\
+		\const_{\attraction, \lambda,\NumCampRelease,\cdrift,d}\
 		\E{
 			\frac{\hmactive_S}{N} 
 			\int_0^S
@@ -1360,7 +1350,8 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 			dt
 			\cdot
 			\exp \left(
-			T\const_\attraction\
+			T
+			\const_{\attraction,\NumCampRelease,d}\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -1371,7 +1362,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	+ 
 	\underbrace{
 		N^{\cutparameter}\
-		\const_{\attraction, \lambda,\NumCampRelease,\cdrift}\
+		\const_{\attraction, \lambda,\NumCampRelease,\cdrift,d}\
 		\left(
 		1+S
 		\right)\
@@ -1381,7 +1372,8 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 			dt
 			\cdot
 			\exp \left(
-			T\const_\attraction\
+			T
+			\const_{\attraction,\NumCampRelease,d}\
 			\frac{\hmactive_T}{N}\
 			\right)
 		}
@@ -1389,7 +1381,24 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 	\end{aligned}
 \end{equation}
 
-And at this point the we are almost exactly as in the equation \ref{ch6:3-terms before-estimates}: we have different constants but the powers in $N$ are the same and almost all the processes under the expectations $\E{}$ are the same.
-More precisely, the only process which is different is $\1_{\setB_t^c}$ because it is an estimate on different particles (the drifts for the microscopic and mesoscopic pulsing waves model, and not of the correspondent drifts of the basic model), but the essence is the same: its measure is dominated by a law of large numbers.
-Then the proof goes on, from here on, exactly as in the section \ref{ch6:2nd-part-of-the-proof}, where the constants might be different and the function $\Fup(T)$ might be slightly different but will always be a $\Cspace^0$ increasing function in $T$.
+And at this point the we are exactly at the same stage as in the equation \ref{ch6:3-terms before-estimates}:
+\begin{itemize}
+	\item Sure, we have different constants and different continuous increasing positive functions $\Fup(S)$ in $S$, but they are still constants and continuous increasing positive functions in $S$.
+	\item The processes 
+	\begin{equation*}
+			\exp \left(
+			T
+			\const\
+			\frac{\hmactive_T}{N}\
+			\right)
+		\quad
+			\text{ and }
+		\quad
+			\frac{\hmactive_S}{N}
+	\end{equation*}
+	under the integral $\E{}$ are the same as in \ref{ch6:3-terms before-estimates}, differing just for the constant $\const$.
+	\item The strongest difference is given by $\1_{\setB_t^c}$, which is the indicator function of the set tamed by \ref{ch7:LLN}, but this is anyway tamed with a law of the large numbers which differ from \ref{ch5:LLN} only by the choice of the constants, and not by the powers of $N$.
+\end{itemize}
+
+Then the proof goes on, from here on, exactly as in the section \ref{ch6:2nd-part-of-the-proof}, with different constants and a different function $\Fup(T)$.
 And thus the proof is concluded.
