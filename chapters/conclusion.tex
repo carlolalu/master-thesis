@@ -3,40 +3,68 @@
 It is clear that the macroscopic description of the system \ref{ch7:model:pulsing-waves}, \ie the equations \ref{ch7:EFFECTIVE-EQUATIONS}, are independent from certain mathematical objects of the microscopic model:
 
 \begin{itemize}
-	\item The constant deterministic velocity $\cdrift$ of the cAMP molecules.
+	\item The effective description is not influenced by the constant deterministic velocity $\cdrift$ of the cAMP molecules.
 	This might seem strange at first glance, but the actual drift for these particles is $\frac{\cdrift}{N}$, which goes to $0$ as $N$ grows to infinity: the result is expected.
-	\item The system is independent from the choice of the chosen rotations $(\rotation_l)_{l=1}^\NumCampRelease$, meaning that even if every amoeba $\amba_t^p$ at every time $\btime_m$ shoots all its $\NumCampRelease$ children in the same random direction $\cgonia_{m,1}$ (\ie we set $\forall l. \rotation_l = \id$), the macroscopic description remains the same one (\ref{ch7:EFFECTIVE-EQUATIONS}).
+	\item The system is independent from the choice of the chosen rotations $(\rotation_l)_{l=1}^\NumCampRelease$, meaning that even if every amoeba $\amba_t^p$ at every time $\btime_m$ shoots all its $\NumCampRelease$ children in the same random direction $\cgonia_{m,1}$ (\ie we set $\forall l. \rotation_l = \id$), the macroscopic description remains the same one.
 	This is expected because what counts is that $\cgonia_{m,1}$ is uniformly distributed, and thus each direction $\rotation_l(\cgonia_{m,1})$ is in average equal to $0$, but it still remains a slightly counterintuitive fact about the system.
 \end{itemize}
 
-Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time, and the rate $\lambda$ with which such birth time are occuring.
-With one simple idea for both parameters, what matters is the speed at which the chemoattractant is released.
+Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time and the rate $\lambda$ with which such birth time are occuring.
+With one simple idea for both parameters, we can say that the speed $\NumCampRelease \cdot \lambda$ at which the chemoattractant is released is telling us how much $\partial_t \adens$ is proportional to the member
 
-\subsection{Work still to be done on this model}
+\begin{equation*}
+	\left[ \left( \nabla \potential
+	\star \int_0^t \cdens_t^\tau 	d \tau
+	\right)
+	\adens
+	\right]
+\end{equation*}
 
-\paragraph{The PIDE} One might want to prove that the partial integro differential equation \ref{ch7:PIDE} has a solution exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
-If this is true, then also the system \ref{ch7:EFFECTIVE-EQUATIONS} has solutions.
+The other thing which we can immediately observe, is the latter member we mentioned represents, in a certain way, a dependence of $\partial_t$ (the "present") from the past, \ie from all the states in $[0,t]$.
+This happens because by integrating over $[0,t]$ in $\tau$ the expression $\cdens_t^\tau = \cdens^\tau (t,x) $ we are asking what happens at time $t$ to all the cAMP particles created along the time $[0,t]$.
+This is even more evident if we substitute $\cdens_t^\tau$ with its analytical solution given by \ref{ch3:eq:eff-eq-camp-analytical-sol} and obtain \ref{ch7:PIDE}:
+
+\begin{equation*}
+	\partial_t \adens =  \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
+	\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
+	d \tau
+	\right)
+	\adens
+	\right]
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+\end{equation*}
+
+Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
+
+[[correct from here on]]
+
+\subsection{Comparison with Keller-Segel in the case of Ana}
+
+here send the diffusion coefficient of the cAMP to infinity
+
+change the potential into a more general one, or short range interaction?
+
+\section{Work still to be done on this model}
+
+explain that all this should be valid also in more higher dimension, if somebody would like to ask how a 42 dimensional behaves he should be covered (in case the model finds applications also for other 42 dimensional objects)
+
+\subsection{the PIDE and properties of its solutions}
+One might want to prove that the partial integro differential equation \ref{ch7:PIDE} has a solution exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
+
 Once this is done, one might ask if which properties do this
 
-\subsubsection{Solution to the model: the PIDE and its solutions, focus on the amoeba and the mathematical properties, relationship with the original keller-segel}
+\subsubsection{cAMP macroscopic description}
 
-\subsubsection{}
-
-\subsection{Numerics and simulations}
-
-
-
-
+\paragraph{Numerics and simulations}
 
 
 
 \section{A more realistic mechanism: the chemical response}
 
+explain that other expansions of the model you have seen do not seem particularly interesting (eg L being a random parameter). Instead it is interesting to make the model realistic, having molecules which do answer to each others. Molecules which are able to speak chemically.
 
-\subsection{Prove that the condition also proves that the empirical measure of the camp converges, even though not exhangeable}
+Build the Poisson process with the waiting times.
+Then change these waiting times to some min(waiting time i, hitting time)
 
-mention the fascination that one cannot refuse to feel at the videos showing the models for the cAMP waves resembling japanese prints, and explain how to investigate in direction where mathematics can give cool almost trippy visuals is without question interesting.
-
-\section{Analyze limit situations where the diffusion of the camp becomes very big and the one of the amoeba very small}
-
-\section{change the potential into a more general one, or short range interaction}
+Explain that here the diffuculties is that your processes are then dependent on the system, and that you expect that the processes M t createdin this way to explode very fast towards infinity, or if you want that the frequency in time of birth times to get faster and faster.
+Explain that this should make everything more diffucult to calculate.
