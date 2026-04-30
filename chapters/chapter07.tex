@@ -479,7 +479,7 @@ Then we have that the mean-field of the pulsing wave model is exactly the mean-d
 This is true not only for the amoebas' part, but also for the cAMP part, because $\NumCampRelease\cdot 0 = 0$ (with the difference in dimension between the two models, because with the pulsing wave one we have $\NumCampRelease$ times more cAMP molecules).
 Then we can write exactly the same models that we set for the basic model at \ref{ch3:EFFECTIVE-EQS}, \ref{ch3:MF-particles} and \ref{ch3:integro-differential-system}, but scaled of a factor $\NumCampRelease$ and with one more index $l$ for the cAMP part:
 
-\begin{equation}
+\begin{equation}\label{ch7:MF-PARTICLES}
 	\left\{
 	\begin{aligned}
 		\mfamba_t^0 &\sim \adens_0
@@ -495,7 +495,7 @@ Then we can write exactly the same models that we set for the basic model at \re
 
 and the respective effective equations are given by
 
-\begin{equation}
+\begin{equation}\label{ch7:EFFECTIVE-EQUATIONS}
 	\left\{
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
@@ -522,9 +522,9 @@ and the respective effective equations are given by
 	\right.
 \end{equation}
 
-or, expressing the density of cAMP molecules analytically (exactly as in \ref{ch3:eq:eff-eq-camp-analytical-sol}) we have
+or, expressing the density of cAMP molecules analytically (with the heat kernel, exactly as in \ref{ch3:eq:eff-eq-camp-analytical-sol}) we have
 
-\begin{equation}
+\begin{equation}\label{ch7:PIDE}
 	\left\{
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
@@ -1080,7 +1080,6 @@ This because the lemmas for the Dini derivation still have the same form, and th
 \subsubsection{Use Groenwall on an auxiliary process}
 
 Define
-
 
 \begin{equation}
 	\auxProc_T^N := 1 \wedge \left( 

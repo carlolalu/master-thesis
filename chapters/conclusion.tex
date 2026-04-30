@@ -1,22 +1,42 @@
-There are 
+\section{The revelations of the pulsing wave model}
+
+It is clear that the macroscopic description of the system \ref{ch7:model:pulsing-waves}, \ie the equations \ref{ch7:EFFECTIVE-EQUATIONS}, are independent from certain mathematical objects of the microscopic model:
+
+\begin{itemize}
+	\item The constant deterministic velocity $\cdrift$ of the cAMP molecules.
+	This might seem strange at first glance, but the actual drift for these particles is $\frac{\cdrift}{N}$, which goes to $0$ as $N$ grows to infinity: the result is expected.
+	\item The system is independent from the choice of the chosen rotations $(\rotation_l)_{l=1}^\NumCampRelease$, meaning that even if every amoeba $\amba_t^p$ at every time $\btime_m$ shoots all its $\NumCampRelease$ children in the same random direction $\cgonia_{m,1}$ (\ie we set $\forall l. \rotation_l = \id$), the macroscopic description remains the same one (\ref{ch7:EFFECTIVE-EQUATIONS}).
+	This is expected because what counts is that $\cgonia_{m,1}$ is uniformly distributed, and thus each direction $\rotation_l(\cgonia_{m,1})$ is in average equal to $0$, but it still remains a slightly counterintuitive fact about the system.
+\end{itemize}
+
+Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time, and the rate $\lambda$ with which such birth time are occuring.
+With one simple idea for both parameters, what matters is the speed at which the chemoattractant is released.
+
+\subsection{Work still to be done on this model}
+
+\paragraph{The PIDE} One might want to prove that the partial integro differential equation \ref{ch7:PIDE} has a solution exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
+If this is true, then also the system \ref{ch7:EFFECTIVE-EQUATIONS} has solutions.
+Once this is done, one might ask if which properties do this
+
+\subsubsection{Solution to the model: the PIDE and its solutions, focus on the amoeba and the mathematical properties, relationship with the original keller-segel}
+
+\subsubsection{}
+
+\subsection{Numerics and simulations}
 
 
-\section{Model with chemical response}
-
-\paragraph{The pulsing wave model does not depend on the rotations $\rotation_l$} The grid does not count much
 
 
-Thus the interesting work is not anymore scale thus and so on, but initiate the chemical response.
 
 
-\section{Solution to the model: the PIDE and its solutions, focus on the amoeba and hte mathemtical properties, relationship with the original keller-segel}
 
-\section{Prove that the condition also proves that the empirical measure of the camp converges, even though not exhangeable}
+\section{A more realistic mechanism: the chemical response}
+
+
+\subsection{Prove that the condition also proves that the empirical measure of the camp converges, even though not exhangeable}
 
 mention the fascination that one cannot refuse to feel at the videos showing the models for the cAMP waves resembling japanese prints, and explain how to investigate in direction where mathematics can give cool almost trippy visuals is without question interesting.
 
-\section{Numerics and simulations} 
-
-\section{Analyse limit situations where the diffusion of the camp becomes very big and the one of the amoeba very small}
+\section{Analyze limit situations where the diffusion of the camp becomes very big and the one of the amoeba very small}
 
 \section{change the potential into a more general one, or short range interaction}
