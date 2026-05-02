@@ -63,6 +63,14 @@
 \newcommand{\Norm}[1]
 	{\left|\left| #1 \right|\right|}					% double '|' norm
 	
+\newcommand{\abs}[1]{\left| #1 \right|}				% absolute value
+\newcommand{\normp}[2]{
+	{	\abs{#2}_{#1}	}
+}		% norm with subscript (pedice)
+\newcommand{\Normp}[2]{
+	{	\left| \abs{#2} \right|_{#1}	}
+}	% double norm with subscript (pedice)
+	
 \newcommand{\lhs}{\mbox{L.H.S.\ }}										% Left hand side
 \newcommand{\rhs}{\mbox{R.H.S.\ }}										% Right hand side
 \newcommand{\sgn}{\text{sgn}}							% sign function
