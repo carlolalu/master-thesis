@@ -885,13 +885,13 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 \begin{proposition}[Law of large numbers for the pulsing wave model]
 	
 	\label{ch7:LLN}
- 	Consider the microscopic drift and particles $\drift^{N}, \sol_t^N$ and the correspondent mean-field drift and particles $\mfdrift^N, \mfsol_t^N$. 
+ 	Consider the microscopic drift $\drift = \drift^{(N)}$ and the particles $\sol_t = \sol_t^{(N)}$ and the correspondent mean-field drift and particles $\mfdrift = \mfdrift^{(N)}, \mfsol_t=\mfsol_t^{(N)}$. 
  	Let $t\leq T$.
  	Then there exists $\overline{N},\const_\xi >0$ such that for all  $n\in \N$ there exists an increasing positive continuous function $\Fup_{n, \NumCampRelease}(t)$ in $t$ (independent from $N,\xi$) so that for all $N > \overline{N}$ we have that
  	\begin{equation*}
  		\PrbOf{
  			\norm{
- 				\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+ 				\drift^{(N)}(t, \sol_t^{(N)}) - \mfdrift^{(N)}(t, \mfsol_t^{(N)})
  			}_\infty
  			\geq
  			(1+2\NumCampRelease)N^{-\xi}
@@ -908,7 +908,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 		(1+\NumCampRelease)N^{-\xi} 
 		&\leq 
 		\norm{
-			\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+			\drift^{(N)}(t, \sol_t^{(N)}) - \mfdrift^{(N)}(t, \mfsol_t^{(N)})
 		}_\infty
 		\\
 		&= 
@@ -948,7 +948,7 @@ Again $\attraction$ could be easily here generalized as in \ref{ch5:LLN}, but fo
 	\begin{align*}
 		&\PrbOf{
 			\norm{
-				\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)
+				\drift^{(N)}(t, \sol_t^{(N)}) - \mfdrift^{(N)}(t, \mfsol_t^{(N)})
 			}_\infty
 			\geq
 			(1+2\NumCampRelease)N^{-\xi}
@@ -1065,7 +1065,7 @@ We expect the condition
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t^{(N)} - \mfsol_t^{(N)}
 		}_\infty 
 		\geq
 		N^{-\cutparameter}
@@ -1087,7 +1087,7 @@ Define
 	N^{\cutparameter}
 	\sup_{0 \leq t \leq T}
 	\Norm{
-		\sol_t^N - \mfsol_t^N
+		\sol_t^{(N)} - \mfsol_t^{(N)}
 	}_\infty \right)
 \end{equation}
 
@@ -1097,7 +1097,7 @@ Exactly as before, we have that
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t^{(N)} - \mfsol_t^{(N)}
 		}_\infty 
 		\geq
 		N^{-\cutparameter}
@@ -1110,7 +1110,7 @@ Exactly as before, we have that
 	} 
 \end{align*}
 
-
+Again, we will omit the superscript $(N)$.
 Consider $0 < t \leq T$ and have then, as previously:
 
 \begin{align*}
@@ -1118,13 +1118,13 @@ Consider $0 < t \leq T$ and have then, as previously:
 	&
 	\leq
 	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
-	N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
+	N^{\cutparameter}d  \norm{\drift(t, \sol_t) - \drift(t, \mfsol_t)}_\infty 
 	+  
 	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
-	N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	N^{\cutparameter}d  \norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq
 \end{align*}
 
-Again we exploit the lipschitzianity of $\drift^N$ (\ref{ch7:lemma:drift:lip-and-bound}) but simply with a different constant with respect to the basic model case:
+Again we exploit the lipschitzianity of $\drift$ (\ref{ch7:lemma:drift:lip-and-bound}) but simply with a different constant with respect to the basic model case:
 
 \begin{align*}
 	\leq
@@ -1134,9 +1134,9 @@ Again we exploit the lipschitzianity of $\drift^N$ (\ref{ch7:lemma:drift:lip-and
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
-		\norm{\sol_t^N - \mfsol_t^N}_\infty
+		\norm{\sol_t - \mfsol_t}_\infty
 	+ N^{\cutparameter}\
-	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	d\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq
 \end{align*}
 
 As previously, we can infer that
@@ -1144,7 +1144,7 @@ $
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
-		\norm{\sol_t^N - \mfsol_t^N}_\infty
+		\norm{\sol_t - \mfsol_t}_\infty
 	\leq
 		\auxProc_t^N 
 $ and therefore
@@ -1157,7 +1157,7 @@ $ and therefore
 	\auxProc_t^N 
 	+N^{\cutparameter}\
 	\const_d
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 \end{align*}
 
 Integrating over $[0,T]$ and choosing some $S > T$ we then obtain:
@@ -1174,7 +1174,7 @@ Integrating over $[0,T]$ and choosing some $S > T$ we then obtain:
 	\const_d
 	\underbrace{
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 	}_{=:\Iu}
 \end{equation*}
@@ -1189,7 +1189,7 @@ We assume this holds, and by applying the Groenwall lemma in his form \ref{ch6:l
 		N^{\cutparameter}\
 		\const_d
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 		\cdot
 		\exp \left(
@@ -1206,7 +1206,7 @@ Again we can now use the law of large numbers and the bounds on the drift $\drif
 
 \begin{equation*}
 	\setB_t := \left\{
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq 2N^{-\xi}
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq 2N^{-\xi}
 	\right\}
 \end{equation*}
 
@@ -1215,13 +1215,13 @@ Then, for $N$ big enough, by the law of large numbers \ref{ch7:LLN} and exploiti
 
 
 \begin{align*}
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 	&=
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty\
 	\1_{\setB_t
 	}
 	+
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty\
 	\1_{\setB_t^c
 	}
 	\\
@@ -1230,11 +1230,11 @@ Then, for $N$ big enough, by the law of large numbers \ref{ch7:LLN} and exploiti
 	+
 	\left(
 	\Norm{
-		\drift^N(t, \cdot)
+		\drift(t, \cdot)
 	}_{\Lpspace^\infty(\R^d)}
 	+
 	\Norm{
-		\mfdrift^N(t, \cdot)
+		\mfdrift(t, \cdot)
 	}_{\Lpspace^\infty(\R^d)}	
 	\right)
 	\1_{\setB_t^c}
@@ -1288,7 +1288,7 @@ Then, averaging on the inequality \ref{ch7:just-applied-Groenwall} we can calcul
 		N^{\cutparameter}\
 		\const_d
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 		\cdot
 		\exp \left(
