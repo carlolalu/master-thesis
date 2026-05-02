@@ -13,18 +13,13 @@ coefficient of the cAMP goes to infinity.
 
 - read it twice, search for '[['
 
-- thesis title
-
-- thesis institution name etc...
+- thesis title, institution name etc... 
 
 - explain aevery symbol the first time it appears
 
 - drawings?
 
-- consistency in the usage of the norm / double norm, and specify how 
-you you use this in the appendix. Maybe you can write \norm{} everywhere 
-and just specify the subscript for the specific one you are using. Or 
-maybe write whatever you do in the appendix.
+- consistency in the usage of the norm / double norm, according to how it is specified on the appendix
 
 - take care of the space of solutions in the appendix and speak very 
 very hintingly about stuff, saying "we might have to prove that the 

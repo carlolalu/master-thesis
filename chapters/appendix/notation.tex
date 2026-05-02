@@ -15,10 +15,48 @@ Whenever we have a measure $\mu$ on a space, to indicate a property $P(x)$ valid
 		P(x)
 \end{equation*}
 
+The Lebesgue measure is signed as $\lebsge$.
+
 \subsection{Cyrillic variables}
 
 The cyrillic letters $\Ch$, $\Zhi$ and $\Iu$ are used in this master thesis for mathematical objects that need to be temporarily addressed (\eg in proofs), for which thus we do not want to use greek or latin letters which would be useful in other places.
 Do not feel intimidated by them: $\Ch$ is pronounced as the sound "tsch" in German, $\Zhi$ as the "j" in the french word "bonjour" and $\Iu$ as the english word "you".
+
+\subsection{Norms}
+
+For the great majority of cases we must take into consideration some function
+
+\begin{align*}
+	f: \R_+ \times \R^m 	&\longrightarrow		\R^n
+	\\
+	(t, x) 						&\longmapsto				f(t,x)
+\end{align*}
+
+and consider some kind of norm
+
+\begin{equation*}
+	\Norm{f(t,x)}
+\end{equation*}
+
+We adopt the subsequent convention:
+
+\begin{equation*}
+	\left\{
+	\begin{aligned}
+		\norm{f(t,x)}_\infty &:= \max_{1 \leq i \leq n} \norm{f_i(t,x)}		&& \text{where $x,t$ are fixed}
+		\\
+		\Norm{f(t,x)}_\infty &:=  \max_{1 \leq i \leq n} \Norm{f_i(t,\cdot)}_{\Lpspace^\infty(\R^m)}			&& \text{where $t$ is fixed}
+	\end{aligned}
+	\right.
+\end{equation*}
+
+In the cases where it is needed to consider the supremum also on some time interval $[s_1,s_2]$ this will be explicitly written down:
+
+\begin{equation*}
+	\sup_{s_1 \leq t \leq s_2} \Norm{f(t,x)}_\infty = \sup_{s_1 \leq t \leq s_2} \max_{1 \leq i \leq n} \Norm{f_i(t,\cdot)}_{\Lpspace^\infty(\R^m)}
+\end{equation*}
+
+
 
 \subsection{Generic positive constants and positive increasing functions}
 
