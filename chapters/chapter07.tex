@@ -157,10 +157,13 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 \end{remark}
 
 \begin{lemma}\label{ch7:lemma:drift:lip-and-bound}
-	The function $\drift = \drift^{(N)}$ is Lipschitz in space with fixed time with Lipschitz constant of
+	The function $\drift = \drift^{(N)}$ is Lipschitz in space with fixed time
 	\begin{equation*}
+		\normp{\infty}{\drift(s,x) - \drift(s,y)}
+		\leq\
 		\frac{\const_{\attraction,\NumCampRelease}}{N}
-		\hmactive_s
+		\hmactive_s\
+		\normp{\infty}{x-y}
 	\end{equation*}
 	where $\const_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
 	Furthermore $\drift = \drift^{(N)}$ is bounded
@@ -179,7 +182,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	Let us see the Lipschitzianity first. Use the relabelling notation for the cAMP part with $(p,g) = m$. Let $l$ be the Lipschitz constant of $\attraction$. Then:
 	
 	\begin{align*}
-		\Norm{\drift(s,x) - \drift(s,y)}_\infty 
+		\normp{\infty}{\drift(s,x) - \drift(s,y)} 
 		&= \max \Bigg\{
 		\max_{p\leq N}
 		\norm{\drift_p(s,x) - \drift_p(s,y)}_\infty,
@@ -228,25 +231,25 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		\sum _{l = 1}^{\NumCampRelease}
 		\sum_{g = 1}^{\hmactive_s^q}\
 		\left(
-		\Norm{x - y}_\infty + \Norm{x - y}_\infty 
+		\normp{\infty}{x - y} + \normp{\infty}{x - y} 
 		\right)
 		\leq
 		\frac{l\NumCampRelease2}{N}
 		\sum _{q = 1}^{N}
 		\hmactive_s^q\
-		\Norm{x - y}_\infty
+		\normp{\infty}{x - y}
 		\\
 		&=
 		\frac{\const_{\attraction,\NumCampRelease}}{N}
 		\hmactive_s\
-		\Norm{x - y}_\infty
+		\normp{\infty}{x - y}
 	\end{align*}
 	
 	Regarding the bound we have that
 	
 	\begin{align*}
-		\Norm{\drift(s,x)}_\infty &=
-		\max 
+		\Norm{\drift(s,\cdot)}_\infty &=
+		\sup_x 
 		\left\{
 			\max_{p\leq N}
 			\norm{\drift_p(s,x)}_\infty,
@@ -258,6 +261,7 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		&\leq
 		\max 
 		\left\{
+		\sup_x\
 		\max_{p\leq N}
 		\norm{
 			\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l}) 
@@ -268,11 +272,11 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 		&\leq
 		\max 
 		\left\{
-		\max_{p\leq N}
 		\frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} 
-		\norm{
+		\sup_x\
+		\abs{
 			\attraction(x^p - x^{q,g,l})  
-		}_\infty,
+		},
 		\frac{\cdrift}{N}
 		\right\}\
 		\\
@@ -579,9 +583,9 @@ Then, to obtain the convergence condition above, it is enough to prove that
 \begin{equation}
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t - \mfsol_t
-		}_\infty 
+		} 
 		\geq
 		N^{-\cutparameter}
 	}
@@ -597,7 +601,7 @@ Then, to obtain the convergence condition above, it is enough to prove that
 The paths of the distance process
 
 \begin{equation*}
-	\Norm{ \sol_t - \mfsol_t}_\infty
+	\normp{\infty}{ \sol_t - \mfsol_t}
 \end{equation*}
 
 for the pulsing wave model solution $\sol_t$ and its mean-field counterpart $\mfsol_t$ are $\Cspace^0$ and thus also \cadlag, therefore the lemma \ref{ch4:lemma:advance-after-sup} remains valid:
@@ -1064,9 +1068,9 @@ We expect the condition
 \begin{equation}
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t^{(N)} - \mfsol_t^{(N)}
-		}_\infty 
+		} 
 		\geq
 		N^{-\cutparameter}
 	}
@@ -1086,9 +1090,9 @@ Define
 	\auxProc_T^N := 1 \wedge \left( 
 	N^{\cutparameter}
 	\sup_{0 \leq t \leq T}
-	\Norm{
+	\normp{\infty}{
 		\sol_t^{(N)} - \mfsol_t^{(N)}
-	}_\infty \right)
+	} \right)
 \end{equation}
 
 Exactly as before, we have that
@@ -1096,9 +1100,9 @@ Exactly as before, we have that
 \begin{align*}
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t^{(N)} - \mfsol_t^{(N)}
-		}_\infty 
+		} 
 		\geq
 		N^{-\cutparameter}
 	}
