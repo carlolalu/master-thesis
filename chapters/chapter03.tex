@@ -41,7 +41,7 @@ In general, having a sequence of probability measures $(\mu_N)_N$ and a probabil
 	\forall f \in \Cspace_b(\R^d). \qquad \mu_N(f) := \int f d\mu_N \xrightarrow{N} \mu(f) = \int f d\mu
 \end{equation*}
 
-\ie we see the space of probability measures $\PrbMeas(\R^d)$ as the dual space of $\Cspace_b(\R^d)$ endowed with the weak-* topology, where $\Cspace_b(\R^d)$ is the space of bounded continuous functions $f:E \longrightarrow \R$ endowed with the norm $\Norm{\cdot}_\infty$.
+\ie we see the space of probability measures $\PrbMeas(\R^d)$ as the dual space of $\Cspace_b(\R^d)$ endowed with the weak-* topology, where $\Cspace_b(\R^d)$ is the space of bounded continuous functions $f:E \longrightarrow \R$ endowed with the norm $\Normp{\infty}{\cdot}$.
 This definition cannot be directly applied to our case, because the empirical measures are \emph{random}, \ie are \rv mapping into the space of probability measures.
 For this to be a valid definition we need to have a $\sigma$-algebra on $\PrbMeas(\R^d)$:
 
@@ -145,20 +145,20 @@ If we have a notion of distance $dist$ on our space $\R^u$, then a plan can be e
 \end{equation}
 
 In this way we can say that two measures $\mu,\nu$ are near to each others if we can find a coupling $\gamma \in \Gamma(\mu,\nu)$ such that its evaluation is very low.
-With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^u$ (meaning $\frac{\norm{\cdot}_1}{u}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
+With this idea in mind, choosing the distance induced by the normalised $1$-norm on $\R^u$ (meaning $\frac{\Normp{1}{\cdot}}{u}$), one reaches the definition of the $1$-Wassertein distance (with respect to the normalised $1$-norm).
 
 \begin{definition}
 	Consider the space of Borel probability measures with finite $1$-moments on $\R^u$
 	\begin{equation}
 		\BorelPrbMeas_1 := \BorelPrbMeas_1(\R^u) := 
 		\{\mu \in \BorelPrbMeas :
-		\int \norm{x} d \mu (x) < \infty
+		\int \Normp{1}{x} d \mu (x) < \infty
 		\} \subseteq \BorelPrbMeas
 	\end{equation}
 	Then the $1$-Wasserstein distance between two measures $\mu,\nu \in \BorelPrbMeas_1$ is defined as
 	\begin{equation}
 		W_1(\mu,\nu):= \inf_{\gamma \in \Gamma(\mu,\nu)}
-		\int_{\R^u \times \R^u} \frac{1}{u}\sum_{i=1}^{u} \norm{x_i-y_i} d\gamma(x,y)
+		\int_{\R^u \times \R^u} \frac{1}{u}\sum_{i=1}^{u} \abs{x_i-y_i} d\gamma(x,y)
 	\end{equation}
 \end{definition}
 
@@ -705,8 +705,8 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\item There are solution $\adens_t,\cdens_t^\tau \in \Lpspace^1(\R^d)$ (for every $\tau \geq0$) for \ref{ch3:integro-differential-system} and it is valid that $\int \adens_t dx = 1= \int \cdens_t^\tau dx$, meaning that $\forall t$ they are probability distributions.
 	\item The solutions $\adens_t,\cdens_t^\tau$ are not exploding to infinity in finite time, meaning that there is an increasing, positive and continuous function $\Fup(T)$ in $T$ such that 
 	\begin{equation*}
-		\sup_{t\leq T} \Norm{\adens_t}_{\Lpspace^\infty(\R^d)},\
-		\sup_{t,\tau\leq T} \Norm{\cdens_t^\tau}_{\Lpspace^\infty(\R^d)} \leq \Fup(T) 
+		\sup_{t\leq T} \Normp{\infty}{\adens_t},\
+		\sup_{t,\tau\leq T} \Normp{\infty}{\cdens_t^\tau} \leq \Fup(T) 
 	\end{equation*}
 	This condition will be necessary to guarantee the existence of solutions for the mean-field particle system \ref{ch3:MF-particles} and to prove the law of large numbers at \ref{ch5:LLN}.
 \end{enumerate}
@@ -721,7 +721,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 	\end{equation*}
 	is Lipschitz and bounded in space with bound
 	\begin{equation*}
-		\Norm{\mfdrift(t,x)}_\infty 
+		\Normp{\infty}{\mfdrift(t,\cdot)}
 		\leq 
 		\const_{\attraction, \lambda} t
 	\end{equation*}
@@ -734,12 +734,12 @@ With this view on the problem we make this assumptions regarding the solutions $
 
 \begin{proof}
 	\begin{align*}
-		\Norm{\mfdrift(t,x) - \mfdrift(t,y)}_\infty 
+		\normp{\infty}{\mfdrift(t,x) - \mfdrift(t,y)}
 		&=
 		\max_{1\leq p\leq N}
 		\max_{1\leq i \leq d}
 		\left\{
-			\norm{\left( 
+			\abs{\left( 
 				\attraction_i \star \int_0^t \lambda \cdens_t^\tau 	d \tau
 				\right) (x^p) 
 				-
@@ -754,7 +754,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 		\max_{1\leq i \leq d}
 		\left\{
 		\lambda\
-		\norm{
+		\abs{
 			\int
 			\attraction_i (x^p-z)
 			\left( 
@@ -776,7 +776,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 		\max_{1\leq i \leq d}
 		\left\{
 		\lambda\
-		\norm{
+		\abs{
 			\int
 			\left( \attraction_i (x^p-z) - \attraction_i (y^p-z) \right)
 			\left( 
@@ -792,7 +792,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 		\left\{
 		\lambda\
 		\int
-			\norm{ \attraction_i (x^p-z) - \attraction_i (y^p-z) }
+			\abs{ \attraction_i (x^p-z) - \attraction_i (y^p-z) }
 			\left( 
 			\int_0^t \cdens_t^\tau (z)	d \tau
 			\right)
@@ -812,7 +812,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 		\lambda\
 		\int
 		l\
-		\norm{ (x^p-z) - (y^p-z) }_\infty
+		\normp{\infty}{ (x^p-z) - (y^p-z) }
 		\left( 
 		\int_0^t \cdens_t^\tau (z)	d \tau
 		\right)
@@ -822,7 +822,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 		&=\
 		l		
 		\max_{1\leq p\leq N}
-		\norm{x^p-y^p}_\infty
+		\normp{\infty}{x^p-y^p}
 		\int_0^t 
 		\overbrace{
 			\int
@@ -832,57 +832,50 @@ With this view on the problem we make this assumptions regarding the solutions $
 		d \tau\
 		=
 		tl
-		\Norm{x-y}_\infty
+		\normp{\infty}{x-y}
 	\end{align*}
 	
 	Regarding the bound we have that
 	
 	\begin{align*}
-		\Norm{\mfdrift(t,x)}_\infty
+		\Normp{\infty}{\mfdrift(t,x)}
 		&=
-		\max_{1\leq p\leq N}
-		\left\{
-		\norm{\left( 
-			\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
-			\right) (x) 
-		}
-		\right\}
-		\\
-		&\leq
 		\lambda
-		\Norm{
+		\Normp{\Lpspace^\infty(\R^d)}
+		{
 			\attraction \star \int_0^t \cdens_t^\tau 	d \tau
-		}_{\Lpspace^\infty(\R^d)}
+		}
 		\leq
 		\lambda
-		\Norm{
+		\Normp{\infty}{
 			\attraction
-		}_\infty
-		\Norm{
+		}
+		\Normp{\Lpspace^1(\R^d)}
+		{
 			\int_0^t \cdens_t^\tau 	d \tau
-		}_{\Lpspace^1(\R^d)}
+		}
 		\\
-		&\leq
+		&=
 		\lambda
-		\Norm{
+		\Normp{\infty}
+		{
 			\attraction
-		}_\infty
+		}
 		\int_0^t \int \cdens_t^\tau dx	d \tau
 		=
 		\lambda
-		\Norm{
+		\Normp{\infty}
+		{
 			\attraction
-		}_\infty
+		}
 		t
 	\end{align*}
 \end{proof}
 
 \paragraph{Continuity}
 It is important to underline that also the mesoscopic particles $\mfsol_t^{(N)} = ( \mfamba_t^{(N)} , \mfcamp_t^{(N)})$ have continuous paths in the sense of \ref{ch2:system-continuous-glueing}, because the mean-field particles $\mfcamp_t^m$ are spawning on the position of the mean-field amoebas $\mfamba_t^{\Parentof(m)}$.
-This will be relevant to inquire about the properties of the distance process 
-\begin{equation*}
-	\Norm{\sol_t - \mfsol_t}_\infty
-\end{equation*}
+This will be relevant to inquire about the properties of the distance process $
+	\normp{\infty}{\sol_t - \mfsol_t}$.
 
 \section{The best condition to prove the convergence}
 
@@ -893,7 +886,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	Suppose that the marginals $\Psi^{(N,k)}$ of $\Psi^{(N)}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
 	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
 	\begin{equation}\label{ch3:condition-closeness}
-		\PrbOf{\max_{1\leq p \leq N} \norm{\amba_t^p - \mfamba_t^p}_\infty > N^{-\cutparameter}
+		\PrbOf{\max_{1\leq p \leq N} \normp{\infty}{\amba_t^p - \mfamba_t^p} > N^{-\cutparameter}
 		}
 		\leq\
 		K\
@@ -930,13 +923,13 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\int_{\R^{dN}\times \R^{dN}} \frac{1}{dN}\
 		\sum_{i=1}^d\
 		\sum_{p=1}^N\
-		\norm{x^{p;i} - y^{p;i}}\
+		\abs{x^{p;i} - y^{p;i}}\
 		d\gamma(x,y)
 		\\
 		&\leq
 		\inf_{\gamma \in \Gamma (\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t)}\
 		\int_{\R^{dN}\times \R^{dN}}
-		\norm{x-y}_\infty\
+		\normp{\infty}{x-y}\
 		d\gamma(x,y)
 		\leq
 	\end{align*}
@@ -952,14 +945,14 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\begin{equation*}
 		\leq
 		\int_{\R^{dN}\times \R^{dN}}
-		\norm{x-y}_\infty\
+			\normp{\infty}{x-y}\
 		d \law(\amba_t^{(N)}) (x)\
 		d \law(\mfamba_t^{(N)}) (y)
 		=
 		\E{
-			\norm{
+			\normp{\infty}{
 				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
+			}
 		}
 		=
 	\end{equation*}
@@ -968,9 +961,9 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	
 	\begin{equation*}
 		\Xi_t := \left\{
-		\norm{
+		\normp{\infty}{
 			\amba_t^{(N)} - \mfamba_t^{(N)}
-		}_\infty \geq N^{-\cutparameter}
+		} \geq N^{-\cutparameter}
 		\right\}
 	\end{equation*}
 	
@@ -979,23 +972,23 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\begin{align*}
 		&=
 		\E{
-			\norm{
+			\normp{\infty}{
 				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
+			}
 			\1_{\Xi_t}
 		}
 		+
 		\E{
-			\norm{
+			\normp{\infty}{
 				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
+			}
 			\1_{\Xi_t^c}
 		}
 		\leq		
 		\E{
-			\norm{
+			\normp{\infty}{
 				\amba_t^{(N)} - \mfamba_t^{(N)}
-			}_\infty
+			}
 			\1_{\Xi_t}
 		} 
 		+ 
@@ -1003,7 +996,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\\
 		&=
 		\E{
-			\norm{
+			\normp{\infty}{
 				\adens_0 + \int_0^t \drift(s, \mfamba_s^p) ds + \diffusion_\amba B_t^p
 				-
 				\left(
@@ -1012,18 +1005,18 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 				+ 
 				\diffusion_\amba B_t^p
 				\right)
-			}_\infty
+			}
 			\1_{\Xi_t}
 		} + 
 		N^{-\cutparameter}
 		\\
 		&=
 		\E{
-			\norm{
+			\normp{\infty}{
 				\int_0^t
 					\drift(s, \mfamba_s^p) - \mfdrift(s, \mfamba_s^p)
 				d s
-			}_\infty
+			}
 			\1_{\Xi_t}
 		}
 		+ 
@@ -1031,13 +1024,13 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		\leq\
 		\E{
 			\int_0^t 
-			\Norm{
+			\Normp{\infty}{
 				\drift(s, \cdot)
-			}_\infty
+			}
 			+
-			\Norm{
+			\Normp{\infty}{
 			 	\mfdrift(s, \cdot)
-			}_\infty
+			}
 			ds\
 			\1_{\Xi_t}
 		}
