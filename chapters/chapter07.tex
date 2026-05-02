@@ -149,24 +149,24 @@ Similarly to the case of the model \ref{ch2:model}, this is a piecewise SDE unde
 	\end{equation*}
 	and the drift by:
 	\begin{align*}
-		&\drift_{p}^N (s,x) = \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l})
+		&\drift_{p} (s,x) = \frac{1}{N} \sum _{l = 1}^{\NumCampRelease} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_s^q} \attraction(x^p - x^{q,g,l})
 		\\
 		&
-		\drift_{p,g,l}^N (s, x) = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) 
+		\drift_{p,g,l} (s, x) = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \cgonia_{p,g,l} = \1_{\geq \btime^{p,g}}(s)  \frac{\cdrift}{N}  \rotation_l (\cgonia_{p,g,1}) 
 	\end{align*}
 \end{remark}
 
 \begin{lemma}\label{ch7:lemma:drift:lip-and-bound}
-	The function $\drift^N$ is Lipschitz in space with fixed time with Lipschitz constant of
+	The function $\drift = \drift^{(N)}$ is Lipschitz in space with fixed time with Lipschitz constant of
 	\begin{equation*}
 		\frac{\const_{\attraction,\NumCampRelease}}{N}
 		\hmactive_s
 	\end{equation*}
 	where $\const_{\attraction,\NumCampRelease} >0$ is a constant dependent on $\attraction$ and $\NumCampRelease$.
-	Furthermore $\drift^N$ is bounded
+	Furthermore $\drift = \drift^{(N)}$ is bounded
 	
 	\begin{equation*}
-		\Norm{\drift^N(s,x)}_\infty \leq 
+		\Norm{\drift(s,\cdot)}_\infty \leq 
 		\frac{1}{N}
 		\const_{\NumCampRelease, \attraction,\cdrift}\
 		(\hmactive_s + 1)
@@ -305,11 +305,11 @@ The mean-field particles candidates are derived similarly to the case of the bas
 Let us start with the amoebas' part:
 
 \begin{align*}
-	\mfdrift_p^N(t, x) 
-	:&= \ECond{\drift_p^N(t, \mfsol_t)}{ \mfsol_t^p} (x)\
+	\mfdrift_p(t, x) 
+	:&= \ECond{\drift_p(t, \mfsol_t)}{ \mfsol_t^p} (x)\
 	= \ECond{\; 
 		\ECondTimes{
-			\drift_p^N(t, \mfsol_t)		
+			\drift_p(t, \mfsol_t)		
 		}{\mfamba_t^p=x, }
 		\;}{\mfamba_t^p=x}
 	\\
@@ -415,7 +415,7 @@ Now recall that $\hmactive^q \sim \hmactive^1$ and thus also $\btime^{q,g} \sim 
 	\lambda \cdens_t^{\tau,l} d \tau
 	\right) (x) 
 	\quad
-	= \mfdrift_p^N (t, x) 
+	= \mfdrift_p (t, x) 
 	\equiv
 	\mfdrift_p (t, x)
 \end{align*}
@@ -433,9 +433,9 @@ Recall that the random direction/angle $\cgonia_{p,g,1}$ and the birth time $\bt
 Then we have that
 
 \begin{align*}
-	\mfdrift_{p,g,l}^N (t, x)  
+	\mfdrift_{p,g,l} (t, x)  
 	&=
-	\E{\drift_{p,g,l}^N (t, x) }
+	\E{\drift_{p,g,l} (t, x) }
 	= 
 	\E{
 		\1_{\geq \btime^{p,g}}(t)  \frac{\cdrift}{N}  \cgonia_{p,g,l}
@@ -580,7 +580,7 @@ Then, to obtain the convergence condition above, it is enough to prove that
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t - \mfsol_t
 		}_\infty 
 		\geq
 		N^{-\cutparameter}
@@ -597,23 +597,24 @@ Then, to obtain the convergence condition above, it is enough to prove that
 The paths of the distance process
 
 \begin{equation*}
-	\Norm{ \sol_t^N - \mfsol_t^N}_\infty
+	\Norm{ \sol_t - \mfsol_t}_\infty
 \end{equation*}
 
-for the pulsing wave model solution $\sol_t^N$ and its mean-field counterpart $\mfsol_t^N$ are $\Cspace^0$ and thus also \cadlag, therefore the lemma \ref{ch4:lemma:advance-after-sup} remains valid:
+for the pulsing wave model solution $\sol_t$ and its mean-field counterpart $\mfsol_t$ are $\Cspace^0$ and thus also \cadlag, therefore the lemma \ref{ch4:lemma:advance-after-sup} remains valid:
 
 	\begin{equation}
-	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty
 	\leq
 	\max_{ s\in \{0,T\} } \left\{ 
-	\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+	\diniu^+_s \norm{\sol_s-\mfsol_s}_\infty
 	\right\}
 \end{equation}
 
 We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:get-rid-of-integral}.
+By signing with $\drift^{(A)}, \mfdrift^{(A)}, B^{(A)}$ the amoeba's part of the drift, the mean-field drift and the \Bm respectively we obtain:
 
 \begin{align*}
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	&= \max \left\{
 	\norm{\amba_t^{(N)} - \mfamba_t^{(N)}}_\infty,
 	\norm{\camp_t^{(N)}  - \mfcamp_t^{(N)}}_\infty
@@ -622,15 +623,15 @@ We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:ge
 	&= \max \Bigg\{
 	\norm{
 		\amba_0^{(N)} 
-		+ \int_0^t \drift^{(A),N} (s, \sol_s^N) d s
+		+ \int_0^t \drift^{(A)} (s, \sol_s) d s
 		+ 
-		\sigma B_t^N
+		\sigma B_t^{(A)}
 		-
 		\left(
 		\mfamba_0^{(N)} 
-		+ \int_0^t \drift^{(A),N}(s, \mfsol_s^N) d s
+		+ \int_0^t \mfdrift^{(A)}(s, \mfsol_s^N) d s
 		+ 
-		\sigma B_t^N
+		\sigma B_t^{(A)}
 		\right)
 	}_\infty,
 	\\
@@ -638,57 +639,57 @@ We have though to be slightly more careful regarding the lemma \ref{ch4:lemma:ge
 	\max_{1\leq m \leq \hmactive_t}
 	\max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)}  
-		- (\mfamba_{\btime_{m}}^{(N),\Parentof(m)}  + \quasibm_t^m)
+		\amba_{\btime_{m}}^{\Parentof(m)}  
 		+ (t - \btime^{m})\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
+		+ \quasibm_t^m
+		- (\mfamba_{\btime_{m}}^{\Parentof(m)}  + \quasibm_t^m)
 	}_\infty
 	\Bigg\}
 	\\
 	&=
 	\max \Bigg\{
 	\norm{
-		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+		\int_0^t \drift^{(A)}(s, \sol_s) - \mfdrift^{(\amba)}(s, \mfsol_s) d s
 	}_\infty,	
 	\\
 	&\qquad
 	\max_{1\leq m \leq \hmactive_t}	
 	\max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		\amba_{\btime_{m}}^{\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m)}
 		+ (t - \btime^{m})\frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 	\Bigg\}
 \end{align*}
 
-where $\drift^{(A),N}, \mfdrift^{(\amba),N}$ represents the amoebas' parts of the correspondent drifts.
 Let us define
 
 \begin{align*}
 	&[\amba] := \left\{ \norm{
-		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
-	}_\infty = \norm{\sol_t^N-\mfsol_t^N}_\infty \right\}
+		\int_0^t \drift^{(A)}(s, \sol_s) - \mfdrift^{(\amba)}(s, \mfsol_s) d s
+	}_\infty = \norm{\sol_t-\mfsol_t}_\infty \right\}
 	\qquad
 	\\
 	&
 	[\camp] := \left\{ \max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		\amba_{\btime_{m}}^{\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m)}
 		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
-	}_\infty = \norm{\sol_t^N-\mfsol_t^N}_\infty \right\}
+	}_\infty = \norm{\sol_t-\mfsol_t}_\infty \right\}
 \end{align*}
 
 Then by recalling the form of the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm} we can obtain that
 
 \begin{align*}
 	\diniu_t^+
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	&=
 	\1_{[\amba]}\
 	\diniu_t^+\
 	\norm{
-		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+		\int_0^t \drift^{(A)}(s, \sol_s) - \mfdrift^{(\amba)}(s, \mfsol_s) d s
 	}_\infty + 
 	\\
 	&\qquad
@@ -698,8 +699,8 @@ Then by recalling the form of the derivative of the infinity norm \ref{ch4:lemma
 	\max_{1\leq m \leq \hmactive_t}	
 	\max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		\amba_{\btime_{m}}^{\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m)}
 		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 \end{align*}
@@ -708,11 +709,11 @@ It is quite easy to prove that the amoebas' part yields the same result as in th
 
 \begin{equation*}
 	\diniu_t^+ \norm{
-		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) d s
+		\int_0^t \drift^{(A)}(s, \sol_s) - \mfdrift^{(\amba)}(s, \mfsol_s) d s
 	}_\infty 
 	\leq
 	d \norm{
-		\drift^{(A),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+		\drift^{(A)}(t, \sol_t) - \mfdrift^{(\amba)}(t, \mfsol_t)
 	}_\infty 
 \end{equation*}
 
@@ -721,16 +722,16 @@ We need though to take care also of the cAMP part this time.
 Let
 
 \begin{align*}
-	I_t &:= \left(
-	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
-	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	I_t &:= \left[
+	\amba_{\btime_{m}}^{\Parentof(m);i} 
+	- \mfamba_{\btime_{m}}^{\Parentof(m);i} 
 	+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
-	\right)_{m,l}
+	\right]_{m,l}
 		 &\in (\R^d)^{\hmactive_t + \NumCampRelease}
 	\\	
 	I^{m,l;i}_t &:= 
-		\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+		\amba_{\btime_{m}}^{\Parentof(m);i} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m);i} 
 		+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 		 &\in \R
 \end{align*}
@@ -742,8 +743,8 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	\max_{1\leq m \leq \hmactive_t}	
 	\max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		\amba_{\btime_{m}}^{\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m)}
 		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty=
 	\\
@@ -766,15 +767,15 @@ Then by the derivative of the infinity norm \ref{ch4:lemma:derive-infinity-norm}
 	}\
 	\diniu_t^+
 	\left[
-	\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
-	- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} 
+	\amba_{\btime_{m}}^{\Parentof(m);i} 
+	- \mfamba_{\btime_{m}}^{\Parentof(m);i} 
 	+ (t - \btime^{m}) \frac{\cdrift}{N}  \pi_i \left(\rotation_l (\cgonia_{m,1}) \right)
 	\right]
 	=
 \end{align*}
 
-Notice, as in the basic model case, that if $t\neq \btime_m$ the term $\amba_{\btime_{m}}^{(N),\Parentof(m);i} 
-- \mfamba_{\btime_{m}}^{(N),\Parentof(m);i} $ is independent from $t$ and it is thus erased with the derivation.
+Notice, as in the basic model case, that if $t\neq \btime_m$ the term $\amba_{\btime_{m}}^{\Parentof(m);i} 
+- \mfamba_{\btime_{m}}^{\Parentof(m);i} $ is independent from $t$ and it is thus erased with the derivation.
 As for the basic model case, since $t= \btime_m$ happens with probability $0$, we simply remove from the space $\Omega$ the correspondent paths.
 Then we can write:
 
@@ -818,12 +819,12 @@ Then we can resume the whole proof as
 
 \begin{align*}
 	\diniu_t^+
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	&=
 	\1_{[\amba]}\
 	\diniu_t^+\
 	\norm{
-		\int_0^t \drift^{(A),N}(s, \sol_s^N) - \mfdrift^{(\amba),N}(s, \mfsol_s^N) ds
+		\int_0^t \drift^{(A)}(s, \sol_s) - \mfdrift^{(\amba)}(s, \mfsol_s) ds
 	}_\infty + 
 	\\
 	&\qquad
@@ -833,14 +834,14 @@ Then we can resume the whole proof as
 	\max_{1\leq m \leq \hmactive_t}	
 	\max_{1\leq l \leq \NumCampRelease}
 	\norm{
-		\amba_{\btime_{m}}^{(N),\Parentof(m)} 
-		- \mfamba_{\btime_{m}}^{(N),\Parentof(m)}
+		\amba_{\btime_{m}}^{\Parentof(m)} 
+		- \mfamba_{\btime_{m}}^{\Parentof(m)}
 		+ (t - \btime^{m}) \frac{\cdrift}{N}  \rotation_l (\cgonia_{m,1})
 	}_\infty
 	\\
 	&\leq
 	d \norm{
-		\drift^{(\amba),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+		\drift^{(\amba)}(t, \sol_t) - \mfdrift^{(\amba)}(t, \mfsol_t)
 	}_\infty 
 	-
 	\sum_{1\leq i \leq d}
@@ -849,7 +850,7 @@ Then we can resume the whole proof as
 	\\
 	&\leq
 	d \norm{
-		\drift^{(A),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+		\drift^{(A)}(t, \sol_t) - \mfdrift^{(\amba)}(t, \mfsol_t)
 	}_\infty 
 	+
 	\sum_{1\leq i \leq d}
@@ -861,21 +862,21 @@ Then we can resume the whole proof as
 	\\
 	&=
 	d \norm{
-		\drift^{(\amba),N}(t, \sol_t^N) - \mfdrift^{(\amba),N}(t, \mfsol_t^N)
+		\drift^{(\amba)}(t, \sol_t) - \mfdrift^{(\amba)}(t, \mfsol_t)
 	}_\infty 
 	+
 	d\NumCampRelease\
 	\norm{
-		\drift^{(\camp),N}(t, \sol_t^N) - \mfdrift^{(\camp),N}(t, \mfsol_t^N)
+		\drift^{(\camp)}(t, \sol_t) - \mfdrift^{(\camp)}(t, \mfsol_t)
 	}_\infty
 	\\
 	&\leq
 	\const_{d, \NumCampRelease} \norm{
-		\drift^{N}(t, \sol_t^N) - \mfdrift^{N}(t, \mfsol_t^N)
+		\drift(t, \sol_t) - \mfdrift(t, \mfsol_t)
 	}_\infty
 \end{align*}
 
-where in the last passages $\drift^{(\camp),N},\mfdrift^{(\camp),N}$ are the correspondent drifts for the cAMP molecules.
+where in the last passages $\drift^{(\camp)},\mfdrift^{(\camp)}$ are the correspondent drifts for the cAMP molecules.
 
 \subsection{Sketch of proof for the Law of large numbers}
 
