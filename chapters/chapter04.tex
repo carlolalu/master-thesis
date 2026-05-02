@@ -1,4 +1,9 @@
-In the main result we will need to consider the Dini derivation of $\sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty$.
+In the main result we will need to consider the Dini derivation of 
+
+\begin{equation*}
+	\sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty = \sup_{0 \leq t \leq T} \norm{\sol_t^{(N)}-\mfsol_t^{(N)}}_\infty
+\end{equation*}
+
 The purpose here is to look at what a Dini derivative is, and how it is used in our case.
 
 \section{Dini derivatives}
@@ -55,14 +60,14 @@ The proof of the first two points of the next lemma is easily achieved exploitin
 With this background in mind, we state the next result, of which the proof will be achieved by the end of the section (\ref{ch4:proof:del-dini-of-all}).
 
 \begin{lemma}\label{ch4:lemma:del-dini-of-all}
-	Let $\sol^N$ be the solution to the model \ref{ch2:model} and $\mfsol^N$ its coupled mean-field particles.
-	Let $\drift$ and $\mfdrift$ be the correspondent drifts for the two.
+	Let $\sol^{(N)} = \sol$ be the solution to the model \ref{ch2:model} and $\mfsol^{(N)} = \mfsol$ its coupled mean-field particles.
+	Let $\drift^{(N)}=\drift$ and $\mfdrift^{(N)} = \mfdrift$ be the correspondent drifts for the two.
 	Then we have that with probability $1$, for all $T>0$
 	\begin{equation}
-		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty
 		\leq
 		d \cdot 
-			\norm{\drift^N(T, \sol_T^N) - \mfdrift^N(T, \mfsol_T^N)}_\infty
+			\norm{\drift(T, \sol_T) - \mfdrift(T, \mfsol_T)}_\infty
 	\end{equation}
 \end{lemma}
 
@@ -73,19 +78,19 @@ In this part we want to show this lemma.
 \begin{lemma}\label{ch4:lemma:advance-after-sup}
 	For all $T>0$
 	\begin{equation}
-		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+		\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty
 		\leq
 		\max_{ s\in \{0,T\} } \left\{ 
-		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+		\diniu^+_s \norm{\sol_s-\mfsol_s}_\infty
 		\right\}
 	\end{equation}
 \end{lemma}
 
-Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\norm{\sol_t^N-\mfsol_t^N}_\infty$ has continuous paths, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions.
+Even though the next lemma (\ref{ch4:distance-is-c0}) show that the distance function $\norm{\sol_t-\mfsol_t}_\infty$ has continuous paths, we will show that the lemma \ref{ch4:lemma:advance-after-sup} is valid also under weaker conditions.
 In fact, defining the random function
 
 \begin{equation}
-	\Ch(t) := \norm{\sol_t^N - \mfsol_t^N}_\infty
+	\Ch(t) := \norm{\sol_t - \mfsol_t}_\infty
 \end{equation}
 
 and considering its paths $\Ch(t)$, we have that these are continuous in between the birth times $(\btime_m)_m$, but the behaviour at such instants depends on the spawning position of the cAMP.
@@ -126,25 +131,25 @@ For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ 
 \end{remark}
 
 \begin{lemma}\label{ch4:distance-is-c0}
-	The paths of $\Ch(t)=\norm{\sol_t^N - \mfsol_t^N}_\infty$ are continuous.
+	The paths of $\Ch(t)=\norm{\sol_t - \mfsol_t}_\infty$ are continuous.
 	In particular are elements of $\SkoroFUp$.
 \end{lemma}
 
 \begin{proof}
-Since both $\sol_t^N$  and $\mfsol_t^N$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
-This, together with the fact that $\Norm{\cdot}_\infty$ is $\Cspace^0$ and that $\forall \omega$ the number of birth times $\btime_m$ in $[0,T]$ is finite, means that the discontinuouties n $[0,T]$ is finite.
+Since both $\sol_t = \sol_t^{(N)}$  and $\mfsol_t = \mfsol_t^{(N)}$ are solutions to SDEs on $I_m \smallsetminus \{ \btime_{m+1} \} = [\btime_m, \btime_{m+1})$, they are continuous on such interval.
+This, together with the fact that $\Norm{\cdot}_\infty$ is $\Cspace^0$ and that $\forall \omega$ the number of birth times $\btime_m$ in $[0,T]$ is finite, means that the discontinuouties in $[0,T]$ is finite.
 Furthermore we have that $[\btime_m, \btime_{m+1})$ is closed on the left, thus the paths are right-continuous.
 By definition we have also that 
 \begin{align}
-	& \lim_{t\rightarrow \btime_{m+1}} \sol_t^N = (\amba_{\btime_{m+1}}^1,\ldots,\amba_{\btime_{m+1}}^N, \camp_{\btime_{m+1}}^1, \ldots, \camp_{\btime_{m+1}}^m )
+	& \lim_{t\rightarrow \btime_{m+1}} \sol_t^{(N)} = (\amba_{\btime_{m+1}}^1,\ldots,\amba_{\btime_{m+1}}^N, \camp_{\btime_{m+1}}^1, \ldots, \camp_{\btime_{m+1}}^m )
 \end{align}
-and analogously for $\mfsol_t^N$. Therefore the paths of $\norm{\sol_t^N - \mfsol_t^N}_\infty$ are \cadlag.
+and analogously for $\mfsol_t^{(N)}$. Therefore the paths of $\norm{\sol_t - \mfsol_t}_\infty$ are \cadlag.
 
 Let us now prove that  $\Ch(\btime_m-) \leq \Ch(\btime_m)$ for every discontinuouty $\btime_m$ in $[0,T]$.
 We have that
 \begin{equation}\label{ch4:distance-paths-inequality}
 	\begin{aligned}
-	\Ch(\btime_m-) &= \lim_{t\rightarrow\btime_{m+1}^-} \Ch(t) = \lim_{t\rightarrow\btime_{m+1}^-} \norm{ \sol_t^N - \mfsol_t^N}_\infty
+	\Ch(\btime_m-) &= \lim_{t\rightarrow\btime_{m+1}^-} \Ch(t) = \lim_{t\rightarrow\btime_{m+1}^-} \norm{ \sol_t^{(N)} - \mfsol_t^{(N)}}_\infty
 	\\
 	& = \lim_{t\rightarrow\btime_{m+1}^-} \max \left\{ 
 		\max_{p \in \{ 1, \ldots, N\}} \norm{
@@ -176,7 +181,7 @@ We have that
 	}
 	\right\}
 	\\
-	& = \norm{ \sol_{\btime_{m+1}}^N -\mfsol_{\btime_{m+1}}^N}_\infty = \Ch(\btime_{m+1})
+	& = \norm{ \sol_{\btime_{m+1}}^{(N)} -\mfsol_{\btime_{m+1}}^{(N)}}_\infty = \Ch(\btime_{m+1})
 	\end{aligned}
 \end{equation}
 
@@ -546,10 +551,10 @@ Then, since $0 < \xi_\delta \leq \delta$ (by \ref{ch4:claim:exploit-xi-of-delta}
 Thus we proved the statement \ref{ch4:lemma:advance-after-sup}:
 
 \begin{equation}
-	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty
 	\leq
 	\max_{ s\in \{0,T\} } \left\{ 
-		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+		\diniu^+_s \norm{\sol_s-\mfsol_s}_\infty
 	\right\}
 \end{equation}
 
@@ -559,14 +564,14 @@ Here the result we need to show is this:
 
 \begin{lemma}\label{ch4:lemma:get-rid-of-integral}
 	\begin{equation*}
-		\diniu^+_t \norm{\sol_t^N-\mfsol_t^N}_\infty \leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+		\diniu^+_t \norm{\sol_t-\mfsol_t}_\infty \leq d \norm{\drift(t, \sol_t) - \mfdrift(t, \mfsol_t)}_\infty
 	\end{equation*}
 \end{lemma}
 
 Notice that the mean-field particles are coupled with the system \ref{ch2:model}, and the initial conditions $\adens_0$ are the same for all the amoebas. Then we have
 
 \begin{align*}
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t^{(N)}-\mfsol_t^{(N)}}_\infty 
 	&= \max \left\{
 	\norm{\amba_t^{(N)} - \mfamba_t^{(N)}}_\infty,
 	\norm{\camp_t^{(N)}  - \mfcamp_t^{(N)}}_\infty
@@ -575,13 +580,13 @@ Notice that the mean-field particles are coupled with the system \ref{ch2:model}
 	&= \max \Bigg\{
 	\norm{
 		\amba_0^{(N)} 
-		+ \int_0^t \drift^{N} (s, \sol_s^N) d s
+		+ \int_0^t \drift^{(N)} (s, \sol_s^{(N)}) d s
 		+ 
 		\sigma B_t^N
 	-
 	\left(
 		\mfamba_0^{(N)} 
-		+ \int_0^t \drift^N(s, \mfsol_s^N) d s
+		+ \int_0^t \drift^{(N)}(s, \mfsol_s^{(N)}) d s
 		+ 
 		\sigma B_t^N
 	\right)
@@ -599,7 +604,7 @@ Notice that the mean-field particles are coupled with the system \ref{ch2:model}
 	&=
 	\max \Bigg\{
 	\norm{
-		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		\int_0^t \drift(s, \sol_s) - \mfdrift(s, \mfsol_s) d s
 	}_\infty,	
 	\max_{1\leq m \leq \hmactive_t}
 	\norm{
@@ -618,12 +623,12 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 \begin{align*}
 	\diniu^+_t 
 	\;
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	&=
 		\diniu^+_t 
 		\;
 		\norm{
-			\underbrace{ \int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s}
+			\underbrace{ \int_0^t \drift(s, \sol_s) - \mfdrift(s, \mfsol_s) d s}
 				_{:= I_t = (I_t^{p;i})_{p,i}}
 		}_\infty
 	\\
@@ -633,7 +638,7 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\partial^+_t
 		\;
 		\norm{
-			\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+			\int_0^t \drift(s, \sol_s) - \mfdrift(s, \mfsol_s) d s
 		}_\infty
 	\\
 	& =
@@ -643,8 +648,8 @@ Therefore, if we try to Dini-derive such quantity we might sketch this:
 		\Big(
 			\underbrace{
 				\partial^+_t
-				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
-			}_{\logQuest{ = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N) }}
+				\int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
+			}_{\logQuest{ = \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t) }}
 		\Big)_{p,i}
 \end{align*}
 
@@ -674,11 +679,11 @@ The second one is a confirmation of an intuitive fact:
 \begin{lemma}\label{ch4:lemma:right-diff-of-integral}
 	The quantity 
 	\begin{equation}\label{ch4:derivation-of-lebesgue}
-		\int_0^t \drift(s, \sol_s^N) - \mfdrift(s, \mfsol_s^N) d s
+		\int_0^t \drift(s, \sol_s) - \mfdrift(s, \mfsol_s) d s
 	\end{equation}
 	is right-differentiable in each of its coordinates and is such that
 	\begin{equation}
-		\partial_t^+ \int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s = \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		\partial_t^+ \int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s = \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	\end{equation}
 	almost everywhere.
 \end{lemma}
@@ -686,20 +691,20 @@ The second one is a confirmation of an intuitive fact:
 \begin{proof}
 	Consider
 	\begin{equation}
-		\Zhi(t) := \int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s,
+		\Zhi(t) := \int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s,
 	\end{equation}
 	the $i$-th coordinate of the object of interest.
 	In order to prove our thesis we will prove that $\Zhi(t)$ is differentiable and that its derivative is the \rhs(\ref{ch4:derivation-of-lebesgue}).
 	Then our thesis is that for all $t$
 	\begin{align*}
 		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi(t+h) - \Zhi(t)}{h} 
-		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
+		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
 		\\
 		&= \lim_{h\rightarrow 0^+} \frac{1}{
 				\lebsge((t, t+ h))
-			} \int_{(t,t+h)} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d\lebsge(s)
+			} \int_{(t,t+h)} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d\lebsge(s)
 		\\
-		&= \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		&= \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	\end{align*}
 	To prove this we just need to exploit the Lebesgue differentiation theorem (see \autocite[Theorem 3.21]{folland}), \ie check that the integrand is in $\Lpspace^1_{loc}$ (true by the definition of the solutions $\sol$ and $\mfsol$) and that $\{E_h\}_{h>0} := \big\{ (t,t+h) \big\}_{h>0}$ is a collection of Borel sets shrinking nicely to $t$.
 	The latter condition means to verify that:
@@ -722,12 +727,12 @@ The second one is a confirmation of an intuitive fact:
 	Then the Lebesgue differentiation theorem guarantees us that
 	
 	\begin{align*}
-		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_i(s, \sol_s^N) - \mfdrift_i(s, \mfsol_s^N) d s
+		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
 		&= \lim_{h\rightarrow 0^+} \frac{1}{
 			\lebsge(E_h)
-		} \int_{E_h} \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d\lebsge(s)
+		} \int_{E_h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d\lebsge(s)
 		\\
-		&= \drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		&= \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	\end{align*}
 	almost everywhere, and this concludes the proof.
 \end{proof}
@@ -737,14 +742,14 @@ Then we can write
 \begin{align*}
 	\diniu^+_t 
 	\;
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	&=
 	\partial^+_t
 	\;
 	\norm{
 		\Bigg(
 			\underbrace{ 
-				\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
+				\int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
 			}_{:= I_t^{p;i} }
 		\Bigg)_{p,i}
 	}_\infty
@@ -755,7 +760,7 @@ Then we can write
 		\left( \partial_{p;i} \norm{x_{p;i}}_\infty \right)_{x_{p;i} = I_t^{p;i}}
 	\Big(
 		\partial^+_t
-		\int_0^t \drift_{p;i}(s, \sol_s^N) - \mfdrift_{p;i}(s, \mfsol_s^N) d s
+		\int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
 	\Big)
 	\\
 	& =
@@ -763,7 +768,7 @@ Then we can write
 	\sum_{i=1}^d
 	\left( \sgn(I_t^{p;i})\1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\Big(
-	\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+	\drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	\Big)
 	\\
 	& \leq
@@ -771,7 +776,7 @@ Then we can write
 	\sum_{i=1}^d
 	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\norm{
-		\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		\drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	}
 \end{align*}
 
@@ -807,7 +812,7 @@ This might seem obvious, because corresponds roughly to the statement that diffe
 		\Bigg)\cdot
 		\\
 		&\qquad\qquad\qquad
-		\cdot d(\sol_s^N,  \mfsol_s^N)_\star \PrbCondTimes{x,y}{}
+		\cdot d(\sol_s,  \mfsol_s)_\star \PrbCondTimes{x,y}{}
 	\end{align*}
 	
 	where in the last inequality we treat all the birth times as deterministic.	
@@ -932,27 +937,27 @@ This statement allows as to say that with probability $1$ there exist some index
 \begin{align*}
 	\diniu^+_t 
 	\;
-	\norm{\sol_t^N-\mfsol_t^N}_\infty 
+	\norm{\sol_t-\mfsol_t}_\infty 
 	& \leq
 	\sum_{p=1}^{N}
 	\sum_{i=1}^d
 	\left( \1_{\norm{I_t^{p;i}} = \norm{I_t}_\infty } \right)
 	\norm{
-		\drift_{p;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		\drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	}
 	\\
 	&= \sum_{i=1}^d
 	\left( \1_{\norm{I_t^{k;i}} = \norm{I_t}_\infty } \right)
 	\norm{
-		\drift_{k;i}(t, \sol_t^N) - \mfdrift_{p;i}(t, \mfsol_t^N)
+		\drift_{k;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
 	}
 	\\
 	&\leq 
 	 \sum_{i=1}^d
 	 1
 	 \cdot
-	 \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
-	\leq d \norm{\drift(t, \sol_t^N) - \mfdrift(t, \mfsol_t^N)}_\infty
+	 \norm{\drift(t, \sol_t) - \mfdrift(t, \mfsol_t)}_\infty
+	\leq d \norm{\drift(t, \sol_t) - \mfdrift(t, \mfsol_t)}_\infty
 \end{align*}
 
 And thus the result \ref{ch4:lemma:get-rid-of-integral} is proved.
@@ -962,17 +967,17 @@ And thus the result \ref{ch4:lemma:get-rid-of-integral} is proved.
 For $T >0$ we have that
 
 \begin{align*}
-	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t^N-\mfsol_t^N}_\infty
+	\diniu_T^+ \sup_{0 \leq t \leq T} \norm{\sol_t-\mfsol_t}_\infty
 	&\leq
 	\max_{ s\in \{0,T\} } 
 	\left\{ 
-		\diniu^+_s \norm{\sol_s^N-\mfsol_s^N}_\infty
+		\diniu^+_s \norm{\sol_s-\mfsol_s}_\infty
 	\right\}
 	&& \ref{ch4:lemma:advance-after-sup}
 	\\
 	&\leq \max_{ s\in \{0,T\} } 
 	\left\{ 
-		d \norm{\drift(s, \sol_s^N) - \mfdrift^N(s, \mfsol_s^N)}_\infty
+		d \norm{\drift(s, \sol_s) - \mfdrift(s, \mfsol_s)}_\infty
 	\right\}
 	&& \ref{ch4:lemma:get-rid-of-integral}
 \end{align*}
@@ -980,7 +985,7 @@ For $T >0$ we have that
 Now notice that since for every amoeba $p$ $\hmactive_0^p =0$ with probability $1$, then we have that
 
 \begin{equation*}
-	\drift_p(0, \sol_0^N)
+	\drift_p(0, \sol_0)
 	= \frac{1}{N} \sum _{q = 1}^{N} \sum_{g = 1}^{\hmactive_0^q} \attraction(\amba_s^p - \camp_s^{q,g}) 
 	= 0
 \end{equation*}
@@ -988,7 +993,7 @@ Now notice that since for every amoeba $p$ $\hmactive_0^p =0$ with probability $
 and the same is valid for the mean-field drift:
 
 \begin{equation*}
-\mfdrift(0, \mfsol_0^N)_\infty
+\mfdrift(0, \mfsol_0)_\infty
 = \lambda \left(\attraction \star \int_0^0 \cdens_0^\tau 	d \tau \right) (y^{p;i})  
 = 0
 \end{equation*}
@@ -998,9 +1003,9 @@ Then we have that
 \begin{equation*}
 	\max_{ s\in \{0,T\} } 
 	\left\{ 
-	d \norm{\drift^N(s, \sol_s^N) - \mfdrift^N(s, \mfsol_s^N)}_\infty
+	d \norm{\drift(s, \sol_s) - \mfdrift(s, \mfsol_s)}_\infty
 	\right\}
-	= d \norm{\drift^N(T, \sol_T^N) - \mfdrift^N(T, \mfsol_T^N)}_\infty 
+	= d \norm{\drift(T, \sol_T) - \mfdrift(T, \mfsol_T)}_\infty 
 \end{equation*}
 
 And the proof is concluded.
