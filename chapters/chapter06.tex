@@ -6,9 +6,9 @@
 	\begin{equation}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
-			\Norm{
+			\normp{\infty}{
 				\sol_t^{(N)} - \mfsol_t^{(N)}
-			}_\infty 
+			} 
 			\geq
 			N^{-\cutparameter}
 		}
@@ -24,9 +24,9 @@ The proof is based on the usage of the Groenwall argument on the auxiliary proce
 	\auxProc_T^N := 1 \wedge \left( 
 	N^{\cutparameter}
 	\sup_{0 \leq t \leq T}
-	\Norm{
+	\normp{\infty}{
 		\sol_t^{(N)} - \mfsol_t^{(N)}
-	}_\infty \right)
+	} \right)
 \end{equation}
 
 In fact we have that
@@ -34,9 +34,9 @@ In fact we have that
 	\begin{align*}
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t^{(N)} - \mfsol_t^{(N)}
-		}_\infty 
+		} 
 		\geq
 		N^{-\cutparameter}
 	}
@@ -44,9 +44,9 @@ In fact we have that
 	\PrbOf{  
 		N^{\cutparameter}\:
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t^{(N)} - \mfsol_t^{(N)}
-		}_\infty 
+		} 
 		\geq
 		1
 	}
@@ -56,9 +56,9 @@ In fact we have that
 		\Big(
 		N^{\cutparameter}\:
 		\sup_{0 \leq t \leq T}
-		\Norm{
+		\normp{\infty}{
 			\sol_t^{(N)} - \mfsol_t^{(N)}
-		}_\infty 
+		} 
 		\Big)
 		\wedge
 		1
@@ -115,9 +115,9 @@ Consider $0 < t \leq T$ and calculate then:
 	1 \wedge \big( 
 	N^{\cutparameter}
 	\sup_{0 \leq s \leq t}
-	\Norm{
+	\normp{\infty}{
 		\sol_s - \mfsol_s
-	}_\infty \big)
+	} \big)
 	\right)
 	\leq
 	\\
@@ -127,9 +127,9 @@ Consider $0 < t \leq T$ and calculate then:
 	\diniu_t^+ 1 \wedge \diniu_t^+ \big( 
 	N^{\cutparameter}
 	\sup_{0 \leq s \leq t}
-	\Norm{
+	\normp{\infty}{
 		\sol_s - \mfsol_s
-	}_\infty \big)
+	} \big)
 	\right)
 	\\
 	&\footnotemark[1]\leq
