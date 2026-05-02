@@ -1,13 +1,13 @@
 \label{ch6}
 \begin{proposition}
-	Let $\sol_t^N$ be the solution to the model \ref{ch2:model} and let $\mfsol_t^N$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
+	Let $\sol_t^{(N)}$ be the solution to the model \ref{ch2:model} and let $\mfsol_t^{(N)}$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
 	Let $T > 0$ and let $0< \delta <\xi <\frac{1}{2}$.
 	Then there exists an $\overline{N}>0$ and an increasing continuous function $\Fup: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
 	\begin{equation}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
 			\Norm{
-				\sol_t^N - \mfsol_t^N
+				\sol_t^{(N)} - \mfsol_t^{(N)}
 			}_\infty 
 			\geq
 			N^{-\cutparameter}
@@ -25,7 +25,7 @@ The proof is based on the usage of the Groenwall argument on the auxiliary proce
 	N^{\cutparameter}
 	\sup_{0 \leq t \leq T}
 	\Norm{
-		\sol_t^N - \mfsol_t^N
+		\sol_t^{(N)} - \mfsol_t^{(N)}
 	}_\infty \right)
 \end{equation}
 
@@ -35,7 +35,7 @@ In fact we have that
 	\PrbOf{  
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t^{(N)} - \mfsol_t^{(N)}
 		}_\infty 
 		\geq
 		N^{-\cutparameter}
@@ -45,7 +45,7 @@ In fact we have that
 		N^{\cutparameter}\:
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t^{(N)} - \mfsol_t^{(N)}
 		}_\infty 
 		\geq
 		1
@@ -57,7 +57,7 @@ In fact we have that
 		N^{\cutparameter}\:
 		\sup_{0 \leq t \leq T}
 		\Norm{
-			\sol_t^N - \mfsol_t^N
+			\sol_t^{(N)} - \mfsol_t^{(N)}
 		}_\infty 
 		\Big)
 		\wedge
@@ -80,6 +80,10 @@ In fact we have that
 
 where in the latter inequality we applied Markov with $f(x) = \norm{x}$.
 Then we need to find a bound for $\E{\auxProc_T^N} $.
+
+\begin{remark}
+	From now on we will omit the superscript $(N)$ for $\sol_t^{(N)},\mfsol_t^{(N)}, \drift^{(N)}, \mfdrift^{(N)}$ whenever possible, since the dependence on $N$ is now clear.
+\end{remark}
 
 \section{Stochastic estimate with Groenwall}
 
@@ -112,7 +116,7 @@ Consider $0 < t \leq T$ and calculate then:
 	N^{\cutparameter}
 	\sup_{0 \leq s \leq t}
 	\Norm{
-		\sol_s^N - \mfsol_s^N
+		\sol_s - \mfsol_s
 	}_\infty \big)
 	\right)
 	\leq
@@ -124,7 +128,7 @@ Consider $0 < t \leq T$ and calculate then:
 	N^{\cutparameter}
 	\sup_{0 \leq s \leq t}
 	\Norm{
-		\sol_s^N - \mfsol_s^N
+		\sol_s - \mfsol_s
 	}_\infty \big)
 	\right)
 	\\
@@ -134,20 +138,20 @@ Consider $0 < t \leq T$ and calculate then:
 	0 \vee 
 	\Big(
 	N^{\cutparameter}d  
-	\norm{\drift^N(t, \sol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty
+	\norm{\drift(t, \sol_t) - \mfdrift(t, \mfsol_t)}_\infty
 	\Big)
 	\right]	
 	\\
 	&\leq
 	\1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
-	  N^{\cutparameter}d  \norm{\drift^N(t, \sol_t^N) - \drift^N(t, \mfsol_t^N)}_\infty 
+	  N^{\cutparameter}d  \norm{\drift(t, \sol_t) - \drift(t, \mfsol_t)}_\infty 
 	  +  
 	  \1_{\{\diniu^+_t \auxProc_t^N >0 \}}\
-	  N^{\cutparameter}d  \norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	  N^{\cutparameter}d  \norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq
 \end{align*}
 \footnotetext[1]{by \ref{ch4:lemma:del-dini-of-all}}
 
-Recall that $\drift^N$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore:
+Recall that $\drift$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore:
 
 \begin{align*}
 	\leq
@@ -158,13 +162,13 @@ Recall that $\drift^N$ is Lipschitz (\ref{ch2:lemma:lipsch-of-drift}), therefore
 		  \1_{\diniu^+_t \auxProc_t^N >0 }\
 		   \cdot 
 		   N^{\cutparameter}\
-		   \norm{\sol_t^N - \mfsol_t^N}_\infty
+		   \norm{\sol_t - \mfsol_t}_\infty
 	   }_{}
 	     + N^{\cutparameter}\
-	     d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq
+	     d\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq
 \end{align*}
 
-Now observe that if $N^{\cutparameter}\norm{\sol_t^N - \mfsol_t^N}_\infty \geq 1$ then $\auxProc_t^N =1$, which is the maximum value that $\auxProc_t^N$ can reach.
+Now observe that if $N^{\cutparameter}\norm{\sol_t - \mfsol_t}_\infty \geq 1$ then $\auxProc_t^N =1$, which is the maximum value that $\auxProc_t^N$ can reach.
 This means that in such case we have $\diniu^+_t\auxProc_t^N \leq 0$, because the function, in the near future either remains constant or decreases.
 This means that
 
@@ -174,7 +178,7 @@ This means that
 	\right\} 
 	\subseteq 
 	\left\{
-		N^{\cutparameter}\norm{\sol_t^N - \mfsol_t^N}_\infty < 1
+		N^{\cutparameter}\norm{\sol_t - \mfsol_t}_\infty < 1
 	\right\} 
 \end{equation*}
 
@@ -184,14 +188,14 @@ and consequently
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
-		\norm{\sol_t^N - \mfsol_t^N}_\infty
+		\norm{\sol_t - \mfsol_t}_\infty
 	\leq
 		\left(
 			1
 			\vee
 			\big(
 			N^{\cutparameter}\
-			\norm{\sol_t^N - \mfsol_t^N}_\infty
+			\norm{\sol_t - \mfsol_t}_\infty
 			\big)
 		\right)
 	\leq
@@ -199,7 +203,7 @@ and consequently
 		\vee
 		\big(
 		N^{\cutparameter}\
-		\sup_{s\in[0,t]} \norm{\sol_s^N - \mfsol_s^N}_\infty
+		\sup_{s\in[0,t]} \norm{\sol_s - \mfsol_s}_\infty
 		\big)
 	=
 		\auxProc_t^N 
@@ -216,9 +220,9 @@ Therefore we can write
 		\1_{\diniu^+_t \auxProc_t^N >0 }\
 		\cdot 
 		N^{\cutparameter}\
-		\norm{\sol_t^N - \mfsol_t^N}_\infty
+		\norm{\sol_t - \mfsol_t}_\infty
 	+ N^{\cutparameter}\
-	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	d\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 	\\
 	&\leq
 	d\
@@ -226,7 +230,7 @@ Therefore we can write
 	\frac{\hmactive_t}{N}\
 	\auxProc_t^N 
 	+N^{\cutparameter}\
-	d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	d\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 \end{align*}
 
 Integrating over $[0,T]$ we then obtain:
@@ -240,7 +244,7 @@ Integrating over $[0,T]$ we then obtain:
 	 	\frac{\hmactive_t}{N}\
 	 	\auxProc_t^N 
 	 	+N^{\cutparameter}\
-	 	 d\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	 	 d\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 	 	dt
 	 	\\
 	 	& \leq
@@ -252,7 +256,7 @@ Integrating over $[0,T]$ we then obtain:
 	N^{\cutparameter}\
 	\const_d
 		\int_0^T 
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 	\leq
 \end{align*}
@@ -270,7 +274,7 @@ Choose now some $S >T$ to obtain
 	\const_d
 	\underbrace{
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 	}_{=:\Iu}
 \end{equation*}
@@ -279,7 +283,7 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 
 \begin{lemma}
 	$\PrbOf{\int_0^S 
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt = 0} = 0 $
 \end{lemma}
 
@@ -289,13 +293,13 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 	
 	\begin{align*}
 		&\PrbCondTimes{\int_0^S
-			\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+			\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 			dt = 0}{}=
 			\\
 		&= \PrbCondTimes{
 			\forall p,i.\
 			\int_0^S
-			\norm{\drift_{p;i}^N(t, \mfsol_t^N) - \mfdrift_{p;i}^N(t, \mfsol_t^N)}
+			\norm{\drift_{p;i}(t, \mfsol_t) - \mfdrift_{p;i}(t, \mfsol_t)}
 			dt
 			= 0
 			}{}
@@ -303,7 +307,7 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 		&\leq
 		\sum_{p,i}\
 		\PrbCondTimes{ \int_0^S
-			\norm{\drift_{p;i}^N(t, \mfsol_t^N) - \mfdrift_{p;i}^N(t, \mfsol_t^N)}
+			\norm{\drift_{p;i}(t, \mfsol_t) - \mfdrift_{p;i}(t, \mfsol_t)}
 			dt
 			}{}
 		\\
@@ -314,12 +318,12 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 		\Big(
 		\underbrace{
 			\int_0^S
-				\norm{\drift_{p;i}^N(t, x) - \mfdrift_{p;i}^N(t, x)}
+				\norm{\drift_{p;i}(t, x) - \mfdrift_{p;i}(t, x)}
 			dt
 		}_{\Zhi_S(x,y)}
 		\Big)
 		\cdot
-		\PrbCondTimes{\mfsol_t^N =dx}{}
+		\PrbCondTimes{\mfsol_t =dx}{}
 	\end{align*}
 	
 	Let us show that $\left\{
@@ -331,7 +335,7 @@ Notice now that if $\Iu$ is positive almost surely, then we can proceed to apply
 		x \in \left\{		\Zhi_S = 0		\right\} \quad 
 		&\Longleftrightarrow\
 		\forall^\lebsge t \in [0,S].\quad
-			\norm{\drift_{p;i}^N(t, x) - \mfdrift_{p;i}^N(t, x)}
+			\norm{\drift_{p;i}(t, x) - \mfdrift_{p;i}(t, x)}
 			= 0
 			\\
 		&\Longleftrightarrow\
@@ -379,7 +383,7 @@ With this lemma we have that the conditions of \ref{ch6:lemma-groenwall-generali
 	N^{\cutparameter}\
 	\const_d
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 \end{equation*}
 
@@ -392,7 +396,7 @@ Therefore we obtain that
 		N^{\cutparameter}\
 		\const_{d}
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 		\cdot
 		\exp \left(
@@ -405,7 +409,7 @@ Therefore we obtain that
 		N^{\cutparameter}\
 		\const_{d}
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 		\cdot
 		\exp \left(
@@ -422,20 +426,20 @@ Define the set
 
 \begin{equation*}
 	\setB_t := \left\{
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty \leq 2N^{-\xi}
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty \leq 2N^{-\xi}
 	\right\}
 \end{equation*}
 
 for some $0 < \xi < \frac{1}{2}$.
 Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-drift} and \ref{ch3:mfdrift-lips-and-bounded} for the drift and the mesoscopic drift we obtain
 \begin{align*}
-	\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+	\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 	&=
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty\
 		\1_{\setB_t
 		}
 		+
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty\
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty\
 		\1_{\setB_t^c
 		}
 		\\
@@ -443,9 +447,9 @@ Exploiting the definition of such set and the bounds \ref{ch2:lemma:lipsch-of-dr
 			2N^{-\xi}
 			+
 			\left(
-				\Norm{\drift^N(t, \cdot)}_\infty\
+				\Norm{\drift(t, \cdot)}_\infty\
 				+
-				\Norm{\mfdrift^N(t, \cdot)}_\infty\
+				\Norm{\mfdrift(t, \cdot)}_\infty\
 			\right)
 			\1_{\setB_t^c}
 		\\
@@ -493,7 +497,7 @@ Then, averaging on the inequality \ref{ch6:just-applied-Groenwall} we can calcul
 		N^{\cutparameter}
 		\const_d\
 		\int_0^S
-		\norm{\drift^N(t, \mfsol_t^N) - \mfdrift^N(t, \mfsol_t^N)}_\infty 
+		\norm{\drift(t, \mfsol_t) - \mfdrift(t, \mfsol_t)}_\infty 
 		dt
 		\cdot
 		\exp \left(
