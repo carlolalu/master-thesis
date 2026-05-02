@@ -5,21 +5,21 @@ In this chapter we follow a similar path to the one traced by \cite{ana}.
 \section{Introduction}
 
 In the previous chapter we have defined a microscopic system, \ie a system where we track the movement of each individual.
-Consider $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$, the solution to \ref{ch2:model} with $N$ amoebas, where $\amba_t^{(N)}$ represents the $N$ amoebas and $\camp_t^{(N)}$ the cAMP molecules.
+Consider $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$, the solution to \ref{ch2:model} with $N$ amoebas, where $\amba_t^{(N)}$ represents the $N$ amoebas and $\camp_t^{(N)}$ the cAMP molecules.
 Then such solution can be expressed in terms of its empirical measures:
 
 \begin{equation*}
 	\begin{aligned}
-		\empmeas_t^{(\amba),N} &:= \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
+		\empmeas_t^{\amba,(N)}&:= \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
 		\\
-		\empmeas_t^{(\camp),N} &:= "\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} "
+		\empmeas_t^{\camp,(N)} &:= "\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} "
 	\end{aligned}
 \end{equation*}
 
 A macroscopic description of this model for the amoebas' part is a density $\adens(t,\cdot)$ independent form $N$ such that, in some sense
 
 \begin{equation*}
-	\empmeas_t^{(\amba),N} \xrightarrow{N\longrightarrow +\infty} \adens(t,\cdot)
+	\empmeas_t^{\amba,(N)}\xrightarrow{N\longrightarrow +\infty} \adens(t,\cdot)
 \end{equation*}
 
 This description is macroscopic, because we loose the information about each individual, but we still describe the movement of the individuals as a whole.
@@ -28,7 +28,7 @@ Specifically we build a mesoscopic model, \ie a model between the macroscopic an
 Finally we hint at the idea of finding a similar macroscopic description for the cAMP part, namely a density $\cdens(t,\cdot)$ such that
 
 \begin{equation*}
-	\empmeas_t^{(\camp),N} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
+	\empmeas_t^{\camp,(N)} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
 \end{equation*}
 
 
@@ -55,15 +55,15 @@ For this to be a valid definition we need to have a $\sigma$-algebra on $\PrbMea
 		\end{equation*}
 \end{definition}
 
-Then the condition that we actually need to show is the convergence in law of the \rv $\empmeas_t^{(\amba),N}$ to the (constant) \rv $\adens_t$:
+Then the condition that we actually need to show is the convergence in law of the \rv $\empmeas_t^{(\amba),(N)}$ to the (constant) \rv $\adens_t$:
 
 \begin{equation}\label{ch3:cumbersome-condition-convergence-in-Pspace}
 	\begin{aligned}
-	\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
+	\empmeas_t^{\amba,(N)}\xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
 	\qquad \Longleftrightarrow
 	\quad
 	&\forall F\in \Cspace_b(\PrbMeas(\R^d)).\quad
-	\E{F(\empmeas_t^{(\amba),N})}
+	\E{F(\empmeas_t^{\amba,(N)})}
 	\xrightarrow{N \rightarrow \infty} 
 	\E{F(\adens_t)}
 	\end{aligned}
@@ -172,36 +172,36 @@ The reason why we cover this concept is this result (from \autocite[Corollary 6.
 Then we have the subsequent statement:
 
 \begin{lemma}\label{ch3:lemma-sznitman-wasserstein}
-	Let $\empmeas_t^{(\amba),N},\adens_t, \Psi_t^{N, (k)},\Psi_t^{N}$ be as in \ref{ch3:proposition:sznitman} and let $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$.
+	Let $\empmeas_t^{\amba,(N)},\adens_t, \Psi_t^{(N,k)},\Psi_t^{(N)}$ be as in \ref{ch3:proposition:sznitman} and let $\forall k\geq 1. \Psi_t^{(N,k)},\Psi_t^{(N)} \in \BorelPrbMeas_1$.
 	Then the condition
 	\begin{equation}\label{ch3:w-1-convergence-condition}
 		\sup_{0\leq t\leq T}
 		W_1 \big(
-		\Psi_t^{N, (k)}, \bigotimes_{p=1}^{k}\adens_t
+		\Psi_t^{(N,k)}, \bigotimes_{p=1}^{k}\adens_t
 		\big),
 		\quad
 		\sup_{0\leq t\leq T}
 		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t
 		\big),
 		\xrightarrow {N \rightarrow \infty} 0
 	\end{equation}
-	implies that the \rv $\empmeas_t^{(\amba),N}$ with values in $\PrbMeas(\R^d)$ converges in law to the constant \rv $\adens_t \in \PrbMeas(\R^d)$.
+	implies that the \rv $\empmeas_t^{\amba,(N)}$ with values in $\PrbMeas(\R^d)$ converges in law to the constant \rv $\adens_t \in \PrbMeas(\R^d)$.
 \end{lemma}
 
 \begin{remark}
-	Notice that the condition that $\forall k\geq 1. \Psi_t^{N, (k)},\Psi_t^{N} \in \BorelPrbMeas_1$ is not particularly strict, it translates to requiring that the amoebas do not have the possibility to have an infinite velocity.
+	Notice that the condition that $\forall k\geq 1. \Psi_t^{(N,k)},\Psi_t^{(N)} \in \BorelPrbMeas_1$ is not particularly strict, it translates to requiring that the amoebas do not have the possibility to have an infinite velocity.
 \end{remark}
 
 \begin{proof}
 	By \ref{ch3:proposition:sznitman} we have that the condition
 	\begin{equation*}
-		\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
+		\empmeas_t^{\amba,(N)}\xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
 	\end{equation*}
-	is equivalent to ask that for all $k \geq 1$, the marginals $\Psi^{N, (k)}$ converge weakly to $ \otimes_{p=1}^N \adens$ in $N$.
-	Since for every $k\geq 1$ we have that $\Psi_t^{N, (k)} \in \BorelPrbMeas_1$, and since $\BorelPrbMeas_1$ is a Polish space, then also $\lim_N \Psi_t^{N, (k)} = \bigotimes_{p=1}^{k} \adens_t$  is an element of $\BorelPrbMeas_1$.
-	Since the $1$-Wasserstein distance $W_1$ is a metric for the weak-convergence of measures, this implies that for every $k\geq 1$ we have that $\Psi_t^{N, (k)}$ converges weakly to $\bigotimes_{p=1}^{k} \adens_t$.
-	By the proposition \ref{ch3:proposition:sznitman}, this implies that the \rv $\empmeas_t^{(\amba),N}$ converges in law to $\adens_t$.
+	is equivalent to ask that for all $k \geq 1$, the marginals $\Psi^{N, (k)}$ converge weakly to $ \otimes_{p=1}^N \adens_t$ in $N$.
+	Since for every $k\geq 1$ we have that $\Psi_t^{(N,k)} \in \BorelPrbMeas_1$, and since $\BorelPrbMeas_1$ is a Polish space, then also $\lim_N \Psi_t^{(N,k)} = \bigotimes_{p=1}^{k} \adens_t$  is an element of $\BorelPrbMeas_1$.
+	Since the $1$-Wasserstein distance $W_1$ is a metric for the weak-convergence of measures, this implies that for every $k\geq 1$ we have that $\Psi_t^{(N,k)}$ converges weakly to $\bigotimes_{p=1}^{k} \adens_t$.
+	By the proposition \ref{ch3:proposition:sznitman}, this implies that the \rv $\empmeas_t^{\amba,(N)}$ converges in law to $\adens_t$.
 \end{proof}
 
 \section{From effective equations to mean-field particles}
@@ -219,7 +219,7 @@ This might work, but we do not know yet how to find a candidate, and even if we 
 since we have no analytical solution for the model \ref{ch2:model}, we cannot work directly with the marginals $\Psi_t^N$, and we are thus stuck with the empirical measure
 
 \begin{equation*}
-\empmeas_t^{(\amba),N} := \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
+\empmeas_t^{\amba,(N)}:= \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
 \end{equation*}
 
 which is a discrete object.
@@ -261,8 +261,8 @@ Since this new system $\mfamba_t^{(N)}$ would be between the microscopic descrip
 More intuitively, if we have such particles $\mfamba_t^{(N)}$ remaining close enough to the original ones $\amba_t^{(N)}$, we should expect their respective empirical densities 
 
 \begin{equation*}
-	\empmeas_t^{(\mfamba),N} = \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p},\qquad 
-	\empmeas_t^{(\amba),N} := \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
+	\empmeas_t^{\mfamba,(N)}= \frac{1}{N}\sum_{p=1}^N \delta_{\mfamba_t^p},\qquad 
+	\empmeas_t^{\amba,(N)}:= \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
 \end{equation*}
 
 to be close, and thus tend to the same limit in $N$, which we would expect to be the same one given by the Fokker-Planck equation.
@@ -270,17 +270,17 @@ The same concept will be roughly applied also to the cAMP, meaning that, under t
 This not only because it is conceptually more useful to  think in two entire systems of both amoebas and cAMP being close to each others, but also because we hope that it is possible to show, in further work, that this implies also the convergence of measures for the cAMP part, \ie that there is a density $\cdens_t$ easily derivable (with Fokker-Planck and other tools) from $\mfcamp_t^{(N)}$ such that 
 
 \begin{equation*}
-	\empmeas_t^{(\camp),N}, \empmeas_t^{(\mfcamp),N} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
+	\empmeas_t^{\camp,(N)}, \empmeas_t^{\mfcamp,(N)} \xrightarrow{N\longrightarrow +\infty} \cdens(t,\cdot)
 \end{equation*}
 
-where $\empmeas_t^{(\mfcamp),N}$ is the empirical measure of $\mfcamp_t^{(N)}$.
-Then, practically, we are trying to craft a system of $N+\hmactive_t$ particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ with these characteristics:
+where $\empmeas_t^{\mfcamp,(N)}$ is the empirical measure of $\mfcamp_t^{(N)}$.
+Then, practically, we are trying to craft a system of $N+\hmactive_t$ particles $\mfsol_t^{(N)} = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ with these characteristics:
 
 \begin{enumerate}
-	\item The particles $\mfsol_t^N = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ should be coupled with their counterparts $\sol_t^N = (\amba_t^{(N)}, \camp_t^{(N)})$ (\ie they should have the same \Bm in their stochastic evolution), in order to control more easily the distance between the two.
-	Indeed in such case the distance process $\sol_t^N -\mfsol_t^N$ is a finite variation process and can be thus more easily treated, depending only on the two drifts, and not on the diffusions.
+	\item The particles $\mfsol_t^{(N)} = (\mfamba_t^{(N)}, \mfcamp_t^{(N)})$ should be coupled with their counterparts $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$ (\ie they should have the same \Bm in their stochastic evolution), in order to control more easily the distance between the two.
+	Indeed in such case the distance process $\sol_t^{(N)} -\mfsol_t^{(N)}$ is a finite variation process and can be thus more easily treated, depending only on the two drifts, and not on the diffusions.
 	\item The single particles $\mfamba_t^1, \ldots, \mfamba_t^N$ must be \iid so that on each one of them can be described by the same SDE and thus we can use Fokker-Planck separately to have $N$ identical densities $\adens_t^p = \adens_t$, and have thus that the marginals of this system are $\bigotimes_{p=1}^{k}\adens_t$.	
-	\item The distance process $\sol_t^N -\mfsol_t^N$ should be well-defined, and thus under the conditional probability $\PrbCondTimes{\cdot}{}$ the processes $\sol_t^N$ and $\mfsol_t^N$ must have the same dimension, meaning each having at every time the same number of cAMP molecules spawned.	
+	\item The distance process $\sol_t^{(N)} -\mfsol_t^{(N)}$ should be well-defined, and thus under the conditional probability $\PrbCondTimes{\cdot}{}$ the processes $\sol_t^{(N)}$ and $\mfsol_t^{(N)}$ must have the same dimension, meaning each having at every time the same number of cAMP molecules spawned.	
 	\item It would be nice that under the conditional probability $\PrbCondTimes{\cdot}{}$ the particles $\mfcamp_t^1, \ldots, \mfcamp_t^{\hmactive_t}$ would be at least independent.
 	It would be desirable to have them even \iid to easily apply Fokker-Planck also in this case, but this is not possible.
 	In fact, if we want them to be coupled with their counterparts $\camp_t^{p,g}$, we must necessarily have that they move of quasi-\Bm spawning at different random times, which automatically makes them differently distributed.
@@ -290,9 +290,9 @@ Then, practically, we are trying to craft a system of $N+\hmactive_t$ particles 
 Till now we found conditions on the mesoscopic system, but we still have not pointed out at the main way to provide our smart guess: the idea is that the macroscopic behaviour is dictated by the \emph{average} dynamic of the system, more precisely, by the \emph{mean} field felt by each amoeba $\amba_t^p$ and cAMP molecule $\camp_t^{p,g}$):
 
 \begin{align*}
-	\mfdrift_p^N(t, x) &:= \ECondTimes{\drift_p^N(t, \mfsol_t) }{\mfsol_t^{N,p} = x}
+	\mfdrift_p(t, x) := \mfdrift_p^{(N)}(t, x) &:= \ECondTimes{\drift_p^{(N)}(t, \mfsol_t^{(N)} ) }{\mfsol_t^{(N),p} = x, }
 	\\
-	\mfdrift_{p,g}^N(t, x) &:= \ECondTimes{\drift_{p,g}^N(t, \mfsol_t) }{\mfsol_t^{N,p,g} = x}
+	\mfdrift_{p,g}(t, x) := \mfdrift_{p,g}^{(N)}(t, x) &:= \ECondTimes{\drift_{p,g}^{(N)}(t, \mfsol_t^{(N)} ) }{\mfsol_t^{(N),p,g} = x, }
 \end{align*}
 
 This in fact guarantees that the force felt by a particle $p$ is dependent only on itself, and thus the independence. Besides then the SDE becomes the same for each amoeba, guaranteeing identical distribution for the amoebas' part.
@@ -301,9 +301,9 @@ Then, imposing the same initial condition as for \ref{ch2:model}, the candidate 
 \begin{equation}\label{eq:approximate-mean-field-equations}
 	\left\{
 	\begin{aligned}
-		\mfamba^p_t &= \adens_0 + \int_0^t \mfdrift^N_p(s,\mfamba_s^k) d s + \sigma_\amba B_t^{\amba,k} &
+		\mfamba^p_t &= \adens_0 + \int_0^t \mfdrift^{(N)}_p(s,\mfamba_s^k) d s + \sigma_\amba B_t^{\amba,k} &
 		\\
-		\mfcamp^{p,g}_t &= \text{ (some spawning position } P_{\btime^{p,g}}^{p,g})) + \int_0^t \mfdrift^N_{p,g}(s,\mfcamp_s^{p,g}) d s + \sigma_\camp Q_t^{p,g}\qquad &\text{from time }\btime^{p,g}
+		\mfcamp^{p,g}_t &= \text{ (some spawning position } P_{\btime^{p,g}}^{p,g})) + \int_0^t \mfdrift^{(N)}_{p,g}(s,\mfcamp_s^{p,g}) d s + \sigma_\camp Q_t^{p,g}\qquad &\text{from time }\btime^{p,g}
 	\end{aligned}
 	\right.
 \end{equation}
@@ -315,9 +315,9 @@ We call such particles the \emph{mean-field particles}, for obvious reasons.
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
 \begin{align*}
-\forall p,g. \quad \mfdrift_{p,g}^{N}(t, \mfsol_t^{p,g}) 
-:= \ECond {\drift_{p,g}^{N}(t, \mfsol_t) }{\mfsol_t^{p,g}}\
-&=\ECond {\ \ECondTimes{ \drift_{p,g}^{N}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
+\forall p,g. \quad \mfdrift_{p,g}(t, \mfsol_t^{p,g}) 
+:= \ECond {\drift_{p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}}\
+&=\ECond {\ \ECondTimes{ \drift_{p,g}(t, \mfsol_t) }{\mfsol_t^{p,g}, }\ }{\mfsol_t^{p,g}}
 \\
 &= \E {\ECondTimes{ 0 }{} }  = 0
 \end{align*}
@@ -408,11 +408,11 @@ where $\star$ is the convolution in space.
 Let us calculate now the case for the amoebas, using our candidate for the effective equations of the cAMP particles:
 
 \begin{align*}
-\mfdrift_p^N(t, x) 
-:&= \ECond{\drift_p^N(t, \mfsol_t)}{ \mfsol_t^p} (x)\
+\mfdrift_p^{(N)}(t, x) 
+:&= \ECond{\drift_p^{(N)}(t, \mfsol_t^{(N)})}{ \mfsol_t^{(N),p}} (x)\
 = \ECond{\; 
 		\ECondTimes{
-			\drift_p^N(t, \mfsol_t)		
+			\drift_p^{(N)}(t, \mfsol_t^{(N)})		
 		}{\mfamba_t^p=x, }
 	\;}{\mfamba_t^p=x}
 \\
@@ -511,7 +511,7 @@ Since the argument in the expectation value is coordinate-wise positive, we can 
 		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
 	\right) (x) 
 	\quad
-	=: \mfdrift_p^N (t, x) 
+	=: \mfdrift_p^{(N)}(t, x) 
 	\equiv
 	\mfdrift_p (t, x)
 \end{align*}
@@ -878,7 +878,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 \end{proof}
 
 \paragraph{Continuity}
-It is important to underline that also the mesoscopic particles $\mfsol_t^N = ( \mfamba_t , \mfcamp_t)$ have continuous paths in the sense of \ref{ch2:system-continuous-glueing}, because the mean-field particles $\mfcamp_t^m$ are spawning on the position of the mean-field amoebas $\mfamba_t^{\Parentof(m)}$.
+It is important to underline that also the mesoscopic particles $\mfsol_t^{(N)} = ( \mfamba_t^{(N)} , \mfcamp_t^{(N)})$ have continuous paths in the sense of \ref{ch2:system-continuous-glueing}, because the mean-field particles $\mfcamp_t^m$ are spawning on the position of the mean-field amoebas $\mfamba_t^{\Parentof(m)}$.
 This will be relevant to inquire about the properties of the distance process 
 \begin{equation*}
 	\Norm{\sol_t - \mfsol_t}_\infty
@@ -890,7 +890,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 
 \begin{lemma}\label{ch3:best-condition-convergence}
 	Let  $\mfamba_t^{(N)}=(\mfamba_t^p)_{p=1}^N$ be the amoebas part of the solution of \ref{ch3:MF-particles}.
-	Suppose that the marginals $\Psi^{N, (k)}$ of $\Psi^{N}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
+	Suppose that the marginals $\Psi^{(N,k)}$ of $\Psi^{(N)}= \law(\amba_t^{(N)})$ are elements of $\BorelPrbMeas_1$.
 	Suppose that there exists parameters $0 < \cutparameter < \xi < \frac{1}{2}$ and a constant $K > 0$ independent form $N$ such that
 	\begin{equation}\label{ch3:condition-closeness}
 		\PrbOf{\max_{1\leq p \leq N} \norm{\amba_t^p - \mfamba_t^p}_\infty > N^{-\cutparameter}
@@ -901,7 +901,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\end{equation}
 	Then we have that
 	\begin{equation*}
-		\empmeas_t^{(\amba),N} \xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
+		\empmeas_t^{\amba,(N)}\xrightarrow{\text{in law in $\PrbMeas(\R^d)$}} \adens_t
 	\end{equation*}
 \end{lemma}
 
@@ -910,23 +910,23 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	\begin{equation*}
 		\sup_{0\leq t\leq T}
 		W_1 \big(
-		\Psi_t^{N, (k)}, \bigotimes_{p=1}^{k} \adens_t
+		\Psi_t^{(N,k)}, \bigotimes_{p=1}^{k} \adens_t
 		\big),
 		\quad
 		\sup_{0\leq t\leq T}
 		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t
 		\big),
 		\xrightarrow {N \rightarrow \infty} 0
 	\end{equation*}
 	
-	Here the proof will be shown for $\Psi_t^{N}$, the case is analogous for $\Psi_t^{N, (k)}$.
+	Here the proof will be shown for $\Psi_t^{(N)}$, the case is analogous for $\Psi_t^{(N,k)}$.
 	
 	\begin{align*}
 		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t
 		\big) &=
-		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\inf_{\gamma \in \Gamma (\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t)}\
 		\int_{\R^{dN}\times \R^{dN}} \frac{1}{dN}\
 		\sum_{i=1}^d\
 		\sum_{p=1}^N\
@@ -934,7 +934,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 		d\gamma(x,y)
 		\\
 		&\leq
-		\inf_{\gamma \in \Gamma (\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t)}\
+		\inf_{\gamma \in \Gamma (\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t)}\
 		\int_{\R^{dN}\times \R^{dN}}
 		\norm{x-y}_\infty\
 		d\gamma(x,y)
@@ -944,7 +944,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	Since $\mfamba_t^{(N)} = (\mfamba_t^p)_{p=1}^N$ are \iid each with law $\adens_t$, we can take the specific coupling 
 	
 	\begin{equation*}
-		\overline{\gamma} := \Psi_t^{N} \otimes (\bigotimes_{p=1}^{N}\adens_t) = \law(\amba_t^{(N)}) \otimes \law(\mfamba_t^{(N)})
+		\overline{\gamma} := \Psi_t^{(N)} \otimes (\bigotimes_{p=1}^{N}\adens_t) = \law(\amba_t^{(N)}) \otimes \law(\mfamba_t^{(N)})
 	\end{equation*}
 	
 	and obtain
@@ -1190,7 +1190,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	
 	\begin{equation*}
 		W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t
 		\big) 
 		\leq
 		\const_{\attraction, \lambda}
@@ -1208,7 +1208,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 	
 	\begin{equation*}
 		\sup_{t\in[0,T]} W_1 \big(
-		\Psi_t^{N}, \bigotimes_{p=1}^{N}\adens_t
+		\Psi_t^{(N)}, \bigotimes_{p=1}^{N}\adens_t
 		\big) 
 		\leq
 		\const_{\attraction, \lambda}
@@ -1252,7 +1252,7 @@ The cAMP molecules are created at a rate $\lambda$, and each molecule created at
 This, together with the form of the effective equations \ref{ch3:EFFECTIVE-EQS}, where the $\adens_t$ should follow the cAMP by the convolution, seems to suggest that
 
 \begin{equation*}
-	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{(\camp),N} 
+	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{\camp,(N)} 
 	\xrightarrow{N\longrightarrow +\infty} 
 		\cdens(t,\cdot) :=
 		 \int_0^t \lambda \cdens_t^\tau 	d \tau
