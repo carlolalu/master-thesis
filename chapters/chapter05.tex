@@ -2,63 +2,68 @@ The following chapter focuses on showing, in some sense, that the quantity
 
 \begin{equation}
 	\Norm{
-		\drift^N(t, \mfsol_t^N)
+		\drift(t, \mfsol_t)
 		-
-		\mfdrift^N(t, \mfsol_t^N)
+		\mfdrift(t, \mfsol_t)
+	}_\infty
+	=
+	\Norm{
+		\drift^{(N)}(t, \mfsol_t^{(N)})
+		-
+		\mfdrift^{(N)}(t, \mfsol_t^{(N)})
 	}_\infty
 \end{equation}
 
 is very unlikely to be big as $N$ (the number of amoebas) grows, where the attraction taken in consideration is slightly more general than the one considered till now (has an added Coulomb-type singularity).
-More formally we would like to prove that, chosen some $\xi>0$ (with some extra condition)
+More formally we would like to prove that, chosen some $t\leq T$ and  some $0<\xi < \frac{1}{2}$ then
 
 \begin{equation}
 	\PrbOf{
 		\Norm{
-			\drift^N(t, \mfsol_t^N)
+			\drift^{(N)}(t, \mfsol_t^{(N)})
 			-
-			\mfdrift^N(t, \mfsol_t^N)
+			\mfdrift^{(N)}(t, \mfsol_t^{(N)})
 	}_\infty
 	\geq
 	N^{-\xi}
 	}
 	\leq
-	\const_n\
-	(t^{4n} \: \vee \: 1)\
+	\Fup_n(T)\
 	N^{-\const_\xi n + 1}
 \end{equation}
 
-for all $n \in \N$, where $\const_n$ is a constant dependent on $n$ and independent from $\xi, N$, and $\const_\xi$ is a constant dependent only on $\xi$.
+for all $n \in \N$, where $\const_\xi$ is a constant dependent only on $\xi$ and $\Fup_n$ is an increasing continuous function dependent on $n$ and independent from $N$.
 To prove it the idea is to notice that for the $k$-th particle
 
 \begin{align*}
 	N^{-\xi}\
 	&\leq
 	\Norm{
-		\drift_k^N(t, \mfsol_t^N)
+		\drift_k(t, \mfsol_t)
 		-
-		\mfdrift_k^N(t, \mfsol_t^N)
+		\mfdrift_k(t, \mfsol_t)
 	}_\infty
 	\\
 	&=
 	\Norm{
-		\drift_k^N(t, \mfsol_t^N)
+		\drift_k(t, \mfsol_t)
 		-
-		\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+		\ECond{\drift_k(t, \mfsol_t)}{ \mfamba_t}
 	}_\infty
 	\\
 	&\leq
 	\Norm{
-		\drift_k^N(t, \mfsol_t^N)
+		\drift_k(t, \mfsol_t)
 		-
-		\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+		\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 	}_\infty +
 	\\
 	&\qquad\quad
 	+
 	\Norm{
-		\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+		\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 		-
-		\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+		\ECond{\drift_k(t, \mfsol_t)}{ \mfamba_t}
 	}_\infty
 \end{align*}
 
@@ -69,9 +74,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 		&
 		\PrbOf{
 			\Norm{
-				\drift^N(t, \mfsol_t^N)
+				\drift(t, \mfsol_t)
 				-
-				\mfdrift^N(t, \mfsol_t^N)
+				\mfdrift(t, \mfsol_t)
 			}_\infty
 			\geq
 			N^{-\xi}
@@ -80,9 +85,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\drift_k^N(t, \mfsol_t^N)
+				\drift_k(t, \mfsol_t)
 				-
-				\mfdrift_k^N(t, \mfsol_t^N)
+				\mfdrift_k(t, \mfsol_t)
 			}_\infty
 			\geq
 			N^{-\xi}\
@@ -93,9 +98,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 		\Prb \Bigg(
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\drift_k^N(t, \mfsol_t^N)
+				\drift_k(t, \mfsol_t)
 				-
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 			}_\infty
 			+
 			\\
@@ -103,9 +108,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 			+
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 				-
-				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+				\ECond{\drift_k(t, \mfsol_t)}{ \mfamba_t}
 			}_\infty
 			\geq
 			N^{-\xi}\
@@ -117,9 +122,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 			\PrbOf{
 				\sup_{1\leq k \leq N} 
 				\Norm{
-					\drift_k^N(t, \mfsol_t^N)
+					\drift_k(t, \mfsol_t)
 					-
-					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+					\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 				}_\infty
 				\geq
 				N^{-\xi}
@@ -131,9 +136,9 @@ and therefore, using this knowledge together with \ref{app:pA-pB-less-than}, we 
 			\PrbOf{
 				\sup_{1\leq k \leq N} 
 				\Norm{
-					\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+					\ECondTimes{\drift_k(t, \mfsol_t)}{ \mfamba_t, \:}
 					-
-					\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+					\ECond{\drift_k(t, \mfsol_t)}{ \mfamba_t}
 				}_\infty
 				\geq
 				N^{-\xi}
@@ -175,10 +180,10 @@ Only for this chapter we will use a more general case for the attraction: we wil
 	\begin{equation}
 		\left\{
 		\begin{aligned}
-			{}^{\genAttraction}\drift_k(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \genAttraction(x^k - x^{p,g})
+			{}^{\genAttraction}\drift_k^{(N)}(t,x, (\hmactive^k_t)_k) &:= \drift_p(t,x) := \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \genAttraction(x^k - x^{p,g})
 			&& 1\leq k \leq N
 			\\
-			{}^{\genAttraction}\drift_{p,g}(t,x) &:= 0
+			{}^{\genAttraction}\drift_{p,g}^{(N)}(t,x) &:= 0
 			&& \text{if } \exists (p,g)
 		\end{aligned}
 		\right.
@@ -187,23 +192,26 @@ Only for this chapter we will use a more general case for the attraction: we wil
 		\begin{equation}
 		\left\{
 		\begin{aligned}
-			{}^{\genAttraction}\mfdrift_k(t,x, (\hmactive^k_t)_k) &:= \mfdrift_p(t,x) := 
+			{}^{\genAttraction}\mfdrift_k^{(N)}(t,x, (\hmactive^k_t)_k) &:= \mfdrift_p(t,x) := 
 			\lambda
 			\int
 				(\genAttraction \star \cdens_t^\tau) (x)
 			d{\:\tau}
 			&& 1\leq k \leq N
 			\\
-			{}^{\genAttraction}\mfdrift_{p,g}(t,x) &:= 0
+			{}^{\genAttraction}\mfdrift_{p,g}^{(N)}(t,x) &:= 0
 			&& \text{if } \exists (p,g)
 		\end{aligned}
 		\right.
 	\end{equation}
 \end{definition}
 
-For the sake of shortness we will simply write $\drift,\mfdrift$ for ${}^{\genAttraction}\drift, {}^{\genAttraction}\mfdrift$ all along this subsection, where such generalized attraction is used.
+Therefore with the symbols $\drift,\mfdrift$, in this chapter, we will mean ${}^{\genAttraction}\drift, {}^{\genAttraction}\mfdrift$ respectively.
 
-[[here tikz figure]]
+
+\begin{figure}[h]
+\caption{[[here tikz figure]]}
+\end{figure}
 
 \begin{remark}
 	The usual attraction can be considered as a generalized attraction of parameter $\alpha = 0$.
@@ -384,22 +392,22 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 
 \begin{proposition}[The first part of the law of large numbers]\label{ch5:prop:LLN1}
 	
-	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^N$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
+	Let $\hmactive_t$ be the spawning Poisson process of \ref{ch2:model-reformulation}. Let $\mfsol^{(N)}$ be a \rv that under $\PrbCondTimes{\cdot}{}$ takes the form
 	\begin{equation}
-		\mfsol^N = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
+		\mfsol^{(N)} = (\mfamba^1, \ldots, \mfamba^N, \mfcamp^1, \ldots, \mfcamp^{\hmactive_t}) \in (\R^d)^{\NumParticles_t} =  (\R^d)^{N + \hmactive_t} 
 	\end{equation}
-	Let $\drift^{N,k}(t, \cdot)$ be the \emph{generalized} drift of parameter $\alpha$ defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $\drift^{(N)}(t, \cdot)$ be the \emph{generalized} drift of parameter $\alpha$ defined in \ref{ch5:def:generalized-attr&drift}.
 	Assume that:
 	\begin{enumerate}
-		\item All the coordinates of $\mfsol^N$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
-		\item All the coordinates $\mfamba^p$ of $\mfsol^N$ are \iid under the p. measure $\PrbCondTimes{}{}$.
-		\item The densities of all coordinates of $\mfsol^N$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
+		\item All the coordinates of $\mfsol^{(N)}$ are $\indep$ under the p. measure $\PrbCondTimes{}{}$.
+		\item All the coordinates $\mfamba^p$ of $\mfsol^{(N)}$ are \iid under the p. measure $\PrbCondTimes{}{}$.
+		\item The densities of all coordinates of $\mfsol^{(N)}$ are uniformly bounded in $\Lpspace^{\infty}$, \ie
 		\begin{equation*}
 			\exists \const_\dens>0.\
 			\forall p,m.\
 			\Norm{\cdens^m}_\infty, \Norm{\adens^p}_\infty < \const_\dens
 		\end{equation*}
-		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{}{}$ respectively.
+		where $\adens^p$ and $\cdens^m$ represent the laws of $\mfamba^p$ and $\mfcamp^m$ under $\PrbCondTimes{\cdot}{}$ respectively.
 	\end{enumerate}
 	Consider $\xi >0$ be such that $0<\xi + \alpha < \frac{1}{2}$ and define the sets
 	\begin{equation*}
@@ -407,9 +415,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			S^{N,\xi}_\amba
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\norm{
-				\drift_k^N(t, \mfsol^N) 
+				\drift_k^{(N)}(t, \mfsol^{(N)}) 
 				- \ECondTimes{
-					\drift^N_k(t,\mfsol^N)
+					\drift^{(N)}_k(t,\mfsol^{(N)})
 				}{\mfamba^k,}
 			}_\infty \geq N^{-\xi} 
 			\right\}
@@ -417,9 +425,9 @@ It uses a notation akin to the relabelled model defined in \ref{ch2:model-reform
 			S^{N, \xi}
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\norm{
-				\drift_k^N(t, \mfsol^N) 
+				\drift_k^{(N)}(t, \mfsol^{(N)}) 
 				- \ECondTimes{
-					\drift^N_k(t,\mfsol^N)
+					\drift^{(N)}_k(t,\mfsol^{(N)})
 				}{}
 			}_\infty \geq N^{-\xi} 
 			\right\}
@@ -464,18 +472,18 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		& =\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\norm{
-				\drift_k^N(t, \mfsol^N) 
+				\drift_k^{(N)}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_k(t,\mfsol^N)
+					\drift^{(N)}_k(t,\mfsol^{(N)})
 				}
 			}_\infty \geq N^{-\xi} 
 		}
 		\\
 		& \leq \sum_{k=1}^{N} \sum_{i=1}^{d}
 		\PrbOf{\norm{
-				\drift^N_{k;i}(t, \mfsol^N) 
+				\drift^{(N)}_{k;i}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_{k;i}(t,\mfsol^N)
+					\drift^{(N)}_{k;i}(t,\mfsol^{(N)})
 				}
 			} \geq N^{-\xi} 
 		}
@@ -486,9 +494,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\:
 		\underbrace{
 			\PrbOf{\norm{
-					\drift^N_{k;i}(t, \mfsol^N) 
+					\drift^{(N)}_{k;i}(t, \mfsol^{(N)}) 
 					- \ETFoot{\ast}{
-						\drift^N_{k;i}(t,\mfsol^N)
+						\drift^{(N)}_{k;i}(t,\mfsol^{(N)})
 					}
 				} \geq N^{-\xi} 
 			}
@@ -502,18 +510,18 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		&=
 		3N \cdot
 		\PrbOf{\norm{
-				\drift^N_{1;1}(t, \mfsol^N) 
+				\drift^{(N)}_{1;1}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_{1;1}(t,\mfsol^N)
+					\drift^{(N)}_{1;1}(t,\mfsol^{(N)})
 				}
 			} \geq N^{-\xi} 
 		}
 		\\
 		&\leq \frac{3N}{ (N^{-\xi})^{2n} } \E{
 			\norm{
-				\drift^N_{1;1}(t, \mfsol^N) 
+				\drift^{(N)}_{1;1}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_{1;1}(t,\mfsol^N)
+					\drift^{(N)}_{1;1}(t,\mfsol^{(N)})
 				}
 			}^{2n}
 		}
@@ -907,9 +915,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		& =\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\norm{
-				\drift_k^N(t, \mfsol^N) 
+				\drift_k^{(N)}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_k(t,\mfsol^N)
+					\drift^{(N)}_k(t,\mfsol^{(N)})
 				}
 			}_\infty \geq N^{-\xi} 
 		}
@@ -919,9 +927,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\max_{k,i}
 		\:
 		\PrbOf{\norm{
-				\drift^N_{k;i}(t, \mfsol^N) 
+				\drift^{(N)}_{k;i}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_{k;i}(t,\mfsol^N)
+					\drift^{(N)}_{k;i}(t,\mfsol^{(N)})
 				}
 			} \geq N^{-\xi} 
 		}
@@ -1268,9 +1276,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		& =\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\norm{
-				\drift_k^N(t, \mfsol^N) 
+				\drift_k^{(N)}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_k(t,\mfsol^N)
+					\drift^{(N)}_k(t,\mfsol^{(N)})
 				}
 			}_\infty \geq N^{-\xi} 
 		}
@@ -1280,9 +1288,9 @@ For the sake of shortness, together with the convention at \ref{app:notation}, w
 		\max_{k,i}
 		\:
 		\PrbOf{\norm{
-				\drift^N_{k;i}(t, \mfsol^N) 
+				\drift^{(N)}_{k;i}(t, \mfsol^{(N)}) 
 				- \ETFoot{\ast}{
-					\drift^N_{k;i}(t,\mfsol^N)
+					\drift^{(N)}_{k;i}(t,\mfsol^{(N)})
 				}
 			} \geq N^{-\xi} 
 		}
@@ -1385,7 +1393,7 @@ To prove the second part of the law of large numbers it will be necessary to pro
 
 \begin{proposition}[The second part of the law of large numbers]\label{ch5:prop:LLN2}
 	
-	Let $\mfsol_t^N$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.	
+	Let $\mfsol_t^{(N)}$ be the solution of the mean field system \ref{ch3:MF-particles} with $N$ amoebas with the attraction $\attraction$ substituted with $\genAttraction$.	
 	Let $t \leq T$ and choose $0  < \xi \leq \frac{1}{2}$ and define the sets
 	
 	\begin{equation*}
@@ -1394,10 +1402,10 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\Norm{
 				\ECondTimes{
-					\drift^N_k(t,\mfsol_t^N)
+					\drift^{(N)}_k(t,\mfsol_t^{(N)})
 				}{\mfamba^k,}
 				-
-				\ECond{\drift^N_k(t,\mfsol_t^N)}{\mfamba^k}
+				\ECond{\drift^{(N)}_k(t,\mfsol_t^{(N)})}{\mfamba^k}
 			}_\infty 
 			\geq N^{-\xi} 
 			\right\}
@@ -1406,10 +1414,10 @@ To prove the second part of the law of large numbers it will be necessary to pro
 			&:= \left\{ \sup_{1\leq k \leq N} 
 			\Norm{
 				\ECondTimes{
-					\drift^N_k(t,\mfsol_t^N)
+					\drift^{(N)}_k(t,\mfsol_t^{(N)})
 				}{}
 				-
-				\E{\drift^N_k(t,\mfsol_t^N)}
+				\E{\drift^{(N)}_k(t,\mfsol_t^{(N)})}
 			}_\infty 
 			\geq N^{-\xi} 
 			\right\}
@@ -1445,9 +1453,9 @@ Then we can write, as for the previous proof:
 			\Norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_k(t,\mfsol^N)}
+				{\drift^{(N)}_k(t,\mfsol^{(N)})}
 				-
-				\EFoot{\ast}{\drift^N_k(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^{(N)}_k(t,\mfsol^{(N)})}
 			}_\infty 
 			\geq 
 			N^{-\xi} 
@@ -1461,9 +1469,9 @@ Then we can write, as for the previous proof:
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{k;i}(t,\mfsol^N)}
+				{\drift^{(N)}_{k;i}(t,\mfsol^{(N)})}
 				-
-				\EFoot{\ast}{\drift^N_{k;i}(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^{(N)}_{k;i}(t,\mfsol^{(N)})}
 			}
 			\geq 
 			N^{-\xi} 
@@ -1482,9 +1490,9 @@ Then we can write, as for the previous proof:
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{1;1}(t,\mfsol_t^N)}
+				{\drift^{(N)}_{1;1}(t,\mfsol_t^{(N)})}
 				-
-				\EFoot{\ast}{\drift^N_{1;1}(t,\mfsol_t^N)}
+				\EFoot{\ast}{\drift^{(N)}_{1;1}(t,\mfsol_t^{(N)})}
 			}
 			\geq 
 			N^{-\xi} 
@@ -1497,9 +1505,9 @@ Then we can write, as for the previous proof:
 		\E{\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{1;1}(t,\mfsol_t^N)}
+				{\drift^{(N)}_{1;1}(t,\mfsol_t^{(N)})}
 				-
-				\EFoot{\ast}{\drift^N_{1;1}(t,\mfsol_t^N)}
+				\EFoot{\ast}{\drift^{(N)}_{1;1}(t,\mfsol_t^{(N)})}
 			}^{2n} }
 		\\
 		&=
@@ -1756,9 +1764,9 @@ Then we can write, as for the previous proof:
 			\norm{
 				\ETFoot
 				{\ast}
-				{\drift^N_{k;i}(t,\mfsol^N)}
+				{\drift^{(N)}_{k;i}(t,\mfsol^{(N)})}
 				-
-				\EFoot{\ast}{\drift^N_{k;i}(t,\mfsol^N)}
+				\EFoot{\ast}{\drift^{(N)}_{k;i}(t,\mfsol^{(N)})}
 			}
 			\geq 
 			N^{-\xi} 
@@ -3327,7 +3335,7 @@ Then let us observe closely the object in question.
 
 \begin{proposition}\label{ch5:LLN}[Law of large numbers]
 	
-	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^N$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
+	Let $\drift(t, \cdot)$ be the generalized drift of parameter $0 \leq \alpha < \frac{1}{2}$ and constant $\const_\curlywedge > 0$ and let $\mfsol_t^{(N)}$ be the solution to the mean-field system with $N$ amoebas, as defined in \ref{ch5:def:generalized-attr&drift}.
 	Let $t\leq T$ and let $\xi >0$ be such that $0 < \alpha + \xi <\frac{1}{2}$.
 	Choose a value $0 < \const_\xi \leq 1 - 2(\alpha + \xi)$.
 	
@@ -3335,9 +3343,9 @@ Then let us observe closely the object in question.
 	\begin{equation}
 		\PrbOf{
 			\Norm{
-				\drift^N(t, \mfsol_t^N)
+				\drift^{(N)}(t, \mfsol_t^{(N)})
 				-
-				\mfdrift^N(t, \mfsol_t^N)
+				\mfdrift^{(N)}(t, \mfsol_t^{(N)})
 			}_\infty
 			\geq
 			2N^{-\xi}
@@ -3360,20 +3368,22 @@ Then let us observe closely the object in question.
 		&
 		\PrbOf{
 			\Norm{
-				\drift^N(t, \mfsol_t^N)
+				\drift^{(N)}(t, \mfsol_t^{(N)})
 				-
-				\mfdrift^N(t, \mfsol_t^N)
+				\mfdrift^{(N)}(t, \mfsol_t^{(N)})
 			}_\infty
 			\geq
 			2N^{-\xi}
-		}
+		}=
+		\\
+		&
 		= 
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\drift_k^N(t, \mfsol_t^N)
+				\drift_k^{(N)}(t, \mfsol_t^{(N)})
 				-
-				\mfdrift_k^N(t, \mfsol_t^N)
+				\mfdrift_k^{(N)}(t, \mfsol_t^{(N)})
 			}_\infty
 			\geq
 			2N^{-\xi}
@@ -3384,9 +3394,9 @@ Then let us observe closely the object in question.
 		\Prb \Bigg(
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\drift_k^N(t, \mfsol_t^N)
+				\drift_k^{(N)}(t, \mfsol_t^{(N)})
 				-
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t, \:}
 			}_\infty
 		 +
 		\\
@@ -3394,9 +3404,9 @@ Then let us observe closely the object in question.
 		+
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t, \:}
 				-
-				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+				\ECond{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t}
 			}_\infty
 			\geq
 			N^{-\xi} + N^{-\xi}
@@ -3406,9 +3416,9 @@ Then let us observe closely the object in question.
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\drift_k^N(t, \mfsol_t^N)
+				\drift_k^{(N)}(t, \mfsol_t^{(N)})
 				-
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t, \:}
 			}_\infty
 			\geq
 			N^{-\xi}
@@ -3419,9 +3429,9 @@ Then let us observe closely the object in question.
 		\PrbOf{
 			\sup_{1\leq k \leq N} 
 			\Norm{
-				\ECondTimes{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t, \:}
+				\ECondTimes{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t, \:}
 				-
-				\ECond{\drift_k^N(t, \mfsol_t^N)}{ \mfamba_t}
+				\ECond{\drift_k^{(N)}(t, \mfsol_t^{(N)})}{ \mfamba_t}
 			}_\infty
 			\geq
 			N^{-\xi}
@@ -3447,7 +3457,8 @@ Then let us observe closely the object in question.
 	Then the \ref{ch5:LLN1:bound} gives us
 	
 	\begin{equation}\label{ch5:lln1-applied-to-mean-field-parts}
-		 \forall N> \overline{N}.	\PrbOf{S^{N,\xi}_\ast}{}
+		 \forall N> \overline{N}.	\qquad
+		 \PrbOf{S^{N,\xi}_\ast}{}
 		\leq 
 		\const_n\
 		\Fup_n(\Fup(T))\
