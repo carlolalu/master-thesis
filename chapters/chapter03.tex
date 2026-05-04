@@ -566,11 +566,11 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 			\partial_{x_i} \adens
 		\right] + \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= \left( \bigtriangleup \potential
+&= -\left( \bigtriangleup \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
-			+
+	-
 			 \left( 
 				\nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
@@ -578,7 +578,7 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 			\nabla \adens
 		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= \nabla \left[ \left( \nabla \potential
+&= -\nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -591,13 +591,13 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 If we would decide to express such equations with the analytical solution of $\cdens$ (\ref{ch3:eq:eff-eq-camp-analytical-sol}) this would become
 
 \begin{align*}
-= \nabla \left[ \left( \nabla \potential
+= -\nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
 			\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
-=  \lambda \nabla \left[ \left(
+=  -\lambda \nabla \left[ \left(
 			\int_0^t  \nabla \potential \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
@@ -643,7 +643,7 @@ where $\cdens_t^\tau$ is defined by the correspondent effective equations:
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+\partial_t \adens &= -\nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -672,7 +672,7 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
+\partial_t \adens &=  -\lambda \nabla \left[ \left( \nabla \int_0^t
 		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	 	d \tau
 			\right)
