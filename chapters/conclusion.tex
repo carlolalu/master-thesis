@@ -25,7 +25,7 @@ This happens because by integrating over $[0,t]$ in $\tau$ the expression $\cden
 This is even more evident if we substitute $\cdens_t^\tau$ with its analytical solution given by \ref{ch3:eq:eff-eq-camp-analytical-sol} and obtain \ref{ch7:PIDE}:
 
 \begin{equation*}
-	\partial_t \adens =  \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
+	\partial_t \adens =  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
 	\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	d \tau
 	\right)
@@ -36,13 +36,62 @@ This is even more evident if we substitute $\cdens_t^\tau$ with its analytical s
 
 Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
 
+\subsection{Comparison with the original paper of Ana Cañizares García}
+
+The original paper who inspired this master thesis (\cite{ana}) modelled the movement of amoebas as particles attracting each others with a Coulomb-like potential, to find the famous Keller-Segel equation,
+
+[[add here up quote to the original Keller-Segel]]
+
+in particular of the specific case in which the chemoattractant diffuses much faster than the organisms releasing it:
+
+[[add here up quote to this specific Keller-Segel, always following Ana]]
+
+\begin{equation}
+	\left\{
+	\begin{aligned}
+		\partial_t \adens &= - \chi \nabla (\adens \nabla \cdens) + \bigtriangleup \adens
+		\\
+		-\bigtriangleup \cdens &= \adens
+	\end{aligned}
+	\right.
+\end{equation}
+
+or, solving $\cdens_t$ analytically:
+
+\begin{equation}
+		\partial_t \adens = - \chi \nabla ( (\attraction_C \star \adens) \adens) + \bigtriangleup \adens
+\end{equation}
+
+where $\attraction_C:= \frac{x}{2\pi \abs{x}^2}$ is the previously mentioned Coulomb-like attraction.
+This thesis models some different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficient $\diffusion_\camp$ of the cAMP molecules is finite (\ie of comparable order of magnitude as $\diffusion_\amba$, the equivalent of the amoebas).
+What happens to the effective equations we have found, in case $\diffusion_\camp >> \diffusion_\amba$?
+Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
+
+\begin{equation*}
+	\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x) = \frac{1}{
+		\big( 2\pi d\sigma_\camp^2 s \big)^{\frac{d}{2}}
+	}
+	exp \left(
+	-\frac{x^2}{2 d\sigma_\camp^2 s}
+	\right)
+	\1_{s\geq 0} 
+	= 
+	\frac{d\: \Normal(0, d\sigma_\camp^2 s)}{d\:\lebsge} (x)
+	\1_{s\geq 0} 
+\end{equation*}
+
+then, in the limit case we do obtain
+
 [[correct from here on]]
 
-\subsection{Comparison with Keller-Segel in the case of Ana}
+\begin{equation*}
+		\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x)
+	\xrightarrow{\diffusion_\camp \rightarrow +\infty}
+		\frac{d\: \Normal(0, "+\infty")}{d\:\lebsge} (x)
+		\1_{s\geq 0} 
+\end{equation*}
 
-here send the diffusion coefficient of the cAMP to infinity
 
-change the potential into a more general one, or short range interaction?
 
 \section{Work still to be done on this model}
 

@@ -11,6 +11,10 @@ coefficient of the cAMP goes to infinity.
 
 ### less priority here under
 
+- correction of the norms: norm-1 should be without double stanghette, 
+and l-infinity-norm should have its own command: it does not happen 
+often.
+
 - read it twice, search for '[['
 
 - thesis title, institution name etc... 
