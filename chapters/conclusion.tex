@@ -36,17 +36,18 @@ This is even more evident if we substitute $\cdens_t^\tau$ with its analytical s
 
 Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
 
-\subsection{Comparison with the original paper of Ana Cañizares García}
+\subsection{Comparison with the original paper of García}
 
-The original paper who inspired this master thesis (\cite{ana}) modelled the movement of amoebas as particles attracting each others with a Coulomb-like potential, to find the famous Keller-Segel equation,
+The original paper who inspired this master thesis (\cite{ana}) modelled the movement of amoebas as particles attracting each others with a Coulomb-like potential (the cAMP molecules were not present in the microscopic IBM model), and found the famous Keller-Segel equation as an effective equation,
 
+[[add the concept of IBM model in the introduction]]
 [[add here up quote to the original Keller-Segel]]
 
-in particular of the specific case in which the chemoattractant diffuses much faster than the organisms releasing it:
+in particular for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it:
 
 [[add here up quote to this specific Keller-Segel, always following Ana]]
 
-\begin{equation}
+\begin{equation}\label{conc:ANA-macro-amoebas}
 	\left\{
 	\begin{aligned}
 		\partial_t \adens &= - \chi \nabla (\adens \nabla \cdens) + \bigtriangleup \adens
@@ -59,19 +60,20 @@ in particular of the specific case in which the chemoattractant diffuses much fa
 or, solving $\cdens_t$ analytically:
 
 \begin{equation}
-		\partial_t \adens = - \chi \nabla ( (\attraction_C \star \adens) \adens) + \bigtriangleup \adens
+		\partial_t \adens = - \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
-where $\attraction_C:= \frac{x}{2\pi \abs{x}^2}$ is the previously mentioned Coulomb-like attraction.
-This thesis models some different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficient $\diffusion_\camp$ of the cAMP molecules is finite (\ie of comparable order of magnitude as $\diffusion_\amba$, the equivalent of the amoebas).
-What happens to the effective equations we have found, in case $\diffusion_\camp >> \diffusion_\amba$?
+where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the previously mentioned Coulomb-like attraction and $\chi$ is a positive constant called \emph{chemosensitivity}.
+We modelled a slightly different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficients $\diffusion_\amba, \diffusion_\camp$ of the amoebas and of the cAMP molecules are both finite (\ie of comparable order of magnitude).
+We expect that it is possible to prove that the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} is valid also in case of a Coulomb-like potential, so let us ignore the difference regarding $\attraction$ for now.
+Then, to compare the two models, we want to ask what happens to \ref{ch7:PIDE} if we modulate the diffusions coefficient to be analogous to the ones treated in \cite{ana}, \ie when $\diffusion_\camp >> \diffusion_\amba:=\sqrt{\frac{2}{d}}$.
 Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
 
 \begin{equation*}
 	\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x) = \frac{1}{
 		\big( 2\pi d\sigma_\camp^2 s \big)^{\frac{d}{2}}
 	}
-	exp \left(
+	\exp \left(
 	-\frac{x^2}{2 d\sigma_\camp^2 s}
 	\right)
 	\1_{s\geq 0} 
@@ -80,35 +82,123 @@ Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
 	\1_{s\geq 0} 
 \end{equation*}
 
-then, in the limit case we do obtain
-
-[[correct from here on]]
+then in the limit case we do obtain
 
 \begin{equation*}
 		\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x)
 	\xrightarrow{\diffusion_\camp \rightarrow +\infty}
 		\frac{d\: \Normal(0, "+\infty")}{d\:\lebsge} (x)
 		\1_{s\geq 0} 
+		\equiv
+		0
 \end{equation*}
 
+and therefore, setting $\sigma_\amba := \sqrt{\frac{2}{d}}$, the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} becomes
+
+\begin{equation*}\label{conc:sigmaC-goes-infty}
+	\partial_t \adens =  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
+	\potential \star 0 \star \adens(\tau, \cdot) 
+	d \tau
+	\right)
+	\adens
+	\right]
+	+ \frac{d \frac{2}{d}}{2} \bigtriangleup \adens
+	=
+	\bigtriangleup \adens
+\end{equation*}
+
+which is a heat equation, which with the initial condition $\adens_0$ yields the explicit solution
+
+\begin{equation*}
+	\left(\heatkernel_t^1 \star \adens_0 \right) (x)
+	= 
+	\int 
+	\frac{1}{
+		\big( 2\pi)^{\frac{d}{2}}
+	}
+	\exp \left(
+	-\frac{y^2}{2 t}
+	\right)
+	\adens_0 (x-y)
+	dy
+\end{equation*}
+
+What is even more surprising is what happens in the other limit case, namely when $\sigma_\camp$ tends to $0^+$:
+
+\begin{equation*}
+	\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x)
+	\xrightarrow{\diffusion_\camp \rightarrow 0^+}
+	\frac{d\: \Normal(0, 0)}{d\:\lebsge} (x)
+	\1_{s\geq 0} 
+	=
+	\delta(x) \1_{s\geq 0}
+\end{equation*}
+
+In such case the macroscopic description of the amoebas' density becomes
+
+\begin{equation}\label{conc:sigmaC-goes-0}
+	\begin{aligned}
+		\partial_t \adens &=  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
+		\potential \star 
+		\delta(x) \1_{t-\tau\geq 0}
+		\star \adens(\tau, \cdot) 
+		d \tau
+		\right)
+		\adens
+		\right]
+		+
+		\bigtriangleup \adens
+		\\
+		&=
+		- \NumCampRelease\lambda \nabla \left[ \left( 
+		\attraction
+		\star 
+		\int_0^t
+		\adens(\tau, \cdot) 
+		d \tau
+		\right)
+		\adens
+		\right]
+		+
+		\bigtriangleup \adens
+	\end{aligned}
+\end{equation}
+
+By setting $\chi:=\NumCampRelease\lambda$ we then obtain
+
+\begin{equation*}\label{conc:sigmaC-goes-0}
+	\partial_t \adens =
+	- \chi \nabla \left[ \left( 
+	\attraction
+	\star 
+	\int_0^t
+	\adens(\tau, \cdot) 
+	d \tau
+	\right)
+	\adens
+	\right]
+	+
+	\bigtriangleup \adens
+\end{equation*}
+
+Now notice that the expression obtained is similar to the equation \ref{conc:ANA-macro-amoebas}: they differ in the convolution term, which is $(\cutoffSinAttraction \star \adens)$ in \ref{conc:ANA-macro-amoebas} and is $(\attraction \star \int_0^t \adens(\tau, \cdot) d\tau)$ in \ref{conc:sigmaC-goes-0}.
+Though we can see that even if we would have the same attraction $\attraction$, the partial integro-differential equation (PIDE) \ref{conc:sigmaC-goes-0} still would have a memory of the past (the integration on $[0,t]$) that the Keller-Segel equation does not possess.
+
+[[correct from here on. Besides, consider if to put such questions on the beginning of the conclusions]]
+
+\section{Open questions on the topic}
+
+\subsection{An interesting question: the more realistic mechanism of the chemical response}
+
+[[write all this section properly]]
 
 
-\section{Work still to be done on this model}
-
-explain that all this should be valid also in more higher dimension, if somebody would like to ask how a 42 dimensional behaves he should be covered (in case the model finds applications also for other 42 dimensional objects)
-
-\subsection{the PIDE and properties of its solutions}
-One might want to prove that the partial integro differential equation \ref{ch7:PIDE} has a solution exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
-
-Once this is done, one might ask if which properties do this
-
-\subsubsection{cAMP macroscopic description}
-
-\paragraph{Numerics and simulations}
 
 
 
-\section{A more realistic mechanism: the chemical response}
+
+
+
 
 explain that other expansions of the model you have seen do not seem particularly interesting (eg L being a random parameter). Instead it is interesting to make the model realistic, having molecules which do answer to each others. Molecules which are able to speak chemically.
 
@@ -117,3 +207,59 @@ Then change these waiting times to some min(waiting time i, hitting time)
 
 Explain that here the diffuculties is that your processes are then dependent on the system, and that you expect that the processes M t createdin this way to explode very fast towards infinity, or if you want that the frequency in time of birth times to get faster and faster.
 Explain that this should make everything more diffucult to calculate.
+
+\subsection{Technical "nice" conditions to assume or obtain for the pulsing wave models}
+
+	\paragraph{Using a Coulomb-like potential}
+	Again, as in the paper of Garcia (\cite{ana}), it would be interesting to use a Coulomb-like potential (analogous to the generalized attraction $\genAttraction$ used in the law of large numbers \ref{ch5:LLN}), and prove that the equation \ref{ch7:EFFECTIVE-EQUATIONS} still holds with $\attraction$ substituted with $\genAttraction$.
+	As seen in other works previously (\cite{ana}, \cite{peter-boers}), the problem that arises is that $\genAttraction$ is not globally Lipschitz anymore, spoiling the same property for the drift $\drift(t, x)$.
+	The solution is to show that $\drift(t, \cdot)$ is locally Lipschitz with a high probability (using essentially the same argument as the law of large numbers \ref{ch5:LLN}), and use such condition to bound the term $\drift(t, \sol_t) - \drift(t,\mfsol_t)$ which spawns in the proof of the final result \ref{ch7:final-result}.
+	We expect this to be a not too difficult proof to build.
+
+	\paragraph{Higher degree of convergence}
+	As in the paper of Garcia (\cite{ana}) it would be interesting to obtain a higher degree of convergence for the distance between the microscopic and the mesoscopic description, namely going from the condition \ref{ch7:final-result} (for the basic model more precisely stated in \ref{ch6:final-result}) to a result of this kind:
+	\begin{proposition}\label{conc:final-result-with-higher-convergence}
+		Let $\sol_t^{(N)},\mfsol_t^{(N)}$ the solutions to the systems \ref{ch7:model:pulsing-waves} and \ref{ch7:MF-PARTICLES} respectively.
+		Let $0\leq t \leq T$.
+		Then, for each $\gamma>0$ and there is a positive, increasing and continuous function $\Fup_\gamma$ independent of $N$ such that
+		\begin{equation}
+			\PrbOf{
+				\sup_{0 \leq t \leq T}
+				\normp{\infty}{
+					\sol_t^{(N)} - \mfsol_t^{(N)}
+				} 
+				\geq
+				N^{-\cutparameter}
+			}
+			\leq\
+			\Fup_{\gamma}(T)\
+			N^{-\gamma}
+		\end{equation}
+	\end{proposition}
+	Contrary to the usage of a Coulomb-like attraction, we expect this to be a tougher goal to pursue.	
+	
+\subsection{Numerics and simulations}
+It could be an exciting task to search numerical solutions both for the PIDE and for the stochastic system \ref{ch7:model:pulsing-waves}, or to create simulations for the latter one.
+Of course, we expect this not be easy because the PIDEs are generally considered very wild beasts, and because the system \ref{ch7:EFFECTIVE-EQUATIONS}, as underlined in chapter \ref{ch2}, is too stochastic to be precisely an SDE, therefore one could not directly apply the Euler-Maruyama method to it.
+Still, it is not excluded that the author will one day set off on one of such adventures (keep an eye on this \href{https://github.com/carlolalu}{Github profile}).
+
+\subsection{More technical and (probably) less interesting questions}
+
+\paragraph{Higher dimensions}
+We expect that if somebody would like to ask what happens with the Dictyostelium Discoideum amoebas moving in a $42$-dimensional space, the macroscopic description proved in this master thesis should still be valid, since along this work the dimension was a finite dimensional parameter $d$. 
+We also expect this to be a futile question, unless somebody finds a $42$-dimensional natural phenomenon which can be modelled exactly in the same way.
+
+\paragraph{The solution(s) to the PIDE and its properties}
+As suggested in chapter \ref{ch3:prove-solutions?}, one might want to prove that the partial integro-differential equation \ref{ch7:PIDE} has a solution (with the required conditions) exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
+We expect this solution to exists, thus we regard this more as a technical verification rather than a quest bringing new insights.
+One might also inquire about the properties of such $\adens(t, x)$, which would probably be a more interesting adventure, but since the object considered is a PIDE, we expect this not to be an easy task.
+
+\paragraph{The macroscopic description of the cAMP molecules}
+As suggested in \ref{ch3:macro-cAMP?}, one might inquire about proving formally that
+\begin{equation*}
+	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{\camp,(N)} 
+	\xrightarrow[\text{in law}]{N\longrightarrow +\infty} 
+	\cdens(t,\cdot) :=
+	\int_0^t \lambda \cdens_t^\tau 	d \tau
+\end{equation*}
+where the measure considered are treated as \rvs in the space of Borel probability measures with finite moments $\BorelPrbMeas_1$.
