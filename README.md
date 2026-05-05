@@ -2,26 +2,21 @@
 
 ## very high priority
 
-- write a good conclusion
+- notation:
+	+ infinty norm into l-infinity norm if necessary (double stanghette e pedice)
+	+ declare what you use the first time you use it (symbols etc..)
 
-- in order to write the conclusions, see what happens when the diffusion 
-coefficient of the cAMP goes to infinity.
+- write a good conclusion
 
 - write a good introduction
 
-### less priority here under
-
-- correction of the norms: norm-1 should be without double stanghette, 
-and l-infinity-norm should have its own command: it does not happen 
-often.
-
-- read it twice, search for '[['
-
-- thesis title, institution name etc... 
-
-- explain aevery symbol the first time it appears
+- search for the '[['
 
 - drawings?
+
+- watch the names of the chapters and of the thesis, and stuff of the kind
+
+### less priority here under
 
 - take care of the space of solutions in the appendix and speak very 
 very hintingly about stuff, saying "we might have to prove that the 
