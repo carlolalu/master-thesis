@@ -213,41 +213,33 @@ Though we can see that even if we would have the same attraction $\attraction$, 
 
 \section{Open questions on the topic}
 
+\subsection{The most enticing question: the realistic mechanism of chemical response}
 
-[[correct from here on. Besides, consider if to put such questions on the beginning of the conclusions]]
+The portrait depicted by the pulsing wave models is that of amoebas which are moving towards the chemotactic agent, where the latter one is released in \emph{independent} bursts by the population.
+We mean that in our image \ref{ch7:model:pulsing-waves}, the time at which a burst happen ($\btime_m$) is not dependent on the contact with the chemotactic agent ($\camp_t$), or in other words the amoebas are not communicating with each others, but are simply shouting at random times and are following the noise they hear.
+This is just half of what happens in nature, where the organisms involved are not only aiming at the direction of the chemical cry, but are also actively answering to it, \ie they \emph{react} to a pulse of cAMP with another pulse, namely are chemically shouting back to the call.
+The really interesting challenge would therefore be to build a mathematical model of this phenomenon and search for its effective description.
 
-\subsection{An interesting question: the more realistic mechanism of the chemical response}
-
-[[write all this section properly]]
-
-
-
-
-
-
-
-
-
-explain that other expansions of the model you have seen do not seem particularly interesting (eg L being a random parameter). Instead it is interesting to make the model realistic, having molecules which do answer to each others. Molecules which are able to speak chemically.
-
-Build the Poisson process with the waiting times.
-Then change these waiting times to some min(waiting time i, hitting time)
-
-Explain that here the diffuculties is that your processes are then dependent on the system, and that you expect that the processes M t createdin this way to explode very fast towards infinity, or if you want that the frequency in time of birth times to get faster and faster.
-Explain that this should make everything more diffucult to calculate.
+\paragraph{Some ideas on an hypothetical "answering pulses" model}
+A mathematical depiction of such an idea would be particularly difficult because the processes $(\hmactive_t^p)_p$ describing the release of cAMP molecules would now be dependent from $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$.
+This fact would hinder the usage of many mathematical tactics which were adopted along this work to calculate the effective equation candidate and to prove that such smart guess was correct.
+One would probably like to let such processes be Poisson distributed in case of no contact between the organisms and the chemotactic agent, but also to jump at the moment in which a particle of substance $\camp_t^m$ travels near enough one of the amoebas.
+One could then define a sequence of stopping times $(S_j)_j$ describing (in chronological order) all the impacts between a cAMP molecule and an amoeba.
+We expect that this would let us say that the system of answering amoebas so described, between two successive impacts, behaves exactly as the pulsing wave model \ref{ch7:model:pulsing-waves} aforethought.
+We also expect the impacts' frequency to grow with a high probability, the more the time flows, namely we expect $f{j} := S_j - S_{j-1}$ to be with a high probability a strictly decreasing function.
+Of course all these thoughts are no conclusive lucubrations, are based on pure intuition and are not derived from any rigorous model.
 
 
+\subsection{"Nice" technicalities to have for the pulsing wave model}
 
-\subsection{Technical "nice" conditions to assume or obtain for the pulsing wave models}
-
-	\paragraph{Using a Coulomb-like potential}
-	Again, as in the paper of Garcia (\cite{ana}), it would be interesting to use a Coulomb-like potential (analogous to the generalized attraction $\genAttraction$ used in the law of large numbers \ref{ch5:LLN}), and prove that the equation \ref{ch7:EFFECTIVE-EQUATIONS} still holds with $\attraction$ substituted with $\genAttraction$.
-	As seen in other works previously (\cite{ana}, \cite{peter-boers}), the problem that arises is that $\genAttraction$ is not globally Lipschitz anymore, spoiling the same property for the drift $\drift(t, x)$.
+	\paragraph{Assume a Coulomb-like potential}
+	As in the original PhD thesis \cite{ana}, it would be interesting to use a Coulomb-like potential (the analogous to the generalized attraction $\genAttraction$ used in the law of large numbers \ref{ch5:LLN}, but without cutoff), and prove that the equation \ref{ch7:EFFECTIVE-EQUATIONS} still holds with $\attraction$ substituted with $\genAttraction$.
+	As seen in other works previously (\cite{ana}, \cite{peter-boers}), the problem that arises is that $\genAttraction$ is not globally Lipschitz anymore, spoiling this property also for the drift $\drift(t, x)$.
 	The solution is to show that $\drift(t, \cdot)$ is locally Lipschitz with a high probability (using essentially the same argument as the law of large numbers \ref{ch5:LLN}), and use such condition to bound the term $\drift(t, \sol_t) - \drift(t,\mfsol_t)$ which spawns in the proof of the final result \ref{ch7:final-result}.
 	We expect this to be a not too difficult proof to build.
 
-	\paragraph{Higher degree of convergence}
-	As in the paper of Garcia (\cite{ana}) it would be interesting to obtain a higher degree of convergence for the distance between the microscopic and the mesoscopic description, namely going from the condition \ref{ch7:final-result} (for the basic model more precisely stated in \ref{ch6:final-result}) to a result of this kind:
+	\paragraph{Prove a higher degree of convergence}
+	Again, as in \cite{ana}, it would be interesting to obtain a higher degree of convergence for the distance between the microscopic and the mesoscopic description, namely going from the condition \ref{ch7:final-result} (for the basic model more precisely stated in \ref{ch6:final-result}) to a result of this kind:
 	\begin{proposition}\label{conc:final-result-with-higher-convergence}
 		Let $\sol_t^{(N)},\mfsol_t^{(N)}$ the solutions to the systems \ref{ch7:model:pulsing-waves} and \ref{ch7:MF-PARTICLES} respectively.
 		Let $0\leq t \leq T$.
@@ -266,22 +258,22 @@ Explain that this should make everything more diffucult to calculate.
 			N^{-\gamma}
 		\end{equation}
 	\end{proposition}
-	Contrary to the usage of a Coulomb-like attraction, we expect this to be a tougher goal to pursue.
+	Contrary to the usage of a Coulomb-like attraction, we expect this to be a tough goal to pursue.
 	
-\subsection{Numerics and simulations}
+\subsection{Numerics and simulations on the pulsing wave model}
 It could be an exciting task to search numerical solutions both for the PIDE and for the stochastic system \ref{ch7:model:pulsing-waves}, or to create simulations for the latter one.
-Of course, we expect this not be easy because the PIDEs are generally considered very wild beasts, and because the system \ref{ch7:EFFECTIVE-EQUATIONS}, as underlined in chapter \ref{ch2}, is too stochastic to be precisely an SDE, therefore one could not directly apply the Euler-Maruyama method to it.
+Of course, we expect this not be easy because the PIDEs are generally considered very wild beasts to deal with, and because the system \ref{ch7:EFFECTIVE-EQUATIONS}, as underlined in chapter \ref{ch2}, is too stochastic to be precisely an SDE, therefore one could not directly apply the Euler-Maruyama method to it, but would likely first need to sample the spawning Poisson processes $(\hmactive_t^p)_p$.
 Still, it is not excluded that the author will one day set off on one of such adventures (keep an eye on \href{https://github.com/carlolalu}{this Github profile}).
 
 \subsection{More technical and (probably) less interesting questions}
 
 \paragraph{Higher (finite) dimensions}
 If somebody would like to know what happens with the Dictyostelium Discoideum amoebas moving in a $42$-dimensional space, we expect the macroscopic description proved in this master thesis to still be valid, since along this work the dimension was a finite dimensional parameter $d$. 
-We also expect this to be a futile question, unless somebody finds a $42$-dimensional amoeba or some natural phenomenon which can be modeled exactly in the same way as \ref{ch7:model:pulsing-waves} but with $d=42$.
+We also expect this to be a very futile question, unless somebody will discover some $42$-dimensional amoeba or some natural phenomenon which can be modeled exactly in the same way as \ref{ch7:model:pulsing-waves} but with $d=42$.
 
 \paragraph{The solution(s) to the PIDE and its properties}
 As suggested in chapter \ref{ch3:prove-solutions?}, one might want to prove that the partial integro-differential equation \ref{ch7:PIDE} has a solution (with the required conditions) exploiting the Schauder fixed point theorem \ref{ch3:fixed-point-schauder-theorem}.
-We expect this solution to exists, thus we regard this more as a technical verification rather than a quest bringing new insights.
+We expect this solution to exist, thus we regard this more as a technical verification rather than an epiphany bringing brilliant new insights.
 One might also inquire about the properties of such $\adens(t, x)$, which would probably be a more interesting adventure, but since the object considered is a PIDE, we expect this not to be an easy task.
 
 \paragraph{The macroscopic description of the cAMP molecules}
