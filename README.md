@@ -2,8 +2,13 @@
 
 ## very high priority
 
+- correct the conclusion with the correct correction of what happens 
+according to what Peter told you. Write it only in words.
+
 - notation:
+
 	+ infinty norm into l-infinity norm if necessary (double stanghette e pedice)
+
 	+ declare what you use the first time you use it (symbols etc..)
 
 - write a good conclusion
