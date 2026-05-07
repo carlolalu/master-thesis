@@ -96,23 +96,15 @@ or, solving $\cdens_t$ analytically:
 where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the previously mentioned Coulomb-like attraction and $\chi$ is the \emph{chemosensitivity}, namely a positive constant indicating the sensibility of the organisms to the chemoattractant.
 We modeled a slightly different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficients $\diffusion_\amba, \diffusion_\camp$ of the amoebas and of the cAMP molecules are both finite (\ie of comparable order of magnitude).
 We expect that it is possible to prove that the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} is valid also in case of a Coulomb-like potential, so let us ignore the difference regarding $\attraction$ for now.
-Then, to compare the two models, we want to ask what happens to \ref{ch7:PIDE} if we modulate the diffusions coefficient to be analogous to the ones treated in \cite{ana}, \ie when $\lambda >> 1$ and $\diffusion_\camp >> \diffusion_\amba:=\sqrt{\frac{2}{d}}$.
-
-
+Then, to compare the two models, we want to ask what happens to \ref{ch7:PIDE} if we modulate the diffusions coefficient to be analogous to the ones treated in \cite{ana}, \ie when $\lambda >> 1$ and $\diffusion_\camp >> \diffusion_\amba$.
+To simplify the situation as Cañizares García does, let us set $\diffusion_\amba := \sqrt{\frac{2}{d}}$ so that $\frac{d\sigma_\amba^2}{2} \bigtriangleup \adens = \bigtriangleup \adens$.
 
 
 [[correct from here on]]
 
+\subsubsection{Slow release of a chemoattractant with a high diffusion}
 
-
-
-
-
-
-
-
-
-
+Let us for now leave $\lambda$ as it is.
 Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
 
 \begin{equation*}
@@ -128,7 +120,7 @@ Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
 	\1_{t\geq \tau} 
 \end{equation*}
 
-then in the limit case we do obtain
+Then in the limit case we do obtain
 
 \begin{equation*}
 		\heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}}(x)
@@ -139,7 +131,7 @@ then in the limit case we do obtain
 		0
 \end{equation*}
 
-and therefore, setting $\sigma_\amba = \sqrt{\frac{2}{d}}$, the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} becomes
+and therefore the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} becomes
 
 \begin{equation*}\label{conc:sigmaC-goes-infty}
 	\partial_t \adens =  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
@@ -153,23 +145,16 @@ and therefore, setting $\sigma_\amba = \sqrt{\frac{2}{d}}$, the effective equati
 	\bigtriangleup \adens
 \end{equation*}
 
-which is a heat equation, which with the initial condition $\adens_0$ yields the explicit solution
+which is the heat equation.
+This can be interpreted as the consequence of the fact that the chemoattractant is diffusing with a very high speed but is released with a slow rate $\lambda$, and therefore escapes at infinity too fast to have an influence on the amoebas.
 
-\begin{equation*}
-	\left(\heatkernel_t^1 \star \adens_0 \right) (x)
-	= 
-	\int 
-	\frac{1}{
-		\big( 2\pi)^{\frac{d}{2}}
-	}
-	\exp \left(
-	-\frac{y^2}{2 t}
-	\right)
-	\adens_0 (x-y)
-	dy
-\end{equation*}
+\subsubsection{Fast release of a chemoattractant with a high diffusion}
 
-What is even more surprising is what happens in the other limit case, namely when $\sigma_\camp$ tends to $0^+$:
+[[this is the section to really write. Do it quickly and dirtily]]
+
+\subsubsection{Slow release of a chemoattractant with no diffusion}
+
+It is interesting to observe what happens in the other limit case, namely when $\sigma_\camp\rightarrow0^+$:
 
 \begin{equation*}
 	\heatkernel_s^{\frac{d\sigma_\camp^2}{2}}(x)

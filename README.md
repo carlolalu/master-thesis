@@ -1,7 +1,5 @@
 # Todo
 
-## very high priority
-
 - correct the conclusion with the correct correction of what happens 
 according to what Peter told you. Write it only in words.
 
@@ -20,8 +18,6 @@ according to what Peter told you. Write it only in words.
 - drawings?
 
 - watch the names of the chapters and of the thesis, and stuff of the kind
-
-### less priority here under
 
 - take care of the space of solutions in the appendix and speak very 
 very hintingly about stuff, saying "we might have to prove that the 
