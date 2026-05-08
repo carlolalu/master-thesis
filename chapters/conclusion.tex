@@ -1,8 +1,5 @@
 [[rewrite according to the topoi of the genre: summary, interpretations of results, limitations, future research directions, final remarks. Basically add the summary of the main results before, and the final remark at the very end]]
 
-[[add the concept of IBM model in the introduction]]
-[[explain Keller-Segel it in the introduction]]
-
 [[erase the limit situations, write in words what you expect to happen]]
 
 
@@ -73,9 +70,9 @@ This is even more evident if we substitute $\cdens_t^\tau$ with its analytical s
 
 Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
 
-\subsection{Comparison with the original paper of Cañizares García and Keller-Segel}
+\subsection{Comparison with the original paper of Cañizares García and the equation of Keller-Segel}
 
-The original paper from Cañizares García (\cite{ana}) modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and found the famous Keller-Segel equation(\cite{keller-segel}) as an effective macroscopic description, in particular for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it (\cite{jaeger-luckhaus}):
+The original paper from Cañizares García (\cite{ana}) modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and found the notorious Keller-Segel equation(\cite{keller-segel}) as an effective macroscopic description, in particular for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it (\cite{jaeger-luckhaus}):
 
 \begin{equation}\label{conc:ANA-macro-amoebas}
 	\left\{
@@ -215,9 +212,9 @@ By setting $\chi:=\NumCampRelease\lambda$ we then obtain
 Now notice that the expression obtained is similar to the equation \ref{conc:ANA-macro-amoebas}: they differ in the convolution term, which is $(\cutoffSinAttraction \star \adens)$ in \ref{conc:ANA-macro-amoebas} and is $(\attraction \star \int_0^t \adens(\tau, \cdot) d\tau)$ in \ref{conc:sigmaC-goes-0}.
 Though we can see that even if we would have the same attraction $\attraction$, the partial integro-differential equation (PIDE) \ref{conc:sigmaC-goes-0} still would have a memory of the past (the integration on $[0,t]$) that the Keller-Segel equation does not possess.
 
-\section{Open questions on the topic}
+\section{Further research possibilities}
 
-\subsection{The most enticing question: the realistic mechanism of chemical response}
+\subsection{The most enticing question: the mechanism of chemical response}
 
 The portrait depicted by the pulsing wave models is that of amoebas which are moving towards the chemotactic agent, where the latter one is released in \emph{independent} bursts by the population.
 We mean that in our image \ref{ch7:model:pulsing-waves}, the time at which a burst happen ($\btime_m$) is not dependent on the contact with the chemotactic agent ($\camp_t$), or in other words the amoebas are not communicating with each others, but are simply shouting at random times and are following the noise they hear.
@@ -227,14 +224,14 @@ The really interesting challenge would therefore be to build a mathematical mode
 \paragraph{Some ideas on an hypothetical "answering pulses" model}
 A mathematical depiction of such an idea would be particularly difficult because the processes $(\hmactive_t^p)_p$ describing the release of cAMP molecules would now be dependent from $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$.
 This fact would hinder the usage of many mathematical tactics which were adopted along this work to calculate the effective equation candidate and to prove that such smart guess was correct.
-One would probably like to let such processes be Poisson distributed in case of no contact between the organisms and the chemotactic agent, but also to jump at the moment in which a particle of substance $\camp_t^m$ travels near enough one of the amoebas.
+One would probably like to let such processes be Poisson distributed in case of no contact between the organisms and the chemotactic agent, but also to forcibly jump up at the moment in which a particle of substance $\camp_t^m$ travels near enough one of the amoebas.
 One could then define a sequence of stopping times $(S_j)_j$ describing (in chronological order) all the impacts between a cAMP molecule and an amoeba.
 We expect that this would let us say that the system of answering amoebas so described, between two successive impacts, behaves exactly as the pulsing wave model \ref{ch7:model:pulsing-waves} aforethought.
 We also expect the impacts' frequency to grow with a high probability, the more the time flows, namely we expect $f{j} := S_j - S_{j-1}$ to be with a high probability a strictly decreasing function.
 Of course all these thoughts are no conclusive lucubrations, are based on pure intuition and are not derived from any rigorous model.
 
 
-\subsection{"Nice" technicalities to have for the pulsing wave model}
+\subsection{"Nice" technical properties to have for the pulsing wave model}
 
 	\paragraph{Assume a Coulomb-like potential}
 	As in the original PhD thesis \cite{ana}, it would be interesting to use a Coulomb-like potential (the analogous to the generalized attraction $\genAttraction$ used in the law of large numbers \ref{ch5:LLN}, but without cutoff), and prove that the equation \ref{ch7:EFFECTIVE-EQUATIONS} still holds with $\attraction$ substituted with $\genAttraction$.
