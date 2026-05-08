@@ -2,6 +2,14 @@
 \usepackage[T1,T2A]{fontenc}
 \usepackage[italian,greek, spanish, german, english]{babel}				% The last option listed determines the headings' language
 
+\usepackage{fontspec}
+\setmainfont{NewCM10-Regular.otf}[
+	BoldFont = NewCM10-Bold.otf,
+	ItalicFont = NewCM10-Italic.otf,
+	BoldItalicFont = NewCM10-BoldItalic.otf
+	]
+\newfontfamily\malayalamfont{Noto Serif Malayalam}[Script=Malayalam]
+
 \usepackage{amsmath, amsthm, amssymb, dsfont}
 \usepackage{tikz}
 \usetikzlibrary{calc}

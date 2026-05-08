@@ -23,3 +23,6 @@ according to what Peter told you. Write it only in words.
 very hintingly about stuff, saying "we might have to prove that the 
 conditional measure is regular, with the theorem tal dei tali, thus must 
 prove that the space i Polish if provided with the optimal topology.
+
+
+- correct cyrillic variables!!!
