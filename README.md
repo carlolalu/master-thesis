@@ -4,13 +4,7 @@
 - first write the introduction. Take inspiration from Ana, but be less 
 technical, and start from the microscopic model.
 
-- notation:
-
-	+ infinty norm into l-infinity norm if necessary (double stanghette e pedice)
-
-	+ declare what you use the first time you use it (symbols etc..)
-
-- write a good introduction
+- notation: declare what you use the first time you use it (symbols etc..)
 
 - search for the '[['
 

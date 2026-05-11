@@ -1,23 +1,24 @@
-\subsection{Space of solutions, formally}\label{app:formal-def-solution}
+In this section we want to address a bit more formally two closely related questions:
+\begin{enumerate}
+	\item What is the exact space of solutions for the solutions to the basic model? In the definition \ref{ch2:def:solution-model} did not specify the codomain of the \rvs involved.
+	\item How can we be sure that the conditioning $\Prb$ we are obtaining \emph{regular} conditional probability measures (\cite[Chapter 10.2,first definition]{dudley}), \ie that we obtain mathematical objects that behave as probability measures?
+	This is an important question because for the definition \ref{ch2:def:solution-model} we need certain objects to be \Bms under $\PrbCondTimes{\cdot}{}$, thus we assume that $\PrbCondTimes{\cdot}{}$ is a probability measure.
+\end{enumerate}
 
-[[see who references the label]]
+We will not give a complete answer to the second question, but we will give a direction to search for it, and we expect that with further work one might prove the necessary technicalities required to obtain the desired result.
 
-[[main theorem to have a nice regular measure is 10.2.2 from dudley]]
+\subsection{The space of solutions}\label{app:formal-def-solution}
 
-[[use theorem 2.8.2 from dudley to add the point to Rd and use the paragraph 13.2 to have that the product of such spaces can be seen as a polish space.
-use chapter 2.4 from dudley to put a metric on the function spaces for the hmactive processes, if necessary.
-Or should I maybe see this as a putting a function from R+ to the configuration spaces and N times the natural numbers (for the thing).
-Maybe use theorem 2.4.5 from dudley and see, for every T>0 the space [0,T] as the compact space, and then the rest of the space a metric maybe polish space
-You can actually see it as a skochorod space (which is polish) over a polish space, and thus a polish space. Complicated but doable]]
-
-First we define the space of configurations of cAMP molecules spawned by a single amoeba.
-Here the $\star$ means that a particle has not been spawned yet.
-We must take only sequences where only the first coordinates (finitely) are different from $\star$.
+We first need to check where the spawning Poisson processes $(\hmactive_t^p)_p$ are taking values for each fixed time $t$.
+This is of course $(\N_0)^N$.
+Now we define the space of configurations for the cAMP molecules $(\camp^{p,g})_g$ spawned by a single amoeba $\amba^p$.
+Here the symbol "$\spadesuit$" means that a particle has not been spawned yet.
+We must take only sequences where only the first coordinates (finitely) are different from $\spadesuit$.
 
 \begin{definition}
 Define the space of the positions cAMP particles spawned by an amoeba as:
-\begin{equation}
-\R^d_{camp}:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d) := 
+\begin{equation*}
+\confCamp(d):=\boxplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d) := 
 \{
 	x = (x_g)_{g\in\N}\
 	:\
@@ -26,14 +27,14 @@ Define the space of the positions cAMP particles spawned by an amoeba as:
 	x_g \in \R^d\
 	\text{ and }\
 	\forall g\geq G.\
-	x_g =\star
+	x_g =\spadesuit
 \}
-\end{equation}
-Define the space of configurations for all particles (the $N$ amoebas and the cAMP molecules) as
-\begin{equation}
-\Conf:=(\R^d)^N \times\big(\R^d_{camp}\big)^N
-\end{equation}
-For each configuration of particles $x\in \Conf$ sign its coordinates as 
+\end{equation*}
+Define the space of configurations for all particles (the $N$ amoebas $\amba^p$ and the cAMP molecules $\camp^{p,g}$) as
+\begin{equation*}
+\Conf:=(\R^d)^N \times\big(\confCamp(d)\big)^N
+\end{equation*}
+For each configuration of particles $x\in \Conf$ sign its $d$-dimensional coordinates as 
 \begin{equation*}
 \begin{aligned}
 x &= (x^1, \ldots, x^N, 
@@ -47,86 +48,86 @@ x &= (x^1, \ldots, x^N,
 	&c^{N,1}, \ldots)
 \end{aligned}
 \end{equation*}
-where the absence of a coordinate in the list means that such coordinate is set to $\star$.
+where the absence of a coordinate in the list means that such coordinate is set to $\spadesuit$.
 \end{definition}
 
 \begin{remark}
-	Notice that, if $\{\star\} \sqcup \R^d$ could be seen as an algebraic structure with $\star$ as a neutral element, then
+	Notice that, if $\{\spadesuit\} \sqcup \R^d$ could be seen as an algebraic structure with $\spadesuit$ as a neutral element, then
 	\begin{align*}
-		\R^d_{camp}
-		&:=\boxplus_{g=1}^\N (\{\star\} \sqcup \R^d)\
-		\subseteq\
-		\bigoplus_{g=1}^\N (\{\star\} \sqcup \R^d)\
-		=
+		\confCamp(d)
+		&:=\boxplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d)\
+		\subseteq
 		\\
-		&:=
+		&\subseteq\
+		\bigoplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d)\
+		:=
 		\{
 			x = (x_g)_{g\in\N}\
 			:\
 			\exists G\in\N_0.\
 			\forall g\geq G.\
-			x_g =\star
+			x_g =\spadesuit
 		\}
 	\end{align*}
 	And the latter one, among the other things, would be a categorical construct on which one can put quite a lot of structure (categorical product of an in algebraic category), which would be useful in case we would like to inquire about properties of such spaces.
-	Unluckily though, there does not seem to be any "natural" way to put an algebraic structure on $\{\star\} \sqcup \R^d$, since $\R$ is a field.
+	It does not seem to us though that there is any "natural" way to put an algebraic structure on $\{\spadesuit\} \sqcup \R^d$.
 \end{remark}
 
-Now we have the space of configurations of such particles, and we need a space of where the Poisson process are taking values, which is of course $\N_0^N$.
+And what about the Brownian motion associated to each particle? That is just a countable amount of independent $d$-dimensional \Bms.
+With these definitions the solution of \ref{ch2:def:solution-model} can be seen as a \emph{random \cadlag} function 
 
-This definition is important to have processes and function with domains and codomains which are constant throughout time.
-For example:
+\begin{equation*}
+	((\hmactive^p)_p, \sol = (\amba, \camp), B) (\omega):\
+	\R_+ \longrightarrow 
+	\underbrace{
+		(\N_0)^N
+	}_{\text{Poisson processes}}
+	\times
+	\underbrace{
+		(\R^d\times\confCamp(d))^N 
+	}_{ \text{positions particles}}
+		\times 
+	\underbrace{
+		(\R^d)^N \times (\R^d)^\N
+	}_{\Bms}
+\end{equation*}
 
-\begin{definition}\label{ch3:formal-def-drift-diffus}
-	Let $S$ be the space of \cadlag increasing functions $f:\R+ \longrightarrow \N_0$ (basically the space of increasing "stairs" with steps of integer height). Then define $\drift: \R_+ \times \Conf \times S^N \longrightarrow \Conf$ and $\diffusion: \Conf \longrightarrow \Conf$ as
-\begin{equation}
-\left\{
-\begin{aligned}
-&\drift_p(t,x,(\hmactive_t^p)_p) = \frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_s^p} \attraction(x^p - x^{p,g})
-	&&
-\\
-&\drift_{p,g}(t,x) = 0
-	&& \text{if } \btime^{p,g} \leq t
-\\
-&\drift_{p,g}(t,x) = \star
-	&& \text{otherwise}
-\\
-&\diffusion_p:= \sigma_A
-&
-\\
-&\diffusion_{p,g} = \sigma_C
-&& \text{if } \btime^{p,g} \leq t
-\\
-&\diffusion_{p,g} = \star
-&& \text{otherwise}
-\end{aligned}
-\right.
+or, in other words, the \rv $((\hmactive^p)_p, \sol, B)$ takes values in the set
+
+\begin{equation}\label{app:def:space-of-solutions}
+	\left\{
+		f:\R_+ \longrightarrow 
+			(\N_0)^N
+			\times
+			(\R^d\times\confCamp(d))^N
+			\times 
+			(\R^d)^N \times (\R^d)^\N\
+			:\
+			f \text{ is \cadlag}
+	\right\}
 \end{equation}
-\end{definition}
 
-Now we need to see what does it mean to formally solve a piecewise define SDE with a quasi-brownian motion as ours:
+It is not necessary to redefine the drift $\drift$ and the diffusion $\diffusion$, because they become relevant for the SDE framework only under the conditioning $\PrbCondTimes{}{}$. In any case, if we really wanted to see them in this framework, we would have for absent particle they have no mapping, so one could set them to  $\spadesuit$ for every cAMP molecule not yet spawned and obtain consistent mappings in the appropriate spaces.
 
-%todo
-[[[REWRITE FROM HERE ON]]]
+\subsection{Can we obtain regular probability measures by conditioning $\Prb$?}
 
+The main instrument to verify that a measure is regular is \cite[Theorem 10.2.2]{dudley}, namely:
 
-\begin{definition}
-A \emph{piecewise SDE with quasi BM} is an expression of the type $E($
-\end{definition}
+\begin{theorem}
+	Let $T$ be any Polish space, $\Borel$ its $\sigma$-algebra of Borel sets.
+	Let $(\Omega, \sigAlg, \Prb)$ be a probability space, $Y:\Omega\longrightarrow T$ a $(\sigAlg,\Borel)$-measurable function and $\mathcal{C}$ any sub-$\sigma$-algebra of $\sigAlg$.
+	Then there exists a conditional distribution $\Prb_{Y|\mathcal{C}}(\cdot, \cdot \cdot):\Borel \times \Omega \longrightarrow [0,1]$ (see \cite[Chapter 10.2,first definition]{dudley}) and it is unique, meaning that if another $\Prb'(\cdot, \cdot \cdot)$ satisfies the definition of conditional distribution, then
+	\begin{equation*}
+		\forall^\Prb \omega\in\Omega.
+		\quad
+		\Prb_{Y|\mathcal{C}}(\cdot, \omega) = \Prb'(\cdot, \omega)
+	\end{equation*}
+\end{theorem}
 
+[[correct]]
 
-
-\begin{definition}
-A solution to \ref{ch2:model:deterministic-parenting} is given by
-\begin{itemize}
-\item a complete filtered space $(\Omega, \Flt, (\Flt_t)_t, \Prb)$
-\item $N$ indipendent Poisson processes $(\hmactive^p)_{1\leq p\leq N}$ on $\Omega$
-\item $(\Flt_t)_t$-adapted processes $\sol,B:\R_+ \longrightarrow \Conf$ such that 
-	\begin{itemize}
-	\item $(\hmactive^p)_{1\leq p\leq N}$ do not depend on $(\sol,B)$
-	\item Under the random measure $\PrbCond{\cdot}{}$ we have that $(\sol,B)$ solves $E(\drift((\hmactive_t^p)_p), \diffusion)$ in the coordinates different from $\star$ piecewise on $I_m=[\btime_m,\btime_{m+1}]$ with the opportune modifications from $B^{p,g}$ to $\quasibm^{p,g}$
-	\end{itemize}
-\end{itemize}
-\end{definition}
-
-
+[[use theorem 2.8.2 from dudley to add the point to Rd and use the paragraph 13.2 to have that the product of such spaces can be seen as a polish space.
+use chapter 2.4 from dudley to put a metric on the function spaces for the hmactive processes, if necessary.
+Or should I maybe see this as a putting a function from R+ to the configuration spaces and N times the natural numbers (for the thing).
+Maybe use theorem 2.4.5 from dudley and see, for every T>0 the space [0,T] as the compact space, and then the rest of the space a metric maybe polish space
+You can actually see it as a skochorod space (which is polish) over a polish space, and thus a polish space. Complicated but doable]]
