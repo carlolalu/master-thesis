@@ -2,16 +2,19 @@
 
 \subsection{Common sets and measures}
 
-The natural numbers set $\N$ starts with the number $1$, if we want to include the $0$ we will write $\N_0$, \ie
+In this work it will adopted the convention that the set of natural numbers $\N$ starts with the number $1$.
+If we want to include the $0$ we will write $\N_0$, therefore
 
 \begin{equation*}
-	\N = \{1, \ldots\}, \N_0 = \{0,1,\ldots\}
+	\N = \{1, \ldots\}, 
+	\quad
+	\N_0 = \{0,1,\ldots\}
 \end{equation*}
 
 Whenever we have a measure $\mu$ on a space, to indicate a property $P(x)$ valid almost everywhere with respect to $\mu$ we write 
 
 \begin{equation*}
-	\forall_{\mu}x.\
+	\forall^{\mu}x.\
 		P(x)
 \end{equation*}
 
@@ -55,7 +58,7 @@ In the cases where it is needed to consider the supremum also on some time inter
 In some cases where the $\Lpspace^1$-norm appears together with the $\Lpspace^\infty$-norm, for symmetry, the latter one will be also signed as $\Normp{\Lpspace^\infty}{\cdot}$.
 
 
-\subsection{Generic positive constants and positive increasing functions}
+\subsection{Generic positive constants and positive increasing continuous functions}
 
 We will indicate generic constants with the symbol $\const$, and a subscript will indicate on which mathematical objects such constants depend:
 
@@ -71,48 +74,36 @@ Sometimes we will operate on a fixed time $t$, considering certain quantities as
 
 and show that this is bounded.
 Of course here the problem arises because $[0,T]$ is an infinite set, and thus the sup might be $+\infty$.
-In such situation it is usually necessary to show that the function
+In such situation it is usually necessary to show that the function $f_y(t) := \const_{t,y} $ is increasing and continuous on $\R$ so that we can affirm
 
 \begin{equation*}
-	f_y(t) := \const_{t,y}
+		\sup_{t \in [0,T]} \const_{t,y} = \sup \const_{T,y} < +\infty
 \end{equation*}
 
-is increasing an continuous on $\R$, or bounded, so that we can write
-
-\begin{equation*}
-	\sup_{t \in [0,T]} \const_{t,y} = \sup \const_{T,y}
-\end{equation*}
-
-Similarly is the case when we want to bound quantities on discrete sets in $\N$ with the upper extremum: 
+Similarly is the case when we want to bound quantities on finite sets in $\N$ with the value assumed in the upper extremum: 
 
 \begin{equation*}
 	\logQuest{
-		\sup_{q \leq Q} \const_{q} \leq \const_Q 
+		\sup_{0\leq q \leq Q} \const_{q} \leq \const_Q 
 	}
 \end{equation*}
 
-also in this case it is a good solution to show that $f(q) := \const_q$ is an increasing function.
+or do both things at the same time, where the constant might depend on some further objects $a,b,c$:
+
+\begin{equation*}
+	\logQuest{
+		\sup_{t \in [0,T]} \sup_{0\leq q \leq Q} \const_{q,t,a,b,c} \leq \const_{Q,T,a,b,c}  < +\infty
+	}
+\end{equation*}
+
+In all these cases it is good solution to show that for every choice of $a,b,c$ the function $f_{a,b,c}(q,t) := \const_{q,t,a,b,c}$ is increasing in both $t$ and $q$ and it is continuous in $t$.
 For this reasons we indicate with 
 
 \begin{equation*}
-	\Fup (q)
+	\Fup_{a,b,c} (t,q)
 \end{equation*}
 
-a generic increasing function in $q$, with the convention that if the domain of the function is $\R$, the function is also $\Cspace^0$, ensuring its boundedness.
-Furthermore, the expression
-
-\begin{equation*}
-	\Fup_{a,b,c}(t)
-\end{equation*}
-
-will mean a function with the above characteristics in $t$, and furthermore dependent on some mathematical objects $a,b,c$, while
-
-\begin{equation*}
-	\Fup(t,q)
-\end{equation*}
-
-will be an increasing function bounded in both arguments.
-
+a generic positive function dependent from $a,b,c$, \emph{increasing} in each of its arguments and continuous (it is trivially $\Cspace^0$ on $q$ if we endow $\{1,\ldots, Q\}$ with the discrete topology).
 
 \subsection{System, drift and diffusion}
 
@@ -135,7 +126,7 @@ This create ambiguity though, because the cAMP molecule (and the drift that they
 For this reason the components of the drift and the diffusion will be written as 
 
 \begin{equation*}
-	<\text{particle coordinate}>; <1-\text{dimensional component of the $d$-dimensional vector}>
+	<\text{$d$-dimensional particle}>; <1-\text{dimensional component of the $d$-dimensional vector}>
 \end{equation*}
 
 \ie if we indicate with $\pi_i: \R^d \longrightarrow \R$ the projection on the $i$-th component, the expressions
