@@ -8,6 +8,7 @@ technical, and start from the microscopic model.
 and git commit that.
 
 ## NOT HIGH PRIORITY
+
 - notation: declare what you use the first time you use it (symbols 
 etc..)
 
@@ -17,3 +18,10 @@ etc..)
 
 - watch the names of the chapters and of the thesis, and stuff of the kind
 
+## Ask for theoretical confirmation to peter
+
+1. the conclusion, how you explained his topic
+
+2. the space of solution: we have solutions into the space with infinite 
+sequences, but how does hinder that the solution might have a finite 
+number of particles at some time $t$?

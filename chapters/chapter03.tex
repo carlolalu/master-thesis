@@ -696,7 +696,7 @@ Let $F: C \longrightarrow C$ be a $\Cspace^0$ map such that $F(C) \subseteq K$, 
 Then $F$ has a fixed point in $K$.
 \end{theorem}
 
-The usual procedure to apply the theorem is to separate the linear part from the non-linear one, to invert the linear operator with the green function of the linear operator, and then to verify that, with a domain in the space of functions with the characteristics that we do desire, the operator respects the hypothesis of the theorem \ref{ch3:fixed-point-schauder-theorem}.
+The usual procedure to apply the theorem is to separate the linear part of the differential operator from the non-linear one, to invert the linear part with the correspondent green function, and then to verify that, with $K$ as the space of functions with the characteristics that we desire for our solution, the operator respects the hypothesis of the theorem \ref{ch3:fixed-point-schauder-theorem}.
 This is not proved in this master thesis, but it is assumed that the solution exist.
 Notice furthermore that the existence of a sufficiently regular solution $\adens_t$ to the system \ref{ch3:integro-differential-system} is equivalent to require the existence of solutions $\adens_t$ and $\cdens_t^\tau$ for each $\tau \in \R_+$ to \ref{ch3:EFFECTIVE-EQS}.
 
@@ -1258,7 +1258,7 @@ There are some properties of the cAMP particles which show somehow symmetry, nam
 	Even better, $\mfcamp_t^{p,g}$ are spawning on $\mfamba_t^p$, and the latter ones are \iid.
 	\item Each $\camp_t^{p,g}$ moves of a quasi-\Bm starting at $\btime^{p,g}$, and these birth times are \iid with respect to the parameter $p$. Since the mesoscopic molecules $\mfcamp_t^{p,g}$ are coupled with the microscopic ones, the same happens for them 
 \end{itemize}
-Because of these facts, for each generation $g$, we have that $(\camp^{p,g})_p$ are exchangeable and $(\mfcamp^{p,g})_p$ are \iid, which might come in handy.
+Because of these facts, for each generation $g$, we have that $(\camp^{p,g})_p$ are exchangeable, which might come in handy.
 Some nuances come from the fact that the the number of molecules spawned is stochastically distributed with the \rvs $(\hmactive_t^p)_p$, and thus also for the $W_1$-convergence a bit work would be necessary (maybe even approximating first with the conditional probability $\PrbCondTimes{\cdot}{}$ and then with $\Prb$).
 A possible strategy could be to follow a path analogous to the one Sznitman followed in the proof in \ref{ch3:proposition:sznitman}, namely to prove that the sequence $ (\empmeas_t^{\camp,(N)} )_N$ is tight and that converges finitely to $\cdens$, which exploits \cite[Theorem 5.1, Corollary]{billingsley} to obtain the convergence.
 Since the key question of this work is the macroscopic description for the amoebas, not a lot of effort has been further spent on this topic, leaving it for eventual future works.
