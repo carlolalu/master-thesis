@@ -2,7 +2,7 @@ In this section we want to address a bit more formally two closely related quest
 \begin{enumerate}
 	\item What is the exact space of solutions for the solutions to the basic model? In the definition \ref{ch2:def:solution-model} did not specify the codomain of the \rvs involved.
 	\item How can we be sure that the conditioning $\Prb$ we are obtaining \emph{regular} conditional probability measures (\cite[Chapter 10.2,first definition]{dudley}), \ie that we obtain mathematical objects that behave as probability measures?
-	This is an important question because for the definition \ref{ch2:def:solution-model} we need certain objects to be \Bms under $\PrbCondTimes{\cdot}{}$, thus we assume that $\PrbCondTimes{\cdot}{}$ is a probability measure.
+	This is an important question because for the definition \ref{ch2:def:solution-model} we need certain objects to be \Bms under $\PrbCondTimes{\cdot}{}$, thus we assume implicitly that $\PrbCondTimes{\cdot}{}$ is a probability measure.
 \end{enumerate}
 
 We will not give a complete answer to the second question, but we will give a direction to search for it, and we expect that with further work one might prove the necessary technicalities required to obtain the desired result.
@@ -88,7 +88,7 @@ With these definitions the solution of \ref{ch2:def:solution-model} can be seen 
 	}_{ \text{positions particles}}
 		\times 
 	\underbrace{
-		(\R^d)^N \times (\R^d)^\N
+		(\R^d)^N \times (\confCamp(d))^\N
 	}_{\Bms}
 \end{equation*}
 
@@ -101,7 +101,7 @@ or, in other words, the \rv $((\hmactive^p)_p, \sol, B)$ takes values in the set
 			\times
 			(\R^d\times\confCamp(d))^N
 			\times 
-			(\R^d)^N \times (\R^d)^\N\
+			(\R^d)^N \times (\confCamp(d))^\N\
 			:\
 			f \text{ is \cadlag}
 	\right\}
@@ -111,6 +111,7 @@ It is not necessary to redefine the drift $\drift$ and the diffusion $\diffusion
 
 \subsection{Can we obtain regular probability measures by conditioning $\Prb$?}
 
+For this chapter it is assumed the knowledge of \cite[Section 10.2]{dudley}.
 The main instrument to verify that a measure is regular is \cite[Theorem 10.2.2]{dudley}, namely:
 
 \begin{theorem}
@@ -124,7 +125,43 @@ The main instrument to verify that a measure is regular is \cite[Theorem 10.2.2]
 	\end{equation*}
 \end{theorem}
 
+In other words, given a sub-$\sigma$-algebra $\mathcal{C}$ of $\sigAlg$ and a \rv $Y:(\Omega, \sigAlg, \Prb) \longrightarrow (T,\Borel)$, a sufficient condition for $\PrbCond{Y \in \cdot}{\mathcal{C}}$ to behave like a measure for $\Prb_{|\mathcal{C}}$-almost every $\omega$ is that the codomain $T$ is a Polish space, \ie
+
+\begin{definition}
+	Let $(T, \tau)$ be a topological space. $T$ is \emph{Polish} iff $\tau$ is metrizable with respect to a metric $d$ such that $(T,d)$ is a complete separable metric space.
+\end{definition}
+
+Then the regularity of our measures is depending not on the $\sigma$-algebra on which we are conditioning, but on the codomain of the process which is being conditioned, which must be Polish.
+Most of the processes we take into account are taking values into some subset of \ref{app:def:space-of-solutions} of the form
+
+\begin{equation*}
+	\left\{
+	f:\R_+ \longrightarrow
+	(\R^d)^n\times(\confCamp(d))^k
+	:\
+	f \text{ is \cadlag}
+	\right\}
+\end{equation*}
+
+for some $n,k \in \N_0$.
+This is an idea of how somebody might try to prove that this space is Polish:
+\begin{enumerate}
+	\item Prove that $\{\spadesuit\} \sqcup \R^d$ is Polish.
+	This can be done by viewing $\{\spadesuit\} \sqcup \R^d$ as a metrized one-point-compactification of $\R^d$ (since $\R^d$ is Polish one can use \cite[Theorem 5.3]{kechris} to obtain the metric), which then is separable (compact and metrizable).
+	Since then $\{\spadesuit\} \sqcup \R^d$ is metrizable and compact, by \cite[Theorem 45.1]{munkres-2000} we obtain that it is complete, and thus a Polish space.
+	\item Prove that $\confCamp(d)$ is Polish. 
+	One might want to generalize the result \cite[Theorem 43.4]{munkres-2000} for $\{\spadesuit\} \sqcup \R^d$ to ensure that the countable product $(\{\spadesuit\} \sqcup \R^d)^\N$ is complete.
+	In such case, since the metric $\rho$ of the latter theorem induces the product topology, we get that by the Tychonoff theorem (\cite[Theorem 37.3]{munkres-2000}) the space $(\{\spadesuit\} \sqcup \R^d)^\N$ is also compact.
+	Being compact and metrizable we obtain that is also separable, and therefore Polish.
+\end{enumerate}
+If we succeed to see $(\R^d)^n\times(\confCamp(d))^k$ as a metric space then this
+This can be seen as the \emph{Skorokhod space}
+
+
 [[correct]]
+
+
+[[skhorokhod topolgy: the first definition of section 12 and of section 16]]
 
 [[use theorem 2.8.2 from dudley to add the point to Rd and use the paragraph 13.2 to have that the product of such spaces can be seen as a polish space.
 use chapter 2.4 from dudley to put a metric on the function spaces for the hmactive processes, if necessary.
