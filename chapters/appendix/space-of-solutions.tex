@@ -16,19 +16,9 @@ Here the symbol "$\spadesuit$" means that a particle has not been spawned yet.
 We must take only sequences where only the first coordinates (finitely) are different from $\spadesuit$.
 
 \begin{definition}
-Define the space of the positions cAMP particles spawned by an amoeba as:
+Define the space of the positions cAMP particles spawned by a single amoeba as:
 \begin{equation*}
-\confCamp(d):=\boxplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d) := 
-\{
-	x = (x_g)_{g\in\N}\
-	:\
-	\exists G\in\N_0.\
-	\forall g < G.\
-	x_g \in \R^d\
-	\text{ and }\
-	\forall g\geq G.\
-	x_g =\spadesuit
-\}
+\confCamp(d):= (\{\spadesuit\} \sqcup \R^d)^\N
 \end{equation*}
 Define the space of configurations for all particles (the $N$ amoebas $\amba^p$ and the cAMP molecules $\camp^{p,g}$) as
 \begin{equation*}
@@ -40,7 +30,7 @@ For each configuration of particles $x\in \Conf$ sign its $d$-dimensional coordi
 x &= (x^1, \ldots, x^N, 
 	&(x^{1,g})_{g\in\N}, \ldots, 
 	&(x^{p,g})_{g\in\N}, \ldots, 
-	&(x^{N,g})_{g\in\N})
+	&(x^{N,g})_{g\in\N},\ldots)
 \\
 &= (a^1, \ldots, a^N, 
 	&c^{1,1}, c^{1,2}, \ldots, 
@@ -52,25 +42,31 @@ where the absence of a coordinate in the list means that such coordinate is set 
 \end{definition}
 
 \begin{remark}
-	Notice that, if $\{\spadesuit\} \sqcup \R^d$ could be seen as an algebraic structure with $\spadesuit$ as a neutral element, then
+	One might want to define the configuration space of the cAMP as the more precise set
 	\begin{align*}
-		\confCamp(d)
-		&:=\boxplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d)\
-		\subseteq
+		&\{
+		x = (x_g)_{g\in\N}\
+		:\
+		\exists G\in\N_0.\
+		\forall g < G.\
+		x_g \in \R^d\
+		\text{ and }\
+		\forall g\geq G.\
+		x_g =\spadesuit
+		\}\subseteq
 		\\
 		&\subseteq\
 		\bigoplus_{g=1}^\N (\{\spadesuit\} \sqcup \R^d)\
 		:=
 		\{
-			x = (x_g)_{g\in\N}\
-			:\
-			\exists G\in\N_0.\
-			\forall g\geq G.\
-			x_g =\spadesuit
+		x = (x_g)_{g\in\N}\
+		:\
+		\exists G\in\N_0.\
+		\forall g\geq G.\
+		x_g =\spadesuit
 		\}
 	\end{align*}
-	And the latter one, among the other things, would be a categorical construct on which one can put quite a lot of structure (categorical product of an in algebraic category), which would be useful in case we would like to inquire about properties of such spaces.
-	It does not seem to us though that there is any "natural" way to put an algebraic structure on $\{\spadesuit\} \sqcup \R^d$.
+	But such space is very likely not Polish (the topic of the next section), thus we rely on the previous choice.
 \end{remark}
 
 And what about the Brownian motion associated to each particle? That is just a countable amount of independent $d$-dimensional \Bms.
@@ -88,7 +84,7 @@ With these definitions the solution of \ref{ch2:def:solution-model} can be seen 
 	}_{ \text{positions particles}}
 		\times 
 	\underbrace{
-		(\R^d)^N \times (\confCamp(d))^\N
+		(\R^d)^N \times (\confCamp(d))^N
 	}_{\Bms}
 \end{equation*}
 
@@ -97,11 +93,11 @@ or, in other words, the \rv $((\hmactive^p)_p, \sol, B)$ takes values in the set
 \begin{equation}\label{app:def:space-of-solutions}
 	\left\{
 		f:\R_+ \longrightarrow 
-			(\N_0)^N
+			(\N_0
 			\times
-			(\R^d\times\confCamp(d))^N
+			\R^d\times\confCamp(d)
 			\times 
-			(\R^d)^N \times (\confCamp(d))^\N\
+			\R^d \times \confCamp(d))^N\
 			:\
 			f \text{ is \cadlag}
 	\right\}
@@ -153,18 +149,17 @@ This is an idea of how somebody might try to prove that this space is Polish:
 	One might want to generalize the result \cite[Theorem 43.4]{munkres-2000} for $\{\spadesuit\} \sqcup \R^d$ to ensure that the countable product $(\{\spadesuit\} \sqcup \R^d)^\N$ is complete.
 	In such case, since the metric $\rho$ of the latter theorem induces the product topology, we get that by the Tychonoff theorem (\cite[Theorem 37.3]{munkres-2000}) the space $(\{\spadesuit\} \sqcup \R^d)^\N$ is also compact.
 	Being compact and metrizable we obtain that is also separable, and therefore Polish.
+	\item Since both the completeness and the separability remain stable under a finite product we obtain that $(\R^d)^n\times(\confCamp(d))^k$ is Polish.
+	\item Defining $E:=(\R^d)^n\times(\confCamp(d))^k$ we have that the space
+	\begin{equation*}
+		\left\{
+		f:\R_+ \longrightarrow
+		(\R^d)^n\times(\confCamp(d))^k
+		:\
+		f \text{ is \cadlag}
+		\right\}
+	\end{equation*}
+	can be seen as the \emph{Skorokhod space} $\skorokhod{E}$ (see \cite[Chapter 3, Section 5]{kurtz}), which, if $E$ is Polish, is also Polish (\cite[Chapter 3, Theorem 5.6]{kurtz}).
 \end{enumerate}
-If we succeed to see $(\R^d)^n\times(\confCamp(d))^k$ as a metric space then this
-This can be seen as the \emph{Skorokhod space}
 
-
-[[correct]]
-
-
-[[skhorokhod topolgy: the first definition of section 12 and of section 16]]
-
-[[use theorem 2.8.2 from dudley to add the point to Rd and use the paragraph 13.2 to have that the product of such spaces can be seen as a polish space.
-use chapter 2.4 from dudley to put a metric on the function spaces for the hmactive processes, if necessary.
-Or should I maybe see this as a putting a function from R+ to the configuration spaces and N times the natural numbers (for the thing).
-Maybe use theorem 2.4.5 from dudley and see, for every T>0 the space [0,T] as the compact space, and then the rest of the space a metric maybe polish space
-You can actually see it as a skochorod space (which is polish) over a polish space, and thus a polish space. Complicated but doable]]
+We expect then that the all conditional probability measures are regular, since we expect that the processes considered have Polish spaces as codomains.
