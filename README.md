@@ -7,6 +7,10 @@ technical, and start from the microscopic model.
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
 
+- abstracts
+
+- titles of chapters, of the thesis itself
+
 ## NOT HIGH PRIORITY
 
 - notation: declare what you use the first time you use it (symbols 
