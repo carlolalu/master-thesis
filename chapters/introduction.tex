@@ -1,94 +1,60 @@
 [[rewrite according to this layout: background and context, problem statement, research objectives/questions, brief methodology overview, why my work matters, thesis roadmap]]
 
-[[add the concept of IBM model in the introduction]]
-
-[[explain Keller-Segel it in the introduction]]
-
-[[ speak of creation and annihilation of particles, of propagation of chaos]]
 
 
 This master's thesis aim is to analyze mathematically the phenomenon of \emph{chemotaxis}, \ie the movement of an organism in response to a chemical stimulus.
-This is a mechanism used by a considerable amount of microorganisms (various bacteria and amoebas as well as some eukaryots) to search for nutrients and escape toxins, but also by unicellular components of a multicellular organisms (for example leukocytes rely on it to find infections in the body).
-Naturally, the study of this process has wide applications in medicine, since the variation of the chemotactical behaviour of various cells can help the onset of a number of number of diseases 
+This is a mechanism used by a considerable amount of microorganisms (various bacteria and amoebas as well as some eukaryots) to search for nutrients and escape toxins, but also by cells of a multicellular organisms for more complex tasks (\eg leukocytes rely on it to find infections in the body \cite{chemotaxis-leukocytes}).
+Naturally, the study of this process has wide applications in medicine, since the variation of the chemotactical behaviour of various human cells can help the onset of a number of diseases 
 
 ([[add here quote]]), 
 
-but also because many drugs act by altering the chemotactic behaviour of specific cells
+but also because many drugs act by altering the chemotactic behaviour of specific agents (see for example \cite[Conclusions and perspectives]{cancer-medicine-chemotaxis}).
+There is considerable research on this theme on a cellular level (how does the microorganism perceive the chemical stimulus? Which receptors are responsible for it? \cite{ct-chemical-mechanisms}), but we are interested to inquire about the behaviour of a population of microorganisms: what happens when all these corpuscles start to follow a specific chemical stimulus? What will we observe about the spatial distribution of the group, from example through the lenses of a microscope? 
 
-[[add here proper fomulation and example]].
+[[put here pictures of some papers through the lenses of a microscope)]]
 
-There is considerable research on this theme on a cellular level (how does the microorganism perceive the chemical stimulus? Which mechanism drives the response?
-
-[[put here some more papers, I know you have them]])
-
-, but we are interested to explore the behaviour of a population of microorganisms actively involved [[change the word feat appropriately]]: what happens when all these molecules start to follow a specific chemical stimulus? What will we observe about the population, from example through the lenses of a microscope? [[put here pictures of some papers through the lenses of a microscope)]]
-
-(\cite{chemotaxis-leukocytes})
+()
 
 
-When examining mathematically the phenomenon on such scale, there are two main point of view which are chosen:
+When examining mathematically the phenomenon on such scale, there are two main point of view:
 one can see the population macroscopically, as a continuum, representing it therefore with a density $\adens$, or can see it microscopically, \ie as a finite group of individuals $\{\amba\}$.
-
-
-
-
-
-[[maybe the text below is a bit off-topic: I do not try to derive Keller-Segel, or not only. I try to see what ahppens if I add the cAMP, which is different]]
-
-
 Of course it would be optimal that the two description somehow match, meaning that if we construct some empirical density from $\{\amba\}$, this is in some way close to $\adens$, meaning that one can mathematically derive the macroscopic system from the microscopic one.
 It is common in such cases to speak of \emph{propagation of chaos} and of \emph{effective equations} of the microscopic model.
-This procedure justifies the macroscopic model targeted and makes it
-
-[[change the phrasing 'making' here up]]
-
-consequently more credible. 
-
-[[add examples here to show the relevance of this]]
-
+This procedure is often seen as adding insights and validity to a macroscopic description.
 This was the topic of Cañizares García in her PhD thesis \cite{ana}, who derived the classical macroscopic model for chemotaxis, the \emph{Keller-Segel} equation, from a microscopic model for the amoeba \emph{Dictyostelium Discoideum}.
 The master's thesis focuses on studying what happens if in the microscopic system of \cite{ana} also the molecules of the chemical stimuli are taken into account as a different population of individuals.
 
 [[put some pictures of some papers]]
 
 
-\section{Taxis, τάξις}
+\section{Chemotaxis...}
 
-\emph{Chemotaxis} (from the Ancient Greek "χημεία", for "chemistry" - actually "transmutation" - and "τάξις", meaning "order" or "arrangement") is defined as the movement of an organism (or a cell, or even some sub-cellular component \cite{ct-on-subcellular-level}) in response to a chemical substance.
-It is one of the many "τάξις" observed in nature (\eg \emph{phototaxis}, the movement in response to light or \emph{thermotaxis} for temperature)
-
-
-
-
-
-
-
-
+In Ancient Greek "τάξις" means "order" or "arrangement", but in biology it is used to indicate the movement of an organism in response to an external stimulus.
+Depending on the type of such trigger the phenomenon is classified into different subcategories, \eg \emph{phototaxis} or \emph{thermotaxis}.
+The τάξις can be \emph{positive}, meaning directed towards the stimulus, or \emph{negative}, away from it.
+\emph{Chemotaxis} (from the Ancient Greek "χημεία", meaning "chemistry" - or more precisely "transmutation") is the specific case where the reason of the movement is some chemical substance.
+Many lifeforms rely on this mechanism for their survival, the most simple examples being unicellular organisms searching for nutrients (\eg the bacterium \emph{Escherichia coli} follows sources of sugar (\cite{ct-ecoli-glucose}) or fleeing toxins (\eg \emph{Escherichia coli} being repelled by acetate \cite{negative-chemotaxis}).
+More evolved paradigms can be observed in multicellular organisms, \eg the leukocytes are able to find infections by following the fMLF, a formyl peptide produced in the degradation of bacteria and host cells (\cite{ct-immune-system}).
+The phenomenon grows in complexity when the \emph{chemotaxin}, the substance triggering the reaction, is not just a byproduct of another external reaction independent from the population being stimulated, but is secreted actively (by the population itself or by an external actor) with what is often described as a form of signaling.
+In multicellular organisms many kinds of growth are controlled in this way: the axons of neurons develop following extra-cellular signaling substances (\cite{ct-axons-neurons}), as it is the case for the sprouting of new capillaries (\emph{angiogenesis}).
+The latter example is particularly relevant in medicine because many tumors secrete the corresponding chemotaxin VEGF (Vascular Endothelial Growth Factor), stimulating the proliferation of blood vessels in their direction and effectively hacking the body machinery to steal nutrients (\cite{ct-cancer-angiogenesis}).
+Other important examples from medicine can be found in \cite{ct-diseases}.
 
 \subsection{...and Dictyostelium Discoideum}
 
+In order to study the complex phenomena of chemotaxis in eukaryots
 
-
-
-
-[[mention here something regarding the annihilation and creation of particles]]
 
 
 
 
 
-One finds such response also with other external stimuli
 
 Furthermore a non proper chemotactical behaviour of leukocytes and lymphocytes can produce various diseases such as 
 
 
 \cite{chemotaxis-cancer-and-simpler-models}
 
-
-
-\cite{chemotaxis-cancer-and-simpler-models}
-
-[[correct]]
 
 Sometimes an image is worthy more than a thousand words. So please enjoy the the video "" which should have $1000* frame per second$ words per second to offer you about the phenomenon described.
 
@@ -105,12 +71,22 @@ The animals form therefore many aggregated groups, which then compact into slime
 
 \section{Problem statement and objectives}
 
+
+[[ speak of creation and annihilation of particles, of propagation of chaos]]
+
+[[mention here something regarding the annihilation and creation of particles]]
+
+
 [[add methodology somewhere]]
 
 In this master thesis the objective is to create a stochastic individual based model for the aggregation phase and find the effective equations for it, \ie the continuouty equations which regulate the evolution of the population density over time.
 This model is thought to be an expansion of the one defined by \citep{ana}, but with the difference that now the amoebas are not modelled as attracting each others with a Coulomb potential, but rather as attracted with a Gaussian potential to the cAMP molecules, which are created by the \emph{dd}s only in specific instants in time.
 
 \subsection{Methodology}
+
+
+[[explain Keller-Segel it in the introduction]]
+
 
 \section{Old literature and originality of the thesis: creation and annihilation of particles in such context}
 %Stochastic individual based model of Ana, without creation and annihilation of particles
