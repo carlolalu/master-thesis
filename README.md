@@ -29,3 +29,6 @@ etc..)
 2. the space of solution: we have solutions into the space with infinite 
 sequences, but how does hinder that the solution might have a finite 
 number of particles at some time $t$?
+
+3. Should I take away the parts in which I construct the derivative of 
+the Lebesgue integral?
