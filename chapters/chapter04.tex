@@ -693,52 +693,7 @@ The second one is a confirmation of an intuitive fact:
 \end{lemma}
 
 \begin{proof}
-	Consider
-	\begin{equation}
-		\Zhi(t) := \int_0^t \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s,
-	\end{equation}
-	the $i$-th coordinate of the object of interest.
-	In order to prove our thesis we will prove that $\Zhi(t)$ is differentiable and that its derivative is the \rhs(\ref{ch4:derivation-of-lebesgue}).
-	Then our thesis is that for all $t$
-	\begin{align*}
-		\exists \quad \lim_{h\rightarrow 0^+} \frac{\Zhi(t+h) - \Zhi(t)}{h} 
-		&= \lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
-		\\
-		&= \lim_{h\rightarrow 0^+} \frac{1}{
-				\lebsge((t, t+ h))
-			} \int_{(t,t+h)} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d\lebsge(s)
-		\\
-		&= \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
-	\end{align*}
-	To prove this we just need to exploit the Lebesgue differentiation theorem (see \autocite[Theorem 3.21]{folland}), \ie check that the integrand is in $\Lpspace^1_{loc}$ (true by the definition of the solutions $\sol$ and $\mfsol$) and that $\{E_h\}_{h>0} := \big\{ (t,t+h) \big\}_{h>0}$ is a collection of Borel sets shrinking nicely to $t$.
-	The latter condition means to verify that:
-	\begin{itemize}
-		\item $\forall h. \; E_h \subseteq B_t(h)$, the ball of radius $h$ centered in $t$.
-		\item $\exists \alpha >0$ such that $\forall h. \; \lebsge (E_h) > \alpha \lebsge (B_t(h))$.
-	\end{itemize}
-	
-		\begin{figure}[h]
-		\begin{tikzpicture}
-		\end{tikzpicture}
-		\caption{[[[HERE DRAW TIKZ FIGURE]]]}
-		\end{figure}
-	
-	The verification is trivial: for each $h>0$ we have that $E_h = (t,t+h) \subseteq (t-h, t+h) = B_t(h)$ and that 
-	\begin{equation}
-		\lebsge(E_h) = h = \frac{1}{2} \cdot 2h = \frac{1}{2} \lebsge(B_t(h)) > \frac{1}{3} \lebsge(B_t(h)).
-	\end{equation}
-	
-	Then the Lebesgue differentiation theorem guarantees us that
-	
-	\begin{align*}
-		\lim_{h\rightarrow 0^+} \frac{1}{h} \int_{t}^{t+h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d s
-		&= \lim_{h\rightarrow 0^+} \frac{1}{
-			\lebsge(E_h)
-		} \int_{E_h} \drift_{p;i}(s, \sol_s) - \mfdrift_{p;i}(s, \mfsol_s) d\lebsge(s)
-		\\
-		&= \drift_{p;i}(t, \sol_t) - \mfdrift_{p;i}(t, \mfsol_t)
-	\end{align*}
-	almost everywhere, and this concludes the proof.
+	Just apply the Lebesgue differentiation theorem (see \autocite[Theorem 3.21]{folland}).
 \end{proof}
 
 Then we can write
