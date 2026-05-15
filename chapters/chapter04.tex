@@ -101,7 +101,7 @@ For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ 
 	\begin{itemize}
 		\item $g(0)=0$
 		\item $g$ is \cadlag
-		\item  For each $T>0$, $g$ has finite amount of discontinuouity in $[0,T]$
+		\item  For each $T>0$, $g$ has finite amount of discontinuity in $[0,T]$
 	\end{itemize}
 	Furthermore, considering $g(t-) := \lim_{s \rightarrow t^-} g(s)$ and $g(t+) := \lim_{s \rightarrow t^+} g(s)$, we define the set $\SkoroFUp$ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$.
 \end{definition}
@@ -211,7 +211,7 @@ and $g_\star \in \SkoroFUp$.
 \end{lemma}
 
 \begin{proof}
-	Let $\{\tau_1, \ldots, \tau_m\}$ be the set of discontinuouities of $g$ in $[0,t]$, and define $\tau_0:=0, \tau_{m+1} := t$.
+	Let $\{\tau_1, \ldots, \tau_m\}$ be the set of discontinuities of $g$ in $[0,t]$, and define $\tau_0:=0, \tau_{m+1} := t$.
 	Define then, for each $i\in\{1,\ldots, m\}$, the function
 	\begin{equation*}
 		g_i (s) := \1_{[\tau_{i-1}, \tau_i)}(s) g(s) + \1_{\{ \tau_i\}}(s) g(\tau_i-)
@@ -251,7 +251,7 @@ and $g_\star \in \SkoroFUp$.
 	Therefore we have that $g_\star(t) = \sup_{[0,t]} g = \max_{[0,t]} g$.
 	Let us now prove that $g_\star$ is an element of $\SkoroFUp$.
 	\begin{claim}
-		The set of discontinuouities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuouities of $g$.
+		The set of discontinuities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuities of $g$.
 	\end{claim}
 	
 	\begin{figure}[h]
@@ -318,7 +318,7 @@ and $g_\star \in \SkoroFUp$.
 		Therefore we need only to show that such left limit exists.
 		
 		Let $(t_n)_n$ be a sequence of points such that $\forall n. \: t_n \leq t_{n+1} <t$ and $t_n \longrightarrow t$.
-		Since the set of discontinuouities of $g$ on $[0,T]$ is finite, then it is discrete, thus there is an $\epsilon>0$ such that $g$ (and hence $g_\star$) are $\Cspace^0$ on $U_\epsilon^- := (t-\epsilon, t)$ and on $U_\epsilon^+:= (t,t+\epsilon)$.
+		Since the set of discontinuities of $g$ on $[0,T]$ is finite, then it is discrete, thus there is an $\epsilon>0$ such that $g$ (and hence $g_\star$) are $\Cspace^0$ on $U_\epsilon^- := (t-\epsilon, t)$ and on $U_\epsilon^+:= (t,t+\epsilon)$.
 		We then observe, that since $(t_n)$ is a non-decreasing sequence and $g_\star$ is a non-decreasing function, we have that 
 		\begin{equation}
 			g_\star (t_n) \leq g_\star ( t_{n+1} )
