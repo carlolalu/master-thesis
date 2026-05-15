@@ -12,12 +12,12 @@ In words we can describe this design in this way:
 \item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coefficient $\sigma_\amba$
 \item Each amoeba at time $t=0$ is in the same random position $\adens_0 \in \Lpspace^1 \cup \Lpspace^\infty$.
 \item Each amoeba $\amba^p$ attracted to the cAMP molecules with a potential $\potential: \R^d \longrightarrow \R_+$. We require that $\nabla \potential =:\attraction$ is Lebesgue-integrable (\ie $\in \Lpspace^1$), essentialy bounded (\ie $\in \Lpspace^\infty$), $\Cspace^\infty$ and globally Lipschitz. One could think of $\potential$ as a $d$-dimensional Gaussian to imagine something more concrete.
-\item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ indipendent of $p$
+\item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ independent of $p$
 \item Each cAMP molecule is born at the position of its parent and is subjected from that time on to its own Brownian motion with constant diffusion coefficient $\sigma_\camp$
-\item All the Brownian motions for each particle are indipendent from each others
+\item All the Brownian motions for each particle are independent from each others
 \end{enumerate}
 
-Let us see all of this in equations. Let $N\in\N$ be the number of amoebas, and fix $N$ indipendent Poisson processes $(\hmactive^p)_{i=1}^N$ of parameter $\lambda$.
+Let us see all of this in equations. Let $N\in\N$ be the number of amoebas, and fix $N$ independent Poisson processes $(\hmactive^p)_{i=1}^N$ of parameter $\lambda$.
 Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, the stopping time
 
 \begin{equation}
@@ -32,7 +32,7 @@ Define for each parent $p \in \{1,\ldots,N\}$ and each generation $g \in \N$, th
 \caption{[[HERE ILLUSTRATION OF WHAT IS HAPPENING TIMEWISE]]}
 \end{figure}
 
-Consider a countable collection of indipendent Brownian motions 
+Consider a countable collection of independent Brownian motions 
 
 \begin{equation}
 \{B^{A,p}, B^{C,p,g}\}_{1\leq p\leq N,g\in\N} =:\{B^p, B^{p,g}\}_{p,g}
@@ -457,7 +457,7 @@ This can be visualised as the property that at each birth time $\btime_m$ the pa
 \end{figure}
 \label{ch2:fig:path-bifurcation}
 \item Glueing the local solutions we might ask if for each particle its diffusion is \emph{globally} still a \Bm, or a quasi-\Bm (under the measure $\PrbCondTimes{}{}$).
-The question depends essentially on this: \invquest given two indipendent \Bm $B^1$ and $B^2$ and a stopping time $T$, is it true that the process
+The question depends essentially on this: \invquest given two independent \Bm $B^1$ and $B^2$ and a stopping time $T$, is it true that the process
 \begin{equation*}
 B^{T,1,2}_t := B_{t \wedge T} ^1 + \1_{t\geq T} (B_t^2 - B_T^2)
 \end{equation*}
