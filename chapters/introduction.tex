@@ -1,24 +1,31 @@
 [[rewrite according to this layout: background and context, problem statement, research objectives/questions, brief methodology overview, why my work matters, thesis roadmap]]
 
+\epigraph{
+	\textit{
+		If nature were not beautiful it would not be worth knowing, and life would not be worth living.
+	}
+}{
+	H.P.
+, \cite{science-and-hypothesis}}
 
 
-This master's thesis aim is to analyze mathematically the phenomenon of \emph{chemotaxis}, \ie the movement of an organism in response to a chemical stimulus.
+This master's thesis' aim is to analyze mathematically the phenomenon of \emph{chemotaxis}, \ie the movement of an organism in response to a chemical stimulus.
 This is a mechanism used by a considerable amount of microorganisms (various bacteria and amoebas as well as some eukaryots) to search for nutrients and escape toxins, but also by cells of a multicellular organisms for more complex tasks (\eg leukocytes rely on it to find infections in the body \cite{chemotaxis-leukocytes}).
-Naturally, the study of this process has wide applications in medicine, since the variation of the chemotactical behaviour of various human cells can help the onset of a number of diseases 
+Naturally, the study of this process has wide applications in medicine, since the variation of the chemotactical behaviour of various human cells can help the onset of a number of illnesses 
 
-([[add here quote]]), 
+
+[[add cooler examples of chemotactically triggered blood vessels]]
+(\eg some eye diseases are caused by the irregular growth of blood vessels, which is chemotactically triggered [[add here quote]]), 
 
 but also because many drugs act by altering the chemotactic behaviour of specific agents (see for example \cite[Conclusions and perspectives]{cancer-medicine-chemotaxis}).
-There is considerable research on this theme on a cellular level (how does the microorganism perceive the chemical stimulus? Which receptors are responsible for it? \cite{ct-chemical-mechanisms}), but we are interested to inquire about the behaviour of a population of microorganisms: what happens when all these corpuscles start to follow a specific chemical stimulus? What will we observe about the spatial distribution of the group, from example through the lenses of a microscope? 
+There is considerable research on this theme on a cellular level (how does the microorganism perceive the chemical stimulus? Which receptors are responsible for it? \cite{ct-chemical-mechanisms}), but we are interested to inquire about the behaviour of a population of microorganisms: what happens when all these corpuscles start to follow a specific chemical stimulus? What will we observe about the spatial distribution of the group, for example through the lenses of a microscope? 
 
 [[put here pictures of some papers through the lenses of a microscope)]]
 
-()
-
 
 When examining mathematically the phenomenon on such scale, there are two main point of view:
-one can see the population macroscopically, as a continuum, representing it therefore with a density $\adens$, or can see it microscopically, \ie as a finite group of individuals $\{\amba\}$.
-Of course it would be optimal that the two description somehow match, meaning that if we construct some empirical density from $\{\amba\}$, this is in some way close to $\adens$, meaning that one can mathematically derive the macroscopic system from the microscopic one.
+one can see the population macroscopically, as a continuum, representing it therefore with a density $\adens$, or can see it microscopically, \ie as a finite group of individuals $\{\amba^1, \ldots, \amba^N\}$.
+Of course it would be optimal that the two descriptions somehow match, meaning that if we construct some empirical density from $\{\amba^1, \ldots, \amba^N\}$, this is in some way close to $\adens$, meaning that one can mathematically derive the macroscopic system from the microscopic one.
 It is common in such cases to speak of \emph{propagation of chaos} and of \emph{effective equations} of the microscopic model.
 This procedure is often seen as adding insights and validity to a macroscopic description.
 This was the topic of Cañizares García in her PhD thesis \cite{ana}, who derived the classical macroscopic model for chemotaxis, the \emph{Keller-Segel} equation, from a microscopic model for the amoeba \emph{Dictyostelium Discoideum}.
@@ -33,32 +40,47 @@ In Ancient Greek "τάξις" means "order" or "arrangement", but in biology it 
 Depending on the type of such trigger the phenomenon is classified into different subcategories, \eg \emph{phototaxis} or \emph{thermotaxis}.
 The τάξις can be \emph{positive}, meaning directed towards the stimulus, or \emph{negative}, away from it.
 \emph{Chemotaxis} (from the Ancient Greek "χημεία", meaning "chemistry" - or more precisely "transmutation") is the specific case where the reason of the movement is some chemical substance.
-Many lifeforms rely on this mechanism for their survival, the most simple examples being unicellular organisms searching for nutrients (\eg the bacterium \emph{Escherichia coli} follows sources of sugar (\cite{ct-ecoli-glucose}) or fleeing toxins (\eg \emph{Escherichia coli} being repelled by acetate \cite{negative-chemotaxis}).
-More evolved paradigms can be observed in multicellular organisms, \eg the leukocytes are able to find infections by following the fMLF, a formyl peptide produced in the degradation of bacteria and host cells (\cite{ct-immune-system}).
-The phenomenon grows in complexity when the \emph{chemotaxin}, the substance triggering the reaction, is not just a byproduct of another external reaction independent from the population being stimulated, but is secreted actively (by the population itself or by an external actor) with what is often described as a form of signaling.
-In multicellular organisms many kinds of growth are controlled in this way: the axons of neurons develop following extra-cellular signaling substances (\cite{ct-axons-neurons}), as it is the case for the sprouting of new capillaries (\emph{angiogenesis}).
+Many lifeforms rely on this mechanism for their survival, the most simple examples being unicellular organisms searching for nutrients (\eg the bacterium \emph{Escherichia coli} follows sources of sugar, \cite{ct-ecoli-glucose}) or fleeing toxins (\eg \emph{Escherichia coli} being repelled by acetate, \cite{negative-chemotaxis}).
+More evolved paradigms can be observed in multicellular organisms: white blood cells are able to find infections by following formyl peptides, that is molecular byproducts of many bacteria (\cite{ct-immune-system}).
+The phenomenon is even more interesting when the \emph{chemotaxin}, the substance triggering the reaction, seems to be released as a form of signaling.
+Many kinds of growth are controlled in this way: the axons of neurons develop following extra-cellular signaling substances (\cite{ct-axons-neurons}), as it is the case for the sprouting of new capillaries (\emph{angiogenesis}).
 The latter example is particularly relevant in medicine because many tumors secrete the corresponding chemotaxin VEGF (Vascular Endothelial Growth Factor), stimulating the proliferation of blood vessels in their direction and effectively hacking the body machinery to steal nutrients (\cite{ct-cancer-angiogenesis}).
 Other important examples from medicine can be found in \cite{ct-diseases}.
 
 \subsection{...and Dictyostelium Discoideum}
 
-In order to study the complex phenomena of chemotaxis in eukaryots
+In order to study a phenomena occurring so frequently and in so many forms, it is necessary to find a case free of great complications and which can be observed in a controlled environment: the amoeba \emph{Dictyostelium discoideum} is perfect for such a role.
+This organism proliferates till there are available nutrients.
+When these finish, the cells first disperse, searching for other food resources, but if after a while these are not found, some individuals start to secrete cAMP (3',5'-cyclic adenosine monophosphate).
+Such substance act as a chemical signal, triggering the amoebas who come in contact to it to direct their movement towards its higher concentration and to release other cAMP themselves.
+This chemotactical mechanism aggregates the microorganisms into many \emph{slugs}, each formed by several thousands members; these lumps then migrate to the appropriate spot to undergo the last metamorphosis: they produce \emph{fruiting bodies} which then release spores and die.
+The spores become then new individuals, and the life cycle is closed.
+Since an image is worthy more than a thousand words, I advise you to take a look at \cite{ze-frank}, for an explanation which is not only worthy more than $10\cdot 3600 \cdot \text{fpm}$ words, but is also aesthetically pleasing.
+
+The \emph{Dictyostelium discoideum} is a certain sense a very simple example of many subject of studies, \eg he undergoes a life cycle which spans both through a unicellular phase and a 
+
+
+, it has been the subject of extensive research in many fields, 
+
+
+\cite{guide-pdes-chemotaxis}
+
+
+\cite{dd-bioinfo-lj}
 
 
 
 
 
 
-
-Furthermore a non proper chemotactical behaviour of leukocytes and lymphocytes can produce various diseases such as 
 
 
 \cite{chemotaxis-cancer-and-simpler-models}
 
-
 Sometimes an image is worthy more than a thousand words. So please enjoy the the video "" which should have $1000* frame per second$ words per second to offer you about the phenomenon described.
 
-Dictyostelium discoideum as an easy example for the selection of facts \cite[Ch.1: The selection of facts]{science-and-hypothesis}
+
+
 
 
 An exhausting, quick (and rather easthetically pleasing and entertaining) explanation of its lifecycle is provided by the scientific youtube channel "Ze Frank" in his video \citep{ze-frank}.
