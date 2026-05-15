@@ -11,26 +11,21 @@ and git commit that.
 
 - titles of chapters, of the thesis itself
 
+- search for the '[['
+
 ## NOT HIGH PRIORITY
 
 - notation: declare what you use the first time you use it (symbols 
 etc..)
 
-- search for the '[['
-
-- drawings? See `https://www.youtube.com/watch?v=SQYJDKEz0p8`
+- drawings? geogebra
 
 - watch the names of the chapters and of the thesis, and stuff of the kind
 
 ## Ask for theoretical confirmation to peter
 
-1. the conclusion, how you explained his topic
-
-2. the space of solution: we have solutions into the space with infinite 
-sequences, but how does hinder that the solution might have a finite 
-number of particles at some time $t$?
-
-3. Should I take away the parts in which I construct the derivative of 
-the Lebesgue integral?
-
-4. suggestion for the title?
+1. please revision of:
+	1. abstracts,
+	2. introduction
+	3. conclusion
+	4. TITLE
