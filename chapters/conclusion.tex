@@ -7,7 +7,7 @@ Starting from the pulsing wave system \ref{ch7:model:pulsing-waves}, it is clear
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
 		\\
-		\partial_t \adens &= -\nabla \left[ \left( \nabla \potential
+		\partial_t \adens &= \nabla \left[ \left( \attraction
 		\star \int_0^t \NumCampRelease\lambda \cdens_t^\tau 	d \tau
 		\right)
 		\adens
@@ -42,7 +42,7 @@ Then, the only parameters which do have a say also macroscopically are the numbe
 With one simple idea for both parameters, we can say that the speed $\NumCampRelease \cdot \lambda$ at which the chemoattractant is released is telling us how much $\partial_t \adens$ is proportional to the member
 
 \begin{equation*}
-	\left[ \left( \nabla \potential
+	\left[ \left( \attraction
 	\star \int_0^t \cdens_t^\tau 	d \tau
 	\right)
 	\adens
@@ -54,8 +54,8 @@ This happens because by integrating over $[0,t]$ in $\tau$ the expression $\cden
 This is even more evident if we substitute $\cdens_t^\tau$ with its analytical solution given by \ref{ch3:eq:eff-eq-camp-analytical-sol} and obtain the \PIDE \ref{ch7:PIDE}:
 
 \begin{equation*}
-	\partial_t \adens =  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
-	\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
+	\partial_t \adens =  \NumCampRelease\lambda \nabla \left[ \left( \int_0^t
+	\attraction \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	d \tau
 	\right)
 	\adens
@@ -125,8 +125,8 @@ Then in the limit case we do obtain
 and therefore the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} becomes
 
 \begin{equation*}\label{conc:sigmaC-goes-infty}
-	\partial_t \adens =  - \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
-	\potential \star 0 \star \adens(\tau, \cdot) 
+	\partial_t \adens =  \NumCampRelease\lambda \nabla \left[ \left( \int_0^t
+	\attraction \star 0 \star \adens(\tau, \cdot) 
 	d \tau
 	\right)
 	\adens
@@ -146,7 +146,7 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 
 \begin{align*}
 	&\quad
-		- \NumCampRelease\lambda \nabla \left[ \left(
+		 \NumCampRelease\lambda \nabla \left[ \left(
 		\attraction
 		\star	
 		\int_0^t
@@ -157,7 +157,7 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 		\adens
 		\right]\
 	\approx\
-		- \NumCampRelease\lambda \nabla \left[ \left(
+		\NumCampRelease\lambda \nabla \left[ \left(
 		\attraction
 		\star	
 		\int_0^t
@@ -170,7 +170,7 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 		=
 	\\
 	&=
-		- \NumCampRelease \nabla \left[ \left( 
+		\NumCampRelease \nabla \left[ \left( 
 		\attraction \star 
 		\int_0^t
 		\frac{\lambda}{
@@ -208,7 +208,7 @@ has a singularity in $x=0$ and descend rapidly to $0$ for $x\rightarrow\infty$, 
 In such case, the effective equation would become
 
 \begin{equation}
-	\partial_t \adens = - \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens
+	\partial_t \adens = \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
 which is analogous to the equation \ref{conc:ANA-macro-amoebas-in-1-equation} from \cite{ana}.
@@ -230,7 +230,7 @@ In such case the macroscopic description of the amoebas' density becomes
 
 \begin{equation}\label{conc:sigmaC-goes-0}
 	\begin{aligned}
-		\partial_t \adens &=  - \overbrace{
+		\partial_t \adens &=  \overbrace{
 			\NumCampRelease\lambda
 		}^{=:\chi}
 		\nabla \left[ \left( \nabla \int_0^t
@@ -245,7 +245,7 @@ In such case the macroscopic description of the amoebas' density becomes
 		\bigtriangleup \adens
 		\\
 		&=
-		- \chi 
+		\chi 
 		\nabla \left[ \left( 
 		\attraction
 		\star 

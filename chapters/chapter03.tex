@@ -538,6 +538,7 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 \begin{aligned}
 \partial_t \adens(t, x) 
 &\footnotemark[1]= 
+-
 	\sum_{i=1}^d \partial_{x_i} 
 		\left[
 			\mfdrift_{p;i}(t,x) \adens(t,x)
@@ -546,7 +547,8 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 =  \sum_{i=1}^d \partial_{x_i} 
 		\left[
 			\big( 
-				\underbrace{\attraction_i}_{\partial_{x_i} \potential}
+				\underbrace{\attraction_i
+					}_{-\partial_{x_i} \potential}
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\big)
 			\adens
@@ -556,31 +558,31 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 &= \sum_{i=1}^d
 		\left[
 			 \partial_{x_i} \left( 
-				\partial_{x_i} \potential
+				-\partial_{x_i} \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
 			+
 			 \left( 
-				\partial_{x_i} \potential
+				- \partial_{x_i} \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\partial_{x_i} \adens
 		\right] + \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= \left( \bigtriangleup \potential
+&= \left( - \bigtriangleup \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
 			+
 			 \left( 
-				\nabla \potential
+				- \nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\nabla \adens
 		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= \nabla \left[ \left( \nabla \potential
+&= \nabla \left[ \left( \attraction
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -593,14 +595,14 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 Expressing such equations with the analytical solution of $\cdens$ (\ref{ch3:eq:eff-eq-camp-analytical-sol}) this becomes
 
 \begin{align*}
-= \nabla \left[ \left( \nabla \potential
+= \nabla \left[ \left( \attraction
 				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
 			\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
 =  \lambda \nabla \left[ \left(
-			\int_0^t  \nabla \potential \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
+			\int_0^t  \attraction \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
 			\right]
@@ -646,7 +648,7 @@ where $\cdens_t^\tau$ is defined by the correspondent effective equations:
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+\partial_t \adens &= \nabla \left[ \left( \attraction
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -675,8 +677,8 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
-		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
+\partial_t \adens &=  \lambda \nabla \left[ \left( \int_0^t
+		\attraction \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	 	d \tau
 			\right)
 			\adens

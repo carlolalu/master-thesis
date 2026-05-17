@@ -508,7 +508,7 @@ and the respective effective equations are given by
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
 		\\
-		\partial_t \adens &= \nabla \left[ \left( \nabla \potential
+		\partial_t \adens &= \nabla \left[ \left( \attraction
 		\star \int_0^t \NumCampRelease\lambda \cdens_t^\tau 	d \tau
 		\right)
 		\adens
@@ -537,8 +537,8 @@ or, expressing the density of cAMP molecules analytically (with the heat kernel,
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
 		\\
-		\partial_t \adens &=  \NumCampRelease\lambda \nabla \left[ \left( \nabla \int_0^t
-		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
+		\partial_t \adens &=  \NumCampRelease\lambda \nabla \left[ \left( \int_0^t
+		\attraction \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 		d \tau
 		\right)
 		\adens
