@@ -416,34 +416,34 @@ Let us calculate now the case for the amoebas, using our candidate for the effec
 		}{\mfamba_t^p=x, }
 	\;}{\mfamba_t^p=x}
 \\
-&= \ECond{\; 
+&= - \ECond{\; 
 		\ECondTimes{
 			\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} \attraction(\mfamba_t^p - \mfcamp_t^{p,g}) 
 		}{\mfamba_t^p=x, }
 	\;}{\mfamba_t^p=x}
 \\
-&= \E{\; 
+&= - \E{\; 
 		\frac{1}{N} \sum _{p = 1}^{N} \sum_{g = 1}^{\hmactive_t^p} 
 		\ECondTimes{
 			\attraction(x - \mfcamp_t^{p,g}) 
 		}{}
 	\;}
 \\
-&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+&= - \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
 		\sum_{g = 1}^{\hmactive_t^p} 
 		\int 
 			\attraction(x - y) 
 			d\PrbCondTimes{\mfcamp_t^{p,g} = y}
 	\;}
 \\
-&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+&= - \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
 		\sum_{g = 1}^{\hmactive_t^p} 
 		\int 
 			\attraction(x - y) 
 			\cdens_t^{\btime^{p,g}}(y)
 		dy
 	\;}\
-= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+= - \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
 		\sum_{g = 1}^{\hmactive_t^p} 
 			\left( \attraction \star \cdens_t^{\btime^{p,g}} \right) (x)
 	\;}
@@ -453,17 +453,17 @@ Let us calculate now the case for the amoebas, using our candidate for the effec
 Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim \btime^{1,g}$, therefore
 
 \begin{align*}
-&= \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
+&= - \frac{1}{N} \sum _{p = 1}^{N} \E{\; 
 		\sum_{g = 1}^{\hmactive_t^1} 
 			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 	\;}
 \:=\: 
-\E{\; 
+- \E{\; 
 		\sum_{g = 1}^{\hmactive_t^1} 
 			\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 	\;}
 \\
-&= \E{\; 
+&= - \E{\; 
 		\sum_{g = 1}^{\infty} 
 		\underbrace{
 			\overbrace{
@@ -479,22 +479,22 @@ Now recall that $\hmactive^p \sim \hmactive^1$ and thus also $\btime^{p,g} \sim 
 Since the argument in the expectation value is coordinate-wise positive, we can freely extract the infinite sum:
 
 \begin{align*}
-&= \sum_{g = 1}^{\infty}
+&= - \sum_{g = 1}^{\infty}
 	\E{\; \1_{\btime^{1,g} \leq t}
 		\left( \attraction \star \cdens_t^{\btime^{1,g}} \right) (x)
 	\;}
-= \sum_{g = 1}^{\infty}
+= - \sum_{g = 1}^{\infty}
 	\int
 		\1_{\tau \leq t}
 		\left( \attraction \star \cdens_t^{\tau} \right) (x)
 	d \underbrace{\Prb ( \btime^{1,g} = \tau )}_{\Gma_{\lambda, g}}
 \\
-&= \sum_{g = 1}^{\infty}
+&= - \sum_{g = 1}^{\infty}
 	\int_0^t
 		\left( \attraction \star \cdens_t^\tau \right) (x)
 	\frac{\lambda^g}{(g-1)!} x^{g-1} \; e^{ - \lambda x}
 	d \tau
-= \int_0^t
+= - \int_0^t
 		\left( \attraction \star \cdens_t^\tau \right) (x)
 		\lambda
 		\underbrace{
@@ -503,11 +503,11 @@ Since the argument in the expectation value is coordinate-wise positive, we can 
 		e^{ - \lambda x}
 	d \tau
 \\
-&= \lambda \int_0^t
+&= -\lambda \int_0^t
 		\left( \attraction \star \cdens_t^\tau \right) (x)
 	d \tau
 	=
-	\left( 
+	- \left( 
 		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
 	\right) (x) 
 	\quad
@@ -523,9 +523,11 @@ With these calculations we have that the mean-field amoebas are the solution of 
 \begin{aligned}
 \mfamba_t^0 &\sim \adens_0
 \\
-\mfamba_t^p &= \int_0^t \left( 
-		\attraction \star \int_0^s \lambda \cdens_t^\tau 	d \tau
-	\right) (\mfamba_t^p) dt + \diffusion_A B_t^p
+\mfamba_t^p &= 
+	\mfamba_t^0 
+	- \int_0^t \left( 
+		\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
+	\right) (\mfamba_s^p) ds + \diffusion_A B_t^p
 \end{aligned}
 \right.
 \end{equation}
@@ -536,12 +538,12 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 \begin{aligned}
 \partial_t \adens(t, x) 
 &\footnotemark[1]= 
-	- \sum_{i=1}^d \partial_{x_i} 
+	\sum_{i=1}^d \partial_{x_i} 
 		\left[
 			\mfdrift_{p;i}(t,x) \adens(t,x)
 		\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
-= 	- \sum_{i=1}^d \partial_{x_i} 
+=  \sum_{i=1}^d \partial_{x_i} 
 		\left[
 			\big( 
 				\underbrace{\attraction_i}_{\partial_{x_i} \potential}
@@ -551,7 +553,7 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 		\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= - \sum_{i=1}^d
+&= \sum_{i=1}^d
 		\left[
 			 \partial_{x_i} \left( 
 				\partial_{x_i} \potential
@@ -566,11 +568,11 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 			\partial_{x_i} \adens
 		\right] + \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= -\left( \bigtriangleup \potential
+&= \left( \bigtriangleup \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
-	-
+			+
 			 \left( 
 				\nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
@@ -578,7 +580,7 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 			\nabla \adens
 		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
 \\
-&= -\nabla \left[ \left( \nabla \potential
+&= \nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -588,16 +590,16 @@ and $\adens$ is therefore given by the Fokker-Planck equation (\ref{ch3:fokker-p
 \end{equation}
 \footnotetext[1]{Recall the notation for the $1$-dimensional components of the drift and diffusion: \ref{app:notation}.}
 
-If we would decide to express such equations with the analytical solution of $\cdens$ (\ref{ch3:eq:eff-eq-camp-analytical-sol}) this would become
+Expressing such equations with the analytical solution of $\cdens$ (\ref{ch3:eq:eff-eq-camp-analytical-sol}) this becomes
 
 \begin{align*}
-= -\nabla \left[ \left( \nabla \potential
+= \nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
 			\right]
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
-=  -\lambda \nabla \left[ \left(
+=  \lambda \nabla \left[ \left(
 			\int_0^t  \nabla \potential \star \heatkernel_{t-\tau}^{D_\camp} \star \adens(t, \cdot) 	d \tau
 			\right)
 			\adens
@@ -627,7 +629,8 @@ Then our whole system of mean-field particles is given by
 \begin{equation}\label{ch3:MF-particles}
 \left\{
 \begin{aligned}
-\mfamba_t^p &= \adens_0 + \int_0^t \left( 
+\mfamba_t^p &= \adens_0 
+	- \int_0^t \left( 
 		\attraction \star \int_0^s \lambda \cdens_s^\tau 	d \tau
 	\right) (\mfamba_s^p) ds + \diffusion_\amba B_t^p
 \\
@@ -643,7 +646,7 @@ where $\cdens_t^\tau$ is defined by the correspondent effective equations:
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &= -\nabla \left[ \left( \nabla \potential
+\partial_t \adens &= \nabla \left[ \left( \nabla \potential
 				\star \int_0^t \lambda \cdens_t^\tau 	d \tau
 			\right)
 			\adens
@@ -672,7 +675,7 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \begin{aligned}
 \adens(0, \cdot) &= \adens_0
 \\
-\partial_t \adens &=  -\lambda \nabla \left[ \left( \nabla \int_0^t
+\partial_t \adens &=  \lambda \nabla \left[ \left( \nabla \int_0^t
 		\potential \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
 	 	d \tau
 			\right)
@@ -715,6 +718,7 @@ With this view on the problem we make this assumptions regarding the solutions $
 	The mean-field drift $\mfdrift(t,x)$ defined in \ref{ch3:MF-particles} coordinate-wise as
 	\begin{equation*}
 		\mfdrift_p(t,x) = 
+		-
 		 \left( 
 		\attraction \star \int_0^t \lambda \cdens_t^\tau 	d \tau
 		\right) (x)
