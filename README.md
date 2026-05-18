@@ -4,12 +4,8 @@
 - first write the introduction. Take inspiration from Ana, but be less 
 technical, and start from the microscopic model.
 
-- correct the signs in all your stuff
-
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
-
-- add abbreviations
 
 - abstracts
 
@@ -18,9 +14,6 @@ and git commit that.
 - search for the '[['
 
 ## NOT HIGH PRIORITY
-
-- notation: declare what you use the first time you use it (symbols 
-etc..)
 
 - drawings? geogebra
 

@@ -44,11 +44,11 @@ Other important examples from medicine can be found in \cite{ct-diseases}.
 
 In order to study a phenomena occurring so frequently and in so many forms, it is necessary to find a case free of great complications and which can be observed in a controlled environment: the amoeba \emph{Dictyostelium discoideum} is perfect for such a role.
 This organism proliferates till there are available nutrients.
-When these finish, the cells first disperse, searching for other food resources, but if after a while these are not found, some individuals start to secrete cAMP (3',5'-cyclic adenosine monophosphate).
+When these finish, the cells first disperse, searching for other food resources, but if after a while these are not found, some individuals start to secrete cAMP (3',5'-cyclic adenosine monophosphate) waves in quick pulses.
 Such substance act as a chemical signal, triggering the amoebas who come in contact to it to direct their movement towards its higher concentration and to release other cAMP themselves.
 This chemotactical mechanism aggregates the microorganisms into many \emph{slugs}, each formed by several thousands members; these lumps then migrate to the appropriate spot thermotactically to undergo the last metamorphosis: they produce \emph{fruiting bodies} which then release spores and die.
 The spores become then new individuals, and the life cycle is closed.
-Since an image is worthy more than a thousand words, I advise you to take a look at the short documentary \cite{ze-frank} for an informal explanation on this amoeba which is worth more than $10\cdot 3600 \cdot \text{fpm}$ words.
+Since "an image is worthy more than a thousand words", I advise you to take a look at the short documentary \cite{ze-frank} for an informal explanation on this amoeba which is worth more than $10\cdot 3600 \cdot \text{fpm}$ words.
 
 [[here image of the life cycle of disctyostelium discoideum]]
 
@@ -124,31 +124,71 @@ More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergen
 [[should I correct the signs in all my models? Probably yes. It should be a minus in front of every effective equation and of every mesoscopic and microscopic model]]
 
 [[ decide a title for this]]
-\section{What happens if the chemotaxin is explicitly present in the microscopic model?}
+\section{What happens if the chemotaxin is explicitly present in the microscopic description?}
 
-The focus of this master's thesis is to build a microscopic model starting from 
+The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \Bm, and see which consequences does this have on the macroscopic description.
+Can we obtain in this way the Keller-Segel equation \ref{intro:keller-segel-ana-1-equation}? If not, what else do we obtain, and why? Which interpretation can we give to the result?
+
+One would expect this to not find exactly \ref{intro:keller-segel-ana-1-equation}, because the cAMP molecules $\camp^m$, encoded as in our model, do not have a diffusion coefficient (and release frequency) which is inherently much higher than the one of the amoebas.
+Still, one could expect that in some limit case where we let the diffusion coefficient of $\camp^m$ and the Poisson parameter (encoding the spawning frequency) tend to infinity the law \ref{intro:keller-segel-ana-1-equation} appears, or something similar to it.
+As we will see, these hypothesis are both confirmed.
+
+\subsection{Outline}
+
+\paragraph{Chapter 2} In the second chapter we define the microscopic model with $N$ amoebas $\amba^p$ and creation of chemotaxin molecules $\camp^m$.
+Here at each spawning time $\btime_m$ only one molecule $\camp^m$ is released, and $\camp^m$ is moving purely of \Bm with diffusion $\sigma_\camp$.
+Furthermore, we guarantee in this section the existence and uniqueness of a solution for this system.
+
+\paragraph{Chapter 3} In the third chapter we construct a valuable candidate for the effective equations.
+We do so by first calculating the mean-field of the microscopic model $\sol = ( (\amba^p)_p, (\camp^m)_m)$ and considering a set of \iid particles $\mfsol = ( (\mfamba^p)_p, (\mfcamp^m)_m)$ evolving under its influence (the so-called \emph{mean-field particles}).
+Then, calculating the Kolmogorov's forward equation for these objects we obtain the candidate macroscopic equations, of which we call the solution $\adens(t,\cdot) = \adens_t$.
+Furthermore, the chapter explains what does it formally mean that a macroscopic model is derived by a microscopic one, and illustrates the argument used in \cite{ana} to show that a sufficient condition to obtain such result is to show that the microscopic description $\sol$ and the mesoscopic one $\mfsol$ and  are close with a high probability.
+
+\paragraph{Chapter 4 and 5} In the chapter four and five we treat the preliminaries for the final proof of the derivation.
+The chapter four yields a simple formula for the Dini derivation (with respect to time) of the distance between the mesoscopic and the macroscopic description $\norm{\sol_t -\mfsol_t}_\infty$ .
+The chapter five will prove a law of large numbers for the mean-field particles via a "divide et impera" strategy.
+Both chapters develop tools useful in a more general settings than the one 
+
+\paragraph{Chapter 6} This part contains the proof that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
+Here we exploit the result of chapter 3, which states that to obtain a formal derivation of the effective equations it is sufficient to prove:
+
+\begin{proposition}\label{intro:final-result}
+	Let $\sol_t^{(N)}$ be the solution to the microscopic model \ref{ch2:model} and let $\mfsol_t^{(N)}$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
+	Let $T > 0$ and let $0< \delta <\xi <\frac{1}{2}$.
+	Then there exists an $\overline{N}>0$ and an increasing continuous function $\Fup: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
+	\begin{equation}
+		\PrbOf{  
+			\sup_{0 \leq t \leq T}
+			\normp{\infty}{
+				\sol_t^{(N)} - \mfsol_t^{(N)}
+			} 
+			\geq
+			N^{-\cutparameter}
+		}
+		\leq\
+		\Fup(T)\
+		N^{-(\xi-\delta)}
+	\end{equation}
+\end{proposition}
+
+\paragraph{Chapter 7} Here we expand the model treated in the chapter 2: per each random time $\btime_m$ we have $\NumCampRelease$ cAMP molecules released in radial directions with a constant drift $\frac{\cdrift}{N}$.
+Then we do derive the effective equations for this system, which are essentially the same as for the simple model, but with an addend of the equation scaled by a factor $\NumCampRelease$:
+
+\begin{equation}\label{intro:PIDE}
+	\left\{
+	\begin{aligned}
+		\adens(0, \cdot) &= \adens_0
+		\\
+		\partial_t \adens &=  \NumCampRelease\lambda \nabla \left[ \left( \int_0^t
+		\attraction \star \heatkernel_{t-\tau}^{\frac{d\sigma_\camp^2}{2}} \star \adens(\tau, \cdot) 
+		d \tau
+		\right)
+		\adens
+		\right]
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+	\end{aligned}
+	\right.
+\end{equation}
 
 
-
-[[ speak of creation and annihilation of particles, of propagation of chaos]]
-
-[[mention here something regarding the annihilation and creation of particles]]
-
-
-[[add methodology somewhere]]
-
-In this master thesis the objective is to create a stochastic individual based model for the aggregation phase and find the effective equations for it, \ie the continuouty equations which regulate the evolution of the population density over time.
-This model is thought to be an expansion of the one defined by \citep{ana}, but with the difference that now the amoebas are not modelled as attracting each others with a Coulomb potential, but rather as attracted with a Gaussian potential to the cAMP molecules, which are created by the \emph{dd}s only in specific instants in time.
-
-\subsection{Methodology}
-
-\subsection{Old literature and originality of the thesis: creation and annihilation of particles in such context}
-
-\section{Summary of the thesis}
-
-
-[[put here at the end the fact that it is advisable to look at the notation used for regarding constants, functions and norms]]
-
-
-
-
+\paragraph{Conclusion} Here we discuss our results, we compare them with the ones obtained by Ana, and we illustrate the many directions in which one might develop further the research on this topic.
