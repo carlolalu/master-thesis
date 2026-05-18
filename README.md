@@ -4,15 +4,11 @@
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
 
-- abstracts
-
 - titles of chapters, of the thesis itself
 
 - search for the '[['
 
 ## NOT HIGH PRIORITY
-
-- watch the names of the chapters and of the thesis, and stuff of the kind
 
 ## Ask for theoretical confirmation to peter
 
