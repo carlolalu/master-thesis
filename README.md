@@ -8,7 +8,13 @@ and git commit that.
 
 - search for the '[['
 
+- correzioni di BEA!!! E degli altri.
+
+- plan the PARTY
+
 ## NOT HIGH PRIORITY
+
+- disegni? guarda tutorial di geogebra e cerca su internet altri validi sistemi per i plots
 
 ## Ask for theoretical confirmation to peter
 
