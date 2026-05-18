@@ -1,9 +1,6 @@
 # Todo
 
 ## GREAT PRIORITY
-- first write the introduction. Take inspiration from Ana, but be less 
-technical, and start from the microscopic model.
-
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
 
