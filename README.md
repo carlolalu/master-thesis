@@ -12,8 +12,6 @@ and git commit that.
 
 ## NOT HIGH PRIORITY
 
-- drawings? geogebra
-
 - watch the names of the chapters and of the thesis, and stuff of the kind
 
 ## Ask for theoretical confirmation to peter

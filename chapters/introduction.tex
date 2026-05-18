@@ -1,5 +1,3 @@
-[[rewrite according to this layout: background and context, problem statement, research objectives/questions, brief methodology overview, why my work matters, thesis roadmap]]
-
 \epigraph{
 	\textit{
 		If nature were not beautiful it would not be worth knowing, and life would not be worth living.
@@ -14,8 +12,7 @@ This is a mechanism used by a considerable amount of microorganisms (various bac
 Naturally, the study of this process has wide applications in medicine, since the variation of the chemotactical behaviour of various human cells can help the onset of a number of illnesses (\cite{ct-diseases}), but also because many drugs act by altering the chemotactic behaviour of specific agents (see for example \cite[Conclusions and perspectives]{cancer-medicine-chemotaxis}).
 There is considerable research on this theme on a cellular level (how does the microorganism perceive the chemical stimulus? Which receptors are responsible for it? \cite{ct-chemical-mechanisms}), but we are interested to inquire about the behaviour of a population of microorganisms: what happens when all these corpuscles start to follow a specific chemical stimulus? Can we predict what we will observe about the spatial distribution of the group, for example through the lenses of a microscope? 
 
-[[put here pictures of some papers through the lenses of a microscope)]]
-
+%[[put here pictures of some papers through the lenses of a microscope)]]
 
 When examining mathematically the phenomenon on such scale, there are two main point of view:
 one can see the population macroscopically, as a continuum, representing it therefore with a density $\adens$, or can see it microscopically, \ie as a finite group of individuals $\{\amba^1, \ldots, \amba^N\}$.
@@ -23,8 +20,6 @@ Of course it would be optimal that the two descriptions somehow match, meaning t
 For this procedure, which is often seen as adding insights and validity to a macroscopic description, is common to speak of \emph{propagation of chaos} and of \emph{effective equations} of the microscopic model.
 This was the topic of Cañizares García in her PhD thesis \cite{ana}, who derived the classical macroscopic model for chemotaxis, the \emph{Keller-Segel} equation, from a microscopic model for the amoeba \emph{Dictyostelium Discoideum}.
 The master's thesis focuses on studying what happens if one would construct a microscopic system more general than the one of \cite{ana}, where the molecules of the chemical stimuli are taken into account as a different population of individuals spawned at random times.
-
-[[put some pictures of some papers]]
 
 
 \section{Chemotaxis...}
@@ -50,7 +45,7 @@ This chemotactical mechanism aggregates the microorganisms into many \emph{slugs
 The spores become then new individuals, and the life cycle is closed.
 Since "an image is worthy more than a thousand words", I advise you to take a look at the short documentary \cite{ze-frank} for an informal explanation on this amoeba which is worth more than $10\cdot 3600 \cdot \text{fpm}$ words.
 
-[[here image of the life cycle of disctyostelium discoideum]]
+%[[here image of the life cycle of disctyostelium discoideum]]
 
 The \emph{Dictyostelium discoideum} is fairly easy to cultivate in a lab (\cite[Chpater 4]{dd-in-lab}), in some stages of its life is haploid (\ie has a single copy of its DNA) which allows for easy genetic manipulation, and its genome (~34MB) is completely mapped and available to the public (\cite{dd-bioinfo-lj}).
 At the same time it is an eukaryote and presents complex behaviours, such as cell differentiation and apoptosis (programmed cell death) in the non-unicellular phases, thermotaxis in its slug phase (\cite{thermotaxis-dd}).
@@ -81,8 +76,6 @@ Solving analytically for $\cdens$ the system above is resumed in
 \end{equation}
 
 where $\cutoffSinAttraction:=\frac{x}{2\pi \abs{x}^2}$.
-
-[[quote here some paper which links some video to have expanding waves of cAMP, and maybe some youtube video ]]
 
 \subsection{The PhD thesis of Cañizares García}
 
@@ -121,9 +114,7 @@ coupled (\ie with the same \Bm) with the original ones.
 She used the fact that the expression \ref{intro:keller-segel-ana-1-equation} is the \emph{Kolmogorov forward equation} (Fokker-Planck) of \ref{intro:ana-mesoscopic} to obtain the convergence of the aforementioned $\PrbMeas(\R^2)$-valued \rvs by showing that the probability of $(\amba^p)_p$ and $(\mfamba^p)_p$ being far tends to $0$ as $N$ grows to infinity.
 More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergence of this probability to $0$ faster than $N^{-\gamma}$ for every $\gamma > 0$.
 
-[[should I correct the signs in all my models? Probably yes. It should be a minus in front of every effective equation and of every mesoscopic and microscopic model]]
 
-[[ decide a title for this]]
 \section{What happens if the chemotaxin is explicitly present in the microscopic description?}
 
 The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \Bm, and see which consequences does this have on the macroscopic description.

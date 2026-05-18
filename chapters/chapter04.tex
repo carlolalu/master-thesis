@@ -106,13 +106,6 @@ For a general mesoscopic model $\mfsol_t$ which spawn new molecules $\camp_t^m$ 
 	Furthermore, considering $g(t-) := \lim_{s \rightarrow t^-} g(s)$ and $g(t+) := \lim_{s \rightarrow t^+} g(s)$, we define the set $\SkoroFUp$ as the subset of elements $g \in \SkoroF$ such that if $g$ is discontinuous in $t_i$ then $g(t_i-) < g(t_i)$.
 \end{definition}
 
-\begin{figure}[h]
-	\begin{tikzpicture}
-	\end{tikzpicture}
-	\caption{[[[HERE DRAW TIKZ FIGURE WITH a lack of continuouity AT THE RANDOM TIMES with the jump up]]]}
-\end{figure}
-\label{ch4:fig:discontinuous distance}
-
 \begin{remark}
 	Let $g$ be a \cadlag function.
 	Then the condition
@@ -253,13 +246,6 @@ and $g_\star \in \SkoroFUp$.
 	\begin{claim}
 		The set of discontinuities of $g_\star$ is contained in $\{\tau_1, \ldots, \tau_m\}$, the set of discontinuities of $g$.
 	\end{claim}
-	
-	\begin{figure}[h]
-		\begin{tikzpicture}
-		\end{tikzpicture}
-		\caption{[[[HERE DRAW TIKZ FIGURE of g and g star]]]}
-	\end{figure}
-	\label{ch4:fig:sup-of-cadlag-functions}
 	
 	\begin{proof}
 		Let $t$ be a point where $g$ is continuous.
@@ -461,12 +447,7 @@ This will require some preliminary claims to be proved.
 	\end{equation}
 	Then $\xi$ is strictly positive, is $\leq \delta$ and is such that $g(t+\xi) = g_\star (t+ \xi) = g_\star(t + \delta)$.
 \end{claim}
-	\begin{figure}[h]
-	\begin{tikzpicture}
-	\end{tikzpicture}
-	\caption{[[[HERE DRAW TIKZ FIGURE]]]}
-\end{figure}
-\label{ch4:fig:label-to-define}
+
 \begin{proof} We have that $\xi \leq \delta$ is trivially true by definition.
 	
 	\paragraph{$(\logQuest{ \xi > 0 })$} Since $g_\star$ is $\Cspace^0$ on $[t,t+\delta)$, we have that
