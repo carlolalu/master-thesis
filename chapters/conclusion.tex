@@ -85,7 +85,7 @@ or, solving $\cdens_t$ analytically:
 		\partial_t \adens =  \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
-where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the previously mentioned Coulomb-like attraction and $\chi$ is the \emph{chemosensitivity}, namely a positive constant indicating the sensibility of the organisms to the chemoattractant.
+where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the attraction coming from the previously mentioned Coulomb-like potential and $\chi$ is the \emph{chemosensitivity}, namely a positive constant indicating the sensibility of the organisms to the chemoattractant.
 We modeled a slightly different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficients $\diffusion_\amba, \diffusion_\camp$ of the amoebas and of the cAMP molecules are both finite (\ie of comparable order of magnitude).
 We expect that it is possible to prove that the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} is valid also in case of a Coulomb-like potential, so let us ignore the difference regarding $\attraction$ for now.
 Then, to compare the two models, we want to ask what happens to \ref{ch7:PIDE} if we modulate the diffusions coefficient to be analogous to the ones treated in \cite{ana}, \ie when $\lambda >> 1$ and $\diffusion_\camp >> \diffusion_\amba$.
@@ -314,7 +314,7 @@ Of course such ideas definitely need a more rigorous framework to be discussed p
 \subsection{Numerics and simulations on the pulsing wave model}
 It could be an exciting task to search numerical solutions both for the PIDE and for the stochastic system \ref{ch7:model:pulsing-waves}, or to create simulations for the latter one.
 Of course, we expect this not be easy because the PIDEs are generally considered very wild beasts to deal with, and because the system \ref{ch7:EFFECTIVE-EQUATIONS}, as underlined in chapter \ref{ch2}, is too stochastic to be precisely an SDE, therefore one could not directly apply the Euler-Maruyama method to it, but would likely first need to sample the spawning Poisson processes $(\hmactive_t^p)_p$.
-Still, it is not excluded that the author will one day set off on one of such adventures (keep an eye on \href{https://github.com/carlolalu}{this Github profile}).
+Still, it is not excluded that the author will one day set off on one of such adventures (keep an eye on \textbf{\href{https://github.com/carlolalu}{this Github profile}}).
 
 \subsection{More technical and (probably) less interesting questions}
 

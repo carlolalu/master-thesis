@@ -4,15 +4,21 @@
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
 
-- titles of chapters, of the thesis itself
+- revise the title of chapters and of the thesis itself
 
 - search for the '[['
 
-- correzioni di BEA!!! E degli altri.
+- correzioni di bea: should I avoidd repeating twice the stuff in the introduction?
+
+- correzioni di RASHI
+
+- important correzioni di LUCA
 
 - plan the PARTY
 
 - plan german test C1
+
+- plan the work online: abicrash, abacus, etc...
 
 ## NOT HIGH PRIORITY
 
