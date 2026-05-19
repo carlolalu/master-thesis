@@ -43,7 +43,7 @@ When these finish, the cells first disperse, searching for other food resources,
 Such substance act as a chemical signal, triggering the amoebas who come in contact to it to direct their movement towards its higher concentration and to release other cAMP themselves.
 This chemotactical mechanism aggregates the microorganisms into many \emph{slugs}, each formed by several thousands members; these lumps then migrate to the appropriate spot thermotactically to undergo the last metamorphosis: they produce \emph{fruiting bodies} which then release spores and die.
 The spores become then new individuals, and the life cycle is closed.
-Since sometimes an image is worthy more than a thousand words, I advise you to take a look at the informal short documentary \cite{ze-frank}.
+Since sometimes an image is worth a thousand words, I advise you to take a look at the informal short documentary \cite{ze-frank}.
 
 %[[here image of the life cycle of disctyostelium discoideum]]
 
@@ -89,15 +89,15 @@ In equations we have
 		\amba_0^p \sim \adens_0
 \end{equation}
 
-where $B^p: \R_+ \longrightarrow \R^2$ are \iid \Bms (Brownian motions), and at time $t=0$ the microorganisms $\amba_0^p$ are \iid according to the given density $\adens_0$.
+where $B^p: \R_+ \longrightarrow \R^2$ are \iid (independent and identically distributed) \Bm (Brownian motion(s)), and at time $t=0$ the microorganisms $\amba_0^p$ are \iid according to the given density $\adens_0$.
 From this system of SDEs she derived the Keller-Segel equations in their parabolic-elliptic form \ref{intro:keller-segel-ana-1-equation}.
-This means that she proved, under the appropriate conditions to ensure the existence of nice enough solutions for \ref{intro:keller-segel-ana}, that the empirical measure
+This means that she proved, under the appropriate conditions, that the empirical measure
 
 \begin{equation*}
 	\empmeas_t^{\amba,(N)}:= \frac{1}{N}\sum_{p=1}^N \delta_{\amba_t^p}
 \end{equation*}
 
-converges to $\adens_t$ as a \rv (random variable) with values in $\PrbMeas(\R^2)$ (the space of probability measures in $\R^2$) where $\adens_t$ is the solution to \ref{intro:keller-segel-ana-1-equation} with initial condition $\adens_{t=0} = \adens_0$.
+converges to $\adens_t$ as a \rv (random variable(s)) with values in $\PrbMeas(\R^2)$ (the space of probability measures in $\R^2$), where $\adens_t$ is the solution to \ref{intro:keller-segel-ana-1-equation} with initial condition $\adens_{t=0} = \adens_0$.
 Her technique involved the usage of a mesoscopic model given by the \iid \emph{mean-field particles}
 
 \begin{equation}\label{intro:ana-mesoscopic}
@@ -109,7 +109,7 @@ Her technique involved the usage of a mesoscopic model given by the \iid \emph{m
 \end{equation}
 
 coupled (\ie with the same \Bm) with the original ones.
-She used the fact that the expression \ref{intro:keller-segel-ana-1-equation} is the \emph{Kolmogorov forward equation} (Fokker-Planck) of \ref{intro:ana-mesoscopic} to obtain the convergence of the aforementioned $\PrbMeas(\R^2)$-valued \rvs by showing that the probability of $(\amba^p)_p$ and $(\mfamba^p)_p$ being far tends to $0$ as $N$ grows to infinity.
+She used the fact that the expression \ref{intro:keller-segel-ana-1-equation} is the \emph{Kolmogorov forward equation} (Fokker-Planck) of \ref{intro:ana-mesoscopic} to obtain the convergence of the aforementioned $\PrbMeas(\R^2)$-valued \rv by showing that the probability of $(\amba^p)_p$ and $(\mfamba^p)_p$ being far tends to $0$ as $N$ grows to infinity.
 More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergence of this probability to $0$ faster than $N^{-\gamma}$ for every $\gamma > 0$.
 
 
