@@ -115,7 +115,7 @@ More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergen
 
 \section{What happens if the chemotaxin is explicitly present in the microscopic description?}
 
-The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \Bm, and see which consequences does this have on the macroscopic description.
+The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \mbox{B.m.}, and see which consequences does this have on the macroscopic description.
 Can we obtain in this way the Keller-Segel equation \ref{intro:keller-segel-ana-1-equation}? If not, what else do we obtain, and why? Which interpretation can we give to the result?
 
 One would expect this different microscopic framework to not yield exactly \ref{intro:keller-segel-ana-1-equation}, because the cAMP molecules $\camp^m$, encoded as in our model, do not have a diffusion coefficient (and release frequency) which is inherently much higher than the one of the amoebas.
@@ -129,10 +129,10 @@ The creation of particles happens via Poisson-distributed spawning process $(\hm
 Such $\camp^m$ moves purely of \Bm with diffusion $\sigma_\camp$ and attracts the amoebas with a \emph{Gaussian-like} potential $\potential$.
 Furthermore, we guarantee in this section the existence and uniqueness of a solution for this system of almost-SDEs (stochastic differential equations).
 
-\paragraph{Chapter 3} In the third chapter we construct a valuable candidate for the effective equations.
-We do so by first calculating the mean-field of the microscopic model $\sol = ( (\amba^p)_p, (\camp^m)_m)$ and considering a set of \iid particles $\mfsol = ( (\mfamba^p)_p, (\mfcamp^m)_m)$ evolving under its influence (the so-called \emph{mean-field particles}).
-Then, calculating the Kolmogorov's forward equation for these objects we obtain the candidate macroscopic equations, of which we call the solution $\adens(t,\cdot) = \adens_t$.
-Furthermore, the chapter explains what does it formally mean that a macroscopic model is derived by a microscopic one, and illustrates the argument used in \cite{ana} to show that a sufficient condition to obtain such result is to show that the microscopic description $\sol$ and the mesoscopic one $\mfsol$ and  are close with a high probability, namely:
+\paragraph{Chapter 3} In the third chapter we explain what it means formally that a macroscopic model is derived by a microscopic one and we construct a valuable candidate for the first one.
+In order to do so we first calculate the mean-field of the microscopic description $\sol = ( (\amba^p)_p, (\camp^m)_m)$ and we consider a set of \iid particles $\mfsol = ( (\mfamba^p)_p, (\mfcamp^m)_m)$ evolving under the influence this object (we call them \emph{mean-field particles}).
+Then we use the Kolmogorov's forward equation of these as the candidate macroscopic equation, of which we call the solution $\adens(t,\cdot) = \adens_t$.
+Furthermore, the chapter illustrates the argument used in \cite{ana} to prove that a sufficient condition to obtain such result is that the microscopic description $\sol_t$ and the mesoscopic one $\mfsol_t$ remain close with a high probability, namely:
 
 \begin{proposition}\label{intro:final-result}
 	Let $\sol_t^{(N)}$ be the solution to the microscopic model \ref{ch2:model} and let $\mfsol_t^{(N)}$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
@@ -152,6 +152,7 @@ Furthermore, the chapter explains what does it formally mean that a macroscopic 
 		N^{-(\xi-\delta)}
 	\end{equation}
 \end{proposition}
+In the final part of the chapter we hint at possible ways to formally derive a macroscopic description also for the chemotaxin particles $\camp^m$.
 
 \paragraph{Chapter 4 and 5} In the chapter four and five we treat the preliminaries for the final proof of the derivation.
 The chapter four yields a simple formula for the Dini derivation (with respect to time) of the distance between the microscopic and the mesoscopic description, \ie for $\diniu_t ^+\norm{\sol_t -\mfsol_t}_\infty$.
@@ -159,10 +160,10 @@ The chapter five will prove a law of large numbers for the mean-field particles 
 Both chapters develop tools which can be applied in more general settings than the one of this microscopic model.
 
 \paragraph{Chapter 6} This part contains the proof of \ref{intro:final-result} and thus shows that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
-The proof exploits, as previously mentioned, also the preliminaries of chapter 4 and 5.
+The proof exploits the preliminaries of chapter 4 and 5, as previously mentioned.
 
-\paragraph{Chapter 7} Here we expand the model treated in the chapter 2: per each random time $\btime_m$ we have $\NumCampRelease$ cAMP molecules released in radial directions with a constant drift $\frac{\cdrift}{N}$.
-Then we do derive the effective equations for this system, which are essentially the same as for the simple model, but with an addend of the equation scaled by a factor $\NumCampRelease$:
+\paragraph{Chapter 7} Here we expand the model treated in the chapter 2: per each random time $\btime_m$ we have $\NumCampRelease$ chemotaxin molecules released in radial directions with a constant drift $\frac{\cdrift}{N}$.
+Then we derive the effective equations for this system, which are essentially the same as for the simple model, but with an addend of the equation scaled by a factor $\NumCampRelease$:
 
 \begin{equation}\label{intro:PIDE}
 	\left\{
