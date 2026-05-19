@@ -35,7 +35,7 @@ is independent from certain mathematical objects of the microscopic model:
 	\item The effective description is not influenced by the constant deterministic velocity $\cdrift$ of the cAMP molecules.
 	This might seem strange at first glance, but the actual drift for these particles is $\frac{\cdrift}{N}$, which goes to $0$ as $N$ grows to infinity: the result is intuitively justified.
 	\item The system is independent from the choice of the chosen rotations $(\rotation_l)_{l=1}^\NumCampRelease$, meaning that even if every amoeba $\amba_t^p$ at every time $\btime_m$ shoots all its $\NumCampRelease$ children in the same random direction $\cgonia_{m,1}$ (\ie we set $\forall l. \rotation_l = \id$), the macroscopic description remains the same one.
-	This is somehow expected because what counts is that $\cgonia_{m,1}$ is uniformly distributed, and thus each direction $\rotation_l(\cgonia_{m,1})$ is in average equal to $0$.
+	This is somehow expected because what counts is that the \rv $\cgonia_{m,1}$ is uniformly distributed on the $d$-dimensional sphere, and thus each direction $\rotation_l(\cgonia_{m,1})$ is in average equal to $0$.
 \end{itemize}
 
 Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time and the rate $\lambda$ with which such birth time occur.
@@ -49,7 +49,7 @@ With one simple idea for both parameters, we can say that the speed $\NumCampRel
 	\right]
 \end{equation*}
 
-The other thing which we can immediately observe, is the latter member we mentioned represents, in a certain way, a dependence of $\partial_t \adens$ (the present evolution) from the past, namely from all the state of $\adens(\cdot,\cdot\cdot)$ in $[0,t]$.
+The other thing which we can immediately observe, is that the term above represents a dependence of $\partial_t \adens$ (the present evolution) from the past, namely from all the state of $\adens(\cdot,\cdot\cdot)$ in $[0,t]$.
 This happens because by integrating over $[0,t]$ in $\tau$ the expression $\cdens_t^\tau = \cdens^\tau (t,x) $ we are asking what happens at time $t$ to all the cAMP particles created along the times $\tau\in[0,t]$.
 This is even more evident if we substitute $\cdens_t^\tau$ with its analytical solution given by \ref{ch3:eq:eff-eq-camp-analytical-sol} and obtain the \PIDE \ref{ch7:PIDE}:
 
@@ -67,7 +67,7 @@ Here $\adens$ appears also under the integral, and thus the memory effect (the d
 
 \subsection{Comparison with the original paper of Cañizares García and the equation of Keller-Segel}
 
-The original paper from Cañizares García (\cite{ana}) modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and found the notorious Keller-Segel equation(\cite{keller-segel}) as an effective macroscopic description, in particular for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it (\cite{jaeger-luckhaus}):
+The original paper from Cañizares García (\cite{ana}) modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and derived the notorious Keller-Segel equation(\cite{keller-segel}) for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it (\cite{jaeger-luckhaus}):
 
 \begin{equation}\label{conc:ANA-macro-amoebas}
 	\left\{
@@ -273,7 +273,7 @@ This is just half of what happens in nature, where the organisms involved are no
 The really interesting challenge would therefore be to build a mathematical model of this phenomenon and search for its effective description.
 
 \paragraph{Some ideas on an hypothetical "answering pulses" model}
-A mathematical depiction of such an idea would be particularly difficult because the processes $(\hmactive_t^p)_p$ describing the release of cAMP molecules would now be dependent from $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$.
+A mathematical depiction of such an idea would be particularly difficult because the processes $(\hmactive_t^p)_p$ describing the release of cAMP molecules would now be dependent on $\sol_t^{(N)} = (\amba_t^{(N)}, \camp_t^{(N)})$.
 This fact would hinder the usage of many mathematical tactics which were adopted along this work to calculate the effective equation candidate and to prove that such smart guess was correct.
 One would probably like to let such processes be Poisson distributed in case of no contact between the organisms and the chemotactic agent, but also to forcibly jump up at the moment in which a particle of substance $\camp_t^m$ travels near enough to one of the amoebas.
 One could then define a sequence of stopping times $(S_j)_j$ describing (in chronological order) all the impacts between a cAMP molecule and an amoeba.
@@ -319,7 +319,7 @@ Still, it is not excluded that the author will one day set off on one of such ad
 \subsection{More technical and (probably) less interesting questions}
 
 \paragraph{Higher (finite) dimensions}
-If somebody would like to know what happens with the Dictyostelium Discoideum amoebas moving in a $42$-dimensional space, we expect the macroscopic description proved in this master thesis to still be valid, since along this work the dimension was a finite dimensional parameter $d$. 
+If somebody would like to know what happens with the Dictyostelium discoideum amoebas moving in a $42$-dimensional space (or whatever higher dimension), we expect the macroscopic description proved in this master thesis to still be valid, since along this work the dimension was a finite dimensional parameter $d$. 
 We also expect this to be a very futile question, unless somebody will discover some $42$-dimensional amoeba or some natural phenomenon which can be modeled exactly in the same way as \ref{ch7:model:pulsing-waves} but with $d=42$.
 
 \paragraph{The solution(s) to the PIDE and its properties}

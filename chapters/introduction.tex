@@ -115,7 +115,7 @@ More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergen
 
 \section{What happens if the chemotaxin is explicitly present in the microscopic description?}
 
-The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \mbox{B.m.}, and see which consequences does this have on the macroscopic description.
+The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \abbr{B.m.}, and see which consequences does this have on the macroscopic description.
 Can we obtain in this way the Keller-Segel equation \ref{intro:keller-segel-ana-1-equation}? If not, what else do we obtain, and why? Which interpretation can we give to the result?
 
 One would expect this different microscopic framework to not yield exactly \ref{intro:keller-segel-ana-1-equation}, because the cAMP molecules $\camp^m$, encoded as in our model, do not have a diffusion coefficient (and release frequency) which is inherently much higher than the one of the amoebas.
@@ -132,13 +132,13 @@ Furthermore, we guarantee in this section the existence and uniqueness of a solu
 \paragraph{Chapter 3} In the third chapter we explain what it means formally that a macroscopic model is derived by a microscopic one and we construct a valuable candidate for the first one.
 In order to do so we first calculate the mean-field of the microscopic description $\sol = ( (\amba^p)_p, (\camp^m)_m)$ and we consider a set of \iid particles $\mfsol = ( (\mfamba^p)_p, (\mfcamp^m)_m)$ evolving under the influence this object (we call them \emph{mean-field particles}).
 Then we use the Kolmogorov's forward equation of these as the candidate macroscopic equation, of which we call the solution $\adens(t,\cdot) = \adens_t$.
-Furthermore, the chapter illustrates the argument used in \cite{ana} to prove that a sufficient condition to obtain such result is that the microscopic description $\sol_t$ and the mesoscopic one $\mfsol_t$ remain close with a high probability, namely:
+Furthermore, the chapter illustrates the argument used in \cite{ana} to prove that a sufficient condition to obtain such result is that the microscopic description $\sol_t$ and the mesoscopic one $\mfsol_t$ remain close with a high probability, namely proposition \ref{ch3:best-condition-convergence}:
 
-\begin{proposition}\label{intro:final-result}
+\begin{proposition*}
 	Let $\sol_t^{(N)}$ be the solution to the microscopic model \ref{ch2:model} and let $\mfsol_t^{(N)}$ be the solution to the mean-field model \ref{ch3:MF-particles}, each with $N$ amoebas.
 	Let $T > 0$ and let $0< \delta <\xi <\frac{1}{2}$.
 	Then there exists an $\overline{N}>0$ and an increasing continuous function $\Fup: \R_+ \longrightarrow \R_+$ independent from $\overline{N},N$ such that for every $N > \overline{N}$ we have that
-	\begin{equation}
+	\begin{equation*}
 		\PrbOf{  
 			\sup_{0 \leq t \leq T}
 			\normp{\infty}{
@@ -150,8 +150,8 @@ Furthermore, the chapter illustrates the argument used in \cite{ana} to prove th
 		\leq\
 		\Fup(T)\
 		N^{-(\xi-\delta)}
-	\end{equation}
-\end{proposition}
+	\end{equation*}
+\end{proposition*}
 In the final part of the chapter we hint at possible ways to formally derive a macroscopic description also for the chemotaxin particles $\camp^m$.
 
 \paragraph{Chapter 4 and 5} In the chapter four and five we treat the preliminaries for the final proof of the derivation.
@@ -159,13 +159,13 @@ The chapter four yields a simple formula for the Dini derivation (with respect t
 The chapter five will prove a law of large numbers for the mean-field particles via a "divide et impera" strategy.
 Both chapters develop tools which can be applied in more general settings than the one of this microscopic model.
 
-\paragraph{Chapter 6} This part contains the proof of \ref{intro:final-result} and thus shows that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
+\paragraph{Chapter 6} This part contains the proof of proposition \ref{ch3:best-condition-convergence} and thus shows that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
 The proof exploits the preliminaries of chapter 4 and 5, as previously mentioned.
 
 \paragraph{Chapter 7} Here we expand the model treated in the chapter 2: per each random time $\btime_m$ we have $\NumCampRelease$ chemotaxin molecules released in radial directions with a constant drift $\frac{\cdrift}{N}$.
-Then we derive the effective equations for this system, which are essentially the same as for the simple model, but with an addend of the equation scaled by a factor $\NumCampRelease$:
+Then we derive the effective equations \ref{ch7:EFFECTIVE-EQUATIONS} for this system, which are essentially the same as for the simple model, but with an addend of the equation scaled by a factor $\NumCampRelease$:
 
-\begin{equation}\label{intro:PIDE}
+\begin{equation}
 	\left\{
 	\begin{aligned}
 		\adens(0, \cdot) &= \adens_0
