@@ -12,6 +12,8 @@ and git commit that.
 
 - plan the PARTY
 
+- plan german test C1
+
 ## NOT HIGH PRIORITY
 
 - disegni? guarda tutorial di geogebra e cerca su internet altri validi sistemi per i plots
