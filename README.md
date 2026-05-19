@@ -12,7 +12,9 @@ and git commit that.
 
 - correzioni di RASHI
 
-- important correzioni di LUCA
+- important correzioni di LUCA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+- Eigenstaendigkeiterklaerung come ti e' stato detto nella tesi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 
 - plan the PARTY
 
@@ -23,6 +25,8 @@ and git commit that.
 - corrections from Jorge
 
 - corrections from Cedric
+
+- corrections from Prof. Peter Pickl
 
 ## NOT HIGH PRIORITY
 
