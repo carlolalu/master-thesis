@@ -32,7 +32,7 @@ Finally we hint at the idea of finding a similar macroscopic description for the
 \end{equation*}
 
 
-\section{Weak convergence and convergence of empirical measures}
+\section{Convergence of Empirical Measures}
 
 We follow \cite[Section 11.4]{dudley} and \cite[Part 1, Ch. 6]{cedric-villani-opt-trans}.
 In general, having a sequence of probability measures $(\mu_N)_N$ and a probability measure $\mu$ on $\R^d$, the sequence is converging (weakly) to $\mu$ iff
@@ -198,7 +198,7 @@ Then we have the subsequent statement:
 	By the proposition \ref{ch3:proposition:sznitman}, this implies that the \rv $\empmeas_t^{\amba,(N)}$ converges in law to $\adens_t$.
 \end{proof}
 
-\section{From effective equations to mean-field particles}
+\section{Effective Equations and Mean-Field Particles}
 
 We want to find a good candidate $\adens_t := a(t, \cdot)$, but we have no analytical description of the solution of \ref{ch2:model}, we have only its evolution in time.
 Effective equations are description of the evolution of the macroscopic description, and this is what realistically we are searching for, \ie a partial differential equation
@@ -304,7 +304,7 @@ Then, imposing the same initial condition as for \ref{ch2:model}, the candidate 
 
 We call such particles the \emph{mean-field particles}, for obvious reasons.
 
-\subsection{Calculate the mean-field and guess the spawning position}
+\subsection{Calculate the Mean-Field}
 
 First we notice that since the drift of the cAMP molecules is $\equiv 0$, their average drift field is also 0, \ie
 
@@ -603,7 +603,7 @@ Expressing such equations with the analytical solution of $\cdens$ (\ref{ch3:eq:
 	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens	
 \end{align*}
 
-\paragraph{The cAMP spawning positions} \label{ch3:spawing-position-parameters}
+\paragraph{The cAMP Spawning Positions} \label{ch3:spawing-position-parameters}
 We require that the spawning position $P_{\btime^{p,g}}^{p,g}$ of $\mfcamp_t^{p,g}$ is $\adens_{\btime^{p,g}}$ distributed.
 Then $P_t^{p,g}$ fullfills the same SDE \ref{ch3:eff-equ-amoebas} as the mean-field amoebas do.
 Furthermore we need that the distance process 
@@ -683,7 +683,7 @@ The system \ref{ch3:EFFECTIVE-EQS} can be also expressed by substituting the den
 \end{equation}
 
 
-\subsection{Solution of the derived systems and their properties}\label{ch3:prove-solutions?}
+\subsection{Solution of the Mean-Field Systems}\label{ch3:prove-solutions?}
 
 The system \ref{ch3:integro-differential-system} is a non-linear partial integro-differential equation (non-linear PIDE).
 In other words, it is a pretty wild beast.
@@ -877,7 +877,7 @@ It is important to underline that also the mesoscopic particles $\mfsol_t^{(N)} 
 This will be relevant to inquire about the properties of the distance process $
 	\normp{\infty}{\sol_t - \mfsol_t}$.
 
-\section{The best condition to prove the convergence}
+\section{The Best Condition to Obtain the Convergence}
 
 Now that the mean-field particles are well-defined we can finally treat the condition we are gonna use to prove the convergence of the empirical measures of the amoebas of the original system \ref{ch2:model} towards the distribution $\adens_t$.
 
@@ -1220,7 +1220,7 @@ Now that the mean-field particles are well-defined we can finally treat the cond
 \end{proof}
 
 
-\section{A macroscopic description for the cAMP molecules?}\label{ch3:macro-cAMP?}
+\section{A Macroscopic Description for the cAMP Molecules?}\label{ch3:macro-cAMP?}
 
 The cAMP molecules are created at a rate $\lambda$, and each molecule created at a random time $\tau$ has a density fullfilling
 

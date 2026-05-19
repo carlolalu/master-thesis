@@ -25,7 +25,7 @@ The master's thesis focuses on studying what happens if one would construct a mi
 \section{Chemotaxis...}
 
 In Ancient Greek "τάξις" means "order" or "arrangement", but in biology it is used to indicate the movement of an organism in response to an external stimulus.
-Depending on the type of such trigger the phenomenon is classified into different subcategories, \eg \emph{phototaxis} or \emph{thermotaxis}.
+Depending on the type of such triggers the phenomenon is classified into different subcategories, \eg \emph{phototaxis} or \emph{thermotaxis}.
 The τάξις can be \emph{positive}, meaning directed towards the stimulus, or \emph{negative}, away from it.
 \emph{Chemotaxis} (from the Ancient Greek "χημεία", meaning "chemistry" - or more precisely "transmutation") is the specific case where the reason of the movement is some chemical substance.
 Many lifeforms rely on this mechanism for their survival, the most simple examples being unicellular organisms searching for nutrients (\eg the bacterium \emph{Escherichia coli} follows sources of sugar, \cite{ct-ecoli-glucose}) or fleeing toxins (\eg \emph{Escherichia coli} being repelled by acetate, \cite{negative-chemotaxis}).
@@ -42,8 +42,8 @@ This organism proliferates till there are available nutrients.
 When these finish, the cells first disperse, searching for other food resources, but if after a while these are not found, some individuals start to secrete cAMP (3',5'-cyclic adenosine monophosphate) waves in quick pulses.
 Such substance act as a chemical signal, triggering the amoebas who come in contact to it to direct their movement towards its higher concentration and to release other cAMP themselves.
 This chemotactical mechanism aggregates the microorganisms into many \emph{slugs}, each formed by several thousands members; these lumps then migrate to the appropriate spot thermotactically to undergo the last metamorphosis: they produce \emph{fruiting bodies} which then release spores and die.
-The spores become then new individuals, and the life cycle is closed.
-Since sometimes an image is worth a thousand words, I advise you to take a look at the informal short documentary \cite{ze-frank}.
+The spores become then new individuals, and the life cycle is closed
+\footnote[1]{Since sometimes an image is worth a thousand words, I advise you to take a look at the informal short documentary \cite{ze-frank}.}.
 
 %[[here image of the life cycle of disctyostelium discoideum]]
 
@@ -51,9 +51,9 @@ The \emph{Dictyostelium discoideum} is fairly easy to cultivate in a lab (\cite[
 At the same time it is an eukaryote and presents complex behaviours, such as cell differentiation and apoptosis (programmed cell death) in the non-unicellular phases, thermotaxis in its slug phase (\cite{thermotaxis-dd}).
 And, more relevant to us, it is regarded as one of the basic example for eukaryotic chemotaxis (\cite{chemotaxis-cancer-and-simpler-models}).
 
-\section{Previous mathematical work on the topic}
+\section{Previous Models}
 
-\subsection{The classic macroscopic approach: Keller-Segel}
+\subsection{The Classic Approach: Keller-Segel}
 
 The macroscopic \emph{classic mathematical model for chemotaxis}, namely the Keller-Segel system of equations, was given in 1970 in \cite{keller-segel} (a more beginner friendly and recent source to read about it is \cite{guide-pdes-chemotaxis}), even though an heuristic microscopic derivation had already been given by Patlak in 1953 in \cite{patlak}.
 In the specific case in which the chemotaxin molecules diffuse much faster than the organism reacting to them (as it is the case for the aforementioned amoeba), one can derive from the general case this parabolic-elliptic system of equations (\cite{keller-segel-reduced}):
@@ -75,7 +75,7 @@ Solving the system \label{intro:keller-segel-ana} for $\cdens$ and setting $\cut
 	\partial_t \adens = \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
-\subsection{The PhD thesis of Cañizares García}
+\subsection{The PhD Thesis of Cañizares García}
 
 In \cite{ana} the author derived the set of equations \ref{intro:keller-segel-ana} from a microscopic model previously seen in numerical approximation of solutions of Keller-Segel (\cite{numerics-keller-segel}) as well as in other derivation of it (\cite{keller-segel-dd-derivation-previously}).
 The microscopic system describes $N$ amoebas with their positions $\{\amba^1, \ldots, \amba^N\}\in\R^2$ and encodes their attraction via cAMP with a Coulomb-like potential $\potential$.
@@ -90,7 +90,7 @@ In equations we have
 \end{equation}
 
 where $B^p: \R_+ \longrightarrow \R^2$ are \iid (independent and identically distributed) \Bm (Brownian motion(s)), and at time $t=0$ the microorganisms $\amba_0^p$ are \iid according to the given density $\adens_0$.
-From this system of SDEs she derived the Keller-Segel equations in their parabolic-elliptic form \ref{intro:keller-segel-ana-1-equation}.
+From this system of SDEs (stochastic differential equations) she derived the Keller-Segel equations in their parabolic-elliptic form \ref{intro:keller-segel-ana-1-equation}.
 This means that she proved, under the appropriate conditions, that the empirical measure
 
 \begin{equation*}
@@ -113,7 +113,7 @@ She used the fact that the expression \ref{intro:keller-segel-ana-1-equation} is
 More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergence of this probability to $0$ faster than $N^{-\gamma}$ for every $\gamma > 0$.
 
 
-\section{What happens if the chemotaxin is explicitly present in the microscopic description?}
+\section{Chemotaxin in the Microscopic Description}
 
 The focus of this master's thesis is to modify the microscopic model used by Cañizares García to encode the cAMP as a different population of particles $\camp^m$ being \emph{created} at Poisson-distributed times $\btime_m$ by the amoebas and wiggling of \abbr{B.m.}, and see which consequences does this have on the macroscopic description.
 Can we obtain in this way the Keller-Segel equation \ref{intro:keller-segel-ana-1-equation}? If not, what else do we obtain, and why? Which interpretation can we give to the result?
@@ -127,9 +127,9 @@ As we will see, these hypothesis are both confirmed.
 \paragraph{Chapter 2} In the second chapter we define the microscopic model with $N$ amoebas $\amba^p$ and creation of chemotaxin molecules $\camp^m$.
 The creation of particles happens via Poisson-distributed spawning process $(\hmactive_t^p)_{p=1}^N$, and at each spawning time $\btime_m$ only one particle $\camp^m$ is released.
 Such $\camp^m$ moves purely of \Bm with diffusion $\sigma_\camp$ and attracts the amoebas with a \emph{Gaussian-like} potential $\potential$.
-Furthermore, we guarantee in this section the existence and uniqueness of a solution for this system of almost-SDEs (stochastic differential equations).
+Furthermore, we guarantee in this section the existence and uniqueness of a solution for this system of almost-SDEs.
 
-\paragraph{Chapter 3} In the third chapter we explain what it means formally that a macroscopic model is derived by a microscopic one and we construct a valuable candidate for the first one.
+\paragraph{Chapter 3} Here we explain what it means formally that a macroscopic model is derived by a microscopic one and we construct a valuable candidate for the first one.
 In order to do so we first calculate the mean-field of the microscopic description $\sol = ( (\amba^p)_p, (\camp^m)_m)$ and we consider a set of \iid particles $\mfsol = ( (\mfamba^p)_p, (\mfcamp^m)_m)$ evolving under the influence this object (we call them \emph{mean-field particles}).
 Then we use the Kolmogorov's forward equation of these as the candidate macroscopic equation, of which we call the solution $\adens(t,\cdot) = \adens_t$.
 Furthermore, the chapter illustrates the argument used in \cite{ana} to prove that a sufficient condition to obtain such result is that the microscopic description $\sol_t$ and the mesoscopic one $\mfsol_t$ remain close with a high probability, namely proposition \ref{ch3:best-condition-convergence}:
@@ -154,12 +154,12 @@ Furthermore, the chapter illustrates the argument used in \cite{ana} to prove th
 \end{proposition*}
 In the final part of the chapter we hint at possible ways to formally derive a macroscopic description also for the chemotaxin particles $\camp^m$.
 
-\paragraph{Chapter 4 and 5} In the chapter four and five we treat the preliminaries for the final proof of the derivation.
-The chapter four yields a simple formula for the Dini derivation (with respect to time) of the distance between the microscopic and the mesoscopic description, \ie for $\diniu_t ^+\norm{\sol_t -\mfsol_t}_\infty$.
+\paragraph{Chapter 4 and 5} In these part we treat the preliminaries for the final proof of the derivation.
+The chapter four defines the Dini derivative $\diniu_t^+$ and yields a simple formula for the Dini derivation (with respect to time) of the distance between the microscopic and the mesoscopic description, \ie for $\diniu_t^+ \norm{\sol_t -\mfsol_t}_\infty$.
 The chapter five will prove a law of large numbers for the mean-field particles via a "divide et impera" strategy.
 Both chapters develop tools which can be applied in more general settings than the one of this microscopic model.
 
-\paragraph{Chapter 6} This part contains the proof of proposition \ref{ch3:best-condition-convergence} and thus shows that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
+\paragraph{Chapter 6} This section contains the proof of proposition \ref{ch3:best-condition-convergence} and thus shows that the candidate equations of chapter 3 are, as expected, the effective equations of the microscopic model considered.
 The proof exploits the preliminaries of chapter 4 and 5, as previously mentioned.
 
 \paragraph{Chapter 7} Here we expand the model treated in the chapter 2: per each random time $\btime_m$ we have $\NumCampRelease$ chemotaxin molecules released in radial directions with a constant drift $\frac{\cdrift}{N}$.
@@ -182,5 +182,5 @@ Then we derive the effective equations \ref{ch7:EFFECTIVE-EQUATIONS} for this sy
 \end{equation}
 
 
-\paragraph{Conclusion} Here we discuss our results, we compare them with the ones obtained by Ana, and we treat some limit cases, among which one which yield an equation close to Keller-Segel.
+\paragraph{Conclusion} In this last chapter we discuss our results, we compare them with the ones obtained by Cañizares García, and we treat some limit cases, among which one which yield an equation close to Keller-Segel.
 Finally, we illustrate the many directions in which one might develop further the research on this topic.

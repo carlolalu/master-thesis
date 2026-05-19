@@ -6,7 +6,7 @@ The second important difference is that the release of cAMP will be regulated by
 Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2,3\}$.
 In general, it is advised to take a look to the section \ref{app:notation} in the appendix before reading further: it will avoid the reader misunderstandings regarding the usage of specific notation for the particles, their superscripts, the norms, the generic positive constants and increasing positive continuous functions (and other amenities).
 
-\section{The heuristic and the definition}
+\section{The Heuristics and the Definition}
 
 In words we can describe this design in this way:
 \begin{enumerate}
@@ -105,7 +105,7 @@ with $\attraction \in \Lpspace^1 \cap \Lpspace^\infty \cap \Cspace^\infty$, glob
 \paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (\ie the system is piecewise defined in time, according to stochastic times).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
 
-\subsection{Alternative formulation}
+\subsection{Alternative Formulation}
 
 We can build a mathematically handier version of the previous model.
 Since the Poisson processes $M^p$s determining the spawning times of particles are independent for each amoeba, we have that
@@ -193,11 +193,11 @@ Then we can reformulate the model \ref{ch2:model} as:
 
 This makes the equations simpler and let us arrange the spawning time chronologically, a feature which is important to show that the system has a solution.
 
-\section{Existence and uniqueness of solutions}
+\section{Existence and Uniqueness}
 
-The best chance we have to prove existence and uniqueness of solutions for the defined system is to find a way to see it (or parts of it) as proper SDEs and use the theorems of such framework to reach the goal.
+The best chance we have to prove existence and uniqueness of solutions for the system \ref{ch2:model} is to find a way to see it (or parts of it) as proper SDEs and use the theorems of such framework to reach the goal.
 
-\subsection{The SDEs framework}\label{ch2:section:sde-framework}
+\subsection{The SDEs Framework}\label{ch2:section:sde-framework}
 
 An SDE is an expression of the form:
 
@@ -257,7 +257,7 @@ To ensure existence (strong existence, meaning that we can find a solution on ea
 \end{equation*}
 \end{itemize}
 
-\subsection{Reducing the model to the SDE framework}
+\subsection{Reducing the Model to the SDE Framework}
 
 \subsubsection{Heuristic}
 
@@ -310,7 +310,7 @@ This is formally explained by defining defining a solution for the system \ref{c
 the couple $(\sol,B)$ solves \ref{ch2:model}.
 But we can notice that even in this way we need to operate piecewise in time to avoid a non-constant dimension (dictated by the number of particles, which is growing), \ie define the solution as one which on each interval where the dimension is constant, solves the system locally.
 
-\subsubsection{Local solutions}
+\subsubsection{Local Solutions}
 
 Consider the reformulation \ref{ch2:model-reformulation} and its birth times, which are chronologically ordered
 
@@ -415,7 +415,7 @@ Define then on $I_m$ the processes
 
 Then it is straightforward to verify that $({}^{m}\sol_t,B_t^{\star})$ fullfilles the equations on $I_m$, \ie \ref{ch2:system:local-model}, with the correspondent initial conditions.
 
-\subsubsection{Global solutions}
+\subsubsection{Global Solutions}
 
 \begin{definition}\label{ch2:def:solution-model}
 A solution to \ref{ch2:model} is a triple $((\hmactive^p)_{1\leq p \leq N}, \sol = (\amba, \camp), B)$ such that:
