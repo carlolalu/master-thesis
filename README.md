@@ -4,13 +4,7 @@
 - read EVERYTHING twice. Do not change stuff, just correct small errors 
 and git commit that.
 
-- revise the title of chapters and of the thesis itself
-
 - search for the '[['
-
-- correzioni di bea: should I avoidd repeating twice the stuff in the introduction?
-
-- correzioni di RASHI
 
 - important correzioni di LUCA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
@@ -23,10 +17,6 @@ and git commit that.
 - plan the work online: abicrash, abacus, etc...
 
 - corrections from Jorge
-
-- corrections from Cedric
-
-- corrections from Prof. Peter Pickl
 
 ## NOT HIGH PRIORITY
 

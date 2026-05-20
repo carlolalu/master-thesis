@@ -67,9 +67,9 @@ This is even more evident if we substitute $\cdens_t^\tau$ with its analytical s
 
 Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
 
-\subsection{Comparison with the Parabolic-Elliptic Equation of Keller-Segel}
+\subsection{Comparison with the Equation of Keller-Segel}
 
-The original paper from Cañizares García (\cite{ana}) modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and derived the notorious Keller-Segel equation(\cite{keller-segel}) for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it (\cite{jaeger-luckhaus}):
+The original paper from Cañizares García \cite{ana} modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and derived the notorious Keller-Segel equation \cite{keller-segel} for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it \cite{jaeger-luckhaus}:
 
 \begin{equation}\label{conc:ANA-macro-amoebas}
 	\left\{
@@ -191,7 +191,7 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 At this point one might try to prove that for every $\lambda, \sigma_\camp$ the function
 
 \begin{equation*}
-	\overline{\attraction}(x)\
+	\widetilde{\attraction}(t, x)\
 	:=\quad
 	\left(
 	\attraction \star 
@@ -206,14 +206,21 @@ At this point one might try to prove that for every $\lambda, \sigma_\camp$ the 
 	\right) (x)
 \end{equation*}
 
-has a singularity in $x=0$ and descend rapidly to $0$ for $x\rightarrow\infty$, or, in other words, that $\overline{\attraction}$ behaves roughly as the gradient of a Coulomb potential.
+has a singularity in $x=0$ and descend rapidly to $0$ for $x\rightarrow\infty$, and furthermore that for every $t$ it behaves roughly as the gradient of a Coulomb potential.
+
+
+[[correct this two sentences]]
+At this point one might then proceed to show that if $\lambda, \sigma_\camp \rightarrow + \infty$, the function $\widetilde{\attraction}$ is less and less dependent on the time $t$, and thus that one might approximate it with some function $\overline{\attraction} (x) $
+
+
+
 In such case, the effective equation would become
 
 \begin{equation}
 	\partial_t \adens = \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
-which is analogous to the equation \ref{conc:ANA-macro-amoebas-in-1-equation} from \cite{ana}.
+which is close to the equation \ref{conc:ANA-macro-amoebas-in-1-equation} from \cite{ana}.
 
 \subsubsection{Slow Release of a Chemoattractant with no Diffusion}
 
@@ -287,11 +294,11 @@ Of course such ideas definitely need a more rigorous framework to be discussed p
 
 	\paragraph{Assume a Coulomb-like Potential}
 	As in the original PhD thesis \cite{ana}, it would be interesting to use a Coulomb-like potential (the analogous to the generalized attraction $\genAttraction$ used in the law of large numbers \ref{ch5:LLN}, but without cutoff), and prove that the equation \ref{ch7:EFFECTIVE-EQUATIONS} still holds with $\attraction$ substituted with $\genAttraction$.
-	As seen in other works previously (\cite{ana}, \cite{peter-boers}), the problem that arises is that $\genAttraction$ is not globally Lipschitz anymore, spoiling this property also for the drift $\drift(t, x)$.
+	As seen in other works previously \cite{ana}, \cite{peter-boers}, the problem that arises is that $\genAttraction$ is not globally Lipschitz anymore, spoiling this property also for the drift $\drift(t, x)$.
 	The solution is to show that $\drift(t, \cdot)$ is locally Lipschitz with a high probability (using essentially the same argument as the law of large numbers \ref{ch5:LLN}), and use such condition to bound the term $\drift(t, \sol_t) - \drift(t,\mfsol_t)$ which spawns in the proof of the final result \ref{ch7:final-result}.
 	We expect that using the techniques of \cite{peter-boers}, this proof should be not too difficult to construct.
 
-	\paragraph{Prove a Higher degree of Convergence}
+	\paragraph{Prove a Higher Degree of Convergence}
 	Again, as in \cite{ana}, it would be interesting to obtain a higher degree of convergence for the distance between the microscopic and the mesoscopic description, namely going from the condition \ref{ch7:final-result} (for the basic model more precisely stated in \ref{ch6:final-result}) to a result of this kind:
 	\begin{proposition}\label{conc:final-result-with-higher-convergence}
 		Let $0\leq t \leq T$.
@@ -335,6 +342,9 @@ As suggested in \ref{ch3:macro-cAMP?}, one might inquire about proving formally 
 	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{\camp,(N)} 
 	\xrightarrow[\text{in law}]{N\longrightarrow +\infty} 
 	\cdens(t,\cdot) :=
-	\int_0^t \lambda \cdens_t^\tau 	d \tau
+	\frac{1}{t}
+	\int_0^t 
+	\cdens_t^\tau 
+	d \tau
 \end{equation*}
 where the measure considered are treated as \rv in the space of Borel probability measures with finite moments $\BorelPrbMeas_1$.

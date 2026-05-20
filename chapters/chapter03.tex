@@ -1248,7 +1248,18 @@ This, together with the form of the effective equations \ref{ch3:EFFECTIVE-EQS},
 	"\1_{\hmactive_t \neq 0} \frac{1}{\hmactive_t}\sum_{m=1}^{\hmactive_t} \delta_{\camp_t^m} " =: \empmeas_t^{\camp,(N)} 
 	\xrightarrow{N\longrightarrow +\infty} 
 		\cdens(t,\cdot) :=
-		 \int_0^t \lambda \cdens_t^\tau 	d \tau
+		\frac{
+			\int_0^t \lambda \cdens_t^\tau 	d \tau
+		}{
+		\int
+			\int_0^t \lambda \cdens_t^\tau 	d \tau
+		dx
+		}
+		=
+		\frac{1}{t}
+		\int_0^t 
+			\cdens_t^\tau 
+		d \tau
 \end{equation*}
 
 The problem is that the cAMP molecules, both in the microscopic and in the mesoscopic model, are \emph{not} exchangeable, and thus the proposition of Sznitman \ref{ch3:proposition:sznitman} cannot be used, and one might have to manually use the condition \ref{ch3:cumbersome-condition-convergence-in-Pspace}.

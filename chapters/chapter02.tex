@@ -12,7 +12,7 @@ In words we can describe this design in this way:
 \begin{enumerate}
 \item There is a fixed number $N$ of amoebas, each subjected to its own Brownian motion with constant diffusion coefficient $\sigma_\amba$
 \item Each amoeba at time $t=0$ is in the same random position $\adens_0 \in \Lpspace^1 \cup \Lpspace^\infty$.
-\item Each amoeba $\amba^p$ is attracted to the cAMP molecules with a potential $\potential: \R^d \longrightarrow \R_+$.
+\item Each amoeba $\amba^p$ is attracted to the cAMP molecules with a potential $\potential: \R^d \longrightarrow \R$.
 We require that $-\nabla \potential =:\attraction$ is Lebesgue-integrable (\ie $\in \Lpspace^1$), essentialy bounded (\ie $\in \Lpspace^\infty$), $\Cspace^\infty$ and globally Lipschitz.
 One could think of $-\potential$ as a $d$-dimensional Gaussian to keep in mind something more concrete.
 \item Each amoeba $\amba^p$ spawns cAMP molecules $\camp^{p,g}$ (p=parent, g=generation) with a Poisson process $\hmactive^p$ of parameter $\lambda$ independent of $p$.
@@ -492,7 +492,7 @@ But the time dependence is given only by the random value $\hmactive_s^p$, which
 	the $i$-th coordinate of the $d$-dimensional component for the functions $\drift_p(t,x),\: \drift_{p,g}(t,x)\:\in \R^d$ respectively.
 \end{remark}
 
-\subsection{Ensure the existence and uniqueness for the model}
+\subsection{Existence and Uniqueness for the Model}
 
 Now that we have reduced our model to a collection of conditional, piecewise-in-time defined SDE, it is enough to find a solution inductively for each $I_m$ under $\PrbCondTimes{\cdot}{}$, \ie a unique solution for \ref{ch2:system:local-model-shifted-to-0} under such random probability measure.
 Since the case $m=1$ has essentialy the same expression for the drift and diffusion as the arbitrary case $m$, we consider only the latter one.
