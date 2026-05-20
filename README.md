@@ -6,17 +6,17 @@ and git commit that.
 
 - search for the '[['
 
-- important correzioni di LUCA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+- Ask Peter: are the corrections of LUCA correct? is what I said something which roughly makes sense? Can you check this in detail??
 
-- Eigenstaendigkeiterklaerung come ti e' stato detto nella tesi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+- correction of Cedric on whatsapp: expose the main result!!!
 
-- plan the PARTY
+- Eigenstaendigkeiterklaerung come ti e' stato detto nella tesi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dove la trovo? Ask peter and the secretary!
+
+- plan the PARTY !!!!!
 
 - plan german test C1
 
 - plan the work online: abicrash, abacus, etc...
-
-- corrections from Jorge
 
 ## NOT HIGH PRIORITY
 
