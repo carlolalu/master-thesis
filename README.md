@@ -8,6 +8,8 @@ and git commit that.
 
 - Ask Peter: are the corrections of LUCA correct? is what I said something which roughly makes sense? Can you check this in detail??
 
+- correction cedric on whatsapp in general
+
 - correction of Cedric on whatsapp: expose the main result!!!
 
 - Eigenstaendigkeiterklaerung come ti e' stato detto nella tesi !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dove la trovo? Ask peter and the secretary!
