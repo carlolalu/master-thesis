@@ -40,7 +40,7 @@ is independent from certain mathematical objects of the microscopic model:
 	This is somehow expected because what counts is that the \rv $\cgonia_{m,1}$ is uniformly distributed on the $d$-dimensional sphere, and thus each direction $\rotation_l(\cgonia_{m,1})$ is in average equal to $0$.
 \end{itemize}
 
-Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time and the rate $\lambda$ with which such birth time occur.
+Then, the only parameters which do have a say also macroscopically are the number of children $\NumCampRelease$ at each birth time and the rate $\lambda$ with which such birth times occur.
 With one simple idea for both parameters, we can say that the speed $\NumCampRelease \cdot \lambda$ at which the chemoattractant is released is telling us how much $\partial_t \adens$ is proportional to the member
 
 \begin{equation*}
@@ -89,7 +89,7 @@ or, solving $\cdens_t$ analytically:
 
 where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the attraction coming from the previously mentioned Coulomb-like potential and $\chi$ is the \emph{chemosensitivity}, namely a positive constant indicating the sensibility of the organisms to the chemoattractant.
 We modeled a slightly different scenario: the function $\attraction$ taken into consideration is Gaussian-like, and the diffusion coefficients $\diffusion_\amba, \diffusion_\camp$ of the amoebas and of the cAMP molecules are both finite (\ie of comparable order of magnitude).
-We expect that it is possible to prove that the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} is valid also in case of a Coulomb-like potential, so let us ignore the difference regarding $\attraction$ for now.
+Let us ignore the difference regarding $\attraction$ for now.
 Then, to compare the two models, we want to ask what happens to \ref{ch7:PIDE} if we modulate the diffusions coefficient to be analogous to the ones treated in \cite{ana}, \ie when $\lambda >> 1$ and $\diffusion_\camp >> \diffusion_\amba$.
 To simplify the situation as Cañizares García does, let us set $\diffusion_\amba := \sqrt{\frac{2}{d}}$ so that $\frac{d\sigma_\amba^2}{2} \bigtriangleup \adens = \bigtriangleup \adens$.
 
