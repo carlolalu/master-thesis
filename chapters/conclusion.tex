@@ -188,32 +188,51 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 		\right]
 \end{align*}
 
-At this point one might try to prove that when $\lambda, \sigma_\camp \rightarrow +\infty$ the function
+At this point one might take a look at the function
 
-\begin{equation*}
+\begin{align*}
 	\widetilde{\attraction}(t, x)\
-	:=\quad
-	\left(
-	\attraction \star 
-	\int_0^t
-	\frac{\lambda}{
-		\big( 2\pi d\sigma_\camp^2 (t-\tau) \big)^{\frac{d}{2}}
-	}
-	\exp \left(
-	-\frac{(\cdot)^2}{2 d\sigma_\camp^2 (t-\tau)}
-	\right)
-	d \tau
-	\right) (x)
-\end{equation*}
+	:&=
+		\left(
+		\attraction \star 
+		\int_0^t
+		\frac{\lambda}{
+			\big( 2\pi d\sigma_\camp^2 (t-\tau) \big)^{\frac{d}{2}}
+		}
+		\exp \left(
+		-\frac{(\cdot)^2}{2 d\sigma_\camp^2 (t-\tau)}
+		\right)
+		d \tau
+		\right) (x)
+	\\
+	&=
+		\left(
+		\attraction \star 
+		\int_0^t
+		\frac{1}{
+			\left[ 2\pi d
+				\left(
+					\frac{\sigma_\camp}{\lambda^\frac{1}{d}}
+				\right)^2 (t-\tau)
+			\right]^{\frac{d}{2}}
+		}
+		\exp \left(
+		-\frac{(\cdot)^2}{2 d\sigma_\camp^2 (t-\tau)}
+		\right)
+		d \tau
+		\right) (x)
+\end{align*}
 
-tends to the time independent gradient of the Coulomb potential, that we sign as $\overline{\attraction} (x)$.
-In such case, the effective equation would become
+and notice that if $\lambda, \sigma_\camp$ are very big, than the time integration is relevant mainly when $\tau \in [0,\epsilon]$ for some very small $\epsilon$.
+In general we expect that if $\lambda, \sigma_\camp \rightarrow +\infty$ in a way such that the ratio $\frac{\sigma_\camp}{\lambda^\frac{1}{d}}$ remains constant, then the member $\widetilde{\attraction}(t, x)$ will approach the time independent gradient of some potential $\frac{\const}{\norm{x}}$ (for some constants $\const$).
+In such case, by signing this time-independent attraction as $\overline{\attraction} (x)$, the effective equation would become
 
 \begin{equation}
 	\partial_t \adens = \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens
 \end{equation}
 
 which is the equation \ref{conc:ANA-macro-amoebas-in-1-equation} from \cite{ana}.
+The idea of this limit case is that the cAMP is released so fast, that it compensates for the very high diffusion.
 
 \subsubsection{Slow Release of a Chemoattractant with no Diffusion}
 
