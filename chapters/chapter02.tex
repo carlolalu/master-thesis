@@ -1,6 +1,6 @@
 \label{ch2}
 
-This chapter will define a microscopic model of reality and prove that it has a solution.
+This chapter will define a microscopic model for the Dictyostelium discoideum individuals (and its chemotaxin particles) and prove that it has a solution.
 A key difference with the real situation will be that the amoeba will release a single cAMP with no initial velocity for each spawning moment.
 The second important difference is that the release of cAMP will be regulated by a Poisson process, thus ignoring the fact that in reality the amoebas should respond to each trace of cAMP with the release of a chemical cry of more chemotaxin.
 Recall that the space is throughout the whole master thesis $\R^d$ with $d\in\{2,3\}$.
@@ -45,10 +45,9 @@ Consider the process
 B_t^{(T)} := B_{T+t} - B_T
 \end{equation}
 which is a \Bm (see for example \citep[Theorem 2.20]{le-gall}).
-Then the \emph{Quasi Brownian Motion} $\quasibm_t^{B,T}$ is defined as:
+Then the \emph{Quasi Brownian Motion} $\quasibm_t^{B,T}$ is defined as
 \begin{equation}
-\quasibm_t^{B,T} := "B_{t-T}^{(T)}\1_{t-T\geq 0}"
-=
+\quasibm_t^{B,T} :=
 \left\{
 \begin{aligned}
 & 0 
@@ -61,6 +60,7 @@ Then the \emph{Quasi Brownian Motion} $\quasibm_t^{B,T}$ is defined as:
 \end{equation}
 \end{definition}\label{ch2:def:quasi-bm}
 
+which can informally be written as "$B_{t-T}^{(T)}\1_{t-T\geq 0}$".
 Then in our case, since $\forall p,g$ a unique \Bm and birth time is identified, we can write
 
 \begin{equation}
@@ -100,7 +100,7 @@ With these independent processes we can now finally write down the model as the 
 \right.
 \end{equation}
 
-with $\attraction \in \Lpspace^1 \cap \Lpspace^\infty \cap \Cspace^\infty$, globally Lipschitz and $\adens_0 \in \Lpspace^1(\R^d) \cup \Lpspace^\infty(\R^d)$.
+with $\attraction \in \Lpspace^1(\R^d) \cap \Lpspace^\infty(\R^d) \cap \Cspace^\infty(\R^d)$, globally Lipschitz and $\adens_0 \in \Lpspace^1(\R^d) \cup \Lpspace^\infty(\R^d)$.
 
 \paragraph{Observations} One can immediately notice that not even the dimension of the system \ref{ch2:model} is deterministic: the particles $\camp_t^{p,g}$ are spawning at the stochastic time $\btime^{p,g}$, increasing at each of these instants the number of particles involved (\ie the system is piecewise defined in time, according to stochastic times).
 This, together with the fact that the Poisson processes $\hmactive^p$ cannot be represented with a SDE and that the $Q_t^{p,g}$ are not proper Brownian motions, makes this system formally not a system of SDEs, even though the equations involved are indeed differential and stochastic.
@@ -500,8 +500,10 @@ Since the case $m=1$ has essentialy the same expression for the drift and diffus
 In order to prove local existence and uniqueness we must watch at the drift and diffusion of the system (\ref{ch2:def:drift-&-diffusion}).
 The diffusion coefficients are constant, and thus respect all the conditions required in \ref{ch2:cond:E-and-U-lipsch+subgrowth}.
 The same is true for the drift of the cAMP.
-This is not the case for the drift in the case of amoebas though: since $\hmactive^p_t$ are \cadlag, then also the coordinate functions $\drift_p(t, x)$ are \cadlag, \ie not $\Cspace^0$ in time.
+This is not the case for the drift in the case of amoebas though: since the processes $\hmactive^p_t$ are \cadlag\footnotemark[1], then also the coordinate functions $\drift_p(t, x)$ are \cadlag, \ie not $\Cspace^0$ in time.
 We need thus to use the result \ref{ch2:cond:E-and-U-lipsch+subgrowth}.
+
+\footnotetext[1]{From the French expression "\textit{continue à droite, limite à gauche}", meaning "right continuous with left limits".}
 
 \begin{lemma}\label{ch2:lemma:lipsch-of-drift}
 The drift function $\drift(t, x, (\hmactive^p)_p)$ defined coordinate-wise in \ref{ch2:def:drift-&-diffusion} as
