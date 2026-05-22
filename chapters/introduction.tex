@@ -14,7 +14,7 @@ There is considerable research on this theme on a cellular level (how does the m
 
 %[[put here pictures of some papers through the lenses of a microscope)]]
 
-When examining mathematically the phenomenon on such scale, there are two main points of view:
+When examining mathematically the phenomenon on such a scale, there are two main points of view:
 one can see the population macroscopically, as a continuum, representing it therefore with a density $\adens$, or can see it microscopically, \ie as a finite group of individuals $\{\amba^1, \ldots, \amba^N\}$.
 Of course it would be optimal that the two descriptions somehow match, meaning that if we construct some empirical density from $\{\amba^1, \ldots, \amba^N\}$, this is in some way close to $\adens$, meaning that one can mathematically derive the macroscopic system from the microscopic one.
 For this procedure, which is often seen as adding insights and validity to a macroscopic description, is common to speak of \emph{propagation of chaos} and of \emph{effective equations} of the microscopic model.
@@ -47,7 +47,7 @@ The spores become then new individuals, and the life cycle is closed
 
 %[[here image of the life cycle of disctyostelium discoideum]]
 
-The \emph{Dictyostelium discoideum} is fairly easy to cultivate in a lab (\cite[Chpater 4]{dd-in-lab}), in some stages of its life is haploid (\ie has a single copy of its DNA) which allows for easy genetic manipulation, and its genome (which is approximately 34MB of data) is completely mapped and available to the public \cite{dd-bioinfo-lj}.
+The \emph{Dictyostelium discoideum} is fairly easy to cultivate in a lab \cite[Chapter 4]{dd-in-lab}, in some stages of its life is haploid (\ie has a single copy of its DNA) which allows for easy genetic manipulation, and its genome (which is approximately 34MB of data) is completely mapped and available to the public \cite{dd-bioinfo-lj}.
 At the same time it is an eukaryote and presents complex behaviours, such as cell differentiation and apoptosis (programmed cell death) in the non-unicellular phases, thermotaxis in its slug phase \cite{thermotaxis-dd}.
 And, more relevant to us, it is regarded as one of the basic example for eukaryotic chemotaxis \cite{chemotaxis-cancer-and-simpler-models}.
 
@@ -63,7 +63,7 @@ In the specific case in which the chemotaxin molecules diffuse much faster than 
 	\begin{aligned}
 		\partial_t \adens &= - \chi \nabla (\adens \nabla \cdens) + \bigtriangleup \adens
 		\\
-		-\bigtriangleup \cdens &= \adens
+		-\bigtriangleup \cdens &= \adens.
 	\end{aligned}
 	\right.
 \end{equation}
@@ -72,7 +72,7 @@ Here $\adens$ represents the density of the microorganisms, $\cdens$ of the chem
 Solving the system \label{intro:keller-segel-ana} for $\cdens$ and setting $\cutoffSinAttraction:=\frac{x}{2\pi \abs{x}^2}$ we obtain
 
 \begin{equation}\label{intro:keller-segel-ana-1-equation}
-	\partial_t \adens = \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens
+	\partial_t \adens = \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens.
 \end{equation}
 
 \subsection{The PhD Thesis of Cañizares García}
@@ -87,6 +87,7 @@ In equations we have
 		\amba_t^p = \amba_0^p - \int_0^t \frac{\chi}{N} \sum_{q\neq p} \cutoffSinAttraction (\amba_s^p - \amba_s^q) ds + \sqrt{2} B_t^p,
 		\qquad
 		\amba_0^p \sim \adens_0
+		,
 \end{equation}
 
 where $B^p: \R_+ \longrightarrow \R^2$ are \iid (independent and identically distributed) \Bm (Brownian motion(s)), and at time $t=0$ the microorganisms $\amba_0^p$ are \iid according to the given density $\adens_0$.
@@ -106,9 +107,10 @@ Her technique involved the usage of a mesoscopic model given by the \iid \emph{m
 	\mfamba_t^p = \mfamba_0^p - \int_0^t \frac{\chi}{N} (\cutoffSinAttraction \star \adens_s )(\mfamba_s^p) ds + \sqrt{2} B_t^p,
 	\qquad
 	\mfamba_0^p \sim \adens_0
+	,
 \end{equation}
 
-coupled (\ie with the same \Bm) with the original ones.
+coupled (\ie with the same \abbr{B.m.}) with the original ones.
 She used the fact that the expression \ref{intro:keller-segel-ana-1-equation} is the \emph{Kolmogorov forward equation} (Fokker-Planck) of \ref{intro:ana-mesoscopic} to obtain the convergence of the aforementioned $\PrbMeas(\R^2)$-valued \rv by showing that the probability of $(\amba^p)_p$ and $(\mfamba^p)_p$ being far tends to $0$ as $N$ grows to infinity.
 More precisely, in \cite[Theorem 2.1]{ana} she could prove a degree of convergence of this probability to $0$ faster than $N^{-\gamma}$ for every $\gamma > 0$.
 
@@ -131,9 +133,9 @@ Such $\camp^m$ moves purely of \Bm with diffusion $\sigma_\camp$ and attracts th
 Furthermore, we guarantee in this section the existence and uniqueness of a solution for this system of almost-SDEs.
 
 \paragraph{Chapter \ref{ch3}} Here we explain what it means formally that a macroscopic model is derived by a microscopic one and we construct a valuable candidate for the first one.
-In order to do so we first calculate the mean-field of the microscopic description $\sol_t = ( (\amba_t^p)_p, (\camp_t^m)_m)$ and we consider the set of \iid particles $\mfsol_t = ( (\mfamba_t^p)_p, (\mfcamp_t^m)_m)$ evolving under its influence (we call them \emph{mean-field particles}).
-Then we use the Kolmogorov's forward equation of $\mfsol_t$ as the candidate macroscopic equation, of which we call the solution $\adens(t,\cdot) = \adens_t$.
-Furthermore, this chapter shows that a sufficient condition to obtain that $\adens_t$ is the effective description of the model is that the micro-particles $\sol_t$ and the mesoscopic ones $\mfsol_t$ remain close with a high probability, namely proposition \ref{ch3:best-condition-convergence} (same argument as in \cite{ana}).
+In order to do so we first calculate the mean-field of the microscopic description $\sol_t = ( (\amba_t^p)_p, (\camp_t^m)_m)$ and we consider the set of \iid particles $\mfsol_t = ( (\mfamba_t^p)_p, (\mfcamp_t^m)_m)$ evolving under its influence (we call them \emph{mean-field particles} or \emph{mesoscopic system}).
+Then we use the Kolmogorov's forward equation of $\mfsol_t$ as the candidate macroscopic equation, of which we sign the solution as $\adens(t,\cdot) = \adens_t$.
+Furthermore, this chapter shows that a sufficient condition to obtain that $\adens_t$ is the effective description of the model is that $\sol_t$ and $\mfsol_t$ remain close with a high probability, namely proposition \ref{ch3:best-condition-convergence} (same argument as in \cite{ana}).
 In the final part we hint at possible ways to formally derive a macroscopic description also for the chemotaxin particles $\camp^m$.
 
 \paragraph{Chapter \ref{ch4} and \ref{ch5}} These chapters lay the ground for the final proof of the derivation (\ie the proposition \ref{ch6:final-result}).
@@ -158,7 +160,7 @@ Both chapters develop tools which can be applied in more general settings than t
 		}
 		\leq\
 		\Fup(T)\
-		N^{-(\xi-\delta)}
+		N^{-(\xi-\delta)}.
 	\end{equation*}
 \end{proposition*}
 From this proposition it follows (by lemma \ref{ch3:best-condition-convergence}) that \ref{ch3:EFFECTIVE-EQS} are the effective equations of the microscopic model considered.
@@ -177,7 +179,7 @@ Then we derive the effective equations \ref{ch7:EFFECTIVE-EQUATIONS} for this sy
 		\right)
 		\adens
 		\right]
-		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+		+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens.
 	\end{aligned}
 	\right.
 \end{equation}

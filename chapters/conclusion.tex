@@ -26,7 +26,7 @@ Starting from the pulsing wave system \ref{ch7:model:pulsing-waves}, it is clear
 		\\
 		\partial_t \cdens^\tau
 		&= \frac{d\sigma_\camp^2}{2} \bigtriangleup \cdens^\tau
-		&&\text{if } t \geq \tau
+		&&\text{if } t \geq \tau,
 	\end{aligned}
 	\right.
 \end{equation*}
@@ -48,7 +48,7 @@ With one simple idea for both parameters, we can say that the speed $\NumCampRel
 	\star \int_0^t \cdens_t^\tau 	d \tau
 	\right)
 	\adens
-	\right]
+	\right].
 \end{equation*}
 
 The other thing which we can immediately observe, is that the term above represents a dependence of $\partial_t \adens$ (the present evolution) from the past, namely from all the state of $\adens(\cdot,\cdot\cdot)$ in $[0,t]$.
@@ -62,14 +62,14 @@ This is even more evident if we substitute $\cdens_t^\tau$ with its analytical s
 	\right)
 	\adens
 	\right]
-	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens
+	+ \frac{d\sigma_\amba^2}{2} \bigtriangleup \adens.
 \end{equation*}
 
 Here $\adens$ appears also under the integral, and thus the memory effect (the direct dependence of the present $t$ from the events happening in $[0,t]$) is explicit.
 
 \subsection{Comparison with the Equation of Keller-Segel}
 
-The original paper from Cañizares García \cite{ana} modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent), and derived the notorious Keller-Segel equation \cite{keller-segel} for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it \cite{jaeger-luckhaus}:
+The original paper from Cañizares García \cite{ana} modeled the movement of amoebas as individuals attracting each others with a Coulomb-like potential (the cAMP particles were absent). From this she derived the notorious Keller-Segel equation \cite{keller-segel} for the specific case in which the chemoattractant diffuses much faster than the organisms releasing it \cite{jaeger-luckhaus}:
 
 \begin{equation}\label{conc:ANA-macro-amoebas}
 	\left\{
@@ -78,13 +78,13 @@ The original paper from Cañizares García \cite{ana} modeled the movement of am
 		\\
 		-\bigtriangleup \cdens &= \adens
 	\end{aligned}
-	\right.
+	\right.,
 \end{equation}
 
 or, solving $\cdens_t$ analytically:
 
 \begin{equation}\label{conc:ANA-macro-amoebas-in-1-equation}
-		\partial_t \adens =  \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens
+		\partial_t \adens =  \chi \nabla ( (\cutoffSinAttraction \star \adens) \adens) + \bigtriangleup \adens,
 \end{equation}
 
 where $\cutoffSinAttraction:= \frac{x}{2\pi \abs{x}^2}$ is the attraction coming from the previously mentioned Coulomb-like potential and $\chi$ is the \emph{chemosensitivity}, namely a positive constant indicating the sensibility of the organisms to the chemoattractant.
@@ -110,7 +110,7 @@ Consider the modified heat-kernel from \ref{ch3:eq:eff-eq-camp-analytical-sol}:
 	\1_{t-\tau\geq 0} 
 	= 
 	\frac{d\: \Normal\big( 0, d\sigma_\camp^2 (t-\tau) \big)}{d\:\lebsge} (x)
-	\1_{t\geq \tau} 
+	\1_{t\geq \tau}.
 \end{equation*}
 
 Then in the limit case we do obtain
@@ -135,7 +135,7 @@ and therefore the effective equation \ref{ch7:EFFECTIVE-EQUATIONS} becomes
 	\right]
 	+ \frac{d \frac{2}{d}}{2} \bigtriangleup \adens
 	=
-	\bigtriangleup \adens
+	\bigtriangleup \adens,
 \end{equation*}
 
 which is the heat equation.
@@ -185,7 +185,7 @@ The idea is that as the release frequency $\lambda$ of the cAMP and as its diffu
 		\star \adens
 		\right)
 		\adens
-		\right]
+		\right].
 \end{align*}
 
 At this point one might take a look at the function
@@ -228,11 +228,11 @@ In general we expect that if $\lambda, \sigma_\camp \rightarrow +\infty$ in a wa
 In such case, by signing this time-independent attraction as $\overline{\attraction} (x)$, the effective equation would become
 
 \begin{equation}
-	\partial_t \adens = \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens
+	\partial_t \adens = \chi \nabla ( (\overline{\attraction} \star \adens) \adens) + \bigtriangleup \adens,
 \end{equation}
 
 which is the equation \ref{conc:ANA-macro-amoebas-in-1-equation} from \cite{ana}.
-The idea of this limit case is that the cAMP is released so fast, that it compensates for the very high diffusion.
+The interpretation of this limit case is that the cAMP is released so fast, that it compensates for the very high diffusion.
 
 \subsubsection{Slow Release of a Chemoattractant with no Diffusion}
 
@@ -244,7 +244,7 @@ It is interesting to observe what happens in the other limit case, namely when $
 	\frac{d\: \Normal(0, 0)}{d\:\lebsge} (x)
 	\1_{s\geq 0} 
 	=
-	\delta(x) \1_{s\geq 0}
+	\delta(x) \1_{s\geq 0}.
 \end{equation*}
 
 In such case the macroscopic description of the amoebas' density becomes
@@ -277,7 +277,7 @@ In such case the macroscopic description of the amoebas' density becomes
 		\adens
 		\right]
 		+
-		\bigtriangleup \adens
+		\bigtriangleup \adens.
 	\end{aligned}
 \end{equation}
 
@@ -327,7 +327,7 @@ Of course such ideas definitely need a more rigorous framework to be discussed p
 			}
 			\leq\
 			\Fup_{\gamma}(T)\
-			N^{-\gamma}
+			N^{-\gamma}.
 		\end{equation}
 	\end{proposition}
 	Contrary to the previous point, we expect this to be a tougher goal to pursue.
@@ -357,6 +357,6 @@ As suggested in \ref{ch3:macro-cAMP?}, one might inquire about proving formally 
 	\frac{1}{t}
 	\int_0^t 
 	\cdens_t^\tau 
-	d \tau
+	d \tau,
 \end{equation*}
 where the measure considered are treated as \rv in the space of Borel probability measures with finite moments $\BorelPrbMeas_1$.
