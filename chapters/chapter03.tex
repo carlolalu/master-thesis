@@ -88,7 +88,7 @@ Thanks to the theorem \cite[Proposition 2.2]{sznitman} we can find a less scary 
 \footnotetext[1]{Meaning that under each permutation $\pi$ the $(\amba^{\pi(1)}, \ldots, \amba^{\pi(N)})$ has the same law as $\amba^(N) := (\amba^1, \ldots, \amba^N)$, a condition fullfilled by the system \ref{ch2:model} for every $t$.}
 
 In this way we must "only" show the weak convergence of the $k$-marginals $\Psi^{N, (k)}$ to $ \otimes_{p=1}^N \adens$.
-Then we will need another instrument: a suitable metric for the topology of the weak convergence of measures (that, as we have seen, is the weak-* topology on $\Cspace_b(\R^d)$). If we restrict the space of allowed measures we can choose the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein}. Another popular name is \emph{Earth-mover distance} (the latter one can be generalized to finite measures) because of the heuristic that we will see in \ref{ch3:fig:example-coupling}.
+Then we will need another instrument: a suitable metric for the topology of the weak convergence of measures (that, as we have seen, is the weak-* topology on $\Cspace_b(\R^d)$). If we restrict the space of allowed measures we can choose the \emph{$p$-Wasserstein distance}, also known as \emph{$p$-Kantorovich–Rubinstein}. Another popular name is \emph{Earth-mover distance} (the latter one can be generalized to finite measures) because of the heuristic that we will see later.
 To see its definition we first we need the concept of \emph{coupling} of measures.
 
 \begin{definition}
@@ -114,8 +114,7 @@ To see its definition we first we need the concept of \emph{coupling} of measure
 
 A way to visualise a coupling is as a transformation of $\mu$ into $\nu$.
 Assume, for the sake of simplicity, that $\mu,\nu$ are measures on $\R$ and are absolute continuous with respect to the Lebesgue measure $\lebsge$.
-Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth (see \ref{ch3:fig:example-coupling}).
-
+Consider the densities $\frac{d\mu}{d\lebsge}(x), \frac{d\nu}{d\lebsge}(x)$ and think of their graphs as piles of earth.
 A plan to move earth in $\R$ can be thought as a function $\overline{\gamma}: \R \times \R \longrightarrow \R $ which with the value $\overline{\gamma}(x,y)=: \overline{\gamma}(x\rightarrow y)$ tells how much earth we should move from the point $x$ to the point $y$.
 In order for this to be a plan which precisely transforms $\frac{d\mu}{d\lebsge}$ into $\frac{d\nu}{d\lebsge}$, it must respect two symmetrical conditions:
 \begin{enumerate}
